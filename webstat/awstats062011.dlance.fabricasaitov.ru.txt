@@ -1,0 +1,361 @@
+AWSTATS DATA FILE 6.7 (build 1.892)
+# If you remove this file, all statistics for date 201106 will be lost/reset.
+
+# Position (offset in bytes) in this file of beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1864                
+POS_TIME 2536                
+POS_VISITOR 6039                
+POS_DAY 6966                
+POS_DOMAIN 3179                
+POS_LOGIN 3411                
+POS_ROBOT 3566                
+POS_WORMS 3698                
+POS_EMAILSENDER 3829                
+POS_EMAILRECEIVER 3972                
+POS_SESSION 7441                
+POS_SIDER 7647                
+POS_FILETYPES 4107                
+POS_OS 4314                
+POS_BROWSER 4408                
+POS_SCREENSIZE 4533                
+POS_UNKNOWNREFERER 4607                
+POS_UNKNOWNREFERERBROWSER 4784                
+POS_ORIGIN 4956                
+POS_SEREFERRALS 5093                
+POS_PAGEREFS 5237                
+POS_SEARCHWORDS 5419                
+POS_KEYWORDS 5571                
+POS_MISC 2199                
+POS_ERRORS 5630                
+POS_CLUSTER 3267                
+POS_SIDER_404 5730                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20110701062606 1 0 8103737173301
+FirstTime 20110601121949
+LastTime 20110630185747
+LastUpdate 20110702000102 1 0 0 0 0
+TotalVisits 36                  
+TotalUnique 21                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 21                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 11 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 3 36 459108 0 0 0
+1 12 56 496754 1 2 4479
+2 0 0 0 0 0 0
+3 9 37 338105 0 0 0
+4 6 17 165531 0 2 51562
+5 0 0 0 0 0 0
+6 18 107 603836 0 1 21154
+7 0 0 0 0 0 0
+8 0 0 0 0 0 0
+9 0 0 0 0 0 0
+10 7 45 528021 0 0 0
+11 14 120 1615583 0 0 0
+12 54 437 4935368 1 1 20
+13 58 372 6669745 1 1 20
+14 27 139 1208722 1 14 141199
+15 23 116 1217275 1 1 20
+16 27 234 1857932 0 6 140647
+17 58 271 3712159 1 1 20
+18 21 35 1356644 1 1 4069
+19 0 0 0 0 0 0
+20 23 151 1183430 5 9 55519
+21 11 37 290693 0 0 0
+22 1 12 238118 1 1 20
+23 0 0 0 0 0 0
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 10 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 1
+ip 372 2222 26877024
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 10 first Hits must be first (order not required for others)
+BEGIN_ROBOT 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 8
+css 163 3436985 0 0
+png 654 4175938 0 0
+cur 64 19560 0 0
+html 174 889803 0 0
+js 263 6455087 0 0
+jpg 579 11337632 0 0
+Unknown 134 319064 0 0
+gif 191 242955 0 0
+END_FILETYPES
+
+# OS ID - Hits
+BEGIN_OS 5
+winxp 847
+winnt 1253
+Unknown 2
+linuxubuntu 55
+linux 65
+END_OS
+
+# Browser ID - Hits
+BEGIN_BROWSER 6
+msie8.0 100
+firefox5.0 70
+firefox4.0.1 1324
+msie7.0 1
+Unknown 2
+safari 725
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 1
+AppEngine-Google;_(_http://code.google.com/appengine;_appid:_downnotifier) 20110621180157
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 1
+AppEngine-Google;_(_http://code.google.com/appengine;_appid:_downnotifier) 20110621180157
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 49 91
+From1 0 0
+From2 0 0
+From3 1 1
+From4 322 2130
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 0
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 10 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 1
+http://vkontakte.ru/share.php 1 1
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 0
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 0
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 2
+302 12 240
+206 28 418489
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 0
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 10 first Hits must be first (order not required for others)
+BEGIN_VISITOR 21
+81.23.116.142 121 745 11961495 20110622161034
+85.114.9.254 75 404 5489411 20110606130324
+84.204.69.90 34 188 1474123 20110607210158
+95.59.22.35 22 168 960591 20110628175232
+178.91.103.49 19 71 678978 20110622160438
+95.59.24.9 18 107 603836 20110604064958
+178.91.99.28 12 56 496754 20110607012948
+95.59.24.176 10 26 267357 20110607220819
+95.59.22.12 10 71 719705 20110611140138
+178.91.106.10 7 48 355082 20110625144314
+83.243.71.156 3 36 459108 20110607005005
+178.91.108.114 4 37 465072 20110617144250
+178.91.106.39 2 2 11922 20110630185747
+178.91.107.98 6 46 474506 20110608144801
+95.59.1.117 6 40 474397 20110630041051
+95.59.24.8 3 36 459106 20110601163901
+74.125.46.83 1 1 5961 20110621180141
+178.91.106.108 7 45 528021 20110613105652
+178.91.100.28 5 45 497022 20110610132051
+74.125.75.1 1 1 5961 20110621180157
+95.59.22.153 6 49 488616 20110627174135
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 17
+20110601 90 519 8045023 6
+20110602 34 190 1870637 3
+20110604 18 107 603836 1
+20110606 34 129 2982641 1
+20110607 59 306 2697342 6
+20110608 11 104 1146548 3
+20110610 5 45 497022 1
+20110611 10 71 719705 1
+20110613 7 45 528021 1
+20110615 6 56 1058525 1
+20110617 4 37 465072 1
+20110621 16 122 1627505 3
+20110622 35 184 2344539 3
+20110625 7 48 355082 1
+20110627 6 49 488616 1
+20110628 22 168 960591 1
+20110630 8 42 486319 2
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 7
+1h+ 3
+5mn-15mn 7
+30s-2mn 6
+2mn-5mn 2
+15mn-30mn 3
+0s-30s 13
+30mn-1h 2
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_SIDER 80
+/ 74 441570 30 14
+/templates/js/highslide/graphics/zoomin.cur 32 9780 0 0
+/templates/js/highslide/graphics/zoomout.cur 32 9780 0 4
+/designs/search/ 19 82222 2 2
+/designs/index/ 18 43994 1 1
+/designs 14 50507 1 0
+/user/dkushnikov 11 22098 0 0
+/account 8 20557 0 0
+/designs/search 7 34704 0 1
+/register 6 21216 0 0
+/account/balance/ 1 2954 0 0
+/administrator/login 5 10375 2 2
+/users/portfolio/nabux 2 4705 0 0
+/administrator/blogs/ 1 5119 0 0
+/users/activate/695010f127a7d2677b55fa5d8050d72f142298d9 1 801 0 0
+/administrator/purchased/ 2 14458 0 1
+/account/tariff 2 3848 0 0
+/users/designs/nabux 2 3837 0 0
+/help 1 1561 0 0
+/users/reviews_add/goga 1 1516 0 0
+/rss/designs 1 8779 0 0
+/designs/11.html 1 4744 0 0
+/users/followers/dkushnikov 1 1761 0 1
+/users/reviews/nabux 4 7502 0 0
+/administrator/settings/ 4 20240 0 0
+/users/followers/nabux 2 3721 0 0
+/administrator/auth_check 2 70 0 0
+/administrator/pages_add/ 1 5636 0 0
+/administrator/designs/ 5 34555 0 0
+/user/InsomniaFromSky 1 1997 0 0
+/designs/32.html 5 21104 0 2
+/account/events 5 13883 0 0
+/user/goga 2 3846 0 0
+/users/portfolio/dkushnikov 2 3611 0 0
+/users/designs/dlzspb 2 5105 0 0
+/blogs 1 2758 0 0
+/account/delete_message_all 5 100 0 0
+/designs/8.html 3 11841 0 0
+/administrator/ 5 29502 0 0
+/designs/27.html 2 9781 0 0
+/users/services/nabux 2 3782 0 0
+/account/tariff_set 3 6208 0 0
+/login 4 6088 0 0
+/designs/29.html 2 9582 0 0
+/user/nabux 5 9867 0 1
+/designs/34.html 1 3846 0 0
+/users/reviews/dlz 1 903 0 0
+/users/reviews/dlzspb 1 1901 0 0
+/users/reviews/dkushnikov 2 3562 0 1
+/account/designs 1 3432 0 0
+/users/reviews_add/nabux 2 2966 0 0
+/administrator/news/ 1 5163 0 0
+/news 1 1953 0 0
+/contacts/send/goga 1 2223 0 0
+/administrator/reports/ 2 10482 0 0
+/contacts/ 4 11716 0 0
+/administrator/users/ 4 29260 0 1
+/administrator/help_pages/ 1 4955 0 0
+/administrator/mailer/ 1 5936 0 0
+/users/services/dkushnikov 2 3588 0 0
+/users/portfolio/dlzspb 1 2387 0 0
+/users/all 4 10442 0 0
+/administrator/transaction/ 4 26913 0 0
+/administrator/applications/ 1 5076 0 0
+/account/purses 1 2761 0 0
+/designs/7.html 1 4863 0 0
+/administrator/pages/ 1 5008 0 0
+/account/password 1 3227 0 0
+/designs/18.html 3 13621 0 1
+/account/contact_data 1 3260 0 0
+/designs/add/ 3 10472 0 1
+/designs/vote 2 228 0 1
+/users/support 1 1723 0 0
+/user/Openweblife 1 857 0 0
+/administrator/categories/ 1 5296 0 0
+/users/designs/dkushnikov 4 7367 0 0
+/files/designs/47d0f5705cb49b4b564b62b4cfa589f1.jpgdesigns/32.html 1 1062 0 0
+/designs/28.html 2 8832 0 1
+/user/dlzspb 3 6154 0 1
+/users/reviews/goga 2 5327 0 0
+END_SIDER
