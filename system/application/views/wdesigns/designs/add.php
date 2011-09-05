@@ -101,6 +101,11 @@ $().ready(function() {
             </tr>
 
             <tr>
+              <td class="caption">Исходники:</td>
+              <td class="frnt"><input type="text" class="text" name="source" value="<?=set_value('source')?>" size="64" maxlength="64" /></td>
+            </tr>
+
+            <tr>
               <td class="caption">Загрузка изображения:</td>
               <td><input class="file" name="userfile" type="file" />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  Размер — до 1 Мб, Формат — JPG, Разрешение - до 1024x768 px</td>
             </tr>

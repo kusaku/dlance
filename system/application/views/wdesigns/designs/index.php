@@ -20,9 +20,25 @@
 </span>
 </div>
 
+
+
 <table class="listorder">
 <tr>
-<td class="topline lft txtl">Заголовок / Превью</td>
+<td class="topline lft txtl">
+<? if( $input['order_field'] == 'title' and  $input['order_type'] == 'desc' ): ?>
+<a  href="/designs/index/?order_field=title&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Заголовок / Превью</a>
+<? else: ?>
+<a  href="/designs/index/?order_field=title<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Заголовок / Превью</a>
+<? endif; ?>
+</td>
+
+<td class="topline" style="width: 70px;">
+<? if( $input['order_field'] == 'sales' and  $input['order_type'] == 'desc' ): ?>
+<a  href="/designs/index/?order_field=sales&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Покупок</a>
+<? else: ?>
+<a  href="/designs/index/?order_field=sales<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Покупок</a>
+<? endif; ?>
+</td>
 
 <td class="topline" style="width: 70px;">
 <? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?>
@@ -67,6 +83,7 @@
 <?=$row['section']?> / <?=$row['category']?> | <?=$row['date']?>
 
 </div></td>
+<td class="offcount"><?=$row['sales']?></td>
 <td class="offcount"><?=$row['rating']?></td>
 <td class="budget"><?=$row['price_1']?> рублей</td>
 <td class="budget"<? if( $row['sales'] > 0 ): ?> style="text-decoration:line-through"<? endif; ?>><?=$row['price_2']?> рублей</td>

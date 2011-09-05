@@ -7,32 +7,32 @@ AWSTATS DATA FILE 6.7 (build 1.892)
 # update).
 BEGIN_MAP 27
 POS_GENERAL 1864                
-POS_TIME 2546                
-POS_VISITOR 3205                
-POS_DAY 3353                
-POS_DOMAIN 3503                
-POS_LOGIN 3732                
-POS_ROBOT 3887                
-POS_WORMS 4019                
-POS_EMAILSENDER 4150                
-POS_EMAILRECEIVER 4293                
-POS_SESSION 4369                
-POS_SIDER 4506                
-POS_FILETYPES 5056                
-POS_OS 5247                
-POS_BROWSER 5302                
-POS_SCREENSIZE 5379                
-POS_UNKNOWNREFERER 5453                
-POS_UNKNOWNREFERERBROWSER 5540                
-POS_ORIGIN 5622                
-POS_SEREFERRALS 5755                
-POS_PAGEREFS 5899                
-POS_SEARCHWORDS 6047                
-POS_KEYWORDS 6199                
-POS_MISC 2210                
-POS_ERRORS 6258                
-POS_CLUSTER 3588                
-POS_SIDER_404 6333                
+POS_TIME 2535                
+POS_VISITOR 5978                
+POS_DAY 6331                
+POS_DOMAIN 3210                
+POS_LOGIN 3441                
+POS_ROBOT 3596                
+POS_WORMS 3764                
+POS_EMAILSENDER 3895                
+POS_EMAILRECEIVER 4038                
+POS_SESSION 6579                
+POS_SIDER 6768                
+POS_FILETYPES 4173                
+POS_OS 4388                
+POS_BROWSER 4482                
+POS_SCREENSIZE 4625                
+POS_UNKNOWNREFERER 4699                
+POS_UNKNOWNREFERERBROWSER 4813                
+POS_ORIGIN 4922                
+POS_SEREFERRALS 5058                
+POS_PAGEREFS 5213                
+POS_SEARCHWORDS 5361                
+POS_KEYWORDS 5513                
+POS_MISC 2199                
+POS_ERRORS 5572                
+POS_CLUSTER 3297                
+POS_SIDER_404 5669                
 END_MAP
 
 # LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
@@ -44,14 +44,14 @@ END_MAP
 # MonthHostsKnown   = Number of hosts known
 # MonthHostsUnKnown = Number of hosts unknown
 BEGIN_GENERAL 8
-LastLine 20110803184516 205 56636 21964019776912
+LastLine 20110901190806 1 0 7536557274540
 FirstTime 20110803183223
-LastTime 20110803184515
-LastUpdate 20110804000103 205 0 205 0 0
-TotalVisits 1                   
-TotalUnique 1                   
+LastTime 20110831213344
+LastUpdate 20110902000102 1 0 0 0 0
+TotalVisits 12                  
+TotalUnique 7                   
 MonthHostsKnown 0                   
-MonthHostsUnknown 1                   
+MonthHostsUnknown 7                   
 END_GENERAL
 
 # Misc ID - Pages - Hits - Bandwidth
@@ -70,48 +70,36 @@ END_MISC
 
 # Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
 BEGIN_TIME 24
-0 0 0 0 0 0 0
-1 0 0 0 0 0 0
-2 0 0 0 0 0 0
-3 0 0 0 0 0 0
-4 0 0 0 0 0 0
-5 0 0 0 0 0 0
-6 0 0 0 0 0 0
-7 0 0 0 0 0 0
-8 0 0 0 0 0 0
-9 0 0 0 0 0 0
-10 0 0 0 0 0 0
-11 0 0 0 0 0 0
-12 0 0 0 0 0 0
-13 0 0 0 0 0 0
-14 0 0 0 0 0 0
-15 0 0 0 0 0 0
-16 0 0 0 0 0 0
-17 0 0 0 0 0 0
-18 30 176 6998558 0 0 0
-19 0 0 0 0 0 0
-20 0 0 0 0 0 0
-21 0 0 0 0 0 0
-22 0 0 0 0 0 0
-23 0 0 0 0 0 0
+0 0 0 0 4 4 89052
+1 1 12 201430 3 3 66789
+2 3 36 459114 3 3 66789
+3 0 0 0 1 1 22263
+4 0 0 0 2 2 44526
+5 0 0 0 1 1 22263
+6 0 0 0 1 1 22263
+7 0 0 0 1 1 22263
+8 0 0 0 7 7 155841
+9 0 0 0 18 18 400734
+10 0 0 0 17 17 378471
+11 2 5 15142 21 21 445280
+12 17 89 3292942 7 8 194253
+13 59 161 354027 13 13 200441
+14 36 246 2426300 8 8 133618
+15 1 3 7754 4 4 89052
+16 13 106 1200121 11 11 222642
+17 4 37 465082 32 32 712408
+18 30 176 6998558 17 17 378471
+19 0 0 0 6 6 133578
+20 0 0 0 14 14 311664
+21 2 3 25241 8 8 155855
+22 0 0 0 5 5 111315
+23 0 0 0 4 4 89052
 END_TIME
-
-# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
-# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
-# The 10 first Hits must be first (order not required for others)
-BEGIN_VISITOR 1
-81.23.116.142 30 176 6998558 20110803184515 20110803183223 /designs/search/
-END_VISITOR
-
-# Date - Pages - Hits - Bandwidth - Visits
-BEGIN_DAY 1
-20110803 30 176 6998558 1
-END_DAY
 
 # Domain - Pages - Hits - Bandwidth
 # The 10 first Pages must be first (order not required for others)
 BEGIN_DOMAIN 1
-ip 30 176 6998558
+ip 168 874 15445711
 END_DOMAIN
 
 # Cluster ID - Pages - Hits - Bandwidth
@@ -125,7 +113,8 @@ END_LOGIN
 
 # Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
 # The 10 first Hits must be first (order not required for others)
-BEGIN_ROBOT 0
+BEGIN_ROBOT 1
+python 199 4430291 20110813115531 0
 END_ROBOT
 
 # Worm ID - Hits - Bandwidth - Last visit
@@ -143,53 +132,37 @@ END_EMAILSENDER
 BEGIN_EMAILRECEIVER 0
 END_EMAILRECEIVER
 
-# Session range - Number of visits
-BEGIN_SESSION 0
-END_SESSION
-
-# URL - Pages - Bandwidth - Entry - Exit
-# The 10 first Pages must be first (order not required for others)
-BEGIN_SIDER 17
-/designs/search/ 7 25636 0 0
-/ 4 23856 1 0
-/news 2 3906 0 0
-/designs/search 2 9714 0 0
-/templates/js/highslide/graphics/zoomin.cur 2 652 0 0
-/templates/js/highslide/graphics/zoomout.cur 2 652 0 0
-/account/ 1 1859 0 0
-/user/ 1 903 0 0
-/user 1 903 0 0
-/register 1 4064 0 0
-/users/all 1 2459 0 0
-/user/goga 1 2044 0 0
-/account/cart 1 1789 0 0
-/designs/18.html 1 4048 0 0
-/blogs 1 2758 0 0
-/users/support 1 1723 0 0
-/login 1 1530 0 0
-END_SIDER
-
 # Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
-BEGIN_FILETYPES 8
-css 11 190675 0 0
-cur 4 1304 0 0
-png 46 385480 0 0
-html 14 56302 0 0
-jpg 53 5848896 0 0
-js 17 466506 0 0
-Unknown 12 30890 0 0
-gif 19 18505 0 0
+BEGIN_FILETYPES 9
+css 68 1418189 0 0
+cur 20 5216 0 0
+png 269 1546735 0 0
+html 87 446292 0 0
+jpg 203 9405468 0 0
+js 97 2392194 0 0
+jpeg 1 3446 0 0
+Unknown 61 164636 0 0
+gif 68 63535 0 0
 END_FILETYPES
 
 # OS ID - Hits
-BEGIN_OS 1
-linuxubuntu 176
+BEGIN_OS 5
+winxp 94
+winnt 169
+Unknown 1
+linuxubuntu 313
+linux 297
 END_OS
 
 # Browser ID - Hits
-BEGIN_BROWSER 2
+BEGIN_BROWSER 7
+firefox5.0 57
+firefox4.0.1 297
 firefox3.6.10 89
-safari 87
+Unknown 1
+msie7.0 2
+safari 391
+firefox6.0 37
 END_BROWSER
 
 # Screen size - Hits
@@ -197,25 +170,28 @@ BEGIN_SCREENSIZE 0
 END_SCREENSIZE
 
 # Unknown referer OS - Last visit date
-BEGIN_UNKNOWNREFERER 0
+BEGIN_UNKNOWNREFERER 1
+Mail.RU/2.0 20110831213344
 END_UNKNOWNREFERER
 
 # Unknown referer Browser - Last visit date
-BEGIN_UNKNOWNREFERERBROWSER 0
+BEGIN_UNKNOWNREFERERBROWSER 1
+Mail.RU/2.0 20110831213344
 END_UNKNOWNREFERERBROWSER
 
 # Origin - Pages - Hits 
 BEGIN_ORIGIN 6
-From0 4 4
+From0 21 49
 From1 0 0
-From2 0 0
+From2 1 1
 From3 0 0
-From4 26 172
+From4 146 824
 From5 0 0
 END_ORIGIN
 
 # Search engine referers ID - Pages - Hits
-BEGIN_SEREFERRALS 0
+BEGIN_SEREFERRALS 1
+yandex 1 1
 END_SEREFERRALS
 
 # External page referers - Pages - Hits
@@ -234,9 +210,100 @@ BEGIN_KEYWORDS 0
 END_KEYWORDS
 
 # Errors - Hits - Bandwidth
-BEGIN_ERRORS 0
+BEGIN_ERRORS 2
+302 9 180
+206 1 38412
 END_ERRORS
 
 # URL with 404 errors - Hits - Last URL referer
 BEGIN_SIDER_404 0
 END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 10 first Hits must be first (order not required for others)
+BEGIN_VISITOR 7
+81.23.116.142 157 777 14126627 20110825164348
+178.91.101.136 4 37 465082 20110830171900
+95.59.1.32 3 36 459114 20110806025022
+217.69.134.91 1 1 22263 20110831213344
+95.59.23.50 1 9 168217 20110807161522
+91.202.222.13 1 2 2978 20110804211551
+95.59.23.151 1 12 201430 20110804012919
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 8
+20110803 30 176 6998558 1
+20110804 39 263 2638462 4
+20110806 3 36 459114 1
+20110807 1 9 168217 1
+20110808 78 255 3662111 2
+20110825 12 97 1031904 1
+20110830 4 37 465082 1
+20110831 1 1 22263 1
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 5
+5mn-15mn 2
+15mn-30mn 1
+0s-30s 6
+30s-2mn 2
+30mn-1h 1
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_SIDER 50
+/ 29 189214 10 4
+/templates/js/highslide/graphics/zoomin.cur 10 2608 0 0
+/designs/search/ 10 37937 0 1
+/templates/js/highslide/graphics/zoomout.cur 10 2608 0 1
+/account 9 23995 0 0
+/designs/search 7 33895 0 1
+/login 7 10643 0 0
+/administrator/ 6 35394 1 2
+/designs/29.html 5 22333 0 0
+/administrator/login 4 8300 1 2
+/account/ 2 3718 0 0
+/user 1 903 0 0
+/administrator/blogs/ 3 15357 0 0
+/contacts 2 4360 0 0
+/rss/designs 2 17558 0 0
+/users/activate/e39457d4a41d5738cd37f7075a4556116f5f97b6 1 845 0 0
+/administrator/news/ 1 5163 0 0
+/news 2 3906 0 0
+/account/tariff/ 1 2757 0 0
+/administrator/reports/ 2 10482 0 0
+/administrator/settings/ 1 5060 0 0
+/administrator/auth_check 2 70 0 0
+/administrator/designs/ 1 6911 0 0
+/contacts/ 1 3004 0 0
+/administrator/help_pages/ 2 9910 0 0
+/designs/32.html 3 12250 0 1
+/account/events 2 5408 0 0
+/user/ 1 903 0 0
+/users/all 1 2459 0 0
+/administrator/transaction/ 1 6843 0 0
+/register 3 9024 0 0
+/designs/7.html 3 13119 0 0
+/account/userpic 3 6276 0 0
+/user/goga 1 2044 0 0
+/administrator/pages/ 2 10016 0 0
+/account/cart 1 1789 0 0
+/designs/18.html 1 4048 0 0
+/blogs 1 2758 0 0
+/account/delete_message_all 2 40 0 0
+/designs/27.html 2 9057 0 0
+/designs/8.html 1 3958 0 0
+/designs/add/ 2 8207 0 0
+/designs 4 14518 0 0
+/administrator/help_categories/ 1 5020 0 0
+/users/support 1 1723 0 0
+/administrator/categories/ 1 5296 0 0
+/account/profile 1 5104 0 0
+/designs/index/ 2 7030 0 0
+/user/primebit 4 9018 0 0
+/designs/28.html 3 13305 0 0
+END_SIDER

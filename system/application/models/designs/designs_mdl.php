@@ -280,6 +280,38 @@ class Designs_mdl extends Model
     }
 /*
 |---------------------------------------------------------------
+| Популярная расцветка
+|---------------------------------------------------------------
+*/
+    function get_color_cloud($limit = 10)
+	{
+    	$this->db->limit($limit);
+
+		$this->db->select('color, COUNT(color) AS color_count');
+
+		$this->db->group_by('color');
+
+    	$this->db->order_by('color_count', 'desc');
+
+		$query = $this->db->get('colors');
+
+		$query = $query->result_array();
+
+		return $query;
+
+		if( $query->num_rows() > 0 )
+		{
+			$tags = array();
+	
+			foreach ($query->result_array() as $row)
+				$tags[$row['color']] = $row['color_count'];
+				return $tags;
+		}
+
+		else return array();
+    }
+/*
+|---------------------------------------------------------------
 | Вывод тегов для полной новости
 |---------------------------------------------------------------
 */
@@ -456,19 +488,22 @@ class Designs_mdl extends Model
 			$sql .= " and id IN (SELECT design_id FROM ci_colors WHERE `color` = '$color' )";
 		}
 
-		if( !empty($tags) )//Тэги
+		if( !empty($tags) )//Тэги, если тэг не найден, ищем как ключевое слово
 		{
-			$tags = explode(", ", $tags);
+			if( $this->_tags_check($tags) )
+			{
+				$tags = explode(", ", $tags);
 			
-			$tags = "'" . implode("', '", $tags) . "'";//Результаты implode в кавычки
+				$tags = "'" . implode("', '", $tags) . "'";//Результаты implode в кавычки
 
-			$sql .= " and id IN (SELECT design_id FROM ci_tags WHERE `tag` IN ($tags) )";
+				$sql .= " and id IN (SELECT design_id FROM ci_tags WHERE `tag` IN ($tags) )";
+			}
+			else
+			{
+				$sql .= " and (`title` LIKE '%$tags%' or `text` LIKE '%$tags%')";
+			}
 		}
 
-		if( !empty($keywords) )//Ключевые слова
-		{
-			$sql .= " and (`title` LIKE '%$keywords%' or `text` LIKE '%$keywords%')";
-		}
 
 		if( !empty($category) ) 
 		{
@@ -550,6 +585,30 @@ class Designs_mdl extends Model
 			return $query;
         }
   	}
+
+	function _tags_check($tags = '')
+	{
+		$tags = explode(", ", $tags);
+			
+		$tags = "'" . implode("', '", $tags) . "'";//Результаты implode в кавычки
+
+        $query =
+                    " SELECT id".
+
+                    " FROM ci_tags WHERE `tag` IN ($tags) ".";";
+
+        $query = $this->db->query($query);
+
+        if( $query->num_rows() == 0 )
+		{
+			return FALSE;
+        }
+        else 
+		{
+			return TRUE;
+		}
+	}
+
 /*
 |---------------------------------------------------------------
 | Колличество дизайнов по поиску
@@ -601,18 +660,20 @@ class Designs_mdl extends Model
 			$sql .= " and id IN (SELECT design_id FROM ci_colors WHERE `color` = '$color' )";
 		}
 
-		if( !empty($tags) )//Тэги
+		if( !empty($tags) )//Тэги, если тэг не найден, ищем как ключевое слово
 		{
-			$tags = explode(", ", $tags);
+			if( $this->_tags_check($tags) )
+			{
+				$tags = explode(", ", $tags);
 			
-			$tags = "'" . implode("', '", $tags) . "'";//Результаты implode в кавычки
+				$tags = "'" . implode("', '", $tags) . "'";//Результаты implode в кавычки
 
-			$sql .= " and id IN (SELECT design_id FROM ci_tags WHERE `tag` IN ($tags) )";
-		}
-
-		if( !empty($keywords) )//Ключевые слова
-		{
-			$sql .= " and (`title` LIKE '%$keywords%' or `text` LIKE '%$keywords%')";
+				$sql .= " and id IN (SELECT design_id FROM ci_tags WHERE `tag` IN ($tags) )";
+			}
+			else
+			{
+				$sql .= " and (`title` LIKE '%$tags%' or `text` LIKE '%$tags%')";
+			}
 		}
 
 		if( !empty($category) ) 
@@ -1180,7 +1241,7 @@ class Designs_mdl extends Model
 	{
     	$this->db->order_by('date', 'desc');
 
-		$this->db->select('designs_comments.*, users.username');
+		$this->db->select('designs_comments.*, users.username, users.userpic');
 
 		$this->db->where('design_id', $design_id);
 

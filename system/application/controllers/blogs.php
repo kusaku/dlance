@@ -107,6 +107,9 @@ class Blogs extends Controller
 			show_404('page');
 		}
 
+		$this->load->helper('smiley');//Смайлы
+		$this->load->library('table');//Создание таблиц
+
 		$data['check'] = $this->_check($id, $data['user_id']);//Проверка
 
 		$data['category_id'] = $data['category'];
@@ -148,6 +151,16 @@ class Blogs extends Controller
 
 		$comments['data'] = $this->blogs_mdl->get_comments($id);
 
+
+		//Смайлы
+		$image_array = get_clickable_smileys('/img/smileys/');
+
+		$col_array = $this->table->make_columns($image_array, 20);		
+			
+		$comments['smiley'] = $this->table->generate($col_array);
+
+
+
 		$data['comments'] = $this->load->view('wdesigns/blogs/comments', $comments, TRUE);
 
 
@@ -155,6 +168,10 @@ class Blogs extends Controller
 		* Блок
 		*/
 		$data['categories'] = $this->blogs_mdl->get_categories();//категории
+
+
+
+
 
 		$this->template->build('blogs/view', $data, $title = ''.$data['title'].' | Блоги');
 	}

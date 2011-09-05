@@ -410,7 +410,7 @@ form.topsearch input.topsubm {
 	color:#333333;
 	font-size:85%;
 	margin: 0 10px 20px 10px;
-	height:34px;
+	height:75px;
 	border-bottom: 1px dashed #ccc;
 	line-height:22px;
 }
@@ -437,6 +437,8 @@ form.topsearch input.topsubm {
 #userbar li.pm a {
 	color:#24981D;
 }
+
+
 .rtop, .ltop {
 	margin:0;
 	float:left;
@@ -2357,3 +2359,8 @@ visibility:visible;
 	}
 
 .new_event {cursor:pointer}
+
+
+
+div.answer { margin:10px 0; border-top: 1px solid #D4DFE3; min-height:100px; }
+img.userpic { float:left; margin-right:10px; width:64px; height:64px; }

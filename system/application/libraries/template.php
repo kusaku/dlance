@@ -38,6 +38,9 @@ class Template
 			$template['login']['username'] = $this->_ci->username;
 			$template['login']['userpic'] = $this->_ci->userpic;
 
+			$template['login']['name'] = $this->_ci->users_mdl->get_user_by_id($this->_ci->user_id)->name;
+			$template['login']['surname'] = $this->_ci->users_mdl->get_user_by_id($this->_ci->user_id)->surname;
+
 			$this->_ci->load->model('balance/balance_mdl');
 			$this->_ci->load->model('contacts/contacts_mdl');
 			$this->_ci->load->model('events/events_mdl');

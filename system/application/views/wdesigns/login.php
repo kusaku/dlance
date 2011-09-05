@@ -1,7 +1,14 @@
 <? if( $logged_in ): ?>
 <div id="userbar" class="clearfix">
 <ul class="ltop">
-<li class="usr"><a href="/user/<?=$username?>"><?=$username?></a></li>
+<img src="<?=$userpic?>" alt="" class="userpic">
+
+<li class="usr">
+<a href="/user/<?=$username?>"><?=$name?> <?=$surname?> (<?=$username?>)</a>
+<br />
+<a href="/account/profile">Настройки</a>
+</li>
+
 <li class="pm"><a href="/contacts/">Контакты</a>
 <? if( $messages ): ?>
 (<?=$messages?>)
@@ -36,7 +43,7 @@
 </ul>
 </div>
 <? else: ?>
-<div id="userbar" class="clearfix">
+<div id="userbar" class="clearfix" style="height:32px">
 <form name="login" action="/login" method="post">
 <ul id="authline">
 <li class="reg"><a href="/register">Регистрация</a></li>

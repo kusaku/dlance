@@ -164,7 +164,7 @@ class Blogs_mdl extends Model
 	{
     	$this->db->order_by('date', 'desc');
 
-		$this->db->select('blogs_comments.*, users.username');
+		$this->db->select('blogs_comments.*, users.username, users.userpic');
 
 		$this->db->where('blog_id', $blog_id);
 

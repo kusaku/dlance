@@ -1,3 +1,5 @@
+<?=js_insert_smiley('comment', 'text')?>
+
 <?=validation_errors()?>
 
 <div id="comments">
@@ -8,33 +10,39 @@
 				<div>
 
 <h4>Комментарии</h4>
-<? if( !empty($data) ): ?>
-<? foreach($data as $row => $value): $row++; ?>
 
-<div id="com<?=$row?>" class="commets-row">
-<div class="com-title">Разместил <a rel="nofollow" href="/user/<?=$value['username']?>"><?=$value['username']?></a> &nbsp; <?=$value['date']?> &nbsp; <span class="fr"> &nbsp; </span> </div>
-<div class="com-text">
-<?=nl2br($value['text'])?>
+<? if( !empty($data) ): ?>
+
+<? foreach($data as $row): ?>
+<div class="answer">
+<div class="com-title">
+Добавил <a rel="nofollow" href="/user/<?=$row['username']?>"><?=$row['username']?></a> <?=$row['date']?>
 </div>
+<img src="<?=$row['userpic']?>" alt="<?=$row['username']?>" class="userpic" />
+<div class="com-text"><?=parse_smileys(nl2br($row['text']), '/img/smileys/')?></div>
+
 
 <? if( $this->team == 2 ) :?>
-<a href="/blogs/comments_edit/<?=$value['id']?>">Редактировать</a> |
-<a href="/blogs/comments_del/<?=$value['id']?>">Удалить</a>
+<ul class="ocard">
+<li><a href="/blogs/comments_edit/<?=$row['id']?>">Редактировать</a></li>
+<li><a href="/blogs/comments_del/<?=$row['id']?>">Удалить</a></li>
+</ul>
 <? endif; ?>
 
 </div>
 <? endforeach; ?>
+
 <? else: ?>
 <p>Коментарии отсутствуют.</p>
 <? endif; ?>
-
 				</div>
 			</div>
 		</div>
 	</div>
 
 <? if( $this->users_mdl->logged_in() ): ?>
-<form action="" method="post">
+<?=$smiley?>
+<form action="" method="post" name="comment">
 <div class="comments-form">
 <h4>Добавить комментарий</h4>
 <div><textarea id="text" name="text" rows="7" cols="60"></textarea></div>

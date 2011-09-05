@@ -141,7 +141,7 @@ jQuery(document).ready(function() {
 <a href="#" onclick="vote(<?=$id?>, 1)"><img src="/templates/wdesigns/css/img/like.gif" /></a>
 <a href="#" onclick="vote(<?=$id?>, 2)"><img src="/templates/wdesigns/css/img/dislike.gif" /></a>
 <br />
-<span class="like">Нравится: <?=$like?></span> | <span class="dislike">Не нравится <?=$dislike?></span>
+Рейтинг: <?=$rating?><br />
 </div>
 
 
@@ -211,6 +211,10 @@ if( !empty($similar_designs) ): ?>
 </td>
 </tr>
 
+<tr>
+<td class="lbl">Исходники:</td>
+<td class="txt"><?=$source?></td>
+</tr>
 
 <tr>
 <td class="lbl">Цена:</td>

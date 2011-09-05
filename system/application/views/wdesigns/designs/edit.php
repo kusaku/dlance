@@ -99,6 +99,11 @@ $().ready(function() {
             </tr>
 
             <tr>
+              <td class="caption">Исходники:</td>
+              <td class="frnt"><input type="text" class="text" name="source" value="<?=set_value('source')?>" size="64" maxlength="64" /></td>
+            </tr>
+
+            <tr>
               <td class="caption">Загрузка изображения:</td>
               <td>
               <img src="<?=$small_image?>" /><br /><br />

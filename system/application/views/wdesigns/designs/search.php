@@ -68,7 +68,8 @@
 <link rel="stylesheet" type="text/css" href="/templates/js/jquery-autocomplete/jquery.autocomplete.css" />
 <script type="text/javascript">
 $().ready(function() {
-	$("#tags").focus().autocomplete("<?=base_url()?>designs/tags/");
+	$("#tags").focus().autocomplete("<?=base_url()?>designs/tags/", {selectFirst:false});
+
 });
 </script>
 
@@ -83,9 +84,6 @@ $().ready(function() {
     <div id="msearch">
 <form action="/designs/search/" method="get">
 Ключевые слова:
-<div><input name="keywords" type="text" size="100" maxlength="75" value="<?=$input['keywords']?>"></div>
-
-Тэги:
 <div><input name="tags" type="text" size="100" maxlength="75" value="<?=$input['tags']?>" id="tags" /></div>
 
 Цена за покупку 
@@ -118,6 +116,8 @@ $().ready(function() {
 <input name="color" class="Multiple" type="text" value="<?=$input['color']?>" />
 </div>
 
+
+
 Результатов на страницу:
 <div><input name="result" type="text" size="1" maxlength="2" value="<?=$input['result']?>"></div>
 <div><input type="submit" value="Поиск"></div>
@@ -128,8 +128,21 @@ $().ready(function() {
  </div>
 </div>
 
-Найдено: <?=$total_rows?>
+Популярные цвета:
+<? if( $colors ): ?>
+<div class="jColorSelect">
+<? foreach($colors as $row): ?>
+<a href="/designs/search/?color=<?=$row['color']?>"><div style="background-color:#<?=$row['color']?>;"></div></a>
+<? endforeach; ?>
+</div>
+<? endif; ?>
+
 <div id="bubble-2" class="mb20"></div>
+
+Найдено: <?=$total_rows?>
+
+<div id="bubble-2" class="mb20"></div>
+
 <div align="right"><a  href="/designs/add/"><strong>Добавить дизайн на продажу</strong></a></div>
 <div class="latest-orders">
 <h3>Поиск дизайнов</h3>
@@ -149,7 +162,21 @@ $().ready(function() {
 
 <table class="listorder">
 <tr>
-<td class="topline lft txtl">Заголовок / Превью</td>
+<td class="topline lft txtl">
+<? if( $input['order_field'] == 'title' and  $input['order_type'] == 'desc' ): ?>
+<a  href="/designs/search/?order_field=title&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Заголовок / Превью</a>
+<? else: ?>
+<a  href="/designs/search/?order_field=title<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Заголовок / Превью</a>
+<? endif; ?>
+</td>
+
+<td class="topline" style="width: 70px;">
+<? if( $input['order_field'] == 'sales' and  $input['order_type'] == 'desc' ): ?>
+<a  href="/designs/search/?order_field=sales&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Покупок</a>
+<? else: ?>
+<a  href="/designs/search/?order_field=sales<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Покупок</a>
+<? endif; ?>
+</td>
 
 <td class="topline" style="width: 70px;">
 <? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?>
@@ -194,6 +221,7 @@ $().ready(function() {
 <?=$row['category']?> | <?=$row['date']?>
 
 </div></td>
+<td class="offcount"><?=$row['sales']?></td>
 <td class="offcount"><?=$row['rating']?></td>
 <td class="budget"><?=$row['price_1']?> рублей</td>
 <td class="budget"<? if( $row['sales'] > 0 ): ?> style="text-decoration:line-through"<? endif; ?>><?=$row['price_2']?> рублей</td>

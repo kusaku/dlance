@@ -126,7 +126,7 @@ class Designs extends Controller
 		{
 			$order_field = $_GET['order_field'];
 
-			if( $order_field == 'price_1' or $order_field == 'price_2' or $order_field == 'rating' )
+			if( $order_field == 'price_1' or $order_field == 'price_2' or $order_field == 'rating' or $order_field == 'title' or $order_field == 'sales' )
 			{
 				$input['order_field'] = $_GET['order_field'];
 				$url['order_field'] = 'order_field='.$_GET['order_field'];
@@ -277,7 +277,7 @@ class Designs extends Controller
 
 			$order_field = $_GET['order_field'];
 
-			if( $order_field == 'price_1' or $order_field == 'price_2' or $order_field == 'rating' )
+			if( $order_field == 'price_1' or $order_field == 'price_2' or $order_field == 'rating' or $order_field == 'title' or $order_field == 'sales' )
 			{
 				$input['order_field'] = $_GET['order_field'];
 				$url['order_field'] = 'order_field='.$_GET['order_field'];
@@ -342,6 +342,9 @@ class Designs extends Controller
 		* Блок
 		*/
 		$data['categories'] = $this->designs_mdl->get_categories();//категории
+
+
+		$data['colors'] = $this->designs_mdl->get_color_cloud();
 
 		$this->template->build('designs/search', $data, $title);
     }
@@ -619,7 +622,7 @@ class Designs extends Controller
 <a href="#" onclick="vote('.$id.', 1)"><img src="/templates/wdesigns/css/img/like.gif" /></a>
 <a href="#" onclick="vote('.$id.', 2)"><img src="/templates/wdesigns/css/img/dislike.gif" /></a>
 <br />
-<span class="like">Нравится: '.$data['like'].'</span> | <span class="dislike">Не нравится '.$data['dislike'].'</span>
+Рейтинг: '.$data['rating'].'
 </div>');
 	}
 /*
@@ -640,6 +643,9 @@ class Designs extends Controller
 		}
 
 		$this->load->helper('tinymce');
+
+		$this->load->helper('smiley');//Смайлы
+		$this->load->library('table');//Создание таблиц
 
 		$this->designs_mdl->update_views($id);
 
@@ -709,6 +715,18 @@ class Designs extends Controller
 		}
 
 		$comments['data'] = $this->designs_mdl->get_comments($id);
+
+
+
+
+		//Смайлы
+		$image_array = get_clickable_smileys('/img/smileys/');
+
+		$col_array = $this->table->make_columns($image_array, 20);		
+			
+		$comments['smiley'] = $this->table->generate($col_array);
+
+
 
 		$data['comments'] = $this->load->view('wdesigns/designs/comments', $comments, TRUE);
 
@@ -844,6 +862,11 @@ class Designs extends Controller
 				'field' => 'price_2', 
 				'label' => 'Цена выкупа',
 				'rules' => 'required|numeric'
+			),
+			array (
+				'field' => 'source', 
+				'label' => 'Исходники',
+				'rules' => 'required'
 			),
 			array (
 				'field' => 'tags', 
@@ -1020,7 +1043,7 @@ class Designs extends Controller
 				'category' => $this->input->post('category_id'),
 				'price_1' => $this->input->post('price_1'),
 				'price_2' => $this->input->post('price_2'),
-				'payment_type' => $this->input->post('payment_type'),
+				'source' => htmlspecialchars($this->input->post('source')),
 				'small_image' => '/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'],
 				'full_image' => '/files/designs/'.$data['file_name'],
 				'dfile' => $this->username.'/'.$data_file['file_name'],
@@ -1252,6 +1275,11 @@ class Designs extends Controller
 				'rules' => 'required|numeric'
 			),
 			array (
+				'field' => 'source', 
+				'label' => 'Исходники',
+				'rules' => 'required'
+			),
+			array (
 				'field' => 'tags', 
 				'label' => 'Тэги',
 				'rules' => 'required|callback__tags_check'
@@ -1363,7 +1391,7 @@ class Designs extends Controller
 				'category' => $this->input->post('category_id'),
 				'price_1' => $this->input->post('price_1'),
 				'price_2' => $this->input->post('price_2'),
-				'payment_type' => $this->input->post('payment_type'),
+				'source' => htmlspecialchars($this->input->post('source')),
 				'small_image' => $small_image,
 				'full_image' => $full_image,
 

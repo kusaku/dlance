@@ -49,7 +49,8 @@
 
 <table class="listorder">
 <tr>
-<td class="topline lft txtl">Заголовок / Превью</td>
+<td class="topline lft txtl"><a  href="/designs/index/?order_field=title">Заголовок / Превью</a></td>
+<td class="topline" style="width: 70px;"><a  href="/designs/index/?order_field=sales">Покупок</a></td>
 <td class="topline" style="width: 70px;"><a  href="/designs/index/?order_field=rating">Рейтинг</a></td>
 <td class="topline" style="width: 70px;"><a  href="/designs/index/?order_field=price_1">Цена</a></td>
 <td class="topline rht" style="width: 70px;"><a  href="/designs/index/?order_field=price_2">Цена выкупа</a></td>
@@ -72,6 +73,7 @@
 <?=$row['section']?> / <?=$row['category']?> | <?=$row['date']?>
 
 </div></td>
+<td class="offcount"><?=$row['sales']?></td>
 <td class="offcount"><?=$row['rating']?></td>
 <td class="budget"><?=$row['price_1']?> рублей</td>
 <td class="budget"<? if( $row['sales'] > 0 ): ?> style="text-decoration:line-through"<? endif; ?>><?=$row['price_2']?> рублей</td>
@@ -85,7 +87,7 @@
 <? endif; ?>
 <tr>
 <td colspan="1" class="topline lft txtl">&nbsp;</td>
-<td colspan="3" class="topline rht txtr"><a href="/designs">Смотреть все</a></td>
+<td colspan="4" class="topline rht txtr"><a href="/designs">Смотреть все</a></td>
 </tr>
 </table> 
 

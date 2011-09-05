@@ -23,6 +23,7 @@
 
 <div class="subcontent"><span>Автор: <?=$username?></span> </div>
 
+
 <?=$comments?>
 
   
