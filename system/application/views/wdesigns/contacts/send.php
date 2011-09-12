@@ -1,14 +1,14 @@
 <div id="yui-main">
 <div class="yui-b">
 
-<h1> <a href="">Контакты / Сообщения</a> </h1>
+<h1><a href="">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
 
 <img src="<?=$userpic?>" alt="" class="avatar" />
 <ul class="ucard">
-<li class="utitle"><a class="black" href="/user/<?=$username?>"><?=$username?></a></li>
-<li>Последний визит: <?=$last_login?></li>
-<li>Дата регистрации: <?=$created?></li>
-<li><a href="#send">Написать сообщение</a></li>
+	<li class="utitle"><a class="black" href="/user/<?=$username?>"><?=$username?></a></li>
+	<li>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: <?=$last_login?></li>
+	<li>пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <?=$created?></li>
+	<li><a href="#send">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></li>
 </ul>
 
 <br />
@@ -22,41 +22,27 @@
 
 
 
-<div class="message">
-<? if( !empty($messages) ): ?>
+<div class="message"><? if( !empty($messages) ): ?> <? foreach($messages as $row): ?>
 
 
-<? foreach($messages as $row): ?>
-
-
-<? if( $row['reading'] ): ?><div align="right">Прочитано: <?=$row['reading']?></div><? endif;?>
-
-
-
-<strong><?=$row['sender_id']?></strong> <?=date_smart($row['date'])?>:<br />
+<? if( $row['reading'] ): ?>
+<div align="right">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <?=$row['reading']?></div>
+<? endif;?> <strong><?=$row['sender_id']?></strong> <?=date_smart($row['date'])?>:<br />
 
 <?=nl2br($row['text'])?>
 <hr />
-<? endforeach; ?>
-<?=$page_links?>
-<? else: ?>
-Сообщения не найдено.
-<? endif; ?>
+<? endforeach; ?> <?=$page_links?> <? else: ?> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. <? endif; ?>
 </div>
 
 
-<? if( $black_list ): ?>
-Переписка отключена
-<? else: ?>
-<?=validation_errors()?>
+<? if( $black_list ): ?> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ <? else: ?> <?=validation_errors()?>
 <div id="send">
 <form action="" method="post">
-<div><textarea cols="10" rows="10" name="text" style="width:100%"><?=set_value('text')?></textarea></div>
-<div><input type="submit" value="Отправить"></div>
+<div><textarea cols="10" rows="10" name="text" style="width: 100%"><?=set_value('text')?></textarea></div>
+<div><input type="submit" value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"></div>
 </form>
 </div>
-<? endif; ?>
-</div>
+<? endif; ?></div>
 </div>
 <!--/yui-main-->
 

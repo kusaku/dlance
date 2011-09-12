@@ -1,76 +1,76 @@
-	<!-- Content -->
-	<article class="container_12">
-		
-		<section class="grid_4">
-			<!--<div class="block-border"><div class="block-content">-->
-				<h1>Избранное</h1>
-				
-				<ul class="favorites no-margin with-tip" title="Избранное">
 
-					<li>
-						<img src="/templates/admin/images/icons/web-app/48/Pie-Chart.png" width="48" height="48">
-						<a href="/administrator/">Статистика<br>
-						<small>Статистика &gt; Статистика сервиса</small></a>
-					</li>
+<!-- Content -->
+<article class="container_12">
 
-					<li>
-						<img src="/templates/admin/images/icons/web-app/48/Info.png" width="48" height="48">
-						<a href="/administrator/settings/">Настройки<br>
-						<small>Настройки</small></a>
-					</li>
-					
-					<li>
-						<img src="/templates/admin/images/icons/web-app/48/Picture.png" width="48" height="48">
-						<a href="/administrator/designs/">Дизайны<br>
-						<small>Дизайны &gt; Список</small></a>
-					</li>
-					
-					<li>
-						<img src="/templates/admin/images/icons/web-app/48/Modify.png" width="48" height="48">
-						<a href="/administrator/pages_add/">Добавить страницу<br>
-						<small>Страницы &gt; Добавить</small></a>
-					</li>
+<section class="grid_4">
+<!--<div class="block-border"><div class="block-content">-->
+<h1>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</h1>
 
-				</ul>	
-			<!--</div></div>-->
-		</section>
-		
-		<section class="grid_8">
-			<div class="block-border"><div class="block-content">
-				<!-- We could put the menu inside a H1, but to get valid syntax we'll use a wrapper -->
-				<div class="h1 with-menu">
-					<h1>Статистика сервиса</h1>
-				</div>
-			
-				<div class="block-controls">
-					
-					<ul class="controls-tabs js-tabs same-height with-children-tip">
-						<li><a href="#tab-stats" title="График"><img src="/templates/admin/images/icons/web-app/24/Bar-Chart.png" width="24" height="24"></a></li>
-						<li><a href="#tab-medias" title="Дизайны"><img src="/templates/admin/images/icons/web-app/24/Picture.png" width="24" height="24"></a></li>
-						<li><a href="#tab-users" title="Пользователи"><img src="/templates/admin/images/icons/web-app/24/Profile.png" width="24" height="24"></a></li>
-					</ul>
-					
-				</div>
-				
-				<form class="form" id="tab-stats" method="post" action="">
-					
-					<fieldset class="grey-bg">
-						<legend><a href="#">Настройки</a></legend>
-						
-						<div class="float-left gutter-right">
-							<label for="stats-period">Год</label>
-                            
-							<span class="input-type-text">
-<select name="year" onchange="document.location.href = '/administrator/index/?year=' + this.value">
-<? foreach($years as $row => $value): ?> 
-<option value="<?=$value?>" <? if( $input['year'] == $value ): ?>selected="selected"<? endif; ?>><?=$value?></option>
-<? endforeach; ?>
-></select>
-                            <img src="/templates/admin/images/icons/fugue/calendar-month.png" width="16" height="16"></span>
-						</div>
-					</fieldset>
-					
-					<script type="text/javascript">
+<ul class="favorites no-margin with-tip" title="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ">
+
+	<li><img src="/templates/admin/images/icons/web-app/48/Pie-Chart.png"
+		width="48" height="48"> <a href="/administrator/">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ<br>
+	<small>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ &gt; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</small></a></li>
+
+	<li><img src="/templates/admin/images/icons/web-app/48/Info.png"
+		width="48" height="48"> <a href="/administrator/settings/">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ<br>
+	<small>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</small></a></li>
+
+	<li><img src="/templates/admin/images/icons/web-app/48/Picture.png"
+		width="48" height="48"> <a href="/administrator/designs/">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ<br>
+	<small>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ &gt; пїЅпїЅпїЅпїЅпїЅпїЅ</small></a></li>
+
+	<li><img src="/templates/admin/images/icons/web-app/48/Modify.png"
+		width="48" height="48"> <a href="/administrator/pages_add/">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ<br>
+	<small>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ &gt; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</small></a></li>
+
+</ul>
+<!--</div></div>-->
+</section>
+
+<section class="grid_8">
+<div class="block-border">
+<div class="block-content"><!-- We could put the menu inside a H1, but to get valid syntax we'll use a wrapper -->
+<div class="h1 with-menu">
+<h1>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</h1>
+</div>
+
+<div class="block-controls">
+
+<ul class="controls-tabs js-tabs same-height with-children-tip">
+	<li><a href="#tab-stats" title="пїЅпїЅпїЅпїЅпїЅпїЅ"><img
+		src="/templates/admin/images/icons/web-app/24/Bar-Chart.png"
+		width="24" height="24"></a></li>
+	<li><a href="#tab-medias" title="пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"><img
+		src="/templates/admin/images/icons/web-app/24/Picture.png" width="24"
+		height="24"></a></li>
+	<li><a href="#tab-users" title="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"><img
+		src="/templates/admin/images/icons/web-app/24/Profile.png" width="24"
+		height="24"></a></li>
+</ul>
+
+</div>
+
+<form class="form" id="tab-stats" method="post" action="">
+
+<fieldset class="grey-bg"><legend><a href="#">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></legend>
+
+<div class="float-left gutter-right"><label for="stats-period">пїЅпїЅпїЅ</label>
+
+<span class="input-type-text"> <select name="year"
+	onchange="document.location.href = '/administrator/index/?year=' + this.value">
+	<? foreach($years as $row => $value): ?>
+	<option value="<?=$value?>" <? if( $input['year'] == $value ): ?>
+		selected="selected" <? endif; ?>><?=$value?></option>
+		<? endforeach; ?>
+	>
+</select> <img
+	src="/templates/admin/images/icons/fugue/calendar-month.png" width="16"
+	height="16"></span></div>
+</fieldset>
+
+<script type="text/javascript">
 						
 						// Add listener for tab
 						$('#tab-stats').onTabShow(function() { drawVisitorsChart(); }, true);
@@ -91,10 +91,10 @@
 
 							// Create our data table.
 							var data = new google.visualization.DataTable();
-							var raw_data = [['Продуктов', <?=$products[1]?>, <?=$products[2]?>, <?=$products[3]?>, <?=$products[4]?>, <?=$products[5]?>, <?=$products[6]?>, <?=$products[7]?>, <?=$products[8]?>, <?=$products[9]?>, <?=$products[10]?>, <?=$products[11]?>, <?=$products[12]?>],
-											['Покупок', <?=$purchased[1]?>, <?=$purchased[2]?>, <?=$purchased[3]?>, <?=$purchased[4]?>, <?=$purchased[5]?>, <?=$purchased[6]?>, <?=$purchased[7]?>, <?=$purchased[8]?>, <?=$purchased[9]?>, <?=$purchased[10]?>, <?=$purchased[11]?>, <?=$purchased[12]?>],
-											['Выкуплено', <?=$purchased_2[1]?>, <?=$purchased_2[2]?>, <?=$purchased_2[3]?>, <?=$purchased_2[4]?>, <?=$purchased_2[5]?>, <?=$purchased_2[6]?>, <?=$purchased_2[7]?>, <?=$purchased_2[8]?>, <?=$purchased_2[9]?>, <?=$purchased_2[10]?>, <?=$purchased_2[11]?>, <?=$purchased_2[12]?>],
-											['Пользователи', <?=$users[1]?>, <?=$users[2]?>, <?=$users[3]?>, <?=$users[4]?>, <?=$users[5]?>, <?=$users[6]?>, <?=$users[7]?>, <?=$users[8]?>, <?=$users[9]?>, <?=$users[10]?>, <?=$users[11]?>, <?=$users[12]?>]];
+							var raw_data = [['пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', <?=$products[1]?>, <?=$products[2]?>, <?=$products[3]?>, <?=$products[4]?>, <?=$products[5]?>, <?=$products[6]?>, <?=$products[7]?>, <?=$products[8]?>, <?=$products[9]?>, <?=$products[10]?>, <?=$products[11]?>, <?=$products[12]?>],
+											['пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', <?=$purchased[1]?>, <?=$purchased[2]?>, <?=$purchased[3]?>, <?=$purchased[4]?>, <?=$purchased[5]?>, <?=$purchased[6]?>, <?=$purchased[7]?>, <?=$purchased[8]?>, <?=$purchased[9]?>, <?=$purchased[10]?>, <?=$purchased[11]?>, <?=$purchased[12]?>],
+											['пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', <?=$purchased_2[1]?>, <?=$purchased_2[2]?>, <?=$purchased_2[3]?>, <?=$purchased_2[4]?>, <?=$purchased_2[5]?>, <?=$purchased_2[6]?>, <?=$purchased_2[7]?>, <?=$purchased_2[8]?>, <?=$purchased_2[9]?>, <?=$purchased_2[10]?>, <?=$purchased_2[11]?>, <?=$purchased_2[12]?>],
+											['пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', <?=$users[1]?>, <?=$users[2]?>, <?=$users[3]?>, <?=$users[4]?>, <?=$users[5]?>, <?=$users[6]?>, <?=$users[7]?>, <?=$users[8]?>, <?=$users[9]?>, <?=$users[10]?>, <?=$users[11]?>, <?=$users[12]?>]];
 							
 							var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 							
@@ -121,7 +121,7 @@
 							// Create and draw the visualization.
 							var div = $('#chart_div');
 							new google.visualization.ColumnChart(div.get(0)).draw(data, {
-								title: 'Ежемесячная статистика сервиса',
+								title: 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 								width: div.width(),
 								height: 330,
 								legend: 'right',
@@ -129,38 +129,39 @@
 							});
 							
 							// Message
-							notify('График обновлен');
+							notify('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 						};
 						
-					</script>
-                    <a href="/administrator/info">Развернутая статистика сервиса</a>
-					<div id="chart_div" style="height:330px;"></div>
-					
-				</form>
-				
-				<div id="tab-medias" class="with-margin">
-					<p>Новые за сегодня: <?=$designs_day?></p>
-					<p>Новые за неделю: <?=$designs_week?></p>
-					<p>Новые за месяц: <?=$designs_month?></p>
-					<p>Новые за год: <?=$designs_year?></p>
-				</div>
-				
-				<div id="tab-users" class="with-margin">
-					<p>Новые за сегодня: <?=$users_day?></p>
-					<p>Новые за неделю: <?=$users_week?></p>
-					<p>Новые за месяц: <?=$users_month?></p>
-					<p>Новые за год: <?=$users_year?></p>
-				</div>
-				
-				<ul class="message no-margin">
-					<li><strong>общая статистика сервиса</strong></li>
-				</ul>
-				
-			</div></div>
-		</section>
-		
-		<div class="clear"></div>
-		
-	</article>
-	
-	<!-- End content -->
+					</script> <a href="/administrator/info">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a>
+<div id="chart_div" style="height: 330px;"></div>
+
+</form>
+
+<div id="tab-medias" class="with-margin">
+<p>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <?=$designs_day?></p>
+<p>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: <?=$designs_week?></p>
+<p>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: <?=$designs_month?></p>
+<p>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ: <?=$designs_year?></p>
+</div>
+
+<div id="tab-users" class="with-margin">
+<p>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <?=$users_day?></p>
+<p>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: <?=$users_week?></p>
+<p>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: <?=$users_month?></p>
+<p>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ: <?=$users_year?></p>
+</div>
+
+<ul class="message no-margin">
+	<li><strong>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</strong></li>
+</ul>
+
+</div>
+</div>
+</section>
+
+<div class="clear"></div>
+
+</article>
+
+<!-- End content -->

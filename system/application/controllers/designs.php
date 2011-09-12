@@ -34,33 +34,33 @@ class Designs extends Controller
 			$this->adult = 0;
 		}
 	}
-/*
-|---------------------------------------------------------------
-| Главная
-|---------------------------------------------------------------
-*/
-    function main()
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function main()
 	{
 		$title = $this->config->item('title');
 
-		$data['data'] = $this->designs_mdl->get_designs(0, 20);//Выводим последнии 20 дизайнов, сделать через настройку
+		$data['data'] = $this->designs_mdl->get_designs(0, 20);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 20 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		/**
-		* Блок
-		*/
+		 * пїЅпїЅпїЅпїЅ
+		 */
 		$this->load->model('news/news_mdl');
 
-		$data['news'] = $this->news_mdl->get_newest(3);//Новости сервиса
+		$data['news'] = $this->news_mdl->get_newest(3);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['count_designs'] = $this->designs_mdl->count_designs();//Всего дизайнов
+		$data['count_designs'] = $this->designs_mdl->count_designs();//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['count_users'] = $this->users_mdl->count_users();//Всего пользователей
+		$data['count_users'] = $this->users_mdl->count_users();//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['top_users'] = $this->users_mdl->get_top_users();//Топ 10 пользователей
+		$data['top_users'] = $this->users_mdl->get_top_users();//пїЅпїЅпїЅ 10 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['newest_users'] = $this->users_mdl->get_newest_users();//Новые исполнители
+		$data['newest_users'] = $this->users_mdl->get_newest_users();//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		//Пользовательский рейтинг
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		$input['order_field'] = 'rating';
 
 		$input['order_type'] = 'desc';
@@ -71,17 +71,17 @@ class Designs extends Controller
 		$data['descr'] = $this->config->item('description');
 		$data['keywords'] = $this->config->item('keywords');
 
-		$data['tagcloud'] = $this->tagcloud();//Популярные дизайны
+		$data['tagcloud'] = $this->tagcloud();//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 		$this->template->build('designs/main', $data, $title);
-    }
-/*
-|---------------------------------------------------------------
-| Дизайны
-|---------------------------------------------------------------
-*/
-    function index($start_page = 0) 
+	}
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function index($start_page = 0)
 	{
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 
@@ -92,7 +92,7 @@ class Designs extends Controller
 		if( $start_page < 0 )
 		{
 			$start_page = 0;
-		}		
+		}
 
 		$url = '';
 
@@ -100,9 +100,9 @@ class Designs extends Controller
 
 		$input = array();
 
-		$title = 'Дизайны сайта. Купить шаблон для сайта, Купить дизайн сайта';
+		$title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ';
 
-		if( !empty($_GET['category']) )//Категория
+		if( !empty($_GET['category']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$category = $_GET['category'];
 
@@ -113,16 +113,16 @@ class Designs extends Controller
 
 			$data['category'] = $category;
 
-			$title = $this->designs_mdl->design_title($category).' | '.$title;//Выводим название категории
+			$title = $this->designs_mdl->design_title($category).' | '.$title;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			$input['category_array'] = $this->designs_mdl->cat_array($category);
 
 			$url['category'] = 'category='.$category;
 		}
 
-		$data['url'] = $url;//Для прикрепления к ссылке сортировки
+		$data['url'] = $url;//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( !empty($_GET['order_field']) )//Сортировка
+		if( !empty($_GET['order_field']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$order_field = $_GET['order_field'];
 
@@ -133,7 +133,7 @@ class Designs extends Controller
 			}
 		}
 
-		if( !empty($_GET['order_type']) )//Тип сортировки
+		if( !empty($_GET['order_type']) )//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['order_type'] = $_GET['order_type'];
 			$url['order_type'] = 'order_type='.$_GET['order_type'];
@@ -159,28 +159,28 @@ class Designs extends Controller
 			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);
 		}
 
-		if( !empty($data['url']) ) 
+		if( !empty($data['url']) )
 		{
 			$data['url'] = implode ("&", $data['url']);
 		}
 
 		/**
-		* Блок
-		*/
-		$data['categories'] = $this->designs_mdl->get_categories();//категории
+		 * пїЅпїЅпїЅпїЅ
+		 */
+		$data['categories'] = $this->designs_mdl->get_categories();//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$data['input'] = array (
 			'order_field' => (isset($input['order_field'])) ? $input['order_field'] : '',
-			'order_type' => (isset($input['order_type'])) ? $input['order_type'] : 'desc',//Если не задан ордер тип, ставим desc
+			'order_type' => (isset($input['order_type'])) ? $input['order_type'] : 'desc',//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ desc
 		);
 
 		$this->template->build('designs/index', $data, $title);
-    }
-/*
-|---------------------------------------------------------------
-| Поиск
-|---------------------------------------------------------------
-*/
+	}
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function search($start_page = 0)
 	{
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
@@ -200,9 +200,9 @@ class Designs extends Controller
 
 		$input = array();
 
-		$title = 'Поиск дизайнов сайта';
+		$title = 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ';
 
-		if( !empty($_GET['category']) )//Категория
+		if( !empty($_GET['category']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$category = $_GET['category'];
 
@@ -213,66 +213,66 @@ class Designs extends Controller
 
 			$data['category'] = $category;
 
-			$title = $this->designs_mdl->design_title($category).' | '.$title;//Выводим название категории
+			$title = $this->designs_mdl->design_title($category).' | '.$title;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			$input['category_array'] = $this->designs_mdl->cat_array($category);
 
 			$url['category'] = 'category='.$category;
 		}
 
-		if( !empty($_GET['result']) and is_numeric($_GET['result']) and $_GET['result'] > 0 )//Результатов на страницу
+		if( !empty($_GET['result']) and is_numeric($_GET['result']) and $_GET['result'] > 0 )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['per_page'] = $_GET['result'];
 			$url['result'] = 'result='.$_GET['result'];
-			
+				
 			$per_page = $input['per_page'];
 		}
 
-		if( !empty($_GET['keywords']) )//Ключевые слова
+		if( !empty($_GET['keywords']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['keywords'] = $_GET['keywords'];
 			$url['keywords'] = 'keywords='.$_GET['keywords'];
 		}
 
-		if( !empty($_GET['color']) )//Цвет
+		if( !empty($_GET['color']) )//пїЅпїЅпїЅпїЅ
 		{
 			$input['color'] = $_GET['color'];
 			$url['color'] = 'color='.$_GET['color'];
 		}
 
-		if( !empty($_GET['tags']) )//Тэги
+		if( !empty($_GET['tags']) )//пїЅпїЅпїЅпїЅ
 		{
 			$input['tags'] = $_GET['tags'];
 			$url['tags'] = 'tags='.$_GET['tags'];
 		}
 
-		if( !empty($_GET['price_1_start']) and is_numeric($_GET['price_1_start']) )//Цена за покупку от
+		if( !empty($_GET['price_1_start']) and is_numeric($_GET['price_1_start']) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['price_1_start'] = $_GET['price_1_start'];
 			$url['price_1_start'] = 'price_1_start='.$_GET['price_1_start'];
 		}
 
-		if( !empty($_GET['price_1_end']) and is_numeric($_GET['price_1_end']) )//Цена за покупку до
+		if( !empty($_GET['price_1_end']) and is_numeric($_GET['price_1_end']) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['price_1_end'] = $_GET['price_1_end'];
 			$url['price_1_end'] = 'price_1_end='.$_GET['price_1_end'];
 		}
 
-		if( !empty($_GET['price_2_start']) and is_numeric($_GET['price_2_start']) )//Цена за выкуп от
+		if( !empty($_GET['price_2_start']) and is_numeric($_GET['price_2_start']) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['price_2_start'] = $_GET['price_2_start'];
 			$url['price_2_start'] = 'price_2_start='.$_GET['price_2_start'];
 		}
 
-		if( !empty($_GET['price_2_end']) and is_numeric($_GET['price_2_end']) )//Цена за выкуп до
+		if( !empty($_GET['price_2_end']) and is_numeric($_GET['price_2_end']) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['price_2_end'] = $_GET['price_2_end'];
 			$url['price_2_end'] = 'price_2_end='.$_GET['price_2_end'];
 		}
 
-		$data['url'] = $url;//Для прикрепления к ссылке сортировки
+		$data['url'] = $url;//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( !empty($_GET['order_field']) )//Сортировка
+		if( !empty($_GET['order_field']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 
 			$order_field = $_GET['order_field'];
@@ -285,7 +285,7 @@ class Designs extends Controller
 
 		}
 
-		if( !empty($_GET['order_type']) )//Тип сортировки
+		if( !empty($_GET['order_type']) )//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['order_type'] = $_GET['order_type'];
 			$url['order_type'] = 'order_type='.$_GET['order_type'];
@@ -308,14 +308,14 @@ class Designs extends Controller
 
 		$data['total_rows'] = $config['total_rows'];
 
-		if( !empty($url) ) 
+		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
 
 			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);
 		}
 
-		if( !empty($data['url']) ) 
+		if( !empty($data['url']) )
 		{
 			$data['url'] = implode ("&", $data['url']);
 		}
@@ -329,7 +329,7 @@ class Designs extends Controller
 			'price_2_end' => (isset($input['price_2_end'])) ? $input['price_2_end'] : '',
 
 			'order_field' => (isset($input['order_field'])) ? $input['order_field'] : '',
-			'order_type' => (isset($input['order_type'])) ? $input['order_type'] : 'desc',//Если не задан ордер тип, ставим desc
+			'order_type' => (isset($input['order_type'])) ? $input['order_type'] : 'desc',//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ desc
 
 			'color' => (isset($input['color'])) ? $input['color'] : '',
 
@@ -339,20 +339,20 @@ class Designs extends Controller
 
 
 		/**
-		* Блок
-		*/
-		$data['categories'] = $this->designs_mdl->get_categories();//категории
+		 * пїЅпїЅпїЅпїЅ
+		 */
+		$data['categories'] = $this->designs_mdl->get_categories();//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 		$data['colors'] = $this->designs_mdl->get_color_cloud();
 
 		$this->template->build('designs/search', $data, $title);
-    }
-/*
-|---------------------------------------------------------------
-| Добавить дополнительные изображения
-|---------------------------------------------------------------
-*/
+	}
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function images_add($design_id = '')
 	{
 		if( !$this->errors->access() )
@@ -360,9 +360,9 @@ class Designs extends Controller
 			return;
 		}
 
-		if( !$this->_check_action($design_id) )//Если не существует дизайна со статусом открыт у пользователя
+		if( !$this->_check_action($design_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->load->library('upload');
@@ -373,90 +373,90 @@ class Designs extends Controller
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'title', 
-				'label' => 'Заголовок',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|text|max_length[64]'
-			),
-			array (
+				),
+				array (
 				'field' => 'text', 
-				'label' => 'Краткое описание',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[255]'
-			)
-		);
+				)
+				);
 
-		if( isset($_FILES['userfile']['tmp_name']) ) 
-		{
-			$config['encrypt_name']  = TRUE;
-			$config['upload_path'] = './files/images/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-			$config['max_size']	= '1000';
-			$config['max_width']  = '1600';
-			$config['max_height']  = '1200';
-
-			$this->upload->initialize($config); unset($config);
-	
-			if( $this->upload->do_upload() )
-			{
-
-				$data = $this->upload->data();
-
-    			$path  = './files/images/'.$data['file_name'].'';
-
-    			$config['source_image'] = $path;
-    			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 120;
-   				$config['height'] = 120;
-				$config['new_image'] = './files/images/'.$data['file_name'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_small';
-
-    			$this->image_lib->initialize($config);
-
-    			$this->image_lib->resize();
-
-				
-				//Дальше работаем над остальными полями
-				$this->form_validation->set_rules($rules);
-
-				if( $this->form_validation->run() ) 
+				if( isset($_FILES['userfile']['tmp_name']) )
 				{
-					$data = array (
+					$config['encrypt_name']  = TRUE;
+					$config['upload_path'] = './files/images/';
+					$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
+					$config['max_size']	= '1000';
+					$config['max_width']  = '1600';
+					$config['max_height']  = '1200';
+
+					$this->upload->initialize($config); unset($config);
+
+					if( $this->upload->do_upload() )
+					{
+
+						$data = $this->upload->data();
+
+						$path  = './files/images/'.$data['file_name'].'';
+
+						$config['source_image'] = $path;
+						$config['maintain_ratio'] = TRUE;
+						$config['width'] = 120;
+						$config['height'] = 120;
+						$config['new_image'] = './files/images/'.$data['file_name'].'';
+						$config['create_thumb'] = TRUE;
+						$config['thumb_marker'] = '_small';
+
+						$this->image_lib->initialize($config);
+
+						$this->image_lib->resize();
+
+
+						//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+						$this->form_validation->set_rules($rules);
+
+						if( $this->form_validation->run() )
+						{
+							$data = array (
 						'design_id' => $design_id,
 						'date' => now(),
 						'title' => $this->input->post('title'),
 						'descr' => htmlspecialchars($this->input->post('text')),
 						'small_image' => '/files/images/'.$data['raw_name'].'_small'.$data['file_ext'],
 						'full_image' => '/files/images/'.$data['file_name']
-					);
-	
-					$this->designs_mdl->add('images', $data);
-					
-					redirect('designs/'.$design_id.'.html');//Перекидываем на страницу вывода изображений
+							);
+
+							$this->designs_mdl->add('images', $data);
+								
+							redirect('designs/'.$design_id.'.html');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+						}
+
+					}
+					else
+					{
+						$data['error'] = $this->upload->display_errors();
+					}
+
 				}
 
-			}	
-			else
-			{
-				$data['error'] = $this->upload->display_errors();
-			}
+				if( empty($data) )
+				{
+					$data = '';
+				}
 
-		}
-
-		if( empty($data) )
-		{
-			$data = '';
-		}
-
-		$this->template->build('designs/images_add', $data, $title = 'Добавить изображение | Дизайн');
+				$this->template->build('designs/images_add', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Редактировать дополнительное изображение
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function images_edit($id = '')
 	{
 		if( !$this->errors->access() )
@@ -466,97 +466,97 @@ class Designs extends Controller
 
 		$designdata = $this->designs_mdl->get_image($id);
 
-		$design_id = $designdata['design_id'];//Для проверки + для редиректа
+		$design_id = $designdata['design_id'];//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ + пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( !$this->_check_action($design_id) )//Если не существует дизайна со статусом открыт у пользователя
+		if( !$this->_check_action($design_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->load->library('upload');
 		$this->load->library('Image_lib');
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'title', 
-				'label' => 'Заголовок',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|text|max_length[64]'
-			),
-			array (
+				),
+				array (
 				'field' => 'text', 
-				'label' => 'Краткое описание',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[255]'
-			)
-		);
+				)
+				);
 
-		if( isset($_FILES['userfile']['tmp_name']) ) 
-		{
-			$config['encrypt_name']  = TRUE;
-			$config['upload_path'] = './files/images/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-			$config['max_size']	= '1000';
-			$config['max_width']  = '1600';
-			$config['max_height']  = '1200';
-
-
-			$this->upload->initialize($config); unset($config);
-	
-			if( $this->upload->do_upload() )
-			{
-				$data = $this->upload->data();
-
-    			$path  = './files/images/'.$data['file_name'].'';
-
-    			$config['source_image'] = $path;
-    			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 120;
-   				$config['height'] = 120;
-				$config['new_image'] = './files/images/'.$data['file_name'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_small';
-
-    			$this->image_lib->initialize($config);
-
-    			$this->image_lib->resize();
-				
-				$small_image = '/files/images/'.$data['raw_name'].'_small'.$data['file_ext'];
-				$full_image = '/files/images/'.$data['file_name'];
-			}
-
-		}
-
-		if( !isset($small_image) or !isset($full_image) )//Если не существует, оставляем прошлые изображения
-		{
-			$small_image = $designdata['small_image'];
-			$full_image = $designdata['full_image'];
-		}
+				if( isset($_FILES['userfile']['tmp_name']) )
+				{
+					$config['encrypt_name']  = TRUE;
+					$config['upload_path'] = './files/images/';
+					$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
+					$config['max_size']	= '1000';
+					$config['max_width']  = '1600';
+					$config['max_height']  = '1200';
 
 
-		//Дальше работаем над остальными полями
-		$this->form_validation->set_rules($rules);
+					$this->upload->initialize($config); unset($config);
 
-		if( $this->form_validation->run() ) 
-		{
-			$data = array (
+					if( $this->upload->do_upload() )
+					{
+						$data = $this->upload->data();
+
+						$path  = './files/images/'.$data['file_name'].'';
+
+						$config['source_image'] = $path;
+						$config['maintain_ratio'] = TRUE;
+						$config['width'] = 120;
+						$config['height'] = 120;
+						$config['new_image'] = './files/images/'.$data['file_name'].'';
+						$config['create_thumb'] = TRUE;
+						$config['thumb_marker'] = '_small';
+
+						$this->image_lib->initialize($config);
+
+						$this->image_lib->resize();
+
+						$small_image = '/files/images/'.$data['raw_name'].'_small'.$data['file_ext'];
+						$full_image = '/files/images/'.$data['file_name'];
+					}
+
+				}
+
+				if( !isset($small_image) or !isset($full_image) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				{
+					$small_image = $designdata['small_image'];
+					$full_image = $designdata['full_image'];
+				}
+
+
+				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				$this->form_validation->set_rules($rules);
+
+				if( $this->form_validation->run() )
+				{
+					$data = array (
 				'title' => $this->input->post('title'),
 				'descr' => htmlspecialchars($this->input->post('text')),
 				'small_image' => $small_image,
 				'full_image' => $full_image
-			);
-	
-			$this->designs_mdl->edit('images', $id, $data);
-					
-			redirect('designs/'.$design_id.'.html');//Перекидываем на страницу вывода изображений
-		}
+					);
 
-		$this->template->build('designs/images_edit', $designdata, $title = 'Редактировать изображение | Дизайн');
+					$this->designs_mdl->edit('images', $id, $data);
+						
+					redirect('designs/'.$design_id.'.html');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				}
+
+				$this->template->build('designs/images_edit', $designdata, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Удалить изображение, находим id дизайна а затем делаем проверку
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ id пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function images_del($id = '')
 	{
 		if( !$this->errors->access() )
@@ -566,43 +566,43 @@ class Designs extends Controller
 
 		$design_id = $this->designs_mdl->get_id($id);
 
-		if( !$this->_check_action($design_id) )//Если не существует дизайна со статусом ожидание
+		if( !$this->_check_action($design_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->designs_mdl->del('images', $id);
-		
+
 		redirect('/designs/'.$design_id.'.html');
 	}
-/*
-|---------------------------------------------------------------
-| Пользовательское голосование
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function vote()
 	{
 		$id = $this->input->post('id');
 
 		$type = $this->input->post('type');
 
-	    if( empty($id) )
-	    {
+		if( empty($id) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$data = $this->designs_mdl->get_edit($id);
 
-		if( $this->user_id == $data['user_id'] )//Если дизайн уже был добавлен в корзину
+		if( $this->user_id == $data['user_id'] )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			echo 'Товар принадлежит вам';
-			
+			echo 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ';
+				
 			die;
 		}
 
 		if( !$this->designs_mdl->check_vote($id) )
 		{
-			echo 'Вы уже голосовали!';
+			echo 'пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!';
 
 			die;
 		}
@@ -622,15 +622,15 @@ class Designs extends Controller
 <a href="#" onclick="vote('.$id.', 1)"><img src="/templates/wdesigns/css/img/like.gif" /></a>
 <a href="#" onclick="vote('.$id.', 2)"><img src="/templates/wdesigns/css/img/dislike.gif" /></a>
 <br />
-Рейтинг: '.$data['rating'].'
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$data['rating'].'
 </div>');
 	}
-/*
-|---------------------------------------------------------------
-| Просмотр
-|---------------------------------------------------------------
-*/
-	function view($id = '') 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function view($id = '')
 	{
 		if( !$data = $this->designs_mdl->get($id) )
 		{
@@ -639,79 +639,79 @@ class Designs extends Controller
 
 		if( $cause = $this->_check_banned($data['id']) )
 		{
-			show_error('Дизайн заблокирован.<br><br>Причина: '.$cause.'');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br><br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$cause.'');
 		}
 
 		$this->load->helper('tinymce');
 
-		$this->load->helper('smiley');//Смайлы
-		$this->load->library('table');//Создание таблиц
+		$this->load->helper('smiley');//пїЅпїЅпїЅпїЅпїЅпїЅ
+		$this->load->library('table');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$this->designs_mdl->update_views($id);
 
 		/**
-		* Блок
-		*/
-		$data['newest_designs'] = $this->designs_mdl->get_newest($data['category_id'], $data['status_id']);//Дизайны данной категории
+		 * пїЅпїЅпїЅпїЅ
+		 */
+		$data['newest_designs'] = $this->designs_mdl->get_newest($data['category_id'], $data['status_id']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['similar_designs'] = $this->designs_mdl->get_similar($id);//Похожии дизайны
+		$data['similar_designs'] = $this->designs_mdl->get_similar($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['members_voted'] = $this->designs_mdl->get_members_voted($id);//Проголосовавшии пользователи
+		$data['members_voted'] = $this->designs_mdl->get_members_voted($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['tags'] = $this->designs_mdl->get_design_tags($id);//Тэги дизайна
+		$data['tags'] = $this->designs_mdl->get_design_tags($id);//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['colors'] = $this->designs_mdl->get_design_colors($id);//Расцветка дизайна
+		$data['colors'] = $this->designs_mdl->get_design_colors($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['images'] = $this->designs_mdl->get_design_images($id);//Дополнительные изображения
+		$data['images'] = $this->designs_mdl->get_design_images($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['sub'] = $this->designs_mdl->get_design_sub($id);//Сопутствующии товары
+		$data['sub'] = $this->designs_mdl->get_design_sub($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 		/**
-		* Комментарии
-		*/
+		 * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		 */
 		if( $this->input->post('newcomment') and $this->users_mdl->logged_in() )
 		{
 
-			if( $data['user_id'] != $this->user_id )//Если комментатор добавляет не автор
+			if( $data['user_id'] != $this->user_id )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 			{
 
-				$date = now() - $this->designs_mdl->last_comment($id, $this->user_id);//От текущей даты отнимаем дату последнего добавления отзыва
+				$date = now() - $this->designs_mdl->last_comment($id, $this->user_id);//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-				if(  $date < $this->config->item('comments_add') )//Если остаток даты меньше чем заданный в настройках
+				if(  $date < $this->config->item('comments_add') )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				{
 					$left_date = $this->config->item('comments_add') - $date;
 					$left_date = now() + $left_date;
 					$left_date = date_await($left_date);
-			
-					show_error('Следующий комментарий вы сможете добавить через '.$left_date.'');
+						
+					show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ '.$left_date.'');
 				}
 
 			}
 
-			$rules = array 
+			$rules = array
 			(
-				array (
+			array (
 					'field' => 'text', 
-					'label' => 'Текст',
+					'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 					'rules' => 'required|max_length[10000]'
-				)
-			);
+					)
+					);
 
-			$data_comment = array (
+					$data_comment = array (
 				'date' => now(),
 				'design_id' => $id,
 				'user_id' => $this->user_id,
 				'text' => $this->input->post('text')
-			);
-	
-			$this->form_validation->set_rules($rules);
+					);
 
-			if( $this->form_validation->run() ) 
-			{
-				$this->designs_mdl->add('designs_comments', $data_comment);
+					$this->form_validation->set_rules($rules);
 
-				redirect('designs/'.$id.'.html');
-			}
+					if( $this->form_validation->run() )
+					{
+						$this->designs_mdl->add('designs_comments', $data_comment);
+
+						redirect('designs/'.$id.'.html');
+					}
 		}
 
 		$comments['data'] = $this->designs_mdl->get_comments($id);
@@ -719,10 +719,10 @@ class Designs extends Controller
 
 
 
-		//Смайлы
+		//пїЅпїЅпїЅпїЅпїЅпїЅ
 		$image_array = get_clickable_smileys('/img/smileys/');
 
-		$col_array = $this->table->make_columns($image_array, 20);		
+		$col_array = $this->table->make_columns($image_array, 20);
 			
 		$comments['smiley'] = $this->table->generate($col_array);
 
@@ -730,17 +730,17 @@ class Designs extends Controller
 
 		$data['comments'] = $this->load->view('wdesigns/designs/comments', $comments, TRUE);
 
-		$this->template->build('designs/view', $data, $title = ''.$data['title'].' | Дизайны сайта');
+		$this->template->build('designs/view', $data, $title = ''.$data['title'].' | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Облако тегов
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function tagcloud()
 	{
 		$tagcloud = $this->designs_mdl->get_tag_cloud();
-	
+
 		asort($tagcloud);
 
 		$min = reset($tagcloud);
@@ -751,10 +751,10 @@ class Designs extends Controller
 		$maxSize = 5;
 		$out = '';
 
-		// здесь можно задать сортировку элементов
-		arsort($tagcloud); // большие метки в начале
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		arsort($tagcloud); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-		foreach ($tagcloud as $tag => $count) 
+		foreach ($tagcloud as $tag => $count)
 		{
 			$fontSize = round((($count - $min)/($max - $min)) * ($maxSize - $minSize) + $minSize);
 
@@ -763,13 +763,13 @@ class Designs extends Controller
 
 		}
 
-		return $out; 
+		return $out;
 	}
-/*
-|---------------------------------------------------------------
-| Отправить жалобу
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function send_report()
 	{
 		$id = $this->input->post('id');
@@ -787,13 +787,13 @@ class Designs extends Controller
 
 		$this->designs_mdl->add('reports', $data);
 	}
-/*
-|---------------------------------------------------------------
-| jquery-autocomplete
-|---------------------------------------------------------------
-*/
-	function tags()//Все существующии тэги
-	{		
+	/*
+	 |---------------------------------------------------------------
+	 | jquery-autocomplete
+	 |---------------------------------------------------------------
+	 */
+	function tags()//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	{
 		$tags = $this->designs_mdl->get_tags();
 
 		foreach($tags as $row)
@@ -802,7 +802,7 @@ class Designs extends Controller
 		}
 	}
 
-	function sub()//Все существующии дизайны, для поля сопутствующии товары
+	function sub()//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 
@@ -820,12 +820,12 @@ class Designs extends Controller
 			}
 		}
 	}
-/*
-|---------------------------------------------------------------
-| Добавить дизайн
-|---------------------------------------------------------------
-*/
-	function add() 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function add()
 	{
 		if( !$this->errors->access() )
 		{
@@ -836,210 +836,210 @@ class Designs extends Controller
 		$this->load->library('Image_lib');
 		$this->load->helper('text');
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'title', 
-				'label' => 'Заголовок',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|text|max_length[64]'
-			),
-			array (
+				),
+				array (
 				'field' => 'text', 
-				'label' => 'Текст',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[10000]'
-			),
-			array (
+				),
+				array (
 				'field' => 'category_id', 
-				'label' => 'Категория',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'price_1', 
-				'label' => 'Цена',
+				'label' => 'пїЅпїЅпїЅпїЅ',
 				'rules' => 'required|numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'price_2', 
-				'label' => 'Цена выкупа',
+				'label' => 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'source', 
-				'label' => 'Исходники',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'tags', 
-				'label' => 'Тэги',
+				'label' => 'пїЅпїЅпїЅпїЅ',
 				'rules' => 'required|callback__tags_check'
-			),
-/*
-|---------------------------------------------------------------
-| Дополнительные параметры, для запоминания
-|---------------------------------------------------------------
-*/
-			array (
+				),
+				/*
+				 |---------------------------------------------------------------
+				 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				 |---------------------------------------------------------------
+				 */
+				array (
 				'field' => 'sub', 
-				'label' => 'Сопутствующие товары',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'max_length[64]'
-			),
-			array (
+				),
+				array (
 				'field' => 'flash', 
-				'label' => 'Флэш',
+				'label' => 'пїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'stretch', 
-				'label' => 'Стретч',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'columns', 
-				'label' => 'Количество колонок',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'destination', 
-				'label' => 'Назначение сайта',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'quality', 
-				'label' => 'Тех Качество',
+				'label' => 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'type', 
-				'label' => 'Тип Верстки',
+				'label' => 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'tone', 
-				'label' => 'Тон',
+				'label' => 'пїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'bright', 
-				'label' => 'Яркость',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'style', 
-				'label' => 'Стиль',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'theme', 
-				'label' => 'Тема',
+				'label' => 'пїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'adult', 
-				'label' => 'Только для взрослых',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric'
-			)
-		);
+				)
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		$form_validation = $this->form_validation->run();
-/*
-|---------------------------------------------------------------
-| Загрузка изображения
-|---------------------------------------------------------------
-*/
-		if( isset($_FILES['userfile']['tmp_name']) and $form_validation ) 
-		{
-			$config['encrypt_name']  = TRUE;
-			$config['upload_path'] = './files/designs/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|JPG';
-			$config['max_size']	= '2000';
-			$config['max_width']  = '1800';
-			$config['max_height']  = '1800';
-
-			$this->upload->initialize($config);
-	
-			if( $this->upload->do_upload() )
-			{
-				$data = $this->upload->data();
-
-    			$path  = './files/designs/'.$data['file_name'].'';
-
-    			$config['source_image'] = $path;
-    			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 120;
-   				$config['height'] = 120;
-				$config['new_image'] = './files/designs/'.$data['file_name'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_small';
-
-    			$this->image_lib->initialize($config);
-    			$this->image_lib->resize();
-
-				if( $this->input->post('watermark') )//Налаживаем водяной знак
+				$form_validation = $this->form_validation->run();
+				/*
+				 |---------------------------------------------------------------
+				 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				 |---------------------------------------------------------------
+				 */
+				if( isset($_FILES['userfile']['tmp_name']) and $form_validation )
 				{
-    				$config['source_image'] = $path;
-    				$config['wm_type'] = 'overlay';
-    				$config['wm_overlay_path'] = './img/watermark/watermark.png';
-    				$config['wm_vrt_alignment'] = 'bottom';
-    				$config['wm_hor_alignment'] = 'right';
-					$config['create_thumb'] = FALSE; 
-    				$this->image_lib->initialize($config);
-    				$this->image_lib->watermark();
+					$config['encrypt_name']  = TRUE;
+					$config['upload_path'] = './files/designs/';
+					$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|JPG';
+					$config['max_size']	= '2000';
+					$config['max_width']  = '1800';
+					$config['max_height']  = '1800';
+
+					$this->upload->initialize($config);
+
+					if( $this->upload->do_upload() )
+					{
+						$data = $this->upload->data();
+
+						$path  = './files/designs/'.$data['file_name'].'';
+
+						$config['source_image'] = $path;
+						$config['maintain_ratio'] = TRUE;
+						$config['width'] = 120;
+						$config['height'] = 120;
+						$config['new_image'] = './files/designs/'.$data['file_name'].'';
+						$config['create_thumb'] = TRUE;
+						$config['thumb_marker'] = '_small';
+
+						$this->image_lib->initialize($config);
+						$this->image_lib->resize();
+
+						if( $this->input->post('watermark') )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+						{
+							$config['source_image'] = $path;
+							$config['wm_type'] = 'overlay';
+							$config['wm_overlay_path'] = './img/watermark/watermark.png';
+							$config['wm_vrt_alignment'] = 'bottom';
+							$config['wm_hor_alignment'] = 'right';
+							$config['create_thumb'] = FALSE;
+							$this->image_lib->initialize($config);
+							$this->image_lib->watermark();
+						}
+
+					}
+					else
+					{
+						$data['error'] = $this->upload->display_errors();
+					}
+				}
+				/*
+				 |---------------------------------------------------------------
+				 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+				 |---------------------------------------------------------------
+				 */
+				if( isset($_FILES['file']['tmp_name']) and $form_validation )
+				{
+					//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					if( !file_exists(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'') )
+					{
+						mkdir(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'', 0777, true);
+					}
+
+					$config['encrypt_name']  = TRUE;
+					$config['upload_path'] = './files/download/'.$this->username.'/';
+					$config['allowed_types'] = 'rar|zip';
+					$config['max_size']	= '100000';
+
+					$this->upload->initialize($config);
+
+					if( $this->upload->do_upload("file") )
+					{
+						$data_file = $this->upload->data();
+
+						$path  = './files/download/'.$this->username.'/'.$data_file['file_name'].'';
+					}
+					else
+					{
+						$data['error'] = $this->upload->display_errors();
+					}
+
 				}
 
-			}	
-			else
-			{
-				$data['error'] = $this->upload->display_errors();
-			}
-		}
-/*
-|---------------------------------------------------------------
-| Загрузка файла
-|---------------------------------------------------------------
-*/
-		if( isset($_FILES['file']['tmp_name']) and $form_validation ) 
-		{
-			//Если не существует папки у пользователя
-			if( !file_exists(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'') )
-			{
-				mkdir(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'', 0777, true);
-			}
+				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				if( $form_validation and !isset($data['error']) )//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				{
+					$full_image = 'files/designs/'.$data['file_name'].'';
 
-			$config['encrypt_name']  = TRUE;
-			$config['upload_path'] = './files/download/'.$this->username.'/';
-			$config['allowed_types'] = 'rar|zip';
-			$config['max_size']	= '100000';
+					$moder = $this->config->item('moder');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			$this->upload->initialize($config);
-	
-			if( $this->upload->do_upload("file") )
-			{
-				$data_file = $this->upload->data();
-
-    			$path  = './files/download/'.$this->username.'/'.$data_file['file_name'].'';
-			}	
-			else
-			{
-				$data['error'] = $this->upload->display_errors();
-			}
-
-		}
-
-		//Дальше работаем над остальными полями
-		if( $form_validation and !isset($data['error']) )//Форма должна пройти валидацию и пройти все загрузки без ошибок
-		{
-			$full_image = 'files/designs/'.$data['file_name'].'';
-
-			$moder = $this->config->item('moder');//Модерация
-
-			$data = array (
+					$data = array (
 				'user_id' => $this->user_id,
 				'date' => now(),
 				'title' => $this->input->post('title'),
 				'text' => htmlspecialchars($this->input->post('text')),
-				'descr' => character_limiter(htmlspecialchars($this->input->post('text')), 255),//Описание для SE
+				'descr' => character_limiter(htmlspecialchars($this->input->post('text')), 255),//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ SE
 				'category' => $this->input->post('category_id'),
 				'price_1' => $this->input->post('price_1'),
 				'price_2' => $this->input->post('price_2'),
@@ -1050,44 +1050,44 @@ class Designs extends Controller
 				'status' => 1,
 
 				'moder' => $moder
-			);
+					);
 
-			$this->designs_mdl->add('designs', $data);
+					$this->designs_mdl->add('designs', $data);
 
-			$design_id = $this->db->insert_id();
+					$design_id = $this->db->insert_id();
 
-			$category = $data['category'];//Сохраняем переменную для рассылки по рубрикам
+					$category = $data['category'];//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-/*
-|---------------------------------------------------------------
-| Цвета
-|---------------------------------------------------------------
-*/
-			$this->load->library('colors');
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$this->load->library('colors');
 
-			$delta = 24;
-			$reduce_brightness = true;
-			$reduce_gradients = true;
-			$num_results = 10;
+					$delta = 24;
+					$reduce_brightness = true;
+					$reduce_gradients = true;
+					$num_results = 10;
 
-			$colors = $this->colors->Get_Color($full_image, $num_results, $reduce_brightness, $reduce_gradients, $delta);
+					$colors = $this->colors->Get_Color($full_image, $num_results, $reduce_brightness, $reduce_gradients, $delta);
 
-			foreach ( $colors as $hex => $count )
-			{
-				$a[] = "('" . $design_id . "', '" . trim( $hex ) . "', '" . $count . "')";
-			}
+					foreach ( $colors as $hex => $count )
+					{
+						$a[] = "('" . $design_id . "', '" . trim( $hex ) . "', '" . $count . "')";
+					}
 
-			$a = implode( ", ", $a );
+					$a = implode( ", ", $a );
 
-        	$query = "INSERT INTO ci_colors (design_id, color, percent) VALUES " . $a;
+					$query = "INSERT INTO ci_colors (design_id, color, percent) VALUES " . $a;
 
-        	$query = $this->db->query($query);
-/*
-|---------------------------------------------------------------
-| Дополнительные параметры, отдельная таблица
-|---------------------------------------------------------------
-*/
-			$data = array (
+					$query = $this->db->query($query);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$data = array (
 				'design_id' => $design_id,
 				'flash' => $this->input->post('flash'),
 				'stretch' => $this->input->post('stretch'),
@@ -1100,147 +1100,147 @@ class Designs extends Controller
 				'style' => $this->input->post('style'),
 				'theme' => $this->input->post('theme'),
 				'adult' => $this->input->post('adult')
-			);
-			
-			$this->designs_mdl->add_options($data);
-/*
-|---------------------------------------------------------------
-| Сопутствующии товары
-|---------------------------------------------------------------
-*/
-			//Обработка данных
-			$a = '';
+					);
+						
+					$this->designs_mdl->add_options($data);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					$a = '';
 
-			$sub = $this->input->post('sub');
+					$sub = $this->input->post('sub');
 
-			$sub = trim($sub);//Удаляем пробелы в начале и конце
+					$sub = trim($sub);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$sub = eregi_replace("\,+$", "", $sub);//Убираем запятую в конце
+					$sub = eregi_replace("\,+$", "", $sub);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$sub = explode(",", $sub);//Создаём массив
-			
-			$sub = array_unique($sub);//только уникальные значения
-			
+					$sub = explode(",", $sub);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+						
+					$sub = array_unique($sub);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+						
 
-			//Вставка данных
-			foreach ( $sub as $row => $value )
-			{
-				$a[] = "('" . $design_id . "', '" . trim( $value ) . "')";
-			}
+					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					foreach ( $sub as $row => $value )
+					{
+						$a[] = "('" . $design_id . "', '" . trim( $value ) . "')";
+					}
 
-			$a = implode( ", ", $a );
+					$a = implode( ", ", $a );
 
-        	$query = "INSERT INTO ci_associated (design_id, sub) VALUES " . $a;
+					$query = "INSERT INTO ci_associated (design_id, sub) VALUES " . $a;
 
-        	$query = $this->db->query($query);
-/*
-|---------------------------------------------------------------
-| Тэги
-|---------------------------------------------------------------
-*/
-			$a = '';
+					$query = $this->db->query($query);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$a = '';
 
-			$tags = $this->input->post('tags');
+					$tags = $this->input->post('tags');
 
-			$tags = trim($tags);//Удаляем пробелы в начале и конце
+					$tags = trim($tags);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$tags = strtolower($tags);//все буквенные символы переведены в нижний регистр, для точной проверки уникальности
+					$tags = strtolower($tags);//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			$tags = eregi_replace("\,+$", "", $tags);//Убираем запятую в конце
+					$tags = eregi_replace("\,+$", "", $tags);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$tags = explode(",", $tags);//Создаём массив
-			
-			$tags = array_unique($tags);//Удаляем неуникальные элементы
+					$tags = explode(",", $tags);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+						
+					$tags = array_unique($tags);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			foreach ( $tags as $row => $value )
-			{
-				$a[] = "('" . $design_id . "', '" . trim( $value ) . "')";
-			}
+					foreach ( $tags as $row => $value )
+					{
+						$a[] = "('" . $design_id . "', '" . trim( $value ) . "')";
+					}
 
-			$a = implode( ", ", $a );
+					$a = implode( ", ", $a );
 
-        	$query = "INSERT INTO ci_tags (design_id, tag) VALUES " . $a;
+					$query = "INSERT INTO ci_tags (design_id, tag) VALUES " . $a;
 
-        	$query = $this->db->query($query);
-/*
-|---------------------------------------------------------------
-| Рассылка/По пользователю/По рубрикам
-|---------------------------------------------------------------
-*/
-//По пользователю выбираем всех пользователей(user_id) которые следуют за follows и рассылаем
-			$mailer = $this->designs_mdl->get_mailer_users($this->user_id);
+					$query = $this->db->query($query);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(user_id) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ follows пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					$mailer = $this->designs_mdl->get_mailer_users($this->user_id);
 
-			foreach ($mailer as $row)
-			{
-				$data = array (
+					foreach ($mailer as $row)
+					{
+						$data = array (
 					'username' => $row['username'],
 					'follows_username' => $this->username,
 					'design_id' => $design_id
-				);
+						);
 
-				$subject = 'Рассылка';
+						$subject = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
 
-				$message = $this->load->view('emails/new_design_users_followers', $data, TRUE);
-			
-				$this->common->email($row['email'], $subject, $message);
-			}
-//По рубрике выбираем всех пользователей(user_id) которые подписаны на рубрику(category) и рассылаем
-			$mailer = $this->designs_mdl->get_mailer_categories($category, $this->user_id);
+						$message = $this->load->view('emails/new_design_users_followers', $data, TRUE);
+							
+						$this->common->email($row['email'], $subject, $message);
+					}
+					//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(user_id) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ(category) пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					$mailer = $this->designs_mdl->get_mailer_categories($category, $this->user_id);
 
-			foreach ($mailer as $row)
-			{
-				$data = array (
+					foreach ($mailer as $row)
+					{
+						$data = array (
 					'username' => $row['username'],
 					'design_id' => $design_id
-				);
+						);
 
-				$subject = 'Рассылка';
+						$subject = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
 
-				$message = $this->load->view('emails/new_design_categories_followers', $data, TRUE);
-			
-				$this->common->email($row['email'], $subject, $message);
-			}
+						$message = $this->load->view('emails/new_design_categories_followers', $data, TRUE);
+							
+						$this->common->email($row['email'], $subject, $message);
+					}
 
-/*
-|---------------------------------------------------------------
-| Повышение репутации
-|---------------------------------------------------------------
-*/
-			$this->events->create($this->user_id, 'Продукт добавлен', 'add_design');#Событие с репутацией
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$this->events->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'add_design');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			if( $moder == 0 )
-			{
-				show_error('Дизайн успешно добавлен, после модерации он будет доступен пользователям на главной странице сервиса.');
-			}
-			else
-			{
-				redirect('designs/'.$design_id.'.html');
-			}
-		}
+					if( $moder == 0 )
+					{
+						show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
+					}
+					else
+					{
+						redirect('designs/'.$design_id.'.html');
+					}
+				}
 
-		$data['categories'] = $this->designs_mdl->get_categories();
+				$data['categories'] = $this->designs_mdl->get_categories();
 
-		$data['themes'] = $this->designs_mdl->get_themes();
+				$data['themes'] = $this->designs_mdl->get_themes();
 
-		$data['destinations'] = $this->designs_mdl->get_destinations();
+				$data['destinations'] = $this->designs_mdl->get_destinations();
 
-		$this->template->build('designs/add', $data, $title = 'Добавить дизайн');
+				$this->template->build('designs/add', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Редактирование дизайна
-|---------------------------------------------------------------
-*/
-	function edit($id = '') 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function edit($id = '')
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		if( !$this->_check_action($id) )//Если не существует дизайна со статусом ожидание У ПОЛЬЗОВАТЕЛЯ
+		if( !$this->_check_action($id) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->load->library('upload');
@@ -1249,145 +1249,145 @@ class Designs extends Controller
 
 		$rules = array
 		(
-			array (
+		array (
 				'field' => 'title', 
-				'label' => 'Заголовок',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|text|max_length[64]'
-			),
-			array (
+				),
+				array (
 				'field' => 'text', 
-				'label' => 'Текст',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[10000]'
-			),
-			array (
+				),
+				array (
 				'field' => 'category_id', 
-				'label' => 'Категория',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'price_1', 
-				'label' => 'Цена',
+				'label' => 'пїЅпїЅпїЅпїЅ',
 				'rules' => 'required|numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'price_2', 
-				'label' => 'Цена выкупа',
+				'label' => 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|numeric'
-			),
-			array (
+				),
+				array (
 				'field' => 'source', 
-				'label' => 'Исходники',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'tags', 
-				'label' => 'Тэги',
+				'label' => 'пїЅпїЅпїЅпїЅ',
 				'rules' => 'required|callback__tags_check'
-			)
-		);
+				)
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		$form_validation = $this->form_validation->run();
+				$form_validation = $this->form_validation->run();
 
-		if( isset($_FILES['userfile']['tmp_name']) and $form_validation ) 
-		{
-			$config['encrypt_name']  = TRUE;
-			$config['upload_path'] = './files/designs/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|JPG';
-			$config['max_size']	= '2000';
-			$config['max_width']  = '1800';
-			$config['max_height']  = '1800';
-
-
-			$this->upload->initialize($config); unset($config);
-	
-			if( $this->upload->do_upload() )
-			{
-				$data = $this->upload->data();
-
-    			$path  = './files/designs/'.$data['file_name'].'';
-
-    			$config['source_image'] = $path;
-    			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 120;
-   				$config['height'] = 120;
-				$config['new_image'] = './files/designs/'.$data['file_name'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_small';
-
-    			$this->image_lib->initialize($config);
-    			$this->image_lib->resize();
-
-
-				if( $this->input->post('watermark') )//Налаживаем водяной знак
+				if( isset($_FILES['userfile']['tmp_name']) and $form_validation )
 				{
-    				$config['source_image'] = $path;
-    				$config['wm_type'] = 'overlay';
-    				$config['wm_overlay_path'] = './img/watermark/watermark.png';
-    				$config['wm_vrt_alignment'] = 'bottom';
-    				$config['wm_hor_alignment'] = 'right';
-					$config['create_thumb'] = FALSE; 
-    				$this->image_lib->initialize($config);
-    				$this->image_lib->watermark();
+					$config['encrypt_name']  = TRUE;
+					$config['upload_path'] = './files/designs/';
+					$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|JPG';
+					$config['max_size']	= '2000';
+					$config['max_width']  = '1800';
+					$config['max_height']  = '1800';
+
+
+					$this->upload->initialize($config); unset($config);
+
+					if( $this->upload->do_upload() )
+					{
+						$data = $this->upload->data();
+
+						$path  = './files/designs/'.$data['file_name'].'';
+
+						$config['source_image'] = $path;
+						$config['maintain_ratio'] = TRUE;
+						$config['width'] = 120;
+						$config['height'] = 120;
+						$config['new_image'] = './files/designs/'.$data['file_name'].'';
+						$config['create_thumb'] = TRUE;
+						$config['thumb_marker'] = '_small';
+
+						$this->image_lib->initialize($config);
+						$this->image_lib->resize();
+
+
+						if( $this->input->post('watermark') )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+						{
+							$config['source_image'] = $path;
+							$config['wm_type'] = 'overlay';
+							$config['wm_overlay_path'] = './img/watermark/watermark.png';
+							$config['wm_vrt_alignment'] = 'bottom';
+							$config['wm_hor_alignment'] = 'right';
+							$config['create_thumb'] = FALSE;
+							$this->image_lib->initialize($config);
+							$this->image_lib->watermark();
+						}
+
+
+						$small_image = '/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'];
+						$full_image = '/files/designs/'.$data['file_name'];
+					}
 				}
 
+				if( !isset($small_image) or !isset($full_image) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				{
+					$data = $this->designs_mdl->get_edit($id);
+					$small_image = $data['small_image'];
+					$full_image = $data['full_image'];
+				}
+				/*
+				 |---------------------------------------------------------------
+				 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+				 |---------------------------------------------------------------
+				 */
+				if( isset($_FILES['file']['tmp_name']) and $form_validation )
+				{
+					//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					if( !file_exists(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'') )
+					{
+						mkdir(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'', 0777, true);
+					}
 
-				$small_image = '/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'];
-				$full_image = '/files/designs/'.$data['file_name'];
-			}
-		}
+					$config['encrypt_name']  = TRUE;
+					$config['upload_path'] = './files/download/'.$this->username.'/';
+					$config['allowed_types'] = 'zip|rar';
+					$config['max_size']	= '100000';
 
-		if( !isset($small_image) or !isset($full_image) )//Если не существует, оставляем прошлые изображения
-		{
-			$data = $this->designs_mdl->get_edit($id);
-			$small_image = $data['small_image'];
-			$full_image = $data['full_image'];
-		}
-/*
-|---------------------------------------------------------------
-| Загрузка файла
-|---------------------------------------------------------------
-*/
-		if( isset($_FILES['file']['tmp_name']) and $form_validation ) 
-		{
-			//Если не существует папки у пользователя
-			if( !file_exists(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'') )
-			{
-				mkdir(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'', 0777, true);
-			}
+					$this->upload->initialize($config);
 
-			$config['encrypt_name']  = TRUE;
-			$config['upload_path'] = './files/download/'.$this->username.'/';
-			$config['allowed_types'] = 'zip|rar';
-			$config['max_size']	= '100000';
+					if( $this->upload->do_upload("file") )
+					{
+						$data_file = $this->upload->data();
 
-			$this->upload->initialize($config);
-	
-			if( $this->upload->do_upload("file") )
-			{
-				$data_file = $this->upload->data();
+						$path  = './files/download/'.$this->username.'/'.$data_file['file_name'].'';
 
-    			$path  = './files/download/'.$this->username.'/'.$data_file['file_name'].'';
-				
-				$dfile = $this->username.'/'.$data_file['file_name'];
-			}
-		}
+						$dfile = $this->username.'/'.$data_file['file_name'];
+					}
+				}
 
-		if( !isset($dfile) )//Если не существует, оставляем прошлый файл
-		{
-			$data = $this->designs_mdl->get_edit($id);
-			$dfile = $data['dfile'];
-		}
+				if( !isset($dfile) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+				{
+					$data = $this->designs_mdl->get_edit($id);
+					$dfile = $data['dfile'];
+				}
 
-		//Дальше работаем над остальными полями
-		if( $form_validation and empty($data['error']) ) 
-		{
-			
-			$data = array (
+				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				if( $form_validation and empty($data['error']) )
+				{
+						
+					$data = array (
 				'title' => $this->input->post('title'),
 				'text' => htmlspecialchars($this->input->post('text')),
-				'descr' => character_limiter(htmlspecialchars($this->input->post('text')), 255),//Описание для SE
+				'descr' => character_limiter(htmlspecialchars($this->input->post('text')), 255),//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ SE
 				'category' => $this->input->post('category_id'),
 				'price_1' => $this->input->post('price_1'),
 				'price_2' => $this->input->post('price_2'),
@@ -1397,15 +1397,15 @@ class Designs extends Controller
 
 				'dfile' => $dfile,
 				'status' => 1
-			);
+					);
 
-			$this->designs_mdl->edit('designs', $id, $data);
-/*
-|---------------------------------------------------------------
-| Дополнительные параметры, отдельная таблица
-|---------------------------------------------------------------
-*/
-			$data = array (
+					$this->designs_mdl->edit('designs', $id, $data);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$data = array (
 				'flash' => $this->input->post('flash'),
 				'stretch' => $this->input->post('stretch'),
 				'columns' => $this->input->post('columns'),
@@ -1417,109 +1417,109 @@ class Designs extends Controller
 				'style' => $this->input->post('style'),
 				'theme' => $this->input->post('theme'),
 				'adult' => $this->input->post('adult')
-			);
+					);
 
-			$this->designs_mdl->edit_options($id, $data);
+					$this->designs_mdl->edit_options($id, $data);
 
-/*
-|---------------------------------------------------------------
-| Сопутствующии товары, удаляем старые добавляем новые
-|---------------------------------------------------------------
-*/
-			$this->designs_mdl->delete_design_sub($id);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$this->designs_mdl->delete_design_sub($id);
 
-			//Обработка данных
-			$a = '';
+					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					$a = '';
 
-			$sub = $this->input->post('sub');
+					$sub = $this->input->post('sub');
 
-			$sub = trim($sub);//Удаляем пробелы в начале и конце
+					$sub = trim($sub);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			while ( strpos($sub,' ') !== false )//удаляем все пробелы, для точной проверки уникальности
-			{
-				$sub = str_replace(' ','',$sub);
-			}; 
+					while ( strpos($sub,' ') !== false )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					{
+						$sub = str_replace(' ','',$sub);
+					};
 
-			$sub = eregi_replace("\,+$", "", $sub);//Убираем запятую в конце
+					$sub = eregi_replace("\,+$", "", $sub);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$sub = explode(",", $sub);//Создаём массив
-			
-			$sub = array_unique($sub);//только уникальные значения
-			
+					$sub = explode(",", $sub);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+						
+					$sub = array_unique($sub);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+						
 
-			//Вставка данных
-			foreach ( $sub as $row => $value )
-			{
-				$a[] = "('" . $id . "', '" . trim( $value ) . "')";
-			}
+					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					foreach ( $sub as $row => $value )
+					{
+						$a[] = "('" . $id . "', '" . trim( $value ) . "')";
+					}
 
-			$a = implode( ", ", $a );
+					$a = implode( ", ", $a );
 
-        	$query = "INSERT INTO ci_associated (design_id, sub) VALUES " . $a;
+					$query = "INSERT INTO ci_associated (design_id, sub) VALUES " . $a;
 
-        	$query = $this->db->query($query);
-/*
-|---------------------------------------------------------------
-| Тэги, удаляем старые добавляем новые
-|---------------------------------------------------------------
-*/
-			$this->designs_mdl->delete_design_tags($id);
+					$query = $this->db->query($query);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$this->designs_mdl->delete_design_tags($id);
 
-			$a = '';
+					$a = '';
 
-			$tags = $this->input->post('tags');
+					$tags = $this->input->post('tags');
 
-			$tags = trim($tags);//Удаляем пробелы в начале и конце
+					$tags = trim($tags);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$tags = strtolower($tags);//все буквенные символы переведены в нижний регистр, для точной проверки уникальности
+					$tags = strtolower($tags);//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			while ( strpos($tags,' ') !== false )//удаляем все пробелы, для точной проверки уникальности
-			{
-				$tags = str_replace(' ','',$tags);
-			}; 
+					while ( strpos($tags,' ') !== false )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					{
+						$tags = str_replace(' ','',$tags);
+					};
 
-			$tags = eregi_replace("\,+$", "", $tags);//Убираем запятую в конце
+					$tags = eregi_replace("\,+$", "", $tags);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$tags = explode(",", $tags);//Создаём массив
-			
-			$tags = array_unique($tags);//Удаляем неуникальные элементы
+					$tags = explode(",", $tags);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+						
+					$tags = array_unique($tags);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			foreach ( $tags as $row => $value )
-			{
-				$a[] = "('" . $id . "', '" . trim( $value ) . "')";
-			}
+					foreach ( $tags as $row => $value )
+					{
+						$a[] = "('" . $id . "', '" . trim( $value ) . "')";
+					}
 
-			$a = implode( ", ", $a );
+					$a = implode( ", ", $a );
 
-        	$query = "INSERT INTO ci_tags (design_id, tag) VALUES " . $a;
+					$query = "INSERT INTO ci_tags (design_id, tag) VALUES " . $a;
 
-        	$query = $this->db->query($query);
+					$query = $this->db->query($query);
 
 
 
-			redirect('designs/'.$id.'.html');
-		}
+					redirect('designs/'.$id.'.html');
+				}
 
-		$data = $this->designs_mdl->get_edit($id);
+				$data = $this->designs_mdl->get_edit($id);
 
-		$data['categories'] = $this->designs_mdl->get_categories();
+				$data['categories'] = $this->designs_mdl->get_categories();
 
-		$data['themes'] = $this->designs_mdl->get_themes();
+				$data['themes'] = $this->designs_mdl->get_themes();
 
-		$data['destinations'] = $this->designs_mdl->get_destinations();
-		
-		//Также вывести тэги и id сопутствующих товаров
-		$data['tags'] = $this->designs_mdl->get_design_tags($id);
+				$data['destinations'] = $this->designs_mdl->get_destinations();
 
-		$data['sub'] = $this->designs_mdl->get_associated_designs_edit($id);
+				//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				$data['tags'] = $this->designs_mdl->get_design_tags($id);
 
-		$this->template->build('designs/edit', $data, $title = 'Редактировать дизайн');
+				$data['sub'] = $this->designs_mdl->get_associated_designs_edit($id);
+
+				$this->template->build('designs/edit', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Закрытие дизайна
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function close($id = '')
 	{
 		if( !$this->errors->access() )
@@ -1527,20 +1527,20 @@ class Designs extends Controller
 			return;
 		}
 
-		if( !$this->_check_action($id) )//Если не существует продукта со статусом ожидание
+		if( !$this->_check_action($id) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
-		
-		$this->designs_mdl->close($id);//Закрываем проект
-		
+
+		$this->designs_mdl->close($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+
 		redirect('designs/'.$id.'.html');
 	}
-/*
-|---------------------------------------------------------------
-| Функции, проверки
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function _check_banned($user_id)
 	{
 		if( $cause = $this->designs_mdl->check_banned($user_id) )
@@ -1553,67 +1553,67 @@ class Designs extends Controller
 
 	function _tags_check($tags)
 	{
-		$tags = trim($tags);//Удаляем пробелы в начале и конце
+		$tags = trim($tags);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-		$tags = eregi_replace("\,+$", "", $tags);//Убираем запятую в конце
+		$tags = eregi_replace("\,+$", "", $tags);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-		$tags = explode(",", $tags);//Создаём массив
+		$tags = explode(",", $tags);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-	    if( count($tags) < 1 )
-	    {
-	        $this->form_validation->set_message('_tags_check', 'Должно быть не менее одного тега');
-	        return FALSE;
-	    }
-	    else
-	    {
-	        return TRUE;
-	    }
+		if( count($tags) < 1 )
+		{
+			$this->form_validation->set_message('_tags_check', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 
-	function _check_design($id)//Проверка, действия над продуктом - удаление, редактирование, закрытие, добавление доп изображений
+	function _check_design($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		if( $this->designs_mdl->check($id, 1) )//Если существует продукт со статусом ожидание, возвращаем истину
+		if( $this->designs_mdl->check($id, 1) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			return TRUE;	
+			return TRUE;
 		}
-			return FALSE;	
+		return FALSE;
 	}
 
-	function _check_action($id)//Проверка, действия над продуктом - удаление, редактирование, закрытие, добавление доп изображений
+	function _check_action($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		if( $this->designs_mdl->check($id, 1, $this->user_id) )//Если существует продукт со статусом ожидание и принадлежит пользователю, возвращаем истину
+		if( $this->designs_mdl->check($id, 1, $this->user_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			return TRUE;	
+			return TRUE;
 		}
-			return FALSE;	
+		return FALSE;
 	}
 
 	function _category_check($category)
 	{
-	    if( $this->designs_mdl->category_check($category) )
-	    {
+		if( $this->designs_mdl->category_check($category) )
+		{
 			return TRUE;
-	    }
-	    else
-	    {
-	        return FALSE;
-	    }
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 
-/*
-|---------------------------------------------------------------
-| МОДЕРАТОР
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
-/*
-|---------------------------------------------------------------
-| ЗАБАНИТЬ
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function send_ban()
 	{
-		if( $this->team != 2 )//МОДЕРАТОР
+		if( $this->team != 2 )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			exit;
 		}
@@ -1632,12 +1632,12 @@ class Designs extends Controller
 		$this->designs_mdl->add('designs_banned', $data);
 	}
 
-/*
-|---------------------------------------------------------------
-| Редактирование комментария
-|---------------------------------------------------------------
-*/
-    function comments_edit($id) 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function comments_edit($id)
 	{
 		if( !$this->errors->access() )
 		{
@@ -1651,35 +1651,35 @@ class Designs extends Controller
 
 		if(  !$this->_check_comment($id, $data['user_id']) )
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'text', 
-				'label' => 'Текст',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[10000]'
-			)
-		);
+				)
+				);
 
-		$commentdata = array (
+				$commentdata = array (
 			'text' => htmlspecialchars($this->input->post('text'))
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->designs_mdl->edit_comment($id, $commentdata);
+				if( $this->form_validation->run() )
+				{
+					$this->designs_mdl->edit_comment($id, $commentdata);
 
-			redirect('designs/'.$data['design_id'].'.html');
-		}
+					redirect('designs/'.$data['design_id'].'.html');
+				}
 
-		$this->template->build('designs/comments_edit', $data, $title = 'Редактировать комментарий');
+				$this->template->build('designs/comments_edit', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-    function comments_del($id = '')
+	function comments_del($id = '')
 	{
 		if( !$this->errors->access() )
 		{
@@ -1693,7 +1693,7 @@ class Designs extends Controller
 
 		if(  !$this->_check_comment($id, $data['user_id']) )
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->designs_mdl->del_comment($id);
@@ -1701,21 +1701,21 @@ class Designs extends Controller
 		redirect('designs/'.$data['design_id'].'.html');
 	}
 
-	function _check_comment($id = '', $user_id = '')//Проверка редактирования модератором, $id - ид блога, $user_id пользователь чей блог
+	function _check_comment($id = '', $user_id = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, $id - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, $user_id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	{
 		$userdata = $this->users_mdl->get_user($user_id);
 
-		if( $userdata['team'] == 2 )//Если коммент модератора
+		if( $userdata['team'] == 2 )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			if(  !$this->_check_action_comment($id) )
 			{
 				return FALSE;
 			}
 		}
-		else//коммент обычного пользователя (может редактировать модератор)
+		else//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 		{
 
-			if( $this->team != 2 )//ЕСЛИ НЕ МОДЕРАТОР, проверяем
+			if( $this->team != 2 )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			{
 				if(  !$this->_check_action_comment($id) )
 				{
@@ -1724,17 +1724,17 @@ class Designs extends Controller
 			}
 
 		}
-		
+
 		return TRUE;
 	}
 
-    function _check_action_comment($id = '') 
+	function _check_action_comment($id = '')
 	{
-		if( $this->designs_mdl->check_comment($id, $this->user_id) )//Если найдена запись и она принадлежит пользователю
+		if( $this->designs_mdl->check_comment($id, $this->user_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			return TRUE;
 		}
-		
+
 		return FALSE;
 	}
 }

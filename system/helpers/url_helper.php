@@ -70,7 +70,7 @@ if ( ! function_exists('base_url'))
 /**
  * Current URL
  *
- * Returns the full URL (including segments) of the page where this 
+ * Returns the full URL (including segments) of the page where this
  * function is placed
  *
  * @access	public
@@ -320,7 +320,7 @@ if ( ! function_exists('safe_mailto'))
 				{
 					$count = ($ordinal < 224) ? 2 : 3;
 				}
-	
+
 				$temp[] = $ordinal;
 				if (count($temp) == $count)
 				{
@@ -337,7 +337,8 @@ if ( ! function_exists('safe_mailto'))
 		$x = array_reverse($x);
 		ob_start();
 
-	?><script type="text/javascript">
+		?>
+<script type="text/javascript">
 	//<![CDATA[
 	var l=new Array();
 	<?php
@@ -348,11 +349,12 @@ if ( ! function_exists('safe_mailto'))
 	if (l[i].substring(0, 1) == '|') document.write("&#"+unescape(l[i].substring(1))+";");
 	else document.write(unescape(l[i]));}
 	//]]>
-	</script><?php
+	</script>
+	<?php
 
-		$buffer = ob_get_contents();
-		ob_end_clean();
-		return $buffer;
+	$buffer = ob_get_contents();
+	ob_end_clean();
+	return $buffer;
 	}
 }
 
@@ -381,7 +383,7 @@ if ( ! function_exists('auto_link'))
 			if (preg_match_all("#(^|\s|\()((http(s?)://)|(www\.))(\w+[^\s\)\<]+)#i", $str, $matches))
 			{
 				$pop = ($popup == TRUE) ? " target=\"_blank\" " : "";
-	
+
 				for ($i = 0; $i < count($matches['0']); $i++)
 				{
 					$period = '';
@@ -390,16 +392,16 @@ if ( ! function_exists('auto_link'))
 						$period = '.';
 						$matches['6'][$i] = substr($matches['6'][$i], 0, -1);
 					}
-		
+
 					$str = str_replace($matches['0'][$i],
-										$matches['1'][$i].'<a href="http'.
-										$matches['4'][$i].'://'.
-										$matches['5'][$i].
-										$matches['6'][$i].'"'.$pop.'>http'.
-										$matches['4'][$i].'://'.
-										$matches['5'][$i].
-										$matches['6'][$i].'</a>'.
-										$period, $str);
+					$matches['1'][$i].'<a href="http'.
+					$matches['4'][$i].'://'.
+					$matches['5'][$i].
+					$matches['6'][$i].'"'.$pop.'>http'.
+					$matches['4'][$i].'://'.
+					$matches['5'][$i].
+					$matches['6'][$i].'</a>'.
+					$period, $str);
 				}
 			}
 		}
@@ -416,7 +418,7 @@ if ( ! function_exists('auto_link'))
 						$period = '.';
 						$matches['3'][$i] = substr($matches['3'][$i], 0, -1);
 					}
-		
+
 					$str = str_replace($matches['0'][$i], safe_mailto($matches['1'][$i].'@'.$matches['2'][$i].'.'.$matches['3'][$i]).$period, $str);
 				}
 			}
@@ -489,25 +491,25 @@ if ( ! function_exists('url_title'))
 						'&\S+?;'				=> '',
 						'\s+'					=> $replace,
 						'[^a-z0-9\-\._]'		=> '',
-						$replace.'+'			=> $replace,
-						$replace.'$'			=> $replace,
+		$replace.'+'			=> $replace,
+		$replace.'$'			=> $replace,
 						'^'.$replace			=> $replace,
 						'\.+$'					=> ''
-					  );
+						);
 
-		$str = strip_tags($str);
+						$str = strip_tags($str);
 
-		foreach ($trans as $key => $val)
-		{
-			$str = preg_replace("#".$key."#i", $val, $str);
-		}
+						foreach ($trans as $key => $val)
+						{
+							$str = preg_replace("#".$key."#i", $val, $str);
+						}
 
-		if ($lowercase === TRUE)
-		{
-			$str = strtolower($str);
-		}
-		
-		return trim(stripslashes($str));
+						if ($lowercase === TRUE)
+						{
+							$str = strtolower($str);
+						}
+
+						return trim(stripslashes($str));
 	}
 }
 
@@ -533,13 +535,13 @@ if ( ! function_exists('redirect'))
 		{
 			$uri = site_url($uri);
 		}
-		
+
 		switch($method)
 		{
 			case 'refresh'	: header("Refresh:0;url=".$uri);
-				break;
+			break;
 			default			: header("Location: ".$uri, TRUE, $http_response_code);
-				break;
+			break;
 		}
 		exit;
 	}

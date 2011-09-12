@@ -31,14 +31,14 @@ class Controller extends CI_Base {
 
 	var $_ci_scaffolding	= FALSE;
 	var $_ci_scaff_table	= FALSE;
-	
+
 	/**
 	 * Constructor
 	 *
 	 * Calls the initialize() function
 	 */
 	function Controller()
-	{	
+	{
 		parent::CI_Base();
 		$this->_ci_initialize();
 		log_message('debug', "Controller Class Initialized");
@@ -69,51 +69,51 @@ class Controller extends CI_Base {
 							'lang'		=> 'Language',
 							'router'	=> 'Router'
 							);
-		
-		foreach ($classes as $var => $class)
-		{
-			$this->$var =& load_class($class);
-		}
 
-		// In PHP 5 the Loader class is run as a discreet
-		// class.  In PHP 4 it extends the Controller
-		if (floor(phpversion()) >= 5)
-		{
-			$this->load =& load_class('Loader');
-			$this->load->_ci_autoloader();
-		}
-		else
-		{
-			$this->_ci_autoloader();
-			
-			// sync up the objects since PHP4 was working from a copy
-			foreach (array_keys(get_object_vars($this)) as $attribute)
-			{
-				if (is_object($this->$attribute))
-				{
-					$this->load->$attribute =& $this->$attribute;
-				}
-			}
-		}
+							foreach ($classes as $var => $class)
+							{
+								$this->$var =& load_class($class);
+							}
+
+							// In PHP 5 the Loader class is run as a discreet
+							// class.  In PHP 4 it extends the Controller
+							if (floor(phpversion()) >= 5)
+							{
+								$this->load =& load_class('Loader');
+								$this->load->_ci_autoloader();
+							}
+							else
+							{
+								$this->_ci_autoloader();
+									
+								// sync up the objects since PHP4 was working from a copy
+								foreach (array_keys(get_object_vars($this)) as $attribute)
+								{
+									if (is_object($this->$attribute))
+									{
+										$this->load->$attribute =& $this->$attribute;
+									}
+								}
+							}
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Run Scaffolding
 	 *
 	 * @access	private
 	 * @return	void
-	 */	
+	 */
 	function _ci_scaffolding()
 	{
 		if ($this->_ci_scaffolding === FALSE OR $this->_ci_scaff_table === FALSE)
 		{
 			show_404('Scaffolding unavailable');
 		}
-		
+
 		$method = ( ! in_array($this->uri->segment(3), array('add', 'insert', 'edit', 'update', 'view', 'delete', 'do_delete'), TRUE)) ? 'view' : $this->uri->segment(3);
-		
+
 		require_once(BASEPATH.'scaffolding/Scaffolding'.EXT);
 		$scaff = new Scaffolding($this->_ci_scaff_table);
 		$scaff->$method();

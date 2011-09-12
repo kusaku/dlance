@@ -22,65 +22,65 @@ $(document).ready(function()
 <div class="yui-b">
 
 
-<h1><a href="/account/transfer">Перевод средств</a></h1>
-<p class="subtitle">Перевод внутрисервисных средств между пользователями.</p>
+<h1><a href="/account/transfer">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
+<p class="subtitle">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
 
 
 
 
 <?=validation_errors()?>
 <form action="" method="post" />
-  <div class="rnd">
-    <div>
-      <div>
-        <div style="overflow:hidden;">
+<div class="rnd">
+<div>
+<div>
+<div style="overflow: hidden;">
 <table class="order-form">
-<tr>
-<td class="caption">Тип платежа:</td>
-<td>
-<input type="radio" name="type" value="1" checked="checked" /> Прямой платеж&nbsp &nbsp
-<input type="radio" name="type" value="2" /> С протекцией 
-</td>
-</tr>
+	<tr>
+		<td class="caption">пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><input type="radio" name="type" value="1" checked="checked" />
+		пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ&nbsp &nbsp <input type="radio" name="type" value="2" />
+		пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</td>
+	</tr>
 
-            <tr class="event2" style="display: none;">
-              <td class="caption">Срок протекции:</td>
-              <td>
-<select name="time" class="text">
-<option value="1"<?=set_select('time', '1'); ?>>Сегодня</option>
-<option value="2"<?=set_select('time', '2'); ?>>Завтра</option>
-<option value="3"<?=set_select('time', '3'); ?>>3 дня</option>
-<option value="7"<?=set_select('time', '7'); ?>>Неделя</option>
-<option value="30"<?=set_select('time', '30'); ?>>Месяц</option>
-</select>
-              </td>
-            </tr>
-            
-<tr>
-<td class="caption">Получатель:</td>
-<td><input type="text" name="recipient" value="<?=set_value('recipient')?>" size="15" maxlength="15" /></td>
-</tr>
+	<tr class="event2" style="display: none;">
+		<td class="caption">пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><select name="time" class="text">
+			<option value="1" <?=set_select('time', '1'); ?>>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</option>
+			<option value="2" <?=set_select('time', '2'); ?>>пїЅпїЅпїЅпїЅпїЅпїЅ</option>
+			<option value="3" <?=set_select('time', '3'); ?>>3 пїЅпїЅпїЅ</option>
+			<option value="7" <?=set_select('time', '7'); ?>>пїЅпїЅпїЅпїЅпїЅпїЅ</option>
+			<option value="30" <?=set_select('time', '30'); ?>>пїЅпїЅпїЅпїЅпїЅ</option>
+		</select></td>
+	</tr>
 
-<tr>
-<td class="caption">Сумма:</td>
-<td><input type="text" name="amount" value="<?=set_value('amount')?>" size="6" maxlength="6" /> рублей</td>
-</tr>
+	<tr>
+		<td class="caption">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><input type="text" name="recipient"
+			value="<?=set_value('recipient')?>" size="15" maxlength="15" /></td>
+	</tr>
 
-<tr>
-<td class="caption">Комментарий:(максимум 1000 символов):</td>
-<td class="frnt"><textarea name="text" rows="10" cols="49"><?=set_value('text')?></textarea></td>
-</tr>
+	<tr>
+		<td class="caption">пїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><input type="text" name="amount" value="<?=set_value('amount')?>"
+			size="6" maxlength="6" /> пїЅпїЅпїЅпїЅпїЅпїЅ</td>
+	</tr>
+
+	<tr>
+		<td class="caption">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:(пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1000 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ):</td>
+		<td class="frnt"><textarea name="text" rows="10" cols="49"><?=set_value('text')?></textarea></td>
+	</tr>
 
 </table>
-        </div>
-      </div>
-    </div>
-  </div>
-<input type="submit" value="Отправить">
+</div>
+</div>
+</div>
+</div>
+<input type="submit" value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ">
 </form>
 
 
-  </div>
+</div>
 
 </div>
 <!--/yui-main-->

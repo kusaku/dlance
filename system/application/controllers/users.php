@@ -24,7 +24,7 @@ class Users extends Controller
 		if( $this->users_mdl->logged_in() )
 		{
 			$this->user_id = $this->session->userdata('id');
-	
+
 			$user = $this->users_mdl->get_user_by_id($this->user_id);
 			$this->username = $user->username;
 			$this->userpic = $user->userpic;
@@ -36,14 +36,14 @@ class Users extends Controller
 			$this->adult = 0;
 		}
 	}
-/*
-|---------------------------------------------------------------
-| Обратная связь
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function _email_support($data)
 	{
-		$email = $this->config->item('email');//Админу
+		$email = $this->config->item('email');//пїЅпїЅпїЅпїЅпїЅпїЅ
 		$subject = $data['subject'];
 
 		if( empty($email) )
@@ -53,10 +53,10 @@ class Users extends Controller
 
 		switch($subject)
 		{
-    		case 0: $subject = 'Вопрос по работе системы'; break;
-    		case 1: $subject = 'Предложение сотрудничества'; break;
-    		case 2: $subject = 'Сообщение об ошибке'; break;
-    		case 3: $subject = 'Размещение рекламы на dlance.ru'; break;
+			case 0: $subject = 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+			case 1: $subject = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+			case 2: $subject = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+			case 3: $subject = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ dlance.ru'; break;
 		}
 
 		$message = $this->load->view('emails/support', $data, TRUE);
@@ -69,56 +69,56 @@ class Users extends Controller
 		$this->load->helper('string');
 		$this->load->plugin('captcha');
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'subject', 
-				'label' => 'Тема',
+				'label' => 'пїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'email', 
 				'label' => 'Email',
 				'rules' => 'required|valid_email'
-			),
-			array (
+				),
+				array (
 				'field' => 'message', 
-				'label' => 'Сообщение',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'code', 
-				'label' => 'Код',
+				'label' => 'пїЅпїЅпїЅ',
 				'rules' => 'required|callback__captcha_check'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'email' => $this->input->post('email'),
 			'subject' => $this->input->post('subject'),
 			'message' => $this->input->post('message')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() )
-		{
-			$this->_email_support($data);
-			
-			show_error('Ваше сообщение было успешно отправлено!');
-		}
-		else
-		{
-			$rnd_str = random_string('numeric',6);
+				if( $this->form_validation->run() )
+				{
+					$this->_email_support($data);
+						
+					show_error('пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!');
+				}
+				else
+				{
+					$rnd_str = random_string('numeric',6);
 
-			//Записываем строку в сессии
-			$ses_data = array();
-			$ses_data['captcha_rnd_str'] = $rnd_str;
-		
-			$this->session->set_userdata($ses_data);
-	
-			//Форумируем картинку
-			$vals = array (
+					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					$ses_data = array();
+					$ses_data['captcha_rnd_str'] = $rnd_str;
+
+					$this->session->set_userdata($ses_data);
+
+					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					$vals = array (
 					'word' => $rnd_str, 
 					'img_path' => './img/captcha/',
 					'img_url' => base_url().'img/captcha/',
@@ -128,113 +128,113 @@ class Users extends Controller
 					'expiration' => 10
 					);
 
-			$cap = create_captcha($vals);
+					$cap = create_captcha($vals);
 
-			$data['imgcode'] = $cap['image'];
-			
-			$this->template->build('users/support', $data, $title = 'Обратная связь');
-		}
-    }
-/*
-|---------------------------------------------------------------
-| Авторизация
-|---------------------------------------------------------------
-*/
+					$data['imgcode'] = $cap['image'];
+						
+					$this->template->build('users/support', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
+				}
+	}
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function fast_register_check()
 	{
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'username',
-				'label' => 'Имя пользователя',
+				'label' => 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|alpha_numeric|min_length[3]|max_length[15]|callback__username_check'
-			),
-			array (
+				),
+				array (
 				'field' => 'email',
 				'label' => 'Email',
 				'rules' => 'required|valid_email|max_length[48]|callback__email_check'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'username' => $this->input->post('username'),
 			'email' => strtolower($this->input->post('email')),
 			'password' => random_string('alnum', 6)
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$res['status'] = "OK";
+				if( $this->form_validation->run() )
+				{
+					$res['status'] = "OK";
 
-			$code = $this->users_mdl->fast_register($data['username'], $data['email'], $data['password']);
-			
-			$res['username'] = $data['username'];
+					$code = $this->users_mdl->fast_register($data['username'], $data['email'], $data['password']);
+						
+					$res['username'] = $data['username'];
 
-			$res['email'] = $data['email'];
+					$res['email'] = $data['email'];
 
-			$res['password'] = $data['password'];
-			
-			$res['code'] = $code;
-		}	
-		else 
-		{
-			$res['username_err'] = iconv('windows-1251', 'UTF-8', form_error('username'));
+					$res['password'] = $data['password'];
+						
+					$res['code'] = $code;
+				}
+				else
+				{
+					$res['username_err'] = iconv('windows-1251', 'UTF-8', form_error('username'));
 
-			$res['email_err'] = iconv('windows-1251', 'UTF-8', form_error('email'));
-		}
-		
-		echo json_encode($res);
+					$res['email_err'] = iconv('windows-1251', 'UTF-8', form_error('email'));
+				}
+
+				echo json_encode($res);
 	}
 
-    function fast_register()
+	function fast_register()
 	{
-		$this->load->view('wdesigns/users/fast_register', $data = '');//Контент
-    }
-/*
-|---------------------------------------------------------------
-| Авторизация
-|---------------------------------------------------------------
-*/
-    function login()
+		$this->load->view('wdesigns/users/fast_register', $data = '');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	}
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function login()
 	{
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'username', 
-				'label' => 'Логин',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|trim|callback__login_check'
-			),
-			array (
+				),
+				array (
 				'field' => 'password', 
-				'label' => 'Пароль',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|trim'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'username' => $this->input->post('username'),
 			'password' => $this->input->post('password')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() or $this->users_mdl->logged_in() )
-		{
-			if( !$this->_last_auth() )
-			{
-				$this->events->create($this->session->userdata('id'), 'Авторизация в системе', 'auth');#Событие с повышением репутации
-			}
+				if( $this->form_validation->run() or $this->users_mdl->logged_in() )
+				{
+					if( !$this->_last_auth() )
+					{
+						$this->events->create($this->session->userdata('id'), 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'auth');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					}
 
-			redirect('/account');
-		}
-		else
-		{
-			$this->template->build('users/login', $data, $title = 'Авторизация пользователя');
-		}
+					redirect('/account');
+				}
+				else
+				{
+					$this->template->build('users/login', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+				}
 
-    }
+	}
 
 	function _last_auth()
 	{
@@ -244,7 +244,7 @@ class Users extends Controller
 
 			$day = date('d');
 
-			$year = date('Y'); 
+			$year = date('Y');
 
 			$date_start = mktime(0, 0, 0, $month, $day, $year);
 
@@ -261,25 +261,25 @@ class Users extends Controller
 
 		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| Выход
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function logout()
 	{
 		$this->users_mdl->logout();
 
 		redirect('');
-    }
-/*
-|---------------------------------------------------------------
-| Регистрация
-|---------------------------------------------------------------
-*/
+	}
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function register()
 	{
-		if( $this->users_mdl->logged_in() )//Если пользователь зарегистрирован кидаем на главную
+		if( $this->users_mdl->logged_in() )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			redirect('');
 		}
@@ -287,81 +287,81 @@ class Users extends Controller
 		$this->load->helper('string');
 		$this->load->plugin('captcha');
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'username',
-				'label' => 'Имя пользователя',
+				'label' => 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|alpha_numeric|min_length[3]|max_length[15]|callback__username_check'
-			),
-			array (
+				),
+				array (
 				'field' => 'email',
 				'label' => 'Email',
 				'rules' => 'required|valid_email|max_length[48]|callback__email_check'
-			),
-			array (
+				),
+				array (
 				'field' => 'password1', 
-				'label' => 'Пароль',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|min_length[6]|max_length[24]|matches[password2]'
-			),
-			array (
+				),
+				array (
 				'field' => 'password2', 
-				'label' => 'Повтор пароля',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'surname', 
-				'label' => 'Фамилия',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|cyrillic|max_length[24]'
-			),
-			array (
+				),
+				array (
 				'field' => 'name', 
-				'label' => 'Имя',
+				'label' => 'пїЅпїЅпїЅ',
 				'rules' => 'required|cyrillic|max_length[24]'
-			),
-			array (
+				),
+				array (
 				'field' => 'sex', 
-				'label' => 'Пол',
+				'label' => 'пїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'country_id', 
-				'label' => 'Страна',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'city_id', 
-				'label' => 'Город',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'dob_day', 
-				'label' => 'День рождения',
+				'label' => 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'dob_month', 
-				'label' => 'Месяц рождения',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'dob_year', 
-				'label' => 'Год рождения',
+				'label' => 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'code', 
-				'label' => 'Код',
+				'label' => 'пїЅпїЅпїЅ',
 				'rules' => 'required|callback__captcha_check'
-			),
-			array (
+				),
+				array (
 				'field' => 'agree', 
-				'label' => 'Пользовательское соглашение',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'callback__agree_check'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'username' => $this->input->post('username'),
 			'email' => strtolower($this->input->post('email')),
 			'password' => $this->input->post('password1'),
@@ -373,28 +373,28 @@ class Users extends Controller
 			'year' => $this->input->post('dob_year'),
 			'country_id' => $this->input->post('country_id'),
 			'city_id' => $this->input->post('city_id')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->users_mdl->register($data['username'], $data['email'], $data['password'], $data['surname'], $data['name'], $data['sex'],  $data['country_id'], $data['city_id'], $data['day'], $data['month'], $data['year']);
+				if( $this->form_validation->run() )
+				{
+					$this->users_mdl->register($data['username'], $data['email'], $data['password'], $data['surname'], $data['name'], $data['sex'],  $data['country_id'], $data['city_id'], $data['day'], $data['month'], $data['year']);
 
-			show_error('Регистрация успешно завершена, на указанный email был выслан код для активации аккаунта');
-		}	
-		else 
-		{
-			$rnd_str = random_string('numeric',6);
+					show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ email пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+				}
+				else
+				{
+					$rnd_str = random_string('numeric',6);
 
-			//Записываем строку в сессии
-			$ses_data = array();
-			$ses_data['captcha_rnd_str'] = $rnd_str;
-		
-			$this->session->set_userdata($ses_data);
-	
-			//Форумируем картинку
-			$vals = array (
+					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					$ses_data = array();
+					$ses_data['captcha_rnd_str'] = $rnd_str;
+
+					$this->session->set_userdata($ses_data);
+
+					//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					$vals = array (
 					'word' => $rnd_str, 
 					'img_path' => './img/captcha/',
 					'img_url' => base_url().'img/captcha/',
@@ -404,18 +404,18 @@ class Users extends Controller
 					'expiration' => 10
 					);
 
-			$cap = create_captcha($vals);
+					$cap = create_captcha($vals);
 
-			$data['imgcode'] = $cap['image'];
+					$data['imgcode'] = $cap['image'];
 
-			$this->template->build('users/register', $data, $title = 'Регистрация');
-		}
+					$this->template->build('users/register', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+				}
 	}
-/*
-|---------------------------------------------------------------
-| Список пользователей
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function all($start_page = 0)
 	{
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
@@ -434,7 +434,7 @@ class Users extends Controller
 
 		$url = '';
 
-		$title = 'Все дизайнеры';
+		$title = 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
 
 		if( !empty($_GET['category']) )
 		{
@@ -444,12 +444,12 @@ class Users extends Controller
 			{
 				$category = 1;
 			}
-	
+
 			$data['category'] = $category;
 
-			$data['users_descr'] = $this->categories_mdl->users_descr($category);//Описание пользователей
+			$data['users_descr'] = $this->categories_mdl->users_descr($category);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			$title = $this->categories_mdl->title($category).' | '.$title;//Выводим Заголовок категории
+			$title = $this->categories_mdl->title($category).' | '.$title;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			$data['title'] = $this->categories_mdl->title($category);
 
@@ -460,9 +460,9 @@ class Users extends Controller
 			$url['category'] = 'category='.$category;
 		}
 
-		$data['url'] = $url;//Для прикрепления к ссылке сортировки
+		$data['url'] = $url;//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( !empty($_GET['order_field']) )//Сортировка
+		if( !empty($_GET['order_field']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$order_field = $_GET['order_field'];
 
@@ -473,7 +473,7 @@ class Users extends Controller
 			}
 		}
 
-		if( !empty($_GET['order_type']) )//Тип сортировки
+		if( !empty($_GET['order_type']) )//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['order_type'] = $_GET['order_type'];
 			$url['order_type'] = 'order_type='.$_GET['order_type'];
@@ -490,38 +490,38 @@ class Users extends Controller
 
 		$this->pagination->initialize($config);
 
-		$data['data'] = $this->users_mdl->get_all($start_page, $per_page, $input);//Вывод
+		$data['data'] = $this->users_mdl->get_all($start_page, $per_page, $input);//пїЅпїЅпїЅпїЅпїЅ
 
 		$data['page_links'] = $this->pagination->create_links();
 
 		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
-			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);//Присоединяем к ссылкам на страницы, поисковые GET параметры
+			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ GET пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		}
 
-		if( !empty($data['url']) ) 
+		if( !empty($data['url']) )
 		{
 			$data['url'] = implode ("&", $data['url']);
 		}
 
 		/**
-		* Блок
-		*/
+		 * пїЅпїЅпїЅпїЅ
+		 */
 		$data['categories'] = $this->categories_mdl->get_categories_for_users();
 
 		$data['input'] = array (
 			'order_field' => (isset($input['order_field'])) ? $input['order_field'] : '',
-			'order_type' => (isset($input['order_type'])) ? $input['order_type'] : 'desc',//Если не задан ордер тип, ставим desc
+			'order_type' => (isset($input['order_type'])) ? $input['order_type'] : 'desc',//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ desc
 		);
 
 		$this->template->build('users/all', $data, $title);
 	}
-/*
-|---------------------------------------------------------------
-| Расширенный поиск пользователей
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function search($start_page = 0)
 	{
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
@@ -540,7 +540,7 @@ class Users extends Controller
 
 		$input = array();
 
-		$title = 'Поиск дизайнера';
+		$title = 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
 
 		if( !empty($_GET['category']) )
 		{
@@ -550,17 +550,17 @@ class Users extends Controller
 			{
 				$category = 1;
 			}
-	
+
 			$data['category'] = $category;
 
-			$title = $this->categories_mdl->title($category).' | '.$title;//Выводим Заголовок категории
+			$title = $this->categories_mdl->title($category).' | '.$title;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			$input['category_array'] = $this->categories_mdl->cat_array($category);
 
 			$url['category'] = 'category='.$category;
 		}
 
-		if( !empty($_GET['result']) and is_numeric($_GET['result']) )//Результатов на страницу
+		if( !empty($_GET['result']) and is_numeric($_GET['result']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['per_page'] = $_GET['result'];
 			$url['result'] = 'result='.$_GET['result'];
@@ -568,63 +568,63 @@ class Users extends Controller
 			$per_page = $input['per_page'];
 		}
 
-		if( !empty($_GET['keywords']) )//Ключевые слова
+		if( !empty($_GET['keywords']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['keywords'] = $_GET['keywords'];
 			$url['keywords'] = 'keywords='.$_GET['keywords'];
 		}
 
-		if( !empty($_GET['country_id']) )//Страна
+		if( !empty($_GET['country_id']) )//пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['country_id'] = $_GET['country_id'];
 			$url['country_id'] = 'country_id='.$_GET['country_id'];
 		}
 
-		if( !empty($_GET['city_id']) )//Город
+		if( !empty($_GET['city_id']) )//пїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['city_id']= $_GET['city_id'];
 			$url['city_id'] = 'city_id='.$_GET['city_id'];
 		}
 
-		if( !empty($_GET['age_start']) and is_numeric($_GET['age_start']) )//Возраст от
+		if( !empty($_GET['age_start']) and is_numeric($_GET['age_start']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['age_start'] = $_GET['age_start'];
 			$url['age_start'] = 'age_start='.$_GET['age_start'];
 		}
 
-		if( !empty($_GET['age_end']) and is_numeric($_GET['age_end']) )//Возраст до
+		if( !empty($_GET['age_end']) and is_numeric($_GET['age_end']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['age_end'] = $_GET['age_end'];
 			$url['age_end'] = 'age_end='.$_GET['age_end'];
 		}
 
-		if( !empty($_GET['price_1_start']) and is_numeric($_GET['price_1_start']) )//Цена за час от
+		if( !empty($_GET['price_1_start']) and is_numeric($_GET['price_1_start']) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['price_1_start'] = $_GET['price_1_start'];
 			$url['price_1_start'] = 'price_1_start='.$_GET['price_1_start'];
 		}
 
-		if( !empty($_GET['price_1_end']) and is_numeric($_GET['price_1_end']) )//Цена за час до
+		if( !empty($_GET['price_1_end']) and is_numeric($_GET['price_1_end']) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['price_1_end'] = $_GET['price_1_end'];
 			$url['price_1_end'] = 'price_1_end='.$_GET['price_1_end'];
 		}
 
-		if( !empty($_GET['price_2_start']) and is_numeric($_GET['price_2_start']) )//Цена за месяц от
+		if( !empty($_GET['price_2_start']) and is_numeric($_GET['price_2_start']) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['price_2_start'] = $_GET['price_2_start'];
 			$url['price_2_start'] = 'price_2_start='.$_GET['price_2_start'];
 		}
 
-		if( !empty($_GET['price_2_end']) and is_numeric($_GET['price_2_end']) )//Цена за месяц до
+		if( !empty($_GET['price_2_end']) and is_numeric($_GET['price_2_end']) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$input['price_2_end'] = $_GET['price_2_end'];
 			$url['price_2_end'] = 'price_2_end='.$_GET['price_2_end'];
 		}
 
-		$data['url'] = $url;//Для прикрепления к ссылке сортировки
+		$data['url'] = $url;//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( !empty($_GET['order_field']) )//Сортировка
+		if( !empty($_GET['order_field']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$order_field = $_GET['order_field'];
 
@@ -635,7 +635,7 @@ class Users extends Controller
 			}
 		}
 
-		if( !empty($_GET['order_type']) )//Тип сортировки
+		if( !empty($_GET['order_type']) )//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$input['order_type'] = $_GET['order_type'];
 			$url['order_type'] = 'order_type='.$_GET['order_type'];
@@ -652,24 +652,24 @@ class Users extends Controller
 
 		$this->pagination->initialize($config);
 
-		$data['data'] = $this->users_mdl->get_all($start_page, $per_page, $input);//Вывод
+		$data['data'] = $this->users_mdl->get_all($start_page, $per_page, $input);//пїЅпїЅпїЅпїЅпїЅ
 
 		$data['page_links'] = $this->pagination->create_links();
 
 		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
-			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);//Присоединяем к ссылкам на страницы, поисковые GET параметры
+			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ GET пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		}
 
-		if( !empty($data['url']) ) 
+		if( !empty($data['url']) )
 		{
 			$data['url'] = implode ("&", $data['url']);
 		}
 
 		/**
-		* Блок
-		*/
+		 * пїЅпїЅпїЅпїЅ
+		 */
 		$data['input'] = array (
 			'keywords' => (isset($input['keywords'])) ? $input['keywords'] : '',
 			'country_id' => (isset($input['country_id'])) ? $input['country_id'] : '',
@@ -683,7 +683,7 @@ class Users extends Controller
 			'category' => $category,
 
 			'order_field' => (isset($input['order_field'])) ? $input['order_field'] : '',
-			'order_type' => (isset($input['order_type'])) ? $input['order_type'] : 'desc',//Если не задан ордер тип, ставим desc
+			'order_type' => (isset($input['order_type'])) ? $input['order_type'] : 'desc',//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ desc
 
 			'result' => $per_page,
 		);
@@ -692,14 +692,14 @@ class Users extends Controller
 
 		$this->template->build('users/search', $data, $title);
 	}
-/*
-|---------------------------------------------------------------
-| Профиль пользователя
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function view($username = '')
-	{	
-		//$this->output->cache(5);//КЭШИРОВАНИЕ
+	{
+		//$this->output->cache(5);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		if( !$data = $this->users_mdl->get($username) )
 		{
@@ -708,7 +708,7 @@ class Users extends Controller
 
 		if( $cause = $this->_check_banned($data['id']) )
 		{
-			show_error('Пользователь заблокирован.<br><br>Причина: '.$cause.'');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br><br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$cause.'');
 		}
 
 		$this->users_mdl->update_views($data['id']);
@@ -719,11 +719,11 @@ class Users extends Controller
 
 		$this->template->build('users/view', $data, $title);
 	}
-/*
-|---------------------------------------------------------------
-| Услуги пользователя
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function services($username = '')
 	{
 		if( !$data = $this->users_mdl->get($username) )
@@ -733,7 +733,7 @@ class Users extends Controller
 
 		if( $cause = $this->_check_banned($data['id']) )
 		{
-			show_error('Пользователь заблокирован.<br><br>Причина: '.$cause.'');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br><br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$cause.'');
 		}
 
 		$this->users_mdl->update_views($data['id']);
@@ -745,26 +745,26 @@ class Users extends Controller
 			$select = $data['services'];
 
 			foreach($select as $row => $value):
-				$select[$row] = $value['category'];
-				$select_parent[$row] = $value['parent_id'];
+			$select[$row] = $value['category'];
+			$select_parent[$row] = $value['parent_id'];
 			endforeach;
 
-			$data['select'] = $select;//Категории
+			$data['select'] = $select;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			$data['select_parent'] = $select_parent;//Разделы
+			$data['select_parent'] = $select_parent;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		}
 
 		$data['categories'] = $this->categories_mdl->get_categories();
 
-		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Услуги';
+		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | пїЅпїЅпїЅпїЅпїЅпїЅ';
 
 		$this->template->build('users/services', $data, $title);
 	}
-/*
-|---------------------------------------------------------------
-| Подписчики
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function followers($username = '', $start_page = 0)
 	{
 		if( !$data = $this->users_mdl->get($username) )
@@ -774,7 +774,7 @@ class Users extends Controller
 
 		if( $cause = $this->_check_banned($data['id']) )
 		{
-			show_error('Пользователь заблокирован.<br><br>Причина: '.$cause.'');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br><br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$cause.'');
 		}
 
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
@@ -784,7 +784,7 @@ class Users extends Controller
 		if( !empty($_GET['type']) )
 		{
 			$type = $_GET['type'];
-			
+				
 			$url['type'] = 'type='.$_GET['type'];
 		}
 
@@ -813,7 +813,7 @@ class Users extends Controller
 
 		$data['page_links'] = $this->pagination->create_links();
 
-		if( !empty($url) ) 
+		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
 			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);
@@ -822,15 +822,15 @@ class Users extends Controller
 
 		$data['followers'] = $this->account_mdl->get_followers($start_page, $per_page, $data['id']);
 
-		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Отзывы';
+		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | пїЅпїЅпїЅпїЅпїЅпїЅ';
 
 		$this->template->build('users/followers', $data, $title);
 	}
-/*
-|---------------------------------------------------------------
-| Отзывы пользователя
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function reviews($username = '', $start_page = 0)
 	{
 		if( !$data = $this->users_mdl->get($username) )
@@ -840,7 +840,7 @@ class Users extends Controller
 
 		if( $cause = $this->_check_banned($data['id']) )
 		{
-			show_error('Пользователь заблокирован.<br><br>Причина: '.$cause.'');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br><br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$cause.'');
 		}
 
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
@@ -850,7 +850,7 @@ class Users extends Controller
 		if( !empty($_GET['type']) )
 		{
 			$type = $_GET['type'];
-			
+				
 			$url['type'] = 'type='.$_GET['type'];
 		}
 
@@ -879,7 +879,7 @@ class Users extends Controller
 
 		$data['page_links'] = $this->pagination->create_links();
 
-		if( !empty($url) ) 
+		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
 			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);
@@ -888,78 +888,76 @@ class Users extends Controller
 
 		$data['reviews'] = $this->reviews_mdl->get_reviews($start_page, $per_page, $data['id'], $type);
 
-		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Отзывы';
+		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | пїЅпїЅпїЅпїЅпїЅпїЅ';
 
 		$this->template->build('users/reviews', $data, $title);
 	}
-/*
-|---------------------------------------------------------------
-| Добавить отзыв
-|---------------------------------------------------------------
-*/
-    function reviews_add($username = '')//Нельзя оставлять отзывы самому себе и больше одного раза в час, проверяем сколько прошло времени с последнего добавления отзыв, нельзя оставлять несколько отзывов одному и тому же пользователю
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function reviews_add($username = '')//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		if( !$user_id = $this->users_mdl->get_id($username) )//Если пользователь не найден
+		if( !$user_id = $this->users_mdl->get_id($username) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			show_404('page');
 		}
 
 		if( $this->user_id == $user_id )
-		{	
-			show_error('Нельзя оставлять отзыв себе');
-		}
-
-		if( $this->_check_add_reviews($user_id) )//Если отзыв был уже добавлен
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ');
 		}
 
-		$date = now() - $this->reviews_mdl->last_date($this->user_id);//От текущей даты отнимаем дату последнего добавления отзыва
+		if( $this->_check_add_reviews($user_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		{
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
+		}
 
-		if(  $date < $this->config->item('reviews_add') )//Если остаток даты меньше чем заданный в настройках
+		$date = now() - $this->reviews_mdl->last_date($this->user_id);//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+
+		if(  $date < $this->config->item('reviews_add') )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			//
 			$left_date = $this->config->item('reviews_add') - $date;
 			$left_date = now() + $left_date;
 			$left_date = date_await($left_date);
-			
-			show_error('Следующий отзыв вы сможете добавить через '.$left_date.'');
+				
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ '.$left_date.'');
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'text', 
-				'label' => 'Текст',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[1000]'
-			),
-			array (
+				),
+				array (
 				'field' => 'rating', 
-				'label' => 'Рейтинг',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'user_id' => $user_id,
 			'from_id' => $this->user_id,
 			'date' => now(),
 			'text' => htmlspecialchars($this->input->post('text')),
 			'rating' => $this->input->post('rating')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->db->insert('reviews', $data);
-
-
+				if( $this->form_validation->run() )
+				{
+					$this->db->insert('reviews', $data);
 
 
 
@@ -968,54 +966,56 @@ class Users extends Controller
 
 
 
-/*
-|---------------------------------------------------------------
-| Отправитель отзыва
-|---------------------------------------------------------------
-*/
-			if( $data['rating'] > 0 )
-			{
-				$this->events->create($this->user_id, 'Отправлен положительный отзыв', 'add_positive_review');#Событие с репутацией
-			}
-			else
-			{
-				$this->events->create($this->user_id, 'Отправлен отрицательный отзыв', 'add_negative_review');#Событие с репутацией
-			}
 
-/*
-|---------------------------------------------------------------
-| Получатель отзыва
-|---------------------------------------------------------------
-*/
-			if( $data['rating'] > 0 )
-			{
-				$this->events->create($data['user_id'], 'Получен положительный отзыв', 'receipt_positive_review');#Событие с репутацией
-			}
-			else
-			{
-				$this->events->create($data['user_id'], 'Получен отрицательный отзыв', 'receipt_negative_review');#Событие с репутацией
-			}
 
-			redirect('users/reviews/'.$username);
-		}
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					if( $data['rating'] > 0 )
+					{
+						$this->events->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'add_positive_review');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					}
+					else
+					{
+						$this->events->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'add_negative_review');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					}
 
-		$this->template->build('users/reviews_add', $data, $title = 'Добавить отзыв');
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					if( $data['rating'] > 0 )
+					{
+						$this->events->create($data['user_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'receipt_positive_review');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					}
+					else
+					{
+						$this->events->create($data['user_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 'receipt_negative_review');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					}
+
+					redirect('users/reviews/'.$username);
+				}
+
+				$this->template->build('users/reviews_add', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
 
 	}
 
-	function _check_add_reviews($user_id = '')//Проверка, был ли уже добавлен отзыв пользователю от данного пользователя(from_id
+	function _check_add_reviews($user_id = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(from_id
 	{
 		if( $this->reviews_mdl->check($user_id, $this->user_id) )
 		{
-			return TRUE;	
+			return TRUE;
 		}
-			return FALSE;	
+		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| Дизайны пользователя
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function designs($username = '', $start_page = 0)
 	{
 		if( !$data = $this->users_mdl->get($username) )
@@ -1025,7 +1025,7 @@ class Users extends Controller
 
 		if( $cause = $this->_check_banned($data['id']) )
 		{
-			show_error('Пользователь заблокирован.<br><br>Причина: '.$cause.'');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br><br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$cause.'');
 		}
 
 		$this->users_mdl->update_views($data['id']);
@@ -1052,15 +1052,15 @@ class Users extends Controller
 
 		$data['data'] = $this->designs_mdl->get_designs($start_page, $per_page, $input);
 
-		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Портфолио';
+		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
 
 		$this->template->build('users/designs', $data, $title);
 	}
-/*
-|---------------------------------------------------------------
-| Портфолио пользователя
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function portfolio($username = '')
 	{
 		$this->load->helper('highslide');
@@ -1072,58 +1072,58 @@ class Users extends Controller
 
 		if( $cause = $this->_check_banned($data['id']) )
 		{
-			show_error('Пользователь заблокирован.<br><br>Причина: '.$cause.'');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br><br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$cause.'');
 		}
 
 		$this->users_mdl->update_views($data['id']);
 
 		$data['portfolio'] = $this->account_mdl->get_portfolio($data['id']);
 
-		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Альбом';
+		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | пїЅпїЅпїЅпїЅпїЅпїЅ';
 
 		$this->template->build('users/portfolio', $data, $title);
 	}
-/*
-|---------------------------------------------------------------
-| Восстановление пароля
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function recovery()
 	{
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'username', 
-				'label' => 'Логин',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|trim'
-			),
-			array (
+				),
+				array (
 				'field' => 'email', 
 				'label' => 'Email',
 				'rules' => 'required|valid_email|callback__remind_check'
-			)
-		);
+				)
+				);
 
-		$username = $this->input->post('username');
-		$email = $this->input->post('email');
+				$username = $this->input->post('username');
+				$email = $this->input->post('email');
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() and $this->users_mdl->recovery($email) )
-		{
-			show_error('На ваш email был отправлен сгенерированный пароль');
+				if( $this->form_validation->run() and $this->users_mdl->recovery($email) )
+				{
+					show_error('пїЅпїЅ пїЅпїЅпїЅ email пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 
-		}
-		else
-		{
-			$this->template->build('users/recovery', $data = '', $title = 'Восстановление пароля');
-		}
+				}
+				else
+				{
+					$this->template->build('users/recovery', $data = '', $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+				}
 	}
-/*
-|---------------------------------------------------------------
-| Активация пользователя
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function activate($code = '')
 	{
 		if( $this->users_mdl->logged_in() or !$code )
@@ -1133,18 +1133,18 @@ class Users extends Controller
 
 		if( $this->users_mdl->activate($code) )
 		{
-			show_error('Активация успешно завершена');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 		}
 		else
 		{
-			show_error('Активация не удалась');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 		}
 	}
-/*
-|---------------------------------------------------------------
-| Активация пользователя
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function activate_2($code = '')
 	{
 		if( $this->users_mdl->activate_2($code) )
@@ -1153,25 +1153,25 @@ class Users extends Controller
 		}
 		else
 		{
-			show_error('Активация не удалась');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 		}
 	}
 
-/*
-|---------------------------------------------------------------
-| Функции, проверки
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function _category_check($category)
 	{
-	    if( $this->categories_mdl->category_check($category) )
-	    {
+		if( $this->categories_mdl->category_check($category) )
+		{
 			return TRUE;
-	    }
-	    else
-	    {
-	        return FALSE;
-	    }
+		}
+		else
+		{
+			return FALSE;
+		}
 	}
 
 	function _check_banned($user_id)
@@ -1191,90 +1191,90 @@ class Users extends Controller
 			return TRUE;
 		}
 
-		$this->form_validation->set_message('_login_check', 'Неверно введён логин или пароль');
+		$this->form_validation->set_message('_login_check', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 		return FALSE;
 	}
 
 	function _username_check($username)
 	{
-	    if( $this->users_mdl->username_check($username) )
-	    {
-	        $this->form_validation->set_message('_username_check', 'Имя пользователя уже используется');
-	        return FALSE;
-	    }
-	    else
-	    {
-	        return TRUE;
-	    }
+		if( $this->users_mdl->username_check($username) )
+		{
+			$this->form_validation->set_message('_username_check', 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 
 	function _remind_check($email)
 	{
-	    if( $this->users_mdl->remind_check($email, $this->input->post('username')) )
-	    {
-	        return TRUE;
-	    }
-	    else
-	    {
-	        $this->form_validation->set_message('_remind_check', 'Пользователь с адресом '.$email.' не найден.');
-	        return FALSE;
-	    }
+		if( $this->users_mdl->remind_check($email, $this->input->post('username')) )
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('_remind_check', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ '.$email.' пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.');
+			return FALSE;
+		}
 	}
 
 	function _email_check($email)
 	{
-	    if( $this->users_mdl->email_check($email) )
-	    {
-	        $this->form_validation->set_message('_email_check', 'Email уже используется');
-	        return FALSE;
-	    }
-	    else
-	    {
-	        return TRUE;
-	    }
+		if( $this->users_mdl->email_check($email) )
+		{
+			$this->form_validation->set_message('_email_check', 'Email пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 
 	function _agree_check($agree)
 	{
-	    if( $agree )
-	    {
-	        return TRUE;
-	    }
-	    else
-	    {
-	        $this->form_validation->set_message('_agree_check', 'Пользовательское соглашение должно быть принято.');
-	        return FALSE;
-	    }
+		if( $agree )
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('_agree_check', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
+			return FALSE;
+		}
 	}
 
 	function _captcha_check($captcha)
 	{
-	    if( $captcha != $this->session->userdata('captcha_rnd_str') )
-	    {
-	        $this->form_validation->set_message('_captcha_check', 'Неверно введён код');
-	        return FALSE;
-	    }
-	    else
-	    {
-	        return TRUE;
-	    }
+		if( $captcha != $this->session->userdata('captcha_rnd_str') )
+		{
+			$this->form_validation->set_message('_captcha_check', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 
 
-/*
-|---------------------------------------------------------------
-| МОДЕРАТОР
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
-/*
-|---------------------------------------------------------------
-| Редактировать отзыв
-|---------------------------------------------------------------
-*/
-    function reviews_edit($id = '')
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function reviews_edit($id = '')
 	{
-		$this->_moderator();//МОДЕРАТОРЫ
+		$this->_moderator();//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		if( !$this->errors->access() )
 		{
@@ -1286,44 +1286,44 @@ class Users extends Controller
 			show_404('page');
 		}
 
-		$userdata = $this->users_mdl->get_user($data['from_id']);//Получаем сведения об отправителе отзыва
+		$userdata = $this->users_mdl->get_user($data['from_id']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( $userdata['team'] == 2 and $data['from_id'] != $this->user_id )//Если отзыв модератора и отзыв не принадлежит пользователю
+		if( $userdata['team'] == 2 and $data['from_id'] != $this->user_id )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'text', 
-				'label' => 'Текст',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[1000]'
-			)
-		);
+				)
+				);
 
-		$reviewdata = array (
+				$reviewdata = array (
 			'text' => htmlspecialchars($this->input->post('text')),
 			'moder_date' => now(),
 			'moder_user_id' => $this->user_id
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->reviews_mdl->edit($id, $reviewdata);
+				if( $this->form_validation->run() )
+				{
+					$this->reviews_mdl->edit($id, $reviewdata);
 
-			$userdata = $this->users_mdl->get_user($data['user_id']);//Будет исправлено
+					$userdata = $this->users_mdl->get_user($data['user_id']);//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			redirect('users/reviews/'.$userdata['username']);
-		}
+					redirect('users/reviews/'.$userdata['username']);
+				}
 
-		$this->template->build('users/reviews_edit', $data, $title = 'Редактировать отзыв');
+				$this->template->build('users/reviews_edit', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
 
 	}
 
-    function reviews_del($id = '')//Убрать рейтинг и удалить историю добавления
+	function reviews_del($id = '')//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->_moderator();
 
@@ -1337,14 +1337,14 @@ class Users extends Controller
 			show_404('page');
 		}
 
-		$userdata = $this->users_mdl->get_user($data['from_id']);//Получаем сведения об отправителе отзыва
+		$userdata = $this->users_mdl->get_user($data['from_id']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( $userdata['team'] == 2 and $data['from_id'] != $this->user_id )//Если отзыв модератора и отзыв не принадлежит пользователю+
+		if( $userdata['team'] == 2 and $data['from_id'] != $this->user_id )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ+
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
-		if( $data['rating'] == 1 )//Если был положительный
+		if( $data['rating'] == 1 )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			if( $this->rating->value('add_positive_review') > 0 )
 			{
@@ -1375,16 +1375,16 @@ class Users extends Controller
 
 		$this->events->del($data['from_id'], $data['date']);
 
-		$userdata = $this->users_mdl->get_user($data['user_id']);//Будет исправлено
+		$userdata = $this->users_mdl->get_user($data['user_id']);//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		redirect('users/reviews/'.$userdata['username']);
 	}
 
-	function _moderator()//Модератор
+	function _moderator()//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if( $this->team != 2 )
 		{
-			show_error('Вы не имеете доступа к данному разделу');
-		}	
+			show_error('пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
 	}
 }

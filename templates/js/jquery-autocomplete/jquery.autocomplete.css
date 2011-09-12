@@ -1,7 +1,6 @@
-body {/*Сбрасываем*/
-	text-align:left;
+body { /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
+	text-align: left;
 }
-
 
 .ac_results {
 	padding: 0px;
@@ -27,8 +26,7 @@ body {/*Сбрасываем*/
 	/* 
 	if width will be 100% horizontal scrollbar will apear 
 	when scroll mode will be used
-	*/
-	/*width: 100%;*/
+	*/ /*width: 100%;*/
 	font: menu;
 	font-size: 12px;
 	/* 

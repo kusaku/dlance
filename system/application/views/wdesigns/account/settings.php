@@ -2,37 +2,43 @@
 <div class="yui-b">
 
 
-<h1> <a href="/account/settings">Настройки</a> </h1>
+<h1><a href="/account/settings">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
 
-<p class="subtitle"> Настройки </p>
+<p class="subtitle">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</p>
 
 <form action="" method="post" />
 <div class="ttl">
 <div class="ttr"></div>
 </div>
 <div class="bbd">
-<p class="subtitle"><b>Настройки</b></p>
+<p class="subtitle"><b>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</b></p>
 <table class="profile">
 
-<tr>
-<td class="caption">Получать рассылку:</td>
-<td><input name="mailer" type="checkbox" value="1"<? if( !empty($mailer) ): ?> checked="checked"<? endif; ?> /></td>
-</tr>
+	<tr>
+		<td class="caption">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><input name="mailer" type="checkbox" value="1"
+		<? if( !empty($mailer) ): ?> checked="checked" <? endif; ?> /></td>
+	</tr>
 
-<tr>
-<td class="caption">Получать уведомления:</td>
-<td><input name="notice" type="checkbox" value="1"<? if( !empty($notice) ): ?> checked="checked"<? endif; ?> /></td>
-</tr>
+	<tr>
+		<td class="caption">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><input name="notice" type="checkbox" value="1"
+		<? if( !empty($notice) ): ?> checked="checked" <? endif; ?> /></td>
+	</tr>
 
-<tr>
-<td class="caption">Показывать всплывающие подсказки:</td>
-<td><input name="hint" type="checkbox" value="1"<? if( !empty($hint) ): ?> checked="checked"<? endif; ?> /></td>
-</tr>
+	<tr>
+		<td class="caption">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><input name="hint" type="checkbox" value="1"
+		<? if( !empty($hint) ): ?> checked="checked" <? endif; ?> /></td>
+	</tr>
 
-<tr>
-<td class="caption">Показывать контент "только для взрослых":</td>
-<td><input name="adult" type="checkbox" value="1"<? if( !empty($adult) ): ?> checked="checked"<? endif; ?><? if( $age < 19 ): ?> disabled="disabled"<? endif; ?> /> Пользователяем с возрастом менее 18 не доступна данная опция</td>
-</tr>
+	<tr>
+		<td class="caption">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ":</td>
+		<td><input name="adult" type="checkbox" value="1"
+		<? if( !empty($adult) ): ?> checked="checked" <? endif; ?>
+		<? if( $age < 19 ): ?> disabled="disabled" <? endif; ?> />
+		пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 18 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ</td>
+	</tr>
 
 </table>
 </div>
@@ -42,11 +48,11 @@
 
 
 <br />
-<input name="submit" type="submit" value="Сохранить изменения">
+<input name="submit" type="submit" value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ">
 </form>
-  </div>
+</div>
 
 </div>
 <!--/yui-main-->
 
-<? $this->load->view('wdesigns/account/block'); ?>
+		<? $this->load->view('wdesigns/account/block'); ?>

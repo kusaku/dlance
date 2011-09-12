@@ -9,7 +9,7 @@ class Colors
 
 	function Get_Color($img, $count = 10, $reduce_brightness = true, $reduce_gradients = true, $delta =16)
 	{
-		
+
 		if (is_readable( $img ))
 		{
 			if ( $delta > 2 )
@@ -151,7 +151,7 @@ class Colors
 			foreach ($hexarray as $key => $value)
 			{
 				$hexarray[$key] = (float)$value / $total_pixel_count;
-				
+
 				$hexarray[$key] = $hexarray[$key] * 100;
 			}
 

@@ -241,16 +241,16 @@ class CI_URI {
 
 	// --------------------------------------------------------------------
 	/**
-	 * Re-index Segments
-	 *
-	 * This function re-indexes the $this->segment array so that it
-	 * starts at 1 rather than 0.  Doing so makes it simpler to
-	 * use functions like $this->uri->segment(n) since there is
-	 * a 1:1 relationship between the segment array and the actual segments.
-	 *
-	 * @access	private
-	 * @return	void
-	 */
+	* Re-index Segments
+	*
+	* This function re-indexes the $this->segment array so that it
+	* starts at 1 rather than 0.  Doing so makes it simpler to
+	* use functions like $this->uri->segment(n) since there is
+	* a 1:1 relationship between the segment array and the actual segments.
+	*
+	* @access	private
+	* @return	void
+	*/
 	function _reindex_segments()
 	{
 		array_unshift($this->segments, NULL);
@@ -320,7 +320,7 @@ class CI_URI {
 	 */
 	function uri_to_assoc($n = 3, $default = array())
 	{
-	 	return $this->_uri_to_assoc($n, $default, 'segment');
+		return $this->_uri_to_assoc($n, $default, 'segment');
 	}
 	/**
 	 * Identical to above only it uses the re-routed segment array
@@ -328,7 +328,7 @@ class CI_URI {
 	 */
 	function ruri_to_assoc($n = 3, $default = array())
 	{
-	 	return $this->_uri_to_assoc($n, $default, 'rsegment');
+		return $this->_uri_to_assoc($n, $default, 'rsegment');
 	}
 
 	// --------------------------------------------------------------------

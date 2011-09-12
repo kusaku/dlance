@@ -1,26 +1,10 @@
 /*
  * Global reset
  * Based on Eric Meyer's : http://meyerweb.com/eric/thoughts/2008/01/15/resetting-again/
- */ 
-a, abbr, acronym, address, applet, article, aside, audio, 
-b, big, blockquote, body,
-canvas, caption, center, cite, code, command,
-datalist, dd, del, details, dfn, div, dl, dt,
-em, embed,
-fieldset, figcaption, figure, font, footer, form,
-h1, h2, h3, h4, h5, h6, header, hgroup, html,
-i, iframe, img, ins,
-kbd, keygen,
-label, legend, li,
-meter,
-nav,
-object, ol, output,
-pre, progress, /*p, */ 
-q,
-s, samp, section, small, source, span, strike, strong, sub, sup,
-table, tbody, td, tfoot, th, thead, tr, tt,
-u, ul,
-var, video {
+ */
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,command,datalist,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,font,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,keygen,label,legend,li,meter,nav,object,ol,output,pre,progress,
+	/*p, */ q,s,samp,section,small,source,span,strike,strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,tt,u,ul,var,video
+	{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -34,30 +18,39 @@ var, video {
 /*
  * Default HTML5 behaviour for older browsers
  */
-article, aside, audio, canvas, command, datalist, 
-details, embed, figcaption, figure, footer, header, 
-hgroup, keygen, meter, nav, output, progress, 
-section, source, video { display: block; }
-mark, rp, rt, ruby, summary, time{ display: inline }
+article,aside,audio,canvas,command,datalist,details,embed,figcaption,figure,footer,header,hgroup,keygen,meter,nav,output,progress,section,source,video
+	{
+	display: block;
+}
+
+mark,rp,rt,ruby,summary,time {
+	display: inline
+}
 
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,q {
 	quotes: none;
 }
+
 :focus {
 	outline: 0;
 }
+
 ins {
 	text-decoration: none;
 }
+
 del {
 	text-decoration: line-through;
 }
+
 a {
 	text-decoration: none;
 }

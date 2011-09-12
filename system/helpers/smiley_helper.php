@@ -56,8 +56,8 @@ EOF;
 /**
  * Get Clickable Smileys
  *
- * Returns an array of image tag links that can be clicked to be inserted 
- * into a form field.  
+ * Returns an array of image tag links that can be clicked to be inserted
+ * into a form field.
  *
  * @access	public
  * @param	string	the URL to the folder containing the smiley images

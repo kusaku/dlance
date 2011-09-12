@@ -37,14 +37,14 @@
  * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/
  */
- class CI_Base extends CI_Loader {
+class CI_Base extends CI_Loader {
 
 	function CI_Base()
 	{
 		// This allows syntax like $this->load->foo() to work
 		parent::CI_Loader();
 		$this->load =& $this;
-		
+
 		// This allows resources used within controller constructors to work
 		global $OBJ;
 		$OBJ = $this->load; // Do NOT use a reference.
@@ -54,12 +54,12 @@
 function &get_instance()
 {
 	global $CI, $OBJ;
-	
+
 	if (is_object($CI))
 	{
 		return $CI;
 	}
-	
+
 	return $OBJ->load;
 }
 

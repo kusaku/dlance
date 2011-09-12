@@ -51,7 +51,6 @@ th {
 }
 
 /* Basic formats */
-
 .bold {
 	font-weight: bold;
 }
@@ -65,7 +64,6 @@ th {
 }
 
 /* Global align classes */
-
 .left {
 	text-align: inherit;
 }
@@ -83,13 +81,12 @@ th {
 }
 
 /* Image and table specific aligns */
-
-img.left, table.left {
+img.left,table.left {
 	float: left;
 	text-align: inherit;
 }
 
-img.center, table.center {
+img.center,table.center {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: inherit;
@@ -99,7 +96,7 @@ img.center {
 	display: block;
 }
 
-img.right, table.right {
+img.right,table.right {
 	float: right;
 	text-align: inherit;
 }

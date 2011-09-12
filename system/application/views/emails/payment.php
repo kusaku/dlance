@@ -1,3 +1,12 @@
-Здравствуйте, <?=$recipient_username?>.
-
-Пользователь <?=$name?> <?=$surname?> [<?=$username?>] создал для вас платеж <?=base_url()?>/account/payments/<?=$payment_id?>.html
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+<?=$recipient_username?>
+. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+<?=$name?>
+<?=$surname?>
+[
+<?=$username?>
+] пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+<?=base_url()?>
+/account/payments/
+<?=$payment_id?>
+.html

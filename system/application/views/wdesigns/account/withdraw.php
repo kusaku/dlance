@@ -3,20 +3,20 @@ function commission(amount)
 {
 	var amount = $('#amount').val(), commission = '';
 	  
-	/*Узнаём комиссию*/
+	/*пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
 	commission = amount / 100;
 
 	commission = commission * <?=$commission?>;
 
-	commission = commission.toFixed();/*Округление*/
+	commission = commission.toFixed();/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
 
 	$('#commission').html(commission);
 
 
-	/*Узнаём остаток для вывода*/
+	/*пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ*/
 	amount = amount - commission;
 
-	amount = amount.toFixed();/*Округление*/
+	amount = amount.toFixed();/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
 
 	$('#result').html(amount);
 }
@@ -24,73 +24,61 @@ function commission(amount)
 <div id="yui-main">
 <div class="yui-b">
 
-<h1><a href="/account/withdraw">Вывод средств</a></h1>
-<p class="subtitle">Заявки обрабатываются в течение двух суток.</p>
+<h1><a href="/account/withdraw">пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
+<p class="subtitle">пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.</p>
 <?=validation_errors()?>
 <div class="rnd">
- <div>
-  <div>
-   <div>
-    <div id="msearch">
-<form action="" method="post">
-Номер кошелька:
 <div>
-
-<? if( !empty($purses) ): ?>
-
-<select name="purse">
-<? foreach($purses as $row): ?> 
-<option value="<?=$row['purse']?>"<?=set_select('purse', ''.$row['purse'].''); ?>><?=$row['purse']?></option>
-<? endforeach; ?>
-</select>
-
-<? else: ?>
-Перед выводом необходимо <a href="/account/purses_add">указать</a> кошелек.
-<? endif; ?>
-
-</div>
+<div>
+<div>
+<div id="msearch">
+<form action="" method="post">пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:
+<div><? if( !empty($purses) ): ?> <select name="purse">
+<? foreach($purses as $row): ?>
+	<option value="<?=$row['purse']?>"
+	<?=set_select('purse', ''.$row['purse'].''); ?>><?=$row['purse']?></option>
+	<? endforeach; ?>
+</select> <? else: ?> пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ <a
+	href="/account/purses_add">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a> пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. <? endif; ?></div>
 <script type="text/javascript" src="/templates/js/commission.js"></script>
-Сумма:
-<div><input id="amount" name="amount" maxlength="6" type="text" onkeyup="commission()"  /></div>
+пїЅпїЅпїЅпїЅпїЅ:
+<div><input id="amount" name="amount" maxlength="6" type="text"
+	onkeyup="commission()" /></div>
 
-<div>Вывод: <b id="result">0</b> рублей</div>
+<div>пїЅпїЅпїЅпїЅпїЅ: <b id="result">0</b> пїЅпїЅпїЅпїЅпїЅпїЅ</div>
 
-<div>Комиссия: <b id="commission">0</b> рублей</div>
+<div>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <b id="commission">0</b> пїЅпїЅпїЅпїЅпїЅпїЅ</div>
 
-<div><input value="Отправить" type="submit"></div>
+<div><input value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" type="submit"></div>
 </form>
-     </div>
-   </div>
-  </div>
- </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 
 
-<? if( !empty($data) ): ?>
+	<? if( !empty($data) ): ?>
 <table class="portfolio">
-<tr>
-<th class="txtl" style="width: 100px;">Дата</th>
-<th style="width: 100px;">Сумма</th>
-<th style="width: 100px;">Кошелёк</th>
-<th style="width: 60px;">Статус</th>
-<th></th>
-</tr>
-<? foreach($data as $row): ?>
-<tr>
-<td class="title"><?=$row['date']?></td>
-<td class="budget txtc"><strong><?=$row['amount']?></strong> рублей</td>
-<td class="owner txtc"><?=$row['purse']?></td>
-<td class="state txtc"><?=$row['status']?></td>
-<td><span class="fr"><a href="/account/withdraw_del/<?=$row['id']?>">Отменить</a></span></td>
-</tr>
-<? endforeach; ?>
-    </table>
-<?=$page_links?>
-<? endif; ?>
-
-
-  </div>
+	<tr>
+		<th class="txtl" style="width: 100px;">пїЅпїЅпїЅпїЅ</th>
+		<th style="width: 100px;">пїЅпїЅпїЅпїЅпїЅ</th>
+		<th style="width: 100px;">пїЅпїЅпїЅпїЅпїЅпїЅ</th>
+		<th style="width: 60px;">пїЅпїЅпїЅпїЅпїЅпїЅ</th>
+		<th></th>
+	</tr>
+	<? foreach($data as $row): ?>
+	<tr>
+		<td class="title"><?=$row['date']?></td>
+		<td class="budget txtc"><strong><?=$row['amount']?></strong> пїЅпїЅпїЅпїЅпїЅпїЅ</td>
+		<td class="owner txtc"><?=$row['purse']?></td>
+		<td class="state txtc"><?=$row['status']?></td>
+		<td><span class="fr"><a href="/account/withdraw_del/<?=$row['id']?>">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></span></td>
+	</tr>
+	<? endforeach; ?>
+</table>
+<?=$page_links?> <? endif; ?></div>
 
 </div>
 <!--/yui-main-->

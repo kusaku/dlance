@@ -1,30 +1,28 @@
 <div id="yui-main">
-<div class="yui-b clearfix"> 
+<div class="yui-b clearfix">
 
-<div align="right"><a  href="/blogs/add/"><b>Добавить запись</b></a></div><br />
+<div align="right"><a href="/blogs/add/"><b>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ</b></a></div>
+<br />
 
-<? if( !empty($blogs) ): ?>
-<? foreach($blogs as $row): ?>
+<? if( !empty($blogs) ): ?> <? foreach($blogs as $row): ?>
 <div class="rnd mb10">
-      <div>
-        <div>
-          <div>
-            <div class="row-title"><a href="/blogs/<?=$row['id']?>.html"><?=$row['title']?></a></div>
-            <div class="row-date"><?=$row['date']?></div>
-            <div class="row-desc clearfix skip-rating"><?=nl2br($row['text'])?></div>
-            <div class="row-comments"><span>Комментарии (<?=$row['count_comments']?>)</span> &nbsp;|&nbsp; Категория: <a href="/blogs/index/?category=<?=$row['category_id']?>"><?=$row['category']?></a> &nbsp;|&nbsp; <span>Автор: <a href="/user/<?=$row['username']?>"><?=$row['username']?></a></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-<? endforeach; ?>
-<?=$page_links?>
-<? else: ?>
-<p>Ничего не найдено.</p>
-<? endif; ?>
-
-
+<div>
+<div>
+<div>
+<div class="row-title"><a href="/blogs/<?=$row['id']?>.html"><?=$row['title']?></a></div>
+<div class="row-date"><?=$row['date']?></div>
+<div class="row-desc clearfix skip-rating"><?=nl2br($row['text'])?></div>
+<div class="row-comments"><span>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (<?=$row['count_comments']?>)</span>
+&nbsp;|&nbsp; пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <a
+	href="/blogs/index/?category=<?=$row['category_id']?>"><?=$row['category']?></a>
+&nbsp;|&nbsp; <span>пїЅпїЅпїЅпїЅпїЅ: <a href="/user/<?=$row['username']?>"><?=$row['username']?></a></span></div>
 </div>
+</div>
+</div>
+</div>
+<? endforeach; ?> <?=$page_links?> <? else: ?>
+<p>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
+<? endif; ?></div>
 </div>
 
 
@@ -37,15 +35,15 @@
 <div class="bd clearfix">
 
 <ul class="marketnav">
-      <h3><a href="/blogs">Все блоги</a></h3>
+	<h3><a href="/blogs">пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ</a></h3>
 
-<? foreach($categories as $row): ?> 
+	<? foreach($categories as $row): ?>
 
-<li class="lvl-1"><a href="/blogs/index/?category=<?=$row['id']?>"><?=$row['name']?></a></li>
+	<li class="lvl-1"><a href="/blogs/index/?category=<?=$row['id']?>"><?=$row['name']?></a></li>
 
 
 
-<? endforeach; ?>
+	<? endforeach; ?>
 </ul>
 
 </div>

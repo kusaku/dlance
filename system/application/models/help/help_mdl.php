@@ -4,7 +4,7 @@ class Help_mdl extends Model
 {
 	function get($id)
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('*');
 
@@ -16,7 +16,7 @@ class Help_mdl extends Model
 		$this->db->select('name');
 
 		$query = $this->db->get_where('help_categories', array('id '=> $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -61,6 +61,6 @@ class Help_mdl extends Model
 	{
 		$this->db->where('category', $category);
 
-		return $this->db->count_all_results('help_pages'); 
+		return $this->db->count_all_results('help_pages');
 	}
 }

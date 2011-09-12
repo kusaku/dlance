@@ -2,31 +2,27 @@
 <div class="yui-b">
 
 
-<h1><a href="/account/transaction/">История операция</a></h1>
+<h1><a href="/account/transaction/">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
 
 
 <? if( !empty($data) ): ?>
 <table class="offers">
-<tr>
-<th style="width:150px;">Дата</th>
-<th style="width:150px;">Сумма</th>
-<th>Описание</th>
-</tr>
-<? foreach($data as $row): ?>
-<tr>
-<td class="owner txtc"><?=$row['date']?></td>
-<td class="budget txtc"><strong><?=$row['amount']?></strong> рублей</td>
-<td class="owner txtc"><?=$row['descr']?></td>
-</tr>
-<? endforeach; ?>
+	<tr>
+		<th style="width: 150px;">пїЅпїЅпїЅпїЅ</th>
+		<th style="width: 150px;">пїЅпїЅпїЅпїЅпїЅ</th>
+		<th>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</th>
+	</tr>
+	<? foreach($data as $row): ?>
+	<tr>
+		<td class="owner txtc"><?=$row['date']?></td>
+		<td class="budget txtc"><strong><?=$row['amount']?></strong> пїЅпїЅпїЅпїЅпїЅпїЅ</td>
+		<td class="owner txtc"><?=$row['descr']?></td>
+	</tr>
+	<? endforeach; ?>
 </table>
-<? //$page_links?>
-<? else: ?>
-<p>История отсутствуют.</p>
-<? endif; ?>
-
-
-  </div>
+<? //$page_links?> <? else: ?>
+<p>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
+<? endif; ?></div>
 
 </div>
 <!--/yui-main-->

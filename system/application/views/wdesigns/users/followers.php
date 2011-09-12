@@ -1,12 +1,12 @@
 <div class="yui-g">
-  <ul class="usernav">
-    <li><a href="/user/<?=$username?>">Информация</a></li>
-    <li><a href="/users/designs/<?=$username?>">Дизайны</a></li>
-    <li><a href="/users/portfolio/<?=$username?>">Портфолио</a></li>
-    <li><a href="/users/services/<?=$username?>">Услуги</a></li>
-    <li><a href="/users/reviews/<?=$username?>">Отзывы</a></li>
-    <li class="active"><a href="/users/followers/<?=$username?>">Подписчики</a></li>
- </ul>
+<ul class="usernav">
+	<li><a href="/user/<?=$username?>">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></li>
+	<li><a href="/users/designs/<?=$username?>">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></li>
+	<li><a href="/users/portfolio/<?=$username?>">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></li>
+	<li><a href="/users/services/<?=$username?>">пїЅпїЅпїЅпїЅпїЅпїЅ</a></li>
+	<li><a href="/users/reviews/<?=$username?>">пїЅпїЅпїЅпїЅпїЅпїЅ</a></li>
+	<li class="active"><a href="/users/followers/<?=$username?>">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></li>
+</ul>
 </div>
 
 <div class="yui-g usertitle">
@@ -17,25 +17,15 @@
 
 
 <div id="yui-main">
-<div id="usermain" class="yui-b">
-
-
-
-<? if( !empty($followers) ): ?>
-<div class="following">
-<? foreach($followers as $row): ?>
-<div>
-<img src="<?=$row['userpic']?>" alt="" class="avatar" width="60px"/><a href="/user/<?=$row['username']?>" rel="follows"><?=$row['username']?></a>
+<div id="usermain" class="yui-b"><? if( !empty($followers) ): ?>
+<div class="following"><? foreach($followers as $row): ?>
+<div><img src="<?=$row['userpic']?>" alt="" class="avatar" width="60px" /><a
+	href="/user/<?=$row['username']?>" rel="follows"><?=$row['username']?></a>
 </div>
-<? endforeach; ?>
-</div>
-<?=$page_links?>
-<? else: ?>
-<p>Подписчики отсутствуют.</p>
-<? endif; ?>
-
-
-</div>
+<? endforeach; ?></div>
+<?=$page_links?> <? else: ?>
+<p>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
+<? endif; ?></div>
 </div>
 
 
@@ -44,62 +34,61 @@
 <div id="sidebar" class="yui-b">
 <div class="hd"></div>
 <div id="usercard" class="bd clearfix">
-<div class="clearfix"> <img src="<?=$userpic?>" alt="" class="avatar" />
+<div class="clearfix"><img src="<?=$userpic?>" alt="" class="avatar" />
 <ul class="ucard">
 
-<li class="age">
-Возраст: <?=$age?>
-</li>
+	<li class="age">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <?=$age?></li>
 
-<li>
-Пол: <?=$sex?>
-</li>
+	<li>пїЅпїЅпїЅ: <?=$sex?></li>
 
 </ul>
 </div>
-<div class="sendpm"><a href="/contacts/send/<?=$username?>">Личное сообщение</a></div>
+<div class="sendpm"><a href="/contacts/send/<?=$username?>">пїЅпїЅпїЅпїЅпїЅпїЅ
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></div>
 
-    <table class="userstats">
-      <tr>
-        <td>Дата регистрации:</td>
-        <td><?=$created?></td>
-      </tr>
-      <tr>
-        <td>Последний визит:</td>
-        <td><?=$last_login?></td>
-      </tr>
-     <tr>
-
-
-<? if( $positive or $negative ): ?>
-      <tr>
-        <td>Отзывы:</td>
-        <td>
-<a class="rev-positive" href="/users/reviews/<?=$username?>/?type=positive"><?=$positive?></a>
-<? if( $negative ): ?>| <a class="rev-negative" href="/users/reviews/<?=$username?>/?type=negative"><?=$negative?></a><? endif; ?>
-        </td>
-      </tr>
-<? endif; ?>
+<table class="userstats">
+	<tr>
+		<td>пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><?=$created?></td>
+	</tr>
+	<tr>
+		<td>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ:</td>
+		<td><?=$last_login?></td>
+	</tr>
+	<tr>
 
 
+	<? if( $positive or $negative ): ?>
+		<tr>
+			<td>пїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+			<td><a class="rev-positive"
+				href="/users/reviews/<?=$username?>/?type=positive"><?=$positive?></a>
+				<? if( $negative ): ?>| <a class="rev-negative"
+				href="/users/reviews/<?=$username?>/?type=negative"><?=$negative?></a><? endif; ?>
+			</td>
+		</tr>
+		<? endif; ?>
 
-      <tr>
-        <td>Просмотров:</td>
-        <td><?=$views?></td>
-      </tr>
-      <tr>
-      <tr>
-        <td>Местоположение:</td>
-        <td><?=$country_id?> / <?=$city_id?></td>
-      </tr>
-      <tr>
-        <td colspan="2" class="noborder green">
-        </td>
-     </tr>
-    </table>
 
-<? if( !empty($website) ):?><b><noindex><a href="<?=$website?>" target="_blank" rel="nofollow"><?=$website?></a></noindex></b><? endif; ?>
 
-    </div>
+		<tr>
+			<td>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+			<td><?=$views?></td>
+		</tr>
+		<tr>
+			<tr>
+				<td>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</td>
+				<td><?=$country_id?> / <?=$city_id?></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="noborder green"></td>
+			</tr>
+
+</table>
+
+		<? if( !empty($website) ):?><b><noindex><a href="<?=$website?>"
+	target="_blank" rel="nofollow"><?=$website?></a></noindex></b><? endif; ?>
+
+</div>
 <div class="ft"></div>
 </div>

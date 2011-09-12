@@ -5,51 +5,51 @@ if ( ! function_exists('date_smart'))
 	function date_smart($date_input, $datestr = '%d.%m.%Y %G:%i', $time = true)
 	{
 		if( $date_input == '' )
-			$date_input = now();
+		$date_input = now();
 
 		$datestr = str_replace('%\\', '', preg_replace("/([a-z]+?){1}/i", "\\\\\\1", $datestr));
 		$date_input = date($datestr, $date_input);
 
 		$monthes = array(
-		'', 'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
-		'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+		'', 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅ',
+		'пїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'
 		);
 		$date = strtotime($date_input);
 
-		//Время
-		if($time) $time = ' в G:i';
+		//пїЅпїЅпїЅпїЅпїЅ
+		if($time) $time = ' пїЅ G:i';
 		else $time = '';
 
-		//Сегодня, вчера, завтра
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ
 		if(date('Y') == date('Y',$date))
 		{
 			if(date('z') == date('z', $date))
 			{
-				$result_date = date('Сегодня'.$time, $date);
-			} 
-			elseif(date('z') == date('z',mktime(0,0,0,date('n',$date),date('j',$date)+1,date('Y',$date)))) 
+				$result_date = date('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'.$time, $date);
+			}
+			elseif(date('z') == date('z',mktime(0,0,0,date('n',$date),date('j',$date)+1,date('Y',$date))))
 			{
-				$result_date = date('Вчера'.$time, $date);
-			} 
-			elseif(date('z') == date('z',mktime(0,0,0,date('n',$date),date('j',$date)-1,date('Y',$date)))) 
+				$result_date = date('пїЅпїЅпїЅпїЅпїЅ'.$time, $date);
+			}
+			elseif(date('z') == date('z',mktime(0,0,0,date('n',$date),date('j',$date)-1,date('Y',$date))))
 			{
-				$result_date = date('Завтра'.$time, $date);
-			} 
+				$result_date = date('пїЅпїЅпїЅпїЅпїЅпїЅ'.$time, $date);
+			}
 			elseif(date('z') == date('z',mktime(0,0,0,date('n',$date),date('j',$date)+2,date('Y',$date)))) {
-				$result_date = date('2 дня назад'.$time, $date);
-			} 
+				$result_date = date('2 пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ'.$time, $date);
+			}
 			elseif(date('z') == date('z',mktime(0,0,0,date('n',$date),date('j',$date)+3,date('Y',$date)))) {
-				$result_date = date('3 дня назад'.$time, $date);
+				$result_date = date('3 пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ'.$time, $date);
 			}
 
 			if(isset($result_date)) return $result_date;
 		}
 
-		//Месяца
+		//пїЅпїЅпїЅпїЅпїЅпїЅ
 		$month = $monthes[date('n',$date)];
 
-		//Года
-		if(date('Y') != date('Y', $date)) $year = 'Y г.';
+		//пїЅпїЅпїЅпїЅ
+		if(date('Y') != date('Y', $date)) $year = 'Y пїЅ.';
 		else $year = '';
 
 		$result_date = date('j '.$month.' '.$year.$time, $date);
@@ -57,43 +57,43 @@ if ( ! function_exists('date_smart'))
 	}
 
 
-	function date_await($date_input)//Сколько времени до событиая
+	function date_await($date_input)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$days = floor(($date_input - time())/86400);
 
-		$fmod_days = fmod($date_input - time(), 86400);//Узнаём остаток, после деления узнавания дня
+		$fmod_days = fmod($date_input - time(), 86400);//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 
 
 		$hours = floor(($fmod_days)/3600);
 
-		$fmod_days = fmod($fmod_days, 3600);//Узнаём остаток, после деления узнавания дня
+		$fmod_days = fmod($fmod_days, 3600);//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 
 
 		$mins = floor(($fmod_days)/60);
 
-		$fmod_mins = fmod($fmod_days, 60);//Узнаём остаток, после деления узнавания дня
+		$fmod_mins = fmod($fmod_days, 60);//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 
 		$result_date = '';
 
 		if( $days )
 		{
-			$result_date = $days.' дней';
+			$result_date = $days.' пїЅпїЅпїЅпїЅ';
 		}
 
 		if( $hours )
 		{
-			$result_date .= ' '.$hours.' час';
+			$result_date .= ' '.$hours.' пїЅпїЅпїЅ';
 		}
 
 		if( $mins )
 		{
-			$result_date .= ' '.$mins.' минут';
+			$result_date .= ' '.$mins.' пїЅпїЅпїЅпїЅпїЅ';
 		}
 
 		return  $result_date;
 	}
 
-	function date_age($day, $month, $year)//Возраст 
+	function date_age($day, $month, $year)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$result_date = date('Y') - $year;
 

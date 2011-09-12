@@ -26,7 +26,7 @@ class Contacts extends Controller
 		}
 	}
 
-	function index($start_page = 0) 
+	function index($start_page = 0)
 	{
 		if( !$this->errors->access() )
 		{
@@ -44,11 +44,11 @@ class Contacts extends Controller
 			$start_page = 0;
 		}
 
-		if( !empty($_GET['group_id']) )//Категория
+		if( !empty($_GET['group_id']) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$group_id = $_GET['group_id'];
 
-			if( !$this->contacts_mdl->check_group($group_id) )//Если группа не существует
+			if( !$this->contacts_mdl->check_group($group_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			{
 				$group_id = 1;
 			}
@@ -67,7 +67,7 @@ class Contacts extends Controller
 
 
 		$this->load->library('pagination');
-		
+
 
 		$config['base_url'] = base_url().'/contacts/index/';
 		$config['total_rows'] = $this->contacts_mdl->count_contacts($group_id, $this->user_id);
@@ -79,7 +79,7 @@ class Contacts extends Controller
 
 		$contacts['page_links'] = $this->pagination->create_links();
 
-		if( !empty($url) ) 
+		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
 
@@ -88,42 +88,42 @@ class Contacts extends Controller
 
 		$data['contacts'] = $this->load->view('wdesigns/contacts/contacts', $contacts, TRUE);
 
-		$this->template->build('contacts/view', $data, $title = 'Контакты / Сообщения');
-    }
+		$this->template->build('contacts/view', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+	}
 
-	function add() 
+	function add()
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'name', 
-				'label' => 'Название',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[64]'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'user_id' => $this->user_id,
 			'name' => htmlspecialchars($this->input->post('name'))
-		);
-		
-		$this->form_validation->set_rules($rules);
+				);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->contacts_mdl->add_group($data);
-			
-			redirect('contacts/');
-		}
+				$this->form_validation->set_rules($rules);
 
-		$data['groups'] = $this->contacts_mdl->get_groups();
+				if( $this->form_validation->run() )
+				{
+					$this->contacts_mdl->add_group($data);
+						
+					redirect('contacts/');
+				}
 
-		$this->template->build('contacts/add', $data, $title = 'Контакты / Сообщения');
+				$data['groups'] = $this->contacts_mdl->get_groups();
+
+				$this->template->build('contacts/add', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 	function move()
@@ -133,16 +133,16 @@ class Contacts extends Controller
 			return;
 		}
 
-		$id = $this->input->post('users');//массив с id контактов
+		$id = $this->input->post('users');//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$group_id = $this->input->post('group_id');//группа куда будем перемещать контакты
+		$group_id = $this->input->post('group_id');//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$this->contacts_mdl->move_contacts($id, $group_id);
 
 		redirect('contacts/index/?group_id='.$group_id);
 	}
 
-	function send($username = '', $start_page = 0)//Здесь выводим все сообщения и форму отправки сообщений
+	function send($username = '', $start_page = 0)//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if( !$this->errors->access() )
 		{
@@ -159,176 +159,176 @@ class Contacts extends Controller
 			redirect('contacts/');
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'text', 
-				'label' => 'Текст',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|text|max_length[1000]'
-			)
-		);
+				)
+				);
 
-		$data = array (
-			'sender_id' => $this->user_id,//Пользователь отправитель
-			'recipient_id' => $contact,//Получатель
+				$data = array (
+			'sender_id' => $this->user_id,//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			'recipient_id' => $contact,//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			'date' => now(),
 			'text' => $this->input->post('text')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->contacts_mdl->send_message($data);
+				if( $this->form_validation->run() )
+				{
+					$this->contacts_mdl->send_message($data);
 
-			if( !$this->contacts_mdl->count_contacts($group_id = '', $this->user_id, $contact) )
-			{
-				$data = array (//Добавляем чела к себе
+					if( !$this->contacts_mdl->count_contacts($group_id = '', $this->user_id, $contact) )
+					{
+						$data = array (//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
 					'user_id' => $this->user_id,
 					'contact' => $contact,
 					'group_id' => 1,
 					'last_msg' => now()
-				);
-				
-				$this->contacts_mdl->add_contact($data);
-			}
+						);
+
+						$this->contacts_mdl->add_contact($data);
+					}
 
 
-			if( !$this->contacts_mdl->count_contacts($group_id = '', $contact, $this->user_id) )//Проверяем есть ли мы в контакте у пользователя
-			{
-				$data = array (//Добавляем нас к пользовелю
+					if( !$this->contacts_mdl->count_contacts($group_id = '', $contact, $this->user_id) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					{
+						$data = array (//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 					'user_id' => $contact,
 					'contact' => $this->user_id,
 					'group_id' => 1,
 					'last_msg' => now()
-				);
-				
-				$this->contacts_mdl->add_contact($data);
-			}
+						);
 
-			$this->contacts_mdl->update_last_msg($this->user_id, $contact);//Обновляем дату последнего сообщения
+						$this->contacts_mdl->add_contact($data);
+					}
 
-			$this->contacts_mdl->update_last_msg($contact, $this->user_id);
-/*
-|---------------------------------------------------------------
-| Получатель сообщение
-|---------------------------------------------------------------
-*/
-			$this->events->create($contact, 'Получено персональное сообщение', 'receipt_message');#Событие с репутацией
-/*
-|---------------------------------------------------------------
-| Отправитель сообщения
-|---------------------------------------------------------------
-*/
-			$this->events->create($this->user_id, 'Отправлено персональное сообщение', 'send_message');#Событие с репутацией
+					$this->contacts_mdl->update_last_msg($this->user_id, $contact);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			redirect('contacts/send/'.$username.'');
-		}
+					$this->contacts_mdl->update_last_msg($contact, $this->user_id);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$this->events->create($contact, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'receipt_message');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					/*
+					|---------------------------------------------------------------
+					| пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					|---------------------------------------------------------------
+					*/
+					$this->events->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'send_message');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data = $this->users_mdl->get_user($contact);//Выводим пользователя
+					redirect('contacts/send/'.$username.'');
+				}
 
-		$per_page = 10;
+				$data = $this->users_mdl->get_user($contact);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$start_page = intval($start_page);
-		if( $start_page < 0 )
-		{
-			$start_page = 0;
-		}
+				$per_page = 10;
 
-		$this->load->library('pagination');
-		
-		$config['uri_segment'] = '4';
-		$config['base_url'] = base_url().'/contacts/send/'.$username;
-		$config['total_rows'] = $this->contacts_mdl->count_messages($contact);
-		$config['per_page'] = $per_page;
+				$start_page = intval($start_page);
+				if( $start_page < 0 )
+				{
+					$start_page = 0;
+				}
 
-		$this->pagination->initialize($config);
+				$this->load->library('pagination');
 
-		$data['messages'] = $this->contacts_mdl->get_messages($start_page, $per_page, $contact);
+				$config['uri_segment'] = '4';
+				$config['base_url'] = base_url().'/contacts/send/'.$username;
+				$config['total_rows'] = $this->contacts_mdl->count_messages($contact);
+				$config['per_page'] = $per_page;
 
-		$data['page_links'] = $this->pagination->create_links();
+				$this->pagination->initialize($config);
 
-		$data['black_list'] = $this->_black_list($contact);
+				$data['messages'] = $this->contacts_mdl->get_messages($start_page, $per_page, $contact);
 
-		$data['created'] = date_smart($data['created']);
+				$data['page_links'] = $this->pagination->create_links();
 
-		$data['last_login'] = date_smart($data['last_login']);
+				$data['black_list'] = $this->_black_list($contact);
 
-		$this->template->build('contacts/send', $data, $title = 'Контакты / Сообщения');
+				$data['created'] = date_smart($data['created']);
+
+				$data['last_login'] = date_smart($data['last_login']);
+
+				$this->template->build('contacts/send', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-	function _black_list($contact)//Проверяем находимся ли мы в черном списке у контакта
+	function _black_list($contact)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		if( $this->contacts_mdl->count_contacts(4, $contact, $this->user_id) )//4 - черный список
+		if( $this->contacts_mdl->count_contacts(4, $contact, $this->user_id) )//4 - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			return TRUE;
 		}
-	
+
 		return FALSE;
 	}
 
-	function del($group_id = '') 
+	function del($group_id = '')
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		if( !$this->contacts_mdl->check_group($group_id, $this->user_id) )//Если такая группа не существует у пользователя
+		if( !$this->contacts_mdl->check_group($group_id, $this->user_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		if( $this->contacts_mdl->count_contacts($group_id, $this->user_id) > 0 )
 		{
-			show_error('Нельзя удалить не пустую группу.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->contacts_mdl->del_group($group_id);
-		
+
 		redirect('contacts/');
 	}
 
-	function edit($group_id = '') 
+	function edit($group_id = '')
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		if( !$this->contacts_mdl->check_group($group_id, $this->user_id) )//Если такая группа не существует у пользователя
+		if( !$this->contacts_mdl->check_group($group_id, $this->user_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'name', 
-				'label' => 'Название',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|text|max_length[64]'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'user_id' => $this->user_id,
 			'name' => htmlspecialchars($this->input->post('name'))
-		);
-		
+				);
 
-		$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->contacts_mdl->edit_group($group_id, $data);
+				$this->form_validation->set_rules($rules);
 
-			redirect('contacts/');
-		}
+				if( $this->form_validation->run() )
+				{
+					$this->contacts_mdl->edit_group($group_id, $data);
 
-		$data = $this->contacts_mdl->get_group($group_id);
+					redirect('contacts/');
+				}
 
-		$data['groups'] = $this->contacts_mdl->get_groups();
+				$data = $this->contacts_mdl->get_group($group_id);
 
-		$this->template->build('contacts/edit', $data, $title = 'Контакты / Сообщения');
-    }
+				$data['groups'] = $this->contacts_mdl->get_groups();
+
+				$this->template->build('contacts/edit', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+	}
 }

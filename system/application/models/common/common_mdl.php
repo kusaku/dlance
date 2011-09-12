@@ -2,14 +2,14 @@
 
 class Common_mdl extends Model
 {
-	function change_tariff()//Меняем тарифный план у которых истёк срок на начальный
+	function change_tariff()//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->where('tariff_period <', now());
 
 		$this->db->update('users', array('tariff' => 1));
 	}
 
-	function return_payment()//Возвращаем платежи с истёкшим сроком протекции отправителю
+	function return_payment()//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('id, user_id, recipient_id, amount');
 
@@ -22,13 +22,13 @@ class Common_mdl extends Model
 
 			foreach($result as $row):
 
-				$this->db->update('payments', array('status' => 3), array('id' => $row['id']));
+			$this->db->update('payments', array('status' => 3), array('id' => $row['id']));
 
-				$this->balance_mdl->plus($row['user_id'], $row['amount']);//Прибавляем баланс обратно отправителю
+			$this->balance_mdl->plus($row['user_id'], $row['amount']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-				$this->events->create($row['user_id'], 'Платеж с ID '.$row['id'].' был возвращен отправителю');
+			$this->events->create($row['user_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ ID '.$row['id'].' пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
-				$this->events->create($row['recipient_id'], 'Платеж с ID '.$row['id'].' был возвращен отправителю');
+			$this->events->create($row['recipient_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ ID '.$row['id'].' пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 			endforeach;
 		}

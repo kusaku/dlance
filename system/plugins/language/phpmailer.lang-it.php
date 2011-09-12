@@ -1,10 +1,10 @@
 <?php
 /**
-* PHPMailer language file.
-* Italian version
-* @package PHPMailer
-* @author Ilias Bartolini <brain79@inwind.it>
-*/
+ * PHPMailer language file.
+ * Italian version
+ * @package PHPMailer
+ * @author Ilias Bartolini <brain79@inwind.it>
+ */
 
 $PHPMAILER_LANG = array();
 

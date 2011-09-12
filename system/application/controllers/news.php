@@ -9,7 +9,7 @@ class News extends Controller
 		$this->load->model('news/news_mdl');
 	}
 
-    function index($start_page = 0) 
+	function index($start_page = 0)
 	{
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
 
@@ -36,15 +36,15 @@ class News extends Controller
 
 
 		/**
-		* Блок
-		*/
+		 * пїЅпїЅпїЅпїЅ
+		 */
 		$data['newest_news'] = $this->news_mdl->get_newest(10);
 
 
-		$this->template->build('news/index', $data, $title = 'Новости проекта');
-    }
+		$this->template->build('news/index', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+	}
 
-    function view($id = '') 
+	function view($id = '')
 	{
 		if( !$data = $this->news_mdl->get($id) )
 		{
@@ -55,10 +55,10 @@ class News extends Controller
 
 
 		/**
-		* Блок
-		*/
+		 * пїЅпїЅпїЅпїЅ
+		 */
 		$data['newest_news'] = $this->news_mdl->get_newest(10);
 
-		$this->template->build('news/view', $data, $title = ''.$data['title'].' | Новости проекта');
+		$this->template->build('news/view', $data, $title = ''.$data['title'].' | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 }

@@ -32,15 +32,15 @@
 /**
  * Tests for file writability
  *
- * is_writable() returns TRUE on Windows servers when you really can't write to 
+ * is_writable() returns TRUE on Windows servers when you really can't write to
  * the file, based on the read-only attribute.  is_writable() is also unreliable
- * on Unix servers if safe_mode is on. 
+ * on Unix servers if safe_mode is on.
  *
  * @access	private
  * @return	void
  */
 function is_really_writable($file)
-{	
+{
 	// If we're on a Unix server with safe_mode off we call is_writable
 	if (DIRECTORY_SEPARATOR == '/' AND @ini_get("safe_mode") == FALSE)
 	{
@@ -75,17 +75,17 @@ function is_really_writable($file)
 // ------------------------------------------------------------------------
 
 /**
-* Class registry
-*
-* This function acts as a singleton.  If the requested class does not
-* exist it is instantiated and set to a static variable.  If it has
-* previously been instantiated the variable is returned.
-*
-* @access	public
-* @param	string	the class name being requested
-* @param	bool	optional flag that lets classes get loaded but not instantiated
-* @return	object
-*/
+ * Class registry
+ *
+ * This function acts as a singleton.  If the requested class does not
+ * exist it is instantiated and set to a static variable.  If it has
+ * previously been instantiated the variable is returned.
+ *
+ * @access	public
+ * @param	string	the class name being requested
+ * @param	bool	optional flag that lets classes get loaded but not instantiated
+ * @return	object
+ */
 function &load_class($class, $instantiate = TRUE)
 {
 	static $objects = array();
@@ -97,7 +97,7 @@ function &load_class($class, $instantiate = TRUE)
 	}
 
 	// If the requested class does not exist in the application/libraries
-	// folder we'll load the native class from the system/libraries folder.	
+	// folder we'll load the native class from the system/libraries folder.
 	if (file_exists(APPPATH.'libraries/'.config_item('subclass_prefix').$class.EXT))
 	{
 		require(BASEPATH.'libraries/'.$class.EXT);
@@ -132,17 +132,17 @@ function &load_class($class, $instantiate = TRUE)
 	}
 
 	$name = ($class != 'Controller') ? 'CI_'.$class : $class;
-	
+
 	$objects[$class] =& new $name();
 	return $objects[$class];
 }
 
 /**
-* Loads the main config.php file
-*
-* @access	private
-* @return	array
-*/
+ * Loads the main config.php file
+ *
+ * @access	private
+ * @return	array
+ */
 function &get_config()
 {
 	static $main_conf;
@@ -167,11 +167,11 @@ function &get_config()
 }
 
 /**
-* Gets a config item
-*
-* @access	public
-* @return	mixed
-*/
+ * Gets a config item
+ *
+ * @access	public
+ * @return	mixed
+ */
 function config_item($item)
 {
 	static $config_item = array();
@@ -192,17 +192,17 @@ function config_item($item)
 
 
 /**
-* Error Handler
-*
-* This function lets us invoke the exception class and
-* display errors using the standard error template located
-* in application/errors/errors.php
-* This function will send the error page directly to the
-* browser and exit.
-*
-* @access	public
-* @return	void
-*/
+ * Error Handler
+ *
+ * This function lets us invoke the exception class and
+ * display errors using the standard error template located
+ * in application/errors/errors.php
+ * This function will send the error page directly to the
+ * browser and exit.
+ *
+ * @access	public
+ * @return	void
+ */
 function show_error($message)
 {
 	$error =& load_class('Exceptions');
@@ -212,15 +212,15 @@ function show_error($message)
 
 
 /**
-* 404 Page Handler
-*
-* This function is similar to the show_error() function above
-* However, instead of the standard error template it displays
-* 404 errors.
-*
-* @access	public
-* @return	void
-*/
+ * 404 Page Handler
+ *
+ * This function is similar to the show_error() function above
+ * However, instead of the standard error template it displays
+ * 404 errors.
+ *
+ * @access	public
+ * @return	void
+ */
 function show_404($page = '')
 {
 	$error =& load_class('Exceptions');
@@ -230,18 +230,18 @@ function show_404($page = '')
 
 
 /**
-* Error Logging Interface
-*
-* We use this as a simple mechanism to access the logging
-* class and send messages to be logged.
-*
-* @access	public
-* @return	void
-*/
+ * Error Logging Interface
+ *
+ * We use this as a simple mechanism to access the logging
+ * class and send messages to be logged.
+ *
+ * @access	public
+ * @return	void
+ */
 function log_message($level = 'error', $message, $php_error = FALSE)
 {
 	static $LOG;
-	
+
 	$config =& get_config();
 	if ($config['log_threshold'] == 0)
 	{
@@ -253,28 +253,28 @@ function log_message($level = 'error', $message, $php_error = FALSE)
 }
 
 /**
-* Exception Handler
-*
-* This is the custom exception handler that is declaired at the top
-* of Codeigniter.php.  The main reason we use this is permit
-* PHP errors to be logged in our own log files since we may
-* not have access to server logs. Since this function
-* effectively intercepts PHP errors, however, we also need
-* to display errors based on the current error_reporting level.
-* We do that with the use of a PHP error template.
-*
-* @access	private
-* @return	void
-*/
+ * Exception Handler
+ *
+ * This is the custom exception handler that is declaired at the top
+ * of Codeigniter.php.  The main reason we use this is permit
+ * PHP errors to be logged in our own log files since we may
+ * not have access to server logs. Since this function
+ * effectively intercepts PHP errors, however, we also need
+ * to display errors based on the current error_reporting level.
+ * We do that with the use of a PHP error template.
+ *
+ * @access	private
+ * @return	void
+ */
 function _exception_handler($severity, $message, $filepath, $line)
-{	
-	 // We don't bother with "strict" notices since they will fill up
-	 // the log file with information that isn't normally very
-	 // helpful.  For example, if you are running PHP 5 and you
-	 // use version 4 style class functions (without prefixes
-	 // like "public", "private", etc.) you'll get notices telling
-	 // you that these have been deprecated.
-	
+{
+	// We don't bother with "strict" notices since they will fill up
+	// the log file with information that isn't normally very
+	// helpful.  For example, if you are running PHP 5 and you
+	// use version 4 style class functions (without prefixes
+	// like "public", "private", etc.) you'll get notices telling
+	// you that these have been deprecated.
+
 	if ($severity == E_STRICT)
 	{
 		return;
@@ -285,12 +285,12 @@ function _exception_handler($severity, $message, $filepath, $line)
 	// Should we display the error?
 	// We'll get the current error_reporting level and add its bits
 	// with the severity bits to find out.
-	
+
 	if (($severity & error_reporting()) == $severity)
 	{
 		$error->show_php_error($severity, $message, $filepath, $line);
 	}
-	
+
 	// Should we log the error?  No?  We're done...
 	$config =& get_config();
 	if ($config['log_threshold'] == 0)

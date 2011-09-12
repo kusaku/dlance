@@ -7,23 +7,23 @@ class Help extends Controller
 		parent::Controller();
 		$this->load->model('help/help_mdl');
 	}
-/*
-|---------------------------------------------------------------
-| Вывод всех категорий/страниц
-|---------------------------------------------------------------
-*/
-    function index() 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function index()
 	{
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 
-		$title = 'Помощь';
+		$title = 'пїЅпїЅпїЅпїЅпїЅпїЅ';
 
 		$category = '';
 
 		if( !empty($_GET['category']) )
 		{
-			$category = $_GET['category'];	
-	
+			$category = $_GET['category'];
+
 			if( !$this->_category_check($category) )
 			{
 				$category = 1;
@@ -38,18 +38,18 @@ class Help extends Controller
 
 
 		/**
-		* Блок
-		*/
+		 * пїЅпїЅпїЅпїЅ
+		 */
 		$data['categories'] = $this->help_mdl->get_categories();
 
 		$this->template->build('help/index', $data, $title);
-    }
-/*
-|---------------------------------------------------------------
-| Полный вывод
-|---------------------------------------------------------------
-*/
-    function view($id = '') 
+	}
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function view($id = '')
 	{
 		if( !$data = $this->help_mdl->get($id) )
 		{
@@ -57,22 +57,22 @@ class Help extends Controller
 		}
 
 		/**
-		* Блок
-		*/
+		 * пїЅпїЅпїЅпїЅ
+		 */
 		$data['categories'] = $this->help_mdl->get_categories();
 
-		$this->template->build('help/view', $data, $title = ''.$data['title'].' | Помощь');
+		$this->template->build('help/view', $data, $title = ''.$data['title'].' | пїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 	function _category_check($category)
 	{
-	    if( !$this->help_mdl->category_check($category) )
-	    {
-	        return FALSE;
-	    }
-	    else
-	    {
-	        return TRUE;
-	    }
+		if( !$this->help_mdl->category_check($category) )
+		{
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 }

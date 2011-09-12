@@ -12,29 +12,29 @@ class Common
 
 		$this->return_payment();
 	}
-/*
-|---------------------------------------------------------------
-| Смена тарифа
-|---------------------------------------------------------------
-*/
-    function change_tariff() 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function change_tariff()
 	{
 		$this->_ci->load->model('common/common_mdl');
 
 		$this->_ci->common_mdl->change_tariff();
 	}
-/*
-|---------------------------------------------------------------
-| Возвращение платежей с истёкшим сроком
-|---------------------------------------------------------------
-*/
-    function return_payment() 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function return_payment()
 	{
 		$this->_ci->load->model('common/common_mdl');
 
 		$this->_ci->common_mdl->return_payment();
 	}
-    function email($email, $subject, $message, $file = '') 
+	function email($email, $subject, $message, $file = '')
 	{
 		$encoding = "windows-1251";
 
@@ -43,7 +43,7 @@ class Common
 		$from = $this->_ci->config->item('email');
 
 		$this->_ci->load->library('email');
-		
+
 		$this->_ci->email->clear(TRUE);
 
 		if( !empty($file) )

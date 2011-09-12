@@ -2,198 +2,160 @@
 	Design by Free CSS Templates
 	http://www.freecsstemplates.org
 	Released for free under a Creative Commons Attribution 2.5 License
-*/
-
-/* Basic */
-
-*
-{
+*/ /* Basic */
+* {
 	margin: 0em;
 	padding: 0em;
 }
 
-h1,h2
-{
+h1,h2 {
+	
 }
 
-#faq h3, p, div
-{
+#faq h3,p,div {
+	
 }
 
-
-
-body
-{
+body {
 	font-family: Arial, sans-serif;
 	font-size: 10pt;
 	color: #666;
 	background-color: #fff;
 }
 
-a
-{
+a {
 	color: #0077dd;
 	text-decoration: underline;
 }
 
-a:hover
-{
+a:hover {
 	text-decoration: none;
 }
 
 /* Outer */
-
-#outer
-{
+#outer {
 	padding: 0em;
 	margin: 0em;
 	width: 100%;
 }
 
 /* Header */
-
-#header
-{
+#header {
 	position: relative;
 	background: #004778 url('images/a5.gif') bottom left repeat-x;
 	height: 10em;
 	padding-left: 2em;
 }
 
-#header h1
-{
+#header h1 {
 	position: absolute;
 	top: 1.8em;
 	font-size: 2.2em;
 	letter-spacing: -0.05em;
 }
 
-#header h1 a
-{
+#header h1 a {
 	color: #fff;
 	text-decoration: none;
 }
 
-#header h2
-{
+#header h2 {
 	position: absolute;
 	font-size: 0.8em;
 	top: 8em;
 	color: #E0E8EF;
 }
 
-
 /* Content */
-
-#content
-{
+#content {
 	line-height: 1.5em;
 }
 
-
-#content p
-{
+#content p {
 	margin-bottom: 1.5em;
 }
 
-#content h2,h3,h4,h5,h6
-{
+#content h2,h3,h4,h5,h6 {
 	color: #545454;
 	margin-bottom: 1em;
 	border-bottom: dashed 1px #dfdfdf;
 	padding-bottom: 0.3em;
 }
 
-#content h2
-{
+#content h2 {
 	font-size: 1.5em;
 }
 
-#content h3
-{
+#content h3 {
 	font-size: 1.1em;
 }
 
-#content ul
-{
+#content ul {
 	margin-bottom: 1.5em;
 	padding-left: 1em;
 	list-style: square;
 }
 
-#content blockquote
-{
+#content blockquote {
 	margin-bottom: 1.5em;
 	padding: 0.75em 0.75em 0.75em 1.5em;
 	border-left: solid 0.75em #005082;
 	background: #FDFDFD url('images/a7.gif') top left repeat-x;
 }
 
-#content blockquote p
-{
+#content blockquote p {
 	margin-bottom: 0em;
 }
 
-#content table
-{
+#content table {
 	margin-bottom: 1.5em;
 	border-collapse: collapse;
 	text-align: left;
 }
 
-#content table th
-{
+#content table th {
 	font-weight: bold;
 	padding: 0.5em;
 }
 
-#content table td
-{
+#content table td {
 	padding: 0.5em;
 	border-right: solid 1px #fff;
 }
 
-#content table tr.rowH
-{
+#content table tr.rowH {
 	color: #fff;
 	background: #006192 url('images/a8.gif') top left repeat-x;
 	border-right: solid 1px #fff;
 }
 
-#content table tr.rowA
-{
+#content table tr.rowA {
 	background: #F8F8F8 url('images/a6.gif') top left repeat-x;
 	border-top: solid 1px #fff;
 	color: inherit;
 }
 
-#content table tr.rowB
-{
+#content table tr.rowB {
 	background: #FDFDFD url('images/a7.gif') top left repeat-x;
 	border-top: solid 1px #fff;
 	color: inherit;
 }
 
 /* Primary Content */
-
-#primaryContentContainer
-{
+#primaryContentContainer {
 	background-color: #fff;
 	float: right;
 	margin: 0em -19em 0em -19em;
 	width: 100%;
 }
 
-#primaryContent
-{
+#primaryContent {
 	margin: 1.5em 19em 0em 17.25em;
 	padding: 1.5em 3em 1.5em 3em;
 }
 
 /* Secondary Content */
-
-#secondaryContent
-{
+#secondaryContent {
 	position: relative;
 	float: left;
 	width: 14em;
@@ -201,8 +163,7 @@ a:hover
 	background: #fff url('images/a1.gif') top right repeat-y;
 }
 
-#secondaryContent .xbg
-{
+#secondaryContent .xbg {
 	position: absolute;
 	right: 0em;
 	bottom: -64px;
@@ -212,9 +173,7 @@ a:hover
 }
 
 /* Tertiary Content */
-
-#tertiaryContent
-{
+#tertiaryContent {
 	position: relative;
 	float: right;
 	width: 15em;
@@ -222,8 +181,7 @@ a:hover
 	background: #fff url('images/a2.gif') top left repeat-y;
 }
 
-#tertiaryContent .xbg
-{
+#tertiaryContent .xbg {
 	position: absolute;
 	left: 0em;
 	bottom: -64px;
@@ -233,9 +191,7 @@ a:hover
 }
 
 /* Footer */
-
-#footer
-{
+#footer {
 	position: relative;
 	z-index: 1;
 	border-top: dashed 1px #dfdfdf;
@@ -244,16 +200,12 @@ a:hover
 	text-align: center;
 }
 
-.clear
-{
+.clear {
 	clear: both;
 }
 
-
 /* Menu */
-
-#menu
-{
+#menu {
 	position: absolute;
 	top: 5em;
 	right: 3em;
@@ -261,157 +213,191 @@ a:hover
 }
 
 ul#cssmenu {
-        width:550px;
-        margin: 0;
-        border: 0 none;
-        padding: 0;
-        list-style: none;
-        height: 30px;
-        font: bold 12px/28px Verdana, Arial;
-		z-index:2;
+	width: 550px;
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	list-style: none;
+	height: 30px;
+	font: bold 12px/28px Verdana, Arial;
+	z-index: 2;
 }
 
 ul#cssmenu li {
-        margin: 0;
-        border: 0 none;
-        padding: 0;
-        float: left;
-        display: inline;
-        list-style: none;
-        position: relative;
-        height: 30px;
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	float: left;
+	display: inline;
+	list-style: none;
+	position: relative;
+	height: 30px;
 }
 
 ul#cssmenu ul {
-        margin: 0;
-        border: 0 none;
-        padding: 0;
-        width: 160px;
-        list-style: none;
-        display: none;
-        position: absolute;
-        top: 30px;
-        left: 0;
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	width: 160px;
+	list-style: none;
+	display: none;
+	position: absolute;
+	top: 30px;
+	left: 0;
 }
 
 ul#cssmenu ul:after {
-        clear: both;
-        display: block;
-        font: 1px/0px serif;
-        content: ".";
-        height: 0;
-        visibility: hidden;
+	clear: both;
+	display: block;
+	font: 1px/0px serif;
+	content: ".";
+	height: 0;
+	visibility: hidden;
 }
 
 ul#cssmenu ul li {
-        width: 200px;
-        float: left;
-        display: block !important;
-        display: inline;
+	width: 200px;
+	float: left;
+	display: block !important;
+	display: inline;
 }
 
 /* Main Menu */
 ul#cssmenu a {
-        border: 0px;
-        padding: 0 10px;
-        float: none !important;
-        float: left;
-        display: block;
-
-        color: #FFFFFF;
-        font: bold 12px/28px Verdana, Arial;
-        text-decoration: none;
-        height: auto !important;
-        height: 1%;
+	border: 0px;
+	padding: 0 10px;
+	float: none !important;
+	float: left;
+	display: block;
+	color: #FFFFFF;
+	font: bold 12px/28px Verdana, Arial;
+	text-decoration: none;
+	height: auto !important;
+	height: 1%;
 }
 
 /* Main Menu Hover */
-ul#cssmenu a:hover,
-ul#cssmenu li:hover a,
-ul#cssmenu li.iehover a {
-        background: #FFFFFF;
-        color:#003366;
-        border-top:#003366 1px solid;
+ul#cssmenu a:hover,ul#cssmenu li:hover a,ul#cssmenu li.iehover a {
+	background: #FFFFFF;
+	color: #003366;
+	border-top: #003366 1px solid;
 }
 
 /* Second Menu */
-ul#cssmenu li:hover li a,
-ul#cssmenu li.iehover li a {
-        border-top: 2px solid #FFFFFF;
-        float: none;
-        background: #005f90;
-        color: #FFFFFF;
+ul#cssmenu li:hover li a,ul#cssmenu li.iehover li a {
+	border-top: 2px solid #FFFFFF;
+	float: none;
+	background: #005f90;
+	color: #FFFFFF;
 }
 
 /* Second Menu Hover */
-ul#cssmenu li:hover li a:hover,
-ul#cssmenu li:hover li:hover a,
-ul#cssmenu li.iehover li a:hover,
-ul#cssmenu li.iehover li.iehover a {
-        border-top: 2px solid #FFFFFF;
-        background: #FFFFFF;
-        color:#003366;
-        border:#003366 1px solid;
+ul#cssmenu li:hover li a:hover,ul#cssmenu li:hover li:hover a,ul#cssmenu li.iehover li a:hover,ul#cssmenu li.iehover li.iehover a
+	{
+	border-top: 2px solid #FFFFFF;
+	background: #FFFFFF;
+	color: #003366;
+	border: #003366 1px solid;
 }
 
 ul#cssmenu ul ul {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 170px;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 170px;
 }
 
-ul#cssmenu li:hover ul ul,
-ul#cssmenu li.iehover ul ul {
-        display: none;
+ul#cssmenu li:hover ul ul,ul#cssmenu li.iehover ul ul {
+	display: none;
 }
 
-ul#cssmenu li:hover ul,
-ul#cssmenu ul li:hover ul,
-ul#cssmenu li.iehover ul,
-ul#cssmenu ul li.iehover ul {
-        display: block;
-} 
+ul#cssmenu li:hover ul,ul#cssmenu ul li:hover ul,ul#cssmenu li.iehover ul,ul#cssmenu ul li.iehover ul
+	{
+	display: block;
+}
 
+#regtable p {
+	color: #333;
+	font-size: 11px
+}
 
-#regtable p{color:#333;font-size:11px}
-#regtable input{border:1px #ccc solid;width:150px;color:#333;font:11px Verdana, Geneva, sans-serif;background-color:#f9f9f9}
-#regtable textarea{border:1px #ccc solid;width:350px;color:#333;font:11px Verdana, Geneva, sans-serif;background-color:#f9f9f9}
-#regtable select{border:1px #ccc solid;width:250px;color:#333;font:11px Verdana, Geneva, sans-serif;background-color:#f9f9f9}
-.answer1{width:150px;float:right;margin-right:93px; margin-top:10px; margin-bottom:10px;}
-.answer2{width:150px;float:right;margin-right:200px; margin-top:10px; margin-bottom:10px;}
+#regtable input {
+	border: 1px #ccc solid;
+	width: 150px;
+	color: #333;
+	font: 11px Verdana, Geneva, sans-serif;
+	background-color: #f9f9f9
+}
 
-.centerconlk{
+#regtable textarea {
+	border: 1px #ccc solid;
+	width: 350px;
+	color: #333;
+	font: 11px Verdana, Geneva, sans-serif;
+	background-color: #f9f9f9
+}
+
+#regtable select {
+	border: 1px #ccc solid;
+	width: 250px;
+	color: #333;
+	font: 11px Verdana, Geneva, sans-serif;
+	background-color: #f9f9f9
+}
+
+.answer1 {
+	width: 150px;
+	float: right;
+	margin-right: 93px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.answer2 {
+	width: 150px;
+	float: right;
+	margin-right: 200px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.centerconlk {
 	width: 100%;
 	position: relative;
 	float: left;
 }
-.centerconlk li{
-	list-style:none;
-	float:left;
-	margin:0px 20px;;
-	font-weight:bold;
-}
-.centerconlk li a{
-	color: gray;
-}
-.centerconlk li a:hover{
-	color: #003366;
+
+.centerconlk li {
+	list-style: none;
+	float: left;
+	margin: 0px 20px;;
+	font-weight: bold;
 }
 
+.centerconlk li a {
+	color: gray;
+}
+
+.centerconlk li a:hover {
+	color: #003366;
+}
 
 /* 
    Posts 
 ------------------------------------------------------------------- */
-
-.post {margin-bottom: 24px;}
+.post {
+	margin-bottom: 24px;
+}
 
 .post_date {
 	color: #777;
 	font-size: 0.9em;
 	padding: 8px 0 12px;
 }
-.post_date a {color: #444;}
+
+.post_date a {
+	color: #444;
+}
 
 .post_meta {
 	background: #E7E7E7;
@@ -420,7 +406,16 @@ ul#cssmenu ul li.iehover ul {
 	font-size: 0.9em;
 	padding: 6px 10px;
 }
-.post_meta a {color: #345; }
-.post_meta a:hover {color: #001;}
 
-.post_body { margin-top:10px; margin-bottom:10px; }
+.post_meta a {
+	color: #345;
+}
+
+.post_meta a:hover {
+	color: #001;
+}
+
+.post_body {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

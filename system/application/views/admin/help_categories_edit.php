@@ -1,24 +1,26 @@
-<link rel="stylesheet" href="/templates/admin/steal/960.css" type="text/css" media="screen" charset="utf-8">
-<link rel="stylesheet" href="/templates/admin/steal/template.css" type="text/css" media="screen" charset="utf-8">
-<link rel="stylesheet" href="/templates/admin/steal/colour.css" type="text/css" media="screen" charset="utf-8">
+<link rel="stylesheet" href="/templates/admin/steal/960.css"
+	type="text/css" media="screen" charset="utf-8">
+<link
+	rel="stylesheet" href="/templates/admin/steal/template.css"
+	type="text/css" media="screen" charset="utf-8">
+<link
+	rel="stylesheet" href="/templates/admin/steal/colour.css"
+	type="text/css" media="screen" charset="utf-8">
 <?=validation_errors()?>
 <?=show_tinimce('text')?>
 <form action="" method="post">
-			<div id="content" class="container_16 clearfix">
-				<div class="grid_16">
-					<h2>Редактировать категорию</h2>
-					<p class="error">Форма редактирования категорий.</p>
-				</div>
+<div id="content" class="container_16 clearfix">
+<div class="grid_16">
+<h2>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</h2>
+<p class="error">пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
+</div>
 
-				<div class="grid_16">
-					<p>
-						<label for="title">Название <small>Максимальное количество символов 25.</small></label>
-						<input type="text" name="name" maxlength="24" value="<?=$name?>">
-					</p>
-					<p class="submit">
-						<input value="Сбросить" type="reset">
-						<input value="Сохранить" type="submit">
-					</p>
-				</div>
-			</div>
+<div class="grid_16">
+<p><label for="title">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ <small>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+25.</small></label> <input type="text" name="name" maxlength="24"
+	value="<?=$name?>"></p>
+<p class="submit"><input value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" type="reset"> <input
+	value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" type="submit"></p>
+</div>
+</div>
 </form>

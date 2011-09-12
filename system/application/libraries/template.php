@@ -9,7 +9,7 @@ class Template
 	private $userpic;
 
 	private $_ci;
-	
+
 	private $theme;
 
 	private $script = '';
@@ -21,7 +21,7 @@ class Template
 		$this->theme = 'wdesigns';
 	}
 
-    function build($view, $data = array(), $title = '', $section = FALSE) 
+	function build($view, $data = array(), $title = '', $section = FALSE)
 	{
 		$template['title'] = $this->title($title);
 
@@ -34,7 +34,7 @@ class Template
 			$this->_ci->user_id = $this->_ci->session->userdata('id');
 			$this->_ci->username = $this->_ci->users_mdl->get_user_by_id($this->_ci->user_id)->username;
 			$this->_ci->userpic = $this->_ci->users_mdl->get_user_by_id($this->_ci->user_id)->userpic;
-			
+				
 			$template['login']['username'] = $this->_ci->username;
 			$template['login']['userpic'] = $this->_ci->userpic;
 
@@ -78,7 +78,7 @@ class Template
 
 
 
-		$template['content'] = $this->_ci->load->view($theme.'/'.$view, $data, TRUE);//Контент
+		$template['content'] = $this->_ci->load->view($theme.'/'.$view, $data, TRUE);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		if( isset($this->script) )
 		{
@@ -88,7 +88,7 @@ class Template
 		$this->_ci->load->view($theme.'/template', $template);
 	}
 
-    function build_admin($view, $data = array(), $title = '') 
+	function build_admin($view, $data = array(), $title = '')
 	{
 		if( !$this->_ci->admin_mdl->logged_in() )
 		{
@@ -101,7 +101,7 @@ class Template
 
 		$theme = 'admin';
 
-		$template['content'] = $this->_ci->load->view($theme.'/'.$view, $data, TRUE);//Контент
+		$template['content'] = $this->_ci->load->view($theme.'/'.$view, $data, TRUE);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$template['count_new_reports'] = $this->_ci->admin_mdl->count_new_reports();
 
@@ -112,13 +112,13 @@ class Template
 
 	function set_metadata($name, $content)
 	{
-        $name = htmlspecialchars(strip_tags($name));
-        $content = htmlspecialchars(strip_tags($content));
+		$name = htmlspecialchars(strip_tags($name));
+		$content = htmlspecialchars(strip_tags($content));
 
-        if($name == 'keywords' && !strpos($content, ','))
-        {
-        	$content = preg_replace('/[\s]+/', ', ', trim($content));
-        }
+		if($name == 'keywords' && !strpos($content, ','))
+		{
+			$content = preg_replace('/[\s]+/', ', ', trim($content));
+		}
 
 		$metadata = '<meta name="'.$name.'" content="'.$content.'" />';
 
@@ -133,16 +133,16 @@ class Template
 	}
 
 
-/*
-|---------------------------------------------------------------
-| Контроллер вывода подсказан, только для авторизированных, только для тех у кого не отключены уведомления, события, повышения репутации и т д
-|---------------------------------------------------------------
-*/
-    function hint() 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅ пїЅ
+	 |---------------------------------------------------------------
+	 */
+	function hint()
 	{
 		$settings = $this->_ci->users_mdl->get_settings($this->_ci->session->userdata('id'));
 
-		if( $settings['hint'] == 0 )//Если у пользователя отключены всплывающии подсказкм
+		if( $settings['hint'] == 0 )//пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			return FALSE;
 		}
@@ -151,12 +151,12 @@ class Template
 
 		$data = $this->_ci->load->view('events', $data, TRUE);
 
-		if( empty($data) )//Если нету новых событий останавливаем контроллер
+		if( empty($data) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			return FALSE;
 		}
 
-		$this->script = 
+		$this->script =
 
 <<<HERE
 <script type="text/javascript" language="javascript">
@@ -164,13 +164,13 @@ $(document).ready(function()
 {
 	var counter = 0, massiv = massiv();
 
-	show(massiv[counter]);//Показываем первый элемент
+	show(massiv[counter]);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 	function massiv()
 	{
-		var massiv = [], data = $('.event');// находим все подсказки
+		var massiv = [], data = $('.event');// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     	
-		for( var i = 0, size = data.length;i < size; i++ )// перебираем все
+		for( var i = 0, size = data.length;i < size; i++ )// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 		{
 			id = data[i].id.split('-');
 
@@ -186,21 +186,21 @@ $(document).ready(function()
 
 	$('.event').click(function()
 	{
-		counter++;//Счётчик
+		counter++;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		data = $(this).attr('id').split('-');//Id данного элемента
+		data = $(this).attr('id').split('-');//Id пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		id = data[1];
 
-		delete_message(id);//Удаляем событие из базы
+		delete_message(id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
 
-		next_id = massiv[counter];//Id следующего элемента который будем показываеть
+		next_id = massiv[counter];//Id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$('#message-' + id).animate({ top:"+=15px",opacity:0 }, "slow");//Скрываем подсказку
+		$('#message-' + id).animate({ top:"+=15px",opacity:0 }, "slow");//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$('#message-' + id).queue(function ()
-		{//Очередь
-			$('#message-' + id).css({visibility: "hidden"});//Делаем невидимым
+		{//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			$('#message-' + id).css({visibility: "hidden"});//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			show(next_id);
 		});
 			
@@ -208,13 +208,13 @@ $(document).ready(function()
 
 	$('.events').click(function()
 	{
-		delete_message_all();//Удаляем событие из базы
+		delete_message_all();//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
 
-		$('#message-all').animate({ top:"+=15px",opacity:0 }, "slow");//Скрываем подсказку
+		$('#message-all').animate({ top:"+=15px",opacity:0 }, "slow");//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$('#message-all').queue(function ()
-		{//Очередь
-			$('#message-all').css({visibility: "hidden"});//Делаем невидимым
+		{//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			$('#message-all').css({visibility: "hidden"});//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			show(next_id);
 		});
 			
@@ -226,7 +226,7 @@ $(document).ready(function()
 		$('.events').animate({top:$(window).scrollTop()+"px" },{queue: false, duration: 350}); 
 	});
 
-	//Удаляем сообщение
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	function delete_message(id)
 	{
 		var dataString = 'id='+ id;
@@ -241,7 +241,7 @@ $(document).ready(function()
 		return false;
 	}
 
-	//Удаляем сообщение
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	function delete_message_all()
 	{
 		$.ajax({
@@ -255,7 +255,7 @@ $(document).ready(function()
 
 });
 </script>
-$data
+		$data
 HERE;
 
 	}

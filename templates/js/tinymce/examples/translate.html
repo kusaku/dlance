@@ -3,7 +3,10 @@
 <head>
 <title>Full featured example</title>
 <style>
-body {font-family:Arial,Verdana; font-size: 12px;}
+body {
+	font-family: Arial, Verdana;
+	font-size: 12px;
+}
 </style>
 
 <!-- TinyMCE -->
@@ -50,23 +53,28 @@ body {font-family:Arial,Verdana; font-size: 12px;}
 </head>
 <body>
 
-<form method="post" action="http://tinymce.moxiecode.com/dump.php?example=true">
-	<h3>Translation</h3>
+<form method="post"
+	action="http://tinymce.moxiecode.com/dump.php?example=true">
+<h3>Translation</h3>
 
-	<p>This page enables you to translate TinyMCE by using XML files.</p>
-	<p>Steps to translate:</p>
-	<ol>
-		<li>Download one of the language XML files from the TinyMCE site.</li>
-		<li>Place it in /jscripts/tiny_mce/langs directory, for example /jscripts/tiny_mce/langs/sv.xml.</li>
-		<li>Change the language init option in this file to match the XML file code. For example: sv</li>
-		<li>TinyMCE will now use the XML file instead of the .js versions.</li>
-		<li>Modify the XML file until everything is translated</li>
-		<li>Modify the author information, this is optional.</li>
-		<li>Upload the XML file to the TinyMCE site to share it with others.</li>
-		<li>You can now download the .js versions of the language pack from the TinyMCE site.</li>
-	</ol>
+<p>This page enables you to translate TinyMCE by using XML files.</p>
+<p>Steps to translate:</p>
+<ol>
+	<li>Download one of the language XML files from the TinyMCE site.</li>
+	<li>Place it in /jscripts/tiny_mce/langs directory, for example
+	/jscripts/tiny_mce/langs/sv.xml.</li>
+	<li>Change the language init option in this file to match the XML
+	file code. For example: sv</li>
+	<li>TinyMCE will now use the XML file instead of the .js versions.</li>
+	<li>Modify the XML file until everything is translated</li>
+	<li>Modify the author information, this is optional.</li>
+	<li>Upload the XML file to the TinyMCE site to share it with
+	others.</li>
+	<li>You can now download the .js versions of the language pack
+	from the TinyMCE site.</li>
+</ol>
 
-	<textarea id="elm1" name="elm1" rows="15" cols="80" style="width: 80%">
+<textarea id="elm1" name="elm1" rows="15" cols="80" style="width: 80%">
 		&lt;p&gt;
 			This is some example text that you can edit inside the &lt;strong&gt;TinyMCE editor&lt;/strong&gt;.
 		&lt;/p&gt;

@@ -1,19 +1,15 @@
 <div class="yui-g">
-	<h1 class="title"><?=$title?></h1>
-	<div class="desc"><?=$descr?></div>
-	<noindex>
-	<div class="subtitle">Дата: <?=$date?></div>
-	</noindex>
-
-</div>
+<h1 class="title"><?=$title?></h1>
+<div class="desc"><?=$descr?></div>
+<noindex>
+<div class="subtitle">пїЅпїЅпїЅпїЅ: <?=$date?></div>
+</noindex></div>
 
 
 <div id="yui-main">
 <div class="yui-b clearfix">
 
-<div class="content">
-<?=nl2br($text)?>
-</div>
+<div class="content"><?=nl2br($text)?></div>
 
 </div>
 </div>
@@ -25,12 +21,12 @@
 <div class="bd clearfix">
 
 <div class="sideblock">
-<h3>Новости проекта</h3>
-	<ul class="latest-page">
+<h3>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</h3>
+<ul class="latest-page">
 <? foreach($newest_news as $row): ?>
-		<li><?=$row['date']?> | <a href="/news/<?=$row['id']?>.html"><?=$row['title']?></a></li>
-<? endforeach; ?>
-	</ul>
+	<li><?=$row['date']?> | <a href="/news/<?=$row['id']?>.html"><?=$row['title']?></a></li>
+	<? endforeach; ?>
+</ul>
 
 </div>
 

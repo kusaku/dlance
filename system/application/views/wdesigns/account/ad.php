@@ -1,49 +1,46 @@
 <div id="yui-main">
 <div class="yui-b">
 
-<h1> <a href="/account/ad">Указатели</a> </h1>
+<h1><a href="/account/ad">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
 
-<p class="subtitle"> Вы можете поместить указатель на любой сайт или блог. Указатель будет ссылаться на ваш аккаунт на сайте <?=$this->config->item('site')?>.  </p>
-<? if( !empty($code) ): ?>
-<textarea name="text" rows="5" cols="49" style="width:100%"><?=$code?></textarea>
-<? endif; ?>
-
-<?=validation_errors()?>
+<p class="subtitle">пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ <?=$this->config->item('site')?>.
+</p>
+<? if( !empty($code) ): ?> <textarea name="text" rows="5" cols="49"
+	style="width: 100%"><?=$code?></textarea> <? endif; ?> <?=validation_errors()?>
 
 
 <form action="/account/ad/" method="get" />
 <? if( !empty($ads) ): ?>
 <table class="services">
-<tbody>
-<tr>
-<td width="25px">
-</td>
-<td></td>
-</tr>
+	<tbody>
+		<tr>
+			<td width="25px"></td>
+			<td></td>
+		</tr>
 
-	<? foreach($ads as $row): ?>
-<tr>
-<td>
-<input name="ad" type="radio" value="<?=$row['id']?>" <? if( !empty($ad) and $ad == $row['id'] ): ?> checked="checked" <? endif; ?>/>
-</td>
-<td><img src="<?=$row['img']?>" alt=""></td>
-</tr>
+		<? foreach($ads as $row): ?>
+		<tr>
+			<td><input name="ad" type="radio" value="<?=$row['id']?>"
+			<? if( !empty($ad) and $ad == $row['id'] ): ?> checked="checked"
+			<? endif; ?> /></td>
+			<td><img src="<?=$row['img']?>" alt=""></td>
+		</tr>
 
-	<? endforeach; ?>
+		<? endforeach; ?>
 
 
-</tbody>
+	</tbody>
 </table>
-<? else: ?>
-<p>Категории не найдены.</p>
-<? endif; ?>
-<input type="submit" value="Получить код">
+		<? else: ?>
+<p>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
+		<? endif; ?> <input type="submit" value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ">
 </form>
 
 
-  </div>
+</div>
 
 </div>
 <!--/yui-main-->
 
-<? $this->load->view('wdesigns/account/block'); ?>
+		<? $this->load->view('wdesigns/account/block'); ?>

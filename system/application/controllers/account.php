@@ -29,7 +29,7 @@ class Account extends Controller
 			$this->user_id = $this->session->userdata('id');
 
 			$user = $this->users_mdl->get_user_by_id($this->user_id);
-	
+
 			$this->username = $user->username;
 
 			$this->userpic = $user->userpic;
@@ -45,47 +45,47 @@ class Account extends Controller
 			$this->adult = 0;
 		}
 	}
-/*
-|---------------------------------------------------------------
-| ROBOKASSA
-|---------------------------------------------------------------
-*/
-    function balance() 
+	/*
+	 |---------------------------------------------------------------
+	 | ROBOKASSA
+	 |---------------------------------------------------------------
+	 */
+	function balance()
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		// регистрационная информация (логин, пароль #1)
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ #1)
 		// registration info (login, password #1)
 		$mrh_login = "Openweblife";
 		$mrh_pass1 = "199122x199122x";
-		// номер заказа
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// number of order
 		$inv_id = 1;
-		// описание заказа
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// order description
-		$inv_desc = "Пополнение баланса";
-		// сумма заказа
+		$inv_desc = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// sum of order
 		$out_summ = "";
-		// предлагаемая валюта платежа
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// default payment e-currency
 		$in_curr = "PCR";
-		// язык
+		// пїЅпїЅпїЅпїЅ
 		// language
 		$culture = "ru";
-		// формирование подписи
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// generate signature
 		$crc = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1");
-		// форма оплаты товара
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// payment form
 
 
 		$data = array
-		( 
-            //'robokassaUrl'          => 'https://merchant.roboxchange.com/Index.aspx',
+		(
+		//'robokassaUrl'          => 'https://merchant.roboxchange.com/Index.aspx',
             'robokassaUrl'          => 'http://test.robokassa.ru/Index.aspx',
             'rb_mrh_login'          => $mrh_login,
             'rb_payment_amount'     => $out_summ,
@@ -94,40 +94,40 @@ class Account extends Controller
             'rb_sign'               => $crc
 		);
 
-		$this->template->build('account/balance_r', $data, $title = 'Пополнение баланса через Робокассу');
+		$this->template->build('account/balance_r', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-    function result_r() 
+	function result_r()
 	{
-		// регистрационная информация (пароль #2)
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ #2)
 		// registration info (password #2)
 		$mrh_pass2 = "199122x199122x";
 
-		//установка текущего времени
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		//current date
 		$tm=getdate(time()+9*3600);
 		$date="$tm[year]-$tm[mon]-$tm[mday] $tm[hours]:$tm[minutes]:$tm[seconds]";
 
-		// чтение параметров
+		// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// read parameters
 		$out_summ = $_REQUEST["OutSum"];
 		$inv_id = $_REQUEST["InvId"];
 		$crc = $_REQUEST["SignatureValue"];
 
 
-		if( !empty($_REQUEST["ShpCart"]) )//Покупка без авторизацииы
+		if( !empty($_REQUEST["ShpCart"]) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$ShpCart = $_REQUEST["ShpCart"];
 		}
 
-		if( !empty($_REQUEST["ShpCode"]) )//Покупка без авторизацииы
+		if( !empty($_REQUEST["ShpCode"]) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$ShpCode = $_REQUEST["ShpCode"];
 		}
 
 		$crc = strtoupper($crc);
 
-		if( !empty($ShpCart) )//Покупка без авторизацииы
+		if( !empty($ShpCart) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2:ShpCart=".$ShpCart.":ShpCode=".$ShpCode.""));
 		}
@@ -138,7 +138,7 @@ class Account extends Controller
 
 
 
-		// проверка корректности подписи
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// check signature
 		if ($my_crc !=$crc)
 		{
@@ -146,7 +146,7 @@ class Account extends Controller
 			exit();
 		}
 
-		// признак успешно проведенной операции
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// success
 		echo "OK$inv_id\n";
 	}
@@ -159,33 +159,33 @@ class Account extends Controller
 
 		$data['password'] = $userdata['password'];
 
-		$this->template->build('account/tes', $data, $title = 'Авторизация');
+		$this->template->build('account/tes', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-    function succes_r() 
+	function succes_r()
 	{
-		// регистрационная информация (пароль #1)
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ #1)
 		// registration info (password #1)
 		$mrh_pass1 = "199122x199122x";
 
-		// чтение параметров
+		// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// read parameters
 		$out_summ = $_REQUEST["OutSum"];
 		$inv_id = $_REQUEST["InvId"];
 		$crc = $_REQUEST["SignatureValue"];
 		$crc = strtoupper($crc);
 
-		if( !empty($_REQUEST["ShpCart"]) )//Покупка без авторизацииы
+		if( !empty($_REQUEST["ShpCart"]) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$ShpCart = $_REQUEST["ShpCart"];
 		}
 
-		if( !empty($_REQUEST["ShpCode"]) )//Покупка без авторизацииы
+		if( !empty($_REQUEST["ShpCode"]) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$ShpCode = $_REQUEST["ShpCode"];
 		}
 
-		if( !empty($ShpCart) )//Покупка без авторизацииы
+		if( !empty($ShpCart) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass1:ShpCart=".$ShpCart.":ShpCode=".$ShpCode.""));
 		}
@@ -195,7 +195,7 @@ class Account extends Controller
 		}
 
 
-		// проверка корректности подписи
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// check signature
 		if ($my_crc != $crc)
 		{
@@ -206,21 +206,21 @@ class Account extends Controller
 		if ( !empty($ShpCart) )
 		{
 			$this->result_pay($ShpCart, $ShpCode);
-			
+				
 			redirect('account/tes/'.$ShpCode);
 		}
 		else
 		{
 
-/*
-|---------------------------------------------------------------
-| Пополнение счёта
-|---------------------------------------------------------------
-*/
+			/*
+			 |---------------------------------------------------------------
+			 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+			 |---------------------------------------------------------------
+			 */
 			$this->balance_mdl->plus($this->user_id, $out_summ);
 
-			$this->transaction->create($this->user_id, 'Пополнение счета', $out_summ);
-		
+			$this->transaction->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', $out_summ);
+
 			redirect('account');
 		}
 	}
@@ -232,75 +232,75 @@ class Account extends Controller
 		$user_id = $this->users_mdl->get_id_by_code($ShpCode);
 
 		$designs = $this->account_mdl->pay_no_auth_designs($designs);
-/*
-|---------------------------------------------------------------
-| После проверки выполняем изменения, добавляем в покупки, снимаем средства, прибавляем средства владельцу, отправляем дизайн на почту и т д
-|---------------------------------------------------------------
-*/
-		foreach($designs as $row): 
+		/*
+		 |---------------------------------------------------------------
+		 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅ пїЅ
+		 |---------------------------------------------------------------
+		 */
+		foreach($designs as $row):
 
-			$email = $this->users_mdl->get_email($user_id);
+		$email = $this->users_mdl->get_email($user_id);
 
-			$file = $this->account_mdl->get_file($row['id']);
+		$file = $this->account_mdl->get_file($row['id']);
 
-			$file = 'files/download/'.$file;
+		$file = 'files/download/'.$file;
 
-			$this->common->email($email, $subject = 'Вам прислан файл', '', $file);	
+		$this->common->email($email, $subject = 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ', '', $file);
 
-			$data = array (
+		$data = array (
 				'user_id' => $user_id,
 				'design_id' => $row['id'],
 				'date' => now(),
 				'kind' => $row['kind']
-			);
+		);
 
-			$this->account_mdl->add('purchased', $data);//Добавляем в купленные
-
-
-			$this->designs_mdl->update_sales($row['id']);//Увеличиваем число покупок
-
-			if( $row['kind'] == '1' )
-			{
-				$this->balance_mdl->plus($row['user_id'], $row['price_1']);//Прибавляем владельцу цену за покупку
-			}
-			else//Если дизайн выкуплен переводим статус на выкуплен - 2
-			{
-				$this->balance_mdl->plus($row['user_id'], $row['price_2']);//Прибавляем владельцу цену за выкуп
-
-				$this->designs_mdl->enter($row['id']);//Переводим в выкуплен
-			}
+		$this->account_mdl->add('purchased', $data);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
-			$this->events->create($row['user_id'], 'Ваш дизайн "'.$row['title'].'" был куплен');//Добавляем событие
+		$this->designs_mdl->update_sales($row['id']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+		if( $row['kind'] == '1' )
+		{
+			$this->balance_mdl->plus($row['user_id'], $row['price_1']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		}
+		else//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - 2
+		{
+			$this->balance_mdl->plus($row['user_id'], $row['price_2']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+
+			$this->designs_mdl->enter($row['id']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		}
 
 
-/*
-|---------------------------------------------------------------
-| Повышение репутации продавцу
-|---------------------------------------------------------------
-*/
-			$this->events->create($row['user_id'], 'Продажа дизайна', 'sell_design');#Событие с репутацией
+		$this->events->create($row['user_id'], 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "'.$row['title'].'" пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-/*
-|---------------------------------------------------------------
-| Повышение репутации покупателю
-|---------------------------------------------------------------
-*/
-			$this->events->create($user_id, 'Покупка дизайна', 'buy_design');#Событие с репутацией
+
+		/*
+		 |---------------------------------------------------------------
+		 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		 |---------------------------------------------------------------
+		 */
+		$this->events->create($row['user_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'sell_design');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+		/*
+		 |---------------------------------------------------------------
+		 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		 |---------------------------------------------------------------
+		 */
+		$this->events->create($user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'buy_design');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		endforeach;
 	}
 
-    function fail_r() 
+	function fail_r()
 	{
-		show_error('Вы отказались от оплаты.');
+		show_error('пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.');
 	}
-/*
-|---------------------------------------------------------------
-| Перевод
-|---------------------------------------------------------------
-*/
-	function payments($start_page = 0)//Вывод
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function payments($start_page = 0)//пїЅпїЅпїЅпїЅпїЅ
 	{
 		if( !$this->errors->access() )
 		{
@@ -325,10 +325,10 @@ class Account extends Controller
 
 		$data['data'] = $this->account_mdl->get_payments($start_page, $per_page, $this->user_id);
 
-		$this->template->build('account/payments', $data, $title = 'Список платежей');
+		$this->template->build('account/payments', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-	function payments_view($id = '')//Просмотр платежа
+	function payments_view($id = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if( !$this->errors->access() )
 		{
@@ -340,48 +340,48 @@ class Account extends Controller
 			show_404('page');
 		}
 
-		if( $data['user_id'] != $this->user_id and $data['recipient_id'] != $this->user_id )//Если платеж не причастен к пользователю
+		if( $data['user_id'] != $this->user_id and $data['recipient_id'] != $this->user_id )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			redirect('account/payments');
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'payment_id', 
-				'label' => 'ID платежа',
+				'label' => 'ID пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|callback__check_payment'
-			)
-		);
+				)
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->balance_mdl->plus($data['recipient_id'], $data['amount']);//Списываем со счёта
+				if( $this->form_validation->run() )
+				{
+					$this->balance_mdl->plus($data['recipient_id'], $data['amount']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$this->events->create($data['user_id'], 'Платеж с ID '.$data['id'].' был принят');//Добавляем событие
+					$this->events->create($data['user_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ ID '.$data['id'].' пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			$update = array (
+					$update = array (
 				'status' => 2
-			);
-			
-			$this->account_mdl->edit('payments', $data['id'], $update);
+					);
+						
+					$this->account_mdl->edit('payments', $data['id'], $update);
 
-			$username = $this->users_mdl->get_username($data['user_id']);
+					$username = $this->users_mdl->get_username($data['user_id']);
 
-			$this->transaction->create($data['recipient_id'], 'Получение средств от пользователя "'.$username.'"', $data['amount']);
+					$this->transaction->create($data['recipient_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "'.$username.'"', $data['amount']);
 
-			show_error('Перевод получен.');
-		}
+					show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
+				}
 
-		$this->template->build('account/payments_view', $data, $title = 'Платежи');
+				$this->template->build('account/payments_view', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-	//Проверка принятия платежа, есть ли код протекции, если есть сверить код протекции с введённым, предназачен ли платеж пользователю
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	function _check_payment($id)
 	{
-		$payment = $this->account_mdl->get_payment($id);//Выводим все данные о платеже
+		$payment = $this->account_mdl->get_payment($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		if( $payment['type'] == 2 )
 		{
@@ -389,68 +389,68 @@ class Account extends Controller
 
 			if( empty($code) )
 			{
-				$this->form_validation->set_message('_check_payment', 'Не введён код протекции');
-				
+				$this->form_validation->set_message('_check_payment', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+
 				return FALSE;
 			}
-			
+				
 			if( $payment['code'] != $code )
 			{
-				$this->form_validation->set_message('_check_payment', 'Не верно введён код протекции');
-	
+				$this->form_validation->set_message('_check_payment', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+
 				return FALSE;
 			}
 		}
 
 		if( $payment['recipient_id'] != $this->user_id )
 		{
-			$this->form_validation->set_message('_check_payment', 'Платеж не предназначен вам');
+			$this->form_validation->set_message('_check_payment', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ');
 
 			return FALSE;
 		}
 
 		if( $payment['status_id'] != 1 )
 		{
-			$this->form_validation->set_message('_check_payment', 'Платеж уже завершён');
+			$this->form_validation->set_message('_check_payment', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 			return FALSE;
 		}
 
-		return TRUE;	
+		return TRUE;
 	}
 
-    function transfer() 
+	function transfer()
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'type', 
-				'label' => 'Тип платежа',
+				'label' => 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'recipient', 
-				'label' => 'Получатель',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[15]|callback__user_check'
-			),
-			array (
+				),
+				array (
 				'field' => 'amount', 
-				'label' => 'Сумма',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|numeric|max_length[6]|callback__check_transfer'
-			),
-			array (
+				),
+				array (
 				'field' => 'text', 
-				'label' => 'Комментарий',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[10000]'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'user_id' => $this->user_id,
 			'recipient_id' => $this->input->post('recipient'),
 			'date' => now(),
@@ -460,107 +460,107 @@ class Account extends Controller
 			'amount' => $this->input->post('amount'),
 			'text' => htmlspecialchars($this->input->post('text')),
 			'status' => 1
-		);
+				);
 
-		$recipient = $this->input->post('recipient');//Для истории
+				$recipient = $this->input->post('recipient');//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['recipient_id'] = $this->users_mdl->get_id($recipient);
+				$data['recipient_id'] = $this->users_mdl->get_id($recipient);
 
-		$recipient_id = $data['recipient_id'];//Для истории
+				$recipient_id = $data['recipient_id'];//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			if( $data['type'] == 2 )
-			{
-				$data['code'] = random_string('alnum', 6);//Создаём код протекции
+				if( $this->form_validation->run() )
+				{
+					if( $data['type'] == 2 )
+					{
+						$data['code'] = random_string('alnum', 6);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-				//Дата возвращения платежа отправителю 86400 - один день
-				$data['time'] = $data['time'] * 86400;//Сколько всего времени до события
+						//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 86400 - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+						$data['time'] = $data['time'] * 86400;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-				$data['time'] = NOW() + $data['time'];//Прибавляем текущую дату
-			}
+						$data['time'] = NOW() + $data['time'];//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+					}
 
-			$this->account_mdl->add('payments', $data);
+					$this->account_mdl->add('payments', $data);
 
-			$this->balance_mdl->minus($this->user_id, $data['amount']);//Списываем со счёта
-
-
+					$this->balance_mdl->minus($this->user_id, $data['amount']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
 
 
-			if( $data['type'] == 2 )
-			{
-				$this->transaction->create($this->user_id, 'Перевод средств с кодом протекции пользователю "'.$recipient.'"', $data['amount']);
 
-				show_error('Перевод завершен. Код протекции: '.$data['code'].'');
-			}
-			else
-			{
-				$this->transaction->create($this->user_id, 'Перевод средств пользователю "'.$recipient.'"', $data['amount']);
 
-				show_error('Перевод завершен.');
-			}
-		}
+					if( $data['type'] == 2 )
+					{
+						$this->transaction->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "'.$recipient.'"', $data['amount']);
 
-		$this->template->build('account/transfer', $data, $title = 'Создание платежа');
+						show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: '.$data['code'].'');
+					}
+					else
+					{
+						$this->transaction->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "'.$recipient.'"', $data['amount']);
+
+						show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
+					}
+				}
+
+				$this->template->build('account/transfer', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-	function _check_transfer($amount)//Проверка
+	function _check_transfer($amount)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    if( $amount > $this->balance_mdl->get($this->user_id) )
-	    {
-	        $this->form_validation->set_message('_check_transfer', 'На вашем счету недостаточно средств');
-	        return FALSE;
-	    }
+		if( $amount > $this->balance_mdl->get($this->user_id) )
+		{
+			$this->form_validation->set_message('_check_transfer', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
-		return TRUE;	
+		return TRUE;
 	}
 
 	function _user_check($username)
 	{
-	    if( $this->username == $username )
-	    {
-	        $this->form_validation->set_message('_user_check', 'Нельзя указывать себя в качестве получателя');
-	        return FALSE;
-	    }
+		if( $this->username == $username )
+		{
+			$this->form_validation->set_message('_user_check', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
-	    if( !$this->users_mdl->username_check($username) )
-	    {
-	        $this->form_validation->set_message('_user_check', 'Получатель не найден');
-	        return FALSE;
-	    }
+		if( !$this->users_mdl->username_check($username) )
+		{
+			$this->form_validation->set_message('_user_check', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
 		return TRUE;
 	}
 
 	function _check_tarrif($id)
 	{
-		$tariff = $this->tariff->get_tariff($id);//Выводим все данные о тарифе
+		$tariff = $this->tariff->get_tariff($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$period = $this->input->post('period');
 
 		if( $period == 1 )
 		{
-			$price = $tariff['price_of_month'];//Стоимость в месяц
+			$price = $tariff['price_of_month'];//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 		}
 		else
 		{
-			$price = $tariff['price_of_year'];//Стоимость в год
+			$price = $tariff['price_of_year'];//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ
 		}
 
-	    if( $price > $this->balance_mdl->get($this->user_id) )
-	    {
-	        $this->form_validation->set_message('_check_tarrif', 'На вашем счету недостаточно средств');
-	        return FALSE;
-	    }
+		if( $price > $this->balance_mdl->get($this->user_id) )
+		{
+			$this->form_validation->set_message('_check_tarrif', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
-	    if( $tariff['id'] == $this->user_tariff )
-	    {
-	        $this->form_validation->set_message('_check_tarrif', 'Данный тариф уже установлен');
-	        return FALSE;
-	    }
+		if( $tariff['id'] == $this->user_tariff )
+		{
+			$this->form_validation->set_message('_check_tarrif', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
 		return TRUE;
 	}
@@ -572,63 +572,63 @@ class Account extends Controller
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'tariff', 
-				'label' => 'ID тарифа',
+				'label' => 'ID пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|callback__check_tarrif'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'tariff' => $this->input->post('tariff')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$tariff = $this->tariff->get_tariff($data['tariff']);
-	
-			if( $this->input->post('period') == 1 )
-			{
-				$price = $tariff['price_of_month'];
+				if( $this->form_validation->run() )
+				{
+					$tariff = $this->tariff->get_tariff($data['tariff']);
 
-				$time = 2629743;
-			}
-			else
-			{
+					if( $this->input->post('period') == 1 )
+					{
+						$price = $tariff['price_of_month'];
 
-				$price = $tariff['price_of_year'];
+						$time = 2629743;
+					}
+					else
+					{
 
-				$time = 31556926;
-			}
+						$price = $tariff['price_of_year'];
 
-
-			$this->balance_mdl->minus($this->user_id, $price);//Списываем со счёта оплату
+						$time = 31556926;
+					}
 
 
-			$date = now() + $time;//К текущей дате прибавляем срок действия тарифа, получаем дату до которой будет действовать тариф
-
-			$data['tariff_period'] = $date;
-
-			$this->tariff->update($this->user_id,  $data);
+					$this->balance_mdl->minus($this->user_id, $price);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 
-/*
-|---------------------------------------------------------------
-| Записываем историю
-|---------------------------------------------------------------
-*/
-			$this->transaction->create($this->user_id, 'Установка виртуального статуса "'.$tariff['name'].'"', $price);
+					$date = now() + $time;//пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			show_error('Виртуальный статус установлен.');
-		}
+					$data['tariff_period'] = $date;
 
-		$data['data'] = $this->tariff->get_all();
+					$this->tariff->update($this->user_id,  $data);
 
-		$this->template->build('account/tariff_set', $data, $title = 'Настройка виртуального статуса');
+
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$this->transaction->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ "'.$tariff['name'].'"', $price);
+
+					show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
+				}
+
+				$data['data'] = $this->tariff->get_all();
+
+				$this->template->build('account/tariff_set', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 	function tariff()
@@ -637,121 +637,121 @@ class Account extends Controller
 		{
 			return;
 		}
-/*
-Выводим установленный тариф, сколько всего осталось времени
+		/*
+		 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-Затем если сабмитится продление прибавляем к дате до которой действует тариф, период на который увеличиваем, отнимаем баланс
+		 пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-Проверка на сумму баланса
-*/
-		$rules = array 
+		 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		 */
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'tariff', 
-				'label' => 'ID тарифа',
+				'label' => 'ID пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|callback__check_tarrif_long'
-			)
-	
-		);
+				)
 
-		$this->form_validation->set_rules($rules);
+				);
 
-		if( $this->form_validation->run() ) 
-		{
+				$this->form_validation->set_rules($rules);
 
-/*
-|---------------------------------------------------------------
-| Продлеваем по времени
-1 минута	60 секунд
-1 час	3600 секунд
-1 день	86400 секунд
-1 неделя	604800 секунд
-1 месяц (30.44 дней) 	2629743 секунд
-1 год (365.24 дней) 	 31556926 секунд
-|---------------------------------------------------------------
-*/
-			$tariff_period = $this->tariff->period($this->user_id);
+				if( $this->form_validation->run() )
+				{
 
-			$tariff = $this->tariff->get_tariff($this->user_tariff);
+					/*
+					 |---------------------------------------------------------------
+					 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					 1 пїЅпїЅпїЅпїЅпїЅпїЅ	60 пїЅпїЅпїЅпїЅпїЅпїЅ
+					 1 пїЅпїЅпїЅ	3600 пїЅпїЅпїЅпїЅпїЅпїЅ
+					 1 пїЅпїЅпїЅпїЅ	86400 пїЅпїЅпїЅпїЅпїЅпїЅ
+					 1 пїЅпїЅпїЅпїЅпїЅпїЅ	604800 пїЅпїЅпїЅпїЅпїЅпїЅ
+					 1 пїЅпїЅпїЅпїЅпїЅ (30.44 пїЅпїЅпїЅпїЅ) 	2629743 пїЅпїЅпїЅпїЅпїЅпїЅ
+					 1 пїЅпїЅпїЅ (365.24 пїЅпїЅпїЅпїЅ) 	 31556926 пїЅпїЅпїЅпїЅпїЅпїЅ
+					 |---------------------------------------------------------------
+					 */
+					$tariff_period = $this->tariff->period($this->user_id);
 
-			if( $this->input->post('period') == 1 )
-			{
-				$price = $tariff['price_of_month'];//за месяц
+					$tariff = $this->tariff->get_tariff($this->user_tariff);
 
-				$time = 2629743;
-			}
-			else
-			{
-				$price = $tariff['price_of_year'];//за год
-	
-				$time = 31556926;
-			}
+					if( $this->input->post('period') == 1 )
+					{
+						$price = $tariff['price_of_month'];//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$this->balance_mdl->minus($this->user_id, $price);//Списываем со счёта оплату
+						$time = 2629743;
+					}
+					else
+					{
+						$price = $tariff['price_of_year'];//пїЅпїЅ пїЅпїЅпїЅ
 
-			$tariff_period = $tariff_period + $time;
+						$time = 31556926;
+					}
 
-			$data = array (
+					$this->balance_mdl->minus($this->user_id, $price);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+
+					$tariff_period = $tariff_period + $time;
+
+					$data = array (
 				'tariff_period' => $tariff_period
-			);
+					);
 
-			$this->tariff->update($this->user_id, $data);
-
-
-
-			$this->transaction->create($this->user_id, 'Продление виртуального статуса "'.$tariff['name'].'"', $price);
-
-			show_error('Виртуальный статус продлен.');
-		}
-
-		$data = $this->tariff->get_tariff($this->user_tariff);//Выводим все данные о тарифе
-
-/*
-|---------------------------------------------------------------
-| Узнаём остаток времени
-|---------------------------------------------------------------
-*/
-		$tariff_period = $this->tariff->period($this->user_id);
-
-		$date = $tariff_period - now();//От срока когда истекает период отнимаем текущую дату
-
-		$date = $date + now();
-
-		$data['tariff_period'] = date_await($date);
+					$this->tariff->update($this->user_id, $data);
 
 
 
-		$this->template->build('account/tariff', $data, $title = 'Виртуальный статус');
+					$this->transaction->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ "'.$tariff['name'].'"', $price);
+
+					show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
+				}
+
+				$data = $this->tariff->get_tariff($this->user_tariff);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+
+				/*
+				 |---------------------------------------------------------------
+				 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				 |---------------------------------------------------------------
+				 */
+				$tariff_period = $this->tariff->period($this->user_id);
+
+				$date = $tariff_period - now();//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+
+				$date = $date + now();
+
+				$data['tariff_period'] = date_await($date);
+
+
+
+				$this->template->build('account/tariff', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 	function _check_tarrif_long($id)
 	{
-		$tariff = $this->tariff->get_tariff($id);//Выводим все данные о тарифе
+		$tariff = $this->tariff->get_tariff($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$period = $this->input->post('period');
 
 		if( $period == 1 )
 		{
-			$price = $tariff['price_of_month'];//Стоимость в месяц
+			$price = $tariff['price_of_month'];//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 		}
 		else
 		{
-			$price = $tariff['price_of_year'];//Стоимость в год
+			$price = $tariff['price_of_year'];//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ
 		}
 
-	    if( $price > $this->balance_mdl->get($this->user_id) )
-	    {
-	        $this->form_validation->set_message('_check_tarrif_long', 'На вашем счету недостаточно средств');
-	        return FALSE;
-	    }
+		if( $price > $this->balance_mdl->get($this->user_id) )
+		{
+			$this->form_validation->set_message('_check_tarrif_long', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
 		return TRUE;
 	}
-/*
-|---------------------------------------------------------------
-| Подписка на рубрики
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function categories_followers()
 	{
 		if( !$this->errors->access() )
@@ -759,54 +759,54 @@ class Account extends Controller
 			return;
 		}
 
-		$categories_followers = $this->input->post('category');//Выбранные подписки
+		$categories_followers = $this->input->post('category');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$submit = $this->input->post('submit');//Кнопка
+		$submit = $this->input->post('submit');//пїЅпїЅпїЅпїЅпїЅпїЅ
 
 		if( $submit )
 		{
-			$this->account_mdl->del_categories_followers($this->user_id);//Удаляем старые подписки
+			$this->account_mdl->del_categories_followers($this->user_id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			if( $categories_followers )
 			{
 
-				//Создаём массив и заносим
+				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				foreach($categories_followers as $row => $value):
 
-					$array = array (
+				$array = array (
 						'user_id' => $this->user_id,
 						'category' => $value,
-					);
+				);
 
-					$this->account_mdl->add_categories_followers($array);
+				$this->account_mdl->add_categories_followers($array);
 
 				endforeach;
 			}
 
 		}
 
-		$data['categories'] = $this->designs_mdl->get_categories();//Все категории
+		$data['categories'] = $this->designs_mdl->get_categories();//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['categories_followers'] = $this->account_mdl->get_categories_followers($this->user_id);//Подписки пользователя
+		$data['categories_followers'] = $this->account_mdl->get_categories_followers($this->user_id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		if( $data['categories_followers'] )
 		{
 			$select = $data['categories_followers'];
 
 			foreach($select as $row => $value):
-				$select[$row] = $value['category'];
+			$select[$row] = $value['category'];
 			endforeach;
 
 			$data['select'] = $select;
 		}
 
-		$this->template->build('account/categories_followers', $data, $title = 'Подписки на рубрики');
+		$this->template->build('account/categories_followers', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Подписки на пользовательские работы
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function users_followers($start_page = 0)
 	{
 		if( !$this->errors->access() )
@@ -835,14 +835,14 @@ class Account extends Controller
 
 		$data['data'] = $this->account_mdl->get_followers($start_page, $per_page, $user_id = '', $this->user_id);
 
-		$this->template->build('account/users_followers', $data, $title = 'Подписки на пользовательские работы');
+		$this->template->build('account/users_followers', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Подписаться
-|---------------------------------------------------------------
-*/
-	function subscribe($follows = '')//Проверяем подписан ли подписчик уже, если нет добавляем
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function subscribe($follows = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if( !$this->errors->access() )
 		{
@@ -851,7 +851,7 @@ class Account extends Controller
 
 		if( $this->_check_subscribe($follows) )
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$data = array (
@@ -861,14 +861,14 @@ class Account extends Controller
 		);
 
 		$this->account_mdl->add('users_followers', $data);
-		
+
 		redirect('account/users_followers');
 	}
-/*
-|---------------------------------------------------------------
-| Удаление подписки
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function subscribe_del($follows = '')
 	{
 		if( !$this->errors->access() )
@@ -876,29 +876,29 @@ class Account extends Controller
 			return;
 		}
 
-		if( !$this->_check_subscribe($follows) )//Если подписка не найдена перенаправляем
+		if( !$this->_check_subscribe($follows) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			redirect('account/users_followers');
 		}
 
 		$this->account_mdl->subscribe_del($this->user_id, $follows);
-		
+
 		redirect('account/users_followers');
 	}
 
 	function _check_subscribe($follows)
 	{
-		if( $this->account_mdl->subscribe_check($this->user_id, $follows) )//Если пользователь уже находится в подписчиках
+		if( $this->account_mdl->subscribe_check($this->user_id, $follows) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			return TRUE;	
+			return TRUE;
 		}
-			return FALSE;	
+		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| Корзина
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function cart($start_page = 0)
 	{
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
@@ -917,15 +917,15 @@ class Account extends Controller
 
 			$session_id = '';
 
-			$template = 'cart'; 
+			$template = 'cart';
 		}
 		else
 		{
 			$user_id = '';
 
 			$session_id = $this->session->userdata('session_id');
-			
-			$template = 'cart_no_auth'; 
+				
+			$template = 'cart_no_auth';
 		}
 
 		$config['base_url'] = base_url().'/account/cart';
@@ -938,45 +938,45 @@ class Account extends Controller
 
 		$data['data'] = $this->account_mdl->get_cart($start_page, $per_page, $user_id, $session_id);
 
-		$this->template->build('account/'.$template.'', $data, $title = 'Корзина');
+		$this->template->build('account/'.$template.'', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 	function pay_no_auth()
 	{
-		//Сначала регистрируем здесь получаем user_id
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ user_id
 
 		$designs = $this->input->post('designs');
 
-	    if( empty($designs) )
-	    {
-			show_error('Выберите товары для оплаты');
-	    }
+		if( empty($designs) )
+		{
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
 
 		$cart = $designs; $cart = implode(", ",  $cart);
 
-	
+
 		$designs = $this->account_mdl->pay_designs($designs);
 
-		$total_amount = $this->total_amount($designs);//Итоговая сумма
+		$total_amount = $this->total_amount($designs);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
 
-/*
-|---------------------------------------------------------------
-| Проверяем каждый дизайн
-|---------------------------------------------------------------
-*/
+		/*
+		 |---------------------------------------------------------------
+		 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+		 |---------------------------------------------------------------
+		 */
 		foreach($designs as $row):
 
-			if( $row['sales'] > 0 and $row['kind'] == 2 )//Если у дизайна больше одной продажи и пользователь пытается выкупить дизайн
-			{
-				
-				show_error('Дизайн с ID '.$row['id'].' невозможно выкупить');
-			}
+		if( $row['sales'] > 0 and $row['kind'] == 2 )//пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+		{
 
-			if( $row['status'] == 2 )
-			{
-				show_error('Дизайн с ID '.$row['id'].' выкуплен');
-			}
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ ID '.$row['id'].' пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
+
+		if( $row['status'] == 2 )
+		{
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ ID '.$row['id'].' пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
 
 		endforeach;
 
@@ -986,7 +986,7 @@ class Account extends Controller
 
 		$data['cart'] = $cart;
 
-		$this->template->build('account/pay', $data, $title = 'Корзина');
+		$this->template->build('account/pay', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 
@@ -994,41 +994,41 @@ class Account extends Controller
 	{
 		$cart = $this->input->post('cart');
 		$code = $this->input->post('code');
-		$total_amount = $this->input->post('total_amount'); 
+		$total_amount = $this->input->post('total_amount');
 
-		// регистрационная информация (логин, пароль #1)
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ #1)
 		// registration info (login, password #1)
 		$mrh_login = "Openweblife";
 		$mrh_pass1 = "199122x199122x";
-		// номер заказа
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// number of order
 		$inv_id = 1;
-		// описание заказа
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// order description
-		$inv_desc = "Пополнение баланса";
-		// сумма заказа
+		$inv_desc = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// sum of order
 		$out_summ = $total_amount;
-		// предлагаемая валюта платежа
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// default payment e-currency
 		$in_curr = "PCR";
-		// язык
+		// пїЅпїЅпїЅпїЅ
 		// language
 		$culture = "ru";
 
 		$ShpCart = $cart;
 		$ShpCode = $code;
 
-		// формирование подписи
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		// generate signature
 		$crc = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1:ShpCart=".$ShpCart.":ShpCode=".$ShpCode."");
-		// форма оплаты товара
+		// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		// payment form
 
 
 		$data = array
-		( 
-            //'robokassaUrl'          => 'https://merchant.roboxchange.com/Index.aspx',
+		(
+		//'robokassaUrl'          => 'https://merchant.roboxchange.com/Index.aspx',
             'robokassaUrl'          => 'http://test.robokassa.ru/Index.aspx',
             'rb_mrh_login'          => $mrh_login,
             'rb_payment_amount'     => $out_summ,
@@ -1042,34 +1042,34 @@ class Account extends Controller
 
 		$this->load->view('wdesigns/account/newa', $data);
 	}
-/*
-|---------------------------------------------------------------
-| Корзина/Удаление товара
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function cart_del($id = '')
 	{
-		if( !$this->_check_cart($id) )//Если не существует товара у пользователя
+		if( !$this->_check_cart($id) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->account_mdl->del('cart', $id);
-		
+
 		redirect('account/cart');
 	}
-/*
-|---------------------------------------------------------------
-| Корзина/Добавление товара
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function cart_add()
 	{
 		$id = $this->input->post('id');
 
 		$kind = $this->input->post('kind');
 
-		if( !empty($this->user_id) )//Авторизированный пользователя
+		if( !empty($this->user_id) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$data = array (
 				'user_id' => $this->user_id,
@@ -1078,7 +1078,7 @@ class Account extends Controller
 				'kind' => $kind
 			);
 		}
-		else//Не авторизированный
+		else//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$data  = array (
 				'session_id' => $this->session->userdata('session_id'),
@@ -1088,117 +1088,117 @@ class Account extends Controller
 			);
 		}
 
-		if( $this->_check_action_cart($id) )//Если дизайн уже был добавлен в корзину
+		if( $this->_check_action_cart($id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			echo 'Товар уже добавлен';
-			
+			echo 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
+				
 			die;
 		}
 
-		if( $this->_check_purchased($id) )//Если дизайн уже был куплен
+		if( $this->_check_purchased($id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			echo 'Товар уже куплен';
-			
+			echo 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ';
+				
 			die;
 		}
 
-		$design = $this->designs_mdl->get_edit($id);//Выводим всю информацию по дизайну
+		$design = $this->designs_mdl->get_edit($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		if( $design['sales'] > 0 and $kind == 2 )
 		{
-			echo 'Товар нелья выкупить';
-			
+			echo 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
+				
 			die;
 		}
 
 		if( $design['user_id'] == $this->user_id )
 		{
-			echo 'Товар принадлежит вам';
-			
+			echo 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ';
+				
 			die;
 		}
 
 		$this->account_mdl->add('cart', $data);
 
-		echo '<a href="/account/cart/">Товар добавлен</a>';
+		echo '<a href="/account/cart/">пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a>';
 	}
 
 	function _check_action_cart($design_id)
 	{
-		if( !empty($this->user_id) )//Авторизированный пользователь
+		if( !empty($this->user_id) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$session_id = '';
 		}
-		else//Не авторизированный
+		else//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$session_id = $this->session->userdata('session_id');
 		}
 
-		if( $this->account_mdl->cart_check($design_id, $this->user_id, $session_id) )//Если существует товар у пользователя в корзине
+		if( $this->account_mdl->cart_check($design_id, $this->user_id, $session_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			return TRUE;	
+			return TRUE;
 		}
-			return FALSE;	
+		return FALSE;
 	}
 
-	function _check_cart($id)//Удаление, проверка по id корзиныы
+	function _check_cart($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		if( !empty($this->user_id) )//Авторизированный пользователь
+		if( !empty($this->user_id) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$session_id = '';
 		}
-		else//Не авторизированный
+		else//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$session_id = $this->session->userdata('session_id');
 		}
 
-		if( $this->account_mdl->cart_check_del($id, $this->user_id, $session_id) )//Если существует товар у пользователя в корзине
+		if( $this->account_mdl->cart_check_del($id, $this->user_id, $session_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			return TRUE;	
+			return TRUE;
 		}
-			return FALSE;	
+		return FALSE;
 	}
 
-/*
-|---------------------------------------------------------------
-| Оплата товаров
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
-/*
-|---------------------------------------------------------------
-| Контрольная сумма
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function total_amount($designs = '')
 	{
 		$total_amount = 0;
 
-		foreach($designs as $row): 
+		foreach($designs as $row):
 
-			if( $row['kind'] == 1 ):
+		if( $row['kind'] == 1 ):
 
-				$total_amount = $total_amount + $row['price_1'];
+		$total_amount = $total_amount + $row['price_1'];
 
-			else:
+		else:
 
-				$total_amount = $total_amount + $row['price_2'];
+		$total_amount = $total_amount + $row['price_2'];
 
-			endif;
+		endif;
 
 		endforeach;
 
 		return $total_amount;
 	}
-/*
-|---------------------------------------------------------------
-| Очистка корзины, от купленных товаров у пользователя
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function cart_clear($designs, $user_id)
 	{
-		foreach($designs as $row): 
-			$design_id[] = $row['id'];
+		foreach($designs as $row):
+		$design_id[] = $row['id'];
 		endforeach;
 
 		$this->db->where_in('design_id', $design_id);
@@ -1207,12 +1207,12 @@ class Account extends Controller
 
 		$this->db->delete('cart');
 	}
-/*
-|---------------------------------------------------------------
-| Форма оплаты
-|---------------------------------------------------------------
-*/
-    function pay()
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function pay()
 	{
 		if( !$this->errors->access() )
 		{
@@ -1225,104 +1225,104 @@ class Account extends Controller
 
 		$total_amount = $this->total_amount($designs);
 
-	    if( empty($designs) )
-	    {
-			show_error('Выберите товары для оплаты');
-	    }
+		if( empty($designs) )
+		{
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
 
-	    if( $total_amount > $this->balance_mdl->get($this->user_id) )
-	    {
-			show_error('На вашем счету недостаточно средств');
-	    }
-/*
-|---------------------------------------------------------------
-| Проверяем каждый дизайн
-|---------------------------------------------------------------
-*/
+		if( $total_amount > $this->balance_mdl->get($this->user_id) )
+		{
+			show_error('пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
+		/*
+		 |---------------------------------------------------------------
+		 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+		 |---------------------------------------------------------------
+		 */
 		foreach($designs as $row):
 
-			if( $row['sales'] > 0 and $row['kind'] == 2 )//Если у дизайна больше одной продажи и пользователь пытается выкупить дизайн
-			{
-				
-				show_error('Дизайн с ID '.$row['id'].' невозможно выкупить');
-			}
+		if( $row['sales'] > 0 and $row['kind'] == 2 )//пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+		{
 
-			if( $row['status'] == 2 )
-			{
-				show_error('Дизайн с ID '.$row['id'].' выкуплен');
-			}
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ ID '.$row['id'].' пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
+
+		if( $row['status'] == 2 )
+		{
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ ID '.$row['id'].' пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
 
 		endforeach;
-/*
-|---------------------------------------------------------------
-| После проверки выполняем изменения, добавляем в покупки, снимаем средства, прибавляем средства владельцу и т д
-|---------------------------------------------------------------
-*/
-		$this->balance_mdl->minus($this->user_id, $total_amount);//Списываем со счёта
+		/*
+		 |---------------------------------------------------------------
+		 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅ пїЅ
+		 |---------------------------------------------------------------
+		 */
+		$this->balance_mdl->minus($this->user_id, $total_amount);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-		foreach($designs as $row): 
+		foreach($designs as $row):
 
-			$data = array (
+		$data = array (
 				'user_id' => $this->user_id,
 				'design_id' => $row['id'],
 				'date' => now(),
 				'kind' => $row['kind']
-			);
+		);
 
-			$this->account_mdl->add('purchased', $data);//Добавляем в купленные
-
-
-
-			$this->designs_mdl->update_sales($row['id']);//Увеличиваем число покупок
-
-			if( $row['kind'] == '1' )
-			{
-				$price = $row['price_1'];//ПОкупка
-			}
-			else//Если дизайн выкуплен переводим статус на выкуплен - 2
-			{
-				$price = $row['price_2'];//Выкуп
-
-				$this->designs_mdl->enter($row['id']);//Переводим в выкуплен
-			}
-
-			$this->balance_mdl->plus($row['user_id'], $price);//Прибавляем владельцу баланс
-
-			$this->events->create($row['user_id'], 'Ваш дизайн "'.$row['title'].'" был куплен');//Добавляем событие
+		$this->account_mdl->add('purchased', $data);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
-/*
-|---------------------------------------------------------------
-| Продавец
-|---------------------------------------------------------------
-*/
-			$this->events->create($row['user_id'], 'Продажа дизайна', 'sell_design');#Событие с репутацией
 
-			$this->transaction->create($row['user_id'], 'Продажа дизайна', $price);//История продавца
-/*
-|---------------------------------------------------------------
-| Покупатель
-|---------------------------------------------------------------
-*/
-			$this->events->create($this->user_id, 'Покупка дизайна', 'buy_design');#Событие с репутацией
+		$this->designs_mdl->update_sales($row['id']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			$this->transaction->create($this->user_id, 'Покупка дизайна', $price);//История покупателя
+		if( $row['kind'] == '1' )
+		{
+			$price = $row['price_1'];//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		}
+		else//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - 2
+		{
+			$price = $row['price_2'];//пїЅпїЅпїЅпїЅпїЅ
+
+			$this->designs_mdl->enter($row['id']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		}
+
+		$this->balance_mdl->plus($row['user_id'], $price);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+
+		$this->events->create($row['user_id'], 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "'.$row['title'].'" пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+
+		/*
+		 |---------------------------------------------------------------
+		 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		 |---------------------------------------------------------------
+		 */
+		$this->events->create($row['user_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'sell_design');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+		$this->transaction->create($row['user_id'], 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', $price);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		/*
+		|---------------------------------------------------------------
+		| пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		|---------------------------------------------------------------
+		*/
+		$this->events->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'buy_design');#пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+		$this->transaction->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ', $price);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 		endforeach;
 
-		$this->cart_clear($designs, $this->user_id);//Удаляем купленные товары из корзины
-		
-		//Также нужно удалить выкупленные товары из корзины всех пользователей
+		$this->cart_clear($designs, $this->user_id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		show_error('Все товары оплачены.');
+		//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+		show_error('пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 	}
-/*
-|---------------------------------------------------------------
-| Купить
-|---------------------------------------------------------------
-*/
-    function buy($id = '')
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function buy($id = '')
 	{
 		if( !$this->errors->access() )
 		{
@@ -1334,66 +1334,66 @@ class Account extends Controller
 			show_404('page');
 		}
 
-		if( $design['status'] != 1 )//Если статус дизайна отличный от открыт, может быть он уже выкуплен и т д 
+		if( $design['status'] != 1 )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅ пїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'design_id', 
-				'label' => 'ID дизайна',
+				'label' => 'ID пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|callback__check_buy'
-			),
-			array (
+				),
+				array (
 				'field' => 'kind', 
-				'label' => 'Вид',
+				'label' => 'пїЅпїЅпїЅ',
 				'rules' => 'required'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'user_id' => $this->user_id,
 			'design_id' => $id,
 			'date' => now(),
-			'kind' => $this->input->post('kind')//1 - куплен, 2 - выкуплен, затем расчитываеться как 1 - цена покупки 2 - цена выкупа
-		);
+			'kind' => $this->input->post('kind')//1 - пїЅпїЅпїЅпїЅпїЅпїЅ, 2 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 1 - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 - пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->account_mdl->add('purchased', $data);
+				if( $this->form_validation->run() )
+				{
+					$this->account_mdl->add('purchased', $data);
 
-			if( $this->input->post('kind') == '1' )//Цена которую будем списывать с нашего баланса
-			{
-				$price = $design['price_1'];
-			}
-			else//Если дизайн выкуплен переводим статус на выкуплен - 2
-			{
-				$price = $design['price_2'];
+					if( $this->input->post('kind') == '1' )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					{
+						$price = $design['price_1'];
+					}
+					else//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - 2
+					{
+						$price = $design['price_2'];
 
-				$this->designs_mdl->enter($id);//Переводим в выкуплен
-			}
+						$this->designs_mdl->enter($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+					}
 
-			$this->designs_mdl->update_sales($id);//Увеличиваем число покупок
+					$this->designs_mdl->update_sales($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			$this->balance_mdl->minus($data['user_id'], $price);//Списываем со счёта
+					$this->balance_mdl->minus($data['user_id'], $price);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-			$this->events->create($design['user_id'], 'Ваш дизайн "'.$design['title'].'" был куплен');//Добавляем событие
+					$this->events->create($design['user_id'], 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "'.$design['title'].'" пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			redirect('account/purchased');
-		}
+					redirect('account/purchased');
+				}
 
-		$data = $design;
+				$data = $design;
 
-		$this->template->build('account/buy', $data, $title = 'Купить');
+				$this->template->build('account/buy', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-	function _check_buy($id)//Нельзя покупать свой дизайн или уже купленный, проверяем наличие средств
+	function _check_buy($id)//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		$design = $this->designs_mdl->get_edit($id);//Выводим все данные о дизайне
+		$design = $this->designs_mdl->get_edit($id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$kind = $this->input->post('kind');
 
@@ -1408,29 +1408,29 @@ class Account extends Controller
 
 		if( $this->account_mdl->buy_check($design['id'], $this->user_id) )
 		{
-	        $this->form_validation->set_message('_check_buy', 'Данный дизайн уже куплен вами');
-			return FALSE;	
+			$this->form_validation->set_message('_check_buy', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ');
+			return FALSE;
 		}
-	
-	    if( $design['user_id'] == $this->user_id )
-	    {
-	        $this->form_validation->set_message('_check_buy', 'Дизайн принадлежит вам');
-	        return FALSE;
-	    }
 
-	    if( $price > $this->balance_mdl->get($this->user_id) )
-	    {
-	        $this->form_validation->set_message('_check_buy', 'На вашем счету недостаточно средств');
-	        return FALSE;
-	    }
+		if( $design['user_id'] == $this->user_id )
+		{
+			$this->form_validation->set_message('_check_buy', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ');
+			return FALSE;
+		}
+
+		if( $price > $this->balance_mdl->get($this->user_id) )
+		{
+			$this->form_validation->set_message('_check_buy', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
 		return TRUE;
 	}
-/*
-|---------------------------------------------------------------
-| Купленные
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function purchased($start_page = 0)
 	{
 		if( !$this->errors->access() )
@@ -1459,27 +1459,27 @@ class Account extends Controller
 
 		$data['data'] = $this->account_mdl->get_purchased($start_page, $per_page, $this->user_id);
 
-		$this->template->build('account/purchased', $data, $title = 'Купленные');
+		$this->template->build('account/purchased', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 	function _check_purchased($design_id)
 	{
-		if( $this->account_mdl->purchased_check($design_id, $this->user_id) )//Если существует товар у пользователя в покупках
+		if( $this->account_mdl->purchased_check($design_id, $this->user_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			return TRUE;	
+			return TRUE;
 		}
-			return FALSE;	
+		return FALSE;
 	}
 
 	function create_download($design_id)
 	{
-//Проверяем куплен ли дизайн нами, если да то создаём защищённую загрузку
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( !$this->_check_purchased($design_id) )//Если дизайн не был куплен
+		if( !$this->_check_purchased($design_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
-		
+
 		$file = $this->account_mdl->get_file($design_id);
 
 		$code = md5(time());
@@ -1494,14 +1494,14 @@ class Account extends Controller
 		);
 
 		$this->account_mdl->add('downloads', $data);
-		
-		$this->template->build('account/create_download', $data, $title = 'Купленные');
+
+		$this->template->build('account/create_download', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Созданные загрузки
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function downloads($start_page = 0)
 	{
 		if( !$this->errors->access() )
@@ -1529,136 +1529,136 @@ class Account extends Controller
 
 		$data['data'] = $this->account_mdl->get_downloads($start_page, $per_page, $this->user_id);
 
-		$this->template->build('account/downloads', $data, $title = 'Загрузки');
+		$this->template->build('account/downloads', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Закачка файла с защитой, папка с файлами files/downloads/ защищена http
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ files/downloads/ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ http
+	 |---------------------------------------------------------------
+	 */
 	function download($code)
 	{
-//Выбираем файл по коду, если нет выдаём ошибку
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !$data = $this->account_mdl->get_download($code) )
 		{
 			show_404('page');
 		}
 
-//После сверяем ip если ip другой то выдаём ошибку
+		//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ip пїЅпїЅпїЅпїЅ ip пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		if( $data['ip'] != $this->input->ip_address()  )
 		{
-			show_error('Ip не действителен.');
+			show_error('Ip пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
-		
-//Затем проверяем, действительна ли ссылка по времени, если нет удаляем это поле с файлом
 
-		$date = now() - $data['date'];//От текущей даты отнимаем дату создания загрузки, получаем время прошедшее с момента создания загрузки
+		//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if(  $date > $this->config->item('download_period') )//Если время прошедшее с момента создания файла больше чем заданное время продолжительности ссылки то выдаём ошибку и УДАЛЯЕМ ЗАГРУЗКУ
+		$date = now() - $data['date'];//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+		if(  $date > $this->config->item('download_period') )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->account_mdl->del('downloads', $data['id']);
 
-			show_error('Период загрузки истёк, загрузка будет удалена.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 
-/*
-|---------------------------------------------------------------
-| Загрузка
-|---------------------------------------------------------------
-*/
+		/*
+		 |---------------------------------------------------------------
+		 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		 |---------------------------------------------------------------
+		 */
 
-	$file = 'files/download/'.$data['file'].'';//Настояший путь к файлу
-	
-	$type = explode('.', $file);
-	
-	$type = $type[1];
-	
-	$fname = md5(time()).'.'.$type;//Случайное название файла
+		$file = 'files/download/'.$data['file'].'';//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-	$fsize = filesize($file);
-	
-	$fdown = $file;//Закачка
+		$type = explode('.', $file);
 
-/*
-Мы только что "на лету" сгенерировали файл, которого физически на сервере не существует. Таким образом мы можем генерировать "виртуальные" файлы и отдавать их пользователю.
-*/
+		$type = $type[1];
 
-// Установлена или нет переменная HTTP_RANGE
-if( getenv('HTTP_RANGE') == '' )
-{// Читать и отдавать файл от самого начала
-	$f = fopen($fdown, 'r');
+		$fname = md5(time()).'.'.$type;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-	header("HTTP/1.1 200 OK");
-	header("Connection: close");
-	header("Content-Type: application/octet-stream");
-	header("Accept-Ranges: bytes");
-	header("Content-Disposition: Attachment; filename=".$fname);
-	header("Content-Length: ".$fsize); 
+		$fsize = filesize($file);
 
-	while(!feof($f))
-	{
+		$fdown = $file;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( connection_aborted() )
-		{
+		/*
+		 пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ "пїЅпїЅ пїЅпїЅпїЅпїЅ" пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+		 */
+
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ HTTP_RANGE
+		if( getenv('HTTP_RANGE') == '' )
+		{// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+			$f = fopen($fdown, 'r');
+
+			header("HTTP/1.1 200 OK");
+			header("Connection: close");
+			header("Content-Type: application/octet-stream");
+			header("Accept-Ranges: bytes");
+			header("Content-Disposition: Attachment; filename=".$fname);
+			header("Content-Length: ".$fsize);
+
+			while(!feof($f))
+			{
+
+				if( connection_aborted() )
+				{
+					fclose($f);
+
+					break;
+				}
+
+				echo fread($f, 10000);
+
+				sleep(1);
+			}
+
+			fclose($f);
+		}
+		else
+		{// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ HTTP_RANGE
+
+			preg_match ("/bytes=(\d+)-/", getenv('HTTP_RANGE'), $m);
+
+			$csize = $fsize - $m[1];  // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+			$p1 = $fsize - $csize;    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+
+			$p2 = $fsize - 1;         // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+			$f = fopen($fdown, 'r');
+			fseek ($f, $p1);
+
+			header("HTTP/1.1 206 Partial Content");
+			header("Connection: close");
+			header("Content-Type: application/octet-stream");
+			header("Accept-Ranges: bytes");
+			header("Content-Disposition: Attachment; filename=".$fname);
+			header("Content-Range: bytes ".$p1."-".$p2."/".$fsize);
+			header("Content-Length: ".$csize);
+
+			while (!feof($f))
+			{
+				if( connection_aborted() )
+				{
+					fclose($f);
+
+					break;
+				}
+
+				echo fread($f, 10000);
+
+				sleep(1);
+			}
+
 			fclose($f);
 
-			break;
 		}
-
-		echo fread($f, 10000);
-
-		sleep(1);
 	}
-
-	fclose($f);
-}
-else
-{// Получить значение переменной HTTP_RANGE
-
-	preg_match ("/bytes=(\d+)-/", getenv('HTTP_RANGE'), $m);
-
-	$csize = $fsize - $m[1];  // Размер фрагмента
-
-	$p1 = $fsize - $csize;    // Позиция, с которой начинать чтение файла
-
-	$p2 = $fsize - 1;         // Конец фрагмента
-
-	// Установить позицию чтения в файле
-	$f = fopen($fdown, 'r');
-	fseek ($f, $p1);
-
-	header("HTTP/1.1 206 Partial Content");
-	header("Connection: close");
-	header("Content-Type: application/octet-stream");
-	header("Accept-Ranges: bytes");
-	header("Content-Disposition: Attachment; filename=".$fname);
-	header("Content-Range: bytes ".$p1."-".$p2."/".$fsize);
-	header("Content-Length: ".$csize);
-
-	while (!feof($f))
-	{
-		if( connection_aborted() )
-		{
-			fclose($f);
-
-			break;
-		}
-
-		echo fread($f, 10000);
-
-		sleep(1);
-	}
-
-	fclose($f);
-
-	}
-}
-/*
-|---------------------------------------------------------------
-| Отправка купленного файла на email
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ email
+	 |---------------------------------------------------------------
+	 */
 	function to_email($design_id)
 	{
 		if( !$this->errors->access() )
@@ -1666,7 +1666,7 @@ else
 			return;
 		}
 
-		if( $this->_check_purchased($design_id) )//Если данный дизайн был куплен
+		if( $this->_check_purchased($design_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$email = $this->users_mdl->get_email($this->user_id);
 
@@ -1674,20 +1674,20 @@ else
 
 			$file = 'files/download/'.$file;
 
-			$this->common->email($email, $subject = 'Вам прислан файл', '', $file);
-			
-			show_error('Купленный дизайн был отправлен вам на почту.');
+			$this->common->email($email, $subject = 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ', '', $file);
+				
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.');
 		}
 		else
 		{
 			redirect('account/purchased');
 		}
 	}
-/*
-|---------------------------------------------------------------
-| События
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function events($start_page = 0)
 	{
 		$this->load->model('events/events_mdl');
@@ -1738,7 +1738,7 @@ else
 
 		$data['page_links'] = $this->pagination->create_links();
 
-		if( !empty($url) ) 
+		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
 			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);
@@ -1747,28 +1747,28 @@ else
 		$data['data'] = $this->events_mdl->get_all($start_page, $per_page, $this->user_id, $status);
 
 
-		$this->template->build('account/events', $data, $title = 'События');
+		$this->template->build('account/events', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 	function update_event()
 	{
 		$id = $this->input->post('id');
 
-	    if( empty($id) )
-	    {
+		if( empty($id) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$this->load->model('events/events_mdl');
 
 		$this->events_mdl->update($id);
 	}
-/*
-|---------------------------------------------------------------
-| История операция
-|---------------------------------------------------------------
-*/
-    function transaction() 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function transaction()
 	{
 		if( !$this->errors->access() )
 		{
@@ -1779,14 +1779,14 @@ else
 
 		$data['data'] = $this->account_mdl->get_transaction($this->user_id);
 
-		$this->template->build('account/transaction', $data, $title = 'История операций');
+		$this->template->build('account/transaction', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Кошельки
-|---------------------------------------------------------------
-*/
-    function purses() 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function purses()
 	{
 		if( !$this->errors->access() )
 		{
@@ -1797,49 +1797,49 @@ else
 
 		$data['data'] = $this->account_mdl->get_purses($this->user_id);
 
-		$this->template->build('account/purses', $data, $title = 'Кошельки');
+		$this->template->build('account/purses', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-    function purses_add()
+	function purses_add()
 	{
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'purse', 
-				'label' => 'Кошелек',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|wmr|max_length[13]'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'user_id' => $this->user_id,
 			'date' => now(),
 			'last_operation' => now(),
 			'purse' => $this->input->post('purse')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->account_mdl->add('purses', $data);
-			
-			redirect('account/purses');
-		}
+				if( $this->form_validation->run() )
+				{
+					$this->account_mdl->add('purses', $data);
+						
+					redirect('account/purses');
+				}
 
-		$this->template->build('account/purses_add', $data, $title = 'Добавить кошелек');
+				$this->template->build('account/purses_add', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-	function purses_del($id = '')//Удаление кошелька
+	function purses_del($id = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		if( !$this->_check_purses($id) )//Если не существует кошелька у пользователя
+		if( !$this->_check_purses($id) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->account_mdl->del('purses', $id);
@@ -1847,89 +1847,89 @@ else
 		redirect('account/purses');
 	}
 
-	function _check_purses($id = '')//Проверка
+	function _check_purses($id = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		if( $this->account_mdl->purse_check($id, $this->user_id) )//Если существует кошелёк у пользователя
+		if( $this->account_mdl->purse_check($id, $this->user_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			return TRUE;	
+			return TRUE;
 		}
-			return FALSE;	
+		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| Заявки на вывод
-|---------------------------------------------------------------
-*/
-    function withdraw($start_page = 0)
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function withdraw($start_page = 0)
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'purse', 
-				'label' => 'Кошелек Z',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Z',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'amount', 
-				'label' => 'Сумма',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|numeric|max_length[6]|callback__check_amount'
-			),
-		);
+				),
+				);
 
-		$data = array (
+				$data = array (
 			'user_id' => $this->user_id,
 			'date' => now(),
 			'purse' => $this->input->post('purse'),
 			'amount' => $this->input->post('amount'),
 			'status' => 1
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->account_mdl->add('balance_applications', $data);
+				if( $this->form_validation->run() )
+				{
+					$this->account_mdl->add('balance_applications', $data);
 
-			$this->balance_mdl->minus($data['user_id'], $data['amount']);//Списываем со счёта
-			
-			redirect('account/withdraw');
-		}
+					$this->balance_mdl->minus($data['user_id'], $data['amount']);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+						
+					redirect('account/withdraw');
+				}
 
 
-		$per_page = 10;
+				$per_page = 10;
 
-		$start_page = intval($start_page);
-		if( $start_page < 0 )
-		{
-			$start_page = 0;
-		}
+				$start_page = intval($start_page);
+				if( $start_page < 0 )
+				{
+					$start_page = 0;
+				}
 
-		$config['base_url'] = base_url().'/account/withdraw';
-		$config['total_rows'] = $this->account_mdl->count_applications($this->user_id);
-		$config['per_page'] = $per_page;
+				$config['base_url'] = base_url().'/account/withdraw';
+				$config['total_rows'] = $this->account_mdl->count_applications($this->user_id);
+				$config['per_page'] = $per_page;
 
-		$this->pagination->initialize($config);
+				$this->pagination->initialize($config);
 
-		$data['page_links'] = $this->pagination->create_links();
+				$data['page_links'] = $this->pagination->create_links();
 
-		$data['data'] = $this->account_mdl->get_applications($start_page, $per_page, $this->user_id);
+				$data['data'] = $this->account_mdl->get_applications($start_page, $per_page, $this->user_id);
 
-		$data['purses'] = $this->account_mdl->get_purses($this->user_id);
+				$data['purses'] = $this->account_mdl->get_purses($this->user_id);
 
-		$data['commission'] = $this->tariff->value($this->user_tariff, 'commission');//Комиссия - будет по тарифу
+				$data['commission'] = $this->tariff->value($this->user_tariff, 'commission');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$this->template->build('account/withdraw', $data, $title = 'Вывод средств');
+				$this->template->build('account/withdraw', $data, $title = 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Заявки на вывод/Отмена операции
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function withdraw_del($id = '')
 	{
 		if( !$this->errors->access() )
@@ -1937,9 +1937,9 @@ else
 			return;
 		}
 
-		if( !$this->_check_withdraw($id) )//Если не существует вывода у пользователя
+		if( !$this->_check_withdraw($id) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->account_mdl->cancel_applications($id, $this->user_id);
@@ -1947,38 +1947,38 @@ else
 		redirect('account/withdraw');
 	}
 
-	function _check_withdraw($id = '')//Проверка на удаление заявки
+	function _check_withdraw($id = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		if( $this->account_mdl->withdraw_check($id, $this->user_id) )//Если заявка на вывод принадлежит пользователю
+		if( $this->account_mdl->withdraw_check($id, $this->user_id) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
-			return TRUE;	
+			return TRUE;
 		}
 
-		return FALSE;	
+		return FALSE;
 	}
 
-	function _check_amount($amount)//Проверка для вывода
+	function _check_amount($amount)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    if( $amount < $this->tariff->value($this->user_tariff, 'minimum_w_a') )
-	    {
-	        $this->form_validation->set_message('_check_amount', 'Минимальная сумма вывода '.$this->tariff->value($this->user_tariff, 'minimum_w_a').' рублей');
-	        return FALSE;
-	    }
+		if( $amount < $this->tariff->value($this->user_tariff, 'minimum_w_a') )
+		{
+			$this->form_validation->set_message('_check_amount', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ '.$this->tariff->value($this->user_tariff, 'minimum_w_a').' пїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
-	    if( $amount > $this->balance_mdl->get($this->user_id) )
-	    {
-	        $this->form_validation->set_message('_check_amount', 'На вашем счету недостаточно средств');
-	        return FALSE;
-	    }
+		if( $amount > $this->balance_mdl->get($this->user_id) )
+		{
+			$this->form_validation->set_message('_check_amount', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 
-		return TRUE;	
+		return TRUE;
 	}
-/*
-|---------------------------------------------------------------
-| Мерчант webmoney
-|---------------------------------------------------------------
-*/
-    function balance_w() 
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ webmoney
+	 |---------------------------------------------------------------
+	 */
+	function balance_w()
 	{
 		if( !$this->errors->access() )
 		{
@@ -1989,10 +1989,10 @@ else
 
 		$data['purse'] = 'R344515119665';
 
-		$this->template->build('account/balance', $data, $title = 'Пополнение баланса');
+		$this->template->build('account/balance', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-    function result() 
+	function result()
 	{
 		$LMI_PREREQUEST = $this->input->post('LMI_PREREQUEST');
 		$LMI_PAYMENT_AMOUNT = $this->input->post('LMI_PAYMENT_AMOUNT');
@@ -2006,25 +2006,25 @@ else
 
 			if( $LMI_PAYEE_PURSE != $purse )
 			{
-    			$err = 1;
-    			echo "ERR: Вы не авторизированы на сайте";
-    			exit;
+				$err = 1;
+				echo "ERR: пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ";
+				exit;
 			}
 
 			if( !$err ) echo "YES";
 		}
 		else
-		{	
+		{
 			$this->balance_mdl->plus($user_id, $LMI_PAYMENT_AMOUNT);
 
-			$this->transaction->create($this->user_id, 'Пополнение счета', $LMI_PAYMENT_AMOUNT);
+			$this->transaction->create($this->user_id, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', $LMI_PAYMENT_AMOUNT);
 		}
 	}
-/*
-|---------------------------------------------------------------
-| Указатели
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function ad($id = '')
 	{
 		parse_str($_SERVER['QUERY_STRING'],$_GET);
@@ -2037,19 +2037,19 @@ else
 
 			if( $ad = $this->account_mdl->get_ad($ad) )
 			{
-				$data['code'] = '<a href="'.base_url().'user/'.$this->username.'" target="_blank" title="'.$this->config->item('title').'"><img src="'.base_url().''.$ad['img'].'" border="0" alt="'.$this->username.' на '.$this->config->item('site').'"></a>';
+				$data['code'] = '<a href="'.base_url().'user/'.$this->username.'" target="_blank" title="'.$this->config->item('title').'"><img src="'.base_url().''.$ad['img'].'" border="0" alt="'.$this->username.' пїЅпїЅ '.$this->config->item('site').'"></a>';
 			}
 		}
 
 		$data['ads'] = $this->account_mdl->get_ads();
 
-		$this->template->build('account/ad', $data, $title = 'Указатели');
+		$this->template->build('account/ad', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Блоги
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function blogs($start_page = 0)
 	{
 		if( !$this->errors->access() )
@@ -2080,13 +2080,13 @@ else
 
 		$data['data'] = $this->blogs_mdl->get_all($start_page, $per_page, $input);
 
-		$this->template->build('account/blogs', $data, $title = 'Список записей');
+		$this->template->build('account/blogs', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Дизайны
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function designs($start_page = 0)
 	{
 		if( !$this->errors->access() )
@@ -2140,7 +2140,7 @@ else
 
 		$data['page_links'] = $this->pagination->create_links();
 
-		if( !empty($url) ) 
+		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
 			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);
@@ -2149,31 +2149,31 @@ else
 		$data['data'] = $this->designs_mdl->get_designs($start_page, $per_page, $input);
 
 
-		$this->template->build('account/designs', $data, $title = 'Список дизайнов');
+		$this->template->build('account/designs', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Главная
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function index()
 	{
 		if( $this->users_mdl->logged_in() )
 		{
-			$template = 'index'; 
+			$template = 'index';
 		}
 		else
-		{			
-			$template = 'index_no_auth'; 
+		{
+			$template = 'index_no_auth';
 		}
 
-		$this->template->build('account/'.$template.'', $data = '', $title = 'Мой кабинет');
+		$this->template->build('account/'.$template.'', $data = '', $title = 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Настройки
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function settings()
 	{
 		if( !$this->errors->access() )
@@ -2181,11 +2181,11 @@ else
 			return;
 		}
 
-		$mailer = $this->input->post('mailer');//чекбокс
-		$notice = $this->input->post('notice');//чекбокс
-		$hint = $this->input->post('hint');//чекбокс
-		$adult = $this->input->post('adult');//чекбокс
-		$submit = $this->input->post('submit');//кнопка
+		$mailer = $this->input->post('mailer');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		$notice = $this->input->post('notice');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		$hint = $this->input->post('hint');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		$adult = $this->input->post('adult');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		$submit = $this->input->post('submit');//пїЅпїЅпїЅпїЅпїЅпїЅ
 
 		if( $submit )
 		{
@@ -2203,17 +2203,17 @@ else
 
 		$age = date('Y') - $profile['year'];
 
-		$data = $this->users_mdl->get_settings($this->user_id);//Получаем настройки для отображения
+		$data = $this->users_mdl->get_settings($this->user_id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$data['age'] = $age;
 
-		$this->template->build('account/settings', $data, $title = 'Настройки');
+		$this->template->build('account/settings', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Профиль
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function profile()
 	{
 		if( !$this->errors->access() )
@@ -2221,66 +2221,66 @@ else
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'surname', 
-				'label' => 'Фамилия',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|cyrillic|max_length[24]'
-			),
-			array (
+				),
+				array (
 				'field' => 'name', 
-				'label' => 'Имя',
+				'label' => 'пїЅпїЅпїЅ',
 				'rules' => 'required|cyrillic|max_length[24]'
-			),
-			array (
+				),
+				array (
 				'field' => 'sex', 
-				'label' => 'Пол',
+				'label' => 'пїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'dob_day', 
-				'label' => 'День рождения',
+				'label' => 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'dob_month', 
-				'label' => 'Месяц рождения',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'dob_year', 
-				'label' => 'Год рождения',
+				'label' => 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'country_id', 
-				'label' => 'Страна',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'city_id', 
-				'label' => 'Город',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			),
-			array (
+				),
+				array (
 				'field' => 'website', 
-				'label' => 'Web-сайт',
+				'label' => 'Web-пїЅпїЅпїЅпїЅ',
 				'rules' => 'max_length[64]'
-			),
-			array (
+				),
+				array (
 				'field' => 'short_descr', 
-				'label' => 'Краткое описание',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'max_length[255]'
-			),
-			array (
+				),
+				array (
 				'field' => 'full_descr', 
-				'label' => 'Резюме',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'max_length[10000]'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'surname' => ucwords(strtolower($this->input->post('surname'))),
 			'name' => ucwords(strtolower($this->input->post('name'))),
 			'sex' => $this->input->post('sex'),
@@ -2292,26 +2292,26 @@ else
 			'website' => prep_url($this->input->post('website')),
 			'short_descr' => htmlspecialchars($this->input->post('short_descr')),
 			'full_descr' => htmlspecialchars($this->input->post('full_descr'))
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() )
-		{
-			$this->users_mdl->edit($this->user_id, $data);
-		}
+				if( $this->form_validation->run() )
+				{
+					$this->users_mdl->edit($this->user_id, $data);
+				}
 
-		$data = $this->users_mdl->profile();
+				$data = $this->users_mdl->profile();
 
-		$data['created'] = date_smart($data['created']);
+				$data['created'] = date_smart($data['created']);
 
-		$this->template->build('account/profile', $data, $title = 'Настройки профиля');
+				$this->template->build('account/profile', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Пароль
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function password()
 	{
 		if( !$this->errors->access() )
@@ -2319,54 +2319,54 @@ else
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'old_password', 
-				'label' => 'Старый пароль',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|callback__password_check'
-			),
-			array (
+				),
+				array (
 				'field' => 'password1', 
-				'label' => 'Новый пароль',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|min_length[6]|max_length[24]|matches[password2]'
-			),
-			array (
+				),
+				array (
 				'field' => 'password2', 
-				'label' => 'Повтор пароля',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required'
-			)
-		);
+				)
+				);
 
-		$password = $this->input->post('password1');
+				$password = $this->input->post('password1');
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() )
-		{
-			$this->users_mdl->change_password($this->user_id, $password);
-		}
+				if( $this->form_validation->run() )
+				{
+					$this->users_mdl->change_password($this->user_id, $password);
+				}
 
-		$this->template->build('account/password', $data = '', $title = 'Пароль | Настройки профиля');
+				$this->template->build('account/password', $data = '', $title = 'пїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
 	function _password_check($password)
 	{
-	    if( $this->users_mdl->password_check($this->user_id, $password) )
-	    {
-	        return TRUE;
-	    }
-	    else
-	    {
-	        $this->form_validation->set_message('_password_check', 'Действующий пароль введён неверно');
-	        return FALSE;
-	    }
+		if( $this->users_mdl->password_check($this->user_id, $password) )
+		{
+			return TRUE;
+		}
+		else
+		{
+			$this->form_validation->set_message('_password_check', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+			return FALSE;
+		}
 	}
-/*
-|---------------------------------------------------------------
-| Услуги
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function services()
 	{
 		if( !$this->errors->access() )
@@ -2374,37 +2374,37 @@ else
 			return;
 		}
 
-		$services = $this->input->post('category');//Выбранные услуги
+		$services = $this->input->post('category');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$submit = $this->input->post('submit');//Кнопка
+		$submit = $this->input->post('submit');//пїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 		if( $submit )
 		{
-			$this->account_mdl->del_services($this->user_id);//Удаляем старые рубрики
+			$this->account_mdl->del_services($this->user_id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			if( $services )
 			{
-				//Создаём массив и заносим
+				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				foreach($services as $row => $value):
 
-					$array = array (
+				$array = array (
 						'user_id' => $this->user_id,
 						'category' => $value,
-					);
+				);
 
-					$this->account_mdl->add_services($array);
+				$this->account_mdl->add_services($array);
 
 				endforeach;
 			}
 
 		}
 
-		$this->load->model('categories/categories_mdl');//Для каталога
+		$this->load->model('categories/categories_mdl');//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['categories'] = $this->categories_mdl->get_categories();//Все услуги
+		$data['categories'] = $this->categories_mdl->get_categories();//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-		$data['services'] = $this->account_mdl->get_services($this->user_id);//Услуги пользователя
+		$data['services'] = $this->account_mdl->get_services($this->user_id);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 		if( $data['services'] )
@@ -2412,19 +2412,19 @@ else
 			$select = $data['services'];
 
 			foreach($select as $row => $value):
-				$select[$row] = $value['category'];
+			$select[$row] = $value['category'];
 			endforeach;
 
 			$data['select'] = $select;
 		}
 
-		$this->template->build('account/services', $data, $title = 'Услуги | Настройки профиля');
+		$this->template->build('account/services', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Дополнительные данные/Редактирование
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function additional_data()
 	{
 		if( !$this->errors->access() )
@@ -2432,41 +2432,41 @@ else
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'price_1', 
-				'label' => 'Цена за час работы',
+				'label' => 'пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric|max_length[12]'
-			),
-			array (
+				),
+				array (
 				'field' => 'price_2', 
-				'label' => 'Цена за месяц вашей работы',
+				'label' => 'пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'numeric|max_length[12]'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'price_1' => $this->input->post('price_1'),
 			'price_2' => $this->input->post('price_2')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() )
-		{
-			$this->account_mdl->edit_profile($this->user_id, $data);
-		}
+				if( $this->form_validation->run() )
+				{
+					$this->account_mdl->edit_profile($this->user_id, $data);
+				}
 
-		$data = $this->account_mdl->get_profile($this->user_id);
+				$data = $this->account_mdl->get_profile($this->user_id);
 
-		$this->template->build('account/additional', $data, $title = 'Дополнительные данные | Настройки профиля');
+				$this->template->build('account/additional', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Контактные данные/Редактирование
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function contact_data()
 	{
 		if( !$this->errors->access() )
@@ -2474,53 +2474,53 @@ else
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'email', 
 				'label' => 'Email',
 				'rules' => 'valid_email|max_length[48]'
-			),
-			array (
+				),
+				array (
 				'field' => 'icq', 
 				'label' => 'ICQ',
 				'rules' => 'trim|numeric|max_length[16]'
-			),
-			array (
+				),
+				array (
 				'field' => 'skype', 
 				'label' => 'Skype',
 				'rules' => 'trim|skype|max_length[16]'
-			),
-			array (
+				),
+				array (
 				'field' => 'telephone', 
-				'label' => 'Телефон',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'trim|telephone|max_length[24]'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'email' => strtolower($this->input->post('email')),
 			'icq' => $this->input->post('icq'),
 			'skype' => $this->input->post('skype'),
 			'telephone' => $this->input->post('telephone')
-		);
+				);
 
-		$this->form_validation->set_rules($rules);
+				$this->form_validation->set_rules($rules);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->users_mdl->edit($this->user_id, $data);
-		}
+				if( $this->form_validation->run() )
+				{
+					$this->users_mdl->edit($this->user_id, $data);
+				}
 
-		$data = $this->users_mdl->profile();
+				$data = $this->users_mdl->profile();
 
-		$this->template->build('account/contact', $data, $title = 'Контактные данные | Настройки профиля');
+				$this->template->build('account/contact', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Портфолио
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function images_add()
 	{
 		if( !$this->errors->access() )
@@ -2531,65 +2531,65 @@ else
 		$this->load->library('upload');
 		$this->load->library('Image_lib');
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'title', 
-				'label' => 'Заголовок',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|text|max_length[64]'
-			),
-			array (
+				),
+				array (
 				'field' => 'text', 
-				'label' => 'Краткое описание',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[255]'
-			)
-		);
+				)
+				);
 
-		if( isset($_FILES['userfile']['tmp_name']) ) 
-		{
-			$config['encrypt_name']  = TRUE;
-			$config['upload_path'] = './files/portfolio/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '1000';
-			$config['max_width']  = '1600';
-			$config['max_height']  = '1200';
-
-
-			$this->upload->initialize($config); unset($config);
-	
-			if( $this->upload->do_upload() )
-			{
-
-				$data = $this->upload->data();
-
-    			$path  = './files/portfolio/'.$data['file_name'].'';
-
-    			$config['source_image'] = $path;
-    			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 120;
-   				$config['height'] = 120;
-				$config['new_image'] = './files/portfolio/'.$data['file_name'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_small';
-
-    			$this->image_lib->initialize($config);
-
-    			$this->image_lib->resize();
-				
-				
-				
-				//Дальше работаем над остальными полями
-				$this->form_validation->set_rules($rules);
-
-				if( $this->form_validation->run() ) 
+				if( isset($_FILES['userfile']['tmp_name']) )
 				{
-	
-					$this->db->select_max('position');
-	
-					$query = $this->db->get('portfolio')->row_array();
+					$config['encrypt_name']  = TRUE;
+					$config['upload_path'] = './files/portfolio/';
+					$config['allowed_types'] = 'gif|jpg|png';
+					$config['max_size']	= '1000';
+					$config['max_width']  = '1600';
+					$config['max_height']  = '1200';
 
-				
-					$data = array (
+
+					$this->upload->initialize($config); unset($config);
+
+					if( $this->upload->do_upload() )
+					{
+
+						$data = $this->upload->data();
+
+						$path  = './files/portfolio/'.$data['file_name'].'';
+
+						$config['source_image'] = $path;
+						$config['maintain_ratio'] = TRUE;
+						$config['width'] = 120;
+						$config['height'] = 120;
+						$config['new_image'] = './files/portfolio/'.$data['file_name'].'';
+						$config['create_thumb'] = TRUE;
+						$config['thumb_marker'] = '_small';
+
+						$this->image_lib->initialize($config);
+
+						$this->image_lib->resize();
+
+
+
+						//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+						$this->form_validation->set_rules($rules);
+
+						if( $this->form_validation->run() )
+						{
+
+							$this->db->select_max('position');
+
+							$query = $this->db->get('portfolio')->row_array();
+
+
+							$data = array (
 						'user_id' => $this->user_id,
 						'position' => $query['position'] + 1,
 						'date' => now(),
@@ -2597,33 +2597,33 @@ else
 						'descr' => htmlspecialchars($this->input->post('text')),
 						'small_image' => '/files/portfolio/'.$data['raw_name'].'_small'.$data['file_ext'],
 						'full_image' => '/files/portfolio/'.$data['file_name']
-					);
-	
-					$this->account_mdl->add_porfolio($data);
-					
-					redirect('users/portfolio/'.$this->username);//Перекидываем на страницу вывода изображений
+							);
+
+							$this->account_mdl->add_porfolio($data);
+								
+							redirect('users/portfolio/'.$this->username);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+						}
+
+					}
+					else
+					{
+						$data['error'] = $this->upload->display_errors();
+					}
+
 				}
 
-			}	
-			else
-			{
-				$data['error'] = $this->upload->display_errors();
-			}
+				if( empty($data) )
+				{
+					$data = '';
+				}
 
-		}
-
-		if( empty($data) )
-		{
-			$data = '';
-		}
-
-		$this->template->build('portfolio/add', $data, $title = 'Добавить изображение | Настройки профиля');
+				$this->template->build('portfolio/add', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Портфолио/Редактирование
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function images_edit($id = '')
 	{
 		if( !$this->errors->access() )
@@ -2633,97 +2633,97 @@ else
 
 		if( !$this->_check_porfolio($id) )
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->load->library('upload');
 		$this->load->library('Image_lib');
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'title', 
-				'label' => 'Заголовок',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|text|max_length[64]'
-			),
-			array (
+				),
+				array (
 				'field' => 'text', 
-				'label' => 'Краткое описание',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[255]'
-			)
-		);
+				)
+				);
 
-		if( isset($_FILES['userfile']['tmp_name']) ) 
-		{
-			$config['encrypt_name']  = TRUE;
-			$config['upload_path'] = './files/portfolio/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '1000';
-			$config['max_width']  = '1600';
-			$config['max_height']  = '1200';
-
-
-			$this->upload->initialize($config); unset($config);
-	
-			if( $this->upload->do_upload() )
-			{
-
-				$data = $this->upload->data();
-
-    			$path  = './files/portfolio/'.$data['file_name'].'';
-
-    			$config['source_image'] = $path;
-    			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 120;
-   				$config['height'] = 120;
-				$config['new_image'] = './files/portfolio/'.$data['file_name'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_small';
-
-    			$this->image_lib->initialize($config);
-
-    			$this->image_lib->resize();
-				
-				$small_image = '/files/portfolio/'.$data['raw_name'].'_small'.$data['file_ext'];
-				$full_image = '/files/portfolio/'.$data['file_name'];
-			}
-
-		}
-
-		if( !isset($small_image) or !isset($full_image) )//Если не существует, оставляем прошлые изображения
-		{
-			$data = $this->account_mdl->get_image($id);
-			$small_image = $data['small_image'];
-			$full_image = $data['full_image'];
-		}
+				if( isset($_FILES['userfile']['tmp_name']) )
+				{
+					$config['encrypt_name']  = TRUE;
+					$config['upload_path'] = './files/portfolio/';
+					$config['allowed_types'] = 'gif|jpg|png';
+					$config['max_size']	= '1000';
+					$config['max_width']  = '1600';
+					$config['max_height']  = '1200';
 
 
-		//Дальше работаем над остальными полями
-		$this->form_validation->set_rules($rules);
+					$this->upload->initialize($config); unset($config);
 
-		if( $this->form_validation->run() ) 
-		{
-			$data = array (
+					if( $this->upload->do_upload() )
+					{
+
+						$data = $this->upload->data();
+
+						$path  = './files/portfolio/'.$data['file_name'].'';
+
+						$config['source_image'] = $path;
+						$config['maintain_ratio'] = TRUE;
+						$config['width'] = 120;
+						$config['height'] = 120;
+						$config['new_image'] = './files/portfolio/'.$data['file_name'].'';
+						$config['create_thumb'] = TRUE;
+						$config['thumb_marker'] = '_small';
+
+						$this->image_lib->initialize($config);
+
+						$this->image_lib->resize();
+
+						$small_image = '/files/portfolio/'.$data['raw_name'].'_small'.$data['file_ext'];
+						$full_image = '/files/portfolio/'.$data['file_name'];
+					}
+
+				}
+
+				if( !isset($small_image) or !isset($full_image) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				{
+					$data = $this->account_mdl->get_image($id);
+					$small_image = $data['small_image'];
+					$full_image = $data['full_image'];
+				}
+
+
+				//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+				$this->form_validation->set_rules($rules);
+
+				if( $this->form_validation->run() )
+				{
+					$data = array (
 				'title' => $this->input->post('title'),
 				'descr' => htmlspecialchars($this->input->post('text')),
 				'small_image' => $small_image,
 				'full_image' => $full_image
-			);
-	
-			$this->account_mdl->edit_porfolio($id, $data);
-					
-			redirect('users/portfolio/'.$this->username);//Перекидываем на страницу вывода изображений
-		}
+					);
 
-		$data = $this->account_mdl->get_image($id);
+					$this->account_mdl->edit_porfolio($id, $data);
+						
+					redirect('users/portfolio/'.$this->username);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+				}
 
-		$this->template->build('portfolio/edit', $data, $title = 'Редактировать изображение | Настройки профиля');
+				$data = $this->account_mdl->get_image($id);
+
+				$this->template->build('portfolio/edit', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Портфолио/Удалить изображение
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function images_del($id = '')
 	{
 		if( !$this->errors->access() )
@@ -2733,18 +2733,18 @@ else
 
 		if( !$this->_check_porfolio($id) )
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->account_mdl->del_porfolio($id);
-		
-		redirect('users/images/'.$this->username);//Перекидываем на страницу вывода изображений
+
+		redirect('users/images/'.$this->username);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	}
-/*
-|---------------------------------------------------------------
-| Портфолио/Переместить вверх
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function images_up($id = '')
 	{
 		if( !$this->errors->access() )
@@ -2754,18 +2754,18 @@ else
 
 		if( !$this->_check_porfolio($id) )
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->account_mdl->up_portfolio($id, $this->user_id);
 
-		redirect('users/images/'.$this->username);//Перекидываем на страницу вывода изображений
+		redirect('users/images/'.$this->username);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	}
-/*
-|---------------------------------------------------------------
-| Портфолио/Переместить вниз
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function images_down($id = '')
 	{
 		if( !$this->errors->access() )
@@ -2775,28 +2775,28 @@ else
 
 		if( !$this->_check_porfolio($id) )
 		{
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+			show_error('пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.');
 		}
 
 		$this->account_mdl->down_portfolio($id, $this->user_id);
 
-		redirect('users/images/'.$this->username);//Перекидываем на страницу вывода изображений
+		redirect('users/images/'.$this->username);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	}
 
 	function _check_porfolio($id = '')
 	{
 		if( $this->account_mdl->check_porfolio($id, $this->user_id) )
 		{
-			return TRUE;	
+			return TRUE;
 		}
 
-		return FALSE;	
+		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| Юзерпик
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function userpic()
 	{
 		if( !$this->errors->access() )
@@ -2809,7 +2809,7 @@ else
 
 		$data['userpic'] = $this->userpic;
 
-		if( isset($_FILES['userfile']['tmp_name']) ) 
+		if( isset($_FILES['userfile']['tmp_name']) )
 		{
 			$config['upload_path'] = './userpics/';
 			$config['allowed_types'] = 'gif|jpg|png';
@@ -2823,32 +2823,32 @@ else
 			if( $this->upload->do_upload() )
 			{
 				$data = $this->upload->data();
-	
-				if( $this->userpic != '/userpics/standart.jpg' )//Если изображение не стандартное удаляем
+
+				if( $this->userpic != '/userpics/standart.jpg' )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 				{
 					unlink('.'.$this->userpic);
 				}
 
-    			$path  = './userpics/'.$data['orig_name'].'';
+				$path  = './userpics/'.$data['orig_name'].'';
 
-    			$config['source_image'] = $path;
-    			$config['maintain_ratio'] = FALSE;
-    			$config['width'] = 100; 
-   				$config['height'] = 100;
+				$config['source_image'] = $path;
+				$config['maintain_ratio'] = FALSE;
+				$config['width'] = 100;
+				$config['height'] = 100;
 				$config['new_image'] = './userpics/userpic'.$data['file_ext'].'';
 				$config['create_thumb'] = TRUE;
 				$config['thumb_marker'] = '_'.$this->username;
 
-    			$this->image_lib->initialize($config);
+				$this->image_lib->initialize($config);
 
-    			$this->image_lib->resize();
+				$this->image_lib->resize();
 
-				unlink($path);//Удаляем оригинал
+				unlink($path);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-				$data = array('userpic' => '/userpics/userpic_'.$this->username.''.$data['file_ext'].'');//Юзерпик 
+				$data = array('userpic' => '/userpics/userpic_'.$this->username.''.$data['file_ext'].'');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 				$this->users_mdl->edit($this->user_id, $data);
-			}	
+			}
 			else
 			{
 				$data['error'] = $this->upload->display_errors();
@@ -2856,13 +2856,13 @@ else
 
 		}
 
-		$this->template->build('account/userpic', $data, $title = 'Настройка юзерпика | Настройки профиля');
+		$this->template->build('account/userpic', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
-/*
-|---------------------------------------------------------------
-| Удаление события
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function delete_message()
 	{
 		$id = $this->input->post('id');
@@ -2874,20 +2874,20 @@ else
 
 		$this->db->update('events', array('status' => 2), array('id' => $id));
 	}
-/*
-|---------------------------------------------------------------
-| Удаление события - новый вариант все
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function delete_message_all()
 	{
 		$this->db->update('events', array('status' => 2), array('user_id' => $this->user_id));
 	}
-/*
-|---------------------------------------------------------------
-| Юзерпик/Удаление юзерпика
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function userpic_del()
 	{
 		if( !$this->errors->access() )
@@ -2895,12 +2895,12 @@ else
 			return;
 		}
 
-		if( $this->userpic != '/userpics/standart.jpg' )//Если юзерпик не стандартный удаляем
+		if( $this->userpic != '/userpics/standart.jpg' )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			unlink('.'.$this->userpic);
 		}
 
-		$data = array('userpic' => '/userpics/standart.jpg');//Меняем юзерпик на стандартный
+		$data = array('userpic' => '/userpics/standart.jpg');//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$this->users_mdl->edit($this->user_id, $data);
 
@@ -2911,17 +2911,17 @@ else
 
 
 
-/*
-|---------------------------------------------------------------
-| МОДЕРАТОР
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
-/*
-|---------------------------------------------------------------
-| пользователи
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function users($start_page = 0)
 	{
 		$this->_moderator();
@@ -2977,7 +2977,7 @@ else
 
 		$data['page_links'] = $this->pagination->create_links();
 
-		if( !empty($url) ) 
+		if( !empty($url) )
 		{
 			$url = implode ("&", $url);
 			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);
@@ -2986,10 +2986,10 @@ else
 		$data['data'] = $this->account_mdl->get_users($start_page, $per_page, $input);
 
 
-		$this->template->build('account/users', $data, $title = 'Список пользователей');
+		$this->template->build('account/users', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-	function users_ban($id = '') 
+	function users_ban($id = '')
 	{
 		$this->_moderator();
 
@@ -2998,37 +2998,37 @@ else
 			return;
 		}
 
-		$rules = array 
+		$rules = array
 		(
-			array (
+		array (
 				'field' => 'cause', 
-				'label' => 'Причина бана',
+				'label' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ',
 				'rules' => 'required|max_length[255]'
-			)
-		);
+				)
+				);
 
-		$data = array (
+				$data = array (
 			'user_id' => $id,
 			'cause' => htmlspecialchars($this->input->post('cause'))
-		);
-		
-		$this->form_validation->set_rules($rules);
+				);
 
-		if( $this->form_validation->run() ) 
-		{
-			$this->account_mdl->add('banned', $data);
-			
-			redirect('account/users');
-		}
+				$this->form_validation->set_rules($rules);
 
-		$this->template->build('account/users_ban', $data, $title = 'Забанить пользователя');
+				if( $this->form_validation->run() )
+				{
+					$this->account_mdl->add('banned', $data);
+						
+					redirect('account/users');
+				}
+
+				$this->template->build('account/users_ban', $data, $title = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 	}
 
-	function _moderator()//Модератор
+	function _moderator()//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if( $this->team != 2 )
 		{
-			show_error('Вы не имеете доступа к данному разделу');
-		}	
+			show_error('пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+		}
 	}
 }

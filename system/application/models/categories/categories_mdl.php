@@ -2,11 +2,11 @@
 
 class Categories_mdl extends Model
 {
-/*
-|---------------------------------------------------------------
-| Каталог, и есть услуги пользователей
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function get($id)
 	{
 		$this->db->where('id', $id);
@@ -16,32 +16,32 @@ class Categories_mdl extends Model
 		return $this->db->get('categories')->row_array();
 	}
 
-	function get_categories()//Для списков и вывода услуг в аккаунта - services
+	function get_categories()//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - services
 	{
 		$this->db->select('id, name, parent_id');
 
 		return $this->db->get('categories')->result_array();
 	}
 
-/*	
-        $query = "SELECT ci_categories.name, ci_categories.id, ci_categories.parent_id, COUNT(ci_services.id) AS number".
-                    " FROM ci_categories LEFT JOIN ci_services ON ci_categories.id = ci_services.category".
-                    " GROUP BY ci_categories.id";
+	/*
+	 $query = "SELECT ci_categories.name, ci_categories.id, ci_categories.parent_id, COUNT(ci_services.id) AS number".
+	 " FROM ci_categories LEFT JOIN ci_services ON ci_categories.id = ci_services.category".
+	 " GROUP BY ci_categories.id";
 
-        $query = $this->db->query($query);
+	 $query = $this->db->query($query);
 
 		if( $query->num_rows() == 0 )
 		{
-			return false;
+		return false;
 		}
 		else
 		{
-			return $query->result_array();
+		return $query->result_array();
 		}
-    }
+		}
 
-*/
-	function get_categories_for_users()//Категории с колличеством пользователей предоставляющих данную услугу
+		*/
+	function get_categories_for_users()//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('categories.name, categories.id, categories.parent_id, COUNT(ci_services.id) AS number');
 
@@ -56,7 +56,7 @@ class Categories_mdl extends Model
 	{
 		$this->db->select('name');
 		$query = $this->db->get_where('categories', array('id '=> $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -71,7 +71,7 @@ class Categories_mdl extends Model
 		$this->db->select('title');
 
 		$query = $this->db->get_where('categories', array('id '=> $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -81,12 +81,12 @@ class Categories_mdl extends Model
 		return FALSE;
 	}
 
-	function descr($id)//Описание
+	function descr($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('descr');
 
 		$query = $this->db->get_where('categories', array('id '=> $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -96,12 +96,12 @@ class Categories_mdl extends Model
 		return FALSE;
 	}
 
-	function users_descr($id)//Описание для пользователей каталога
+	function users_descr($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('users_descr');
 
 		$query = $this->db->get_where('categories', array('id '=> $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -127,23 +127,23 @@ class Categories_mdl extends Model
 			return FALSE;
 		}
 
-		if( $parent_id != 0 )//Если выбранная категория не является разделом - выводим проекты только с одной субкатегории
+		if( $parent_id != 0 )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$array = array($id);
-			
+				
 			return $array;
 		}
 
 		$this->db->select('id');
 
-		$this->db->where('parent_id', $id);//Выводим все подразделы главного раздела
+		$this->db->where('parent_id', $id);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 		$array = $this->db->get('categories')->result_array();
 
 		$a = '';
 		foreach($array as $row):
-			$a .= $row['id'];
-			$a .= ', ';
+		$a .= $row['id'];
+		$a .= ', ';
 		endforeach;
 
 		$a = trim($a);;
@@ -157,15 +157,15 @@ class Categories_mdl extends Model
 
 	function category_check($id = '')
 	{
-	    if( empty($id) )
-	    {
+		if( empty($id) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$this->db->where('id', $id);
 
-		if( $this->db->count_all_results('categories') > 0 ) 
-		{ 
+		if( $this->db->count_all_results('categories') > 0 )
+		{
 			return TRUE;
 		}
 

@@ -2,7 +2,7 @@
 
 class Users_mdl extends Model
 {
-	function login($username, $password, $hash = TRUE) 
+	function login($username, $password, $hash = TRUE)
 	{
 		if( empty($username) || empty($password) )
 		{
@@ -27,9 +27,9 @@ class Users_mdl extends Model
 
 		$this->db->where('active', 1);
 
-    	$this->db->select('id, password');
+		$this->db->select('id, password');
 
-    	$this->db->limit(1);
+		$this->db->limit(1);
 
 		$query = $this->db->get('users');
 
@@ -46,15 +46,15 @@ class Users_mdl extends Model
 
 			$this->session->set_userdata('id', $result->id);
 
-			$this->session->set_userdata('password', $this->hash_password_session($result->password));//Сохраняем пароль пользователя в сессии захешированный
+			$this->session->set_userdata('password', $this->hash_password_session($result->password));//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			return TRUE;
 		}
 
 		return FALSE;
-    }
+	}
 
-	function logout()//Выход
+	function logout()//пїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->session->unset_userdata('id');;
 		$this->session->unset_userdata('password');
@@ -65,7 +65,7 @@ class Users_mdl extends Model
 		return $this->session->userdata('id');
 	}
 
-	function check_ip()//Проверяем ip, для защиты от перехвата сессии
+	function check_ip()//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ip, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if( !$this->session->userdata('password') )
 		{
@@ -73,8 +73,8 @@ class Users_mdl extends Model
 		}
 
 		$this->db->where('id', $this->session->userdata('id'));
-    	$this->db->select('password');
-    	$this->db->limit(1);
+		$this->db->select('password');
+		$this->db->limit(1);
 
 		$query = $this->db->get('users');
 
@@ -91,27 +91,27 @@ class Users_mdl extends Model
 		return FALSE;
 	}
 
-	function hash_password_session($password)//Хэшируем пароль для сессии, пароль + IP
+	function hash_password_session($password)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ + IP
 	{
 		$password = md5($password.$_SERVER['REMOTE_ADDR']);
 
 		return $password;
 	}
 
-	function hash_password_db($password)//Хэш пароля в базе, пароль + слово
+	function hash_password_db($password)//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ + пїЅпїЅпїЅпїЅпїЅ
 	{
 		$password = md5($password.'cms');
 
 		return $password;
 	}
 
-	function check_banned($user_id)//Проверка на бан
+	function check_banned($user_id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ
 	{
 		$this->db->select('cause');
 
 		$query = $this->db->get_where('banned', array('user_id '=> $user_id));
 
-		if( $query->num_rows() > 0 ) 
+		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
 
@@ -121,11 +121,11 @@ class Users_mdl extends Model
 		return FALSE;
 	}
 
-	function city($id)//Город
+	function city($id)//пїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('name');
 		$query = $this->db->get_where('city', array('id '=> $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -135,11 +135,11 @@ class Users_mdl extends Model
 		return FALSE;
 	}
 
-	function country($id)//Страна
+	function country($id)//пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('name');
 		$query = $this->db->get_where('country', array('id '=> $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -149,16 +149,16 @@ class Users_mdl extends Model
 		return FALSE;
 	}
 
-	function get_email($id = '')//получение email пользователя
+	function get_email($id = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ email пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    if( empty($id) )
-	    {
+		if( empty($id) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$this->db->select('email');
 		$query = $this->db->get_where('users', array('id' => $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -168,16 +168,16 @@ class Users_mdl extends Model
 		return FALSE;
 	}
 
-	function get_id($username = '')//получение id пользователя
+	function get_id($username = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    if( empty($username) )
-	    {
+		if( empty($username) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$this->db->select('id');
 		$query = $this->db->get_where('users', array('username' => $username));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -187,11 +187,11 @@ class Users_mdl extends Model
 		return FALSE;
 	}
 
-	function get_username($id = '')//получение ника пользователя
+	function get_username($id = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('username');
 		$query = $this->db->get_where('users', array('id' => $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -201,19 +201,19 @@ class Users_mdl extends Model
 		return FALSE;
 	}
 
-	function get($username)//Получение одного пользователя по логину для профиля
+	function get($username)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('username', $username);
+		$this->db->where('username', $username);
 
 		$this->db->select('*');
 
 		$query = $this->db->get('users')->row_array();
-		
+
 		if( !$query ) return FALSE;
 
 		$query['created'] = date_smart($query['created']);
 		$query['last_login'] = date_smart($query['last_login']);
-		
+
 		$query['age'] = date_age($query['day'], $query['month'], $query['year']);
 
 		$query['country_id'] = $this->country($query['country_id']);
@@ -221,69 +221,69 @@ class Users_mdl extends Model
 
 		switch($query['sex'])
 		{
-    		case 1: $query['sex']  = 'Мужской'; break;
-    		case 2: $query['sex']  = 'Женский'; break;
+			case 1: $query['sex']  = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+			case 2: $query['sex']  = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
 		}
-	
+
 		return $query;
 	}
 
-	function profile()//Получение одного пользователя по логину для профиля - редактирование 
+	function profile()//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('id', $this->user_id);
+		$this->db->where('id', $this->user_id);
 
 		$this->db->select('*');
 
 		return $this->db->get('users')->row_array();
 	}
 
-	function get_user($id)//Вывод одного пользователя по id для отправки мыл и т д
+	function get_user($id)//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ id пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅ пїЅ
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('username, email, name, surname, created, last_login, userpic, team');
 
 		return $this->db->get('users')->row_array();
 	}
 
-	function get_users()//Вывод
+	function get_users()//пїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('*');
 
 		return $this->db->get('users');
 	}
 
-	function get_user_by_id($id)//Вывод одного пользователя по id
+	function get_user_by_id($id)//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ id
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		return $this->get_users()->row();
 	}
 
-	function get_top_users($limit = 10)//Топ пользователей
-  	{
+	function get_top_users($limit = 10)//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	{
 		$this->db->where('active', 1);
-    	$this->db->order_by('views', 'desc');
-    	$this->db->limit($limit);
+		$this->db->order_by('views', 'desc');
+		$this->db->limit($limit);
 
-    	return $this->get_users()->result_array();
-  	}
+		return $this->get_users()->result_array();
+	}
 
-	function get_newest_users($limit = 10)//Новые пользователи
-  	{
+	function get_newest_users($limit = 10)//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	{
 		$this->db->where('active', 1);
-    	$this->db->order_by('created', 'desc');
-    	$this->db->limit($limit);
+		$this->db->order_by('created', 'desc');
+		$this->db->limit($limit);
 
-    	return $this->get_users()->result_array();
-  	}
-/*
-|---------------------------------------------------------------
-| Вывод пользователей
-|---------------------------------------------------------------
-*/
+		return $this->get_users()->result_array();
+	}
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function get_all($start_from = FALSE, $per_page, $input = '')
-  	{
+	{
 		$keywords = (isset($input['keywords'])) ? $input['keywords'] : '';
 		$age_start = (isset($input['age_start'])) ? $input['age_start'] : '';
 		$age_end = (isset($input['age_end'])) ? $input['age_end'] : '';
@@ -300,10 +300,10 @@ class Users_mdl extends Model
 
 		$sql = "`active` = '1'";
 
-		$sql .= " and ci_users.id NOT IN (SELECT user_id FROM ci_banned)";//НЕ выводим заблокированных пользователей
+		$sql .= " and ci_users.id NOT IN (SELECT user_id FROM ci_banned)";//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( !empty($category_array) )//Выводим пользователей размещённых в каталоге
-		{//По категориям
+		if( !empty($category_array) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		{//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			$category_array = implode(", ", $category_array);
 
 			$sql .= " and ci_users.id IN (SELECT user_id FROM ci_services WHERE `category` IN ($category_array) )";
@@ -313,7 +313,7 @@ class Users_mdl extends Model
 			$sql .= " and ci_users.id IN (SELECT user_id FROM ci_services)";
 		}
 
-		if( !empty($age_start) )//Возраст от
+		if( !empty($age_start) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$age_start = date('Y') - $age_start;
 
@@ -321,12 +321,12 @@ class Users_mdl extends Model
 
 			$day = date('d');
 
-			$new = $age_start + 1;//Увеличиваем год на один, так как нужно получить меньший год, затем по большому году учитывать дни и месяцы
+			$new = $age_start + 1;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 			$sql .= " and (`year` < '$age_start' or `year` = '$age_start' and `month` < '$month' or `year` = '$age_start' and `month` = '$month' and `day` <= '$day')";
 		}
 
-		if( !empty($age_end) )//Возраст до
+		if( !empty($age_end) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$age_end = date('Y') - $age_end;
 
@@ -334,59 +334,59 @@ class Users_mdl extends Model
 
 			$day = date('d');
 
-			$new = $age_end - 1;//Уменьшаем год на один, так как нужно получить больший год, затем по большому году учитывать дни и месяцы
+			$new = $age_end - 1;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-$sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or `year` = '$new' and `month` = '$month' and `day` >= '$day')";
+			$sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or `year` = '$new' and `month` = '$month' and `day` >= '$day')";
 		}
 
-		if( !empty($keywords) )//Ключевые слова
+		if( !empty($keywords) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		{
 			$sql .= " and (`username` LIKE '%$keywords%' or `short_descr` LIKE '%$keywords%' or `full_descr` LIKE '%$keywords%')";
 		}
 
-		if( !empty($country_id) )//Страна
+		if( !empty($country_id) )//пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$sql .= " and `country_id` = '$country_id'";
 		}
 
-		if( !empty($city_id) )//Город
+		if( !empty($city_id) )//пїЅпїЅпїЅпїЅпїЅ
 		{
 			$sql .= " and `city_id` = '$city_id'";
 		}
 
-		if( !empty($price_1_start) )//Цена за час от
+		if( !empty($price_1_start) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ
 		{
 			$sql .= " and `price_1` >= '$price_1_start'";
 		}
 
-		if( !empty($price_1_end) )//Цена за час до
+		if( !empty($price_1_end) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ
 		{
 			$sql .= " and `price_1` <= '$price_1_end'";
 		}
 
-		if( !empty($price_2_start) )//Цена за месяц от
+		if( !empty($price_2_start) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$sql .= " and `price_2` >= '$price_2_start'";
 		}
 
-		if( !empty($price_2_end) )//Цена за месяц до
+		if( !empty($price_2_end) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$sql .= " and `price_2` <= '$price_2_end'";
 		}
 
 
 
-		if( !empty($order_field) )//Сортировка
+		if( !empty($order_field) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$sql .= " ORDER BY $order_field $order_type";
 		}
 		else
 		{
-			$sql .= " ORDER BY `tariff` DESC, `rating` DESC";//сортировать по умолчанию со статусом PRO сверху (и по рейтингу) 
+			$sql .= " ORDER BY `tariff` DESC, `rating` DESC";//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ PRO пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 		}
-	
 
-        $query =
+
+		$query =
                     " SELECT ci_users.*, ci_profile.*, ci_tariffs.name AS tariffname".
 
                     " FROM ci_users LEFT JOIN ci_profile ON ci_users.id = ci_profile.user_id".
@@ -397,31 +397,31 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
                     " LIMIT ".$start_from.", ".$per_page.";";
 
-        $query = $this->db->query($query);
+		$query = $this->db->query($query);
 
-        if( $query->num_rows() == 0 )
+		if( $query->num_rows() == 0 )
 		{
 			return FALSE;
-        }
-        else 
+		}
+		else
 		{
 			$query = $query->result_array();
-			
+				
 			$count = count($query);
 
-			for($i = 0; $i < $count; $i++) 
+			for($i = 0; $i < $count; $i++)
 			{
 				$query[$i]['created'] = date_smart($query[$i]['created']);
-	
+
 				$query[$i]['last_login'] = date_smart($query[$i]['last_login']);
 			}
 
 			return $query;
-        }
-  	}
+		}
+	}
 
 	function count_all($input = '')
-  	{
+	{
 		$keywords = (isset($input['keywords'])) ? $input['keywords'] : '';
 		$age_start = (isset($input['age_start'])) ? $input['age_start'] : '';
 		$age_end = (isset($input['age_end'])) ? $input['age_end'] : '';
@@ -438,10 +438,10 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 		$sql = "`active` = '1'";
 
-		$sql .= " and id NOT IN (SELECT user_id FROM ci_banned)";//НЕ выводим заблокированных пользователей
+		$sql .= " and id NOT IN (SELECT user_id FROM ci_banned)";//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-		if( !empty($category_array) )//Выводим пользователей размещённых в каталоге
-		{//По категориям
+		if( !empty($category_array) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+		{//пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			$category_array = implode(", ", $category_array);
 
 			$sql .= " and id IN (SELECT user_id FROM ci_services WHERE `category` IN ($category_array) )";
@@ -451,7 +451,7 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 			$sql .= " and id IN (SELECT user_id FROM ci_services)";
 		}
 
-		if( !empty($age_start) )//Возраст от
+		if( !empty($age_start) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$age_start = date('Y') - $age_start;
 
@@ -459,12 +459,12 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 			$day = date('d');
 
-			$new = $age_start + 1;//Увеличиваем год на один, так как нужно получить меньший год, затем по большому году учитывать дни и месяцы
+			$new = $age_start + 1;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 			$sql .= " and (`year` < '$age_start' or `year` = '$age_start' and `month` < '$month' or `year` = '$age_start' and `month` = '$month' and `day` <= '$day')";
 		}
 
-		if( !empty($age_end) )//Возраст до
+		if( !empty($age_end) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$age_end = date('Y') - $age_end;
 
@@ -472,66 +472,66 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 			$day = date('d');
 
-			$new = $age_end - 1;//Уменьшаем год на один, так как нужно получить больший год, затем по большому году учитывать дни и месяцы
+			$new = $age_end - 1;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-$sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or `year` = '$new' and `month` = '$month' and `day` >= '$day')";
+			$sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or `year` = '$new' and `month` = '$month' and `day` >= '$day')";
 		}
 
-		if( !empty($keywords) )//Ключевые слова
+		if( !empty($keywords) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		{
 			$sql .= " and (`username` LIKE '%$keywords%' or `short_descr` LIKE '%$keywords%' or `full_descr` LIKE '%$keywords%')";
 		}
 
-		if( !empty($country_id) )//Страна
+		if( !empty($country_id) )//пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$sql .= " and `country_id` = '$country_id'";
 		}
 
-		if( !empty($city_id) )//Город
+		if( !empty($city_id) )//пїЅпїЅпїЅпїЅпїЅ
 		{
 			$sql .= " and `city_id` = '$city_id'";
 		}
 
-		if( !empty($price_1_start) )//Цена за час от
+		if( !empty($price_1_start) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ
 		{
 			$sql .= " and `price_1` >= '$price_1_start'";
 		}
 
-		if( !empty($price_1_end) )//Цена за час до
+		if( !empty($price_1_end) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ
 		{
 			$sql .= " and `price_1` <= '$price_1_end'";
 		}
 
-		if( !empty($price_2_start) )//Цена за месяц от
+		if( !empty($price_2_start) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$sql .= " and `price_2` >= '$price_2_start'";
 		}
 
-		if( !empty($price_2_end) )//Цена за месяц до
+		if( !empty($price_2_end) )//пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 		{
 			$sql .= " and `price_2` <= '$price_2_end'";
 		}
 
-        $query =
+		$query =
                     " SELECT ci_users.id".
 
                     " FROM ci_users LEFT JOIN ci_profile ON ci_users.id = ci_profile.user_id".
 
 					" WHERE ".$sql.";";
 
-        $query = $this->db->query($query);
-		
-		return $query->num_rows();
-  	}
+		$query = $this->db->query($query);
 
-	function update_views($user_id)//Обновление просмотров профиля
+		return $query->num_rows();
+	}
+
+	function update_views($user_id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$ip_address = $this->input->ip_address();
 
 		$this->db->where('user_id', $user_id);
 		$this->db->where('ip_address', $ip_address);
 
-		if( $this->db->count_all_results('views') > 0 ) 
+		if( $this->db->count_all_results('views') > 0 )
 		{
 			return FALSE;
 		}
@@ -544,18 +544,18 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 			$this->db->insert('views', $data);
 
-			//Прибавляем просмотр
+			//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			$this->db->select('views');
 			$query = $this->db->get_where('users', array('id' => $user_id));
 			$views = $query->row_array();
 			$views = $views['views'] + 1;
 
-			//Обновляем
+			//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			$this->db->update('users', array('views' => $views), array('id' => $user_id));
 		}
 	}
 
-	function update_last_login($id)//Обновление времени последнего входа
+	function update_last_login($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->update('users', array('last_login' => now()), array('id' => $id));
 	}
@@ -571,7 +571,7 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		$this->db->insert('users', $data);
 	}
 
-	function edit($id, $data) 
+	function edit($id, $data)
 	{
 		$this->db->where('id', $id);
 		$this->db->update('users', $data);
@@ -585,10 +585,10 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 		$code = base_url().'users/activate/'."$activation_code";
 
-		//Отправка почты
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		$message = $this->load->view('emails/activate', array('username' => $username, 'code' => $code), TRUE);
 
-		$this->common->email($email, $subject = 'Активация аккаунта', $message);
+		$this->common->email($email, $subject = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', $message);
 
 		$data = array (
 			'username' => $username,
@@ -611,7 +611,7 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		);
 
 		$this->db->insert('users', $data);
-		
+
 		$user_id = $this->db->insert_id();
 
 		$data = array (
@@ -619,8 +619,8 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		);
 
 		$this->db->insert('profile', $data);
-		
-		$data = array (//Настройки
+
+		$data = array (//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			'user_id' => $user_id,
 			'mailer' => 0,			
 			'notice' => 1,
@@ -637,13 +637,13 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		$activation_code = sha1(md5(microtime()));
 
 
-		//Отправка почты
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		$message = $this->load->view('emails/fast_register', array('username' => $username, 'password' => $password), TRUE);
 
-		//$password = $this->hash_password_db($password); Шифруется позже
+		//$password = $this->hash_password_db($password); пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
 
-		$this->common->email($email, $subject = 'Активация аккаунта', $message);
+		$this->common->email($email, $subject = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', $message);
 
 		$data = array (
 			'username' => $username,
@@ -658,7 +658,7 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		);
 
 		$this->db->insert('users', $data);
-		
+
 		$user_id = $this->db->insert_id();
 
 		$data = array (
@@ -666,8 +666,8 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		);
 
 		$this->db->insert('profile', $data);
-		
-		$data = array (//Настройки
+
+		$data = array (//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			'user_id' => $user_id,
 			'mailer' => 0,			
 			'notice' => 1,
@@ -676,7 +676,7 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		);
 
 		$this->db->insert('users_settings', $data);
-		
+
 		return $activation_code;
 	}
 
@@ -700,7 +700,7 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 		$message = $this->load->view('emails/recovery', array('password' => $password), TRUE);
 
-		$this->common->email($email, $subject = 'Восстановление пароля', $message);
+		$this->common->email($email, $subject = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', $message);
 
 		$password = $this->hash_password_db($password);
 
@@ -710,7 +710,7 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 		$this->db->where('email', $email);
 		$this->db->update('users', $data);
-		
+
 		return TRUE;
 	}
 
@@ -732,16 +732,16 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 			$this->db->where('id', $row->id);
 
 			$this->db->update('users', $data);
-				
+
 			return TRUE;
 		}
 		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| Активация со входом
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function activate_2($code = false)
 	{
 		$this->db->select('id, password, username');
@@ -760,7 +760,7 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 			$this->db->where('id', $row->id);
 
 			$this->db->update('users', $data);
-			
+				
 			if( $this->login($row->username, $row->password, FALSE) )
 			{
 				return TRUE;
@@ -768,11 +768,11 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		}
 		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| Активация пользователя получившего аккаунт через быструю покупку
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function activate_3($code = false)
 	{
 		$this->db->select('id, password, username');
@@ -791,14 +791,14 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 			$data = array(
 				'activation_code' => '',
 				'active' => 1,
-				'password' => $this->hash_password_db($row->password)//Хешируем пароль, так как хранили в открытом виде для выдачи пользователю
+				'password' => $this->hash_password_db($row->password)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			);
 
 			$this->db->where('id', $row->id);
 
 			$this->db->update('users', $data);
-				
-			return $userdata;//Возвращаем массив с данными
+
+			return $userdata;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		}
 		return FALSE;
 	}
@@ -812,23 +812,23 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 		if( $query->num_rows() == 1 )
 		{
 			$row = $query->row();
-				
-			return $row->id;//Возвращаем массив с данными
+
+			return $row->id;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		}
 		return FALSE;
 	}
 
 	function username_check($username = '')
 	{
-	    if( empty($username) )
-	    {
+		if( empty($username) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$this->db->where('username', $username);
 
-		if( $this->db->count_all_results('users') > 0 ) 
-		{ 
+		if( $this->db->count_all_results('users') > 0 )
+		{
 			return TRUE;
 		}
 
@@ -837,18 +837,18 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 	function password_check($user_id = '', $password = '')
 	{
-	    if( empty($user_id) or empty($password) )
-	    {
+		if( empty($user_id) or empty($password) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$password = $this->hash_password_db($password);
 
 		$this->db->where('id', $user_id);
 		$this->db->where('password', $password);
 
-		if( $this->db->count_all_results('users') > 0 ) 
-		{ 
+		if( $this->db->count_all_results('users') > 0 )
+		{
 			return TRUE;
 		}
 
@@ -857,10 +857,10 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 	function change_password($user_id, $password)
 	{
-	    if( empty($user_id) or empty($password) )
-	    {
+		if( empty($user_id) or empty($password) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$password = $this->hash_password_db($password);
 
@@ -869,15 +869,15 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 	function email_check($email = '')
 	{
-	    if( empty($email) )
-	    {
+		if( empty($email) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$this->db->where('email', $email);
 
-		if( $this->db->count_all_results('users') > 0 ) 
-		{ 
+		if( $this->db->count_all_results('users') > 0 )
+		{
 			return TRUE;
 		}
 
@@ -886,30 +886,30 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 	function remind_check($email = '', $username = '')
 	{
-	    if( empty($email) )
-	    {
+		if( empty($email) )
+		{
 			return FALSE;
-	    }
+		}
 
 		$this->db->where('email', $email);
 		$this->db->where('username', $username);
 
-		if( $this->db->count_all_results('users') > 0 ) 
-		{ 
+		if( $this->db->count_all_results('users') > 0 )
+		{
 			return TRUE;
 		}
 
 		return FALSE;
 	}
 
-	function count_users()//Пользователей
+	function count_users()//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->where('active', 1);
 
-		return $this->db->count_all_results('users'); 
+		return $this->db->count_all_results('users');
 	}
 
-	function get_last_auth($user_id)//Выбираем дату последней авторизации
+	function get_last_auth($user_id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('last_auth');
 
@@ -917,10 +917,10 @@ $sql .= " and (`year` >= '$age_end' or `year` = '$new' and `month` > '$month' or
 
 		if( $query->num_rows() == 1 )
 		{
-			$this->db->update('daily_auth', array('last_auth' => now()), array('user_id' => $user_id));	//Последняя авторизация, для рейтинга
+			$this->db->update('daily_auth', array('last_auth' => now()), array('user_id' => $user_id));	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			$row = $query->row();
-				
+
 			return $row->last_auth;
 		}
 		else

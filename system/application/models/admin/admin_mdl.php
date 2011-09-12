@@ -35,19 +35,19 @@ class Admin_mdl extends Model
 		$this->db->delete('banned');
 	}
 
-	function get_list($table)//Для списков и вывода услуг в аккаунта - services
+	function get_list($table)//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - services
 	{
 		$this->db->select('*');
 
 		return $this->db->get($table)->result_array();
 	}
 
-	function get_events($input = '')  
+	function get_events($input = '')
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('date >=', $date_start);
@@ -60,11 +60,11 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = events.user_id');
 
-    	$query = $this->db->get('events')->result_array();
+		$query = $this->db->get('events')->result_array();
 
 		$count = count($query);
 
-		for($i = 0; $i < $count; $i++) 
+		for($i = 0; $i < $count; $i++)
 		{
 			$query[$i]['date'] = date('H:i', $query[$i]['date']);
 		}
@@ -72,7 +72,7 @@ class Admin_mdl extends Model
 		return $query;
 	}
 
-	function login($username, $password) 
+	function login($username, $password)
 	{
 		if( empty($username) || empty($password) )
 		{
@@ -83,8 +83,8 @@ class Admin_mdl extends Model
 
 		$this->db->where('username', $username);
 		$this->db->where('password', $password);
-    	$this->db->select('id, password');
-    	$this->db->limit(1);
+		$this->db->select('id, password');
+		$this->db->limit(1);
 
 		$query = $this->db->get('administrator');
 
@@ -94,22 +94,22 @@ class Admin_mdl extends Model
 		{
 			$this->session->set_userdata('administrator', $result->id);
 
-			$this->session->set_userdata('administratorpassword', $this->hash_password_session($result->password));//Сохраняем пароль пользователя в сессии захешированный
+			$this->session->set_userdata('administratorpassword', $this->hash_password_session($result->password));//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 			return TRUE;
 		}
 
 		return FALSE;
-    }
+	}
 
-	function hash_password_session($password)//Хэшируем пароль для сессии, пароль + IP
+	function hash_password_session($password)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ + IP
 	{
 		$password = md5($password.$_SERVER['REMOTE_ADDR']);
 
 		return $password;
 	}
 
-	function hash_password_db($password)//Хэш пароля в базе, пароль + слово
+	function hash_password_db($password)//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ + пїЅпїЅпїЅпїЅпїЅ
 	{
 		$password = md5($password.'cms');
 
@@ -118,26 +118,26 @@ class Admin_mdl extends Model
 
 	function logged_in()
 	{
-		if( $this->session->userdata('administrator') )//Если есть сессиия
+		if( $this->session->userdata('administrator') )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$password = $this->session->userdata('administratorpassword');
-			
+				
 			if( $this->check_password($password) )
 			{
 				return TRUE;
 			}
-			
+				
 			return FALSE;
 		}
 
 		return FALSE;
 	}
 
-	function check_current_password($password)//Проверяем ip, для защиты от перехвата сессии
+	function check_current_password($password)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ip, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$password = $this->hash_password_db($password);
 
-    	$this->db->select('password');
+		$this->db->select('password');
 
 		$query = $this->db->get('administrator');
 
@@ -154,9 +154,9 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function check_password($password)//Проверяем ip, для защиты от перехвата сессии
+	function check_password($password)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ip, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-    	$this->db->select('password');
+		$this->db->select('password');
 
 		$query = $this->db->get('administrator');
 
@@ -172,46 +172,46 @@ class Admin_mdl extends Model
 
 		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| категории дизайнов
-|---------------------------------------------------------------
-*/
-	function get_designs_categories()//Для списков и вывода услуг в аккаунта - services
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function get_designs_categories()//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - services
 	{
 		$this->db->select('id, name, parent_id');
 
 		return $this->db->get('designs_categories')->result_array();
 	}
 
-	function get_designs_category($id)//Категория
+	function get_designs_category($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('*');
 
 		return $this->db->get('designs_categories')->row_array();
 	}
 
-	function logout()//Выход
+	function logout()//пїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->session->unset_userdata('administrator');
 	}
-/*
-|---------------------------------------------------------------
-| Заявки на вывод
-|---------------------------------------------------------------
-*/
-	function get_report($id)//Категория
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function get_report($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('text');
 
 		return $this->db->get('reports')->row_array();
 	}
 
-	function close_reports($reports = '')//Закрыть дизайн
+	function close_reports($reports = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->where_in('id', $reports);
 
@@ -230,7 +230,7 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = reports.user_id');
 
-    	return $this->db->get('reports')->result_array();
+		return $this->db->get('reports')->result_array();
 	}
 
 	function count_new_reports()
@@ -244,7 +244,7 @@ class Admin_mdl extends Model
 	{
 		$status = (isset($input['status'])) ? $input['status'] : '';
 
-		if( $start_from !== FALSE ) 
+		if( $start_from !== FALSE )
 		{
 			$this->db->limit($per_page, $start_from);
 		}
@@ -260,16 +260,16 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = reports.user_id');
 
-    	$query = $this->db->get('reports')->result_array();
+		$query = $this->db->get('reports')->result_array();
 
 		$count = count($query);
 
-		for($i = 0; $i < $count; $i++) 
+		for($i = 0; $i < $count; $i++)
 		{
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Открыт'; break;
-    			case 2: $query[$i]['status']  = 'Закрыт'; break;
+				case 1: $query[$i]['status']  = 'пїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+				case 2: $query[$i]['status']  = 'пїЅпїЅпїЅпїЅпїЅпїЅ'; break;
 			}
 
 			$query[$i]['date'] = date_smart($query[$i]['date']);
@@ -278,29 +278,29 @@ class Admin_mdl extends Model
 		return $query;
 	}
 
-	function count_reports()  
+	function count_reports()
 	{
 		return $this->db->count_all_results('reports');
 	}
-/*
-|---------------------------------------------------------------
-| Заявки на вывод
-|---------------------------------------------------------------
-*/
-	function get_application($id)//Категория
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function get_application($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('*');
 
 		return $this->db->get('balance_applications')->row_array();
 	}
 
-	function get_applications($start_from = FALSE, $per_page, $input = '')//Расширенный поиск
+	function get_applications($start_from = FALSE, $per_page, $input = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	{
 		$status = (isset($input['status'])) ? $input['status'] : '';
 
-		if( $start_from !== FALSE ) 
+		if( $start_from !== FALSE )
 		{
 			$this->db->limit($per_page, $start_from);
 		}
@@ -314,11 +314,11 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = balance_applications.user_id');
 
-    	$query = $this->db->get('balance_applications')->result_array();
+		$query = $this->db->get('balance_applications')->result_array();
 
 		$count = count($query);
 
-		for($i = 0; $i < $count; $i++) 
+		for($i = 0; $i < $count; $i++)
 		{
 			$query[$i]['date'] = date_smart($query[$i]['date']);
 
@@ -326,15 +326,15 @@ class Admin_mdl extends Model
 
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Ожидание'; break;
-    			case 2: $query[$i]['status']  = 'Завершён'; break;
+				case 1: $query[$i]['status']  = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+				case 2: $query[$i]['status']  = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
 			}
 		}
 
 		return $query;
 	}
 
-	function count_applications($input = '')  
+	function count_applications($input = '')
 	{
 		$status = (isset($input['status'])) ? $input['status'] : '';
 
@@ -345,12 +345,12 @@ class Admin_mdl extends Model
 
 		return $this->db->count_all_results('balance_applications');
 	}
-/*
-|---------------------------------------------------------------
-| История операций
-|---------------------------------------------------------------
-*/
-	function get_transaction($start_from = FALSE, $per_page, $input = '')//Расширенный поиск
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function get_transaction($start_from = FALSE, $per_page, $input = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -361,7 +361,7 @@ class Admin_mdl extends Model
 		$order_type = (isset($input['order_type'])) ? $input['order_type'] : '';
 
 
-		if( $start_from !== FALSE ) 
+		if( $start_from !== FALSE )
 		{
 			$this->db->limit($per_page, $start_from);
 		}
@@ -370,7 +370,7 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = transaction.user_id');
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('date >=', $date_start);
@@ -381,22 +381,22 @@ class Admin_mdl extends Model
 			$this->db->where('date <=', $date_end);
 		}
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($sort) )
 		{
 			$this->db->like('descr', $sort);
 		}
 
-		if( !empty($order_field) )//Сортировка
+		if( !empty($order_field) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->order_by($order_field, $order_type);
 		}
 
-    	$query = $this->db->get('transaction')->result_array();
+		$query = $this->db->get('transaction')->result_array();
 
 		$count = count($query);
 
-		for($i = 0; $i < $count; $i++) 
+		for($i = 0; $i < $count; $i++)
 		{
 			$query[$i]['date'] = date_smart($query[$i]['date']);
 		}
@@ -404,7 +404,7 @@ class Admin_mdl extends Model
 		return $query;
 	}
 
-	function total_sum_transaction($input = '')  
+	function total_sum_transaction($input = '')
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -412,7 +412,7 @@ class Admin_mdl extends Model
 
 		$this->db->select_sum('amount');
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('date >=', $date_start);
@@ -423,14 +423,14 @@ class Admin_mdl extends Model
 			$this->db->where('date <=', $date_end);
 		}
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($sort) )
 		{
 			$this->db->like('descr', $sort);
 		}
 
 		$query = $this->db->get('transaction');
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -441,12 +441,12 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function count_transaction($input = '')  
+	function count_transaction($input = '')
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('date >=', $date_start);
@@ -459,12 +459,12 @@ class Admin_mdl extends Model
 
 		return $this->db->count_all_results('transaction');
 	}
-/*
-|---------------------------------------------------------------
-| История операций
-|---------------------------------------------------------------
-*/
-	function get_purchased($start_from = FALSE, $per_page, $input = '')//Расширенный поиск
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function get_purchased($start_from = FALSE, $per_page, $input = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -472,7 +472,7 @@ class Admin_mdl extends Model
 		$order_field = (isset($input['order_field'])) ? $input['order_field'] : '';
 		$order_type = (isset($input['order_type'])) ? $input['order_type'] : '';
 
-		if( $start_from !== FALSE ) 
+		if( $start_from !== FALSE )
 		{
 			$this->db->limit($per_page, $start_from);
 		}
@@ -481,7 +481,7 @@ class Admin_mdl extends Model
 
 		$this->db->join('designs', 'designs.id = purchased.design_id');
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('purchased.date >=', $date_start);
@@ -492,19 +492,19 @@ class Admin_mdl extends Model
 			$this->db->where('purchased.date <=', $date_end);
 		}
 
-		if( !empty($order_field) )//Сортировка
+		if( !empty($order_field) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->order_by($order_field, $order_type);
 		}
 
-    	$query = $this->db->get('purchased')->result_array();
+		$query = $this->db->get('purchased')->result_array();
 
 		$count = count($query);
 
-		for($i = 0; $i < $count; $i++) 
+		for($i = 0; $i < $count; $i++)
 		{
 			$query[$i]['date'] = date_smart($query[$i]['date']);
-			
+				
 			$query[$i]['buyer'] = $this->users_mdl->get_username($query[$i]['user_id']);
 
 			$query[$i]['seller'] = $this->users_mdl->get_username($query[$i]['seller_id']);
@@ -521,20 +521,20 @@ class Admin_mdl extends Model
 
 			switch($query[$i]['kind'])
 			{
-    			case 1: $query[$i]['kind']  = 'Покупка'; break;
-    			case 2: $query[$i]['kind']  = 'Выкуп'; break;
+				case 1: $query[$i]['kind']  = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+				case 2: $query[$i]['kind']  = 'пїЅпїЅпїЅпїЅпїЅ'; break;
 			}
 		}
 
 		return $query;
 	}
 
-	function count_purchased($input = '')  
+	function count_purchased($input = '')
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('purchased.date >=', $date_start);
@@ -547,21 +547,21 @@ class Admin_mdl extends Model
 
 		return $this->db->count_all_results('purchased');
 	}
-/*
-|---------------------------------------------------------------
-| Общая статистика сервиса
-|---------------------------------------------------------------
-*/
-	function info_count_addition($input = '')  
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function info_count_addition($input = '')
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
 
 		$this->db->select_sum('amount');
 
-		$this->db->where('descr', 'Пополнение счета');//Пока
+		$this->db->where('descr', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');//пїЅпїЅпїЅпїЅ
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('date >=', $date_start);
@@ -573,7 +573,7 @@ class Admin_mdl extends Model
 		}
 
 		$query = $this->db->get('transaction');
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -591,16 +591,16 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function info_count_output($input = '')  
+	function info_count_output($input = '')
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
 
 		$this->db->select_sum('amount');
 
-		$this->db->where('descr', 'Вывод средств');//Пока
+		$this->db->where('descr', 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');//пїЅпїЅпїЅпїЅ
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('date >=', $date_start);
@@ -612,7 +612,7 @@ class Admin_mdl extends Model
 		}
 
 		$query = $this->db->get('transaction');
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -630,14 +630,14 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function info_count_users($input = '')  
+	function info_count_users($input = '')
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
 
 		$this->db->where('active', 1);
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('created >=', $date_start);
@@ -651,22 +651,22 @@ class Admin_mdl extends Model
 		return $this->db->count_all_results('users');
 	}
 
-	function info_count_designs($input = '', $user_id = '')//Всего дизайнов
+	function info_count_designs($input = '', $user_id = '')//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
 
-		if( !empty($status) )//Статус
+		if( !empty($status) )//пїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->where('status', $status);
 		}
 
-		if( !empty($user_id) )//Пользователь
+		if( !empty($user_id) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->where('user_id', $user_id);
 		}
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('date >=', $date_start);
@@ -680,22 +680,22 @@ class Admin_mdl extends Model
 		return $this->db->count_all_results('designs');
 	}
 
-	function info_count_purchased($input = '', $kind = '', $user_id = '')//Всего покупок
+	function info_count_purchased($input = '', $kind = '', $user_id = '')//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
 
-		if( !empty($kind) )//Вид
+		if( !empty($kind) )//пїЅпїЅпїЅ
 		{
 			$this->db->where('kind', $kind);
 		}
 
-		if( !empty($user_id) )//Пользователь
+		if( !empty($user_id) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->where('user_id', $user_id);
 		}
 
-		//Промежуток
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		if( !empty($date_start) )
 		{
 			$this->db->where('date >=', $date_start);
@@ -709,9 +709,9 @@ class Admin_mdl extends Model
 		return $this->db->count_all_results('purchased');
 	}
 
-	function info_count_resources($balance = '')//Всего средств в обороте, подсчитываем всю сумму баланса у всех пользователей
+	function info_count_resources($balance = '')//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		if( !empty($balance) )//Если задан минимум, то считаем сумму только у тех пользователей, которые достигли минимума
+		if( !empty($balance) )//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->where('balance >=', $balance);
 		}
@@ -719,7 +719,7 @@ class Admin_mdl extends Model
 		$this->db->select_sum('balance');
 
 		$query = $this->db->get('users');
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -729,40 +729,40 @@ class Admin_mdl extends Model
 
 		return FALSE;
 	}
-/*
-|---------------------------------------------------------------
-| Категории
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
-	function get_help_category($id)//Категория
+	function get_help_category($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('*');
 
 		return $this->db->get('help_categories')->row_array();
 	}
-/*
-|---------------------------------------------------------------
-| Категории
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
-	function get_category($id)//Категория
+	function get_category($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('*');
 
 		return $this->db->get('categories')->row_array();
 	}
 
-/*
-|---------------------------------------------------------------
-| Профиль
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function access()
 	{
 		$this->db->select('*');
@@ -772,19 +772,19 @@ class Admin_mdl extends Model
 		return $this->db->get('administrator')->row_array();
 	}
 
-/*
-|---------------------------------------------------------------
-| Пользователи
-|---------------------------------------------------------------
-*/
-	function get_user($id)//Получение одного пользователя по логину для профиля
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
+	function get_user($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('*');
 
 		$query = $this->db->get('users')->row_array();
-		
+
 		if( !$query ) return FALSE;
 
 		$query['created'] = date_smart($query['created']);
@@ -795,21 +795,21 @@ class Admin_mdl extends Model
 
 		switch($query['sex'])
 		{
-    		case 1: $query['sex']  = 'Мужской'; break;
-    		case 2: $query['sex']  = 'Женский'; break;
+			case 1: $query['sex']  = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+			case 2: $query['sex']  = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
 		}
-	
+
 		return $query;
 	}
 
-	function get_users($start_from = FALSE, $per_page, $input)//Расширенный поиск
+	function get_users($start_from = FALSE, $per_page, $input)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	{
 		$keywords = (isset($input['keywords'])) ? $input['keywords'] : '';
 
 		$order_field = (isset($input['order_field'])) ? $input['order_field'] : '';
 		$order_type = (isset($input['order_type'])) ? $input['order_type'] : '';
 
-		if( !empty($order_field) )//Сортировка
+		if( !empty($order_field) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->order_by($order_field, $order_type);
 		}
@@ -818,26 +818,26 @@ class Admin_mdl extends Model
 			$this->db->order_by('created', 'desc');
 		}
 
-		if( $start_from !== FALSE ) 
+		if( $start_from !== FALSE )
 		{
 			$this->db->limit($per_page, $start_from);
 		}
 
-		if( !empty($keywords) )//Ключевые слова
+		if( !empty($keywords) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->like('username', $keywords);
 		}
 
 		$this->db->select('*');
 
-    	$query = $this->db->get('users')->result_array();
+		$query = $this->db->get('users')->result_array();
 
 		$count = count($query);
 
-		for($i = 0; $i < $count; $i++) 
+		for($i = 0; $i < $count; $i++)
 		{
 			$query[$i]['created'] = date_smart($query[$i]['created']);
-	
+
 			$query[$i]['last_login'] = date_smart($query[$i]['last_login']);
 		}
 
@@ -845,7 +845,7 @@ class Admin_mdl extends Model
 	}
 
 
-	function count_users($input)  
+	function count_users($input)
 	{
 		$keywords = (isset($input['keywords'])) ? $input['keywords'] : '';
 		$age_start = (isset($input['age_start'])) ? $input['age_start'] : '';
@@ -858,38 +858,38 @@ class Admin_mdl extends Model
 		$price_2_end = (isset($input['price_2_end'])) ? $input['price_2_end'] : '';
 		$category_array = (isset($input['category_array'])) ? $input['category_array'] : '';
 
-		if( !empty($keywords) )//Ключевые слова
+		if( !empty($keywords) )//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		{
 			$this->db->like('username', $keywords);
 		}
 
 		return $this->db->count_all_results('users');
 	}
-/*
-|---------------------------------------------------------------
-| Дизайны
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
-	function close_designs($designs = '')//Закрыть дизайн
+	function close_designs($designs = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->where_in('id', $designs);
 
 		$this->db->update('designs', array('status' => 3));
 	}
 
-	function moder_designs($designs = '')//Модерирование
+	function moder_designs($designs = '')//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->where_in('id', $designs);
 
 		$this->db->update('designs', array('moder' => 1));
 	}
 
-	function design_category($id)//Категория
+	function design_category($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('category');
 		$query = $this->db->get_where('designs', array('id '=> $id));
- 
+
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -899,23 +899,23 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function count_designs($input = '')  
+	function count_designs($input = '')
 	{
 		$status = (isset($input['status'])) ? $input['status'] : '';
 
-		if( !empty($status) ) 
+		if( !empty($status) )
 		{
 			$this->db->where('status', $status);
 		}
 
-		return $this->db->count_all_results('designs'); 
+		return $this->db->count_all_results('designs');
 	}
 
 	function get_designs($start_from, $per_page, $input = '')
 	{
 		$status = (isset($input['status'])) ? $input['status'] : '';
 
-		if( $start_from !== FALSE ) 
+		if( $start_from !== FALSE )
 		{
 			$this->db->limit($per_page, $start_from);
 		}
@@ -924,34 +924,34 @@ class Admin_mdl extends Model
 
 		$this->db->select('*');
 
-		if( !empty($status) ) 
+		if( !empty($status) )
 		{
 			$this->db->where('status', $status);
 		}
 
 		$query = $this->db->get('designs')->result_array();
-		
+
 		$count = count($query);
 
-		for($i = 0; $i < $count; $i++) 
+		for($i = 0; $i < $count; $i++)
 		{
 			$query[$i]['date'] = date_smart($query[$i]['date']);
 
 			$query[$i]['category'] = $this->categories_mdl->name($query[$i]['category']);
-		
+
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Открыт'; break;
-    			case 2: $query[$i]['status']  = 'Выкуплен'; break;
-    			case 3: $query[$i]['status']  = 'Закрыт'; break;
+				case 1: $query[$i]['status']  = 'пїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+				case 2: $query[$i]['status']  = 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ'; break;
+				case 3: $query[$i]['status']  = 'пїЅпїЅпїЅпїЅпїЅпїЅ'; break;
 			}
 		}
-		
+
 		return $query;
 	}
 
-	function mailer($mailer, $data)//Рассылка
-	{	
+	function mailer($mailer, $data)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	{
 		$count = 0;
 
 		foreach ($mailer as $row)
@@ -972,7 +972,7 @@ class Admin_mdl extends Model
 		return $count;
 	}
 
-	function get_mailer()//Выводим тех кто помечен на рассылку
+	function get_mailer()//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		$this->db->select('users_settings.mailer, users.username, users.surname, users.name, users.email');
 
@@ -981,28 +981,28 @@ class Admin_mdl extends Model
 		$this->db->from('users_settings');
 
 		$this->db->join('users', 'users.id = users_settings.user_id');
-		
+
 		return $this->db->get()->result_array();
 	}
 
-/*
-|---------------------------------------------------------------
-| Страницы
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
-	function get_page($id)//Страница
+	function get_page($id)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-	    $this->db->where('id', $id);
+		$this->db->where('id', $id);
 
 		$this->db->select('*');
 
 		return $this->db->get('pages')->row_array();
 	}
 
-	function get_pages($start_from = FALSE, $per_page)//Страницы
+	function get_pages($start_from = FALSE, $per_page)//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	{
-		if( $start_from !== FALSE ) 
+		if( $start_from !== FALSE )
 		{
 			$this->db->limit($per_page, $start_from);
 		}
@@ -1014,13 +1014,13 @@ class Admin_mdl extends Model
 
 	function count_pages()
 	{
-		return $this->db->count_all_results('pages'); 
+		return $this->db->count_all_results('pages');
 	}
-/*
-|---------------------------------------------------------------
-| Настройки
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 
 	function get_rating()
 	{
@@ -1034,17 +1034,17 @@ class Admin_mdl extends Model
 
 		foreach($data as $row):
 
-			$array[$row['param']] = $row['value'];
+		$array[$row['param']] = $row['value'];
 
 		endforeach;
 
 		return $array;
 	}
-/*
-|---------------------------------------------------------------
-| Настройки
-|---------------------------------------------------------------
-*/
+	/*
+	 |---------------------------------------------------------------
+	 | пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	 |---------------------------------------------------------------
+	 */
 	function get_settings()
 	{
 		$this->db->select('*');
@@ -1057,7 +1057,7 @@ class Admin_mdl extends Model
 
 		foreach($data as $row):
 
-			$array[$row['param']] = $row['value'];
+		$array[$row['param']] = $row['value'];
 
 		endforeach;
 
@@ -1068,7 +1068,7 @@ class Admin_mdl extends Model
 	{
 		foreach($data as $row => $value):
 
-			$this->db->update('settings', array('value' => $value), array('param' =>  $row));
+		$this->db->update('settings', array('value' => $value), array('param' =>  $row));
 
 		endforeach;
 	}
@@ -1077,7 +1077,7 @@ class Admin_mdl extends Model
 	{
 		foreach($data as $row => $value):
 
-			$this->db->update('rating', array('value' => $value), array('param' =>  $row));
+		$this->db->update('rating', array('value' => $value), array('param' =>  $row));
 
 		endforeach;
 	}

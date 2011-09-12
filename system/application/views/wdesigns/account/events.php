@@ -1,5 +1,7 @@
 <script type='text/javascript' src='/templates/js/thickbox/thickbox.js'></script>
-<link rel="stylesheet" type="text/css" href="/templates/js/thickbox/thickbox.css" />
+<link
+	rel="stylesheet" type="text/css"
+	href="/templates/js/thickbox/thickbox.css" />
 
 <script type="text/javascript">
 
@@ -12,7 +14,7 @@ function update(id){
 		url: "/account/update_event",
 		data: dataString,
 		cache: false,
-		success: function(html)//Тут нужно изменить img
+		success: function(html)//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ img
 		{
 			$('#event_'+ id + '').attr('src', '/templates/wdesigns/css/img/message.gif');
 		}
@@ -25,45 +27,37 @@ function update(id){
 <div class="yui-b">
 
 
-<h1><a href="/account/events/">События</a></h1>
-<p class="subtitle">Список ваших событий, персональные сообщения, поступающие платежи.</p>
+<h1><a href="/account/events/">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
+<p class="subtitle">пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
 
-<div class="offers-stateline">Статус: 
-<span>
-<a href="/account/events">все</a> |
-<a href="/account/events/?status=1">новые</a> |
-<a href="/account/events/?status=2">старые</a>
-</span>
-</div>
+<div class="offers-stateline">пїЅпїЅпїЅпїЅпїЅпїЅ: <span> <a href="/account/events">пїЅпїЅпїЅ</a>
+| <a href="/account/events/?status=1">пїЅпїЅпїЅпїЅпїЅ</a> | <a
+	href="/account/events/?status=2">пїЅпїЅпїЅпїЅпїЅпїЅ</a> </span></div>
 
 <? if( !empty($data) ): ?>
 <table class="offers">
-<tr>
-<th style="width:16px;"></th>
-<th class="txtl">Заголовок</th>
-<th style="width:150px;">Дата</th>
-</tr>
-<? foreach($data as $row): ?>
-<tr>
-<td>
-<? if( $row['status'] == 1 ): ?>
-<img src="/templates/wdesigns/css/img/new_message.gif" id="event_<?=$row['id']?>" onclick="update(<?=$row['id']?>)" class="new_event">
-<? else: ?>
-<img src="/templates/wdesigns/css/img/message.gif" id="event_<?=$row['id']?>">
-<? endif; ?>
-</td>
-<td class="title"><?=$row['title']?></td>
-<td class="owner txtc"><?=$row['date']?></td>
-</tr>
-<? endforeach; ?>
+	<tr>
+		<th style="width: 16px;"></th>
+		<th class="txtl">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</th>
+		<th style="width: 150px;">пїЅпїЅпїЅпїЅ</th>
+	</tr>
+	<? foreach($data as $row): ?>
+	<tr>
+		<td><? if( $row['status'] == 1 ): ?> <img
+			src="/templates/wdesigns/css/img/new_message.gif"
+			id="event_<?=$row['id']?>" onclick="update(<?=$row['id']?>)"
+			class="new_event"> <? else: ?> <img
+			src="/templates/wdesigns/css/img/message.gif"
+			id="event_<?=$row['id']?>"> <? endif; ?></td>
+		<td class="title"><?=$row['title']?></td>
+		<td class="owner txtc"><?=$row['date']?></td>
+	</tr>
+	<? endforeach; ?>
 </table>
-<?=$page_links?>
-<? else: ?>
-<p>События отсутствуют.</p>
-<? endif; ?>
-
-
-  </div>
+<?=$page_links?> <? else: ?>
+<p>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
+<? endif; ?></div>
 
 </div>
 <!--/yui-main-->

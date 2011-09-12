@@ -2,76 +2,60 @@
 <div class="yui-b">
 
 
-<h1><a href="/account/cart">Корзина</a></h1>
+<h1><a href="/account/cart">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
 
-<? if( !empty($data) ): ?>
-<?=show_highslide()?>
+<? if( !empty($data) ): ?> <?=show_highslide()?>
 <form action="/account/pay_no_auth" method="post">
 
-<div align="right"><input type="submit" value="Оплатить" /></div>
+<div align="right"><input type="submit" value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" /></div>
 <br />
 <table class="portfolio">
-<tr>
-<th style="width:150px;">Превью</th>
-<th>Название / Краткое описание</th>
-</tr>
-<? foreach($data as $row): ?>
+	<tr>
+		<th style="width: 150px;">пїЅпїЅпїЅпїЅпїЅпїЅ</th>
+		<th>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</th>
+	</tr>
+	<? foreach($data as $row): ?>
 
 
-<tr>
-<td class="thumb" rowspan="3" style="width:150px;">
-<a href="<?=$row['full_image']?>" class="highslide" onclick="return hs.expand(this)">
-<img src="<?=$row['small_image']?>" title="<?=$row['title']?>" />
-</a>
-</td>
-<td class="info">Категория: <?=$row['category']?></td>
-</tr>
+	<tr>
+		<td class="thumb" rowspan="3" style="width: 150px;"><a
+			href="<?=$row['full_image']?>" class="highslide"
+			onclick="return hs.expand(this)"> <img src="<?=$row['small_image']?>"
+			title="<?=$row['title']?>" /> </a></td>
+		<td class="info">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <?=$row['category']?></td>
+	</tr>
 
-<tr>
-<td>
-<h4><a href="/designs/<?=$row['design_id']?>.html"><?=$row['title']?></a></h4>
-<p><?=$row['text']?></p>
-</td>
-</tr>
+	<tr>
+		<td>
+		<h4><a href="/designs/<?=$row['design_id']?>.html"><?=$row['title']?></a></h4>
+		<p><?=$row['text']?></p>
+		</td>
+	</tr>
 
-<tr>
-<td>
-Добавлено: <?=$row['date']?> | 
-<? if( $row['kind'] == 1 ): ?>
-Цена - Покупка: <?=$row['price_1']?>
-<? else: ?>
-Цена - Выкуп: <?=$row['price_2']?>
-<? endif; ?>
-</td>
-</tr>
-<tr>
+	<tr>
+		<td>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <?=$row['date']?> | <? if( $row['kind'] == 1 ): ?> пїЅпїЅпїЅпїЅ
+		- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: <?=$row['price_1']?> <? else: ?> пїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ: <?=$row['price_2']?>
+		<? endif; ?></td>
+	</tr>
+	<tr>
 
 
-<td class="options" colspan="2">
-
-<input name="designs[]" type="checkbox" value="<?=$row['id']?>" checked="checked"/>
-
-<span class="fr">
-<? if( $row['status_id'] == 1 ): ?>
-<a href="/account/buy/<?=$row['design_id']?>"><strong>Оплатить</strong></a> | 
-<? endif; ?>
-<a href="/account/cart_del/<?=$row['id']?>">Удалить</a>
-</span>
-</td>
-</tr>
-<? endforeach; ?>
+		<td class="options" colspan="2"><input name="designs[]"
+			type="checkbox" value="<?=$row['id']?>" checked="checked" /> <span
+			class="fr"> <? if( $row['status_id'] == 1 ): ?> <a
+			href="/account/buy/<?=$row['design_id']?>"><strong>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</strong></a>
+		| <? endif; ?> <a href="/account/cart_del/<?=$row['id']?>">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a>
+		</span></td>
+	</tr>
+	<? endforeach; ?>
 </table>
 
-<div align="right"><input type="submit" value="Оплатить" /></div>
+<div align="right"><input type="submit" value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" /></div>
 
 </form>
-<?=$page_links?>
-<? else: ?>
-<p>Дизайны отсутствуют.</p>
-<? endif; ?>
-
-
-  </div>
+<?=$page_links?> <? else: ?>
+<p>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</p>
+<? endif; ?></div>
 
 </div>
 <!--/yui-main-->

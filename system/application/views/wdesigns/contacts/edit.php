@@ -1,51 +1,49 @@
 <div id="yui-main">
 <div class="yui-b">
 
-<h1> <a href="">Контакты / Сообщения</a> </h1>
+<h1><a href="">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</a></h1>
 
-<p class="subtitle"> Ваши контакты </p>
+<p class="subtitle">пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</p>
 
 
 
-    <div class="rnd">
-      <div>
-        <div>
-          <div><div align="right"><a href="/contacts/add">Создать группу</a></div>
-            <h1 class="market-title">Группы</h1>
-             <div id="msearch">
+<div class="rnd">
 <div>
-<select name="group_id" onchange="document.location.href = '/contacts/index/?group_id=' + this.value"
-<? foreach($groups as $row): ?> 
-<option value="<?=$row['id']?>"><?=$row['name']?> (<?=$row['count_contacts']?>)</option>
+<div>
+<div>
+<div align="right"><a href="/contacts/add">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ</a></div>
+<h1 class="market-title">пїЅпїЅпїЅпїЅпїЅпїЅ</h1>
+<div id="msearch">
+<div><select name="group_id"
+	onchange="document.location.href = '/contacts/index/?group_id=' + this.value"
+	<? foreach($groups as $row): ?><option value="<?=$row['id']?>"><?=$row['name']?> (<?=$row['count_contacts']?>)</option>
 <? endforeach; ?>
-</select>
+</select></div>
 </div>
-           </div>
-        </div>
-      </div>
-    </div>
-   </div>
+</div>
+</div>
+</div>
+</div>
 
 <?=validation_errors()?>
 <div class="rnd">
- <div>
-  <div>
-   <div>
-    <div id="msearch">
-<form action="" method="post">
-Название группы:
+<div>
+<div>
+<div>
+<div id="msearch">
+<form action="" method="post">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ:
 <div><input type="text" name="name" class="mtext" value="<?=$name?>"></div>
-<div><input type="submit" value="Редактировать"></div>
+<div><input type="submit" value="пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"></div>
 </form>
-     </div>
-   </div>
-  </div>
- </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 
 
-  </div>
+</div>
 
 </div>
 <!--/yui-main-->
