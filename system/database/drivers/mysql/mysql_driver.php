@@ -34,14 +34,14 @@ class CI_DB_mysql_driver extends CI_DB {
 
 	// The character used for escaping
 	var	$_escape_char = '`';
-
+	
 	/**
 	 * Whether to use the MySQL "delete hack" which allows the number
 	 * of affected rows to be shown. Uses a preg_replace when enabled,
 	 * adding a bit more processing to all queries.
-	 */
+	 */	
 	var $delete_hack = TRUE;
-
+	
 	/**
 	 * The syntax to count rows is slightly different across different
 	 * database engines, so this string appears in each driver and is
@@ -55,17 +55,17 @@ class CI_DB_mysql_driver extends CI_DB {
 	 *
 	 * @access	private called by the base class
 	 * @return	resource
-	 */
+	 */	
 	function db_connect()
 	{
 		if ($this->port != '')
 		{
 			$this->hostname .= ':'.$this->port;
 		}
-
+		
 		return @mysql_connect($this->hostname, $this->username, $this->password, TRUE);
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -73,7 +73,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 *
 	 * @access	private called by the base class
 	 * @return	resource
-	 */
+	 */	
 	function db_pconnect()
 	{
 		if ($this->port != '')
@@ -83,7 +83,7 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		return @mysql_pconnect($this->hostname, $this->username, $this->password);
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -91,7 +91,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 *
 	 * @access	private called by the base class
 	 * @return	resource
-	 */
+	 */	
 	function db_select()
 	{
 		return @mysql_select_db($this->database, $this->conn_id);
@@ -113,7 +113,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	}
 
 	// --------------------------------------------------------------------
-
+	
 	/**
 	 * Version number query string
 	 *
@@ -133,13 +133,13 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * @access	private called by the base class
 	 * @param	string	an SQL query
 	 * @return	resource
-	 */
+	 */	
 	function _execute($sql)
 	{
 		$sql = $this->_prep_query($sql);
 		return @mysql_query($sql, $this->conn_id);
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -150,7 +150,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * @access	private called by execute()
 	 * @param	string	an SQL query
 	 * @return	string
-	 */
+	 */	
 	function _prep_query($sql)
 	{
 		// "DELETE FROM TABLE" returns 0 affected rows This hack modifies
@@ -162,7 +162,7 @@ class CI_DB_mysql_driver extends CI_DB {
 				$sql = preg_replace("/^\s*DELETE\s+FROM\s+(\S+)\s*$/", "DELETE FROM \\1 WHERE 1=1", $sql);
 			}
 		}
-
+		
 		return $sql;
 	}
 
@@ -172,15 +172,15 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * Begin Transaction
 	 *
 	 * @access	public
-	 * @return	bool
-	 */
+	 * @return	bool		
+	 */	
 	function trans_begin($test_mode = FALSE)
 	{
 		if ( ! $this->trans_enabled)
 		{
 			return TRUE;
 		}
-
+		
 		// When transactions are nested we only begin/commit/rollback the outermost ones
 		if ($this->_trans_depth > 0)
 		{
@@ -191,7 +191,7 @@ class CI_DB_mysql_driver extends CI_DB {
 		// If the $test_mode flag is set to TRUE transactions will be rolled back
 		// even if the queries produce a successful result.
 		$this->_trans_failure = ($test_mode === TRUE) ? TRUE : FALSE;
-
+		
 		$this->simple_query('SET AUTOCOMMIT=0');
 		$this->simple_query('START TRANSACTION'); // can also be BEGIN or BEGIN WORK
 		return TRUE;
@@ -203,8 +203,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * Commit Transaction
 	 *
 	 * @access	public
-	 * @return	bool
-	 */
+	 * @return	bool		
+	 */	
 	function trans_commit()
 	{
 		if ( ! $this->trans_enabled)
@@ -229,8 +229,8 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * Rollback Transaction
 	 *
 	 * @access	public
-	 * @return	bool
-	 */
+	 * @return	bool		
+	 */	
 	function trans_rollback()
 	{
 		if ( ! $this->trans_enabled)
@@ -248,7 +248,7 @@ class CI_DB_mysql_driver extends CI_DB {
 		$this->simple_query('SET AUTOCOMMIT=1');
 		return TRUE;
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -258,17 +258,17 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * @param	string
 	 * @return	string
 	 */
-	function escape_str($str)
-	{
+	function escape_str($str)	
+	{	
 		if (is_array($str))
 		{
 			foreach($str as $key => $val)
-			{
+	   		{
 				$str[$key] = $this->escape_str($val);
-			}
-			 
-			return $str;
-		}
+	   		}
+   		
+	   		return $str;
+	   	}
 
 		if (function_exists('mysql_real_escape_string') AND is_resource($this->conn_id))
 		{
@@ -283,7 +283,7 @@ class CI_DB_mysql_driver extends CI_DB {
 			return addslashes($str);
 		}
 	}
-
+		
 	// --------------------------------------------------------------------
 
 	/**
@@ -296,7 +296,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		return @mysql_affected_rows($this->conn_id);
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -328,7 +328,7 @@ class CI_DB_mysql_driver extends CI_DB {
 		{
 			return 0;
 		}
-
+	
 		$query = $this->query($this->_count_string . $this->_protect_identifiers('numrows') . " FROM " . $this->_protect_identifiers($table, TRUE, NULL, FALSE));
 
 		if ($query->num_rows() == 0)
@@ -353,7 +353,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	function _list_tables($prefix_limit = FALSE)
 	{
-		$sql = "SHOW TABLES FROM ".$this->_escape_char.$this->database.$this->_escape_char;
+		$sql = "SHOW TABLES FROM ".$this->_escape_char.$this->database.$this->_escape_char;	
 
 		if ($prefix_limit !== FALSE AND $this->dbprefix != '')
 		{
@@ -362,7 +362,7 @@ class CI_DB_mysql_driver extends CI_DB {
 
 		return $sql;
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -407,7 +407,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		return mysql_error($this->conn_id);
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -443,26 +443,26 @@ class CI_DB_mysql_driver extends CI_DB {
 		{
 			if (strpos($item, '.'.$id) !== FALSE)
 			{
-				$str = $this->_escape_char. str_replace('.', $this->_escape_char.'.', $item);
-
+				$str = $this->_escape_char. str_replace('.', $this->_escape_char.'.', $item);  
+				
 				// remove duplicates if the user already included the escape
 				return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
-			}
+			}		
 		}
-
+		
 		if (strpos($item, '.') !== FALSE)
 		{
-			$str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;
+			$str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;			
 		}
 		else
 		{
 			$str = $this->_escape_char.$item.$this->_escape_char;
 		}
-
+	
 		// remove duplicates if the user already included the escape
 		return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
 	}
-		
+			
 	// --------------------------------------------------------------------
 
 	/**
@@ -481,12 +481,12 @@ class CI_DB_mysql_driver extends CI_DB {
 		{
 			$tables = array($tables);
 		}
-
+		
 		return '('.implode(', ', $tables).')';
 	}
 
 	// --------------------------------------------------------------------
-
+	
 	/**
 	 * Insert statement
 	 *
@@ -499,10 +499,10 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * @return	string
 	 */
 	function _insert($table, $keys, $values)
-	{
+	{	
 		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -524,17 +524,17 @@ class CI_DB_mysql_driver extends CI_DB {
 		{
 			$valstr[] = $key." = ".$val;
 		}
-
+		
 		$limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-
+		
 		$orderby = (count($orderby) >= 1)?' ORDER BY '.implode(", ", $orderby):'';
-
+	
 		$sql = "UPDATE ".$table." SET ".implode(', ', $valstr);
 
 		$sql .= ($where != '' AND count($where) >=1) ? " WHERE ".implode(" ", $where) : '';
 
 		$sql .= $orderby.$limit;
-
+		
 		return $sql;
 	}
 
@@ -550,12 +550,12 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * @access	public
 	 * @param	string	the table name
 	 * @return	string
-	 */
+	 */	
 	function _truncate($table)
 	{
 		return "TRUNCATE ".$table;
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -568,7 +568,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * @param	array	the where clause
 	 * @param	string	the limit clause
 	 * @return	string
-	 */
+	 */	
 	function _delete($table, $where = array(), $like = array(), $limit = FALSE)
 	{
 		$conditions = '';
@@ -586,7 +586,7 @@ class CI_DB_mysql_driver extends CI_DB {
 		}
 
 		$limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
-
+	
 		return "DELETE FROM ".$table.$conditions.$limit;
 	}
 
@@ -604,7 +604,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 * @return	string
 	 */
 	function _limit($sql, $limit, $offset)
-	{
+	{	
 		if ($offset == 0)
 		{
 			$offset = '';
@@ -613,7 +613,7 @@ class CI_DB_mysql_driver extends CI_DB {
 		{
 			$offset .= ", ";
 		}
-
+		
 		return $sql."LIMIT ".$offset.$limit;
 	}
 
@@ -630,7 +630,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		@mysql_close($conn_id);
 	}
-
+	
 }
 
 

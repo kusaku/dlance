@@ -19,7 +19,7 @@ class Blogs extends Controller
 		if( $this->users_mdl->logged_in() )
 		{
 			$this->user_id = $this->session->userdata('id');
-
+	
 			$user = $this->users_mdl->get_user_by_id($this->user_id);
 
 			$this->username = $user->username;
@@ -29,12 +29,12 @@ class Blogs extends Controller
 			$this->team = $user->team;
 		}
 	}
-	/*
-	 |---------------------------------------------------------------
-	 | �����
-	 |---------------------------------------------------------------
-	 */
-	function index($start_page = 0)
+/*
+|---------------------------------------------------------------
+| Блоги
+|---------------------------------------------------------------
+*/
+    function index($start_page = 0)  
 	{
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 
@@ -51,7 +51,7 @@ class Blogs extends Controller
 
 		$input = array();
 
-		$title = '�����';
+		$title = 'Блоги';
 
 		if( !empty($_GET['category']) )
 		{
@@ -62,7 +62,7 @@ class Blogs extends Controller
 				$category = 1;
 			}
 
-			$title = $this->blogs_mdl->name($category).' | '.$title;//������� ��������� ���������
+			$title = $this->blogs_mdl->name($category).' | '.$title;//Выводим заголовок категории
 
 			$input['category'] = $category;
 
@@ -79,7 +79,7 @@ class Blogs extends Controller
 
 		$data['page_links'] = $this->pagination->create_links();
 
-		if( !empty($url) )
+		if( !empty($url) ) 
 		{
 			$url = implode ("&", $url);
 			$data['page_links'] = str_replace( '">', '/?'.$url.'">',$data['page_links']);
@@ -89,28 +89,28 @@ class Blogs extends Controller
 
 
 		/**
-		 * ����
-		 */
-		$data['categories'] = $this->blogs_mdl->get_categories();//���������
+		* Блок
+		*/
+		$data['categories'] = $this->blogs_mdl->get_categories();//категории
 
 		$this->template->build('blogs/index', $data, $title);
-	}
-	/*
-	 |---------------------------------------------------------------
-	 | ��������
-	 |---------------------------------------------------------------
-	 */
-	function view($id = '')
+    }
+/*
+|---------------------------------------------------------------
+| Просмотр
+|---------------------------------------------------------------
+*/
+    function view($id = '') 
 	{
 		if( !$data = $this->blogs_mdl->get($id) )
 		{
 			show_404('page');
 		}
 
-		$this->load->helper('smiley');//������
-		$this->load->library('table');//�������� ������
+		$this->load->helper('smiley');//Смайлы
+		$this->load->library('table');//Создание таблиц
 
-		$data['check'] = $this->_check($id, $data['user_id']);//��������
+		$data['check'] = $this->_check($id, $data['user_id']);//Проверка
 
 		$data['category_id'] = $data['category'];
 
@@ -120,42 +120,42 @@ class Blogs extends Controller
 
 		$data['username']= $this->users_mdl->get_username($data['user_id']);
 
-		//�����������
+		//Комментарии
 		if( $this->input->post('newcomment') and $this->users_mdl->logged_in() )
 		{
-			$rules = array
+			$rules = array 
 			(
-			array (
+				array (
 					'field' => 'text', 
-					'label' => '�����',
+					'label' => 'Текст',
 					'rules' => 'required|max_length[10000]'
-					)
-					);
+				)
+			);
 
-					$commentdata = array (
+			$commentdata = array (
 				'date' => now(),
 				'blog_id' => $id,
 				'user_id' => $this->user_id,
 				'text' => $this->input->post('text')
-					);
+			);
+	
+			$this->form_validation->set_rules($rules);
 
-					$this->form_validation->set_rules($rules);
+			if( $this->form_validation->run() ) 
+			{
+				$this->blogs_mdl->add_comment($commentdata);
 
-					if( $this->form_validation->run() )
-					{
-						$this->blogs_mdl->add_comment($commentdata);
-
-						redirect('blogs/'.$id.'.html');
-					}
+				redirect('blogs/'.$id.'.html');
+			}
 		}
 
 		$comments['data'] = $this->blogs_mdl->get_comments($id);
 
 
-		//������
+		//Смайлы
 		$image_array = get_clickable_smileys('/img/smileys/');
 
-		$col_array = $this->table->make_columns($image_array, 20);
+		$col_array = $this->table->make_columns($image_array, 20);		
 			
 		$comments['smiley'] = $this->table->generate($col_array);
 
@@ -165,22 +165,22 @@ class Blogs extends Controller
 
 
 		/**
-		 * ����
-		 */
-		$data['categories'] = $this->blogs_mdl->get_categories();//���������
+		* Блок
+		*/
+		$data['categories'] = $this->blogs_mdl->get_categories();//категории
 
 
 
 
 
-		$this->template->build('blogs/view', $data, $title = ''.$data['title'].' | �����');
+		$this->template->build('blogs/view', $data, $title = ''.$data['title'].' | Блоги');
 	}
-	/*
-	 |---------------------------------------------------------------
-	 | ��������
-	 |---------------------------------------------------------------
-	 */
-	function del($id = '')
+/*
+|---------------------------------------------------------------
+| Удаление
+|---------------------------------------------------------------
+*/
+    function del($id = '') 
 	{
 		if( !$this->errors->access() )
 		{
@@ -189,72 +189,72 @@ class Blogs extends Controller
 
 		if(  !$this->_check_action($id) )
 		{
-			show_error('������� ������ ������������� �������� ���� ���������� �������� ���������.');
+			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
 		}
 
 		$this->blogs_mdl->del($id);
 
 		redirect('account/blogs');
 	}
-	/*
-	 |---------------------------------------------------------------
-	 | ����������
-	 |---------------------------------------------------------------
-	 */
-	function add()
+/*
+|---------------------------------------------------------------
+| Добавление
+|---------------------------------------------------------------
+*/
+    function add() 
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
-
-		$rules = array
+	
+		$rules = array 
 		(
-		array (
+			array (
 				'field' => 'title', 
-				'label' => '���������',
+				'label' => 'Заголовок',
 				'rules' => 'required|text|max_length[64]'
-				),
-				array (
+			),
+			array (
 				'field' => 'text', 
-				'label' => '�����',
+				'label' => 'Текст',
 				'rules' => 'required|max_length[10000]'
-				),
-				array (
+			),
+			array (
 				'field' => 'category_id', 
-				'label' => '���������',
+				'label' => 'Категория',
 				'rules' => 'required'
-				)
-				);
+			)
+		);
 
-				$data = array (
+		$data = array (
 			'date' => now(),
 			'title' => $this->input->post('title'),
 			'user_id' => $this->user_id,
 			'text' => htmlspecialchars($this->input->post('text')),
 			'descr' => character_limiter($this->input->post('text'), 255),
 			'category' => $this->input->post('category_id')
-				);
+		);
 
-				$this->form_validation->set_rules($rules);
+		$this->form_validation->set_rules($rules);
 
-				if( $this->form_validation->run() )
-				{
-					$this->blogs_mdl->add($data);
+		if( $this->form_validation->run() ) 
+		{
+			$this->blogs_mdl->add($data);
 
-					redirect('blogs/');
-				}
+			redirect('blogs/');
+		}
 
-				$data['categories'] = $this->blogs_mdl->get_categories();
+		$data['categories'] = $this->blogs_mdl->get_categories();
 
-				$this->template->build('blogs/add', $data, $title = '�������� ������');
+		$this->template->build('blogs/add', $data, $title = 'Добавить запись');
 	}
-	/*
-	 |---------------------------------------------------------------
-	 | ��������������
-	 |---------------------------------------------------------------
-	 */
-	function edit($id)
+/*
+|---------------------------------------------------------------
+| Редактирование
+|---------------------------------------------------------------
+*/
+    function edit($id) 
 	{
 		if( !$this->errors->access() )
 		{
@@ -270,78 +270,78 @@ class Blogs extends Controller
 
 		if(  !$data['check'] )
 		{
-			show_error('������� ������ ������������� �������� ���� ���������� �������� ���������.');
+			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
 		}
 
-		$rules = array
+		$rules = array 
 		(
-		array (
+			array (
 				'field' => 'title', 
-				'label' => '���������',
+				'label' => 'Заголовок',
 				'rules' => 'required|text|max_length[64]'
-				),
-				array (
+			),
+			array (
 				'field' => 'text', 
-				'label' => '�����',
+				'label' => 'Текст',
 				'rules' => 'required|max_length[10000]'
-				),
-				array (
+			),
+			array (
 				'field' => 'category_id', 
-				'label' => '���������',
+				'label' => 'Категория',
 				'rules' => 'required'
-				)
-				);
+			)
+		);
 
-				$blogdata = array (
+		$blogdata = array (
 			'title' => $this->input->post('title'),
 			'text' => htmlspecialchars($this->input->post('text')),
 			'descr' => character_limiter($this->input->post('text'), 255),
 			'category' => $this->input->post('category_id')
-				);
+		);
 
-				$this->form_validation->set_rules($rules);
+		$this->form_validation->set_rules($rules);
 
-				if( $this->form_validation->run() )
-				{
-					$this->blogs_mdl->edit($id, $blogdata);
+		if( $this->form_validation->run() ) 
+		{
+			$this->blogs_mdl->edit($id, $blogdata);
 
-					redirect('blogs/'.$id.'.html');
-				}
+			redirect('blogs/'.$id.'.html');
+		}
 
-				$data['categories'] = $this->blogs_mdl->get_categories();
+		$data['categories'] = $this->blogs_mdl->get_categories();
 
-				$this->template->build('blogs/edit', $data, $title = '������������� ������');
+		$this->template->build('blogs/edit', $data, $title = 'Редактировать запись');
 	}
-	/*
-	 |---------------------------------------------------------------
-	 | �������, ��������
-	 |---------------------------------------------------------------
-	 */
-	function _check_action($id = '')
+/*
+|---------------------------------------------------------------
+| Функции, проверки
+|---------------------------------------------------------------
+*/
+    function _check_action($id = '') 
 	{
-		if( $this->blogs_mdl->check($id, $this->user_id) )//���� ������� ������ � ��� ����������� ������������
+		if( $this->blogs_mdl->check($id, $this->user_id) )//Если найдена запись и она принадлежит пользователю
 		{
 			return TRUE;
 		}
-
+		
 		return FALSE;
 	}
 
-	function _check($id = '', $user_id = '')//�������� �������������� �����������, $id - �� �����, $user_id ������������ ��� ����
+	function _check($id = '', $user_id = '')//Проверка редактирования модератором, $id - ид блога, $user_id пользователь чей блог
 	{
 		$userdata = $this->users_mdl->get_user($user_id);
 
-		if( $userdata['team'] == 2 )//���� ���� ����������
+		if( $userdata['team'] == 2 )//Если блог модератора
 		{
 			if(  !$this->_check_action($id) )
 			{
 				return FALSE;
 			}
 		}
-		else//���� �������� ������������ (����� ������������� ���������)
+		else//Блог обычного пользователя (может редактировать модератор)
 		{
 
-			if( $this->team != 2 )//���� �� ���������, ���������
+			if( $this->team != 2 )//ЕСЛИ НЕ МОДЕРАТОР, проверяем
 			{
 				if(  !$this->_check_action($id) )
 				{
@@ -350,20 +350,20 @@ class Blogs extends Controller
 			}
 
 		}
-
+		
 		return TRUE;
 	}
 
 	function _category_check($category)
 	{
-		if( $this->blogs_mdl->category_check($category) )
-		{
+	    if( $this->blogs_mdl->category_check($category) )
+	    {
 			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
+	    }
+	    else
+	    {
+	        return FALSE;
+	    }
 	}
 
 
@@ -371,18 +371,18 @@ class Blogs extends Controller
 
 
 
-	/*
-	 |---------------------------------------------------------------
-	 | ���������
-	 |---------------------------------------------------------------
-	 */
+/*
+|---------------------------------------------------------------
+| МОДЕРАТОР
+|---------------------------------------------------------------
+*/
 
-	/*
-	 |---------------------------------------------------------------
-	 | �������������� �����������
-	 |---------------------------------------------------------------
-	 */
-	function comments_edit($id)
+/*
+|---------------------------------------------------------------
+| Редактирование комментария
+|---------------------------------------------------------------
+*/
+    function comments_edit($id) 
 	{
 		if( !$this->errors->access() )
 		{
@@ -396,35 +396,35 @@ class Blogs extends Controller
 
 		if(  !$this->_check_comment($id, $data['user_id']) )
 		{
-			show_error('������� ������ ������������� �������� ���� ���������� �������� ���������.');
+			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
 		}
 
-		$rules = array
+		$rules = array 
 		(
-		array (
+			array (
 				'field' => 'text', 
-				'label' => '�����',
+				'label' => 'Текст',
 				'rules' => 'required|max_length[10000]'
-				)
-				);
+			)
+		);
 
-				$commentdata = array (
+		$commentdata = array (
 			'text' => htmlspecialchars($this->input->post('text'))
-				);
+		);
 
-				$this->form_validation->set_rules($rules);
+		$this->form_validation->set_rules($rules);
 
-				if( $this->form_validation->run() )
-				{
-					$this->blogs_mdl->edit_comment($id, $commentdata);
+		if( $this->form_validation->run() ) 
+		{
+			$this->blogs_mdl->edit_comment($id, $commentdata);
 
-					redirect('blogs/'.$data['blog_id'].'.html');
-				}
+			redirect('blogs/'.$data['blog_id'].'.html');
+		}
 
-				$this->template->build('blogs/comments_edit', $data, $title = '������������� �����������');
+		$this->template->build('blogs/comments_edit', $data, $title = 'Редактировать комментарий');
 	}
 
-	function comments_del($id = '')
+    function comments_del($id = '')
 	{
 		if( !$this->errors->access() )
 		{
@@ -438,7 +438,7 @@ class Blogs extends Controller
 
 		if(  !$this->_check_comment($id, $data['user_id']) )
 		{
-			show_error('������� ������ ������������� �������� ���� ���������� �������� ���������.');
+			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
 		}
 
 		$this->blogs_mdl->del_comment($id);
@@ -446,21 +446,21 @@ class Blogs extends Controller
 		redirect('blogs/'.$data['blog_id'].'.html');
 	}
 
-	function _check_comment($id = '', $user_id = '')//�������� �������������� �����������, $id - �� �����, $user_id ������������ ��� ����
+	function _check_comment($id = '', $user_id = '')//Проверка редактирования модератором, $id - ид блога, $user_id пользователь чей блог
 	{
 		$userdata = $this->users_mdl->get_user($user_id);
 
-		if( $userdata['team'] == 2 )//���� ������� ����������
+		if( $userdata['team'] == 2 )//Если коммент модератора
 		{
 			if(  !$this->_check_action_comment($id) )
 			{
 				return FALSE;
 			}
 		}
-		else//������� �������� ������������ (����� ������������� ���������)
+		else//коммент обычного пользователя (может редактировать модератор)
 		{
 
-			if( $this->team != 2 )//���� �� ���������, ���������
+			if( $this->team != 2 )//ЕСЛИ НЕ МОДЕРАТОР, проверяем
 			{
 				if(  !$this->_check_action_comment($id) )
 				{
@@ -469,17 +469,17 @@ class Blogs extends Controller
 			}
 
 		}
-
+		
 		return TRUE;
 	}
 
-	function _check_action_comment($id = '')
+    function _check_action_comment($id = '') 
 	{
-		if( $this->blogs_mdl->check_comment($id, $this->user_id) )//���� ������� ������ � ��� ����������� ������������
+		if( $this->blogs_mdl->check_comment($id, $this->user_id) )//Если найдена запись и она принадлежит пользователю
 		{
 			return TRUE;
 		}
-
+		
 		return FALSE;
 	}
 }

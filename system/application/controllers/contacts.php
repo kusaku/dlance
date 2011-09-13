@@ -26,7 +26,7 @@ class Contacts extends Controller
 		}
 	}
 
-	function index($start_page = 0)
+	function index($start_page = 0) 
 	{
 		if( !$this->errors->access() )
 		{
@@ -44,11 +44,11 @@ class Contacts extends Controller
 			$start_page = 0;
 		}
 
-		if( !empty($_GET['group_id']) )//���������
+		if( !empty($_GET['group_id']) )//Категория
 		{
 			$group_id = $_GET['group_id'];
 
-			if( !$this->contacts_mdl->check_group($group_id) )//���� ������ �� ����������
+			if( !$this->contacts_mdl->check_group($group_id) )//Если группа не существует
 			{
 				$group_id = 1;
 			}
@@ -67,7 +67,7 @@ class Contacts extends Controller
 
 
 		$this->load->library('pagination');
-
+		
 
 		$config['base_url'] = base_url().'/contacts/index/';
 		$config['total_rows'] = $this->contacts_mdl->count_contacts($group_id, $this->user_id);
@@ -79,7 +79,7 @@ class Contacts extends Controller
 
 		$contacts['page_links'] = $this->pagination->create_links();
 
-		if( !empty($url) )
+		if( !empty($url) ) 
 		{
 			$url = implode ("&", $url);
 
@@ -88,42 +88,42 @@ class Contacts extends Controller
 
 		$data['contacts'] = $this->load->view('wdesigns/contacts/contacts', $contacts, TRUE);
 
-		$this->template->build('contacts/view', $data, $title = '�������� / ���������');
-	}
+		$this->template->build('contacts/view', $data, $title = 'Контакты / Сообщения');
+    }
 
-	function add()
+	function add() 
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		$rules = array
+		$rules = array 
 		(
-		array (
+			array (
 				'field' => 'name', 
-				'label' => '��������',
+				'label' => 'Название',
 				'rules' => 'required|max_length[64]'
-				)
-				);
+			)
+		);
 
-				$data = array (
+		$data = array (
 			'user_id' => $this->user_id,
 			'name' => htmlspecialchars($this->input->post('name'))
-				);
+		);
+		
+		$this->form_validation->set_rules($rules);
 
-				$this->form_validation->set_rules($rules);
+		if( $this->form_validation->run() ) 
+		{
+			$this->contacts_mdl->add_group($data);
+			
+			redirect('contacts/');
+		}
 
-				if( $this->form_validation->run() )
-				{
-					$this->contacts_mdl->add_group($data);
-						
-					redirect('contacts/');
-				}
+		$data['groups'] = $this->contacts_mdl->get_groups();
 
-				$data['groups'] = $this->contacts_mdl->get_groups();
-
-				$this->template->build('contacts/add', $data, $title = '�������� / ���������');
+		$this->template->build('contacts/add', $data, $title = 'Контакты / Сообщения');
 	}
 
 	function move()
@@ -133,16 +133,16 @@ class Contacts extends Controller
 			return;
 		}
 
-		$id = $this->input->post('users');//������ � id ���������
+		$id = $this->input->post('users');//массив с id контактов
 
-		$group_id = $this->input->post('group_id');//������ ���� ����� ���������� ��������
+		$group_id = $this->input->post('group_id');//группа куда будем перемещать контакты
 
 		$this->contacts_mdl->move_contacts($id, $group_id);
 
 		redirect('contacts/index/?group_id='.$group_id);
 	}
 
-	function send($username = '', $start_page = 0)//����� ������� ��� ��������� � ����� �������� ���������
+	function send($username = '', $start_page = 0)//Здесь выводим все сообщения и форму отправки сообщений
 	{
 		if( !$this->errors->access() )
 		{
@@ -159,176 +159,176 @@ class Contacts extends Controller
 			redirect('contacts/');
 		}
 
-		$rules = array
+		$rules = array 
 		(
-		array (
+			array (
 				'field' => 'text', 
-				'label' => '�����',
+				'label' => 'Текст',
 				'rules' => 'required|text|max_length[1000]'
-				)
-				);
+			)
+		);
 
-				$data = array (
-			'sender_id' => $this->user_id,//������������ �����������
-			'recipient_id' => $contact,//����������
+		$data = array (
+			'sender_id' => $this->user_id,//Пользователь отправитель
+			'recipient_id' => $contact,//Получатель
 			'date' => now(),
 			'text' => $this->input->post('text')
-				);
+		);
 
-				$this->form_validation->set_rules($rules);
+		$this->form_validation->set_rules($rules);
 
-				if( $this->form_validation->run() )
-				{
-					$this->contacts_mdl->send_message($data);
+		if( $this->form_validation->run() ) 
+		{
+			$this->contacts_mdl->send_message($data);
 
-					if( !$this->contacts_mdl->count_contacts($group_id = '', $this->user_id, $contact) )
-					{
-						$data = array (//��������� ���� � ����
+			if( !$this->contacts_mdl->count_contacts($group_id = '', $this->user_id, $contact) )
+			{
+				$data = array (//Добавляем чела к себе
 					'user_id' => $this->user_id,
 					'contact' => $contact,
 					'group_id' => 1,
 					'last_msg' => now()
-						);
+				);
+				
+				$this->contacts_mdl->add_contact($data);
+			}
 
-						$this->contacts_mdl->add_contact($data);
-					}
 
-
-					if( !$this->contacts_mdl->count_contacts($group_id = '', $contact, $this->user_id) )//��������� ���� �� �� � �������� � ������������
-					{
-						$data = array (//��������� ��� � ����������
+			if( !$this->contacts_mdl->count_contacts($group_id = '', $contact, $this->user_id) )//Проверяем есть ли мы в контакте у пользователя
+			{
+				$data = array (//Добавляем нас к пользовелю
 					'user_id' => $contact,
 					'contact' => $this->user_id,
 					'group_id' => 1,
 					'last_msg' => now()
-						);
+				);
+				
+				$this->contacts_mdl->add_contact($data);
+			}
 
-						$this->contacts_mdl->add_contact($data);
-					}
+			$this->contacts_mdl->update_last_msg($this->user_id, $contact);//Обновляем дату последнего сообщения
 
-					$this->contacts_mdl->update_last_msg($this->user_id, $contact);//��������� ���� ���������� ���������
+			$this->contacts_mdl->update_last_msg($contact, $this->user_id);
+/*
+|---------------------------------------------------------------
+| Получатель сообщение
+|---------------------------------------------------------------
+*/
+			$this->events->create($contact, 'Получено персональное сообщение', 'receipt_message');#Событие с репутацией
+/*
+|---------------------------------------------------------------
+| Отправитель сообщения
+|---------------------------------------------------------------
+*/
+			$this->events->create($this->user_id, 'Отправлено персональное сообщение', 'send_message');#Событие с репутацией
 
-					$this->contacts_mdl->update_last_msg($contact, $this->user_id);
-					/*
-					 |---------------------------------------------------------------
-					 | ���������� ���������
-					 |---------------------------------------------------------------
-					 */
-					$this->events->create($contact, '�������� ������������ ���������', 'receipt_message');#������� � ����������
-					/*
-					|---------------------------------------------------------------
-					| ����������� ���������
-					|---------------------------------------------------------------
-					*/
-					$this->events->create($this->user_id, '���������� ������������ ���������', 'send_message');#������� � ����������
+			redirect('contacts/send/'.$username.'');
+		}
 
-					redirect('contacts/send/'.$username.'');
-				}
+		$data = $this->users_mdl->get_user($contact);//Выводим пользователя
 
-				$data = $this->users_mdl->get_user($contact);//������� ������������
+		$per_page = 10;
 
-				$per_page = 10;
+		$start_page = intval($start_page);
+		if( $start_page < 0 )
+		{
+			$start_page = 0;
+		}
 
-				$start_page = intval($start_page);
-				if( $start_page < 0 )
-				{
-					$start_page = 0;
-				}
+		$this->load->library('pagination');
+		
+		$config['uri_segment'] = '4';
+		$config['base_url'] = base_url().'/contacts/send/'.$username;
+		$config['total_rows'] = $this->contacts_mdl->count_messages($contact);
+		$config['per_page'] = $per_page;
 
-				$this->load->library('pagination');
+		$this->pagination->initialize($config);
 
-				$config['uri_segment'] = '4';
-				$config['base_url'] = base_url().'/contacts/send/'.$username;
-				$config['total_rows'] = $this->contacts_mdl->count_messages($contact);
-				$config['per_page'] = $per_page;
+		$data['messages'] = $this->contacts_mdl->get_messages($start_page, $per_page, $contact);
 
-				$this->pagination->initialize($config);
+		$data['page_links'] = $this->pagination->create_links();
 
-				$data['messages'] = $this->contacts_mdl->get_messages($start_page, $per_page, $contact);
+		$data['black_list'] = $this->_black_list($contact);
 
-				$data['page_links'] = $this->pagination->create_links();
+		$data['created'] = date_smart($data['created']);
 
-				$data['black_list'] = $this->_black_list($contact);
+		$data['last_login'] = date_smart($data['last_login']);
 
-				$data['created'] = date_smart($data['created']);
-
-				$data['last_login'] = date_smart($data['last_login']);
-
-				$this->template->build('contacts/send', $data, $title = '�������� / ���������');
+		$this->template->build('contacts/send', $data, $title = 'Контакты / Сообщения');
 	}
 
-	function _black_list($contact)//��������� ��������� �� �� � ������ ������ � ��������
+	function _black_list($contact)//Проверяем находимся ли мы в черном списке у контакта
 	{
-		if( $this->contacts_mdl->count_contacts(4, $contact, $this->user_id) )//4 - ������ ������
+		if( $this->contacts_mdl->count_contacts(4, $contact, $this->user_id) )//4 - черный список
 		{
 			return TRUE;
 		}
-
+	
 		return FALSE;
 	}
 
-	function del($group_id = '')
+	function del($group_id = '') 
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		if( !$this->contacts_mdl->check_group($group_id, $this->user_id) )//���� ����� ������ �� ���������� � ������������
+		if( !$this->contacts_mdl->check_group($group_id, $this->user_id) )//Если такая группа не существует у пользователя
 		{
-			show_error('������� ������ ������������� �������� ���� ���������� �������� ���������.');
+			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
 		}
 
 		if( $this->contacts_mdl->count_contacts($group_id, $this->user_id) > 0 )
 		{
-			show_error('������ ������� �� ������ ������.');
+			show_error('Нельзя удалить не пустую группу.');
 		}
 
 		$this->contacts_mdl->del_group($group_id);
-
+		
 		redirect('contacts/');
 	}
 
-	function edit($group_id = '')
+	function edit($group_id = '') 
 	{
 		if( !$this->errors->access() )
 		{
 			return;
 		}
 
-		if( !$this->contacts_mdl->check_group($group_id, $this->user_id) )//���� ����� ������ �� ���������� � ������������
+		if( !$this->contacts_mdl->check_group($group_id, $this->user_id) )//Если такая группа не существует у пользователя
 		{
-			show_error('������� ������ ������������� �������� ���� ���������� �������� ���������.');
+			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
 		}
 
-		$rules = array
+		$rules = array 
 		(
-		array (
+			array (
 				'field' => 'name', 
-				'label' => '��������',
+				'label' => 'Название',
 				'rules' => 'required|text|max_length[64]'
-				)
-				);
+			)
+		);
 
-				$data = array (
+		$data = array (
 			'user_id' => $this->user_id,
 			'name' => htmlspecialchars($this->input->post('name'))
-				);
+		);
+		
 
+		$this->form_validation->set_rules($rules);
 
-				$this->form_validation->set_rules($rules);
+		if( $this->form_validation->run() ) 
+		{
+			$this->contacts_mdl->edit_group($group_id, $data);
 
-				if( $this->form_validation->run() )
-				{
-					$this->contacts_mdl->edit_group($group_id, $data);
+			redirect('contacts/');
+		}
 
-					redirect('contacts/');
-				}
+		$data = $this->contacts_mdl->get_group($group_id);
 
-				$data = $this->contacts_mdl->get_group($group_id);
+		$data['groups'] = $this->contacts_mdl->get_groups();
 
-				$data['groups'] = $this->contacts_mdl->get_groups();
-
-				$this->template->build('contacts/edit', $data, $title = '�������� / ���������');
-	}
+		$this->template->build('contacts/edit', $data, $title = 'Контакты / Сообщения');
+    }
 }

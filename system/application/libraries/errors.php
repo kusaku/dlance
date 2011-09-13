@@ -12,10 +12,10 @@ class Errors
 		if( !$this->_ci->users_mdl->logged_in() )
 		{
 
-			$this->_ci->template->build('users/login', $data = array(), $title = '����������� ������������');
+			$this->_ci->template->build('users/login', $data = array(), $title = 'Авторизация пользователя');
 
 			return FALSE;
 		}
-		return TRUE;
+			return TRUE;
 	}
 }

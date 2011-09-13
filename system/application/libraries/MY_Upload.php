@@ -25,13 +25,13 @@
  * @link		http://codeigniter.com/user_guide/libraries/file_uploading.html
  */
 class MY_Upload extends CI_Upload {
-
+	
 	/**
 	 * Verify that the filetype is allowed
 	 *
 	 * @access	public
 	 * @return	bool
-	 */
+	 */	
 	function is_allowed_filetype()
 	{
 		$file = substr($this->file_ext, 1);
@@ -39,7 +39,7 @@ class MY_Upload extends CI_Upload {
 		if( in_array($file, $this->allowed_types) )
 		{
 			return TRUE;
-		}
+		}   
 
 		if (count($this->allowed_types) == 0 OR ! is_array($this->allowed_types))
 		{
@@ -74,10 +74,10 @@ class MY_Upload extends CI_Upload {
 				if ($mime == $this->file_type)
 				{
 					return TRUE;
-				}
-			}
+				}	
+			}		
 		}
-
+		
 		return FALSE;
 	}
 

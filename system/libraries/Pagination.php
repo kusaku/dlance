@@ -179,7 +179,7 @@ class CI_Pagination {
 			$this->base_url = rtrim($this->base_url, '/') .'/';
 		}
 
-		// And here we go...
+  		// And here we go...
 		$output = '';
 
 		// Render the "First" link

@@ -1,8 +1,5 @@
-<script type="text/javascript"
-	src="<?=base_url()?>templates/js/highslide/highslide-with-gallery.js"></script>
-<link
-	rel="stylesheet" type="text/css"
-	href="<?=base_url()?>templates/js/highslide/highslide.css" />
+<script type="text/javascript" src="<?=base_url()?>templates/js/highslide/highslide-with-gallery.js"></script>
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>templates/js/highslide/highslide.css" />
 
 <script type="text/javascript">
 	hs.graphicsDir = '<?=base_url()?>templates/js/highslide/graphics/';

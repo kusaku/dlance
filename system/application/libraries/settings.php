@@ -7,10 +7,10 @@ class Settings
 		$this->_ci =& get_instance();
 	}
 
-	function value($user_id, $param)
+    function value($user_id, $param)
 	{
 		$settings = $this->_ci->users_mdl->get_settings($user_id);
-
+		
 		return $settings[$param];
 	}
 }

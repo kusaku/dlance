@@ -7,23 +7,23 @@ class Help extends Controller
 		parent::Controller();
 		$this->load->model('help/help_mdl');
 	}
-	/*
-	 |---------------------------------------------------------------
-	 | ����� ���� ���������/�������
-	 |---------------------------------------------------------------
-	 */
-	function index()
+/*
+|---------------------------------------------------------------
+| Вывод всех категорий/страниц
+|---------------------------------------------------------------
+*/
+    function index() 
 	{
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 
-		$title = '������';
+		$title = 'Помощь';
 
 		$category = '';
 
 		if( !empty($_GET['category']) )
 		{
-			$category = $_GET['category'];
-
+			$category = $_GET['category'];	
+	
 			if( !$this->_category_check($category) )
 			{
 				$category = 1;
@@ -38,18 +38,18 @@ class Help extends Controller
 
 
 		/**
-		 * ����
-		 */
+		* Блок
+		*/
 		$data['categories'] = $this->help_mdl->get_categories();
 
 		$this->template->build('help/index', $data, $title);
-	}
-	/*
-	 |---------------------------------------------------------------
-	 | ������ �����
-	 |---------------------------------------------------------------
-	 */
-	function view($id = '')
+    }
+/*
+|---------------------------------------------------------------
+| Полный вывод
+|---------------------------------------------------------------
+*/
+    function view($id = '') 
 	{
 		if( !$data = $this->help_mdl->get($id) )
 		{
@@ -57,22 +57,22 @@ class Help extends Controller
 		}
 
 		/**
-		 * ����
-		 */
+		* Блок
+		*/
 		$data['categories'] = $this->help_mdl->get_categories();
 
-		$this->template->build('help/view', $data, $title = ''.$data['title'].' | ������');
+		$this->template->build('help/view', $data, $title = ''.$data['title'].' | Помощь');
 	}
 
 	function _category_check($category)
 	{
-		if( !$this->help_mdl->category_check($category) )
-		{
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
+	    if( !$this->help_mdl->category_check($category) )
+	    {
+	        return FALSE;
+	    }
+	    else
+	    {
+	        return TRUE;
+	    }
 	}
 }

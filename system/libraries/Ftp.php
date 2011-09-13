@@ -571,7 +571,7 @@ class CI_FTP {
 							);
 
 
-							return (in_array($ext, $text_types)) ? 'ascii' : 'binary';
+		return (in_array($ext, $text_types)) ? 'ascii' : 'binary';
 	}
 
 	// ------------------------------------------------------------------------

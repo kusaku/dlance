@@ -37,7 +37,7 @@
  * @param	array	a key/value pair of attributes
  * @param	array	a key/value pair hidden data
  * @return	string
- */
+ */	
 if ( ! function_exists('form_open'))
 {
 	function form_open($action = '', $attributes = '', $hidden = array())
@@ -52,9 +52,9 @@ if ( ! function_exists('form_open'))
 		$action = ( strpos($action, '://') === FALSE) ? $CI->config->site_url($action) : $action;
 
 		$form = '<form action="'.$action.'"';
-
+	
 		$form .= _attributes_to_string($attributes, TRUE);
-
+	
 		$form .= '>';
 
 		if (is_array($hidden) AND count($hidden) > 0)
@@ -220,7 +220,7 @@ if ( ! function_exists('form_textarea'))
 		}
 		else
 		{
-			$val = $data['value'];
+			$val = $data['value']; 
 			unset($data['value']); // textareas don't use the value attribute
 		}
 
@@ -264,7 +264,7 @@ if ( ! function_exists('form_dropdown'))
 		$multiple = (count($selected) > 1 && strpos($extra, 'multiple') === FALSE) ? ' multiple="multiple"' : '';
 
 		$form = '<select name="'.$name.'"'.$extra.$multiple.">\n";
-
+	
 		foreach ($options as $key => $val)
 		{
 			$key = (string) $key;
@@ -358,7 +358,7 @@ if ( ! function_exists('form_radio'))
 	function form_radio($data = '', $value = '', $checked = FALSE, $extra = '')
 	{
 		if ( ! is_array($data))
-		{
+		{	
 			$data = array('name' => $data);
 		}
 
@@ -379,7 +379,7 @@ if ( ! function_exists('form_radio'))
  * @return	string
  */
 if ( ! function_exists('form_submit'))
-{
+{	
 	function form_submit($data = '', $value = '', $extra = '')
 	{
 		$defaults = array('type' => 'submit', 'name' => (( ! is_array($data)) ? $data : ''), 'value' => $value);
@@ -456,7 +456,7 @@ if ( ! function_exists('form_label'))
 
 		if ($id != '')
 		{
-			$label .= " for=\"$id\"";
+			 $label .= " for=\"$id\"";
 		}
 
 		if (is_array($attributes) AND count($attributes) > 0)
@@ -571,7 +571,7 @@ if ( ! function_exists('form_prep'))
 
 		$temp = '__TEMP_AMPERSANDS__';
 
-		// Replace entities to temporary markers so that
+		// Replace entities to temporary markers so that 
 		// htmlspecialchars won't mess them up
 		$str = preg_replace("/&#(\d+);/", "$temp\\1;", $str);
 		$str = preg_replace("/&(\w+);/",  "$temp\\1;", $str);
@@ -696,7 +696,7 @@ if ( ! function_exists('set_checkbox'))
 		$OBJ =& _get_validation_object();
 
 		if ($OBJ === FALSE)
-		{
+		{ 
 			if ( ! isset($_POST[$field]))
 			{
 				if (count($_POST) === 0)
@@ -707,7 +707,7 @@ if ( ! function_exists('set_checkbox'))
 			}
 
 			$field = $_POST[$field];
-				
+			
 			if (is_array($field))
 			{
 				if ( ! in_array($value, $field))
@@ -762,7 +762,7 @@ if ( ! function_exists('set_radio'))
 			}
 
 			$field = $_POST[$field];
-				
+			
 			if (is_array($field))
 			{
 				if ( ! in_array($value, $field))
@@ -910,9 +910,9 @@ if ( ! function_exists('_attributes_to_string'))
 				$attributes .= ' method="post"';
 			}
 
-			return ' '.$attributes;
+		return ' '.$attributes;
 		}
-
+	
 		if (is_object($attributes) AND count($attributes) > 0)
 		{
 			$attributes = (array)$attributes;
@@ -920,19 +920,19 @@ if ( ! function_exists('_attributes_to_string'))
 
 		if (is_array($attributes) AND count($attributes) > 0)
 		{
-			$atts = '';
+		$atts = '';
 
-			if ( ! isset($attributes['method']) AND $formtag === TRUE)
-			{
-				$atts .= ' method="post"';
-			}
+		if ( ! isset($attributes['method']) AND $formtag === TRUE)
+		{
+			$atts .= ' method="post"';
+		}
 
-			foreach ($attributes as $key => $val)
-			{
-				$atts .= ' '.$key.'="'.$val.'"';
-			}
+		foreach ($attributes as $key => $val)
+		{
+			$atts .= ' '.$key.'="'.$val.'"';
+		}
 
-			return $atts;
+		return $atts;
 		}
 	}
 }

@@ -2,10 +2,10 @@
 
 class Contacts_mdl extends Model
 {
-	// -------------------------------���������-----------------------------------------
-	function get_messages($start_from = FALSE, $per_page, $contact = '')//������� ��� ��������� �� ������������
+// -------------------------------Сообщения-----------------------------------------
+	function get_messages($start_from = FALSE, $per_page, $contact = '')//Выводим все сообщения от пользователя
 	{
-		$this->reading($contact);//������ ��� ��������� ��������� ���
+		$this->reading($contact);//Читаем все сообщения посланные нам
 
 		$query = $this->db->query('SELECT * FROM `ci_messages` WHERE (`sender_id` = '.$this->user_id.' and `recipient_id` = '.$contact.') or (`sender_id` = '.$contact.' and `recipient_id` = '.$this->user_id.') ORDER BY `date` DESC LIMIT '.$start_from.', '.$per_page.';');
 
@@ -22,11 +22,11 @@ class Contacts_mdl extends Model
 				$query[$i]['reading'] = date_smart($query[$i]['reading']);
 			}
 		}
-
+		
 		return $query;
 	}
 
-	function reading($contact)//������ ��� ��������� ������� �� �������� recipient_id
+	function reading($contact)//Читаем все сообщения которые мы получили recipient_id
 	{
 		$this->db->where('sender_id', $contact);
 
@@ -40,14 +40,14 @@ class Contacts_mdl extends Model
 	function send_message($data)
 	{
 		$this->db->insert('messages', $data);
+		
+		$recipient = $this->users_mdl->get_user($data['recipient_id']);//Получатель
 
-		$recipient = $this->users_mdl->get_user($data['recipient_id']);//����������
+		$sender = $this->users_mdl->get_user($data['sender_id']);//Отправитель
 
-		$sender = $this->users_mdl->get_user($data['sender_id']);//�����������
+		$this->events->create($data['recipient_id'], 'Персональное сообщение от '.$sender['username'].'');
 
-		$this->events->create($data['recipient_id'], '������������ ��������� �� '.$sender['username'].'');
-
-		$ins_data['email'] = $recipient['email'];//���������� ����������� ����������
+		$ins_data['email'] = $recipient['email'];//Отправляем уведомление получателю
 		$ins_data['recipient_username'] = $recipient['username'];
 		$ins_data['name'] = $sender['name'];
 		$ins_data['surname'] = $sender['surname'];
@@ -57,16 +57,16 @@ class Contacts_mdl extends Model
 		$this->email_new_message($ins_data);
 	}
 
-	function email_new_message($data)//���������� ����������� � ��������� ���������
+	function email_new_message($data)//Отправляем уведомление о приавтном сообщении
 	{
-		$email = $data['email'];//email ���� �������� �����������
+		$email = $data['email'];//email куда приходят уведомления
 
 		if( empty($email) )
 		{
 			return FALSE;
 		}
 
-		$subject = '����� ���������';
+		$subject = 'Новое сообщение';
 
 		$message = $this->load->view('emails/new_message', $data, TRUE);
 
@@ -79,13 +79,13 @@ class Contacts_mdl extends Model
 
 		$query = $query->result_array();
 
-		return count($query);
+		return count($query); 
 	}
 
-	function count_new_messages($user_id = '', $sender_id = '')//����� ��������� � ������������ ��� ������ �� �������
+	function count_new_messages($user_id = '', $sender_id = '')//Новые сообщения у пользователя для вывода на главной
 	{
 		$this->db->where('recipient_id', $user_id);
-
+		
 		if( !empty($sender_id) )
 		{
 			$this->db->where('sender_id', $sender_id);
@@ -93,23 +93,23 @@ class Contacts_mdl extends Model
 
 		$this->db->where('reading', 0);
 
-		return $this->db->count_all_results('messages');
+		return $this->db->count_all_results('messages'); 
 	}
-	/*
-	 |---------------------------------------------------------------
-	 | ��������
-	 |---------------------------------------------------------------
-	 */
-	function get_contacts($start_from = FALSE, $per_page, $group_id = '')//������� ��� ������ ������������
+/*
+|---------------------------------------------------------------
+| Контакты
+|---------------------------------------------------------------
+*/
+	function get_contacts($start_from = FALSE, $per_page, $group_id = '')//Выводим все группы пользователя
 	{
-		if( $start_from !== FALSE )
+		if( $start_from !== FALSE ) 
 		{
 			$this->db->limit($per_page, $start_from);
 		}
 
 		$this->db->order_by('last_msg', 'desc');
 
-		$this->db->where('user_id', $this->user_id);//������� ��� �������� ������������
+		$this->db->where('user_id', $this->user_id);//Выводим все контакты пользователя
 
 		$this->db->where('group_id', $group_id);
 
@@ -120,7 +120,7 @@ class Contacts_mdl extends Model
 		$this->db->join('users', 'users.id = contacts.contact');
 
 		$query = $this->db->get()->result_array();
-
+		
 		$count = count($query);
 
 		for($i = 0; $i < $count; $i++)
@@ -129,32 +129,32 @@ class Contacts_mdl extends Model
 
 			$query[$i]['last_login'] = date_smart($query[$i]['last_login']);
 
-			if( $query[$i]['last_msg'] )
+			if( $query[$i]['last_msg'] ) 
 			{
 				$query[$i]['last_msg'] = date_smart($query[$i]['last_msg']);
 			}
 
 			$query[$i]['count_messages'] = $this->count_messages($query[$i]['contact']);
-
+	
 			$query[$i]['count_new_messages'] = $this->count_new_messages($this->user_id, $query[$i]['contact']);
 		}
-
+		
 		return $query;
 	}
 
-	function move_contacts($id, $group_id)//����������� ���������
+	function move_contacts($id, $group_id)//Перемещение контактов
 	{
 		$this->db->where_in('id', $id);
 
 		$this->db->update('contacts', array('group_id' => $group_id));
 	}
 
-	function add_contact($data)//�������� �������
+	function add_contact($data)//Добавить контакт
 	{
 		$this->db->insert('contacts', $data);
 	}
 
-	function update_last_msg($user_id, $contact)//���������� ���������� ���������
+	function update_last_msg($user_id, $contact)//Обновление последнего сообщения
 	{
 		$this->db->where('user_id', $user_id);
 
@@ -162,9 +162,9 @@ class Contacts_mdl extends Model
 
 		$this->db->update('contacts', array('last_msg' => now()));
 	}
-	// -------------------------------������-----------------------------------------
+// -------------------------------ГРУППЫ-----------------------------------------
 
-	function get_group($id)//������� ������ ������ ��� ��������������
+	function get_group($id)//Выводим данные группы для редактирования
 	{
 		$this->db->where_in('id', $id);
 
@@ -173,22 +173,22 @@ class Contacts_mdl extends Model
 		return $this->db->get('groups')->row_array();
 	}
 
-	function get_groups()//������� ��� ������ ������������
+	function get_groups()//Выводим все группы пользователя
 	{
-		$this->db->where('user_id', $this->user_id);//������� ��� ������ ��������� �������������
-		$this->db->or_where('user_id', 0);//� ����� ������
+		$this->db->where('user_id', $this->user_id);//Выводим все группы созданные пользователем
+		$this->db->or_where('user_id', 0);//и обшии группы
 
 		$this->db->select('*');
 
 		$query = $this->db->get('groups')->result_array();
-
+		
 		$count = count($query);
 
-		for($i = 0; $i < $count; $i++)
+		for($i = 0; $i < $count; $i++) 
 		{
 			$query[$i]['count_contacts'] = $this->count_contacts($query[$i]['id'], $this->user_id);
 		}
-
+		
 		return $query;
 	}
 
@@ -202,7 +202,7 @@ class Contacts_mdl extends Model
 		if( !empty($user_id) )
 		{
 			$this->db->where('user_id', $user_id);
-		}
+	    }
 
 		$this->db->where('id', $id);
 
@@ -214,24 +214,24 @@ class Contacts_mdl extends Model
 		return FALSE;
 	}
 
-	function count_contacts($group_id = '', $user_id = '', $contact = '')//����������� ��������� � ������
+	function count_contacts($group_id = '', $user_id = '', $contact = '')//Колличество контактов в группе
 	{
 		if( !empty($user_id) )
 		{
 			$this->db->where('user_id', $user_id);
-		}
+	    }
 
 		if( !empty($contact) )
 		{
 			$this->db->where('contact', $contact);
-		}
+	    }
 
 		if( !empty($group_id) )
 		{
 			$this->db->where('group_id', $group_id);
-		}
+	    }
 
-		return $this->db->count_all_results('contacts');
+		return $this->db->count_all_results('contacts'); 
 	}
 
 	function add_group($data)
@@ -248,7 +248,7 @@ class Contacts_mdl extends Model
 
 	function del_group($id)
 	{
-		$this->db->where('id', $id);
+	    $this->db->where('id', $id);
 
 		$this->db->delete('groups');
 	}

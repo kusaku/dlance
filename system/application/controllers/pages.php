@@ -8,7 +8,7 @@ class Pages extends Controller
 		$this->load->model('pages/pages_mdl');
 	}
 
-	function view($id = '')
+    function view($id = '') 
 	{
 		if( !$data = $this->pages_mdl->get($id) )
 		{

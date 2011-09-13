@@ -12,23 +12,23 @@ class MY_Form_validation extends CI_Form_validation {
 	{
 		return ( ! preg_match("/[^\||\'|\<|\>|\"|\$|\@|\/|\\\|\&]+$/", $str)) ? FALSE : TRUE;
 	}
-
-	function nospecial($str)//����������� ������� ���������
+	
+	function nospecial($str)//Специальные символы запрещены
 	{
 		return ( ! preg_match("/[^\||\'|\<|\>|\"|\!|\?|\$|\@|\/|\\\|\&\~\*\+]+$/", $str)) ? FALSE : TRUE;
 	}
-
-	function cyrillic($str)//������ ������� �������
+	
+	function cyrillic($str)//Только русские символы
 	{
-		return ( ! preg_match("/^([�-��-�\�])+$/i", $str)) ? FALSE : TRUE;
+		return ( ! preg_match("/^([а-яА-Я\ё])+$/i", $str)) ? FALSE : TRUE;
 	}
 
-	function skype($str)//����� ��������� ��������� �������, �����, ���� ������������� � �����.
+	function skype($str)//Может содержать латинские символы, цифры, знак подчеркивания и дефис.
 	{
 		return ( ! preg_match("/^[a-zA-z0-9_\-]+$/", $str)) ? FALSE : TRUE;
 	}
 
-	function telephone($str)//����� ��������� ��������� �������, �����, ���� ������������� � �����.
+	function telephone($str)//Может содержать латинские символы, цифры, знак подчеркивания и дефис.
 	{
 		return ( ! preg_match("/^[0-9\-\(\)\+]+$/", $str)) ? FALSE : TRUE;
 	}

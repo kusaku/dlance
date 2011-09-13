@@ -7,26 +7,26 @@ class Events
 		$this->_ci =& get_instance();
 	}
 
-	function create($user_id, $title, $value = '', $multiple = FALSE)
+    function create($user_id, $title, $value = '', $multiple = FALSE) 
 	{
 		if( !empty($value) )
 		{
 			$rating = $this->_ci->rating->value($value);
 
-			if( !empty($multiple) )//��� �������
+			if( !empty($multiple) )//Для баланса
 			{
 				$rating = $rating * $multiple;
 
-				$rating = floor($rating);//���������� ������������ ����� �����
+				$rating = floor($rating);//Возвращает максимальное целое число
 			}
 
 			if( $rating > 0 )
 			{
-				$title = $title.", ���� ��������� ��������� �� ".$rating;
+				$title = $title.", ваша репутация увеличена на ".$rating;
 			}
 			elseif( $rating < 0 )
 			{
-				$title = $title.", ���� ��������� ��������� �� ".$rating;
+				$title = $title.", ваша репутация уменьшена на ".$rating;
 			}
 
 			$this->_ci->rating->plus($user_id, $rating);
@@ -44,7 +44,7 @@ class Events
 		$this->_ci->events_mdl->add($data);
 	}
 
-	function del($user_id, $date)
+    function del($user_id, $date) 
 	{
 		$this->_ci->db->where('user_id', $user_id);
 
@@ -53,7 +53,7 @@ class Events
 		$this->_ci->db->delete('events');
 	}
 
-	function get($user_id)
+    function get($user_id) 
 	{
 		$this->_ci->load->model('events/events_mdl');
 

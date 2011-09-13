@@ -1,6 +1,6 @@
 <?php
-$lang['terabyte_abbr'] = 'Òá';
-$lang['gigabyte_abbr'] = 'Ãá';
-$lang['megabyte_abbr'] = 'Ìá';
-$lang['kilobyte_abbr'] = 'Êá';
-$lang['bytes'] = 'Áàéò';
+$lang['terabyte_abbr'] = 'Ð¢Ð±';
+$lang['gigabyte_abbr'] = 'Ð“Ð±';
+$lang['megabyte_abbr'] = 'ÐœÐ±';
+$lang['kilobyte_abbr'] = 'ÐšÐ±';
+$lang['bytes'] = 'Ð‘Ð°Ð¹Ñ‚';
