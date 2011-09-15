@@ -43,7 +43,7 @@ class Designs extends Controller
 	{
 		$title = $this->config->item('title');
 
-		$data['data'] = $this->designs_mdl->get_designs(0, 20);//Выводим последнии 20 дизайнов, сделать через настройку
+		$data['data'] = $this->designs_mdl->get_designs(0, 20);// TODO Выводим последнии 20 дизайнов, сделать через настройку
 
 		/**
 		* Блок
