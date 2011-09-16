@@ -1,68 +1,36 @@
 <? if( $logged_in ): ?>
-<div id="userbar" class="clearfix">
-<ul class="ltop">
-<img src="<?=$userpic?>" alt="" class="userpic">
 
-<li class="usr">
-<a href="/user/<?=$username?>"><?=$name?> <?=$surname?> (<?=$username?>)</a>
-<br />
-<a href="/account/profile">Настройки</a>
-</li>
-
-<li class="pm"><a href="/contacts/">Контакты</a>
-<? if( $messages ): ?>
-(<?=$messages?>)
-<? endif; ?>
-
-<li class="pm"><a href="/account/events">События</a>
-<? if( $events ): ?>
-(<?=$events?>)
-<? endif; ?>
-</li>
-
-<li>
-Баланс: 
-<a href="/account/balance/"><?=$balance?> рублей</a> 
-</li>
-
-<li>
-Виртуальный статус: 
-<a href="/account/tariff/"><?=$tariff?></a> 
-</li>
-
-<li>
-Рейтинг: 
-<a href="#"><?=$rating?></a> 
-</li>
-
-</ul>
-<ul class="rtop">
-<li>&nbsp;</li>
-<li><a href="/account">Мой кабинет</a></li>
-<li><a href="/logout">Выход</a></li>
-</ul>
+<div class="userInfo">
+	<div class="avatar <?=$tariff?>">
+		<a href="/user/<?=$username?>" title="Перейти к портфолио <?=$username?>"></a>
+		<img src="<?=$userpic?>" alt="<?=$username?> avi" />
+	</div>
+	<p><a href="/user/<?=$username?>" class="name"><?=$username?></a><br/><?=$name?> <?=$surname?></p>
+	<p><span>Рейтинг:</span> <span class="orange"><?=$rating?></span><br/>
+	<span>Баланс:</span>   <a href="/account/balance/" class="orange"><?=$balance?> руб.</a></p>
 </div>
+<div class="userPanel">
+	<a href="/account/profile" class="settings">Настройки</a>
+	<a href="/account" class="orange">Мой кабинет</a>
+	<a href="/contacts/" class="inbox"><span><? if( $messages ): ?><?=$messages?><? endif; ?></span></a>
+	<a href="/logout">Выход</a>
+</div>
+
 <? else: ?>
-<div id="userbar" class="clearfix" style="height:32px">
-<form name="login" action="/login" method="post">
-<ul id="authline">
-<li class="reg"><a href="/register">Регистрация</a></li>
-<li class="log">Авторизация &nbsp; <input class="authtext" type="text" name="username" size="12" maxlength="32" /> &nbsp; <input class="authtext" type="password" name="password" size="12" maxlength="32" /></li>
-<li class="rem"><input type="checkbox" class="authcheckbox" name="rcookiettl"  value="86400" /> Запомнить &nbsp;
 
-<input name="submit" value='Вход' type="submit" >
-</li>
-<li class="rec"><a rel="nofollow" href="/recovery">Напомнить пароль</a></li>
-
-
-<ul class="rtop">
-<li><a href="/account/">Мой кабинет</a></li>
-</ul>
-
-</ul>
-
-
-
+<h3>Авторизация</h3>
+<a href="/register" class="topReg">Регистрация</a>
+<form class="topAuth" name="login" action="/login" method="post">
+	<fieldset>
+		<input name="username" size="12" maxlength="32" type="text" value="" placeholder="login" class="inputTopAuth"/>
+		<input name="password" size="12" maxlength="32" type="password" value="" placeholder="password" class="inputTopPass"/>
+		<input name="submit" type="submit" value="вход" class="submitLogin"/>
+	</fieldset>
+	<fieldset>
+		<label for="remember">запомнить меня</label>
+		<span class="niceCheck"><input name="rcookiettl" value="86400" type="checkbox"/></span>
+		<a href="/recovery" class="forgetPassword">забыли пароль?</a>
+	</fieldset>
 </form>
-</div>
+
 <? endif; ?>
