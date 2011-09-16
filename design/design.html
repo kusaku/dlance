@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Ф.дизайн / биржа стиля.</title>
+		<link href="css/base.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/cusel.css" rel="stylesheet" type="text/css" />
+		<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.6.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.bxSlider.min.js"></script>
+		<script type="text/javascript" src="js/cusel-min-2.4.1.js"></script>
+		<script type="text/javascript" src="js/radio.js"></script>
+		<script type="text/javascript" src="js/checkbox.js"></script>
+		<script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="js/jquery.simpleColor.js"></script>
+		<script type="text/javascript">
+		(function($){
+			$(function(){
+				$("#slider1").bxSlider({
+					infiniteLoop: false,
+					hideControlOnEnd: true
+				});
+				$("#featurelist").bxSlider({
+					auto: true,
+					mode: 'fade',
+					infiniteLoop: true,
+					controls: false,
+					pager: true,
+					buildPager: function(slideIndex){
+						switch (slideIndex){
+							case 0:
+								return '<a href=""><img src="images/thumb1.jpg" /></a>';
+							case 1:
+								return '<a href=""><img src="images/thumb2.jpg" /></a>';
+							case 2:
+								return '<a href=""><img src="images/thumb3.jpg" /></a>';
+						}
+					}
+				});
+				$("a.zoom").fancybox({titlePosition:'over'});
+				$("input[placeholder],textarea").placeholder();
+				var params = {
+					changedEl: "#selectel, #theme"
+					}
+				cuSel(params);
+				$(".niceRadio").each(function() {
+					changeRadioStart($(this));
+				});
+			});
+		}(jQuery))
+		</script>
+	</head>
+	<body>
+		<div class="header">
+			<div class="logoFd">
+				<a href="/" title="На главную"><img src="images/logo_fd.png" alt="Ф.дизайн" /></a>
+			</div>
+			<div class="bannerPlace">
+				<a href="#" title="Эта реклама проплачена!"><img src="images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+			</div>
+			<div class="authBlock">
+				<div class="userInfo">
+					<div class="avatar lite">
+						<a href="#" title="Перейти к портфолио"></a>
+						<img src="images/avatar8.png" alt="AnnaSelesta avi" />
+					</div>
+					<p><a href="#" class="name">AnnaSelesta</a><br/>Анна Селефанова</p>
+					<p><span>Рейтинг:</span> <span class="orange">7872</span><br/>
+					<span>Баланс:</span>   <a href="#" class="orange">1 889 820 руб.</a></p>
+				</div>
+				<div class="userPanel">
+					<a href="#" class="settings">Настройки</a>
+					<a href="#" class="orange">Мой кабинет</a>
+					<a href="#" class="inbox"><span>19</span></a>
+					<a href="#">Выход</a>
+				</div>
+			</div>
+		</div>
+		<div class="navBlock">
+			<form class="fastSearch" method="post" action="#">
+				<input name="keyword" type="text" value="" placeholder="Введите запрос" class="inputFastSearch"/>
+				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch" />
+			</form>
+			<ul class="leftMenu">
+				<li><a href="#"><span>Главная</span></a></li>
+				<li><a href="#"><span>Новости</span></a></li>
+				<li><a href="#"><span>Дизайны</span></a></li>
+				<li><a href="#"><span>Дизайнеры</span></a></li>
+				<li><a href="#"><span>Блоги</span></a></li>
+			</ul>
+			<ul class="rightMenu">
+				<li><a href="#"><span>Обратная связь</span></a></li>
+				<li><a href="#"><span>ЧаВо</span></a></li>
+				<li><a href="#"><span>Помощь</span></a></li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="sideBar">
+				<div class="tagsCloud slideBox">
+					<ul id="slider1">
+						<li>
+							<ul class="tagsCloudBlock">
+								<li><a href="#" class="size5"><span>Дизайн сайта</span></a></li>
+								<li><a href="#" class="size3"><span>Вебдизайн</span></a></li>
+								<li><a href="#" class="size1"><span>Шаблон</span></a></li>
+								<li><a href="#" class="size1"><span>Мобильный портал</span></a></li>
+								<li><a href="#" class="size5"><span>Портфолио</span></a></li>
+								<li><a href="#" class="size1"><span>Автопортал</span></a></li>
+								<li><a href="#" class="size1"><span>Логотип</span></a></li>
+								<li><a href="#" class="size3"><span>Промо сайт</span></a></li>
+								<li><a href="#" class="size5"><span>Интернет магазин</span></a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="tagsCloudBlock">
+								<li><a href="#" class="size5"><span>Дизайн сайта</span></a></li>
+								<li><a href="#" class="size3"><span>Вебдизайн</span></a></li>
+								<li><a href="#" class="size1"><span>Шаблон</span></a></li>
+								<li><a href="#" class="size1"><span>Мобильный портал</span></a></li>
+								<li><a href="#" class="size5"><span>Портфолио</span></a></li>
+								<li><a href="#" class="size1"><span>Автопортал</span></a></li>
+								<li><a href="#" class="size1"><span>Логотип</span></a></li>
+								<li><a href="#" class="size3"><span>Промо сайт</span></a></li>
+								<li><a href="#" class="size5"><span>Интернет магазин</span></a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="tagsCloudBlock">
+								<li><a href="#" class="size5"><span>Дизайн сайта</span></a></li>
+								<li><a href="#" class="size3"><span>Вебдизайн</span></a></li>
+								<li><a href="#" class="size1"><span>Шаблон</span></a></li>
+								<li><a href="#" class="size1"><span>Мобильный портал</span></a></li>
+								<li><a href="#" class="size5"><span>Портфолио</span></a></li>
+								<li><a href="#" class="size1"><span>Автопортал</span></a></li>
+								<li><a href="#" class="size1"><span>Логотип</span></a></li>
+								<li><a href="#" class="size3"><span>Промо сайт</span></a></li>
+								<li><a href="#" class="size5"><span>Интернет магазин</span></a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="tagsCloudBlock">
+								<li><a href="#" class="size5"><span>Дизайн сайта</span></a></li>
+								<li><a href="#" class="size3"><span>Вебдизайн</span></a></li>
+								<li><a href="#" class="size1"><span>Шаблон</span></a></li>
+								<li><a href="#" class="size1"><span>Мобильный портал</span></a></li>
+								<li><a href="#" class="size5"><span>Портфолио</span></a></li>
+								<li><a href="#" class="size1"><span>Автопортал</span></a></li>
+								<li><a href="#" class="size1"><span>Логотип</span></a></li>
+								<li><a href="#" class="size3"><span>Промо сайт</span></a></li>
+								<li><a href="#" class="size5"><span>Интернет магазин</span></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="designsCategories">
+					<h3>Дизайны:</h3>
+					<ul>
+						<li><a href="#">Worpress шаблоны</a></li>
+						<li><a href="#" class="active">HTML шаблоны</a>
+							<ul>
+								<li><a href="#">Порталы</a> <span>(0)</span></li>
+								<li><a href="#">СДЛ</a> <span>(3)</span></li>
+								<li><a href="#">Саттелиты</a> <span>(1)</span></li>
+								<li><a href="#">Интернет магазины</a> <span>(0)</span></li>
+								<li><a href="#">Промо сайты</a> <span>(0)</span></li>
+								<li><a href="#">Plain HTML</a> <span>(0)</span></li>
+								<li><a href="#">Тест12</a> <span>(0)</span></li>
+							</ul>
+						</li>
+						<li><a href="#">Joomla шаблоны</a></li>
+						<li><a href="#">PSD шаблоны</a></li>
+						<li><a href="#">DLE шаблоны</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="content">
+				<div class="templateCard">
+					<div class="templateCardHeader">
+						<div class="rating">
+							<p>Оценка дизайна:</p>
+							<a href="#" class="plus">+</a>
+							<span>176</span>
+							<a href="#" class="minus">-</a>
+						</div>
+						<h3>Девушка фокусник:</h3>
+					</div>
+					<div class="templateDesription">
+						<p><span>Тип:</span> HTML/CSS/Flash шаблон<br/>
+						<span>Исходник:</span> HTML, PSD, FLA (CS4)</p>
+						<p><span>Описание:</span> JavaScript-Анимированные Полный сайт CSS шаблоны содержат JS основе элементов, которые добавляют Flash-как динамика и анимации, оставляя шаблонов очень легкий.</p>
+						<div class="statistica">
+							<p><span>Рейтинг:</span> 176<br/>
+							<a href="#" class="buyout"><span>Выкупить за 36 000 руб.</span></a><span>Скачиваний:</span> 0</p>
+							<p><a href="#" class="buy"><span>Купить</span></a><span>Цена:</span>  3 000 руб.</p>
+							<p class="moreInfo"><a href="#">Дополнительная информация:</a></p>
+						</div>
+					</div>
+					<div class="templatePreview">
+						<ul id="featurelist">
+							<li><a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/ftrlist1.jpg" alt="template"/></a></li>
+							<li><a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/ftrlist2.jpg" alt="template"/></a></li>
+							<li><a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/ftrlist3.jpg" alt="template"/></a></li>
+						</ul>
+					</div>
+					<div class="moreInfo">
+						<form action="#" method="post">
+							<fieldset>
+								<p>Сопутствующие товары:</p>
+								<input name="articuls" type="text" placeholder="вводите ID продуктов через запятую" />
+								<label>вводите ID продуктов через запятую</label>
+							</fieldset>
+							<fieldset>
+								<p>Флеш:</p>
+								<input name="flash" type="radio" class="niceRadio" value="1" checked />
+								<label>да</label>
+								<input name="flash" type="radio" class="niceRadio" value="2"/>
+								<label>нет</label>
+							</fieldset>
+							<fieldset>
+								<p>Стретч:</p>
+								<input name="stretch" type="radio" class="niceRadio" value="1" checked />
+								<label>резина</label>
+								<input name="stretch" type="radio" class="niceRadio" value="2"/>
+								<label>фиксированая</label>
+							</fieldset>
+							<fieldset>
+								<p>Количество колонок:</p>
+								<select name="cols" style="width: 40px;" id="selectel">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select>
+							</fieldset>
+							<fieldset>
+								<p>Тех качество:</p>
+								<input name="tehka4estvo" type="radio" class="niceRadio" value="1"/>
+								<label>только IE</label>
+								<input name="tehka4estvo" type="radio" class="niceRadio" value="2" checked />
+								<label>кроссбраузерная</label>
+								<input name="tehka4estvo" type="radio" class="niceRadio" value="3"/>
+								<label>соответствие W3C </label>
+							</fieldset>
+							<fieldset>
+								<p>Тема:</p>
+								<select name="theme" id="theme">
+									<option value="1">Нефритовый</option>
+									<option value="2">Тефлоновый</option>
+									<option value="3">Непригораемый</option>
+									<option value="4">ОЛОЛОЛО</option>
+								</select>
+							</fieldset>
+						</form>
+					</div>
+					<div class="comments">
+						<div class="commentsHeader">
+							<h3>Комментарии:</h3>
+							<a href="#">Оставить комментарий</a>
+						</div>
+						<ul class="commentsList">
+							<li>
+								<div class="userInfo">
+									<div class="avatar lite">
+										<a href="#" title="перейти к портфолио"></a>
+										<img src="images/avatar3.png" alt="damboJunior avi" />
+									</div>
+									<p><a href="#" title="перейти к портфолио">damboJunior</a></p>
+									<p>Владимирский Илья</p>
+								</div>
+								<div class="userComment">
+									<p class="commentDate">20.06.2011</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								</div>
+							</li>
+							<li>
+								<div class="userInfo">
+									<div class="avatar pro">
+										<a href="#" title="перейти к портфолио"></a>
+										<img src="images/avatar5.png" alt="creamsy avi" />
+									</div>
+									<p><a href="#" title="перейти к портфолио">creamsy</a></p>
+									<p>Богданова Екатерина</p>
+								</div>
+								<div class="userComment">
+									<p class="commentDate">14.06.2011</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="makeComment">
+						<div class="makeCommentHeader">
+							<h3>Оставить комментарий</h3>
+							<a href="#">Показать смайлы</a>
+						</div>
+						<form class="commentForm" action="#" method="post">
+							<div class="avatar lite">
+								<a href="#" title="Перейти к портфолио"></a>
+								<img src="images/avatar8.png" alt="AnnaSelesta avi" />
+							</div>
+							<textarea name="commentText" placeholder="Оставьте комментарий..."></textarea>
+							<div class="smiles">
+								<!--<a href="#" title="тут нужно будет навесить скрипт для смайликов"><img src="images/smiles.png" alt="smilee"/></a>-->
+								<a href="#" title=":D"><img src="images/ab.gif" alt="smilee"/></a>
+								<a href="#" title=":D"><img src="images/ac.gif" alt="smilee"/></a>
+								<a href="#" title=":D"><img src="images/ad.gif" alt="smilee"/></a>
+								<a href="#" title=":D"><img src="images/af.gif" alt="smilee"/></a>
+								<a href="#" title=":D"><img src="images/ah.gif" alt="smilee"/></a>
+								<a href="#" title=":D"><img src="images/aw.gif" alt="smilee"/></a>
+								<a href="#" title=":D"><img src="images/ar.gif" alt="smilee"/></a>
+								<a href="#" title=":D"><img src="images/as.gif" alt="smilee"/></a>
+							</div>
+							<input type="submit" value="Отправить" class="commentBtn" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="navBlock">
+			<form class="fastSearch" method="post" action="#">
+				<input name="keyword" type="text" value="" placeholder="Введите запрос" class="inputFastSearch"/>
+				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+			</form>
+			<ul class="leftMenu">
+				<li><a href="#"><span>Главная</span></a></li>
+				<li><a href="#"><span>Новости</span></a></li>
+				<li><a href="#"><span>Дизайны</span></a></li>
+				<li><a href="#"><span>Дизайнеры</span></a></li>
+				<li><a href="#"><span>Блоги</span></a></li>
+			</ul>
+			<ul class="rightMenu">
+				<li><a href="#"><span>Обратная связь</span></a></li>
+				<li><a href="#"><span>ЧаВо</span></a></li>
+				<li><a href="#"><span>Помощь</span></a></li>
+			</ul>
+		</div>
+		<div class="footer">
+			<div class="rightCopy">
+				<p>&copy; 2011 Все права защищены.<br/>
+				Проект компании <a href="#">“Фабрика сайтов”</a>.</p>
+			</div>
+			<div class="fabricaLogo">
+				<a href="http://fabricasaitov.ru"><img src="images/cop.png" alt="Фабрика сайтов"/></a>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Ф.дизайн / биржа стиля.</title>
+		<link href="css/base.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/cusel.css" rel="stylesheet" type="text/css" />
+		<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.6.3.min.js"></script>
+		<script type="text/javascript" src="js/jquery.bxSlider.min.js"></script>
+		<script type="text/javascript" src="js/cusel-min-2.4.1.js"></script>
+		<script type="text/javascript" src="js/checkbox.js"></script>
+		<script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="js/jquery.simpleColor.js"></script>
+		<script type="text/javascript">
+		(function($){
+			$(function(){
+				$("#slider1").bxSlider({
+					infiniteLoop: false,
+					hideControlOnEnd: true
+				});
+				$("a.zoom").fancybox({titlePosition:'over'});
+				$("input[placeholder]").placeholder();
+				var params = {
+					changedEl: "#categorySelect"
+					}
+				cuSel(params);
+				$(".colorSample").simpleColor({
+					buttonClass: "colorButton"
+				});
+			});
+		}(jQuery))
+		</script>
+	</head>
+	<body>
+		<div class="header">
+			<div class="logoFd">
+				<a href="/" title="На главную"><img src="images/logo_fd.png" alt="Ф.дизайн" /></a>
+			</div>
+			<div class="bannerPlace">
+				<a href="#" title="Эта реклама проплачена!"><img src="images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+			</div>
+			<div class="authBlock">
+				<div class="userInfo">
+					<a href="#" class="avatar pro" title="Перейти к портфолио"><img src="images/avatar8.png" alt="AnnaSelesta avi" /></a>
+					<p><a href="#" class="name">AnnaSelesta</a><br/>Анна Селефанова</p>
+					<p><span>Рейтинг:</span> <span class="orange">7872</span><br/>
+					<span>Баланс:</span>   <a href="#" class="orange">1 889 820 руб.</a></p>
+				</div>
+				<div class="userPanel">
+					<a href="#" class="settings">Настройки</a>
+					<a href="#" class="orange">Мой кабинет</a>
+					<a href="#" class="inbox"><span>19</span></a>
+					<a href="#">Выход</a>
+				</div>
+			</div>
+		</div>
+		<div class="navBlock">
+			<form class="fastSearch" method="post" action="#">
+				<input name="keyword" type="text" value="" placeholder="Введите запрос" class="inputFastSearch"/>
+				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+			</form>
+			<ul class="leftMenu">
+				<li><a href="#"><span>Главная</span></a></li>
+				<li><a href="#"><span>Новости</span></a></li>
+				<li><a href="#"><span>Дизайны</span></a></li>
+				<li><a href="#"><span>Дизайнеры</span></a></li>
+				<li><a href="#"><span>Блоги</span></a></li>
+			</ul>
+			<ul class="rightMenu">
+				<li><a href="#"><span>Обратная связь</span></a></li>
+				<li><a href="#"><span>ЧаВо</span></a></li>
+				<li><a href="#"><span>Помощь</span></a></li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="sideBar">
+				<div class="tagsCloud slideBox">
+					<ul id="slider1">
+						<li>
+							<ul class="tagsCloudBlock">
+								<li><a href="#" class="size5"><span>Дизайн сайта</span></a></li>
+								<li><a href="#" class="size3"><span>Вебдизайн</span></a></li>
+								<li><a href="#" class="size1"><span>Шаблон</span></a></li>
+								<li><a href="#" class="size1"><span>Мобильный портал</span></a></li>
+								<li><a href="#" class="size5"><span>Портфолио</span></a></li>
+								<li><a href="#" class="size1"><span>Автопортал</span></a></li>
+								<li><a href="#" class="size1"><span>Логотип</span></a></li>
+								<li><a href="#" class="size3"><span>Промо сайт</span></a></li>
+								<li><a href="#" class="size5"><span>Интернет магазин</span></a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="tagsCloudBlock">
+								<li><a href="#" class="size5"><span>Дизайн сайта</span></a></li>
+								<li><a href="#" class="size3"><span>Вебдизайн</span></a></li>
+								<li><a href="#" class="size1"><span>Шаблон</span></a></li>
+								<li><a href="#" class="size1"><span>Мобильный портал</span></a></li>
+								<li><a href="#" class="size5"><span>Портфолио</span></a></li>
+								<li><a href="#" class="size1"><span>Автопортал</span></a></li>
+								<li><a href="#" class="size1"><span>Логотип</span></a></li>
+								<li><a href="#" class="size3"><span>Промо сайт</span></a></li>
+								<li><a href="#" class="size5"><span>Интернет магазин</span></a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="tagsCloudBlock">
+								<li><a href="#" class="size5"><span>Дизайн сайта</span></a></li>
+								<li><a href="#" class="size3"><span>Вебдизайн</span></a></li>
+								<li><a href="#" class="size1"><span>Шаблон</span></a></li>
+								<li><a href="#" class="size1"><span>Мобильный портал</span></a></li>
+								<li><a href="#" class="size5"><span>Портфолио</span></a></li>
+								<li><a href="#" class="size1"><span>Автопортал</span></a></li>
+								<li><a href="#" class="size1"><span>Логотип</span></a></li>
+								<li><a href="#" class="size3"><span>Промо сайт</span></a></li>
+								<li><a href="#" class="size5"><span>Интернет магазин</span></a></li>
+							</ul>
+						</li>
+						<li>
+							<ul class="tagsCloudBlock">
+								<li><a href="#" class="size5"><span>Дизайн сайта</span></a></li>
+								<li><a href="#" class="size3"><span>Вебдизайн</span></a></li>
+								<li><a href="#" class="size1"><span>Шаблон</span></a></li>
+								<li><a href="#" class="size1"><span>Мобильный портал</span></a></li>
+								<li><a href="#" class="size5"><span>Портфолио</span></a></li>
+								<li><a href="#" class="size1"><span>Автопортал</span></a></li>
+								<li><a href="#" class="size1"><span>Логотип</span></a></li>
+								<li><a href="#" class="size3"><span>Промо сайт</span></a></li>
+								<li><a href="#" class="size5"><span>Интернет магазин</span></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="designsCategories">
+					<h3>Дизайны:</h3>
+					<ul>
+						<li><a href="#">Worpress шаблоны</a></li>
+						<li><a href="#" class="active">HTML шаблоны</a>
+							<ul>
+								<li><a href="#">Порталы</a> <span>(0)</span></li>
+								<li><a href="#">СДЛ</a> <span>(3)</span></li>
+								<li><a href="#">Саттелиты</a> <span>(1)</span></li>
+								<li><a href="#">Интернет магазины</a> <span>(0)</span></li>
+								<li><a href="#">Промо сайты</a> <span>(0)</span></li>
+								<li><a href="#">Plain HTML</a> <span>(0)</span></li>
+								<li><a href="#">Тест12</a> <span>(0)</span></li>
+							</ul>
+						</li>
+						<li><a href="#">Joomla шаблоны</a></li>
+						<li><a href="#">PSD шаблоны</a></li>
+						<li><a href="#">DLE шаблоны</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="content">
+				<div class="extendedSearch">
+					<h3>Расширенный поиск:</h3>
+					<form class="extendedSearchForm" method="post" action="#">
+						<div class="esfLeftPart">
+							<fieldset>
+								<label for="keyword">Ключевые слова:</label>
+								<input type="text" name="keyword" placeholder="что ищем?" />
+							</fieldset>
+							<div class="esfPrice">
+								<fieldset>
+									<label>Цена за покупку:</label>
+									<span>от</span>
+									<input type="text" name="pricePurchaseMin" placeholder="100" />
+									<span>до</span>
+									<input type="text" name="pricePurchaseMax" placeholder="30000" />
+									<span>рублей</span>
+								</fieldset>
+								<fieldset>
+									<label>Цена за выкуп:</label>
+									<span>от</span>
+									<input type="text" name="priceBuyoutMin" placeholder="100" />
+									<span>до</span>
+									<input type="text" name="priceBuyoutMax" placeholder="3000" />
+									<span>рублей</span>
+								</fieldset>
+							</div>
+							<div class="esfTopColors">
+								<label>Цвет:</label>
+								<ul>
+									<li><a href="#" style="background:#df2229"></a></li>
+									<li><a href="#" style="background:#ff7900"></a></li>
+									<li><a href="#" style="background:#ffff00"></a></li>
+									<li><a href="#" style="background:#00ac00"></a></li>
+									<li><a href="#" style="background:#00ffff"></a></li>
+									<li><a href="#" style="background:#ff00ff"></a></li>
+									<li><a href="#" style="background:#752993"></a></li>
+									<li><a href="#" style="background:#6c3506"></a></li>
+									<li><a href="#" style="background:#b3b3b3"></a></li>
+									<li><a href="#" style="background:#ffffff;" class="white"></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="esfRightPart">
+							<fieldset>
+								<label>Категория:</label>
+								<select name="templateCategory" id="categorySelect" >
+									<option value="0">Все шаблоны</option>
+									<option value="1">Worpress шаблоны</option>
+									<option value="2">HTML шаблоны</option>
+									<option value="3">Joomla шаблоны</option>
+									<option value="4">PSD шаблоны</option>
+									<option value="0">Все шаблоны</option>
+									<option value="1">Worpress шаблоны</option>
+									<option value="2">HTML шаблоны</option>
+									<option value="3">Joomla шаблоны</option>
+									<option value="4">PSD шаблоны</option>
+									<option value="0">Все шаблоны</option>
+									<option value="1">Worpress шаблоны</option>
+									<option value="2">HTML шаблоны</option>
+									<option value="3">Joomla шаблоны</option>
+									<option value="4">PSD шаблоны</option>
+								</select>
+							</fieldset>
+							<fieldset>
+								<label>Свой цвет:</label>
+								<div id="SimpleColor">
+									<input type="text" name="ownColor" class="colorSample" placeholder="EBE6B9" />
+								</div>
+							</fieldset>
+							<fieldset>
+								<input name="extbtn" type="submit" value="Искать" class="submitExtSearch"/>
+							</fieldset>
+						</div>
+					</form>
+				</div>
+				<div class="searchResults">
+					<div class="searchResultsHeader">
+						<div class="sortBy">
+							<p>сортировать по:</p>
+							<a href="#">названию</a>
+							<a href="#" class="abs">рейтингу</a>
+							<a href="#">кол-ву скачиваний</a>
+							<a href="#">цене</a>
+							<a href="#">цене выкупа</a>
+						</div>
+						<h3>Результаты поиска:</h3>
+					</div>
+					<div class="searchResultsList">
+						<ul class="designsList">
+							<li class="unique">
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								<span class="new">Скачиваний: 0</span><br/>
+								Цена: <span>3 000 руб.</span><br/>
+								Цена выкупа: <span>36 000 руб.</span></p>
+								<p class="details"><a href="#">Купить первым!</a></p>
+							</li>
+							<li>
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								Скачиваний: <span>41</span><br/>
+								Цена: <span>3 000 руб.</span></p>
+								<p class="details"><a href="#">Подробно</a></p>
+							</li>
+							<li>
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								Скачиваний: <span>41</span><br/>
+								Цена: <span>3 000 руб.</span></p>
+								<p class="details"><a href="#">Подробно</a></p>
+							</li>
+							<li class="unique">
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								<span class="new">Скачиваний: 0</span><br/>
+								Цена: <span>3 000 руб.</span><br/>
+								Цена выкупа: <span>36 000 руб.</span></p>
+								<p class="details"><a href="#">Купить первым!</a></p>
+							</li>
+							<li>
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								Скачиваний: <span>41</span><br/>
+								Цена: <span>3 000 руб.</span></p>
+								<p class="details"><a href="#">Подробно</a></p>
+							</li>
+							<li>
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								Скачиваний: <span>41</span><br/>
+								Цена: <span>3 000 руб.</span></p>
+								<p class="details"><a href="#">Подробно</a></p>
+							</li>
+							<li>
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								Скачиваний: <span>41</span><br/>
+								Цена: <span>3 000 руб.</span></p>
+								<p class="details"><a href="#">Подробно</a></p>
+							</li>
+							<li class="unique">
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								<span class="new">Скачиваний: 0</span><br/>
+								Цена: <span>3 000 руб.</span><br/>
+								Цена выкупа: <span>36 000 руб.</span></p>
+								<p class="details"><a href="#">Купить первым!</a></p>
+							</li>
+							<li class="unique">
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								<span class="new">Скачиваний: 0</span><br/>
+								Цена: <span>3 000 руб.</span><br/>
+								Цена выкупа: <span>36 000 руб.</span></p>
+								<p class="details"><a href="#">Купить первым!</a></p>
+							</li>
+							<li class="unique">
+								<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr1.png" alt="template"/></a>
+								<p><a href="#">Девушка фокусник</a></p>
+								<p>HTML/CSS/Flash шаблон<br/>
+								Исходник: PSD + FLA(CS4)</p>
+								<p>Рейтинг: <span>176</span><br/>
+								<span class="new">Скачиваний: 0</span><br/>
+								Цена: <span>3 000 руб.</span><br/>
+								Цена выкупа: <span>36 000 руб.</span></p>
+								<p class="details"><a href="#">Купить первым!</a></p>
+							</li>
+						</ul>
+						<div class="paginationControl">
+							<a href="#" class="prevPage" title="Предыдущая страница">назад</a>
+							<ul class="pageList">
+								<li class="active">1</li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+							</ul>
+							<a href="#" class="nextPage" title="Следующая страница">вперед</a>
+						</div>
+						<div class="itemsOnPage">
+							<p>кол-во дизайнов на страницу:</p>
+							<ul class="pageList">
+								<li class="active">10</li>
+								<li><a href="#">20</a></li>
+								<li><a href="#">50</a></li>
+								<li><a href="#">100</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="navBlock">
+			<form class="fastSearch" method="post" action="#">
+				<input name="keyword" type="text" value="" placeholder="Введите запрос" class="inputFastSearch"/>
+				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+			</form>
+			<ul class="leftMenu">
+				<li><a href="#"><span>Главная</span></a></li>
+				<li><a href="#"><span>Новости</span></a></li>
+				<li><a href="#"><span>Дизайны</span></a></li>
+				<li><a href="#"><span>Дизайнеры</span></a></li>
+				<li><a href="#"><span>Блоги</span></a></li>
+			</ul>
+			<ul class="rightMenu">
+				<li><a href="#"><span>Обратная связь</span></a></li>
+				<li><a href="#"><span>ЧаВо</span></a></li>
+				<li><a href="#"><span>Помощь</span></a></li>
+			</ul>
+		</div>
+		<div class="footer">
+			<div class="rightCopy">
+				<p>&copy; 2011 Все права защищены.<br/>
+				Проект компании <a href="#">“Фабрика сайтов”</a>.</p>
+			</div>
+			<div class="fabricaLogo">
+				<a href="http://fabricasaitov.ru"><img src="images/cop.png" alt="Фабрика сайтов"/></a>
+			</div>
+		</div>
+	</body>
+</html>
