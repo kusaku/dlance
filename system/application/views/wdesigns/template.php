@@ -1,88 +1,125 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="google-site-verification" content="GZ6LEudcMoq7OAIcz-ywUZjW9pM6jROZqY4Rn0y_Ei8" />
-<meta name='yandex-verification' content='51dcabbe6fb5f2d8' />
-<title><?=$title?></title>
-<? if( isset($description) ): ?>
-<?=$description?>
-
-<? endif; ?>
-<? if( isset($keywords) ): ?>
-<?=$keywords?>
-
-<? endif; ?>
-<link rel="shortcut icon" href="favicon.ico">
-<link rel="stylesheet" type="text/css" href="/templates/wdesigns/css/styles.css">
-<link rel="alternate" type="application/rss+xml" href="<?=base_url()?>rss/designs" title="Дизайны сайтов (RSS 2.0)">
-<script type="text/javascript" src="/templates/js/jquery.js"></script>
-<script type="text/javascript" src="/templates/js/jquery.cookie.js"></script>
-<?=$script?>
-</head>
-<body>
-<div id="custom-doc" class="yui-t5">
-
-<div id="top" class="yui-gd">
-<div class="yui-u first logo"><a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><span></span></a> </div>
-<div class="yui-u premium">
-
-
-</div>
-</div>
-<div id="pathway"><a href="<?=base_url()?>"><?=$this->config->item('site')?></a> &raquo; </div>
-
-<div id="topnav">
-	<div>
-		<div>
-			<div style="position:relative;">
-<ul>
-<li class="first"><a href="<?=base_url()?>">Главная</a></li>
-<li><a href="/news">Новости проекта</a></li>
-<li><a href="/designs">Дизайны</a></li>
-<li><a href="/designs/search">Поиск дизайнов</a></li>
-<li><a href="/users/all">Каталог дизайнеров</a></li>
-<li><a href="/blogs">Блоги</a></li>
-<li><a href="/help">Помощь</a></li>
-<li><a href="/users/support">Обратная связь</a></li>
-</ul>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="google-site-verification" content="GZ6LEudcMoq7OAIcz-ywUZjW9pM6jROZqY4Rn0y_Ei8" />
+		<meta name='yandex-verification' content='51dcabbe6fb5f2d8' />
+		<title><?=$title?></title>
+		<? if( isset($description) ): ?>
+			<?=$description?>
+		<? endif; ?>
+		<? if( isset($keywords) ): ?>
+			<?=$keywords?>
+		<? endif; ?>
+		<link rel="alternate" type="application/rss+xml" href="<?=base_url()?>rss/designs" title="Дизайны сайтов (RSS 2.0)">
+		<link href="/design/css/base.css" rel="stylesheet" type="text/css" />
+		<link href="/design/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="/design/css/cusel.css" rel="stylesheet" type="text/css" />
+		<link href="/design/css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="/design/js/jquery-1.6.3.min.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.bxSlider.min.js"></script>
+		<script type="text/javascript" src="/design/js/cusel-min-2.4.1.js"></script>
+		<script type="text/javascript" src="/design/js/radio.js"></script>
+		<script type="text/javascript" src="/design/js/checkbox.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.simpleColor.js"></script>
+		<script type="text/javascript">
+		(function($){
+			$(function(){
+				$("#slider1").bxSlider({
+					infiniteLoop: false,
+					hideControlOnEnd: true
+				});
+				$("#featurelist").bxSlider({
+					auto: true,
+					mode: 'fade',
+					infiniteLoop: true,
+					controls: false,
+					pager: true,
+					buildPager: function(slideIndex){
+						switch (slideIndex){
+							case 0:
+								return '<a href=""><img src="images/thumb1.jpg" /></a>';
+							case 1:
+								return '<a href=""><img src="images/thumb2.jpg" /></a>';
+							case 2:
+								return '<a href=""><img src="images/thumb3.jpg" /></a>';
+						}
+					}
+				});
+				$("a.zoom").fancybox({titlePosition:'over'});
+				$("input[placeholder],textarea").placeholder();
+				var params = {
+					changedEl: "#selectel, #theme"
+					}
+				cuSel(params);
+				$(".niceRadio").each(function() {
+					changeRadioStart($(this));
+				});
+			});
+		}(jQuery))
+		</script>
+	</head>
+	<body>
+	<div class="header">
+			<div class="logoFd">
+				<a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><img src="/design/images/logo_fd.png" alt="Ф.дизайн" /></a>
+			</div>
+			<div class="bannerPlace">
+				<a href="#" title="Эта реклама проплачена!"><img src="images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+			</div>
+			<div class="authBlock">
+				<?=$login?>
 			</div>
 		</div>
-	</div>
-</div>
-
-<?=$login?>
-<div id="bd">
-
-<?=$content?>
-
-<br clear="all">
-<div style="font-size:11px;" class="mt20 clearfix"></div>
-</div>
-
-<div id="ft">
-	<div id="ft-inner" class="yui-gf">
-		<div id="copyright" class="yui-u first"> 
-
+		<div class="navBlock">
+			<form class="fastSearch" method="post" action="#">
+				<input name="keyword" type="text" value="" placeholder="Введите запрос" class="inputFastSearch"/>
+				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+			</form>
+			<ul class="leftMenu">
+				<li><a href="<?=base_url()?>"><span>Главная</span></a></li>
+				<li><a href="/news"><span>Новости</span></a></li>
+				<li><a href="/designs"><span>Дизайны</span></a></li>
+				<li><a href="/designs"><span>Дизайнеры</span></a></li>
+				<li><a href="/blogs"><span>Блоги</span></a></li>
+			</ul>
+			<ul class="rightMenu">
+				<li><a href="/users/support"><span>Обратная связь</span></a></li>
+				<li><a href="/faq"><span>ЧаВо</span></a></li>
+				<li><a href="/help"><span>Помощь</span></a></li>
+			</ul>
 		</div>
-	<div id="bottomnav" class="yui-u"><ul>
-<li><a href="<?=base_url()?>">Главная</a></li>
-<li><a href="/news">Новости проекта</a></li>
-<li><a href="/designs">Дизайны</a></li>
-<li><a href="/users/all">Каталог дизайнеров</a></li>
-<li><a href="/blogs">Блоги</a></li>
-<li><a href="/help">Помощь</a></li>
-<li><a href="/users/support">Обратная связь</a></li>
-</ul>
-
-<ul></ul></div>
-	</div>
-</div>
-
-
-
-</div>
-<br>
-<span style="font-size:85%;">&copy; <a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><?=$this->config->item('site')?></a> 2010.</span>
-</body>
+		<div class="main">
+			<?=$content?>
+		</div>
+		<div class="navBlock">
+			<form class="fastSearch" method="post" action="#">
+				<input name="keyword" type="text" value="" placeholder="Введите запрос" class="inputFastSearch"/>
+				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+			</form>
+			<ul class="leftMenu">
+				<li><a href="<?=base_url()?>"><span>Главная</span></a></li>
+				<li><a href="/news"><span>Новости</span></a></li>
+				<li><a href="/designs"><span>Дизайны</span></a></li>
+				<li><a href="/designs"><span>Дизайнеры</span></a></li>
+				<li><a href="/blogs"><span>Блоги</span></a></li>
+			</ul>
+			<ul class="rightMenu">
+				<li><a href="/users/support"><span>Обратная связь</span></a></li>
+				<li><a href="/faq"><span>ЧаВо</span></a></li>
+				<li><a href="/help"><span>Помощь</span></a></li>
+			</ul>
+		</div>
+		<div class="footer">
+			<div class="rightCopy">
+				<p>&copy; 2011 Все права защищены.<br/>
+				Проект компании <a href="http://fabricasaitov.ru" target="_blank">“Фабрика сайтов”</a>.</p>
+			</div>
+			<div class="fabricaLogo">
+				<a href="http://fabricasaitov.ru" target="_blank"><img src="/design/images/cop.png" alt="Фабрика сайтов"/></a>
+			</div>
+		</div>
+	</body>
 </html>
