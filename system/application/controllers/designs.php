@@ -760,7 +760,7 @@ class Designs extends Controller
 		{
 			$fontSize = round((($count - $min)/($max - $min)) * ($maxSize - $minSize) + $minSize);
 			$tagsCount++;
-			if (!($tagsCount%10)){
+			if (!($tagsCount%9)){
 				$out .= "<li><a class=\"size".$fontSize."\" href=\"/designs/search/?tags=".$tag."\"><span>".$tag."</span></a></li>";
 				$outPages .="<li><ul class=\"tagsCloudBlock\">".$out."</ul></li>";
 				$out = '';

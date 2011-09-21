@@ -64,7 +64,7 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .navBlock .leftMenu {float:left;}
 .navBlock .rightMenu {float:right;}
 
-.main {overflow:hidden; padding:15px 0;}
+.main {padding:15px 0;}
 .main .sideBar{width:200px;float:left; text-align:left;}
 .main .content{width:750px;float:left; text-align:justify;}
 .main .content a {color:#ff7b0b; text-decoration:none;}

@@ -59,7 +59,7 @@
 				$(".niceRadio").each(function() {
 					changeRadioStart($(this));
 				});
-				$("#tags, #tagsTop, #tagsBottom").focus().autocomplete("<?=base_url()?>designs/tags/", {selectFirst:false});
+				$("#tagsBottom,#tags, #tagsTop").focus().autocomplete("<?=base_url()?>designs/tags/", {selectFirst:false});
 				$(".colorSample").simpleColor({
 					buttonClass: "colorButton"
 				});

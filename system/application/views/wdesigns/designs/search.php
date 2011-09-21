@@ -35,8 +35,10 @@
 					<? endif; ?>
 				<? endforeach; ?>
 				</ul>
-			<? endif; ?>
 			</li>
+			<? else: ?>
+				<? if ($row['parent_id']==0){ echo "</li>"; }?>
+			<? endif; ?>
 		<? endforeach; ?>
 		</ul>
 	</div>
@@ -94,7 +96,7 @@
 										<? endif; ?>
 									<? foreach($categories as $row2): ?>
 										<? if( $row['id'] == $row2['parent_id'] ): ?>
-											<option value="<?=$row2['id']?>"<? if( $input['category'] == $row2['id']): ?> selected="selected<? endif; ?>"><?=$row2['name']?></option>
+											<option value="<?=$row2['id']?>" <? if( $input['category'] == $row2['id']): ?> selected="selected"<? endif; ?>><?=$row2['name']?></option>
 										<? endif; ?>
 									<? endforeach; ?>
 									<? endforeach; ?>
@@ -150,35 +152,41 @@
 					</div>
 					<div class="searchResultsList">
 						<? if( !empty($data) ): ?>
-							<?=show_highslide()?>
+							<!-- ?=show_highslide()? -->
 							<ul class="designsList">
 							<? foreach($data as $row): ?>
-								<li>
-									<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
-									<p><a href="/designs/<?=$row['id']?>.html"><?=$row['title']?></a></p>
-									<!-- Это откуда берется? -->
-									<p>HTML/CSS/Flash шаблон<br/>
-									Исходник: PSD + FLA(CS4)</p>
-									<p>Рейтинг: <span><?=$row['rating']?></span><br/>
-									Скачиваний: <span><?=$row['sales']?></span><br/>
-									Цена: <span><?=$row['price_1']?> руб.</span></p>
-									<p class="details"><a href="/designs/<?=$row['id']?>.html">Подробно</a></p>
-								</li>
+								<? if ($row['sales']==0) {?> 
+										<li class="unique"> 
+											<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
+											<p><a href="/designs/<?=$row['id']?>.html"><?=$row['title']?></a></p>
+											<!-- Это откуда берется? -->
+											<p>HTML/CSS/Flash шаблон<br/>
+											Исходник: <?=$row['source']?></p>
+											<p>Рейтинг: <span><?=$row['rating']?></span><br/>
+											<span class="new">Скачиваний: <?=$row['sales']?></span><br/>
+											Цена: <span><?=$row['price_1']?> руб.</span></p>
+											<p class="details"><a href="/designs/<?=$row['id']?>.html">Купить первым!</a></p>
+										</li>
+									<?} else {?> 
+										<li> 
+											<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
+											<p><a href="/designs/<?=$row['id']?>.html"><?=$row['title']?></a></p>
+											<!-- Это откуда берется? -->
+											<p>HTML/CSS/Flash шаблон<br/>
+											Исходник: <?=$row['source']?></p>
+											<p>Рейтинг: <span><?=$row['rating']?></span><br/>
+											Скачиваний: <span><?=$row['sales']?></span><br/>
+											Цена: <span><?=$row['price_1']?> руб.</span></p>
+											<p class="details"><a href="/designs/<?=$row['id']?>.html">Подробно</a></p>
+										</li>
+									<? } ?>
 							<? endforeach; ?>
 							</ul>
-						<?=$page_links?>
 						<? else: ?>
 							<p>Ничего не найдено.</p>
 						<? endif; ?>
 						<div class="paginationControl">
-							<a href="#" class="prevPage" title="Предыдущая страница">назад</a>
-							<ul class="pageList">
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-							</ul>
-							<a href="#" class="nextPage" title="Следующая страница">вперед</a>
+							<?=$page_links?>
 						</div>
 						<div class="itemsOnPage">
 							<p>кол-во дизайнов на страницу:</p>

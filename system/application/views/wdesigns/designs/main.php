@@ -31,7 +31,7 @@
 					<h3>Свежие дизайны:</h3>
 					<ul class="freshDesignsList">
 					<? if( !empty($data) ): ?>
-					<?=show_highslide()?>
+					<!-- ?=show_highslide()? -->
 						<? foreach($data as $row): ?>
 						<li>
 							<!-- Здесь нужна серая превьюшка -->
