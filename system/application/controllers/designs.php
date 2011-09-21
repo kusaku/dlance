@@ -750,6 +750,8 @@ class Designs extends Controller
 		$minSize = 1;
 		$maxSize = 5;
 		$out = '';
+		$outPages = '';
+		$tagsCount = 0;
 
 		// здесь можно задать сортировку элементов
 		arsort($tagcloud); // большие метки в начале
@@ -757,13 +759,19 @@ class Designs extends Controller
 		foreach ($tagcloud as $tag => $count) 
 		{
 			$fontSize = round((($count - $min)/($max - $min)) * ($maxSize - $minSize) + $minSize);
-
-
-			$out .= "<li><a class=\"size".$fontSize."\" href=\"/designs/search/?tags=".$tag."\">".$tag."</a></li>";
+			$tagsCount++;
+			if (!($tagsCount%10)){
+				$out .= "<li><a class=\"size".$fontSize."\" href=\"/designs/search/?tags=".$tag."\"><span>".$tag."</span></a></li>";
+				$outPages .="<li><ul class=\"tagsCloudBlock\">".$out."</ul></li>";
+				$out = '';
+			}
+			else{
+				$out .= "<li><a class=\"size".$fontSize."\" href=\"/designs/search/?tags=".$tag."\"><span>".$tag."</span></a></li>";
+			}
 
 		}
 
-		return $out; 
+		return $outPages; //добавил нужные обертки
 	}
 /*
 |---------------------------------------------------------------

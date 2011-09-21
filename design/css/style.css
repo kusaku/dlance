@@ -79,13 +79,15 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .sideBar .topDesigners .designersList {list-style:none; padding:0; margin:0; overflow:hidden;}
 .sideBar .topDesigners .designersList li{display:block; border-top:1px solid #dadada; width:180px;padding:8px 0; overflow:hidden;}
 .sideBar .topDesigners .designersList li:first-child {border-top:0;}
-.sideBar .topDesigners .designersList .avatar {display:block; width:50px; height:50px; float:left; margin:0 10px 0 0;}
+.sideBar .topDesigners .designersList .avatar {display:block; width:50px; height:50px; float:left; margin:0 10px 0 0;overflow:hidden;}
+.sideBar .topDesigners .designersList .avatar img{max-width: 48px;}
 .sideBar .topDesigners .designersList li p{width:80px; float:left; margin:4px 0 0 0;}
 .sideBar .topDesigners .designersList li a {font-size:12px; color:#000000;}
 .sideBar .topDesigners .designersList li .rating {display:block; width:40px; float:right; font-size:22px; color:#ff7b0b; margin:-4px 0 0 0; text-align:center;}
 .sideBar .topDesigners a {color:#ff7b0b;}
 
 .sideBar .designsCategories h3{display:block; height:26px; width:180px; background:url(../images/headerlefttop.png) 0 0 no-repeat #ff7900; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
+.sideBar .designsCategories h3 a {color:#ffffff;text-decoration:none;}
 .sideBar .designsCategories ul {list-style:none; margin:0; padding:0;}
 .sideBar .designsCategories ul li {margin:3px 0;}
 .sideBar .designsCategories ul ul {margin:0 0 0 1em;}
@@ -178,6 +180,7 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main .content .searchResultsList ul.designsList {display:block; width:750px; overflow:hidden; clear:both; margin:5px 0; padding:0;}
 .main .content .searchResultsList ul.designsList  li{display:block; width:138px; height:238px; float:left; margin:0 10px 0 0; padding:1px; position:relative; background:url(../images/designslist.png) -140px 0 no-repeat;z-index:1;} 
 .main .content .searchResultsList ul.designsList  li.unique {background:url(../images/designslist.png) 0 0 no-repeat;}
+.main .content .searchResultsList ul.designsList  li img {max-height: 88px;}
 .main .content .searchResultsList ul.designsList a {text-decoration:underline; font-size:12px;}
 .main .content .searchResultsList ul.designsList a:hover {text-decoration:none;}
 .main .content .searchResultsList ul.designsList p {margin:5px 8px; font-size:10px;}

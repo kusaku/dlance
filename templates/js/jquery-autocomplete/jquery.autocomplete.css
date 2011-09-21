@@ -5,7 +5,8 @@ body {/*—брасываем*/
 
 .ac_results {
 	padding: 0px;
-	border: 1px solid black;
+	border: 1px solid #b2c4c8; 
+	border-top: 0;
 	background-color: white;
 	overflow: hidden;
 	z-index: 99999;
@@ -48,6 +49,6 @@ body {/*—брасываем*/
 }
 
 .ac_over {
-	background-color: #0A246A;
+	background-color: #ff7900;
 	color: white;
 }

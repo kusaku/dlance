@@ -1,267 +1,193 @@
-<style type="text/css">
-	#SimpleColor {
-		font-size:11px;
-	}
-	input#alert_button {
-		display: block;
-		margin-top: 20px;
-	}
-	
-	.simpleColorDisplay {
-		float: left;
-	}
-	
-	.button {
-		clear: right;
-	}
-</style>
+<div class="sideBar">
+	<div class="tagsCloud slideBox">
+		<ul id="slider1">
+			<!-- Облако тегов, вывод надо рассчитать -->
+			<?=$tagcloud?>
+		</ul>
+	</div>
+	<div class="designsCategories">
+		<h3><a href="/designs">Дизайны:</a></h3>
+		<?
+		if( !empty($category) )
+		{
+			$active = $category;
+			foreach($categories as $row):
+				if( $active == $row['id'] ):
+					if( $row['parent_id'] != 0 )://Если у активной категории имеется раздел, присваиваем раздел
+						$active = $row['parent_id'];
+					endif;
+				endif;
+			endforeach;
+		}
+		?>
+		<ul>
+		<? foreach($categories as $row): ?> 
 
-<script type="text/javascript" src="/templates/js/SimpleColor/jquery.simpleColor.js"></script>
-
-<script  type="text/javascript">
-$(document).ready(function(){
-	$('.simple_color').simpleColor({
-			defaultColor: '#<?=$input['color']?>',
-			cellWidth: 25,
-			cellHeight: 10,
-			border: '1px solid #333333',
-			buttonClass: 'button'
-	});
-});
-</script>
-
-<script type='text/javascript' src='/templates/js/jquery-autocomplete/jquery.autocomplete.js'></script>
-<link rel="stylesheet" type="text/css" href="/templates/js/jquery-autocomplete/jquery.autocomplete.css" />
-<script type="text/javascript">
-$().ready(function() {
-	$("#tags").focus().autocomplete("<?=base_url()?>designs/tags/", {selectFirst:false});
-
-});
-</script>
-
-
-<div id="yui-main">
-<div class="yui-b clearfix"> 
-<form action="/designs/search/" method="get">
-
-<div id="SimpleColor">
-Цвет:
-<input name="color" class='simple_color' value='<?=$input['color']?>'/>
-<br />
-</div>
-
-<div>
- <div>
-  <div>
-   <div>
-    <div id="msearch">
-
-Ключевые слова:
-<div><input name="tags" type="text" size="100" maxlength="75" value="<?=$input['tags']?>" id="tags" /></div>
-
-Цена за покупку 
-<div><input name="price_1_start" type="text" size="2" maxlength="6" value="<?=$input['price_1_start']?>"> до <input name="price_1_end" type="text" size="2" maxlength="6" value="<?=$input['price_1_end']?>"> рублей</div>
-
-Цена за выкуп 
-<div><input name="price_2_start" type="text" size="2" maxlength="6" value="<?=$input['price_2_start']?>"> до <input name="price_2_end" type="text" size="2" maxlength="6" value="<?=$input['price_2_end']?>"> рублей</div>
-
-Категория:
-<div>
-<select name="category">
-<option value="">Не важно</option>
-<? foreach($categories as $row): ?> 
-
-<? if( $row['parent_id'] == 0): ?>
-<optgroup label="<?=$row['name']?>">
-<? endif; ?>
-
-	<? foreach($categories as $row2): ?>
-			<? if( $row['id'] == $row2['parent_id'] ): ?>
-				<option value="<?=$row2['id']?>"<? if( $input['category'] == $row2['id']): ?> selected="selected<? endif; ?>"><?=$row2['name']?></option>
+			<? if( $row['parent_id'] == 0 ) :?>
+				<li class="<? if( !empty($active) and $row['id'] == $active ): ?>active<? endif ?>"><a href="/designs/search/?category=<?=$row['id']?>"><?=$row['name']?></a>
 			<? endif; ?>
-	<? endforeach; ?>
-<? endforeach; ?>
-</select>
-</div>
 
-
-
-
-
-Результатов на страницу:
-<div><input name="result" type="text" size="1" maxlength="2" value="<?=$input['result']?>"></div>
-<div><input type="submit" value="Поиск"></div>
-</form>
-     </div>
-   </div>
-  </div>
- </div>
-</div>
-
-
-<? if( $colors ): ?>
-Популярные цвета:
-<div class="jColorSelect">
-<? foreach($colors as $row): ?>
-<a href="/designs/search/?color=<?=$row['color']?>"><div style="background-color:#<?=$row['color']?>;"></div></a>
-<? endforeach; ?>
-</div>
-<? endif; ?>
-
-<div id="bubble-2" class="mb20"></div>
-
-Найдено: <?=$total_rows?>
-
-<div id="bubble-2" class="mb20"></div>
-
-<div align="right"><a  href="/designs/add/"><strong>Добавить дизайн на продажу</strong></a></div>
-<div class="latest-orders">
-<h3>Поиск дизайнов</h3>
-
-<div class="offers-stateline">
-<script type="text/javascript" src="/templates/js/currency.js"></script>
-<span>
-<a id="setRur" rel="nofollow" href="#" class="bold">Рубли</a> | 
-
-<a id="setEur" rel="nofollow" href="#">Евро</a> | 
-
-<a id="setUsd" rel="nofollow" href="#">Доллары</a>
-
-<a id="setUah" rel="nofollow" href="#">Гривны</a>
-</span>
-</div>
-
-<table class="listorder">
-<tr>
-<td class="topline lft txtl">
-<? if( $input['order_field'] == 'title' and  $input['order_type'] == 'desc' ): ?>
-<a  href="/designs/search/?order_field=title&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Заголовок / Превью</a>
-<? else: ?>
-<a  href="/designs/search/?order_field=title<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Заголовок / Превью</a>
-<? endif; ?>
-</td>
-
-<td class="topline" style="width: 70px;">
-<? if( $input['order_field'] == 'sales' and  $input['order_type'] == 'desc' ): ?>
-<a  href="/designs/search/?order_field=sales&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Покупок</a>
-<? else: ?>
-<a  href="/designs/search/?order_field=sales<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Покупок</a>
-<? endif; ?>
-</td>
-
-<td class="topline" style="width: 70px;">
-<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?>
-<a  href="/designs/search/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Рейтинг</a>
-<? else: ?>
-<a  href="/designs/search/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Рейтинг</a>
-<? endif; ?>
-</td>
-
-<td class="topline" style="width: 70px;">
-<? if( $input['order_field'] == 'price_1' and  $input['order_type'] == 'desc' ): ?>
-<a  href="/designs/search/?order_field=price_1&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Цена</a>
-<? else: ?>
-<a  href="/designs/search/?order_field=price_1<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Цена</a>
-<? endif; ?>
-</td>
-
-<td class="topline rht" style="width: 70px;">
-<? if( $input['order_field'] == 'price_2' and  $input['order_type'] == 'desc' ): ?>
-<a  href="/designs/search/?order_field=price_2&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Цена выкупа</a>
-<? else: ?>
-<a  href="/designs/search/?order_field=price_2<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Цена выкупа</a>
-<? endif; ?>
-</td>
-
-</tr>
-
-<? if( !empty($data) ): ?>
-
-<?=show_highslide()?>
-
-<? foreach($data as $row): ?>
-<tr>
-<td class="ordertitle"><strong><a href="/designs/<?=$row['id']?>.html"><?=$row['title']?></a></strong><br>
-
-<a href="<?=$row['full_image']?>" class="highslide" onclick="return hs.expand(this)">
-<img src="<?=$row['small_image']?>" title="<?=$row['title']?>" />
-</a>
-
-
-<div class="inf">
-<?=$row['category']?> | <?=$row['date']?>
-
-</div></td>
-<td class="offcount"><?=$row['sales']?></td>
-<td class="offcount"><?=$row['rating']?></td>
-<td class="budget"><?=$row['price_1']?> рублей</td>
-<td class="budget"<? if( $row['sales'] > 0 ): ?> style="text-decoration:line-through"<? endif; ?>><?=$row['price_2']?> рублей</td>
-
-
-</tr>
-<? endforeach; ?>
-<?=$page_links?>
-<? else: ?>
-<p>Ничего не найдено.</p>
-<? endif; ?>
-
-</table> 
-
-</div>
-</div>
-</div>
-
-
-
-<div id="sidebar" class="yui-b">
-<div class="hd"></div>
-<div class="bd clearfix">
-
-<ul class="marketnav">
-      <h3><a href="/designs">Все дизайны</a></h3>
-<?
-if( !empty($category) )
-{
-	$active = $category;
-
-	foreach($categories as $row):
-
-		if( $active == $row['id'] ):
-			if( $row['parent_id'] != 0 )://Если у активной категории имеется раздел, присваиваем раздел	
-				$active = $row['parent_id'];
-			endif;	
-		endif;
-
-	endforeach;
-}
-?>
-
-<? foreach($categories as $row): ?> 
-
-<? if( $row['parent_id'] == 0 ) :?>
-<li class="lvl-1 <? if( !empty($active) and $row['id'] == $active ): ?>active<? endif ?>"><a href="/designs/search/?category=<?=$row['id']?>"><?=$row['name']?></a></li>
-<? endif; ?>
-
-	<? if( !empty($active) and $active == $row['id'] ):?>
-
-		<? foreach($categories as $row2): ?>
-			<? if( $row['id'] == $row2['parent_id'] ): ?>
-				<li class="lvl-2"><a href="/designs/search/?category=<?=$row2['id']?>"><?=$row2['name']?></a> (<?=$row2['number']?>)</li>
+			<? if( !empty($active) and $active == $row['id'] ):?>
+				<ul>
+				<? foreach($categories as $row2): ?>
+					<? if( $row['id'] == $row2['parent_id'] ): ?>
+						<li class="lvl-2"><a href="/designs/search/?category=<?=$row2['id']?>"><?=$row2['name']?></a> <span>(<?=$row2['number']?>)</span></li>
+					<? endif; ?>
+				<? endforeach; ?>
+				</ul>
 			<? endif; ?>
+			</li>
 		<? endforeach; ?>
-	<? endif; ?>
-
-<? endforeach; ?>
-</ul>
-
-
-<? if( !empty($projects_descr) ): ?>
-<div class="sideblock nomargin">
-<p class="freetext"><?=$projects_descr?></p>
-</div>  
-<? endif; ?> 
-
+		</ul>
+	</div>
 </div>
+			<div class="content">
+				<div class="extendedSearch">
+					<h3>Расширенный поиск:</h3>
+					<form class="extendedSearchForm" action="/designs/search/" method="get">
+						<div class="esfLeftPart">
+							<fieldset>
+								<label for="keyword">Ключевые слова:</label>
+								<input type="text" name="tags" placeholder="что ищем?" <?=$input['tags']?>" id="tags"/>
+							</fieldset>
+							<div class="esfPrice">
+								<fieldset>
+									<label>Цена за покупку:</label>
+									<span>от</span>
+									<input type="text" name="price_1_start" value="<?=$input['price_1_start']?>"/>
+									<span>до</span>
+									<input type="text" name="price_1_end" value="<?=$input['price_1_end']?>" />
+									<span>рублей</span>
+								</fieldset>
+								<fieldset>
+									<label>Цена за выкуп:</label>
+									<span>от</span>
+									<input type="text" name="price_2_start" value="<?=$input['price_2_start']?>" />
+									<span>до</span>
+									<input type="text" name="price_2_end" value="<?=$input['price_2_end']?>" />
+									<span>рублей</span>
+								</fieldset>
+							</div>
+							<div class="esfTopColors">
+								<label>Цвет:</label>
+								<ul>
+								<? foreach($colors as $row): ?>
+									<?if ($row['color']!="ffffff") {
+										echo "<li><a href=\"/designs/search/?color=".$row['color']."\" style=\"background:#".$row['color']."\"></a></li>";
+										}
+									else {
+										echo "<li><a href=\"/designs/search/?color=".$row['color']."\" style=\"background:#".$row['color']."\" class=\"white\"></a></li>";
+										}
+									?>
+								<? endforeach; ?>
+								</ul>
+							</div>
+						</div>
+						<div class="esfRightPart">
+							<fieldset>
+								<label>Категория:</label>
+								<select name="category" id="categorySelect" >
+									<option value="">Не важно</option>
+									<? foreach($categories as $row): ?> 
+										<? if( $row['parent_id'] == 0): ?>
+											<option value="<?=$row['id']?>"><?=$row['name']?></option>
+										<? endif; ?>
+									<? foreach($categories as $row2): ?>
+										<? if( $row['id'] == $row2['parent_id'] ): ?>
+											<option value="<?=$row2['id']?>"<? if( $input['category'] == $row2['id']): ?> selected="selected<? endif; ?>"><?=$row2['name']?></option>
+										<? endif; ?>
+									<? endforeach; ?>
+									<? endforeach; ?>
+								</select>
+							</fieldset>
+							<fieldset>
+								<label>Свой цвет:</label>
+								<div id="SimpleColor">
+									<input type="text" name="ownColor" class="colorSample" placeholder="EBE6B9" value="<?=$input['color']?>"/>
+								</div>
+							</fieldset>
+							<fieldset>
+								<input name="extbtn" type="submit" value="Искать" class="submitExtSearch"/>
+							</fieldset>
+						</div>
+					</form>
+				</div>
+				<div class="searchResults">
+					<div class="searchResultsHeader">
+						<div class="sortBy">
+							<p>сортировать по:</p>
+							<? if( $input['order_field'] == 'title' and  $input['order_type'] == 'desc' ): ?>
+								<a class="abs" href="/designs/search/?order_field=title&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">названию</a>
+							<? else: ?>
+								<a  href="/designs/search/?order_field=title<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">названию</a>
+							<? endif; ?>
+							
+							<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?>
+								<a class="abs" href="/designs/search/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">рейтингу</a>
+							<? else: ?>
+								<a  href="/designs/search/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">рейтингу</a>
+							<? endif; ?>
 
-<div class="ft"></div>
-</div>
+							<? if( $input['order_field'] == 'sales' and  $input['order_type'] == 'desc' ): ?>
+								<a class="abs" href="/designs/search/?order_field=sales&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">кол-ву покупок</a>
+							<? else: ?>
+								<a  href="/designs/search/?order_field=sales<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">кол-ву покупок</a>
+							<? endif; ?>
+
+							<? if( $input['order_field'] == 'price_1' and  $input['order_type'] == 'desc' ): ?>
+								<a class="abs" href="/designs/search/?order_field=price_1&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене</a>
+							<? else: ?>
+								<a  href="/designs/search/?order_field=price_1<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене</a>
+							<? endif; ?>
+							
+							<? if( $input['order_field'] == 'price_2' and  $input['order_type'] == 'desc' ): ?>
+								<a class="abs" href="/designs/search/?order_field=price_2&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене выкупа</a>
+							<? else: ?>
+								<a  href="/designs/search/?order_field=price_2<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене выкупа</a>
+							<? endif; ?>
+						</div>
+						<h3>Результаты поиска:</h3>
+					</div>
+					<div class="searchResultsList">
+						<? if( !empty($data) ): ?>
+							<?=show_highslide()?>
+							<ul class="designsList">
+							<? foreach($data as $row): ?>
+								<li>
+									<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
+									<p><a href="/designs/<?=$row['id']?>.html"><?=$row['title']?></a></p>
+									<!-- Это откуда берется? -->
+									<p>HTML/CSS/Flash шаблон<br/>
+									Исходник: PSD + FLA(CS4)</p>
+									<p>Рейтинг: <span><?=$row['rating']?></span><br/>
+									Скачиваний: <span><?=$row['sales']?></span><br/>
+									Цена: <span><?=$row['price_1']?> руб.</span></p>
+									<p class="details"><a href="/designs/<?=$row['id']?>.html">Подробно</a></p>
+								</li>
+							<? endforeach; ?>
+							</ul>
+						<?=$page_links?>
+						<? else: ?>
+							<p>Ничего не найдено.</p>
+						<? endif; ?>
+						<div class="paginationControl">
+							<a href="#" class="prevPage" title="Предыдущая страница">назад</a>
+							<ul class="pageList">
+								<li class="active">1</li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+							</ul>
+							<a href="#" class="nextPage" title="Следующая страница">вперед</a>
+						</div>
+						<div class="itemsOnPage">
+							<p>кол-во дизайнов на страницу:</p>
+							<ul class="pageList">
+								<li class="active">10</li>
+								<li><a href="#">20</a></li>
+								<li><a href="#">50</a></li>
+								<li><a href="#">100</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>

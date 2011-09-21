@@ -16,6 +16,7 @@
 		<link href="/design/css/style.css" rel="stylesheet" type="text/css" />
 		<link href="/design/css/cusel.css" rel="stylesheet" type="text/css" />
 		<link href="/design/css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="/templates/js/jquery-autocomplete/jquery.autocomplete.css" />
 		<script type="text/javascript" src="/design/js/jquery-1.6.3.min.js"></script>
 		<script type="text/javascript" src="/design/js/jquery.bxSlider.min.js"></script>
 		<script type="text/javascript" src="/design/js/cusel-min-2.4.1.js"></script>
@@ -24,6 +25,7 @@
 		<script type="text/javascript" src="/design/js/jquery.fancybox-1.3.4.pack.js"></script>
 		<script type="text/javascript" src="/design/js/jquery.placeholder.min.js"></script>
 		<script type="text/javascript" src="/design/js/jquery.simpleColor.js"></script>
+		<script type="text/javascript" src="/templates/js/jquery-autocomplete/jquery.autocomplete.js"></script>
 		<script type="text/javascript">
 		(function($){
 			$(function(){
@@ -51,11 +53,15 @@
 				$("a.zoom").fancybox({titlePosition:'over'});
 				$("input[placeholder],textarea").placeholder();
 				var params = {
-					changedEl: "#selectel, #theme"
+					changedEl: "#selectel, #theme, #categorySelect"
 					}
 				cuSel(params);
 				$(".niceRadio").each(function() {
 					changeRadioStart($(this));
+				});
+				$("#tags, #tagsTop, #tagsBottom").focus().autocomplete("<?=base_url()?>designs/tags/", {selectFirst:false});
+				$(".colorSample").simpleColor({
+					buttonClass: "colorButton"
 				});
 			});
 		}(jQuery))
@@ -67,15 +73,17 @@
 				<a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><img src="/design/images/logo_fd.png" alt="Ф.дизайн" /></a>
 			</div>
 			<div class="bannerPlace">
-				<a href="#" title="Эта реклама проплачена!"><img src="images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+				<!-- На баннер тоже функция нужна? -->
+				<a href="#" title="Эта реклама проплачена!"><img src="/design/images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
 			</div>
 			<div class="authBlock">
+				<!-- Блок авторизации -->
 				<?=$login?>
 			</div>
 		</div>
 		<div class="navBlock">
-			<form class="fastSearch" method="post" action="#">
-				<input name="keyword" type="text" value="" placeholder="Введите запрос" class="inputFastSearch"/>
+			<form class="fastSearch" action="/designs/search/" method="get">
+				<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsTop"/>
 				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
 			</form>
 			<ul class="leftMenu">
@@ -92,11 +100,12 @@
 			</ul>
 		</div>
 		<div class="main">
+			<!-- Основной контент выводим -->
 			<?=$content?>
 		</div>
 		<div class="navBlock">
-			<form class="fastSearch" method="post" action="#">
-				<input name="keyword" type="text" value="" placeholder="Введите запрос" class="inputFastSearch"/>
+			<form class="fastSearch" action="/designs/search/" method="get">
+				<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsBottom"/>
 				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
 			</form>
 			<ul class="leftMenu">
