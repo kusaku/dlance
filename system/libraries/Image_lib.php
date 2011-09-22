@@ -1536,6 +1536,39 @@ class CI_Image_lib {
 
 		return $str;
 	}
+	
+	function grayscale(){
+		//Получаем размеры изображения
+		$img_size = GetImageSize($this->full_dst_path);
+		$width = $img_size[0];
+		$height = $img_size[1];
+		//Создаем новое изображение с такмими же размерами
+		$img = imageCreate($width,$height);
+		//Задаем новому изображению палитру "оттенки серого" (grayscale)
+		for ($c = 0; $c < 256; $c++) {
+			ImageColorAllocate($img, $c,$c,$c);
+		}
+		$sName = $this->explode_name($this->full_dst_path);
+		$sName["ext"] = strtolower($sName["ext"]);
+		//Содаем изображение из файла Jpeg
+		if($sName["ext"] == "jpg" || $sName["ext"] == "jpeg")
+			$img2 = ImageCreateFromJpeg($this->full_dst_path);
+		elseif($sName["ext"] == "gif")
+			$img2 = ImageCreateFromGif($this->full_dst_path);
+		elseif($sName["ext"] == "png")
+			$img2 = ImageCreateFromPng($this->full_dst_path);
+		//Объединяем два изображения
+		ImageCopyMerge($img,$img2,0,0,0,0, $width, $height, 100);
+		//Сохраняем полученное изображение
+		if($sName["ext"] == "jpg" || $sName["ext"] == "jpeg")
+			imagejpeg($img, $this->full_dst_path);
+		elseif($sName["ext"] == "gif")
+			imagegif($img, $this->full_dst_path);
+		elseif($sName["ext"] == "png")
+			imagepng($img, $this->full_dst_path);
+		//Освобождаем память, занятую изображением
+		imagedestroy($img);
+	}
 
 }
 // END Image_lib Class
