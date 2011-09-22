@@ -952,7 +952,7 @@ class Designs extends Controller
 		{
 			$config['encrypt_name']  = TRUE;
 			$config['upload_path'] = './files/designs/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|JPG';
+			$config['allowed_types'] = 'jpg|png|jpeg|JPG';
 			$config['max_size']	= '2000';
 			$config['max_width']  = '1800';
 			$config['max_height']  = '1800';
@@ -965,16 +965,61 @@ class Designs extends Controller
 
     			$path  = './files/designs/'.$data['file_name'].'';
 
+    			// RESIZING THUMB
     			$config['source_image'] = $path;
     			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 138;
-   				$config['height'] = 138;
+    			$config['width'] = 200;
+   				$config['height'] = 200;
 				$config['new_image'] = './files/designs/'.$data['file_name'].'';
 				$config['create_thumb'] = TRUE;
 				$config['thumb_marker'] = '_small';
-
     			$this->image_lib->initialize($config);
     			$this->image_lib->resize();
+    			
+    			// CROPING THUMB
+    			$thumb = $this->image_lib->full_dst_path;
+    			$config['source_image'] = $thumb;
+    			$config['maintain_ratio'] = false;
+    			$config['width'] = 138;
+    			$config['height'] = 88;
+    			$config['new_image'] = $thumb;
+    			$config['create_thumb'] = false;
+    			$this->image_lib->initialize($config);
+    			$this->image_lib->crop();
+    			
+    			// Creating BW thumb
+    			$thumb = $this->image_lib->full_dst_path;
+    			$config['source_image'] = $thumb;
+    			$config['width'] = 138;
+    			$config['height'] = 88;
+    			$config['new_image'] = $thumb;
+    			$config['create_thumb'] = true;
+    			$config['thumb_marker'] = 'bw';
+    			$this->image_lib->initialize($config);
+    			$this->image_lib->resize();
+    			$this->image_lib->grayscale();
+    			
+    			// RESIZING BIG THUMB
+    			$config['source_image'] = $path;
+    			$config['maintain_ratio'] = TRUE;
+    			$config['width'] = 400;
+   				$config['height'] = 400;
+				$config['new_image'] = './files/designs/'.$data['file_name'].'';
+				$config['create_thumb'] = TRUE;
+				$config['thumb_marker'] = '_mid';
+    			$this->image_lib->initialize($config);
+    			$this->image_lib->resize();
+    			
+    			// CROPING BIG THUMB
+    			$thumb = $this->image_lib->full_dst_path;
+    			$config['source_image'] = $thumb;
+    			$config['maintain_ratio'] = false;
+    			$config['width'] = 358;
+    			$config['height'] = 288;
+    			$config['new_image'] = $thumb;
+    			$config['create_thumb'] = false;
+    			$this->image_lib->initialize($config);
+    			$this->image_lib->crop();
 
 				if( $this->input->post('watermark') )//Налаживаем водяной знак
 				{
@@ -1045,6 +1090,8 @@ class Designs extends Controller
 				'price_2' => $this->input->post('price_2'),
 				'source' => htmlspecialchars($this->input->post('source')),
 				'small_image' => '/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'],
+				'smallbw_image' => '/files/designs/'.$data['raw_name'].'_smallbw'.$data['file_ext'],
+				'mid_image' => '/files/designs/'.$data['raw_name'].'_mid'.$data['file_ext'],
 				'full_image' => '/files/designs/'.$data['file_name'],
 				'dfile' => $this->username.'/'.$data_file['file_name'],
 				'status' => 1,
@@ -1379,6 +1426,8 @@ class Designs extends Controller
 
 
 				$small_image = '/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'];
+				$smallbw_image = '/files/designs/'.$data['raw_name'].'_smallbw'.$data['file_ext'];
+				$mid_image = '/files/designs/'.$data['raw_name'].'_mid'.$data['file_ext'];
 				$full_image = '/files/designs/'.$data['file_name'];
 			}
 		}
@@ -1387,6 +1436,8 @@ class Designs extends Controller
 		{
 			$data = $this->designs_mdl->get_edit($id);
 			$small_image = $data['small_image'];
+			$smallbw_image = $data['smallbw_image'];
+			$mid_image = $data['mid_image'];
 			$full_image = $data['full_image'];
 		}
 /*
@@ -1438,6 +1489,8 @@ class Designs extends Controller
 				'price_2' => $this->input->post('price_2'),
 				'source' => htmlspecialchars($this->input->post('source')),
 				'small_image' => $small_image,
+				'smallbw_image' => $smallbw_image,
+				'mid_image' => $mid_image,
 				'full_image' => $full_image,
 
 				'dfile' => $dfile,
