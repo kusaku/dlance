@@ -33,23 +33,6 @@
 					infiniteLoop: false,
 					hideControlOnEnd: true
 				});
-				$("#featurelist").bxSlider({
-					auto: true,
-					mode: 'fade',
-					infiniteLoop: true,
-					controls: false,
-					pager: true,
-					buildPager: function(slideIndex){
-						switch (slideIndex){
-							case 0:
-								return '<a href=""><img src="images/thumb1.jpg" /></a>';
-							case 1:
-								return '<a href=""><img src="images/thumb2.jpg" /></a>';
-							case 2:
-								return '<a href=""><img src="images/thumb3.jpg" /></a>';
-						}
-					}
-				});
 				$("a.zoom").fancybox({titlePosition:'over'});
 				$("input[placeholder],textarea").placeholder();
 				var params = {
@@ -59,7 +42,7 @@
 				$(".niceRadio").each(function() {
 					changeRadioStart($(this));
 				});
-				$("#tagsBottom,#tags, #tagsTop").focus().autocomplete("<?=base_url()?>designs/tags/", {selectFirst:false});
+				$("#tagsBottom,#tags, #tagsTop").autocomplete("<?=base_url()?>designs/tags/", {selectFirst:false});
 				$(".colorSample").simpleColor({
 					buttonClass: "colorButton"
 				});

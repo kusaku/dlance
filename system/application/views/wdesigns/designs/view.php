@@ -103,361 +103,192 @@ function addcart(id, kind)
 	return false;
 }
 </script>
-
-
-<script src="/templates/js/slider/jquery.jcarousel.min.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/templates/js/slider/tango/skin.css" />
-<script type="text/javascript">
-jQuery(document).ready(function() {
-    /*
-	jQuery('#sub').jcarousel({
-        vertical: true
-    });
-	*/
-    jQuery('#similar').jcarousel();
-});
-</script>
-<div id="yui-main">
-<div id="order-page" class="yui-b clearfix">
-
-<? if( $status_id == 1 ): ?>
-
-<? if( $this->user_id != $user_id ): ?>
-
-<div id="addcart" align="right" style="margin:10px;">
-<a href="#" onclick="addcart(<?=$id?>, 1)"><img src="/templates/wdesigns/css/img/buy.gif" /></a>
-
-<? if( $sales == 0 ): ?><a href="#" onclick="addcart(<?=$id?>, 2)"><img src="/templates/wdesigns/css/img/buyout.gif" /></a><? endif; ?>
-</div>
-<? endif; ?>
-
-<? endif; ?>
-<div class="order-title">
-<div class="tr">
-<div class="tl">
-
-
-<div id="rating">
-<a href="#" onclick="vote(<?=$id?>, 1)"><img src="/templates/wdesigns/css/img/like.gif" /></a>
-<a href="#" onclick="vote(<?=$id?>, 2)"><img src="/templates/wdesigns/css/img/dislike.gif" /></a>
-<br />
-Рейтинг: <?=$rating?><br />
-</div>
-
-
-
-<h1><?=$title?></h1>
-<a href="/designs/index/?category=<?=$category_id?>"><?=$category?></a>
-<? if( $this->user_id == $user_id ): ?><div align="right"><a href="/designs/images_add/<?=$id?>">Добавить дополнительные изображения</a> | <a href="/designs/edit/<?=$id?>">Редактировать</a> | <a href="/designs/close/<?=$id?>">Закрыть</a></div><? endif; ?>
-<br />
-
-
-
-</div>
-</div>
-</div>
-
-<?
-if( !empty($similar_designs) ): ?>
-<div class="order-title">
-
-<div style="padding:35px;">
-<ul id="similar" class="jcarousel-skin-tango">
-<? foreach($similar_designs as $row): ?>
-<li><a href="/designs/<?=$row['id']?>.html"><img src="<?=$row['small_image']?>" width="120" height="75" alt="" /></a></li>
-<? endforeach; ?>
-</ul>
-</div>
-
-</div>
-
-<? endif; 
-?>
-
-<?=show_highslide()?>
-<table class="order">
-<tr>
-<td class="lbl btb">Автор:</td>
-<td class="txt">
-      <ul class="ocard">
-		<img src="<?=$userpic?>" alt="" class="avatar" />
-        <li class="black">
-        <a href="/user/<?=$username?>"><?=$surname?> <?=$name?> (<?=$username?>)</a></li>
-        <li>Последний визит: <?=$last_login?></li>
-        <li>Дата регистрации: <?=$created?></li>
-		<li><a href="/contacts/send/<?=$username?>">Личное сообщение</a></li>
-      </ul>
-</td>
-</tr>
-
-<tr>
-<td class="lbl btb">Дизайн:</td>
-<td class="txt">
-<div class="highslide-gallery">
-<div style="width: 170px;">
-<a href="<?=$full_image?>" class="highslide" onclick="return hs.expand(this)">
-<img src="<?=$small_image?>" title="<?=$title?>" />
-</a>
-</div>
-</div> 
-<? if( $logged_in ): ?>
-<a href="#TB_inline?height=250&width=500&inlineId=modalWindow" class="thickbox"><strong>Оставить жалобу</strong></a>
-<? endif; ?>
-
-<? if( $this->team == 2 ) :?>
- | <a href="#TB_inline?height=250&width=500&inlineId=banWindow" class="thickbox"><strong>Забанить продукт</strong></a>
-<? endif; ?>
-
-</td>
-</tr>
-
-<tr>
-<td class="lbl">Исходники:</td>
-<td class="txt"><?=$source?></td>
-</tr>
-
-<tr>
-<td class="lbl">Цена:</td>
-<td class="txt"<? if( $status_id == 2 ): ?> style="text-decoration:line-through"<? endif; ?>><strong><?=$price_1?> рублей</strong></td>
-</tr>
-
-<tr>
-<td class="lbl">Цена выкупа:</td>
-<td class="txt"<? if( $sales > 0 ): ?> style="text-decoration:line-through"<? endif; ?>><strong><?=$price_2?> рублей</strong></td>
-</tr>
-
-<tr>
-<td class="lbl">Добавлено:</td>
-<td class="txt"><?=$date?></td>
-</tr>
-
-<tr>
-<td class="lbl">Статистика:</td>
-<td class="txt">Продаж: <?=$sales?>  |  Просмотры: <?=$views?></td>
-</tr>
-
-<tr>
-<td class="lbl">Статус:</td>
-<td class="txt"><?=$status?></td>
-</tr>
-
-<tr>
-<td class="lbl">Тэги:</td>
-<td class="txt">
-<div>
-<ul class="tags">
-<? foreach($tags as $row): ?>
-<li><a href="/designs/search/?tags=<?=$row['tag']?>"><?=$row['tag']?></a>  (<?=$row['tag_count']?>)</li> 
-<? endforeach; ?>
-</ul>
-<div>
-</td>
-</tr>
-
-</table>
-
-<p class="subtitle">Дополнительные параметры.</p>
-
-<table class="order">
-<? if( $flash ): ?>
-<tr>
-<td class="lbl">Флэш:</td>
-<td class="txt"><?=$flash?></td>
-</tr>
-<? endif; ?>
-
-<? if( $stretch ): ?>
-<tr>
-<td class="lbl">Стретч:</td>
-<td class="txt"><?=$stretch?></td>
-</tr>
-<? endif; ?>
-
-<? if( $columns ): ?>
-<tr>
-<td class="lbl">Количество колонок:</td>
-<td class="txt"><?=$columns?></td>
-</tr>
-<? endif; ?>
-
-<? if( $destination ): ?>
-<tr>
-<td class="lbl">Назначение сайта:</td>
-<td class="txt"><?=$destination?></td>
-</tr>
-<? endif; ?>
-
-<? if( $quality ): ?>
-<tr>
-<td class="lbl">Тех Качество:</td>
-<td class="txt"><?=$quality?></td>
-</tr>
-<? endif; ?>
-
-<? if( $type ): ?>
-<tr>
-<td class="lbl">Тип Верстки:</td>
-<td class="txt"><?=$type?></td>
-</tr>
-<? endif; ?>
-
-<? if( $tone ): ?>
-<tr>
-<td class="lbl">Тон:</td>
-<td class="txt"><?=$tone?></td>
-</tr>
-<? endif; ?>
-
-<? if( $bright ): ?>
-<tr>
-<td class="lbl">Яркость:</td>
-<td class="txt"><?=$bright?></td>
-</tr>
-<? endif; ?>
-
-<? if( $style ): ?>
-<tr>
-<td class="lbl">Стиль:</td>
-<td class="txt"><?=$style?></td>
-</tr>
-<? endif; ?>
-
-<? if( $theme ): ?>
-<tr>
-<td class="lbl">Тема:</td>
-<td class="txt"><?=$theme?></td>
-</tr>
-<? endif; ?>
-
-<? if( $adult ): ?>
-<tr>
-<td class="lbl">Ограничение:</td>
-<td class="txt"></td
-></tr>
-<? endif; ?>
-
-<? if( $colors ): ?>
-<tr>
-<td class="lbl">Расцветка:</td>
-<td class="txt">
-<div class="jColorSelect">
-<? foreach($colors as $row): ?>
-<a href="/designs/search/?color=<?=$row['color']?>" title="<?=$row['percent']?>%"><div style="background-color:#<?=$row['color']?>;"></div></a>
-<? endforeach; ?>
-</div>
-</td>
-</tr>
-<? endif; ?>
-</table>
-
-<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-<div class="yashare-auto-init" data-yashareType="button" data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir"></div> 
-
-
-
-<div class="order-text content"><?=nl2br($text)?></div>
-
-
-
-<? if( !empty($images) ): ?>
-<div id="ptf">
-<p class="subtitle">Дополнительные изображения.</p>
-<? foreach($images as $row): ?>
-<div class="ptf-block">
-
-<? if( $this->user_id == $user_id ): ?>
-<span style="font-size:11px;">
-<a href="/designs/images_edit/<?=$row['id']?>">Редактировать</a> | <a href="/designs/images_del/<?=$row['id']?>">Удалить</a>
-</span>
-<? endif; ?>
-
-<div class="ptf-image brdrl">
-<a href="<?=$row['full_image']?>" class="highslide " onclick="return hs.expand(this)">
-<img src="<?=$row['small_image']?>" title="<?=$row['title']?>">
-</a>
-<div class="highslide-caption">
-<?=$row['descr']?>
-</div>
-
-</div>
-<div class="ptf-text"><?=$row['title']?></div>
-</div>
-<? endforeach; ?>
-</div>
-<? endif; ?>
-
-
-
-<?=$comments?>
-
-</div>
-<!--/order-page-->
-	
-</div>
-<!--/yui-main-->
-
-
-
-
-
-
-<div id="sidebar" class="yui-b">
-<div class="hd"></div>
-<div class="bd clearfix">
-
-<div class="sideblock">
-      <h3>Дизайны данной категории</h3>
-      <ul class="latest-page">
-<? foreach($newest_designs as $row): ?>
-        <li><?=$row['date']?> | <a href="/designs/<?=$row['id']?>.html"><?=$row['title']?></a></li>
-<? endforeach; ?>
-      </ul>
-</div>
-
-<? if( !empty($sub) ): ?>
-<div class="sideblock">
-	<h3>Привязанные товары</h3>
-
-
-
-
-<div class="similar">
-<? foreach($sub as $row): ?>
-<div><a href="/designs/<?=$row['id']?>.html"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" width="69px;"/></a></div>
-<? endforeach; ?>
-</div>
-</div>
-<? endif; ?>
-
-
-<? if( !empty($members_voted) ): ?>
-<div class="sideblock">
-	<h3>Проголосовавшии пользователи</h3>
-	<div class="membvote">
-<? foreach($members_voted as $row): ?>
-<div><a href="/user/<?=$row['username']?>"><img src="<?=$row['userpic']?>"/></a></div>
-<? endforeach; ?>
+<div class="sideBar">
+	<div class="tagsCloud slideBox">
+		<ul id="slider1">
+			<!-- Облако тегов, вывод надо рассчитать -->
+			<?=$tagcloud?>
+		</ul>
 	</div>
-</div>
-<? endif; ?>
-            
-</div>
-<div class="ft"></div>
-</div>
+	<div class="designsCategories">
+		<h3><a href="/designs">Дизайны:</a></h3>
+		<?
+		if( !empty($category) )
+		{
+			$active = $category;
+			foreach($categories as $row):
+				if( $active == $row['id'] ):
+					if( $row['parent_id'] != 0 )://Если у активной категории имеется раздел, присваиваем раздел
+						$active = $row['parent_id'];
+					endif;
+				endif;
+			endforeach;
+		}
+		?>
+		<ul>
+		<? foreach($categories as $row): ?> 
 
+			<? if( $row['parent_id'] == 0 ) :?>
+				<li class="<? if( !empty($active) and $row['id'] == $active ): ?>active<? endif ?>"><a href="/designs/search/?category=<?=$row['id']?>"><?=$row['name']?></a>
+			<? endif; ?>
 
-
-
-<div id="modalWindow" style="display: none;">
-	<textarea rows="5" cols="10" name="report" id="report" style="width:100%; height:200px;"></textarea><br /><br />
-	
-	<input value="Отправить" onclick="send_report(<?=$id?>)" type="button">
-	<input value="Отменить" onclick="tb_remove()" type="button">
-</div>
-<div id="banWindow" style="display: none;">
-Причина бана
-	<textarea rows="5" cols="10" name="cause" id="cause" style="width:100%; height:200px;"></textarea><br /><br />
-	
-	<input value="Отправить" onclick="ban(<?=$id?>)" type="button">
-	<input value="Отменить" onclick="tb_remove()" type="button">
-</div>
+			<? if( !empty($active) and $active == $row['id'] ):?>
+				<ul>
+				<? foreach($categories as $row2): ?>
+					<? if( $row['id'] == $row2['parent_id'] ): ?>
+						<li class="lvl-2"><a href="/designs/search/?category=<?=$row2['id']?>"><?=$row2['name']?></a> <span>(<?=$row2['number']?>)</span></li>
+					<? endif; ?>
+				<? endforeach; ?>
+				</ul>
+			</li>
+			<? else: ?>
+				<? if ($row['parent_id']==0){ echo "</li>"; }?>
+			<? endif; ?>
+		<? endforeach; ?>
+		</ul>
+	</div>
+			</div>
+			<div class="content">
+				<div class="templateCard">
+					<div class="templateCardHeader">
+						<div class="rating" id="rating">
+							<p>Оценка дизайна:</p>
+							<a href="#" onclick="vote(<?=$id?>, 1)" class="plus">+</a>
+							<span><?=$rating?></span>
+							<a href="#" onclick="vote(<?=$id?>, 2)" class="minus">-</a>
+						</div>
+						<h3><?=$title?></h3>
+					</div>
+					<div class="templateDesription">
+						<p><span>Тип:</span> HTML/CSS/Flash шаблон<br/>
+						<span>Исходник:</span> <?=$source?></p>
+						<p><span>Описание:</span> JavaScript-Анимированные Полный сайт CSS шаблоны содержат JS основе элементов, которые добавляют Flash-как динамика и анимации, оставляя шаблонов очень легкий.</p>
+						<div class="statistica">
+							<p><span>Рейтинг:</span> <?=$rating?><br/>
+							<? if( $status_id == 1 ): ?>
+								<? if( $this->user_id != $user_id ): ?>
+									<? if( $sales == 0 ): ?><a href="#"  onclick="addcart(<?=$id?>, 2)" class="buyout"><span>Выкупить за <? if( $sales > 0 ): ?> <? endif; ?><strong><?=$price_2?> руб.</span></a><span>Скачиваний:</span> 0</p><? endif; ?>
+									<p><a href="#"  onclick="addcart(<?=$id?>, 1)" class="buy"><span>Купить</span></a><span>Цена:</span> <? if( $status_id == 2 ): ?> <? endif; ?><strong><?=$price_1?> руб.</p><? endif; ?>
+									<? endif; ?>
+							<p class="moreInfo"><a href="#">Дополнительная информация:</a></p>
+						</div>
+					</div>
+					<div class="templatePreview">
+						<script type="text/javascript" src="/design/js/jquery.bxSlider.min.js"></script>
+		<script type="text/javascript">
+		(function($){
+			$(function(){
+				$("#featurelist").bxSlider({
+					auto: true,
+					mode: 'fade',
+					infiniteLoop: true,
+					controls: false,
+					pager: true,
+					buildPager: function(slideIndex){
+						switch (slideIndex){
+							case 0:
+								return '<a href=""><img src="<?=$small_image?>" /></a>';
+							case 1:
+								return '<a href=""><img src="<?=$small_image?>" /></a>';
+						}
+					}
+				});
+			});
+		}(jQuery))
+		</script>
+						<ul id="featurelist">
+							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?=$full_image?>" alt="template"/></a></li>
+							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?=$full_image?>" alt="template"/></a></li>
+						</ul>
+					</div>
+					<div class="moreInfo">
+						<form action="#" method="post">
+							<fieldset>
+								<p>Сопутствующие товары:</p>
+								<input name="articuls" type="text" placeholder="вводите ID продуктов через запятую" value=""/>
+								<label>вводите ID продуктов через запятую</label>
+							</fieldset>
+							<fieldset>
+								<p>Флеш:</p>
+								<? if( $flash!="Нет" ): ?>
+									<input name="flash" type="radio" class="niceRadio" value="1" checked />
+									<label>да</label>
+									<input name="flash" type="radio" class="niceRadio" value="2"/>
+									<label>нет</label>
+								<? else: ?>
+									<input name="flash" type="radio" class="niceRadio" value="1" />
+									<label>да</label>
+									<input name="flash" type="radio" class="niceRadio" value="2" checked />
+									<label>нет</label>
+								<? endif; ?>
+							</fieldset>
+							<fieldset>
+								<p>Стретч:</p>
+								<? if( $stretch=="Тянущаяся" ): ?>
+									<input name="stretch" type="radio" class="niceRadio" value="1" checked />
+									<label>резина</label>
+									<input name="stretch" type="radio" class="niceRadio" value="2"/>
+									<label>фиксированая</label>
+								<? else: ?>
+									<input name="stretch" type="radio" class="niceRadio" value="1" />
+									<label>резина</label>
+									<input name="stretch" type="radio" class="niceRadio" value="2" checked />
+									<label>фиксированая</label>
+								<? endif; ?>
+							</fieldset>
+							<fieldset>
+								<p>Количество колонок:</p>
+								<select name="cols" style="width: 40px;" id="selectel">
+									<? for($i=1; $i<5; $i++){
+										if ($columns==$i){
+											echo "<option value=\"$i\" selected>$i</option>";
+										}
+										else {
+											echo "<option value=\"$i\">$i</option>";
+										}
+									} ?>
+								</select>
+							</fieldset>
+							<fieldset>
+								<p>Тех качество:</p>
+								<? if($quality=="Только для IE") {
+										echo "<input name=\"tehka4estvo\" type=\"radio\" class=\"niceRadio\" value=\"1\" checked />
+												<label>только IE</label>";
+									}
+									else {
+										echo "<input name=\"tehka4estvo\" type=\"radio\" class=\"niceRadio\" value=\"1\" />
+												<label>только IE</label>";
+									}
+									if($quality=="Кроссбраузерная верстка") {
+										echo "<input name=\"tehka4estvo\" type=\"radio\" class=\"niceRadio\" value=\"2\" checked />
+												<label>кроссбраузерная</label>";
+									}
+									else {
+										echo "<input name=\"tehka4estvo\" type=\"radio\" class=\"niceRadio\" value=\"2\" />
+												<label>кроссбраузерная</label>";
+									}
+									if($quality=="Полное соответствие W3C") {
+										echo "<input name=\"tehka4estvo\" type=\"radio\" class=\"niceRadio\" value=\"3\" checked />
+												<label>соответствие W3C</label>";
+									}
+									else {
+										echo "<input name=\"tehka4estvo\" type=\"radio\" class=\"niceRadio\" value=\"3\" />
+												<label>соответствие W3C</label>";
+									}
+								?>
+							</fieldset>
+							<fieldset>
+								<p>Тема:</p>
+								<select name="theme" id="theme">
+									<option value="0"><?=$theme?></option>
+									<option value="1">Нефритовый</option>
+									<option value="2">Тефлоновый</option>
+									<option value="3">Непригораемый</option>
+									<option value="4">ОЛОЛОЛО</option>
+								</select>
+							</fieldset>
+						</form>
+					</div>
+					<?=$comments?>
+				</div>
+			</div>

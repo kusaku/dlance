@@ -12,7 +12,7 @@
 <div class="userPanel">
 	<a href="/account/profile" class="settings">Настройки</a>
 	<a href="/account" class="orange">Мой кабинет</a>
-	<a href="/contacts/" class="inbox"><span><? if( $messages ): ?><?=$messages?><? endif; ?></span></a>
+	<a href="/contacts/" class="inbox"><span><? if( $messages ): ?><?=$messages?><? else: ?> 0 <? endif; ?></span></a>
 	<a href="/logout">Выход</a>
 </div>
 
