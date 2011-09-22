@@ -967,8 +967,8 @@ class Designs extends Controller
 
     			$config['source_image'] = $path;
     			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 120;
-   				$config['height'] = 120;
+    			$config['width'] = 138;
+   				$config['height'] = 138;
 				$config['new_image'] = './files/designs/'.$data['file_name'].'';
 				$config['create_thumb'] = TRUE;
 				$config['thumb_marker'] = '_small';
@@ -1294,7 +1294,7 @@ class Designs extends Controller
 		{
 			$config['encrypt_name']  = TRUE;
 			$config['upload_path'] = './files/designs/';
-			$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp|JPG';
+			$config['allowed_types'] = 'jpg|png|jpeg|JPG';
 			$config['max_size']	= '2000';
 			$config['max_width']  = '1800';
 			$config['max_height']  = '1800';
@@ -1308,16 +1308,61 @@ class Designs extends Controller
 
     			$path  = './files/designs/'.$data['file_name'].'';
 
+    			// RESIZING THUMB
     			$config['source_image'] = $path;
     			$config['maintain_ratio'] = TRUE;
-    			$config['width'] = 120;
-   				$config['height'] = 120;
+    			$config['width'] = 200;
+   				$config['height'] = 200;
 				$config['new_image'] = './files/designs/'.$data['file_name'].'';
 				$config['create_thumb'] = TRUE;
 				$config['thumb_marker'] = '_small';
-
     			$this->image_lib->initialize($config);
     			$this->image_lib->resize();
+    			
+    			// CROPING THUMB
+    			$thumb = $this->image_lib->full_dst_path;
+    			$config['source_image'] = $thumb;
+    			$config['maintain_ratio'] = false;
+    			$config['width'] = 138;
+    			$config['height'] = 88;
+    			$config['new_image'] = $thumb;
+    			$config['create_thumb'] = false;
+    			$this->image_lib->initialize($config);
+    			$this->image_lib->crop();
+    			
+    			// Creating BW thumb
+    			$thumb = $this->image_lib->full_dst_path;
+    			$config['source_image'] = $thumb;
+    			$config['width'] = 138;
+    			$config['height'] = 88;
+    			$config['new_image'] = $thumb;
+    			$config['create_thumb'] = true;
+    			$config['thumb_marker'] = 'bw';
+    			$this->image_lib->initialize($config);
+    			$this->image_lib->resize();
+    			$this->image_lib->grayscale();
+    			
+    			// RESIZING BIG THUMB
+    			$config['source_image'] = $path;
+    			$config['maintain_ratio'] = TRUE;
+    			$config['width'] = 400;
+   				$config['height'] = 400;
+				$config['new_image'] = './files/designs/'.$data['file_name'].'';
+				$config['create_thumb'] = TRUE;
+				$config['thumb_marker'] = '_mid';
+    			$this->image_lib->initialize($config);
+    			$this->image_lib->resize();
+    			
+    			// CROPING BIG THUMB
+    			$thumb = $this->image_lib->full_dst_path;
+    			$config['source_image'] = $thumb;
+    			$config['maintain_ratio'] = false;
+    			$config['width'] = 358;
+    			$config['height'] = 288;
+    			$config['new_image'] = $thumb;
+    			$config['create_thumb'] = false;
+    			$this->image_lib->initialize($config);
+    			$this->image_lib->crop();
 
 
 				if( $this->input->post('watermark') )//Налаживаем водяной знак
