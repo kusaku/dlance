@@ -618,12 +618,11 @@ class Designs extends Controller
 
 		$data = $this->designs_mdl->get_edit($id);
 
-		print('<div id="rating">
-<a href="#" onclick="vote('.$id.', 1)"><img src="/templates/wdesigns/css/img/like.gif" /></a>
-<a href="#" onclick="vote('.$id.', 2)"><img src="/templates/wdesigns/css/img/dislike.gif" /></a>
-<br />
-Рейтинг: '.$data['rating'].'
-</div>');
+		print('
+							<p>Оценка дизайна:</p>
+							<a href="#" onclick="vote('.$id.', 1)" class="plus">+</a>
+							<span>'.$data['rating'].'</span>
+							<a href="#" onclick="vote('.$id.', 2)" class="minus">-</a>');
 	}
 /*
 |---------------------------------------------------------------

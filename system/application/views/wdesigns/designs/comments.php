@@ -55,7 +55,7 @@
 								<a href="/user/<?=$row['username']?>" title="Перейти к портфолио"></a>
 								<img src="<?=$row['userpic']?>" alt="<?=$row['username']?> avi" />
 							</div>
-							<textarea id="text" placeholder="Оставьте комментарий..."></textarea>
+							<textarea id="text" name="text" placeholder="Оставьте комментарий..."></textarea>
 							<div class="smiles">
 								<?=$smiley?>
 							</div>
