@@ -37,9 +37,9 @@
 $active_group = "default";
 $active_record = TRUE;
 
-$db['default']['hostname'] = "localhost";
-$db['default']['username'] = "root";
-$db['default']['password'] = "root";
+$db['default']['hostname'] = "192.168.0.100";
+$db['default']['username'] = "dlance";
+$db['default']['password'] = "dlance";
 $db['default']['database'] = "dlance";
 $db['default']['dbdriver'] = "mysql";
 $db['default']['dbprefix'] = "ci_";
