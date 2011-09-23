@@ -105,10 +105,11 @@
 							<fieldset>
 								<label>Свой цвет:</label>
 								<div id="SimpleColor">
-									<input type="text" name="ownColor" class="colorSample" placeholder="EBE6B9" value="<?=$input['color']?>"/>
+									<input type="text" name="color" class="colorSample" placeholder="EBE6B9" value="<? if(!empty($input['color'])) { echo $input['color'];} else {echo "";} ?>"/>
 								</div>
 							</fieldset>
 							<fieldset>
+								<input name="result" type="hidden" size="1" maxlength="2" value="<?=$input['result']?>" />
 								<input name="extbtn" type="submit" value="Искать" class="submitExtSearch"/>
 							</fieldset>
 						</div>
@@ -191,11 +192,23 @@
 						<div class="itemsOnPage">
 							<p>кол-во дизайнов на страницу:</p>
 							<ul class="pageList">
-								<li class="active">10</li>
-								<li><a href="#">20</a></li>
-								<li><a href="#">50</a></li>
-								<li><a href="#">100</a></li>
+							<? $results = array(10,20,50,100);
+								foreach ($results as $items){
+									if($items==$input['result']){
+										echo "<li class=\"active\">".$items."</li>";
+									}
+									else {
+										if (mb_strpos($_SERVER['QUERY_STRING'],"&result=")) {
+											echo "<li><a href=\"".mb_substr($_SERVER['QUERY_STRING'],0,(mb_strpos($_SERVER['QUERY_STRING'],"&result=")))."&result=".$items."\">".$items."</a></li>";
+										}
+										else {
+											echo "<li><a href=\"".$_SERVER['QUERY_STRING']."&result=".$items."\">".$items."</a></li>";
+										}
+									}
+								}
+							?>
 							</ul>
 						</div>
 					</div>
 				</div>
+			</div>

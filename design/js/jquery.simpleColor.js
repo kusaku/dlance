@@ -139,7 +139,7 @@ $.fn.simpleColor = function(options) {
 		display_box.css('border',          options.border);
 		display_box.css('width',           options.boxWidth);
 		display_box.css('height',          options.boxHeight);
-		display_box.text("FFFFFF");
+		display_box.text($(".colorSample").val());
 		container.append(display_box);
 		
 		// Create the select button 

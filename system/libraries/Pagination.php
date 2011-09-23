@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+﻿<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -29,12 +29,12 @@ class CI_Pagination {
 	var $base_url			= ''; // The page we are linking to
 	var $total_rows  		= ''; // Total number of items (database results)
 	var $per_page	 		= 10; // Max number of items you want shown per page
-	var $num_links			=  2; // Number of "digit" links to show before/after the currently viewed page
+	var $num_links			=  5; // Number of "digit" links to show before/after the currently viewed page
 	var $cur_page	 		=  0; // The current page being viewed
-	var $first_link   		= '&lsaquo; First';
-	var $next_link			= '&gt;';
-	var $prev_link			= '&lt;';
-	var $last_link			= 'Last &rsaquo;';
+	var $first_link   		= '';
+	var $next_link			= 'вперед';
+	var $prev_link			= 'назад';
+	var $last_link			= '';
 	var $uri_segment		= 3;
 	var $full_tag_open		= '';
 	var $full_tag_close		= '';
@@ -42,14 +42,14 @@ class CI_Pagination {
 	var $first_tag_close	= '&nbsp;';
 	var $last_tag_open		= '&nbsp;';
 	var $last_tag_close		= '';
-	var $cur_tag_open		= '&nbsp;<strong>';
-	var $cur_tag_close		= '</strong>';
+	var $cur_tag_open		= '<li><strong>';
+	var $cur_tag_close		= '</strong></li>';
 	var $next_tag_open		= '&nbsp;';
 	var $next_tag_close		= '&nbsp;';
 	var $prev_tag_open		= '&nbsp;';
 	var $prev_tag_close		= '';
-	var $num_tag_open		= '&nbsp;';
-	var $num_tag_close		= '';
+	var $num_tag_open		= '<li>';
+	var $num_tag_close		= '</li>';
 	var $page_query_string	= FALSE;
 	var $query_string_segment = 'per_page';
 
@@ -193,10 +193,11 @@ class CI_Pagination {
 		{
 			$i = $uri_page_number - $this->per_page;
 			if ($i == 0) $i = '';
-			$output .= $this->prev_tag_open.'<a href="'.$this->base_url.$i.'">'.$this->prev_link.'</a>'.$this->prev_tag_close;
+			$output .= $this->prev_tag_open.'<a href="'.$this->base_url.$i.'" class="prevPage">'.$this->prev_link.'</a>'.$this->prev_tag_close;
 		}
 
 		// Write the digit links
+		$output = $output.'<ul class="pageList">';
 		for ($loop = $start -1; $loop <= $end; $loop++)
 		{
 			$i = ($loop * $this->per_page) - $this->per_page;
@@ -214,11 +215,11 @@ class CI_Pagination {
 				}
 			}
 		}
-
+		$output .= "</ul>";
 		// Render the "next" link
 		if ($this->cur_page < $num_pages)
 		{
-			$output .= $this->next_tag_open.'<a href="'.$this->base_url.($this->cur_page * $this->per_page).'">'.$this->next_link.'</a>'.$this->next_tag_close;
+			$output .= $this->next_tag_open.'<a href="'.$this->base_url.($this->cur_page * $this->per_page).'" class="nextPage">'.$this->next_link.'</a>'.$this->next_tag_close;
 		}
 
 		// Render the "Last" link

@@ -35,7 +35,7 @@
 						<? foreach($data as $row): ?>
 						<li>
 							<!-- Здесь нужна серая превьюшка -->
-							<a href="<?=$row['full_image']?>" class="zoom grey" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
+							<a href="<?=$row['full_image']?>" class="zoom grey" title="<?=$row['title']?>"><img src="<? if (!empty($row['smallbw_image'])) {echo $row['smallbw_image'];} else {echo $row['small_image'];} ?>" alt="<?=$row['title']?>"/></a>
 							<div class="moreInfo">
 								<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
 								<!-- Здесь ID или рейтинг? -->
@@ -60,7 +60,7 @@
 					<? foreach($top_designs as $row): ?>
 						<li>
 							<!-- Здесь нужна серая превьюшка -->
-							<a href="<?=$row['full_image']?>" class="zoom grey" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
+							<a href="<?=$row['full_image']?>" class="zoom grey" title="<?=$row['title']?>"><img src="<? if (!empty($row['smallbw_image'])) {echo $row['smallbw_image'];} else {echo $row['small_image'];} ?>" alt="<?=$row['title']?>"/></a>
 							<div class="moreInfo">
 								<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
 								<!-- Здесь ID или рейтинг? -->

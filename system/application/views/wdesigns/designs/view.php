@@ -197,8 +197,8 @@ function addcart(id, kind)
 		}(jQuery))
 		</script>
 						<ul id="featurelist">
-							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?=$full_image?>" alt="template"/></a></li>
-							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?=$full_image?>" alt="template"/></a></li>
+							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?=$mid_image?>" alt="template"/></a></li>
+							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?=$mid_image?>" alt="template"/></a></li>
 						</ul>
 					</div>
 					<div class="moreInfo">
