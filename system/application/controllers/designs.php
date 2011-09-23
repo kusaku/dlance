@@ -725,7 +725,8 @@ class Designs extends Controller
 			
 		$comments['smiley'] = $this->table->generate($col_array);
 
-
+		$data['tagcloud'] = $this->tagcloud();//Популярные дизайны
+		$data['categories'] = $this->designs_mdl->get_categories();//категории
 
 		$data['comments'] = $this->load->view('wdesigns/designs/comments', $comments, TRUE);
 

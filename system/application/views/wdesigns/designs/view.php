@@ -113,9 +113,9 @@ function addcart(id, kind)
 	<div class="designsCategories">
 		<h3><a href="/designs">Дизайны:</a></h3>
 		<?
-		if( !empty($category) )
+		if( !empty($category_id) )
 		{
-			$active = $category;
+			$active = $category_id;
 			foreach($categories as $row):
 				if( $active == $row['id'] ):
 					if( $row['parent_id'] != 0 )://Если у активной категории имеется раздел, присваиваем раздел

@@ -75,10 +75,10 @@
 								<ul>
 								<? foreach($colors as $row): ?>
 									<?if ($row['color']!="ffffff") {
-										echo "<li><a href=\"/designs/search/?color=".$row['color']."\" style=\"background:#".$row['color']."\"></a></li>";
+										echo "<li><a href=\"/designs/search/?color=".$row['color']."&result=".$input['result']."\" style=\"background:#".$row['color']."\"></a></li>";
 										}
 									else {
-										echo "<li><a href=\"/designs/search/?color=".$row['color']."\" style=\"background:#".$row['color']."\" class=\"white\"></a></li>";
+										echo "<li><a href=\"/designs/search/?color=".$row['color']."&result=".$input['result']."\" style=\"background:#".$row['color']."\" class=\"white\"></a></li>";
 										}
 									?>
 								<? endforeach; ?>
@@ -92,11 +92,11 @@
 									<option value="">Не важно</option>
 									<? foreach($categories as $row): ?> 
 										<? if( $row['parent_id'] == 0): ?>
-											<option value="<?=$row['id']?>"><?=$row['name']?></option>
+											<option value="<?=$row['id']?>" <? if( $input['category'] == $row['id']): ?> selected="selected" <? endif; ?>><?=$row['name']?></option>
 										<? endif; ?>
 									<? foreach($categories as $row2): ?>
 										<? if( $row['id'] == $row2['parent_id'] ): ?>
-											<option value="<?=$row2['id']?>" <? if( $input['category'] == $row2['id']): ?> selected="selected"<? endif; ?>><?=$row2['name']?></option>
+											<option value="<?=$row2['id']?>" <? if( $input['category'] == $row2['id']): ?> selected="selected" <? endif; ?>>- <?=$row2['name']?></option>
 										<? endif; ?>
 									<? endforeach; ?>
 									<? endforeach; ?>
@@ -119,32 +119,52 @@
 					<div class="searchResultsHeader">
 						<div class="sortBy">
 							<p>сортировать по:</p>
-							<? if( $input['order_field'] == 'title' and  $input['order_type'] == 'desc' ): ?>
-								<a class="abs" href="/designs/search/?order_field=title&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">названию</a>
+							<? if( $input['order_field'] == 'title'):?>
+								<? if( $input['order_field'] == 'title' and  $input['order_type'] == 'desc' ): ?>
+									<a class="abs" href="/designs/search/?order_field=title&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">названию &darr;</a>
+								<? else: ?>
+									<a class="abs" href="/designs/search/?order_field=title<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">названию &uarr;</a>
+								<? endif; ?>
 							<? else: ?>
 								<a  href="/designs/search/?order_field=title<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">названию</a>
 							<? endif; ?>
 							
-							<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?>
-								<a class="abs" href="/designs/search/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">рейтингу</a>
+							<? if( $input['order_field'] == 'rating'):?>
+								<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?>
+									<a class="abs" href="/designs/search/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">рейтингу &darr;</a>
+								<? else: ?>
+									<a class="abs" href="/designs/search/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">рейтингу &uarr;</a>
+								<? endif; ?>
 							<? else: ?>
 								<a  href="/designs/search/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">рейтингу</a>
 							<? endif; ?>
 
-							<? if( $input['order_field'] == 'sales' and  $input['order_type'] == 'desc' ): ?>
-								<a class="abs" href="/designs/search/?order_field=sales&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">кол-ву покупок</a>
+							<? if( $input['order_field'] == 'sales'):?>
+								<? if( $input['order_field'] == 'sales' and  $input['order_type'] == 'desc' ): ?>
+									<a class="abs" href="/designs/search/?order_field=sales&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">кол-ву покупок &darr;</a>
+								<? else: ?>
+									<a class="abs" href="/designs/search/?order_field=sales<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">кол-ву покупок &uarr;</a>
+								<? endif; ?>
 							<? else: ?>
 								<a  href="/designs/search/?order_field=sales<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">кол-ву покупок</a>
 							<? endif; ?>
 
-							<? if( $input['order_field'] == 'price_1' and  $input['order_type'] == 'desc' ): ?>
-								<a class="abs" href="/designs/search/?order_field=price_1&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене</a>
+							<? if( $input['order_field'] == 'price_1'):?>
+								<? if( $input['order_field'] == 'price_1' and  $input['order_type'] == 'desc' ): ?>
+									<a class="abs" href="/designs/search/?order_field=price_1&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене &darr;</a>
+								<? else: ?>
+									<a class="abs" href="/designs/search/?order_field=price_1<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене &uarr;</a>
+								<? endif; ?>
 							<? else: ?>
 								<a  href="/designs/search/?order_field=price_1<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене</a>
 							<? endif; ?>
 							
-							<? if( $input['order_field'] == 'price_2' and  $input['order_type'] == 'desc' ): ?>
-								<a class="abs" href="/designs/search/?order_field=price_2&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене выкупа</a>
+							<? if( $input['order_field'] == 'price_2'):?>
+								<? if( $input['order_field'] == 'price_2' and  $input['order_type'] == 'desc' ): ?>
+									<a class="abs" href="/designs/search/?order_field=price_2&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене выкупа &darr;</a>
+								<? else: ?>
+									<a class="abs" href="/designs/search/?order_field=price_2<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене выкупа &uarr;</a>
+								<? endif; ?>
 							<? else: ?>
 								<a  href="/designs/search/?order_field=price_2<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">цене выкупа</a>
 							<? endif; ?>

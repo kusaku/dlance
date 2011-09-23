@@ -193,7 +193,7 @@ class CI_Pagination {
 		{
 			$i = $uri_page_number - $this->per_page;
 			if ($i == 0) $i = '';
-			$output .= $this->prev_tag_open.'<a href="'.$this->base_url.$i.'" class="prevPage">'.$this->prev_link.'</a>'.$this->prev_tag_close;
+			$output .= $this->prev_tag_open.'<a class="prevPage" href="'.$this->base_url.$i.'">'.$this->prev_link.'</a>'.$this->prev_tag_close;
 		}
 
 		// Write the digit links
@@ -216,10 +216,11 @@ class CI_Pagination {
 			}
 		}
 		$output .= "</ul>";
+
 		// Render the "next" link
 		if ($this->cur_page < $num_pages)
 		{
-			$output .= $this->next_tag_open.'<a href="'.$this->base_url.($this->cur_page * $this->per_page).'" class="nextPage">'.$this->next_link.'</a>'.$this->next_tag_close;
+			$output .= $this->next_tag_open.'<a class="nextPage" href="'.$this->base_url.($this->cur_page * $this->per_page).'">'.$this->next_link.'</a>'.$this->next_tag_close;
 		}
 
 		// Render the "Last" link
