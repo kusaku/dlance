@@ -139,7 +139,7 @@ function addcart(id, kind)
 						<li class="lvl-2"><a href="/designs/search/?category=<?=$row2['id']?>"><?=$row2['name']?></a> <span>(<?=$row2['number']?>)</span></li>
 					<? endif; ?>
 				<? endforeach; ?>
-				</ul>
+				</ul> 
 			</li>
 			<? else: ?>
 				<? if ($row['parent_id']==0){ echo "</li>"; }?>
@@ -197,8 +197,8 @@ function addcart(id, kind)
 		}(jQuery))
 		</script>
 						<ul id="featurelist">
-							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?=$mid_image?>" alt="template"/></a></li>
-							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?=$mid_image?>" alt="template"/></a></li>
+							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<? if (!empty($mid_image)) {echo $mid_image;} else {echo $full_image;} ?>" alt="template"/></a></li>
+							<li><a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<? if (!empty($mid_image)) {echo $mid_image;} else {echo $full_image;} ?>" alt="template"/></a></li>
 						</ul>
 					</div>
 					<div class="moreInfo">
