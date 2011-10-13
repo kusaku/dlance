@@ -36,7 +36,7 @@
 				$("a.zoom").fancybox({titlePosition:'over'});
 				$("input[placeholder],textarea").placeholder();
 				var params = {
-					changedEl: "#selectel, #theme, #categorySelect"
+					changedEl: "#selectel, #theme, #categorySelect, #feedback"
 					}
 				cuSel(params);
 				$(".niceRadio").each(function() {
