@@ -160,7 +160,7 @@ function addcart(id, kind)
 						<h3><?=$title?></h3>
 					</div>
 					<div class="templateDesription">
-						<p><span>Тип:</span> HTML/CSS/Flash шаблон<br/>
+						<p><span>Тип:</span> <?=$category?><br/>
 						<span>Исходник:</span> <?=$source?></p>
 						<p><span>Описание:</span> JavaScript-Анимированные Полный сайт CSS шаблоны содержат JS основе элементов, которые добавляют Flash-как динамика и анимации, оставляя шаблонов очень легкий.</p>
 						<div class="statistica">

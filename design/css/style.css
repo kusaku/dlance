@@ -177,6 +177,8 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main .content .searchResultsHeader .sortBy a:hover {text-decoration:none;}
 .main .content .searchResultsHeader .sortBy a.abs {background:url(../images/abs.png) top center no-repeat; text-decoration:none;}
 
+.main .content .searchResults {padding: 8px 0 0 0;}
+
 .main .content .searchResultsList ul.designsList {display:block; width:750px; overflow:hidden; clear:both; margin:5px 0; padding:0;}
 .main .content .searchResultsList ul.designsList  li{display:block; width:138px; height:238px; float:left; margin:0 10px 0 0; padding:1px; position:relative; background:url(../images/designslist.png) -140px 0 no-repeat;z-index:1;} 
 .main .content .searchResultsList ul.designsList  li.unique {background:url(../images/designslist.png) 0 0 no-repeat;}

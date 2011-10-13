@@ -181,7 +181,7 @@
 											<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
 											<p><a href="/designs/<?=$row['id']?>.html"><?=$row['title']?></a></p>
 											<!-- Это откуда берется? -->
-											<p>HTML/CSS/Flash шаблон<br/>
+											<p><?=$row['category']?><br/>
 											Исходник: <?=$row['source']?></p>
 											<p>Рейтинг: <span><?=$row['rating']?></span><br/>
 											<span class="new">Скачиваний: <?=$row['sales']?></span><br/>
@@ -193,7 +193,7 @@
 											<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
 											<p><a href="/designs/<?=$row['id']?>.html"><?=$row['title']?></a></p>
 											<!-- Это откуда берется? -->
-											<p>HTML/CSS/Flash шаблон<br/>
+											<p><?=$row['category']?><br/>
 											Исходник: <?=$row['source']?></p>
 											<p>Рейтинг: <span><?=$row['rating']?></span><br/>
 											Скачиваний: <span><?=$row['sales']?></span><br/>
