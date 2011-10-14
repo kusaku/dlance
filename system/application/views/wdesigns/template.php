@@ -73,7 +73,7 @@
 				<li><a href="<?=base_url()?>"><span>Главная</span></a></li>
 				<li><a href="/news"><span>Новости</span></a></li>
 				<li><a href="/designs"><span>Дизайны</span></a></li>
-				<li><a href="/designs"><span>Дизайнеры</span></a></li>
+				<li><a href="/users/all"><span>Дизайнеры</span></a></li>
 				<li><a href="/blogs"><span>Блоги</span></a></li>
 			</ul>
 			<ul class="rightMenu">
