@@ -86,6 +86,20 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .sideBar .topDesigners .designersList li .rating {display:block; width:40px; float:right; font-size:22px; color:#ff7b0b; margin:-4px 0 0 0; text-align:center;}
 .sideBar .topDesigners a {color:#ff7b0b;}
 
+.content .searchResultsList .designersList h3{display:block; height:26px; width:180px; background:url(../images/headerlefttop.png) 0 0 no-repeat #ff7900; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
+.content .searchResultsList .designersList {list-style:none; padding:0; margin:0; overflow:hidden;}
+.content .searchResultsList .designersList li{display:block; border-top:1px solid #dadada; padding:8px 0; overflow:hidden;}
+.content .searchResultsList .designersList li:first-child {border-top:0;}
+.content .searchResultsList .designersList .avatar {display:block; width:70px; height:70px; float:left; margin:0 10px 0 0;overflow:hidden;}
+.content .searchResultsList .designersList .avatar img{max-width: 68px;}
+.content .searchResultsList .designersList li p{ margin:4px 0 0 0;}
+.content .searchResultsList .designersList li p.number {width:20px; float:left; margin:14px 0 0 0; font-size:18px;color:#cccccc;}
+.content .searchResultsList .designersList li a {font-size:12px;}
+.content .searchResultsList .designersList li .rating {display:block; width:auto; float:right; font-size:22px; color:#ff7b0b; margin:14px 0 0 0; text-align:center;}
+.content .searchResultsList .designersList a {color:#ff7b0b;}
+.content .searchResultsList .designersList li a.username {font-size:14px; color:#000000; text-decoration:underline;}
+.content .searchResultsList .designersList .infoblock {width:220px; float: left;}
+
 .sideBar .designsCategories h3{display:block; height:26px; width:180px; background:url(../images/headerlefttop.png) 0 0 no-repeat #ff7900; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
 .sideBar .designsCategories h3 a {color:#ffffff;text-decoration:none;}
 .sideBar .designsCategories ul {list-style:none; margin:0; padding:0;}
