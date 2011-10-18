@@ -46,7 +46,7 @@
 	<div class="searchResults">
 		<div class="searchResultsHeader">
 			<div class="sortBy">
-				<a href="/users/search">Расширенный поиск</a>
+				<a href="/users/search/">Расширенный поиск</a>
 			</div>
 			<h3>Дизайнеры<? if( !empty($title) ): ?> / <?=$title?><? endif; ?></h3>
 		</div>

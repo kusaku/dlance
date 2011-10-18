@@ -183,6 +183,19 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main .content .extendedSearch .esfRightPart fieldset {padding:5px 0;}
 .main .content .extendedSearch .esfRightPart .submitExtSearch {background:url(../images/extsrchbtn.png) #ff7900; border:0; display:inline-block; width:150px; height:20px; padding:0 15px 3px 8px; float:right;color:#ffffff; text-decoration:underline; font-size:12px; line-height:18px;text-align:center; cursor:pointer;vertical-align:baseline;}
 
+.main .content .extendedSearchUsers {width:750px; height:auto; font-size:12px; }
+.main .content .extendedSearchUsers h3{display:block; height:26px; width:750px; background:url(../images/extendedSearch.png) 0 0 no-repeat #b2c4c8; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
+.main .content .extendedSearchUsers input {font-size:11px;}
+.main .content .extendedSearchUsers select {border:1px solid #b2c4c8; width:180px; height:22px;float:left; padding:2px 0px 2px 6px;font-size:11px;}
+.main .content .extendedSearchUsers .esfLeftPart {display:block; width:750px;}
+.main .content .extendedSearchUsers .esfLeftPart label{width:135px; float:left; height:14px; padding:2px 0;}
+.main .content .extendedSearchUsers .esfLeftPart input {border:1px solid #b2c4c8; width:382px; height:14px;float:left; padding:2px 8px;}
+.main .content .extendedSearchUsers .esfLeftPart fieldset {padding:5px 0;}
+.main .content .extendedSearchUsers .esfLeftPart .esfPrice {display:block; width:330px;}
+.main .content .extendedSearchUsers .esfLeftPart .esfPrice input {width:48px; margin:0 10px 0 0; text-align:center; padding:2px 0px;}
+.main .content .extendedSearchUsers .esfLeftPart .esfPrice span {display:inline-block; width:20px; float:left; height:14px; padding:2px 0; color:#b2c4c8;}
+.main .content .extendedSearchUsers #submitExtSearch {background:url(../images/extsrchbtn.png) #ff7900; border:0; display:inline-block; width:150px; height:20px; padding:0 15px 3px 8px; float:right;color:#ffffff; text-decoration:underline; font-size:12px; line-height:18px;text-align:center; cursor:pointer;vertical-align:baseline; float: none; margin:5px 0 0 135px;}
+
 .main .content .searchResultsHeader {display:block; height:26px; width:750px; background:url(../images/searchresulth3.png) 0 0 no-repeat #ff7900; color:#ffffff; line-height:18px;}
 .main .content .searchResultsHeader h3{font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; display:inline-block; margin:0;}
 .main .content .searchResultsHeader .sortBy {float:right; padding:0 10px 0 0;}
