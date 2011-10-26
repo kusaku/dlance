@@ -51,40 +51,43 @@
 		</script>
 	</head>
 	<body>
-	<div class="header">
-			<div class="logoFd">
-				<a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><img src="/design/images/logo_fd.png" alt="Ф.дизайн" /></a>
+	<div class="wrapper">
+		<div class="header">
+				<div class="logoFd">
+					<a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><img src="/design/images/logo_fd.png" alt="Ф.дизайн" /></a>
+				</div>
+				<div class="bannerPlace">
+					<!-- На баннер тоже функция нужна? -->
+					<a href="#" title="Эта реклама проплачена!"><img src="/design/images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+				</div>
+				<div class="authBlock">
+					<!-- Блок авторизации -->
+					<?=$login?>
+				</div>
 			</div>
-			<div class="bannerPlace">
-				<!-- На баннер тоже функция нужна? -->
-				<a href="#" title="Эта реклама проплачена!"><img src="/design/images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+			<div class="navBlock">
+				<form class="fastSearch" action="/designs/search/" method="get">
+					<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsTop"/>
+					<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+				</form>
+				<ul class="leftMenu">
+					<li><a href="<?=base_url()?>"><span>Главная</span></a></li>
+					<li><a href="/news"><span>Новости</span></a></li>
+					<li><a href="/designs"><span>Дизайны</span></a></li>
+					<li><a href="/users/all"><span>Дизайнеры</span></a></li>
+					<li><a href="/blogs"><span>Блоги</span></a></li>
+				</ul>
+				<ul class="rightMenu">
+					<li><a href="/users/support"><span>Обратная связь</span></a></li>
+					<li><a href="/faq"><span>ЧаВо</span></a></li>
+					<li><a href="/help"><span>Помощь</span></a></li>
+				</ul>
 			</div>
-			<div class="authBlock">
-				<!-- Блок авторизации -->
-				<?=$login?>
+			<div class="main">
+				<!-- Основной контент выводим -->
+				<?=$content?>
 			</div>
-		</div>
-		<div class="navBlock">
-			<form class="fastSearch" action="/designs/search/" method="get">
-				<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsTop"/>
-				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
-			</form>
-			<ul class="leftMenu">
-				<li><a href="<?=base_url()?>"><span>Главная</span></a></li>
-				<li><a href="/news"><span>Новости</span></a></li>
-				<li><a href="/designs"><span>Дизайны</span></a></li>
-				<li><a href="/users/all"><span>Дизайнеры</span></a></li>
-				<li><a href="/blogs"><span>Блоги</span></a></li>
-			</ul>
-			<ul class="rightMenu">
-				<li><a href="/users/support"><span>Обратная связь</span></a></li>
-				<li><a href="/faq"><span>ЧаВо</span></a></li>
-				<li><a href="/help"><span>Помощь</span></a></li>
-			</ul>
-		</div>
-		<div class="main">
-			<!-- Основной контент выводим -->
-			<?=$content?>
+			<div class="pushBlock"></div>
 		</div>
 		<div class="navBlock">
 			<form class="fastSearch" action="/designs/search/" method="get">

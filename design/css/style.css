@@ -23,6 +23,9 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .footer{width:950px; margin:0 auto;}
 .navBlock {width:970px; margin:0 auto;}
 
+.wrapper {height: auto !important;margin: 0 auto -90px;min-height: 100%;padding: 0;}
+.pushBlock {clear: both;height: 90px;width: 100%;}
+
 .header{height:100px; overflow:hidden;}
 
 .header .logoFd{width:200px; height:100px; float:left;}
