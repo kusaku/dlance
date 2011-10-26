@@ -39,7 +39,9 @@ $().ready(function() {
 });
 </script>
 <h1 class="title">Форма добавления новых дизайнов</h1>
-<p class="subtitle">Добавить новый дизайн</p>
+<br/>
+<div class="registrationForm">
+<h2>Добавить новый дизайн</h2>
 <?=validation_errors()?>
 <? if( !empty($error) ) {?><?=$error?><? } ?>
 <form action="" method="post" enctype="multipart/form-data"/>
@@ -50,7 +52,7 @@ $().ready(function() {
           <table class="order-form">
             <tr>
               <td class="caption">Заголовок(максимум 64 символов):</td>
-              <td class="frnt"><input type="text" class="text" name="title" value="<?=set_value('title')?>" size="64" maxlength="64" /></td>
+              <td class="frnt"><input type="text" class="text" name="title" value="<?=set_value('title')?>" size="64" maxlength="64" style="width:540px" /></td>
             </tr>
 
             <tr>
@@ -77,7 +79,7 @@ $().ready(function() {
             <tr>
               <td class="caption">Цена:</td>
               <td>
-<input type="text" name="price_1" value="<?=set_value('price_1')?>" size="12" maxlength="12" /> рублей
+<input type="text" name="price_1" value="<?=set_value('price_1')?>" size="12" maxlength="12" style="width:40px" /> рублей
               </td>
             </tr>
 
@@ -86,7 +88,7 @@ $().ready(function() {
             <tr>
               <td class="caption">Цена выкупа:</td>
               <td>
-<input type="text" name="price_2" value="<?=set_value('price_2')?>" size="12" maxlength="12" /> рублей
+<input type="text" name="price_2" value="<?=set_value('price_2')?>" size="12" maxlength="12" style="width:40px" /> рублей
               </td>
             </tr>
 
@@ -97,27 +99,27 @@ $().ready(function() {
 
             <tr>
               <td class="caption">Тэги:</td>
-              <td class="frnt"><input type="text" class="text" name="tags" value="<?=set_value('tags')?>" size="64" maxlength="64"  id="tags" />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  Не менее одного тэга</td>
+              <td class="frnt"><input type="text" class="text" name="tags" value="<?=set_value('tags')?>" size="64" maxlength="64" style="width:340px" id="tags" /> Не менее одного тэга</td>
             </tr>
 
             <tr>
               <td class="caption">Исходники:</td>
-              <td class="frnt"><input type="text" class="text" name="source" value="<?=set_value('source')?>" size="64" maxlength="64" /></td>
+              <td class="frnt"><input type="text" class="text" name="source" value="<?=set_value('source')?>" size="64" maxlength="64" style="width:340px"/></td>
             </tr>
 
             <tr>
               <td class="caption">Загрузка изображения:</td>
-              <td><input class="file" name="userfile" type="file" />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  Размер — до 1 Мб, Формат — JPG, Разрешение - до 1024x768 px</td>
+              <td><input class="file" name="userfile" type="file" />  Размер — до 1 Мб, Формат — JPG, Разрешение - до 1024x768 px</td>
             </tr>
 
             <tr>
               <td class="caption">Файл:</td>
-              <td><input class="file" name="file" type="file" />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  Размер — до 100 Мб, Формат — ZIP, RAR</td>
+              <td><input class="file" name="file" type="file" />  Размер — до 100 Мб, Формат — ZIP, RAR</td>
             </tr>
 
             <tr>
               <td class="caption">Наложить водяные знаки:</td>
-              <td><input type="checkbox" name="watermark" value="1" />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  Будут наложены водяные знаки на полное изображение дизайна</td>
+              <td><span class="niceCheck"><input type="checkbox" name="watermark" value="1" /></span> Будут наложены водяные знаки на полное изображение дизайна</td>
             </tr>
 
 
@@ -129,8 +131,8 @@ $().ready(function() {
 
 
 
-
-<p class="subtitle">Дополнительные параметры, необязательны для заполнения.</p>
+<br/>
+<h2 class="subtitle">Дополнительные параметры, необязательны для заполнения.</h2>
   <div class="rnd">
     <div>
       <div>
@@ -138,22 +140,22 @@ $().ready(function() {
           <table class="order-form">
             <tr>
               <td class="caption">Сопутствующие товары:</td>
-              <td class="frnt"><input type="text" class="text" name="sub" value="<?=set_value('sub')?>" size="64" maxlength="64"  id="sub" />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  вводите ID продуктов через запятую</td>
+              <td class="frnt"><input type="text" class="text" name="sub" value="<?=set_value('sub')?>" size="64" maxlength="64" style="width:340px" id="sub" />  вводите ID продуктов через запятую</td>
             </tr>
 
             <tr>
               <td class="caption">Флэш:</td>
               <td>
-<input type="radio" name="flash" value="1" <?=set_radio('flash', '1'); ?> /> Да &nbsp &nbsp
-<input type="radio" name="flash" value="2" <?=set_radio('flash', '2'); ?> /> Нет
+<input type="radio" class="niceRadio" name="flash" value="1" <?=set_radio('flash', '1'); ?> /> <label>Да &nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="flash" value="2" <?=set_radio('flash', '2'); ?> /> <label>Нет</label>
               </td>
             </tr>
 
             <tr>
               <td class="caption">Стретч:</td>
               <td>
-<input type="radio" name="stretch" value="1" <?=set_radio('stretch', '1'); ?> /> Тянущаяся &nbsp &nbsp
-<input type="radio" name="stretch" value="2" <?=set_radio('stretch', '2'); ?> /> Фиксированная
+<input type="radio" class="niceRadio" name="stretch" value="1" <?=set_radio('stretch', '1'); ?> /> <label>Тянущаяся &nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="stretch" value="2" <?=set_radio('stretch', '2'); ?> /> <label>Фиксированная</label>
               </td>
             </tr>
 
@@ -187,45 +189,42 @@ $().ready(function() {
             <tr>
               <td class="caption">Тех Качество:</td>
               <td>
-<input type="radio" name="quality" value="1" <?=set_radio('quality', '1'); ?> /> Только для IE &nbsp &nbsp
-<input type="radio" name="quality" value="2" <?=set_radio('quality', '2'); ?> /> Кроссбраузерная верстка&nbsp &nbsp
-<input type="radio" name="quality" value="2" <?=set_radio('quality', '2'); ?> /> Полное соответствие W3C
+<input type="radio" class="niceRadio" name="quality" value="1" <?=set_radio('quality', '1'); ?> /> <label>Только для IE &nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="quality" value="2" <?=set_radio('quality', '2'); ?> /> <label>Кроссбраузерная верстка&nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="quality" value="2" <?=set_radio('quality', '2'); ?> /> <label>Полное соответствие W3C</label>
               </td>
             </tr>
 
             <tr>
               <td class="caption">Тип Верстки:</td>
               <td>
-<input type="radio" name="type" value="1" <?=set_radio('type', '1'); ?> /> Блочная верстка &nbsp &nbsp
-<input type="radio" name="type" value="2" <?=set_radio('type', '2'); ?> /> Табличная
+<input type="radio" class="niceRadio" name="type" value="1" <?=set_radio('type', '1'); ?> /> <label>Блочная верстка &nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="type" value="2" <?=set_radio('type', '2'); ?> /> <label>Табличная</label>
               </td>
             </tr>
 
             <tr>
               <td class="caption">Тон:</td>
               <td>
-<input type="radio" name="tone" value="1" <?=set_radio('tone', '1'); ?> /> Светлый &nbsp &nbsp
-<input type="radio" name="tone" value="2" <?=set_radio('tone', '2'); ?> /> Темный
+<input type="radio" class="niceRadio" name="tone" value="1" <?=set_radio('tone', '1'); ?> /> <label>Светлый &nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="tone" value="2" <?=set_radio('tone', '2'); ?> /> <label>Темный</label>
               </td>
             </tr>
-
             <tr>
               <td class="caption">Яркость:</td>
               <td>
-<input type="radio" name="bright" value="1" <?=set_radio('bright', '1'); ?> /> Спокойный &nbsp &nbsp
-<input type="radio" name="bright" value="2" <?=set_radio('bright', '2'); ?> /> Яркий
+<input type="radio" class="niceRadio" name="bright" value="1" <?=set_radio('bright', '1'); ?> /> <label>Спокойный &nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="bright" value="2" <?=set_radio('bright', '2'); ?> /> <label>Яркий</label>
               </td>
             </tr>
-
             <tr>
               <td class="caption">Стиль:</td>
               <td>
-<input type="radio" name="style" value="1" <?=set_radio('style', '1'); ?> /> Новый &nbsp &nbsp
-<input type="radio" name="style" value="2" <?=set_radio('style', '2'); ?> /> Классический  &nbsp &nbsp
-<input type="radio" name="style" value="3" <?=set_radio('style', '3'); ?> /> Старый
+<input type="radio" class="niceRadio" name="style" value="1" <?=set_radio('style', '1'); ?> /> <label>Новый &nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="style" value="2" <?=set_radio('style', '2'); ?> /> <label>Классический  &nbsp &nbsp</label>
+<input type="radio" class="niceRadio" name="style" value="3" <?=set_radio('style', '3'); ?> /> <label>Старый</label>
               </td>
             </tr>
-
             <tr>
               <td class="caption">Тема:</td>
               <td class="frnt cat">
@@ -237,17 +236,15 @@ $().ready(function() {
 </select>
               </td>
             </tr>
-
             <tr>
               <td class="caption">Только для взрослых:</td>
-              <td><input type="checkbox" name="adult" value="1" <?=set_checkbox('adult', '1'); ?> />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  Дизайн не будет показан не авторизированным пользователям и авторизированным пользователям, которые не достигли совершенолетия. </td>
+              <td><span class="niceCheck"><input type="checkbox" name="adult" value="1" <?=set_checkbox('adult', '1'); ?> /></span> Дизайн не будет показан не авторизированным пользователям и авторизированным пользователям, которые не достигли совершенолетия. </td>
             </tr>
-
-
           </table>
         </div>
       </div>
     </div>
   </div>
-<input type="submit" value="Добавить">
+<input type="submit" value="Добавить" class="reg-submit">
 </form>
+</div>

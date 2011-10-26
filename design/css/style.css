@@ -359,6 +359,11 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .registrationForm #requireCaptcha {width:102px; margin: 2px 0;}
 .registrationForm #userSex label{float:left; margin: 2px 12px 0 1px;}
 
+.registrationForm td {padding: 3px; vertical-align:top;}
+.registrationForm td.caption {width: 140px;}
+.registrationForm td select{width: 200px;}
+.registrationForm td label{float:left; margin: 2px 12px 0 1px; font-size: 12px;}
+
 .niceCheck {background:url(../images/checkbox.gif) repeat scroll 0 0 transparent;cursor:pointer;display:inline-block;height:13px;margin:1px 0 0 4px;vertical-align:top;width:13px;}
 .niceCheck input {display:none;}
 .niceRadio {background:url(../images/radio.png) no-repeat scroll -4px -24px transparent; cursor:pointer; display:inline-block; float:left; height:20px; margin:0 0 0 0; overflow:hidden; width:18px;}
