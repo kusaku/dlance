@@ -364,6 +364,15 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .registrationForm td select{width: 200px;}
 .registrationForm td label{float:left; margin: 2px 12px 0 1px; font-size: 12px;}
 
+.blogAddForm h3{font-size: 20px;}
+.blogAddForm label{font-size: 14px; margin: 8px 0 4px 0;}
+.blogAddForm input[type="text"], 
+.blogAddForm input[type="password"] {border:1px solid #b2c4c8; width:540px; height:14px; padding:2px 8px; font-size:11px; margin:0 10px 0 0;}
+.blogAddForm select {border:1px solid #b2c4c8; width:240px; height:22px; padding:2px 0px 2px 6px;font-size:11px;}
+.blogAddForm textarea {width:540px; border:1px solid #b2c4c8; margin:0 10px 0 0; padding:7px 8px; resize:none;}
+.blogAddForm .reg-submit {background:url(../images/extsrchbtn.png) repeat scroll 0 0 #FF7900; border:0; display:inline-block; width: 150px; height:20px; padding:0 0 3px 32px; margin:3px 0 0 67px; float:left;color:#ffffff; font-size:12px; line-height:18px;text-align:left; cursor:pointer;vertical-align:baseline}
+.blogAddForm td {padding: 3px; vertical-align:top;}
+
 .niceCheck {background:url(../images/checkbox.gif) repeat scroll 0 0 transparent;cursor:pointer;display:inline-block;height:13px;margin:1px 0 0 4px;vertical-align:top;width:13px;}
 .niceCheck input {display:none;}
 .niceRadio {background:url(../images/radio.png) no-repeat scroll -4px -24px transparent; cursor:pointer; display:inline-block; float:left; height:20px; margin:0 0 0 0; overflow:hidden; width:18px;}

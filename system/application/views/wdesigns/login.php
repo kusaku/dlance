@@ -2,10 +2,10 @@
 
 <div class="userInfo">
 	<div class="avatar <?=$tariff?>">
-		<a href="/user/<?=$username?>" title="Перейти к портфолио <?=$username?>"></a>
+		<a href="/account" title="Перейти к портфолио <?=$username?>"></a>
 		<img src="<?=$userpic?>" alt="<?=$username?> avi" />
 	</div>
-	<p><a href="/user/<?=$username?>" class="name"><?=$username?></a><br/><?=$name?> <?=$surname?></p>
+	<p><a href="/account" class="name"><?=$username?></a><br/><?=$name?> <?=$surname?></p>
 	<p><span>Рейтинг:</span> <span class="orange"><?=$rating?></span><br/>
 	<span>Баланс:</span>   <a href="/account/balance/" class="orange"><?=$balance?> руб.</a></p>
 </div>

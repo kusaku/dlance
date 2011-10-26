@@ -1,6 +1,8 @@
+<div class="blogAddForm">
 <?=validation_errors()?>
 <h1 class="title">Форма добавления записей</h1>
-<p class="subtitle">Добавить запись</p>
+<br/>
+<h2 class="subtitle">Новая запись в блог:</h2>
 <form action="" method="post" />
   <div class="rnd">
     <div>
@@ -34,5 +36,6 @@
       </div>
     </div>
   </div>
-<input type="submit" value="Добавить">
+<input type="submit" value="Добавить" class="reg-submit">
 </form>
+</div>
