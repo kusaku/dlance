@@ -307,7 +307,7 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main .content .moreInfo {clear:both;}
 .main .content .moreInfo form {padding:1px 0;}
 .main .content .moreInfo form fieldset {margin:10px 0;}
-.main .content .moreInfo form input[type="text"] {border:1px solid #b2c4c8; width:372px; height:14px;float:left; padding:2px 8px; font-size:11px; margin:0 10px 0 0;}
+.main .content .moreInfo form input[type="text"] {border:1px solid #b2c4c8; width:362px; height:14px;float:left; padding:2px 8px; font-size:11px; margin:0 10px 0 0;}
 .main .content .moreInfo form label {min-width:40px; float:left;display:block; height:20px; line-height:20px; margin:0 10px 0 0;}
 .main .content .moreInfo form input[type="radio"] {width:20px; height:20px;float:left;} 
 .main .content .moreInfo form select {border:1px solid #b2c4c8; width:390px; height:22px;float:left; padding:2px 0px 2px 6px;font-size:11px;}
