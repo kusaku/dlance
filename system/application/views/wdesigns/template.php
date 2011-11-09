@@ -3,15 +3,15 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="google-site-verification" content="GZ6LEudcMoq7OAIcz-ywUZjW9pM6jROZqY4Rn0y_Ei8" />
-		<meta name='yandex-verification' content='51dcabbe6fb5f2d8' />
-		<title><?=$title?></title>
+		<meta name="yandex-verification" content="51dcabbe6fb5f2d8" />
+		<title><?=$title?> </title>
 		<? if( isset($description) ): ?>
 			<?=$description?>
 		<? endif; ?>
 		<? if( isset($keywords) ): ?>
 			<?=$keywords?>
 		<? endif; ?>
-		<link rel="alternate" type="application/rss+xml" href="<?=base_url()?>rss/designs" title="Дизайны сайтов (RSS 2.0)">
+		<link rel="alternate" type="application/rss+xml" href="<?=base_url()?>rss/designs" title="Дизайны сайтов (RSS 2.0)" />
 		<link href="/design/css/base.css" rel="stylesheet" type="text/css" />
 		<link href="/design/css/style.css" rel="stylesheet" type="text/css" />
 		<link href="/design/css/cusel.css" rel="stylesheet" type="text/css" />
@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="/design/js/jquery.simpleColor.js"></script>
 		<script type="text/javascript" src="/templates/js/jquery-autocomplete/jquery.autocomplete.js"></script>
 		<script type="text/javascript">
-		(function($){
+		$(function($){
 			$(function(){
 				$("#slider1").bxSlider({
 					infiniteLoop: false,
@@ -47,12 +47,12 @@
 					buttonClass: "colorButton"
 				});
 			});
-		}(jQuery))
+		})
 		</script>
 	</head>
 	<body>
-	<div class="wrapper">
-		<div class="header">
+		<div class="wrapper">
+			<div class="header">
 				<div class="logoFd">
 					<a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><img src="/design/images/logo_fd.png" alt="Ф.дизайн" /></a>
 				</div>

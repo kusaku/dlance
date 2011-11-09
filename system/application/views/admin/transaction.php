@@ -301,7 +301,7 @@ $(document).ready(function(){
   // ---- Календарь -----
   $('#range').attachDatepicker({
   	rangeSelect: true,
-  	yearRange: '2000:2010',
+  	yearRange: '2000:2012',
   	firstDay: 1
   });
   // ---- Календарь -----
