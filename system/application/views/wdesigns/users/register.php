@@ -51,7 +51,7 @@
 
 			<fieldset id="userSex">
 				<label for="name">Пол <span class="alert">*</span></label><br class="clear"/>
-				<input class="niceRadio" type="radio" name="sex" value="1" checked="checked" <?=set_checkbox('sex', '1'); ?>/>
+				<input class="niceRadio" type="radio" name="sex" value="1" <?=set_checkbox('sex', '1'); ?>/>
 				<label>Мужской</label>
 				<input class="niceRadio" type="radio" name="sex" value="2"<?=set_checkbox('sex', '2'); ?>/>
 				<label>Женский</label>

@@ -27,6 +27,7 @@
 		<script type="text/javascript" src="/design/js/jquery.simpleColor.js"></script>
 		<script type="text/javascript" src="/templates/js/jquery-autocomplete/jquery.autocomplete.js"></script>
 		<script type="text/javascript">
+		//<!--
 		$(function($){
 			$(function(){
 				$("#slider1").bxSlider({
@@ -48,6 +49,7 @@
 				});
 			});
 		})
+		//-->
 		</script>
 	</head>
 	<body>
