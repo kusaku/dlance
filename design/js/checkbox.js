@@ -46,7 +46,7 @@ function changeCheckStart(el)
 var el = el,
 		input = el.find("input").eq(0);
       if(input.attr("checked")) {
-		el.css("background-position","0 -17px");	
+		el.css("background-position","0 -13px");	
 		}
      return true;
 }
