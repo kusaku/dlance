@@ -1,15 +1,66 @@
-<div id="yui-main">
-<div class="yui-b">
-<div class="infoblock">
+<? $this->load->view('wdesigns/account/block'); ?>
 
+<div class="content">
 
-<p>В этом разделе Вы можете задать дополнительные данные, опубликовать портфолио, а также указать предоставляемые вами услуги, для отображения вашего профиля в каталоге дизайнеров.
-</p>
+<script type='text/javascript' src='/templates/js/thickbox/thickbox.js'></script>
+<link rel="stylesheet" type="text/css" href="/templates/js/thickbox/thickbox.css" />
 
-  </div>
-  </div>
+<script type="text/javascript">
+
+function update(id){
+
+	var dataString = 'id='+ id;
+
+	$.ajax({
+		type: "POST",
+		url: "/account/update_event",
+		data: dataString,
+		cache: false,
+		success: function(html)//Тут нужно изменить img
+		{
+			$('#event_'+ id + '').removeClass("new");
+		}
+	});
+
+	return false;
+}
+</script>
+
+	<div class="userEventsHeader">
+		<h3>События:</h3>
+		<ul class="userEventsCategory">
+			<li><a href="#">репутация:</a> <span>37</span></li>
+			<li><a href="#">сообщения:</a> <span>45</span></li>
+			<li><a href="#">финансы:</a> <span>13</span></li>
+			<li><a href="#">дизайны:</a> <span>24</span></li>
+			<li><a href="/account/events" class="active">все</a></li>
+		</ul>
+		<ul class="userEventsSelect">
+			<li>показывать:</li>
+			<li><a href="/account/events/?status=1">новые</a></li>
+			<li><a href="/account/events/?status=2">старые</a></li>
+			<li><a href="/account/events" class="active">все</a></li>
+		</ul>
+	</div>
+	<? if( !empty($data) ): ?>
+		<ul class="userEventsList">
+		<? foreach($data as $row): ?>
+		<? if( $row['status'] == 1 ): ?>
+		<li id="event_<?=$row['id']?>" onclick="update(<?=$row['id']?>)" class="new">
+		<? else: ?>
+		<li>
+		<? endif; ?>
+			<p class="date"><?=$row['date']?></p>
+			<p class="event people"><?=$row['title']?></p>
+		</li>
+		<? endforeach; ?>
+		</ul>
+		<div class="userEventsPagination">
+			<?=$page_links?>
+		</div>
+	<? else: ?>
+		<p>События отсутствуют.</p>
+	<? endif; ?>
+
 
 </div>
-<!--/yui-main-->
-
-<? $this->load->view('wdesigns/account/block'); ?>

@@ -22,6 +22,7 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main,
 .footer{width:950px; margin:0 auto;}
 .navBlock {width:970px; margin:0 auto;}
+.wrapper .navBlock {width:970px; margin:0 -10px;}
 
 .wrapper {height: auto !important;margin: 0 auto -90px;min-height: 100%;padding: 0;}
 .pushBlock {clear: both;height: 90px;width: 100%;}
@@ -68,8 +69,8 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .navBlock .rightMenu {float:right;}
 
 .main {padding:15px 0;overflow:hidden;}
-.main .sideBar{width:200px;float:left; text-align:left;}
-.main .content{width:750px;float:left; text-align:justify;}
+.main .sideBar{width:190px;float:left; text-align:left;}
+.main .content{width:760px;float:left; text-align:justify;}
 .main .content a {color:#ff7b0b; text-decoration:none;}
 .main .content a:hover {text-decoration:underline;}
 
@@ -392,3 +393,179 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 #SimpleColor .simpleColorChooser {dispaly:block; position:absolute; top:17px; right:0; z-index:5; background:#ffffff;}
 
 #cuselFrame-theme {z-index: 111;}
+
+/*Попробую делать БАМ*/
+.userInfo {padding:5px 0 10px 0; overflow:hidden;}
+.userInfo .avatar {display:block; float:left; width:80px; height:80px; border:1px solid #d8e2e4; margin:0 10px 5px 0;position:relative; z-index:1;}
+.userInfo .avatar a{display:block; width:80px; height:80px; position:absolute; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
+.userInfo .avatar.pro a{background:url(../images/pro.png) bottom right no-repeat;}
+.userInfo .avatar.lite a {background:url(../images/lite.png) bottom right no-repeat;}
+.userInfo .avatar img {position:absolute; top: 0; left: 0; z-index:-1; max-height: 80px; width: 80px;}
+.userInfo p{margin:0 0 5px 0;}
+.userInfo p.contacts {color:#ff7900;}
+.userInfo p.contacts span{display:inline; background:url(../images/iconsevents.png) -3px -8px no-repeat; padding: 0 0 0 15px;}
+/*.userInfo p.contacts a{color:#ff7900; text-decoration:none;}*/
+.userInfo a.name {color:#000000;}
+.userInfo span {display:inline; width:45px;} 
+.userInfo a.active {text-decoration:none; color:#ff7900;}
+
+.sideBar .userInfo a.name {color:#000000; text-decoration:none;}
+.sideBar .userInfo span {color:#ff7900;}
+
+.sideTabsBlock h3{display:block; height:26px; width:180px; background:url(../images/headerlefttopgrey.png) 0 0 no-repeat #b2c4c8; font-size:12px; line-height:20px; color:#ffffff; font-style:italic; text-indent:5px; white-space:nowrap;}
+.sideTabsBlock h3 a {color:#ffffff;text-decoration:none;}
+.sideTabsBlock ul {list-style:none; margin:0; padding:0 0 10px 0;}
+.sideTabsBlock ul li {margin:3px 0;}
+.sideTabsBlock ul ul {margin:0 0 0 1em;}
+.sideTabsBlock ul a {font-size:12px;}
+.sideTabsBlock ul a:hover,
+.sideTabsBlock ul a.active {color:#ff7b0b; text-decoration:none;}
+.sideTabsBlock ul ul a {color:#b2c4c8;}
+.sideTabsBlock ul span {color:#ff7b0b;}
+
+.contactList {width: 240px;  float: left;}
+.contactList h3{display:block; margin: 6px 9px 6px 9px; height:26px; width:220px; background:url(../images/headercontact.png) 0 0 no-repeat #ff7900; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
+.contactList h3.blackList {background:url(../images/headercontactblack.png) 0 0 no-repeat #000000;}
+.main .contactList h3 a{color:#ffffff; float:right; font-size:10px; line-height:18px; text-decoration:underline; font-style: normal; padding: 0 7px 0 0; display:inline;}
+.main .contactList h3 a:hover {text-decoration:none;}
+.contactList ul {list-style:none; padding:0; margin:0; overflow:hidden;}
+.contactList ul li{display:block; border-top:1px solid #dadada; width:200px;padding:8px 10px; overflow:hidden;}
+.contactList ul li.active {border:1px solid #ff7b0b; background: #ecf0f1;padding:8px 9px;}
+.contactList ul li:first-child {border-top:0;}
+.contactList ul .avatar {display:block; float:left; width:58px; height:58px; border:1px solid #d8e2e4; margin:0 10px 0px 0;position:relative; z-index:1;}
+.contactList ul .avatar a{display:block; width:58px; height:58px; position:absolute; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
+.contactList ul .avatar.pro a{background:url(../images/pro.png) bottom right no-repeat;}
+.contactList ul .avatar.lite a {background:url(../images/lite.png) bottom right no-repeat;}
+.contactList ul .avatar img {position:absolute; top: 0; left: 0; z-index:-1; max-height: 58px; width: 58px;}
+.contactList ul li p{width:80px; float:left; margin:4px 0 0 0;}
+.contactList ul li a {font-size:12px; color:#000000;}
+.contactList ul li .rating {display:block; width:40px; float:right; font-size:22px; color:#ff7b0b; margin:-4px 0 0 0; text-align:center;}
+.contactList ul a.name {color:#000000;text-decoration:underline;}
+.contactList ul a.name:hover {text-decoration:none;}
+.contactList ul a.mailes {display:inline-block; padding:0 0 0 6px; background:#ff7900 url(../images/inbox.png) top left no-repeat; color:#ffffff; line-height: 12px;text-decoration: none;float:right}
+.contactList ul a.mailes span {display:inline-block; padding:3px 19px 5px 0; background:#ff7900 url(../images/inbox.png) top right no-repeat; color:#ffffff; text-decoration: none;}
+
+.messagesBlock {width: 510px; padding: 0 0 0 9px; float:left;}
+.messagesBlock .newMessageHeader {display:block; height:26px; width:510px; margin: 6px 0; background:url(../images/headermessagelog.png) 0 0 no-repeat #ff7900;}
+.messagesBlock .newMessageHeader h3{display:inline-block; height:26px; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; margin: 0;}
+.messagesBlock .newMessageHeader .addContactTo {display:block; height: 20px; padding:0 0 0 12px; background:#ff7900 url(../images/orangebar.png) top left no-repeat; color:#ffffff; line-height: 12px;text-decoration: none;float:right}
+.messagesBlock .newMessageHeader .addContactTo p{display:block; padding:3px 6px 5px 0; margin: 0; background:#ff7900 url(../images/orangebar.png) top right no-repeat; color:#ffffff; text-decoration: none;}
+.messagesBlock .newMessageHeader .addContactTo p a {color:#ffffff; text-decoration: underline; padding: 0 6px;}
+.messagesBlock .newMessageHeader .addContactTo p a:hover {text-decoration:none;}
+.messagesBlock .newMessageHeader .addContactTo p a.black {color: #000000;}
+.messagesBlock .newMessage form {display: block; overflow:hidden; padding: 0 0 10px 0;}
+.messagesBlock .newMessage textarea {width:398px; height:44px; border:1px solid #d8e2e4; margin:0 10px 0 0; float:left; padding:7px 10px; resize:none;}
+.messagesBlock .newMessage .commentBtn {background:url(../images/commentbtn.png) #ff7900; border:0; display:inline-block; width:80px; height:20px; padding:0 0 3px 0px; margin:38px 0 0 0; float:left;color:#ffffff; text-decoration:underline; font-size:12px; line-height:18px;text-align:center; cursor:pointer;vertical-align:baseline}
+.messagesBlock .messagesLog h3{display:block; height:26px; width:510px; background:url(../images/headermessagelog.png) 0 0 no-repeat #ff7900; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
+.messagesBlock .messagesLog h3 a{color:#ffffff; float:right; font-size:10px; line-height:18px; text-decoration:underline; font-style: normal; padding: 0 7px 0 0; display:inline;}
+.messagesBlock .messagesLog h3 a:hover {text-decoration:none;}
+.messagesBlock .messagesLog ul{list-style:none; padding:0; margin:0; overflow:hidden;}
+.messagesBlock .messagesLog ul li{display:block; border-top:1px solid #dadada; width:510px;padding:4px 0px; overflow:hidden;}
+.messagesBlock .messagesLog u li:first-child {border-top:0;}
+.messagesBlock .messagesLog ul li .avatar {display:block; float: right; width: 38px; height:38px; border:1px solid #d8e2e4; margin:10px 0 5px 10px;position:relative; z-index:1;}
+.messagesBlock .messagesLog ul li .avatar a{display:block; width:38px; height:38px; position:absolute; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
+.messagesBlock .messagesLog ul li .avatar.pro a{background:url(../images/pro.png) bottom right no-repeat;}
+.messagesBlock .messagesLog ul li .avatar.lite a {background:url(../images/lite.png) bottom right no-repeat;}
+.messagesBlock .messagesLog ul li .avatar img {position:absolute; top: 0; left: 0; z-index:-1; max-height: 38px; width: 38px;}
+.messagesBlock .messagesLog ul li .messageText {width: 450px;}
+.messagesBlock .messagesLog ul li .messageText .date {font-size: 14px; line-height: 18px; color:#b2c4c8;}
+.messagesBlock .messagesLog ul li.unread {color:#000000;}
+.messagesBlock .messagesLog ul li.unread .avatar{border:1px solid #ff7900;}
+.messagesBlock .messagesLog ul li.unread .date{color:#ff7900;}
+
+.userSettings {width: 750px; float: left;}
+.userSettings .userSettingsLeft {width: 360px; float: left;}
+.userSettings .userSettingsLeft h3{display:block; height:26px; width:360px; margin: 6px 0px 6px 9px; background:url(../images/headersettings1.png) 0 0 no-repeat #ff7900; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
+.userSettings .userSettingsLeft fieldset{padding: 5px 0;}
+.userSettings .userSettingsLeft label{font-size: 12px; margin: 2px 8px 4px 0; width: 110px; color:#ff7900; display: block; float:left; text-align: right;}
+.userSettings .userSettingsLeft label.checkboxValue {display: inline; color:#818181; width: auto;}
+.userSettings .userSettingsLeft label span {font-size: 10px; color:#c0c0c0;}
+.userSettings .userSettingsLeft input[type="text"], 
+.userSettings .userSettingsLeft input[type="password"] {border:1px solid #b2c4c8; width:202px; height:14px; padding:2px 8px; font-size:11px; margin:0 10px 0 0;}
+.userSettings .userSettingsLeft select {border:1px solid #b2c4c8; width:auto; height:22px; padding:2px 0px 2px 6px;font-size:11px;}
+.userSettings .userSettingsLeft select#country_id,
+.userSettings .userSettingsLeft select#city_id {width: 220px;}
+.userSettings .userSettingsLeft textarea {width:202px; border:1px solid #b2c4c8; margin:0 10px 0 0; padding:7px 8px; resize:none;}
+
+.userSettings .userSettingsRight {width: 370px; float: left; padding: 0 0px 0 19px;}
+.userSettings .userSettingsRight h3{display:block; height:26px; width:370px; background:url(../images/headersettings2.png) 0 0 no-repeat #b2c4c8; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
+.userSettings .userSettingsRight p{margin: 4px 0;}
+.userSettings .userSettingsRight .adult p{padding: 10px 0 0 152px; color:#c0c0c0;}
+.userSettings .userSettingsRight .adult .niceCheck {margin: 20px 0 0 4px; float: left;}
+.userSettings .userSettingsRight .subscribe .niceCheck {margin: 4px 0 0 4px; float: left;}
+.userSettings .userSettingsRight .notice .niceCheck {margin: 10px 0 0 4px; float: left;}
+.userSettings .userSettingsRight .advace .niceCheck {margin: 10px 0 0 4px; float: left;}
+.userSettings .userSettingsRight fieldset{padding: 5px 0; width: 360px;}
+.userSettings .userSettingsRight label{font-size: 12px; margin: 2px 8px 4px 0; width: 120px; color:#ff7900; display: block; float:left; text-align: right;}
+.userSettings .userSettingsRight label.checkboxValue {display: inline; color:#818181; width: auto;}
+.userSettings .userSettingsRight label span {font-size: 10px; color:#c0c0c0;}
+.userSettings .userSettingsRight input[type="text"], 
+.userSettings .userSettingsRight input[type="password"] {border:1px solid #b2c4c8; width:202px; height:14px; padding:2px 8px; font-size:11px; margin:0 10px 0 0;}
+.userSettings .userSettingsRight input[type="file"] {margin: 0 0 0 130px;}
+.userSettings .userSettingsRight .userPrice input {width: 162px; float: left;}
+.userSettings .userSettingsRight select {border:1px solid #b2c4c8; width:auto; height:22px; padding:2px 0px 2px 6px;font-size:11px;}
+.userSettings .userSettingsRight textarea {width:202px; border:1px solid #b2c4c8; margin:0 10px 0 0; padding:7px 8px; resize:none;}
+.userSettings .userSettingsRight a.avatarDel {float: right; color:#818181; text-decoration:underline;}
+.userSettings .userSettingsRight .avatarBig {width: 80px; height:80px;}
+.userSettings .userSettingsRight .avatarMedium {width: 60px; height:60px;}
+.userSettings .userSettingsRight .avatarSmall {width: 40px; height:40px;}
+.userSettings .userSettingsRight .reg-submit {background:url(../images/commentbtn.png) #ff7900; border:0; display:inline-block; width:80px; height:20px; padding:0 0 3px 0px; margin:3px 0 0 270px; float:left;color:#ffffff; text-decoration:underline; font-size:12px; line-height:18px;text-align:center; cursor:pointer;vertical-align:baseline}
+
+.userEventsHeader {display:block; height:26px; width:750px; background:url(../images/headeruserevents.png) 0 0 no-repeat #ff7900; margin: 0 0 0 10px;}
+.userEventsHeader h3{display:inline-block; height:26px; width: 100px; float: left; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; margin: 0;}
+.userEventsHeader .userEventsCategory {display:block; height: 26px; width: 410px; padding:0 0 0 12px; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:left;}
+.userEventsHeader .userEventsCategory li{display: block; float: left; padding: 3px 11px; line-height: 14px;}
+.userEventsHeader .userEventsCategory a {color:#ffffff; display:inline-block; height:23px; padding: 0; text-decoration:underline;}
+.userEventsHeader .userEventsCategory span {display:inline-block; height:23px; padding: 0;}
+.userEventsHeader .userEventsCategory a:hover {text-decoration:none;}
+.userEventsHeader .userEventsCategory a.active {background:url(../images/active.png) center -3px no-repeat; text-decoration:none;}
+.userEventsHeader .userEventsSelect {display:block; height: 26px; width: 210px; padding:0 0 0 12px; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:left;}
+.userEventsHeader .userEventsSelect li{display: block; float: left; padding: 3px 7px;}
+.userEventsHeader .userEventsSelect a {color:#ffffff; display:inline-block; height:23px; padding: 0; text-decoration:underline;}
+.userEventsHeader .userEventsSelect a:hover {text-decoration:none;}
+.userEventsHeader .userEventsSelect a.active {background:url(../images/active.png) center -29px no-repeat; text-decoration:none;}
+
+.userEventsList {display:block;  width: 750px; padding:0 0 0 9px; margin: 10px 0 0 0; line-height: 12px;text-decoration: none; border-left:1px solid #b2c4c8; overflow: hidden;}
+.userEventsList li:first-child .event{padding: 4px 0 4px 25px;border-top:1px solid #b2c4c8;}
+.userEventsList li{display: block; width: 750px;}
+.userEventsList li p {margin: 0; line-height: 18px;}
+.userEventsList li .date{display:block; width:100px; height: 20px; padding: 5px 0 5px 10px; float: left; color:#b2c4c8;line-height: 18px;}
+.userEventsList li .event{display:block; width:615px; height: 20px; padding: 5px 0 4px 25px; float: left; border-bottom:1px solid #b2c4c8; background:url(../images/iconsevents.png) 0 -60px no-repeat;}
+.userEventsList li .event span {color:#ff7900;}
+.userEventsList li .event a{text-decoration: underline;}
+.userEventsList li .event.people {background:url(../images/iconsevents.png) 0 -120px no-repeat;}
+.userEventsList li .event.money {background:url(../images/iconsevents.png) 0 -180px no-repeat;}
+.userEventsList li .event.design {background:url(../images/iconsevents.png) 0 -240px no-repeat;}
+.userEventsList li.new .date{color:#ff7900;}
+.userEventsList li.new .event{background:url(../images/iconsevents.png) 0 -30px no-repeat #f4f6f7;}
+.userEventsList li.new .event.people{background:url(../images/iconsevents.png) 0 -90px no-repeat #f4f6f7;}
+.userEventsList li.new .event.money{background:url(../images/iconsevents.png) 0 -150px no-repeat #f4f6f7;}
+.userEventsList li.new .event.design{background:url(../images/iconsevents.png) 0 -210px no-repeat #f4f6f7;}
+
+.userEventsPagination {padding: 10px 0px 10px 20px;}
+
+.contentWrapperBorderLeft {padding: 0 0px 0 9px; border-left:1px solid #d8e2e4; min-height:100%; overflow:hidden;}
+.contentWrapperBorderLeftRight {padding: 0 9px 0 9px; border-left:1px solid #d8e2e4;border-right:1px solid #d8e2e4;}
+.contactList .contentWrapperBorderLeftRight h3{margin: 6px 0;}
+
+.userStatusHeader{display:block; height:26px; width:750px; margin: 6px 0 6px 10px;background:url(../images/searchresulth3.png) 0 0 no-repeat #ff7900; color:#ffffff; line-height:18px;}
+.userStatusHeader h3{font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; display:inline-block;margin:0;}
+.userStatusBlock {min-height: 450px; width: 240px; padding: 10px 10px 10px 0; float: left;}
+.userStatusBlock p{display:block; float: left; width: 95px; height: 20px; font-size: 12px; line-height: 18px; margin: 5px 0; padding: 0 9px 0 0;}
+.userStatusBlock p.label {text-align:right; color: #ff7900;}
+.userStatusBlock p.value {width: 135px; padding: 0;}
+.userStatusBlock p.value.statusPro span{display:block;width:52px;height:20px;float:left;background:url(../images/status.png) 0 -5px no-repeat;text-indent:-3000px; overflow:hidden;}
+.userStatusBlock p.value.statusLite span{display:block;width:52px;height:20px;float:left;background:url(../images/status.png) 0 -35px no-repeat;text-indent:-3000px; overflow:hidden;}
+.userStatusBlock p.value.statusBase span{display:block;width:52px;height:20px;float:left;background:url(../images/status.png) 0 -65px no-repeat;text-indent:-3000px; overflow:hidden;}
+.userStatusBlock p.value a.buttonArrow {display:inline-block; padding:0 0 0 12px; margin: 0 0 0 5px; background:#ff7900 url(../images/tmplabuyout.png) top left no-repeat; color:#ffffff; line-height: 12px;text-decoration: underline; float:right;}
+.userStatusBlock p.value a.buttonArrow span {display:inline-block; padding:3px 7px 5px 0; background:#ff7900 url(../images/tmplabuyout.png) top right no-repeat; color:#ffffff; text-decoration: underline;}
+.userStatusBlock p.value a.buttonArrowGrey {display:inline-block; padding:0 0 0 12px; margin: 0 0 0 5px; background:#ff7900 url(../images/tmplabuy.png) top left no-repeat; color:#ffffff; line-height: 12px;text-decoration: underline; float:right;}
+.userStatusBlock p.value a.buttonArrowGrey span {display:inline-block; padding:3px 7px 5px 0; background:#ff7900 url(../images/tmplabuy.png) top right no-repeat; color:#ffffff; text-decoration: underline;}
+
+.userEventsPagination {float:right; padding:10px 15px 0 0; line-height:16px; font-size:10px;}
+.userEventsPagination *{float:left;}
+.userEventsPagination ul {list-style:none outside none;margin:0 10px;padding:0;}
+.userEventsPagination ul li, .userEventsPagination span {padding:0 3px;}
+.main .content .userEventsPagination a {text-decoration:underline; color:#828282;}
+.main .content .userEventsPagination a:hover {text-decoration:none; color:#828282;}
+.main .content .userEventsPagination .active {color:#ff7900;}
