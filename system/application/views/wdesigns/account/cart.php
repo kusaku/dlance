@@ -1,76 +1,58 @@
-<div id="yui-main">
-<div class="yui-b">
-
-
-<h1><a href="/account/cart">Корзина</a></h1>
-
-<? if( !empty($data) ): ?>
-<?=show_highslide()?>
-<form action="/account/pay" method="post">
-
-<div align="right"><input type="submit" value="Оплатить" /></div>
-<br />
-<table class="portfolio">
-<tr>
-<th style="width:150px;">Превью</th>
-<th>Название / Краткое описание</th>
-</tr>
-<? foreach($data as $row): ?>
-
-
-<tr>
-<td class="thumb" rowspan="3" style="width:150px;">
-<a href="<?=$row['full_image']?>" class="highslide" onclick="return hs.expand(this)">
-<img src="<?=$row['small_image']?>" title="<?=$row['title']?>" />
-</a>
-</td>
-<td class="info">Категория: <?=$row['category']?></td>
-</tr>
-
-<tr>
-<td>
-<h4><a href="/designs/<?=$row['design_id']?>.html"><?=$row['title']?></a></h4>
-<p><?=$row['text']?></p>
-</td>
-</tr>
-
-<tr>
-<td>
-Добавлено: <?=$row['date']?> | 
-<? if( $row['kind'] == 1 ): ?>
-Цена - Покупка: <?=$row['price_1']?>
-<? else: ?>
-Цена - Выкуп: <?=$row['price_2']?>
-<? endif; ?>
-</td>
-</tr>
-<tr>
-
-
-<td class="options" colspan="2">
-<? if( $row['status_id'] == 1 ): ?>
-<input name="designs[]" type="checkbox" value="<?=$row['id']?>" checked="checked"/>
-<? endif; ?>
-<span class="fr">
-<a href="/account/cart_del/<?=$row['id']?>">Удалить</a>
-</span>
-</td>
-</tr>
-<? endforeach; ?>
-</table>
-
-<div align="right"><input type="submit" value="Оплатить" /></div>
-
-</form>
-<?=$page_links?>
-<? else: ?>
-<p>Дизайны отсутствуют.</p>
-<? endif; ?>
-
-
-  </div>
-
-</div>
-<!--/yui-main-->
-
 <? $this->load->view('wdesigns/account/block'); ?>
+
+<div class="content">
+	<div class="userBasketHeader">
+		<div class="makeOrder">
+			<a href="#">оформить заказ</a>
+		</div>
+		<div class="clearCart">
+			<a href="#">очистить корзину</a>
+		</div>
+		<h3>Корзина:</h3>
+	</div>
+	<div class="contentWrapperBorderLeft" style="min-height: 500px;">
+		<? if( !empty($data) ): ?>
+		<ul class="cartItemsList">
+			<? foreach($data as $row): ?>
+			<li class="cartItem">
+				<div class="itemImg">
+					<a href="<?=$row['full_image']?>" class="zoom"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>" /></a>
+				</div>
+				<div class="itemMainDescr">
+					<h3><a href="/designs/<?=$row['design_id']?>.html"><?=$row['title']?></a></h3>
+					<ul>
+						<li><span>Тип: </span><?=$row['category']?></li>
+						<li><span>Исходник: </span><?=$row['source']?></li>
+						<li><span>Рейтинг: </span><?=$row['rating']?></li>
+					</ul>
+				</div>
+				<div class="itemExtDescr">
+					<p><span>Описание: </span><?=$row['text']?></p>
+				</div>
+				<div class="priceBlock">
+					<a href="/account/cart_del/<?=$row['id']?>" class="delete" title="удалить из корзины">x</a>
+					<? if( $row['kind'] == 1 ): ?>
+					<p>Цена покупки: <span><?=$row['price_1']?> руб.</span></p>
+					<? else: ?>
+					<p>Цена выкупа: <span><?=$row['price_2']?> руб.</span></p>
+					<? endif; ?>
+				</div>
+			</li>
+			<? endforeach; ?>
+		</ul>
+		<div class="clear"></div>
+		<div class="userBasketBottom">
+			<form action="/account/pay" method="post">
+			<div class="makeOrder">
+				<a href="#">оформить заказ</a>
+				<!--<input type="submit" value="Оплатить" />-->
+			</div>
+			<div class="clearCart">
+				<a href="#">очистить корзину</a>
+			</div>
+		</div>
+		<? else: ?>
+		<p>Корзина пуста.</p>
+		<? endif; ?>
+	</div>
+</div>

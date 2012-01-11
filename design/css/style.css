@@ -281,8 +281,8 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main .content .comments .commentsList li .userInfo {width:150px; float:left;}
 .main .content .comments .commentsList li .userComment {width:578px; float:left;}
 .main .content .comments .commentsList li .userComment .commentDate {margin:0 0 6px 0; font-size:12px; color:#ff7900;}
-.main .content .comments .commentsList .avatar {display:block; float:left; width:50px; height:50px; margin:0 10px 0 0; position:relative;z-index:1;}
-.main .content .comments .commentsList .avatar a{display:block; width:48px; height:48px; position:absolute; border:1px solid #d8e2e4; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
+.main .content .comments .commentsList .avatar {display:block; float:left; width:48px; height:48px; margin:0 10px 0 0; position:relative;z-index:1;border:1px solid #d8e2e4;}
+.main .content .comments .commentsList .avatar a{display:block; width:48px; height:48px; position:absolute; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
 .main .content .comments .commentsList .avatar.pro a{background:url(../images/pro.png) bottom right no-repeat; position:relative;}
 .main .content .comments .commentsList .avatar.lite a{background:url(../images/lite.png) bottom right no-repeat; position:relative;}
 .main .content .comments .commentsList .avatar img {position:absolute; z-index:-1;top:0px;left:0px; max-height: 48px; max-width: 48px;}
@@ -395,7 +395,7 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 #cuselFrame-theme {z-index: 111;}
 
 /*Попробую делать БАМ*/
-.userInfo {padding:5px 0 10px 0; overflow:hidden;}
+.userInfo {padding:5px 0 10px 0; overflow:hidden;line-height: 13px;}
 .userInfo .avatar {display:block; float:left; width:80px; height:80px; border:1px solid #d8e2e4; margin:0 10px 5px 0;position:relative; z-index:1;}
 .userInfo .avatar a{display:block; width:80px; height:80px; position:absolute; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
 .userInfo .avatar.pro a{background:url(../images/pro.png) bottom right no-repeat;}
@@ -417,7 +417,7 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .sideTabsBlock ul {list-style:none; margin:0; padding:0 0 10px 0;}
 .sideTabsBlock ul li {margin:3px 0;}
 .sideTabsBlock ul ul {margin:0 0 0 1em;}
-.sideTabsBlock ul a {font-size:12px;}
+.sideTabsBlock ul{font-size:12px;}
 .sideTabsBlock ul a:hover,
 .sideTabsBlock ul a.active {color:#ff7b0b; text-decoration:none;}
 .sideTabsBlock ul ul a {color:#b2c4c8;}
@@ -544,9 +544,12 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 
 .userEventsPagination {padding: 10px 0px 10px 20px;}
 
-.contentWrapperBorderLeft {padding: 0 0px 0 9px; border-left:1px solid #d8e2e4; min-height:100%; overflow:hidden;}
+.contentWrapperBorderLeft {padding: 0 0px 0 9px; border-left:1px solid #d8e2e4; min-height:100%; position: relative;}
 .contentWrapperBorderLeftRight {padding: 0 9px 0 9px; border-left:1px solid #d8e2e4;border-right:1px solid #d8e2e4;}
 .contactList .contentWrapperBorderLeftRight h3{margin: 6px 0;}
+.cartResults .contentWrapperBorderLeft{overflow:hidden; position:relative; padding: 0 0 20px 9px;}
+.cartResults .contentWrapperBorderLeft .paginationControl{position:absolute; bottom: 0px; right: 0px;}
+.cartResults .contentWrapperBorderLeft .itemsOnPage{position:absolute; bottom: 0px; left: 10px;}
 
 .userStatusHeader{display:block; height:26px; width:750px; margin: 6px 0 6px 10px;background:url(../images/searchresulth3.png) 0 0 no-repeat #ff7900; color:#ffffff; line-height:18px;}
 .userStatusHeader h3{font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; display:inline-block;margin:0;}
@@ -562,10 +565,136 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .userStatusBlock p.value a.buttonArrowGrey {display:inline-block; padding:0 0 0 12px; margin: 0 0 0 5px; background:#ff7900 url(../images/tmplabuy.png) top left no-repeat; color:#ffffff; line-height: 12px;text-decoration: underline; float:right;}
 .userStatusBlock p.value a.buttonArrowGrey span {display:inline-block; padding:3px 7px 5px 0; background:#ff7900 url(../images/tmplabuy.png) top right no-repeat; color:#ffffff; text-decoration: underline;}
 
-.userEventsPagination {float:right; padding:10px 15px 0 0; line-height:16px; font-size:10px;}
-.userEventsPagination *{float:left;}
-.userEventsPagination ul {list-style:none outside none;margin:0 10px;padding:0;}
-.userEventsPagination ul li, .userEventsPagination span {padding:0 3px;}
-.main .content .userEventsPagination a {text-decoration:underline; color:#828282;}
-.main .content .userEventsPagination a:hover {text-decoration:none; color:#828282;}
-.main .content .userEventsPagination .active {color:#ff7900;}
+.userPortfolioHeader {display:block; height:26px; width:749px; background:url(../images/headerworks.png) 0 0 no-repeat; border-left:1px solid #D8E2E4; margin: 0; padding: 0 0 10px 10px;}
+.userPortfolioHeader.top { border-left:1px solid #ffffff;}
+.userPortfolioHeader.closed {height: 26px; padding: 0 0 5px 10px;}
+.userPortfolioHeader.closed h3{background:none;}
+.userPortfolioHeader h3{display:inline-block; height:26px; width: 145px; float: left; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; margin: 0;background:url(../images/headerworks_h3.png) 10px 0 no-repeat;}
+.userPortfolioHeader .userPortfolioCategory {display:block; height: 26px; padding:0; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:left;}
+.userPortfolioHeader .userPortfolioCategory li{display: block; float: left; padding: 3px 9px 3px 8px; line-height: 14px;}
+.userPortfolioHeader .userPortfolioCategory a {color:#ffffff; display:inline-block; height:23px; padding: 0; text-decoration:underline;}
+.userPortfolioHeader .userPortfolioCategory span {display:inline-block; height:23px; padding: 0;}
+.userPortfolioHeader .userPortfolioCategory a:hover {text-decoration:none;}
+.userPortfolioHeader .userPortfolioCategory a.active {background:url(../images/active.png) center -3px no-repeat; text-decoration:none;}
+.userPortfolioHeader .addItem {display:block; height: 20px; padding:0 0 0 7px; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:right;background:url(../images/ineercorners.png) -393px 0 no-repeat;}
+.userPortfolioHeader .addItem .addItemRightBrdr{display:block; height: 20px; padding:0 12px 0 0; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:right;background:url(../images/searchresulth3.png) right 0 no-repeat;}
+.userPortfolioHeader .addItem a{line-height: 18px; color:#ffffff; text-decoration:underline;}
+.userPortfolioHeader .addItem a:hover{text-decoration:none;}
+.userPortfolioHeader .addItem span{font-size: 20px; vertical-align:middle;}
+
+.userPortfolioList{list-style:none; padding:0; margin:0; overflow:hidden; border-left:1px solid #D8E2E4;}
+.userPortfolioList .worksList{overflow:hidden; padding: 0 0 5px 9px; margin: 0;}
+.userPortfolioList li{display:block; border:1px solid #ff7900; width:138px; height:88px; padding:0; overflow:hidden; position:relative; float:left; margin:0 10px 10px 0;}
+.userPortfolioList li .sign {color:#ffffff; float:right; text-decoration:underline; position:absolute; right:0;bottom:0; height:20px;width:20px; background: url(../images/sign.png) right bottom no-repeat; text-indent:-300px; overflow:hidden;}
+
+.commentsList {display:block; list-style:none; margin:0; padding:0;}
+.commentsList li {display:block; border:1px solid #d8e2e4; padding:10px; margin:10px 0; overflow:hidden;}
+.commentsList li .userInfo {width:150px; float:left;}
+.commentsList li .userComment {width:578px; float:left;}
+.commentsList li .userComment .commentDate {margin:0 0 6px 0; font-size:12px; color:#ff7900;}
+.commentsList .avatar {display:block; float:left; width:48px; height:48px; margin:0 10px 0 0; position:relative;z-index:1;border:1px solid #d8e2e4;}
+.commentsList .avatar a{display:block; width:48px; height:48px; position:absolute; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
+.commentsList .avatar.pro a{background:url(../images/pro.png) bottom right no-repeat; position:relative;}
+.commentsList .avatar.lite a{background:url(../images/lite.png) bottom right no-repeat; position:relative;}
+.commentsList .avatar img {position:absolute; z-index:-1;top:0px;left:0px; max-height: 48px; max-width: 48px;}
+.commentsList p{margin:0 0 5px 0;}
+.commentsList a {color:#000000;text-decoration:underline;}
+.main .content .commentsList li .userInfo a{color:#000000; text-decoration:underline;}
+
+.userBasketHeader,
+.userResponseHeader {display:block; height:26px; width:750px; background:url(../images/searchresulth3.png) 10px 0 no-repeat; margin: 0; padding: 0 0 10px 10px;}
+.userBasketHeader h3,
+.userResponseHeader h3{display:inline-block; height:26px; float: left; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; margin: 0;}
+.userResponseHeader .addResponse {display:block; height: 20px; padding:0 0 0 12px; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:right;background:url(../images/o2gtw.png) 0px 0 no-repeat;}
+.userResponseHeader .addResponse .addResponseRightBrdr{display:block; height: 20px; padding:0 12px 0 0; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:right;background:url(../images/o2gtw.png) right 0 no-repeat;}
+.userResponseHeader .addResponse a{line-height: 18px; color:#ffffff; text-decoration:underline;}
+.userResponseHeader .addResponse a:hover{text-decoration:none;}
+.userResponseHeader .addResponse span{font-size: 20px; vertical-align:middle;}
+
+.userBasketBottom{display:block; height:20px; width:750px; background:url(../images/searchresulth3.png) 0px 0 no-repeat; margin: 0; padding: 0 0 0px 0px; position: absolute; bottom: 0;}
+
+.userBasketHeader .makeOrder,
+.userBasketBottom .makeOrder {display:block; height: 20px; padding:0 15px 0 15px; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:right;background:url(../images/ineercorners.png) -393px 0 no-repeat;}
+.userBasketHeader .clearCart,
+.userBasketBottom .clearCart{display:block; height: 20px; padding:0 12px 0 19px; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:right;background:url(../images/ineercorners.png) 0px 0 no-repeat;}
+.userBasketHeader .makeOrder a,
+.userBasketBottom .makeOrder a,
+.userBasketBottom .clearCart a,
+.userBasketHeader .clearCart a {line-height: 18px; color:#ffffff; text-decoration:underline;}
+.userBasketHeader .makeOrder a:hover,
+.userBasketBottom .makeOrder a:hover,
+.userBasketHeader .clearCart a:hover,
+.userBasketBottom .clearCart a:hover {text-decoration:none;}
+
+.cartItemsList {padding: 10px 0 30px 0; list-style:none;}
+.cartItemsList .cartItem{display:block; height:159px; border:1px solid #d8e2e4; margin: 0 0 30px 0; position:relative;}
+.cartItemsList .cartItem span{color:#ff7900;}
+.cartItemsList .cartItem .itemImg{width: 200px; height:159px; float:left; background: #efefef;}
+.cartItemsList .cartItem .itemMainDescr{width:280px; height: 149px; padding: 0px 15px 5px 15px; float:left;}
+.cartItemsList .cartItem .itemMainDescr ul{margin: 10px 0; padding: 0; list-style: none;}
+.cartItemsList .cartItem .itemMainDescr ul li{margin: 5px 0;}
+.cartItemsList .cartItem .itemExtDescr {width:215px; height: 139px; margin: 10px 0; padding: 0px 10px 0 10px; float:left; border-left:1px solid #dadada;}
+.cartItemsList .cartItem .itemExtDescr p{margin: 0 0 12px 0; line-height: 16px;}
+.cartItemsList .cartItem .priceBlock{display: block; position:absolute; bottom:-20px; right:-1px; width: 195px; height: 20px; padding: 0 10px 0 15px; background: url(../images/pricedbg.png) 0 center no-repeat;}
+.cartItemsList .cartItem .priceBlock a{display:block; width: 10px; float:right; color: #ffffff; font-size: 20px; line-height: 16px;}
+.cartItemsList .cartItem .priceBlock a:hover{text-decoration:none;color:#ff0000;}
+.cartItemsList .cartItem .priceBlock p{margin: 0; color:#ffffff; line-height: 18px;}
+.cartItemsList .cartItem .priceBlock p span {color:#ffffff; font-size: 14px; margin: 0 0 0 12px;}
+
+.subscribersList {list-style:none; margin: 0; padding:0 0 5px 0;}
+.subscribersList li{width:50px; height:50px; float:left; margin: 0 10px 10px 0; overflow:visible; position:relative;}
+.subscribersList li .userInfo {overflow:visible; padding: 0;}
+.subscribersList li .avatar {display:block; float:left; width:48px; height:48px; margin:0 10px 0 0; position:relative;z-index:1;border:1px solid #d8e2e4;}
+.subscribersList li .avatar a{display:block; width:48px; height:48px; position:absolute; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
+.subscribersList li .avatar.pro a{background:url(../images/pro.png) bottom right no-repeat; position:relative;}
+.subscribersList li .avatar.lite a{background:url(../images/lite.png) bottom right no-repeat; position:relative;}
+.subscribersList li .avatar img {position:absolute; z-index:-1;top:0px;left:0px; max-height: 48px; max-width: 48px;}
+.subscribersList li .tooltip{display:none; background:url(../images/headertooltipgrey.png) no-repeat 0 0; padding: 0 0 0 3px;margin: 0 0 0 -3px;}
+.subscribersList li .tooltip p{display:block; background:url(../images/headertooltipgrey.png) no-repeat right 0; padding: 0 3px 0 0;margin: 0 -3px 0 0;}
+.subscribersList li .tooltip p span{display:block; height: 26px; background:url(../images/active.png) center 0px no-repeat;width: auto;}
+.subscribersList li .tooltip a{display:inline;line-height: 20px; color:#ffffff;}
+.subscribersList li .tooltip a.delete{display:inline;background:none;color:#000000; margin: 0 0 0 3px; font-weight:bold;}
+.subscribersList li.hover .tooltip,
+.subscribersList li:hover .tooltip{display:block; position:absolute; top:-26px; left: -15px; z-index: 12; height:20px; width:80px; text-align:center;}
+
+.subscribeSettings h4{color:#ff7900;font-style:italic;font-size:14px;}
+.subscribeSettings .line{list-style:none;margin: 12px 0 20px 0; padding: 0;}
+.subscribeSettings .line li{display:inline; padding: 0 15px 0 0;}
+.main .content .subscribeSettings label {margin: 0 3px;}
+.main .content .subscribeSettings label a{color:#818181; text-decoration:underline;}
+.main .content .subscribeSettings label a:hover{color:#818181; text-decoration:none;}
+
+.userMoneyHeader {display:block; height:26px; width:759px; background:url(../images/o2gtw.png) right 0 no-repeat; border-left:1px solid #ffffff; margin: 0; padding: 0 0 10px 0px;}
+.userMoneyHeader h3{display:inline-block; height:26px; float: left; padding: 0 7px 0 10px; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; margin: 0;background:url(../images/searchresulth3.png) 10px 0 no-repeat #ffffff;}
+.userMoneyHeader .userMoneyCategory {display:block; height: 26px; padding:0; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:left;}
+.userMoneyHeader .userMoneyCategory li{display: block; float: left; padding: 3px 9px 3px 8px; line-height: 14px;text-align:center;}
+.userMoneyHeader .userMoneyCategory li:first-child{background:url(../images/ineercorners.png) 0px 0 no-repeat;}
+.userMoneyHeader .userMoneyCategory a {color:#ffffff; display:inline-block; height:23px; padding: 0; text-decoration:underline;}
+.userMoneyHeader .userMoneyCategory span {display:inline-block; height:23px; padding: 0;}
+.userMoneyHeader .userMoneyCategory a:hover {text-decoration:none;}
+.userMoneyHeader .userMoneyCategory a.active {background:url(../images/active.png) center -3px no-repeat; text-decoration:none;}
+.userMoneyHeader .addItem {display:block; height: 20px; padding:0 0 0 7px; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:right;background:url(../images/ineercorners.png) -393px 0 no-repeat;}
+.userMoneyHeader .addItem .addItemRightBrdr{display:block; height: 20px; padding:0 12px 0 0; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:right;background:url(../images/searchresulth3.png) right 0 no-repeat;}
+.userMoneyHeader .addItem a{line-height: 18px; color:#ffffff; text-decoration:underline;}
+.userMoneyHeader .addItem a:hover{text-decoration:none;}
+.userMoneyHeader .addItem span{font-size: 20px; vertical-align:middle;}
+
+.userMoneyList{padding: 0 0px 0 9px; border-left:1px solid #dadada; min-height:500px; position: relative;}
+.userMoneyList ul{list-style:none; padding: 0; margin:0;}
+.userMoneyList li:first-child{border-bottom: 1px solid #dadada; padding:10px 0 0 0;}
+.userMoneyList li{border-bottom: 1px solid #dadada; height:26px;}
+.userMoneyList li p{display:block; float:left; text-align:center; margin:2px 0; line-height: 20px;}
+.userMoneyList li p.type{width:160px;}
+.userMoneyList li p.date{width:110px;}
+.userMoneyList li p.cost{width:167px;}
+.userMoneyList li p.comment{width:288px;}
+.userMoneyList li p.ctype{width:120px;}
+.userMoneyList li p.nomber{width:117px;}
+.userMoneyList li p.summ{width:117px;}
+.userMoneyList li p.last{width:147px;}
+.userMoneyList li p.spec{width:117px; padding: 0 0 0 20px;}
+.userMoneyList li p.spec span{color:#b2c4c8;}
+.userMoneyList li p span{color:#ff7900;}
+.main .content .userMoneyList li a{text-decoration:underline;}
+.main .content .userMoneyList li a:hover{text-decoration:none;}
+
