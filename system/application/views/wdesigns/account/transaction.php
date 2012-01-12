@@ -1,34 +1,35 @@
-<div id="yui-main">
-<div class="yui-b">
-
-
-<h1><a href="/account/transaction/">История операция</a></h1>
-
-
-<? if( !empty($data) ): ?>
-<table class="offers">
-<tr>
-<th style="width:150px;">Дата</th>
-<th style="width:150px;">Сумма</th>
-<th>Описание</th>
-</tr>
-<? foreach($data as $row): ?>
-<tr>
-<td class="owner txtc"><?=$row['date']?></td>
-<td class="budget txtc"><strong><?=$row['amount']?></strong> рублей</td>
-<td class="owner txtc"><?=$row['descr']?></td>
-</tr>
-<? endforeach; ?>
-</table>
-<? //$page_links?>
-<? else: ?>
-<p>История отсутствуют.</p>
-<? endif; ?>
-
-
-  </div>
-
-</div>
-<!--/yui-main-->
-
 <? $this->load->view('wdesigns/account/block'); ?>
+
+<div class="content">
+	<div class="userMoneyHeader top">
+		<h3>История операций:</h3>
+		<ul class="userMoneyCategory">
+			<li style="width:100px;"><a href="#" class="active">Дата</a></li>
+			<li style="width:150px;"><a href="#">Сумма</a></li>
+			<li style="width:270px;"><a href="#">Описание</a></li>
+		</ul>
+	</div>
+	<div class="userMoneyList">
+		<? if( !empty($data) ): ?>
+		<ul class="worksList">
+			<? foreach($data as $row): ?>
+			<li>
+				<p class="type">
+					<?=$row['type']?>
+					<? if( $row['type_id'] == 2 and $row['status'] == 1 ): //Если платеж с кодом протекции?>
+					(<?=$row['time']?>)
+					<? endif; ?>
+				</p>
+				<p class="date"><?=$row['date']?></p>
+				<p class="cost"><span><?=$row['amount']?> RUB</span></p>
+				<p class="comment"><?=$row['descr']?></p>
+			</li>
+			<? endforeach; ?>
+		</ul>
+		<? else: ?>
+		<ul class="worksList">
+			<li><p class="type">История отсутствует.</p></li>
+		</ul>
+		<? endif; ?>
+	</div>
+</div>

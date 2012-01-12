@@ -1,48 +1,39 @@
-<div id="yui-main">
-<div class="yui-b">
-
-<h1><a href="/balance/payments/">Платежи</a></h1>
-<p class="subtitle">
-Список платежей. Для создания нового перевода нажмите: "<a href="/account/transfer/">Создать перевод</a>"<br />
-Для принятия отправленного вам платежа, кликните по номеру.
-</p>
-
-<? if( !empty($data) ): ?>
-<table class="offers">
-<tr>
-<th style="width:15px;">№</th>
-<th class="txtl">Дата создания</th>
-<th style="width:100px;">Тип</th>
-<th style="width:100px;">Сумма</th>
-<th style="width:100px;">Плательщик</th>
-<th style="width:100px;">Получатель</th>
-<th style="width:60px;">Статус</th>
-</tr>
-<? foreach($data as $row): ?>
-<tr>
-<td><a href="/account/payments/<?=$row['id']?>.html"><?=$row['id']?></a></td>
-<td class="title"><?=$row['date']?></td>
-<td class="state txtc"><?=$row['type']?>
-<? if( $row['type_id'] == 2 and $row['status'] == 1 ): //Если платеж с кодом протекции?>
-(<?=$row['time']?>)
-<? endif; ?>
-</td>
-<td class="budget txtc"><strong><?=$row['amount']?> рублей</strong></td>
-<td class="owner txtc"><a href="/user/<?=$row['user']?>/"><?=$row['user']?></a></td>
-<td class="owner txtc"><a href="/user/<?=$row['recipient']?>/"><?=$row['recipient']?></a></td>
-<td class="state txtc"><?=$row['status']?></td>
-</tr>
-<? endforeach; ?>
-    </table>
-<?=$page_links?>
-<? else: ?>
-<p>Платежи отсутствуют.</p>
-<? endif; ?>
-
-
-  </div>
-
-</div>
-<!--/yui-main-->
-
 <? $this->load->view('wdesigns/account/block'); ?>
+
+<div class="content">
+	<div class="userMoneyHeader top">
+		<h3>История операций:</h3>
+		<ul class="userMoneyCategory">
+			<li style="width:100px;"><a href="#" class="active">Дата</a></li>
+			<li style="width:150px;"><a href="#">Сумма</a></li>
+			<li style="width:270px;"><a href="#">Описание</a></li>
+		</ul>
+	</div>
+	<div class="userMoneyList">
+		<? if( !empty($data) ): ?>
+		<ul class="worksList">
+			<? foreach($data as $row): ?>
+			<li>
+				<p class="type">
+					<?=$row['type']?>
+					<? if( $row['type_id'] == 2 and $row['status'] == 1 ): //Если платеж с кодом протекции?>
+					(<?=$row['time']?>)
+					<? endif; ?>
+				</p>
+				<p class="date"><?=$row['date']?></p>
+				<p class="cost"><span><?=$row['amount']?> RUB</span></p>
+				<p class="comment"><?=$row['descr']?></p>
+			</li>
+			<? endforeach; ?>
+		</ul>
+		<? else: ?>
+		<ul class="worksList">
+			<li><p class="type">История отсутствует.</p></li>
+		</ul>
+		<? endif; ?>
+		<p class="subtitle">
+		Список платежей. Для создания нового перевода нажмите: "<a href="/account/transfer/">Создать перевод</a>"<br />
+		Для принятия отправленного вам платежа, кликните по номеру.
+		</p>
+	</div>
+</div>
