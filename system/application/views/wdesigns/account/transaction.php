@@ -26,6 +26,9 @@
 			</li>
 			<? endforeach; ?>
 		</ul>
+		<div class="paginationControl">
+			<?=$page_links?>
+		</div>
 		<? else: ?>
 		<ul class="worksList">
 			<li><p class="type">История отсутствует.</p></li>

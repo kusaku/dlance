@@ -1,26 +1,34 @@
-<div id="yui-main">
-<div class="yui-b">
-
-<h1><a href="/account/users_followers">Подписки на пользовательские работы</a></h1>
-<p class="subtitle"> Список пользователей, на работы которых вы подписаны.</p>
-
-<? if( !empty($data) ): ?>
-<div class="following">
-<? foreach($data as $row): ?>
-<div>
-<img src="<?=$row['userpic']?>" alt="" class="avatar" width="60px"/><a href="/user/<?=$row['username']?>" rel="follows"><?=$row['username']?></a>
-[<a href="/account/subscribe_del/<?=$row['follows']?>">x</a>]
-
-</div>
-<? endforeach; ?>
-</div>
-<?=$page_links?>
-<? else: ?>
-<p>Подписчики отсутствуют.</p>
-<? endif; ?>
-
-</div>
-</div>
-<!--/yui-main-->
-
 <? $this->load->view('wdesigns/account/block'); ?>
+
+<div class="content">
+	<div class="userResponseHeader">
+		<div class="addResponse">
+			<div class="addResponseRightBrdr">
+				<a href="#">удалить всех</a>
+			</div>
+		</div>
+		<h3>Рассылка по пользователям:</h3>
+	</div>
+	<div class="contentWrapperBorderLeft" style="min-height:580px;">
+		<? if( !empty($data) ): ?>
+		<ul class="subscribersList">
+			<? foreach($data as $row): ?>
+			<li>
+				<div class="userInfo">
+					<div class="avatar lite">
+						<a href="/user/<?=$row['username']?>" title="перейти к портфолио <?=$row['username']?>"></a>
+						<img src="<?=$row['userpic']?>" alt="<?=$row['username']?> avi" />
+					</div>
+					<div class="tooltip"><p><span><a href="/user/<?=$row['username']?>" title="перейти к портфолио <?=$row['username']?>"><?=$row['username']?></a> <a href="/account/subscribe_del/<?=$row['follows']?>" class="delete">x</a></span></p></div>
+				</div>
+			</li>
+			<? endforeach; ?>
+		</ul>
+		<div class="paginationControl">
+			<?=$page_links?>
+		</div>
+		<? else: ?>
+			<p>Подписчики отсутствуют.</p>
+		<? endif; ?>
+	</div>
+</div>
