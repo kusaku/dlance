@@ -1,9 +1,11 @@
 <? $this->load->view('wdesigns/account/block'); ?>
 
 <div class="content">
+	<? if( !empty($data) ): ?>
+	<form action="/account/pay" method="post">
 	<div class="userBasketHeader">
 		<div class="makeOrder">
-			<a href="#">оформить заказ</a>
+			<input type="submit" value="оформить заказ" class="likeLink"/>
 		</div>
 		<div class="clearCart">
 			<a href="#">очистить корзину</a>
@@ -11,7 +13,6 @@
 		<h3>Корзина:</h3>
 	</div>
 	<div class="contentWrapperBorderLeft" style="min-height: 500px;">
-		<? if( !empty($data) ): ?>
 		<ul class="cartItemsList">
 			<? foreach($data as $row): ?>
 			<li class="cartItem">
@@ -30,6 +31,9 @@
 					<p><span>Описание: </span><?=$row['text']?></p>
 				</div>
 				<div class="priceBlock">
+					<? if( $row['status_id'] == 1 ): ?>
+						<input name="designs[]" type="checkbox" value="<?=$row['id']?>" checked="checked" style="display:none;"/>
+					<? endif; ?>
 					<a href="/account/cart_del/<?=$row['id']?>" class="delete" title="удалить из корзины">x</a>
 					<? if( $row['kind'] == 1 ): ?>
 					<p>Цена покупки: <span><?=$row['price_1']?> руб.</span></p>
@@ -42,17 +46,21 @@
 		</ul>
 		<div class="clear"></div>
 		<div class="userBasketBottom">
-			<form action="/account/pay" method="post">
 			<div class="makeOrder">
-				<a href="#">оформить заказ</a>
-				<!--<input type="submit" value="Оплатить" />-->
+				<input type="submit" value="оформить заказ" class="likeLink"/>
 			</div>
 			<div class="clearCart">
 				<a href="#">очистить корзину</a>
 			</div>
 		</div>
-		<? else: ?>
-		<p>Корзина пуста.</p>
-		<? endif; ?>
 	</div>
+	</form>
+	<? else: ?>
+	<div class="userBasketHeader">
+		<h3>Корзина:</h3>
+	</div>
+	<div class="contentWrapperBorderLeft" style="min-height: 500px;">
+		<p>Корзина пуста.</p>
+	</div>
+	<? endif; ?>
 </div>

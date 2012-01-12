@@ -698,3 +698,5 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main .content .userMoneyList li a{text-decoration:underline;}
 .main .content .userMoneyList li a:hover{text-decoration:none;}
 
+input.likeLink {background:none; border:0; display:inline; color:#ffffff; font-size: 11px; line-height:18px;text-decoration:underline; cursor:pointer;}
+input.likeLink:hover {text-decoration:none;}
