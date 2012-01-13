@@ -23,9 +23,6 @@
 				<a href="<?=$row['full_image']?>" class="zoom" title="zoom prewiev"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a>
 				<a href="#" class="sign"><?=$row['status']?></a>
 			</li>
-			<li>
-				<a href="images/fresh1.jpg" class="zoom" title="zoom prewiev"><img src="images/freshgr2.png" alt="template"/></a>
-			</li>
 		</ul>
 	</div>
 	<? endforeach; ?>
