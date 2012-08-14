@@ -82,7 +82,7 @@ var el = el,
 		el.next().find("input").eq(0).attr("disabled","disabled");
 	}
 	
-	/* цепляем обработчики стилизированным radio */		
+	/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ radio */		
 	el.next().bind("mousedown", function(e) { changeRadio(jQuery(this)) });
 	el.next().find("input").eq(0).bind("change", function(e) { changeVisualRadio(jQuery(this)) });
 	if(jQuery.browser.msie)
