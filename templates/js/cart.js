@@ -5,9 +5,9 @@ $(document).ready(function(){
 	var totalCountGoods = 0;
 	if (!$.cookie("basket")) {$.cookie("basket", '', {path: "/"});}
 	basket = decodeURI($.cookie("basket"));
-	basketArray = basket.split(",");// Находим все товары
+	basketArray = basket.split(",");// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	for(var i=0; i<basketArray.length-1;i++) {
-		goodsId = basketArray[i].split(":"); // Находим id товара, цену и количество
+		goodsId = basketArray[i].split(":"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ id пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		totalCountGoods+=parseInt(goodsId[1]);
 		totalprice+=parseInt(goodsId[1])*parseInt(goodsId[2]);
 	}
@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 
 $('a.addCart').click(function() {
-	data = $(this).attr('id').split('-');//отслеживаем id у ссылки и разбиваем его по символу "-" получая параметры.
+	data = $(this).attr('id').split('-');//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ id пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ "-" пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 	addCart(data[1], data[2], 1);
 	return false;
 });
@@ -32,9 +32,9 @@ $('a.addCart').click(function() {
 
 function addCart(p1, p2, p3){
 	if (!p3 || p3==0) {p3=1;}
-	msg.id = p1; 		  // АйДи
-	msg.price = parseInt(p2); // Цена
-	msg.count = parseInt(p3); // Количество
+	msg.id = p1; 		  // пїЅпїЅпїЅпїЅ
+	msg.price = parseInt(p2); // пїЅпїЅпїЅпїЅ
+	msg.count = parseInt(p3); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	var check = false;
 	var cnt = false;
 	var totalCountGoods = 0;
@@ -55,7 +55,7 @@ function addCart(p1, p2, p3){
 
 	for(var i=0; i<basketArray.length-1;i++) {
 		goodsId = basketArray[i].split(":");
-		if(goodsId[0]==msg.id)	// ищем, не покупали ли мы этот товар ранее
+		if(goodsId[0]==msg.id)	// пїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 		{
 			check = true;
 			cnt   = goodsId[1];
@@ -66,13 +66,13 @@ function addCart(p1, p2, p3){
     if(!check) {
         basket+= msg.id + ':' + msg.count + ':' + msg.price + ',';
     } else {
-       alert("Уже есть в корзине!");
+       alert("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
     }
     if(!check) {
-        alert("Добавлено!");
-        basketArray = basket.split(",");// Находим все товары
+        alert("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
+        basketArray = basket.split(",");// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         for(var i=0; i<basketArray.length-1;i++) {
-	    goodsId = basketArray[i].split(":"); // Находим id товара, цену и количество
+	    goodsId = basketArray[i].split(":"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ id пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	    totalCountGoods+=parseInt(goodsId[1]);
 	    totalprice+=parseInt(goodsId[1])*parseInt(goodsId[2]);
 	}
@@ -94,6 +94,6 @@ $('#clearBasket').click(function() {
 			$('.hPe').show();
 			$(this).hide();
 			$('#checkOut').hide();
-			$.jGrowl("Корзина очищена!");
+			$.jGrowl("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
 			return false;
 		});

@@ -56,11 +56,11 @@ class Account extends Controller
 		{
 			return;
 		}
-
+		$this->config->item('pay_robox_login');
 		// регистрационная информация (логин, пароль #1)
 		// registration info (login, password #1)
-		$mrh_login = "Openweblife";
-		$mrh_pass1 = "199122x199122x";
+		$mrh_login = $this->config->item('pay_robox_login');
+		$mrh_pass1 = $this->config->item('pay_robox_pass1');
 		// номер заказа
 		// number of order
 		$inv_id = 1;
@@ -85,14 +85,16 @@ class Account extends Controller
 
 		$data = array
 		( 
-            //'robokassaUrl'          => 'https://merchant.roboxchange.com/Index.aspx',
-            'robokassaUrl'          => 'http://test.robokassa.ru/Index.aspx',
             'rb_mrh_login'          => $mrh_login,
             'rb_payment_amount'     => $out_summ,
             'rb_payment_id'         => $inv_id,
             'rb_payment_desc'       => $inv_desc,
             'rb_sign'               => $crc
 		);
+		if($this->config->item('pay_robox_mode') == 0)
+			$data["robokassaUrl"] = 'http://test.robokassa.ru/Index.aspx';
+		else
+			$data["robokassaUrl"] = 'https://merchant.roboxchange.com/Index.aspx';
 
 		$this->template->build('account/balance_r', $data, $title = 'Пополнение баланса через Робокассу');
 	}
@@ -101,7 +103,7 @@ class Account extends Controller
 	{
 		// регистрационная информация (пароль #2)
 		// registration info (password #2)
-		$mrh_pass2 = "199122x199122x";
+		$mrh_pass2 = $this->config->item('pay_robox_pass2');
 
 		//установка текущего времени
 		//current date
@@ -295,6 +297,55 @@ class Account extends Controller
 	{
 		show_error('Вы отказались от оплаты.');
 	}
+	
+/*
+|---------------------------------------------------------------
+| Мерчант webmoney
+|---------------------------------------------------------------
+*/
+    function balance_w() 
+	{
+		if( !$this->errors->access() )
+		{
+			return;
+		}
+
+		$data = array();
+
+		$data['purse'] = 'R344515119665';
+
+		$this->template->build('account/balance', $data, $title = 'Пополнение баланса');
+	}
+
+    function result() 
+	{
+		$LMI_PREREQUEST = $this->input->post('LMI_PREREQUEST');
+		$LMI_PAYMENT_AMOUNT = $this->input->post('LMI_PAYMENT_AMOUNT');
+		$LMI_PAYEE_PURSE = $this->input->post('LMI_PAYEE_PURSE');
+		$user_id = $this->input->post('user_id');
+
+		$purse = 'R344515119665';
+
+		if( $LMI_PREREQUEST == 1 )
+		{
+
+			if( $LMI_PAYEE_PURSE != $purse )
+			{
+    			$err = 1;
+    			echo "ERR: Вы не авторизированы на сайте";
+    			exit;
+			}
+
+			if( !$err ) echo "YES";
+		}
+		else
+		{	
+			$this->balance_mdl->plus($user_id, $LMI_PAYMENT_AMOUNT);
+
+			$this->transaction->create($this->user_id, 'Пополнение счета', $LMI_PAYMENT_AMOUNT);
+		}
+	}
+	
 /*
 |---------------------------------------------------------------
 | Перевод
@@ -1973,53 +2024,7 @@ else
 
 		return TRUE;	
 	}
-/*
-|---------------------------------------------------------------
-| Мерчант webmoney
-|---------------------------------------------------------------
-*/
-    function balance_w() 
-	{
-		if( !$this->errors->access() )
-		{
-			return;
-		}
 
-		$data = array();
-
-		$data['purse'] = 'R344515119665';
-
-		$this->template->build('account/balance', $data, $title = 'Пополнение баланса');
-	}
-
-    function result() 
-	{
-		$LMI_PREREQUEST = $this->input->post('LMI_PREREQUEST');
-		$LMI_PAYMENT_AMOUNT = $this->input->post('LMI_PAYMENT_AMOUNT');
-		$LMI_PAYEE_PURSE = $this->input->post('LMI_PAYEE_PURSE');
-		$user_id = $this->input->post('user_id');
-
-		$purse = 'R344515119665';
-
-		if( $LMI_PREREQUEST == 1 )
-		{
-
-			if( $LMI_PAYEE_PURSE != $purse )
-			{
-    			$err = 1;
-    			echo "ERR: Вы не авторизированы на сайте";
-    			exit;
-			}
-
-			if( !$err ) echo "YES";
-		}
-		else
-		{	
-			$this->balance_mdl->plus($user_id, $LMI_PAYMENT_AMOUNT);
-
-			$this->transaction->create($this->user_id, 'Пополнение счета', $LMI_PAYMENT_AMOUNT);
-		}
-	}
 /*
 |---------------------------------------------------------------
 | Указатели

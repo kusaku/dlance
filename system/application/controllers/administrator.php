@@ -1312,7 +1312,15 @@ class Administrator extends Controller
 			'site' => $this->input->post('site'),
 			'reviews_add' => $this->input->post('reviews_add'),
 			'download_period' => $this->input->post('download_period'),
-			'moder' => $this->input->post('moder')
+			'moder' => $this->input->post('moder'),
+			'pay_robox_login' => $this->input->post('pay_robox_login'),
+			'pay_robox_pass1' => $this->input->post('pay_robox_pass1'),
+			'pay_robox_pass2' => $this->input->post('pay_robox_pass2'),
+			'pay_robox_mode' => $this->input->post('pay_robox_mode'),
+			'pay_qiwi_id' => $this->input->post('pay_qiwi_id'),
+			'pay_qiwi_lt' => $this->input->post('pay_qiwi_lt'),
+			'pay_qiwi_agt' => $this->input->post('pay_qiwi_agt'),
+			'pay_wm_purse' => $this->input->post('pay_wm_purse'),
 		);
 
 
