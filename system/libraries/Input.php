@@ -529,7 +529,7 @@ class CI_Input {
 	*/
 	function xss_clean($str, $is_image = FALSE)
 	{
-		/*
+		/**
 		* Is the string an array?
 		*
 		*/
@@ -543,12 +543,12 @@ class CI_Input {
 			return $str;
 		}
 
-		/*
+		/**
 		* Remove Invisible Characters
 		*/
 		$str = $this->_remove_invisible_characters($str);
 
-		/*
+		/**
 		* Protect GET variables in URLs
 		*/
 
@@ -556,7 +556,7 @@ class CI_Input {
 
 		$str = preg_replace('|\&([a-z\_0-9]+)\=([a-z\_0-9]+)|i', $this->xss_hash()."\\1=\\2", $str);
 
-		/*
+		/**
 		* Validate standard character entities
 		*
 		* Add a semicolon if missing.  We do this to enable
@@ -565,7 +565,7 @@ class CI_Input {
 		*/
 		$str = preg_replace('#(&\#?[0-9a-z]{2,})([\x00-\x20])*;?#i', "\\1;\\2", $str);
 
-		/*
+		/**
 		* Validate UTF16 two byte encoding (x00) 
 		*
 		* Just as above, adds a semicolon if missing.
@@ -573,12 +573,12 @@ class CI_Input {
 		*/
 		$str = preg_replace('#(&\#x?)([0-9A-F]+);?#i',"\\1\\2;",$str);
 
-		/*
+		/**
 		* Un-Protect GET variables in URLs
 		*/
 		$str = str_replace($this->xss_hash(), '&', $str);
 
-		/*
+		/**
 		* URL Decode
 		*
 		* Just in case stuff like this is submitted:
@@ -590,7 +590,7 @@ class CI_Input {
 		*/
 		$str = rawurldecode($str);
 
-		/*
+		/**
 		* Convert character entities to ASCII 
 		*
 		* This permits our tests below to work reliably.
@@ -603,12 +603,12 @@ class CI_Input {
 
 		$str = preg_replace_callback("/<\w+.*?(?=>|<|$)/si", array($this, '_html_entity_decode_callback'), $str);
 
-		/*
+		/**
 		* Remove Invisible Characters Again!
 		*/
 		$str = $this->_remove_invisible_characters($str);
 
-		/*
+		/**
 		* Convert all tabs to spaces
 		*
 		* This prevents strings like this: ja	vascript
@@ -623,12 +623,12 @@ class CI_Input {
 			$str = str_replace("\t", ' ', $str);
 		}
 
-		/*
+		/**
 		* Capture converted string for later comparison
 		*/
 		$converted_string = $str;
 
-		/*
+		/**
 		* Not Allowed Under Any Conditions
 		*/
 
@@ -642,7 +642,7 @@ class CI_Input {
 			$str = preg_replace("#".$key."#i", $val, $str);   
 		}
 
-		/*
+		/**
 		* Makes PHP tags safe
 		*
 		*  Note: XML tags are inadvertently replaced too:
@@ -663,7 +663,7 @@ class CI_Input {
 			$str = str_replace(array('<?php', '<?PHP', '<?', '?'.'>'),  array('&lt;?php', '&lt;?PHP', '&lt;?', '?&gt;'), $str);
 		}
 
-		/*
+		/**
 		* Compact any exploded words
 		*
 		* This corrects words like:  j a v a s c r i p t
@@ -685,7 +685,7 @@ class CI_Input {
 			$str = preg_replace_callback('#('.substr($temp, 0, -3).')(\W)#is', array($this, '_compact_exploded_words'), $str);
 		}
 
-		/*
+		/**
 		* Remove disallowed Javascript in links or img tags
 		* We used to do some version comparisons and use of stripos for PHP5, but it is dog slow compared
 		* to these simplified non-capturing preg_match(), especially if the pattern exists in the string
@@ -713,7 +713,7 @@ class CI_Input {
 
 		unset($original);
 
-		/*
+		/**
 		* Remove JavaScript Event Handlers
 		*
 		* Note: This code is a little blunt.  It removes
@@ -725,7 +725,7 @@ class CI_Input {
 
 		if ($is_image === TRUE)
 		{
-			/*
+			/**
 			* Adobe Photoshop puts XML metadata into JFIF images, including namespacing, 
 			* so we have to allow this for images. -Paul
 			*/
@@ -734,7 +734,7 @@ class CI_Input {
 
 		$str = preg_replace("#<([^><]+?)(".implode('|', $event_handlers).")(\s*=\s*[^><]*)([><]*)#i", "<\\1\\4", $str);
 
-		/*
+		/**
 		* Sanitize naughty HTML elements
 		*
 		* If a tag containing any of the words in the list
@@ -747,7 +747,7 @@ class CI_Input {
 		$naughty = 'alert|applet|audio|basefont|base|behavior|bgsound|blink|body|embed|expression|form|frameset|frame|head|html|ilayer|iframe|input|isindex|layer|link|meta|object|plaintext|style|script|textarea|title|video|xml|xss';
 		$str = preg_replace_callback('#<(/*\s*)('.$naughty.')([^><]*)([><]*)#is', array($this, '_sanitize_naughty_html'), $str);
 
-		/*
+		/**
 		* Sanitize naughty scripting elements
 		*
 		* Similar to above, only instead of looking for
@@ -762,7 +762,7 @@ class CI_Input {
 		*/
 		$str = preg_replace('#(alert|cmd|passthru|eval|exec|expression|system|fopen|fsockopen|file|file_get_contents|readfile|unlink)(\s*)\((.*?)\)#si', "\\1\\2&#40;\\3&#41;", $str);
 
-		/*
+		/**
 		* Final clean up
 		*
 		* This adds a bit of extra precaution in case
@@ -779,7 +779,7 @@ class CI_Input {
 			$str = preg_replace("#".$key."#i", $val, $str);
 		}
 
-		/*
+		/**
 		*  Images are Handled in a Special Way
 		*  - Essentially, we want to know that after all of the character conversion is done whether
 		*  any unwanted, likely XSS, code was found.  If not, we return TRUE, as the image is clean.
@@ -997,7 +997,7 @@ class CI_Input {
 	/*  Replacement for html_entity_decode()
 	/* -------------------------------------------------*/
 
-	/*
+	/**
 	NOTE: html_entity_decode() has a bug in some PHP versions when UTF-8 is the
 	character set, and the PHP developers said they were not back porting the
 	fix to versions other than PHP 5.x.

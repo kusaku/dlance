@@ -636,7 +636,7 @@ class CI_Loader {
 			}
 		}
 
-		/*
+		/**
 		 * Extract and cache variables
 		 *
 		 * You can either set variables using the dedicated $this->load_vars()
@@ -650,7 +650,7 @@ class CI_Loader {
 		}
 		extract($this->_ci_cached_vars);
 				
-		/*
+		/**
 		 * Buffer the output
 		 *
 		 * We buffer the output for two reasons:
@@ -687,7 +687,7 @@ class CI_Loader {
 			return $buffer;
 		}
 
-		/*
+		/**
 		 * Flush the buffer... or buff the flusher?
 		 *
 		 * In order to permit views to be nested within

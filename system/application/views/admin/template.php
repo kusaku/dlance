@@ -63,7 +63,7 @@
 		
 		$(document).ready(function()
 		{
-			/*
+			/**
 			 * Example context menu
 			 */
 			
@@ -94,7 +94,7 @@
 				] });
 			});
 			
-			/*
+			/**
 			 * Table sorting
 			 */
 			
@@ -119,7 +119,7 @@
 				// DataTable config
 				var table = $(this),
 					oTable = table.dataTable({
-						/*
+						/**
 						 * We set specific options for each columns here. Some columns contain raw data to enable correct sorting, so we convert it for display
 						 * @url http://www.datatables.net/usage/columns
 						 */
@@ -141,13 +141,13 @@
 							{ bSortable: false }	// No sorting for actions column
 						],
 						
-						/*
+						/**
 						 * Set DOM structure for table controls
 						 * @url http://www.datatables.net/examples/basic_init/dom.html
 						 */
 						sDom: '<"block-controls"<"controls-buttons"p>>rti<"block-footer clearfix"lf>',
 						
-						/*
+						/**
 						 * Callback to apply template setup
 						 */
 						fnDrawCallback: function()
@@ -193,7 +193,7 @@
 				});
 			});
 			
-			/*
+			/**
 			 * Datepicker
 			 * Thanks to sbkyle! http://themeforest.net/user/sbkyle
 			 */
@@ -475,7 +475,7 @@
 			<a href="/" class="button" target="_new">Перейти на сайт</a></div>
 		
 		<div class="float-right">
-			<a href="#top" class="button"><img src="images/icons/fugue/navigation-090.png" width="16" height="16">Перейти в самый верх</a></div>
+			<a href="#top" class="button"><img src="/templates/admin/images/icons/fugue/navigation-090.png" width="16" height="16">Перейти в самый верх</a></div>
 		
 </footer>
 

@@ -127,7 +127,7 @@ if ( ! function_exists('ascii_to_entities'))
 	
 		   if ($ordinal < 128)
 		   {
-				/*
+				/**
 					If the $temp array has a value but we have moved on, then it seems only
 					fair that we output that entity and restart $temp before continuing. -Paul
 				*/

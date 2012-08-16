@@ -30,7 +30,7 @@
 
 // ------------------------------------------------------------------------
 
-/*
+/**
  * PHP versions prior to 5.0 don't support the E_STRICT constant
  * so we need to explicitly define it otherwise the Exception class 
  * will generate errors when running under PHP 4

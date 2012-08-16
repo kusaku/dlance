@@ -15,7 +15,7 @@
 
 // ------------------------------------------------------------------------
 
-/*
+/**
 Instructions:
 
 Load the plugin using:
@@ -479,7 +479,7 @@ function set_date(td, cal)
 	// Insert the date into the form
 	insert_date(cal);
 }
-/*
+/**
 //	Insert the date into the form field
 function insert_date(cal)
 {

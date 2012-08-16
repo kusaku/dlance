@@ -30,28 +30,28 @@
 // CI Version
 define('CI_VERSION',	'1.7.1');
 
-/*
+/**
  * ------------------------------------------------------
  *  Load the global functions
  * ------------------------------------------------------
  */
 require(BASEPATH.'codeigniter/Common'.EXT);
 
-/*
+/**
  * ------------------------------------------------------
  *  Load the compatibility override functions
  * ------------------------------------------------------
  */
 require(BASEPATH.'codeigniter/Compat'.EXT);
 
-/*
+/**
  * ------------------------------------------------------
  *  Load the framework constants
  * ------------------------------------------------------
  */
 require(APPPATH.'config/constants'.EXT);
 
-/*
+/**
  * ------------------------------------------------------
  *  Define a custom error handler so we can log PHP errors
  * ------------------------------------------------------
@@ -59,7 +59,7 @@ require(APPPATH.'config/constants'.EXT);
 set_error_handler('_exception_handler');
 set_magic_quotes_runtime(0); // Kill magic quotes
 
-/*
+/**
  * ------------------------------------------------------
  *  Start the timer... tick tock tick tock...
  * ------------------------------------------------------
@@ -69,7 +69,7 @@ $BM =& load_class('Benchmark');
 $BM->mark('total_execution_time_start');
 $BM->mark('loading_time_base_classes_start');
 
-/*
+/**
  * ------------------------------------------------------
  *  Instantiate the hooks class
  * ------------------------------------------------------
@@ -77,14 +77,14 @@ $BM->mark('loading_time_base_classes_start');
 
 $EXT =& load_class('Hooks');
 
-/*
+/**
  * ------------------------------------------------------
  *  Is there a "pre_system" hook?
  * ------------------------------------------------------
  */
 $EXT->_call_hook('pre_system');
 
-/*
+/**
  * ------------------------------------------------------
  *  Instantiate the base classes
  * ------------------------------------------------------
@@ -95,7 +95,7 @@ $URI =& load_class('URI');
 $RTR =& load_class('Router');
 $OUT =& load_class('Output');
 
-/*
+/**
  * ------------------------------------------------------
  *	Is there a valid cache file?  If so, we're done...
  * ------------------------------------------------------
@@ -109,7 +109,7 @@ if ($EXT->_call_hook('cache_override') === FALSE)
 	}
 }
 
-/*
+/**
  * ------------------------------------------------------
  *  Load the remaining base classes
  * ------------------------------------------------------
@@ -118,7 +118,7 @@ if ($EXT->_call_hook('cache_override') === FALSE)
 $IN		=& load_class('Input');
 $LANG	=& load_class('Language');
 
-/*
+/**
  * ------------------------------------------------------
  *  Load the app controller and local controller
  * ------------------------------------------------------
@@ -157,7 +157,7 @@ include(APPPATH.'controllers/'.$RTR->fetch_directory().$RTR->fetch_class().EXT);
 $BM->mark('loading_time_base_classes_end');
 
 
-/*
+/**
  * ------------------------------------------------------
  *  Security check
  * ------------------------------------------------------
@@ -178,14 +178,14 @@ if ( ! class_exists($class)
 	show_404("{$class}/{$method}");
 }
 
-/*
+/**
  * ------------------------------------------------------
  *  Is there a "pre_controller" hook?
  * ------------------------------------------------------
  */
 $EXT->_call_hook('pre_controller');
 
-/*
+/**
  * ------------------------------------------------------
  *  Instantiate the controller and call requested method
  * ------------------------------------------------------
@@ -206,7 +206,7 @@ if ($RTR->scaffolding_request === TRUE)
 }
 else
 {
-	/*
+	/**
 	 * ------------------------------------------------------
 	 *  Is there a "post_controller_constructor" hook?
 	 * ------------------------------------------------------
@@ -236,14 +236,14 @@ else
 // Mark a benchmark end point
 $BM->mark('controller_execution_time_( '.$class.' / '.$method.' )_end');
 
-/*
+/**
  * ------------------------------------------------------
  *  Is there a "post_controller" hook?
  * ------------------------------------------------------
  */
 $EXT->_call_hook('post_controller');
 
-/*
+/**
  * ------------------------------------------------------
  *  Send the final rendered output to the browser
  * ------------------------------------------------------
@@ -254,14 +254,14 @@ if ($EXT->_call_hook('display_override') === FALSE)
 	$OUT->_display();
 }
 
-/*
+/**
  * ------------------------------------------------------
  *  Is there a "post_system" hook?
  * ------------------------------------------------------
  */
 $EXT->_call_hook('post_system');
 
-/*
+/**
  * ------------------------------------------------------
  *  Close the DB connection if one exists
  * ------------------------------------------------------

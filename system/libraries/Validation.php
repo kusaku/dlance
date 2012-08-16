@@ -209,7 +209,7 @@ class CI_Validation {
 				}
 			}
 			
-			/*
+			/**
 			 * Are we dealing with an "isset" rule?
 			 *
 			 * Before going further, we'll see if one of the rules
@@ -247,7 +247,7 @@ class CI_Validation {
 				continue;
 			}
 	
-			/*
+			/**
 			 * Set the current field
 			 *
 			 * The various prepping functions need to know the
@@ -298,7 +298,7 @@ class CI_Validation {
 				{				
 					if ( ! method_exists($this, $rule))
 					{
-						/*
+						/**
 						 * Run the native PHP function if called for
 						 *
 						 * If our own wrapper function doesn't exist we see
@@ -351,7 +351,7 @@ class CI_Validation {
 		
 		$total_errors = count($this->_error_array);
 
-		/*
+		/**
 		 * Recompile the class variables
 		 *
 		 * If any prepping functions were called the $_POST data

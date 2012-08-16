@@ -1,5 +1,6 @@
 .buildpath
 .project
-.settings/
-system/cache/
-img/captcha/
+.settings
+/system/cache
+/img/captcha
+/phpdoc

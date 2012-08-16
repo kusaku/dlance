@@ -34,9 +34,9 @@
 <? if( $this->user_id == $row['user_id'] ): ?>
 <span style="font-size:11px;">
 <a href="/account/images_down/<?=$row['id']?>" title="Переместить вниз"><img src="/templates/wdesigns/css/img/down.gif" alt="Переместить вниз"></a>
-| 
+*  
 <a href="/account/images_up/<?=$row['id']?>" title="Переместить вниз"><img src="/templates/wdesigns/css/img/up.gif" alt="Переместить вверх"></a>
-| 
+*  
 <a href="/account/images_edit/<?=$row['id']?>">Редактировать</a> | <a href="/account/images_del/<?=$row['id']?>">Удалить</a>
 </span>
 <? endif; ?>

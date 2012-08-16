@@ -236,7 +236,7 @@ class CI_Upload {
 			$this->file_name = preg_replace("/\s+/", "_", $this->file_name);
 		}
 
-		/*
+		/**
 		 * Validate the file name
 		 * This function appends an number onto the end of
 		 * the file if one with the same name already exists.
@@ -254,7 +254,7 @@ class CI_Upload {
 			}
 		}
 
-		/*
+		/**
 		 * Move the file to the final destination
 		 * To deal with different server configurations
 		 * we'll attempt to use copy() first.  If that fails
@@ -270,7 +270,7 @@ class CI_Upload {
 			}
 		}
 		
-		/*
+		/**
 		 * Run the file through the XSS hacking filter
 		 * This helps prevent malicious code from being
 		 * embedded within a file.  Scripts can easily
@@ -281,7 +281,7 @@ class CI_Upload {
 			$this->do_xss_clean();
 		}
 
-		/*
+		/**
 		 * Set the finalized image dimensions
 		 * This sets the image width/height (assuming the
 		 * file was an image).  We use this information

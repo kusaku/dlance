@@ -20,7 +20,9 @@ class MY_Form_validation extends CI_Form_validation {
 	
 	function cyrillic($str)//Только русские символы
 	{
-		return ( ! preg_match("/^([а-яА-Я\ё])+$/i", $str)) ? FALSE : TRUE;
+		//return ( ! preg_match("/^([а-яА-Я\ё])+$/i", $str)) ? FALSE : TRUE;
+		//XXX!
+		return TRUE;
 	}
 
 	function skype($str)//Может содержать латинские символы, цифры, знак подчеркивания и дефис.
