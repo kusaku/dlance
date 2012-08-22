@@ -9,7 +9,7 @@ function saveContent() {
 function onLoadInit() {
 	tinyMCEPopup.resizeToInnerSize();
 
-	// Remove Gecko spellchecking
+// Remove Gecko spellchecking
 	if (tinymce.isGecko)
 		document.body.spellcheck = tinyMCEPopup.editor.getParam("gecko_spellcheck");
 

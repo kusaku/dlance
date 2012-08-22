@@ -60,11 +60,9 @@ class Template
 			$template['login'] = '';
 		}
 
-
 		$template['login']['logged_in'] = $this->_ci->users_mdl->logged_in();
 
 		$template['login'] = $this->_ci->load->view($theme.'/login', $template['login'], TRUE);
-
 
 		if( isset($data['descr']) )
 		{
@@ -76,9 +74,8 @@ class Template
 			$data['keywords'] = $this->set_metadata('keywords', $data['keywords']);
 		}
 
-
-
-		$template['content'] = $this->_ci->load->view($theme.'/'.$view, $data, TRUE);//Контент
+		//Контент
+		$template['content'] = $this->_ci->load->view($theme.'/'.$view, $data, TRUE);
 
 		if( isset($this->script) )
 		{
@@ -101,7 +98,8 @@ class Template
 
 		$theme = 'admin';
 
-		$template['content'] = $this->_ci->load->view($theme.'/'.$view, $data, TRUE);//Контент
+		//Контент
+		$template['content'] = $this->_ci->load->view($theme.'/'.$view, $data, TRUE);
 
 		$template['count_new_reports'] = $this->_ci->admin_mdl->count_new_reports();
 
@@ -132,7 +130,6 @@ class Template
 		return $title;
 	}
 
-
 /**
 * ---------------------------------------------------------------
 *  Контроллер вывода подсказан, только для авторизированных, только для тех у кого не отключены уведомления, события, повышения репутации и т д
@@ -142,7 +139,8 @@ class Template
 	{
 		$settings = $this->_ci->users_mdl->get_settings($this->_ci->session->userdata('id'));
 
-		if( $settings['hint'] == 0 )//Если у пользователя отключены всплывающии подсказкм
+		//Если у пользователя отключены всплывающии подсказкм
+		if( $settings['hint'] == 0 )
 		{
 			return FALSE;
 		}
@@ -151,7 +149,8 @@ class Template
 
 		$data = $this->_ci->load->view('events', $data, TRUE);
 
-		if( empty($data) )//Если нету новых событий останавливаем контроллер
+		//Если нету новых событий останавливаем контроллер
+		if( empty($data) )
 		{
 			return FALSE;
 		}
@@ -164,13 +163,16 @@ $(document).ready(function()
 {
 	var counter = 0, massiv = massiv();
 
-	show(massiv[counter]);//Показываем первый элемент
+	//Показываем первый элемент
+	show(massiv[counter]);
 
 	function massiv()
 	{
-		var massiv = [], data = $('.event');// находим все подсказки
+		// находим все подсказки
+		var massiv = [], data = $('.event');
     	
-		for( var i = 0, size = data.length;i < size; i++ )// перебираем все
+		// перебираем все
+		for( var i = 0, size = data.length;i < size; i++ )
 		{
 			id = data[i].id.split('-');
 
@@ -186,21 +188,28 @@ $(document).ready(function()
 
 	$('.event').click(function()
 	{
-		counter++;//Счётчик
+		//Счётчик
+		counter++;
 
-		data = $(this).attr('id').split('-');//Id данного элемента
+		//Id данного элемента
+		data = $(this).attr('id').split('-');
 
 		id = data[1];
 
-		delete_message(id);//Удаляем событие из базы
+		//Удаляем событие из базы
+		delete_message(id);
 
-		next_id = massiv[counter];//Id следующего элемента который будем показываеть
+		//Id следующего элемента который будем показываеть
+		next_id = massiv[counter];
 
-		$('#message-' + id).animate({ top:"+=15px",opacity:0 }, "slow");//Скрываем подсказку
+		//Скрываем подсказку
+		$('#message-' + id).animate({ top:"+=15px",opacity:0 }, "slow");
 
 		$('#message-' + id).queue(function ()
-		{//Очередь
-			$('#message-' + id).css({visibility: "hidden"});//Делаем невидимым
+		//Очередь
+		{
+			//Делаем невидимым
+			$('#message-' + id).css({visibility: "hidden"});
 			show(next_id);
 		});
 			
@@ -208,13 +217,17 @@ $(document).ready(function()
 
 	$('.events').click(function()
 	{
-		delete_message_all();//Удаляем событие из базы
+		//Удаляем событие из базы
+		delete_message_all();
 
-		$('#message-all').animate({ top:"+=15px",opacity:0 }, "slow");//Скрываем подсказку
+		//Скрываем подсказку
+		$('#message-all').animate({ top:"+=15px",opacity:0 }, "slow");
 
 		$('#message-all').queue(function ()
-		{//Очередь
-			$('#message-all').css({visibility: "hidden"});//Делаем невидимым
+		//Очередь
+		{
+			//Делаем невидимым
+			$('#message-all').css({visibility: "hidden"});
 			show(next_id);
 		});
 			
@@ -226,7 +239,7 @@ $(document).ready(function()
 		$('.events').animate({top:$(window).scrollTop()+"px" },{queue: false, duration: 350}); 
 	});
 
-	//Удаляем сообщение
+//Удаляем сообщение
 	function delete_message(id)
 	{
 		var dataString = 'id='+ id;
@@ -241,7 +254,7 @@ $(document).ready(function()
 		return false;
 	}
 
-	//Удаляем сообщение
+//Удаляем сообщение
 	function delete_message_all()
 	{
 		$.ajax({

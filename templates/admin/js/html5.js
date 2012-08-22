@@ -5,7 +5,6 @@
 // Plus, IE does not behave otherwise. The cost of being progressive...
 // -----------------------------------------------------------------------------
 // Credits : http://sickdesigner.com/index.php/2010/html-css/html5-starter-pack-a-sick-freebie/
-
 document.createElement("article");
 document.createElement("aside");
 document.createElement("audio");

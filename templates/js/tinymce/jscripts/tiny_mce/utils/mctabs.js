@@ -21,7 +21,7 @@ MCTabs.prototype.getParam = function(name, default_value) {
 
 	value = (typeof(this.settings[name]) == "undefined") ? default_value : this.settings[name];
 
-	// Fix bool values
+// Fix bool values
 	if (value == "true" || value == "false")
 		return (value == "true");
 
@@ -40,26 +40,26 @@ MCTabs.prototype.displayTab = function(tab_id, panel_id) {
 	if (tabElm && tabContainerElm) {
 		nodes = tabContainerElm.childNodes;
 
-		// Hide all other tabs
+	// Hide all other tabs
 		for (i = 0; i < nodes.length; i++) {
 			if (nodes[i].nodeName == "LI")
 				nodes[i].className = '';
 		}
 
-		// Show selected tab
+	// Show selected tab
 		tabElm.className = 'current';
 	}
 
 	if (panelElm && panelContainerElm) {
 		nodes = panelContainerElm.childNodes;
 
-		// Hide all other panels
+	// Hide all other panels
 		for (i = 0; i < nodes.length; i++) {
 			if (nodes[i].nodeName == "DIV")
 				nodes[i].className = 'panel';
 		}
 
-		// Show selected panel
+	// Show selected panel
 		panelElm.className = 'current';
 	}
 };

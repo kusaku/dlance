@@ -5,7 +5,8 @@
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
    Please attribute the author if you use it. */
 
-(function($) { // Hide scope, no $ conflict
+// Hide scope, no $ conflict
+(function($) { 
 
 var themeRollerRenderer = {
 	picker: '<div{popup:start} id="ui-datepicker-div"{popup:end} class="ui-datepicker ui-widget ' +
@@ -41,17 +42,17 @@ var themeRollerRenderer = {
 
 $.extend($.datepick, {
 
-	// Template for generating a datepicker showing week of year.
+// Template for generating a datepicker showing week of year.
 	weekOfYearRenderer: $.extend({}, $.datepick.defaultRenderer, {
 		weekHeader: '<tr><th class="datepick-week">' +
 		'<span title="{l10n:weekStatus}">{l10n:weekText}</span></th>{days}</tr>',
 		week: '<tr><td class="datepick-week">{weekOfYear}</td>{days}</tr>'
 	}),
 
-	// ThemeRoller template for generating a datepicker.
+// ThemeRoller template for generating a datepicker.
 	themeRollerRenderer: themeRollerRenderer,
 
-	// ThemeRoller template for generating a datepicker showing week of year.
+// ThemeRoller template for generating a datepicker showing week of year.
 	themeRollerWeekOfYearRenderer: $.extend({}, themeRollerRenderer, {
 		weekHeader: '<tr><th class="ui-state-hover"><span>{l10n:weekText}</span></th>{days}</tr>',
 		week: '<tr><td class="ui-state-hover">{weekOfYear}</td>{days}</tr>'

@@ -44,7 +44,6 @@ $platforms = array (
 					'unix'				=> 'Unknown Unix OS'
 				);
 
-
 // The order of this array should NOT be changed. Many browsers return
 // multiple browser types so we want to identify the sub-type first.
 $browsers = array(
@@ -71,7 +70,7 @@ $browsers = array(
 				);
 
 $mobiles = array(
-					// legacy array, old values commented out
+				// legacy array, old values commented out
 					'mobileexplorer'	=> 'Mobile Explorer',
 //					'openwave'			=> 'Open Wave',
 //					'opera mini'		=> 'Opera Mini',
@@ -86,8 +85,7 @@ $mobiles = array(
 //					'ericsson'			=> 'Ericsson',
 //					'blackberry'		=> 'BlackBerry',
 //					'motorola'			=> 'Motorola'
-					
-					// Phones and Manufacturers
+				// Phones and Manufacturers
 					'motorola'			=> "Motorola",
 					'nokia'				=> "Nokia",
 					'palm'				=> "Palm",
@@ -122,7 +120,7 @@ $mobiles = array(
 					'zte'				=> "ZTE",
 					'sendo'				=> "Sendo",
 					
-					// Operating Systems
+				// Operating Systems
 					'symbian'				=> "Symbian",
 					'SymbianOS'				=> "SymbianOS", 
 					'elaine'				=> "Palm",
@@ -130,7 +128,7 @@ $mobiles = array(
 					'series60'				=> "Symbian S60",
 					'windows ce'			=> "Windows CE",
 				
-					// Browsers	
+				// Browsers	
 					'obigo'					=> "Obigo",
 					'netfront'				=> "Netfront Browser",
 					'openwave'				=> "Openwave Browser",
@@ -138,7 +136,7 @@ $mobiles = array(
 					'operamini'				=> "Opera Mini",
 					'opera mini'			=> "Opera Mini",
 				
-					// Other
+				// Other
 					'digital paths'			=> "Digital Paths",
 					'avantgo'				=> "AvantGo",
 					'xiino'					=> "Xiino",
@@ -147,7 +145,7 @@ $mobiles = array(
 					'docomo'				=> "NTT DoCoMo",
 					'o2'					=> "O2",
 				
-					// Fallback
+				// Fallback
 					'mobile'				=> "Generic Mobile",
 					'wireless' 				=> "Generic Mobile",
 					'j2me'					=> "Generic Mobile",

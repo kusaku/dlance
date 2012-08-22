@@ -18,7 +18,7 @@ function insertTable() {
 
 	elm = dom.getParent(inst.selection.getNode(), 'table');
 
-	// Get form data
+// Get form data
 	cols = formObj.elements['cols'].value;
 	rows = formObj.elements['rows'].value;
 	border = formObj.elements['border'].value != "" ? formObj.elements['border'].value  : 0;
@@ -44,7 +44,7 @@ function insertTable() {
 	rowLimit = tinyMCEPopup.getParam('table_row_limit', false);
 	colLimit = tinyMCEPopup.getParam('table_col_limit', false);
 
-	// Validate table size
+// Validate table size
 	if (colLimit && cols > colLimit) {
 		tinyMCEPopup.alert(inst.getLang('table_dlg.col_limit').replace(/\{\$cols\}/g, colLimit));
 		return false;
@@ -56,7 +56,7 @@ function insertTable() {
 		return false;
 	}
 
-	// Update table
+// Update table
 	if (action == "update") {
 		inst.execCommand('mceBeginUndoLevel');
 
@@ -95,7 +95,7 @@ function insertTable() {
 			dom.setStyle(elm, 'width', '');
 		}
 
-		// Remove these since they are not valid XHTML
+	// Remove these since they are not valid XHTML
 		dom.setAttrib(elm, 'borderColor', '');
 		dom.setAttrib(elm, 'bgColor', '');
 		dom.setAttrib(elm, 'background', '');
@@ -130,13 +130,12 @@ function insertTable() {
 
 		inst.addVisual();
 
-		// Fix for stange MSIE align bug
-		//elm.outerHTML = elm.outerHTML;
-
+	// Fix for stange MSIE align bug
+	//elm.outerHTML = elm.outerHTML;
 		inst.nodeChanged();
 		inst.execCommand('mceEndUndoLevel');
 
-		// Repaint if dimensions changed
+	// Repaint if dimensions changed
 		if (formObj.width.value != orgTableWidth || formObj.height.value != orgTableHeight)
 			inst.execCommand('mceRepaint');
 
@@ -144,7 +143,7 @@ function insertTable() {
 		return true;
 	}
 
-	// Create new table
+// Create new table
 	html += '<table';
 
 	html += makeAttrib('id', id);
@@ -157,7 +156,7 @@ function insertTable() {
 		if (style)
 			style += '; ';
 
-		// Force px
+	// Force px
 		if (/^[0-9\.]+$/.test(width))
 			width += 'px';
 
@@ -172,9 +171,9 @@ function insertTable() {
 		style += 'height: ' + height;
 	}*/
 
-	//html += makeAttrib('height', height);
-	//html += makeAttrib('bordercolor', bordercolor);
-	//html += makeAttrib('bgcolor', bgcolor);
+//html += makeAttrib('height', height);
+//html += makeAttrib('bordercolor', bordercolor);
+//html += makeAttrib('bgcolor', bgcolor);
 	html += makeAttrib('align', align);
 	html += makeAttrib('frame', frame);
 	html += makeAttrib('rules', rules);
@@ -209,7 +208,7 @@ function insertTable() {
 
 	inst.execCommand('mceBeginUndoLevel');
 
-	// Move table
+// Move table
 	if (inst.settings.fix_table_elements) {
 		var patt = '';
 
@@ -235,11 +234,11 @@ function insertTable() {
 		var td = dom.select('td', node);
 
 		try {
-			// IE9 might fail to do this selection
+		// IE9 might fail to do this selection
 			inst.selection.select(td[0], true);
 			inst.selection.collapse();
 		} catch (ex) {
-			// Ignore
+		// Ignore
 		}
 
 		dom.setAttrib(node, '_mce_new', '');
@@ -265,7 +264,7 @@ function makeAttrib(attrib, value) {
 	if (value == "")
 		return "";
 
-	// XML encode it
+// XML encode it
 	value = value.replace(/&/g, '&amp;');
 	value = value.replace(/\"/g, '&quot;');
 	value = value.replace(/</g, '&lt;');
@@ -334,7 +333,7 @@ function init() {
 	addClassesToList('class', "table_styles");
 	TinyMCE_EditableSelects.init();
 
-	// Update form
+// Update form
 	selectByValue(formObj, 'align', align);
 	selectByValue(formObj, 'tframe', frame);
 	selectByValue(formObj, 'rules', rules);
@@ -358,11 +357,11 @@ function init() {
 	updateColor('bordercolor_pick', 'bordercolor');
 	updateColor('bgcolor_pick', 'bgcolor');
 
-	// Resize some elements
+// Resize some elements
 	if (isVisible('backgroundimagebrowser'))
 		document.getElementById('backgroundimage').style.width = '180px';
 
-	// Disable some fields in update mode
+// Disable some fields in update mode
 	if (action == "update") {
 		formObj.cols.disabled = true;
 		formObj.rows.disabled = true;
@@ -401,7 +400,7 @@ function changedBorder() {
 	var formObj = document.forms[0];
 	var st = dom.parseStyle(formObj.style.value);
 
-	// Update border width if the element has a color
+// Update border width if the element has a color
 	if (formObj.border.value != "" && formObj.bordercolor.value != "")
 		st['border-width'] = formObj.border.value + "px";
 
@@ -417,7 +416,7 @@ function changedColor() {
 	if (formObj.bordercolor.value != "") {
 		st['border-color'] = formObj.bordercolor.value;
 
-		// Add border-width if it's missing
+	// Add border-width if it's missing
 		if (!st['border-width'])
 			st['border-width'] = formObj.border.value == "" ? "1px" : formObj.border.value + "px";
 	}

@@ -17,13 +17,14 @@
 
 			t.editor = ed;
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceFullScreen', function() {
 				var win, de = DOM.doc.documentElement;
 
 				if (ed.getParam('fullscreen_is_enabled')) {
 					if (ed.getParam('fullscreen_new_window'))
-						closeFullscreen(); // Call to close in new window
+						// Call to close in new window
+						closeFullscreen(); 
 					else {
 						DOM.win.setTimeout(function() {
 							tinymce.dom.Event.remove(DOM.win, 'resize', t.resizeFunc);
@@ -33,7 +34,8 @@
 							de.style.overflow = ed.getParam('fullscreen_html_overflow');
 							DOM.setStyle(DOM.doc.body, 'overflow', ed.getParam('fullscreen_overflow'));
 							DOM.win.scrollTo(ed.getParam('fullscreen_scrollx'), ed.getParam('fullscreen_scrolly'));
-							tinyMCE.settings = tinyMCE.oldSettings; // Restore old settings
+							// Restore old settings
+							tinyMCE.settings = tinyMCE.oldSettings; 
 						}, 10);
 					}
 
@@ -45,25 +47,26 @@
 					try {
 						win.resizeTo(screen.availWidth, screen.availHeight);
 					} catch (e) {
-						// Ignore
+					// Ignore
 					}
 				} else {
-					tinyMCE.oldSettings = tinyMCE.settings; // Store old settings
+					// Store old settings
+					tinyMCE.oldSettings = tinyMCE.settings; 
 					s.fullscreen_overflow = DOM.getStyle(DOM.doc.body, 'overflow', 1) || 'auto';
 					s.fullscreen_html_overflow = DOM.getStyle(de, 'overflow', 1);
 					vp = DOM.getViewPort();
 					s.fullscreen_scrollx = vp.x;
 					s.fullscreen_scrolly = vp.y;
 
-					// Fixes an Opera bug where the scrollbars doesn't reappear
+				// Fixes an Opera bug where the scrollbars doesn't reappear
 					if (tinymce.isOpera && s.fullscreen_overflow == 'visible')
 						s.fullscreen_overflow = 'auto';
 
-					// Fixes an IE bug where horizontal scrollbars would appear
+				// Fixes an IE bug where horizontal scrollbars would appear
 					if (tinymce.isIE && s.fullscreen_overflow == 'scroll')
 						s.fullscreen_overflow = 'auto';
 
-					// Fixes an IE bug where the scrollbars doesn't reappear
+				// Fixes an IE bug where the scrollbars doesn't reappear
 					if (tinymce.isIE && (s.fullscreen_html_overflow == 'visible' || s.fullscreen_html_overflow == 'scroll'))
 						s.fullscreen_html_overflow = 'auto'; 
 
@@ -71,7 +74,8 @@
 						s.fullscreen_overflow = '';
 
 					DOM.setStyle(DOM.doc.body, 'overflow', 'hidden');
-					de.style.overflow = 'hidden'; //Fix for IE6/7
+					//Fix for IE6/7
+					de.style.overflow = 'hidden'; 
 					vp = DOM.getViewPort();
 					DOM.win.scrollTo(0, 0);
 
@@ -113,12 +117,11 @@
 
 					t.fullscreenElement = new tinymce.dom.Element('mce_fullscreen_container');
 					t.fullscreenElement.update();
-					//document.body.overflow = 'hidden';
-
+				//document.body.overflow = 'hidden';
 					t.resizeFunc = tinymce.dom.Event.add(DOM.win, 'resize', function() {
 						var vp = tinymce.DOM.getViewPort(), fed = t.fullscreenEditor, outerSize, innerSize;
 
-						// Get outer/inner size to get a delta size that can be used to calc the new iframe size
+					// Get outer/inner size to get a delta size that can be used to calc the new iframe size
 						outerSize = fed.dom.getSize(fed.getContainer().firstChild);
 						innerSize = fed.dom.getSize(fed.getContainer().getElementsByTagName('iframe')[0]);
 
@@ -127,7 +130,7 @@
 				}
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('fullscreen', {title : 'fullscreen.desc', cmd : 'mceFullScreen'});
 
 			ed.onNodeChange.add(function(ed, cm) {
@@ -146,6 +149,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('fullscreen', tinymce.plugins.FullScreenPlugin);
 })();

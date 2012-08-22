@@ -11,7 +11,7 @@
 (function(tinymce) {
 	tinymce.create('tinymce.plugins.EmotionsPlugin', {
 		init : function(ed, url) {
-			// Register commands
+		// Register commands
 			ed.addCommand('mceEmotion', function() {
 				ed.windowManager.open({
 					file : url + '/emotions.htm',
@@ -23,7 +23,7 @@
 				});
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('emotions', {title : 'emotions.emotions_desc', cmd : 'mceEmotion'});
 		},
 
@@ -38,6 +38,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('emotions', tinymce.plugins.EmotionsPlugin);
 })(tinymce);

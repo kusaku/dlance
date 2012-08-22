@@ -57,7 +57,7 @@
 						v[0] = ':prev';
 					}
 
-					// Find element to focus
+				// Find element to focus
 					if (e.shiftKey) {
 						if (v[0] == ':prev')
 							el = find(-1);
@@ -107,6 +107,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('tabfocus', tinymce.plugins.TabFocusPlugin);
 })();

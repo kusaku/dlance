@@ -14,7 +14,7 @@
 		var settings = $.extend({}, $.modal.defaults, options),
 			root = getModalDiv(),
 			
-			// Vars for resizeFunc and moveFunc
+		// Vars for resizeFunc and moveFunc
 			winX = 0,
 			winY = 0,
 			contentWidth = 0,
@@ -23,7 +23,7 @@
 			mouseY = 0,
 			resized;
 		
-		// Get contents
+	// Get contents
 		var content = '';
 		var contentObj;
 		if (settings.content)
@@ -39,15 +39,15 @@
 		}
 		else
 		{
-			// No content
+		// No content
 			content = '';
 		}
 		
-		// Title
+	// Title
 		var titleClass = settings.title ? '' : ' no-title';
 		var title = settings.title ? '<h1>'+settings.title+'</h1>' : '';
 		
-		// Content size
+	// Content size
 		var sizeParts = new Array();
 		sizeParts.push('min-width:'+settings.minWidth+'px;');
 		sizeParts.push('min-height:'+settings.minHeight+'px;');
@@ -69,14 +69,14 @@
 		}
 		var contentStyle = (sizeParts.length > 0) ? ' style="'+sizeParts.join(' ')+'"' : '';
 		
-		// Borders
+	// Borders
 		var borderOpen = settings.border ? '"><div class="block-content'+titleClass : titleClass;
 		var borderClose = settings.border ? '></div' : '';
 		
-		// Scrolling
+	// Scrolling
 		var scrollClass = settings.scrolling ? ' modal-scroll' : '';
 		
-		// Insert window
+	// Insert window
 		var win = $('<div class="modal-window block-border'+borderOpen+'">'+title+'<div class="modal-content'+scrollClass+'"'+contentStyle+'>'+content+'</div></div'+borderClose+'>').appendTo(root);
 		var contentDiv = win.find('.modal-content');
 		if (contentObj)
@@ -84,25 +84,25 @@
 			contentObj.appendTo(contentDiv);
 		}
 		
-		// If resizable
+	// If resizable
 		if (settings.resizable && settings.border)
 		{
-			// Custom function (to use correct var scope)
+		// Custom function (to use correct var scope)
 			var resizeFunc = function(event)
 			{
-					// Mouse offset
+				// Mouse offset
 				var offsetX = event.pageX-mouseX,
 					offsetY = event.pageY-mouseY,
 				
-					// New size
+				// New size
 					newWidth = Math.max(settings.minWidth, contentWidth+(resized.width*offsetX)),
 					newHeight = Math.max(settings.minHeight, contentHeight+(resized.height*offsetY)),
 					
-					// Position correction
+				// Position correction
 					correctX = 0,
 					correctY = 0;
 				
-				// If max sizes are defined
+			// If max sizes are defined
 				if (settings.maxWidth && newWidth > settings.maxWidth)
 				{
 					correctX = newWidth-settings.maxWidth;
@@ -124,7 +124,7 @@
 				});
 			};
 			
-			// Create resize handlers
+		// Create resize handlers
 			$('<div class="modal-resize-tl"></div>').appendTo(win).data('modal-resize', {
 				top: 1, left: 1,
 				height: -1, width: -1
@@ -166,7 +166,7 @@
 				})
 			).mousedown(function(event)
 			{
-				// Detect positions
+			// Detect positions
 				contentWidth = contentDiv.width();
 				contentHeight = contentDiv.height();
 				var position = win.position();
@@ -176,7 +176,7 @@
 				mouseY = event.pageY;
 				resized = $(this).data('modal-resize');
 				
-				// Prevent text selection
+			// Prevent text selection
 				document.onselectstart = function () { return false; };
 				
 				$(document).bind('mousemove', resizeFunc);
@@ -186,45 +186,45 @@
 			{
 				$(document).unbind('mousemove', resizeFunc);
 				
-				// Restore text selection
+			// Restore text selection
 				document.onselectstart = null;
 			});
 		}
 		
-		// Put in front
+	// Put in front
 		win.mousedown(function()
 		{
 			$(this).putModalOnFront();
 		});
 		
-		// If movable
+	// If movable
 		if (settings.draggable && title)
 		{
-			// Custom functions (to use correct var scope)
+		// Custom functions (to use correct var scope)
 			var moveFunc = function(event)
 			{
-				// Window and document sizes
+			// Window and document sizes
 				var width = win.outerWidth(),
 					height = win.outerHeight();
 				
-				// New position
+			// New position
 				win.css({
 					left: Math.max(0, Math.min(winX+(event.pageX-mouseX), $(root).width()-width))+'px',
 					top: Math.max(0, Math.min(winY+(event.pageY-mouseY), $(root).height()-height))+'px'
 				});
 			};
 			
-			// Listeners
+		// Listeners
 			win.find('h1:first').mousedown(function(event)
 			{
-				// Detect positions
+			// Detect positions
 				var position = win.position();
 				winX = position.left;
 				winY = position.top;
 				mouseX = event.pageX;
 				mouseY = event.pageY;
 				
-				// Prevent text selection
+			// Prevent text selection
 				document.onselectstart = function () { return false; };
 				
 				$(document).bind('mousemove', moveFunc);
@@ -234,13 +234,13 @@
 			{
 				$(document).unbind('mousemove', moveFunc);
 				
-				// Restore text selection
+			// Restore text selection
 				document.onselectstart = null;
 			});
 
 		}
 		
-		// Close button
+	// Close button
 		if (settings.closeButton)
 		{
 			$('<ul class="action-tabs right"><li><a href="#" title="Close window"><img src="images/icons/fugue/cross-circle.png" width="16" height="16"></a></li></ul>')
@@ -252,18 +252,18 @@
 				});
 		}
 		
-		// Bottom buttons
+	// Bottom buttons
 		var buttonsFooter = false;
 		$.each(settings.buttons, function(key, value)
 		{
-			// Button zone
+		// Button zone
 			if (!buttonsFooter)
 			{
 				buttonsFooter = $('<div class="block-footer align-'+settings.buttonsAlign+'"></div>').insertAfter(contentDiv);
 			}
 			else
 			{
-				// Spacing
+			// Spacing
 				buttonsFooter.append('&nbsp;');
 			}
 			
@@ -273,16 +273,16 @@
 			});
 		});
 		
-		// Close function
+	// Close function
 		if (settings.onClose)
 		{
 			win.bind('closeModal', settings.onClose);
 		}
 		
-		// Apply template setup
+	// Apply template setup
 		win.applyTemplateSetup();
 		
-		// Effect
+	// Effect
 		if (!root.is(':visible'))
 		{
 			win.hide();
@@ -296,17 +296,17 @@
 			win.centerModal();
 		}
 		
-		// Store as current
+	// Store as current
 		$.modal.current = win;
 		$.modal.all = root.children('.modal-window');
 				
-		// Callback
+	// Callback
 		if (settings.onOpen)
 		{
 			settings.onOpen.call(win.get(0));
 		}
 		
-		// If content url
+	// If content url
 		if (settings.url)
 		{
 			win.loadModalContent(settings.url, settings);
@@ -371,7 +371,7 @@
 		{
 			var contentBlock = $(this).getModalContentBlock();
 			
-			// Set content
+		// Set content
 			if (typeof(content) == 'string')
 			{
 				contentBlock.html(content);
@@ -382,7 +382,7 @@
 			}
 			contentBlock.applyTemplateSetup();
 			
-			// Resizing
+		// Resizing
 			if (resize)
 			{
 				contentBlock.setModalContentSize(true, false);
@@ -403,7 +403,7 @@
 		{
 			var contentBlock = $(this).getModalContentBlock();
 			
-			// Resizing
+		// Resizing
 			if (width !== true)
 			{
 				contentBlock.css('width', width ? width+'px' : '');
@@ -444,7 +444,7 @@
 			var win = $(this),
 				contentBlock = win.getModalContentBlock();
 			
-			// If loading message
+		// If loading message
 			if (settings.loadingMessage)
 			{
 				win.setModalContent('<div class="modal-loading">'+settings.loadingMessage+'</div>', (settings.resize || settings.resizeOnMessage));
@@ -452,7 +452,7 @@
 			
 			contentBlock.load(url, settings.data, function(responseText, textStatus, XMLHttpRequest)
 			{
-				// Template functions
+			// Template functions
 				contentBlock.applyTemplateSetup();
 				
 				if (settings.resize || settings.resizeOnLoad)
@@ -460,7 +460,7 @@
 					contentBlock.setModalContentSize(true, false);
 				}
 				
-				// Callback
+			// Callback
 				settings.complete.call(this, responseText, textStatus, XMLHttpRequest);
 			});
 		});
@@ -555,13 +555,13 @@
 			var event = $.Event('closeModal'),
 				win = $(this);
 			
-			// Events on close
+		// Events on close
 			win.trigger(event);
 			if (!event.isDefaultPrevented())
 			{
 				win.remove();
 				
-				// Modal root element
+			// Modal root element
 				var root = getModalDiv();
 				$.modal.all = root.children('.modal-window');
 				if ($.modal.all.length == 0)
@@ -571,7 +571,7 @@
 				}
 				else
 				{
-					// Refresh current
+				// Refresh current
 					$.modal.current = $.modal.all.last();
 				}
 			}

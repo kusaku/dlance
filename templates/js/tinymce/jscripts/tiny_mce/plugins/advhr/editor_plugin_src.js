@@ -11,7 +11,7 @@
 (function() {
 	tinymce.create('tinymce.plugins.AdvancedHRPlugin', {
 		init : function(ed, url) {
-			// Register commands
+		// Register commands
 			ed.addCommand('mceAdvancedHr', function() {
 				ed.windowManager.open({
 					file : url + '/rule.htm',
@@ -23,7 +23,7 @@
 				});
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('advhr', {
 				title : 'advhr.advhr_desc',
 				cmd : 'mceAdvancedHr'
@@ -52,6 +52,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('advhr', tinymce.plugins.AdvancedHRPlugin);
 })();

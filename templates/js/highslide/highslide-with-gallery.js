@@ -4,11 +4,9 @@ Version: 4.1.4 (April 17 2009)
 Config:  default +slideshow +positioning +transitions +viewport +thumbstrip
 Author:  Torstein H�nsi
 Support: http://highslide.com/support
-
 Licence:
 Highslide JS is licensed under a Creative Commons Attribution-NonCommercial 2.5
 License (http://creativecommons.org/licenses/by-nc/2.5/).
-
 You are free:
 	* to copy, distribute, display, and perform the work
 	* to make derivative works
@@ -49,47 +47,65 @@ lang : {
 	nextTitle : 'Next (arrow right)',
 	moveTitle : 'Move',
 	fullExpandText : '1:1',
-	number: '',//'Image %1 of %2',
+	//'Image %1 of %2',
+	number: '',
 	restoreTitle : 'Click to close image, click and drag to move. Use arrow keys for next and previous.'
 },
 // See http://highslide.com/ref for examples of settings 
 graphicsDir : 'highslide/graphics/',
-expandCursor : 'zoomin.cur', // null disables
-restoreCursor : 'zoomout.cur', // null disables
-expandDuration : 250, // milliseconds
+// null disables
+expandCursor : 'zoomin.cur', 
+// null disables
+restoreCursor : 'zoomout.cur', 
+// milliseconds
+expandDuration : 250, 
 restoreDuration : 250,
 marginLeft : 15,
 marginRight : 15,
 marginTop : 15,
 marginBottom : 15,
-zIndexCounter : 1001, // adjust to other absolutely positioned elements
+// adjust to other absolutely positioned elements
+zIndexCounter : 1001, 
 loadingOpacity : 0.75,
 allowMultipleInstances: true,
 numberOfImagesToPreload : 5,
-outlineWhileAnimating : 2, // 0 = never, 1 = always, 2 = HTML only 
-outlineStartOffset : 3, // ends at 10
-padToMinWidth : false, // pad the popup width to make room for wide caption
+// 0 = never, 1 = always, 2 = HTML only 
+outlineWhileAnimating : 2, 
+// ends at 10
+outlineStartOffset : 3, 
+// pad the popup width to make room for wide caption
+padToMinWidth : false, 
 fullExpandPosition : 'bottom right',
 fullExpandOpacity : 1,
-showCredits : true, // you can set this to false if you want
+// you can set this to false if you want
+showCredits : true, 
 creditsHref : '#',
 enableKeyListener : true,
-openerTagNames : ['a'], // Add more to allow slideshow indexing
+// Add more to allow slideshow indexing
+openerTagNames : ['a'], 
 transitions : [],
 transitionDuration: 250,
-dimmingOpacity: 0, // Lightbox style dimming background
-dimmingDuration: 50, // 0 for instant dimming
+// Lightbox style dimming background
+dimmingOpacity: 0, 
+// 0 for instant dimming
+dimmingDuration: 50, 
 
-anchor : 'auto', // where the image expands from
-align : 'auto', // position in the client (overrides anchor)
-targetX: null, // the id of a target element
+// where the image expands from
+anchor : 'auto', 
+// position in the client (overrides anchor)
+align : 'auto', 
+// the id of a target element
+targetX: null, 
 targetY: null,
 dragByHeading: true,
 minWidth: 200,
 minHeight: 200,
-allowSizeReduction: true, // allow the image to reduce to fit client size. If false, this overrides minWidth and minHeight
-outlineType : 'drop-shadow', // set null to disable outlines
-wrapperClassName : 'highslide-wrapper', // for enhanced css-control
+// allow the image to reduce to fit client size. If false, this overrides minWidth and minHeight
+allowSizeReduction: true, 
+// set null to disable outlines
+outlineType : 'drop-shadow', 
+// for enhanced css-control
+wrapperClassName : 'highslide-wrapper', 
 skin : {
 	controls:
 		'<div class="highslide-controls"><ul>'+
@@ -124,8 +140,6 @@ skin : {
 		'</ul></div>'
 },
 // END OF YOUR SETTINGS
-
-
 // declare internal properties
 preloadTheseImages : [],
 continuePreloading: true,
@@ -261,9 +275,8 @@ css: function(el, prop) {
 
 getPageSize : function () {
 	var d = document, w = window, iebody = d.compatMode && d.compatMode != 'BackCompat' 
-		? d.documentElement : d.body;	
-	
-	
+		? d.documentElement : d.body;
+
 	var b = d.body;
 	var xScroll = (w.innerWidth && w.scrollMaxX) 
 			? w.innerWidth + w.scrollMaxX : Math.max(b.scrollWidth, b.offsetWidth),
@@ -330,7 +343,6 @@ replaceLang : function(s) {
 	}
 	return s;
 },
-
 
 focusTopmost : function() {
 	var topZ = 0, 
@@ -471,31 +483,44 @@ next : function (el) {
 
 keyHandler : function(e) {
 	if (!e) e = window.event;
-	if (!e.target) e.target = e.srcElement; // ie
-	if (typeof e.target.form != 'undefined') return true; // form element has focus
+	// ie
+	if (!e.target) e.target = e.srcElement; 
+	// form element has focus
+	if (typeof e.target.form != 'undefined') return true; 
 	var exp = hs.getExpander();
 	
 	var op = null;
 	switch (e.keyCode) {
-		case 70: // f
+		// f
+		case 70: 
 			if (exp) exp.doFullExpand();
 			return true;
-		case 32: // Space
+		// Space
+		case 32: 
 			op = 2;
 			break;
-		case 34: // Page Down
-		case 39: // Arrow right
-		case 40: // Arrow down
+		// Page Down
+		case 34: 
+		// Arrow right
+		case 39: 
+		// Arrow down
+		case 40: 
 			op = 1;
 			break;
-		case 8:  // Backspace
-		case 33: // Page Up
-		case 37: // Arrow left
-		case 38: // Arrow up
+		// Backspace
+		case 8:  
+		// Page Up
+		case 33: 
+		// Arrow left
+		case 37: 
+		// Arrow up
+		case 38: 
 			op = -1;
 			break;
-		case 27: // Escape
-		case 13: // Enter
+		// Escape
+		case 27: 
+		// Enter
+		case 13: 
 			op = 0;
 	}
 	if (op !== null) {if (op != 2)hs.removeEventListener(document, window.opera ? 'keypress' : 'keydown', hs.keyHandler);
@@ -518,11 +543,9 @@ keyHandler : function(e) {
 	return true;
 },
 
-
 registerOverlay : function (overlay) {
 	hs.push(hs.overlays, hs.extend(overlay, { hsId: 'hsId'+ hs.idCounter++ } ));
 },
-
 
 addSlideshow : function (options) {
 	var sg = options.slideshowGroup;
@@ -540,14 +563,14 @@ addSlideshow : function (options) {
 
 getWrapperKey : function (element, expOnly) {
 	var el, re = /^highslide-wrapper-([0-9]+)$/;
-	// 1. look in open expanders
+// 1. look in open expanders
 	el = element;
 	while (el.parentNode)	{
 		if (el.hsKey !== undefined) return el.hsKey;
 		if (el.id && re.test(el.id)) return el.id.replace(re, "$1");
 		el = el.parentNode;
 	}
-	// 2. look in thumbnail
+// 2. look in thumbnail
 	if (!expOnly) {
 		el = element;
 		while (el.parentNode)	{
@@ -600,10 +623,10 @@ mouseClickHandler : function(e)
 		if (match) {
 			hs.dragArgs = { exp: exp , type: match[1], left: exp.x.pos, width: exp.x.size, top: exp.y.pos, 
 				height: exp.y.size, clickX: e.clientX, clickY: e.clientY };
-			
-			
+
 			hs.addEventListener(document, 'mousemove', hs.dragHandler);
-			if (e.preventDefault) e.preventDefault(); // FF
+			// FF
+			if (e.preventDefault) e.preventDefault(); 
 			
 			if (/highslide-(image|html)-blur/.test(exp.content.className)) {
 				exp.focus();
@@ -666,9 +689,11 @@ wrapperMouseHandler : function (e) {
 	try {
 		if (!e) e = window.event;
 		var over = /mouseover/i.test(e.type); 
-		if (!e.target) e.target = e.srcElement; // ie
+		// ie
+		if (!e.target) e.target = e.srcElement; 
 		if (hs.ie) e.relatedTarget = 
-			over ? e.fromElement : e.toElement; // ie
+			// ie
+			over ? e.fromElement : e.toElement; 
 		var exp = hs.getExpander(e.target);
 		if (!exp.isExpanded) return;
 		if (!exp || !e.relatedTarget || hs.getExpander(e.relatedTarget, true) == exp 
@@ -726,16 +751,15 @@ preloadImages : function (number) {
 		hs.push(hs.preloadTheseImages, hs.getSrc(arr.images[i]));
 	}
 	
-	// preload outlines
+// preload outlines
 	if (hs.outlineType)	new hs.Outline(hs.outlineType, function () { hs.preloadFullImage(0)} );
 	else
 	
 	hs.preloadFullImage(0);
 	
-	// preload cursor
+// preload cursor
 	if (hs.restoreCursor) var cur = hs.createElement('img', { src: hs.graphicsDir + hs.restoreCursor });
 },
-
 
 init : function () {
 	if (!hs.container) {
@@ -828,13 +852,13 @@ getAnchors : function() {
 	return hs.anchors || hs.updateAnchors();
 },
 
-
 close : function(el) {
 	var exp = hs.getExpander(el);
 	if (exp) exp.close();
 	return false;
 }
-}; // end hs object
+// end hs object
+}; 
 hs.fx = function( elem, options, prop ){
 	this.options = options;
 	this.elem = elem;
@@ -854,7 +878,8 @@ hs.fx.prototype = {
 		this.startTime = (new Date()).getTime();
 		this.start = from;
 		this.end = to;
-		this.unit = unit;// || this.unit || "px";
+		// || this.unit || "px";
+		this.unit = unit;
 		this.now = this.start;
 		this.pos = this.state = 0;
 
@@ -969,7 +994,8 @@ preloadGraphic : function () {
 				
 	var appendTo = hs.safari ? hs.container : null;
 	this.graphic = hs.createElement('img', null, { position: 'absolute', 
-		top: '-9999px' }, appendTo, true); // for onload trigger
+		// for onload trigger
+		top: '-9999px' }, appendTo, true); 
 	
 	var pThis = this;
 	this.graphic.onload = function() { pThis.onGraphicLoad(); };
@@ -1081,7 +1107,7 @@ get : function(key) {
 	}
 },
 calcBorders: function() {
-	// correct for borders
+// correct for borders
 	this.cb = (this.exp.content['offset'+ this.ucwh] - this.t) / 2;
 	this.marginMax = hs['margin'+ this.ucrb] + 2 * this.cb;
 },
@@ -1098,13 +1124,12 @@ calcExpanded: function() {
 	var exp = this.exp;
 	this.justify = 'auto';
 	
-	// get alignment
+// get alignment
 	if (exp.align == 'center') this.justify = 'center';
 	else if (new RegExp(this.lt).test(exp.anchor)) this.justify = null;
 	else if (new RegExp(this.rb).test(exp.anchor)) this.justify = 'max';
-	
-	
-	// size and position
+
+// size and position
 	this.pos = this.tpos - this.cb + this.tb;
 	this.size = Math.min(this.full, exp['max'+ this.ucwh] || this.full);
 	this.minSize = exp.allowSizeReduction ? 
@@ -1164,7 +1189,7 @@ hs.Expander = function(a, params, custom, contentType) {
 	hs.last = null;
 	hs.init();
 	var key = this.key = hs.expanders.length;
-	// override inline parameters
+// override inline parameters
 	for (var i = 0; i < hs.overrides.length; i++) {
 		var name = hs.overrides[i];
 		this[name] = params && typeof params[name] != 'undefined' ?
@@ -1172,12 +1197,12 @@ hs.Expander = function(a, params, custom, contentType) {
 	}
 	if (!this.src) this.src = a.href;
 	
-	// get thumb
+// get thumb
 	var el = (params && params.thumbnailId) ? hs.$(params.thumbnailId) : a;
 	el = this.thumb = el.getElementsByTagName('img')[0] || el;
 	this.thumbsUserSetId = el.id || a.id;
 	
-	// check if already open
+// check if already open
 	for (var i = 0; i < hs.expanders.length; i++) {
 		if (hs.expanders[i] && hs.expanders[i].a == a 
 			&& !(this.last && this.transitions[1] == 'crossfade')) {
@@ -1186,7 +1211,7 @@ hs.Expander = function(a, params, custom, contentType) {
 		}
 	}	
 
-	// cancel other
+// cancel other
 	for (var i = 0; i < hs.expanders.length; i++) {
 		if (hs.expanders[i] && hs.expanders[i].thumb != el && !hs.expanders[i].onLoadStarted) {
 			hs.expanders[i].cancelLoading();
@@ -1199,7 +1224,7 @@ hs.Expander = function(a, params, custom, contentType) {
 			hs.expanders[hs.focusKey].close();
 	}
 	
-	// initiate metrics
+// initiate metrics
 	this.el = el;
 	this.tpos = hs.getPosition(el);
 	hs.page = hs.getPageSize();
@@ -1221,7 +1246,7 @@ hs.Expander = function(a, params, custom, contentType) {
 	if (this.contentType == 'image' && this.outlineWhileAnimating == 2)
 		this.outlineWhileAnimating = 0;
 	
-	// get the outline
+// get the outline
 	if (!this.outlineType 
 		|| (this.last && this.isImage && this.transitions[1] == 'crossfade')) {
 		this[this.contentType +'Create']();
@@ -1245,7 +1270,7 @@ hs.Expander = function(a, params, custom, contentType) {
 
 hs.Expander.prototype = {
 error : function(e) {
-	//alert ('Line '+ e.lineNumber +': '+ e.message);
+//alert ('Line '+ e.lineNumber +': '+ e.message);
 	window.location.href = this.src;
 },
 
@@ -1298,7 +1323,8 @@ imageCreate : function() {
 	});
     img.title = hs.lang.restoreTitle;
     if (hs.safari) hs.container.appendChild(img);
-    if (hs.ie) img.src = 'res://';
+    //';
+    if (hs.ie) img.src = 'res:
 	img.src = this.src;
 	
 	this.showLoading();
@@ -1333,9 +1359,8 @@ contentLoaded : function() {
 		hs.setStyles (this.wrapper, {
 			left: (x.tpos + x.tb - x.cb) +'px',
 			top: (y.tpos + x.tb - y.cb) +'px'
-		});		
-		
-		
+		});
+
 		this.initSlideshow();
 		this.getOverlays();
 		
@@ -1414,7 +1439,8 @@ justify : function (p, moveOnly) {
 				p.size = p.get(dim == 'y' ? 'fitsize' : 'maxsize');
 			} else if (p.get('wsize') < p.get('fitsize')) {
 				p.pos = p.scroll + p.clientSize - p.marginMax - p.get('wsize');
-			} else { // image larger than viewport
+			// image larger than viewport
+			} else { 
 				p.pos = p.scroll + p.marginMin;
 				if (!moveOnly && allowReduce) p.size = p.get(dim == 'y' ? 'fitsize' : 'maxsize');
 			}			
@@ -1424,13 +1450,11 @@ justify : function (p, moveOnly) {
 			p.size = p.minSize;
 			allowReduce = false;
 		}
-		
-	
+
 	} else if (p.justify == 'max') {
 		p.pos = Math.floor(p.pos - p.size + p.t);
 	}
-	
-		
+
 	if (p.pos < p.marginMin) {
 		var tmpMin = p.pos;
 		p.pos = p.marginMin; 
@@ -1448,15 +1472,18 @@ correctRatio : function(ratio) {
 		ySize = Math.min(y.full, y.size),
 		useBox = (this.useBox || hs.padToMinWidth);
 	
-	if (xSize / ySize > ratio) { // width greater
+	// width greater
+	if (xSize / ySize > ratio) { 
 		xSize = ySize * ratio;
-		if (xSize < x.minSize) { // below minWidth
+		// below minWidth
+		if (xSize < x.minSize) { 
 			xSize = x.minSize;
 			ySize = xSize / ratio;
 		}
 		changed = true;
 	
-	} else if (xSize / ySize < ratio) { // height greater
+	// height greater
+	} else if (xSize / ySize < ratio) { 
 		ySize = xSize / ratio;
 		changed = true;
 	}
@@ -1504,7 +1531,7 @@ show : function () {
 	this.doShowHide('hidden');
 	if (this.slideshow && this.slideshow.thumbstrip) this.slideshow.thumbstrip.selectThumb();
 	
-	// Apply size change
+// Apply size change
 	this.changeSize(
 		1, {
 			wrapper: {
@@ -1525,7 +1552,7 @@ show : function () {
 },
 
 changeSize : function(up, to, dur) {
-	// transition
+// transition
 	var trans = this.transitions,
 	other = up ? (this.last ? this.last.a : null) : hs.upcoming,
 	t = (trans[1] && other 
@@ -1541,8 +1568,7 @@ changeSize : function(up, to, dur) {
 		if (up) this.outline.setPosition();
 		else this.outline.destroy();
 	}
-	
-	
+
 	if (!up) this.destroyOverlays();
 	
 	var exp = this,
@@ -1593,8 +1619,6 @@ changeSize : function(up, to, dur) {
 	}
 },
 
-
-
 fade : function(up, to) {
 	this.outlineWhileAnimating = false;
 	var exp = this,	t = up ? hs.expandDuration : 0;
@@ -1624,9 +1648,9 @@ fade : function(up, to) {
 			})();
 		}
 	}
-	
-	
-	if (up) {}//setTimeout(function() { exp.afterExpand(); }, t+50);
+
+	//setTimeout(function() { exp.afterExpand(); }, t+50);
+	if (up) {}
 	else {
 		setTimeout( function() {
 			if (exp.outline) exp.outline.destroy(exp.preserveContent);
@@ -1799,7 +1823,6 @@ reuseOverlay : function(o, el) {
 	return false;
 },
 
-
 afterExpand : function() {
 	this.isExpanded = true;	
 	this.focus();
@@ -1813,7 +1836,6 @@ afterExpand : function() {
 	
 },
 
-
 prepareNextOutline : function() {
 	var key = this.key;
 	var outlineType = this.outlineType;
@@ -1821,13 +1843,11 @@ prepareNextOutline : function() {
 		function () { try { hs.expanders[key].preloadNext(); } catch (e) {} });
 },
 
-
 preloadNext : function() {
 	var next = this.getAdjacentAnchor(1);
 	if (next && next.onclick.toString().match(/hs\.expand/)) 
 		var img = hs.createElement('img', { src: hs.getSrc(next) });
 },
-
 
 getAdjacentAnchor : function(op) {
 	var current = this.getAnchorIndex(), as = hs.anchors.groups[this.slideshowGroup || 'none'];
@@ -1848,7 +1868,6 @@ getAnchorIndex : function() {
 	}
 	return null;
 },
-
 
 getNumber : function() {
 	if (this[this.numberPosition]) {
@@ -1949,7 +1968,6 @@ getInline : function(types, addOverlay) {
 	}
 },
 
-
 // on end move and resize
 doShowHide : function(visibility) {
 	if (hs.hideSelects) this.showHideElements('SELECT', visibility);
@@ -1968,11 +1986,13 @@ showHideElements : function (tagName, visibility) {
 				hiddenBy = hiddenBy.replace('['+ this.key +']', '');
 				els[i].setAttribute('hidden-by', hiddenBy);
 				if (!hiddenBy) els[i].style[prop] = els[i].origProp;
-			} else if (visibility == 'hidden') { // hide if behind
+			// hide if behind
+			} else if (visibility == 'hidden') { 
 				var elPos = hs.getPosition(els[i]);
 				elPos.w = els[i].offsetWidth;
 				elPos.h = els[i].offsetHeight;
-				if (!this.dimmingOpacity) { // hide all if dimming
+				// hide all if dimming
+				if (!this.dimmingOpacity) { 
 				
 					var clearsX = (elPos.x + elPos.w < this.x.get('opos') 
 						|| elPos.x > this.x.get('opos') + this.x.get('osize'));
@@ -1980,7 +2000,8 @@ showHideElements : function (tagName, visibility) {
 						|| elPos.y > this.y.get('opos') + this.y.get('osize'));
 				}
 				var wrapperKey = hs.getWrapperKey(els[i]);
-				if (!clearsX && !clearsY && wrapperKey != this.key) { // element falls behind image
+				// element falls behind image
+				if (!clearsX && !clearsY && wrapperKey != this.key) { 
 					if (!hiddenBy) {
 						els[i].setAttribute('hidden-by', '['+ this.key +']');
 						els[i].origProp = els[i].style[prop];
@@ -1990,7 +2011,8 @@ showHideElements : function (tagName, visibility) {
 						els[i].setAttribute('hidden-by', hiddenBy + '['+ this.key +']');
 					}
 				} else if ((hiddenBy == '['+ this.key +']' || hs.focusKey == wrapperKey)
-						&& wrapperKey != this.key) { // on move
+						// on move
+						&& wrapperKey != this.key) { 
 					els[i].setAttribute('hidden-by', '');
 					els[i].style[prop] = els[i].origProp || '';
 				} else if (hiddenBy && hiddenBy.indexOf('['+ this.key +']') > -1) {
@@ -2004,7 +2026,7 @@ showHideElements : function (tagName, visibility) {
 
 focus : function() {
 	this.wrapper.style.zIndex = hs.zIndexCounter++;
-	// blur others
+// blur others
 	for (var i = 0; i < hs.expanders.length; i++) {
 		if (hs.expanders[i] && i == hs.focusKey) {
 			var blurExp = hs.expanders[i];
@@ -2014,7 +2036,7 @@ focus : function() {
 		}
 	}
 	
-	// focus this
+// focus this
 	if (this.outline) this.outline.table.style.zIndex 
 		= this.wrapper.style.zIndex;
 	this.content.className = 'highslide-'+ this.contentType;
@@ -2307,8 +2329,6 @@ destroyOverlays : function() {
 	hs.discardElement(this.overlayBox);
 },
 
-
-
 createFullExpand : function () {
 	if (this.slideshow && this.slideshow.controls) {
 		this.slideshow.enable('full-expand');
@@ -2350,7 +2370,6 @@ doFullExpand : function () {
 	}
 },
 
-
 afterClose : function () {
 	this.a.className = this.a.className.replace('highslide-active-anchor', '');
 	
@@ -2366,7 +2385,6 @@ afterClose : function () {
 }
 
 };
-
 
 hs.Slideshow = function (expKey, options) {
 	if (hs.dynamicallyUpdateAnchors !== false) hs.updateAnchors();
@@ -2388,7 +2406,7 @@ getControls: function() {
 		this.enable(buttons[i]);
 	}
 	this.btn.pause.style.display = 'none';
-	//this.disable('full-expand');
+//this.disable('full-expand');
 },
 checkFirstAndLast: function() {
 	if (this.repeat || !this.controls) return;
@@ -2515,9 +2533,8 @@ hs.Thumbstrip = function(slideshow) {
 		scrollUp.style.display = tblPos < 0 ? 'block' : 'none';
 		scrollDown.style.display = (tblPos > minTblPos)  ? 'block' : 'none';
 	};
-	
 
-	// initialize
+// initialize
 	var group = hs.anchors.groups[hs.expanders[slideshow.expKey].slideshowGroup || 'none'],
 		options = slideshow.thumbstrip,
 		mode = options.mode || 'horizontal',

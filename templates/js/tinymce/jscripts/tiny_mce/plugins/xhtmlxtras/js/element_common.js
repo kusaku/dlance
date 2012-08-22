@@ -13,7 +13,7 @@ tinyMCEPopup.requireLangPack();
 function initCommonAttributes(elm) {
 	var formObj = document.forms[0], dom = tinyMCEPopup.editor.dom;
 
-	// Setup form data for common element attributes
+// Setup form data for common element attributes
 	setFormValue('title', dom.getAttrib(elm, 'title'));
 	setFormValue('id', dom.getAttrib(elm, 'id'));
 	selectByValue(formObj, 'class', dom.getAttrib(elm, 'class'), true);
@@ -212,7 +212,8 @@ SXE.removeClass = function(elm,cl) {
 			newClassNames += (classNames[x] + " ");
 		}
 	}
-	elm.className = newClassNames.substring(0,newClassNames.length-1); //removes extra space at the end
+	//removes extra space at the end
+	elm.className = newClassNames.substring(0,newClassNames.length-1); 
 }
 
 SXE.addClass = function(elm,cl) {

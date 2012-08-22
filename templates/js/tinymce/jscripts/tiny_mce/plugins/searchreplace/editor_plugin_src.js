@@ -25,7 +25,7 @@
 				});
 			};
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceSearch', function() {
 				open('search');
 			});
@@ -34,7 +34,7 @@
 				open('replace');
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('search', {title : 'searchreplace.search_desc', cmd : 'mceSearch'});
 			ed.addButton('replace', {title : 'searchreplace.replace_desc', cmd : 'mceReplace'});
 
@@ -52,6 +52,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('searchreplace', tinymce.plugins.SearchReplacePlugin);
 })();

@@ -7,14 +7,14 @@ $().ready(function() {
 		autoFill: true
 	});
 
-    //Вызывается когда вводятся символы в поле с id quantity
+   //Вызывается когда вводятся символы в поле с id quantity
     $("#sub").keypress(function (e)  
     { 
-      //Если символ - не цифра, ввыодится сообщение об ошибке, другие символы не пишутся
+     //Если символ - не цифра, ввыодится сообщение об ошибке, другие символы не пишутся
       if( e.which!=8 && e.which!=0 && (e.which<48 || e.which>57))
       {
-		//Вывод сообщения об ошибке
-		//$("#errmsg").html("Только цифры").show().fadeOut("slow"); 
+	//Вывод сообщения об ошибке
+	//$("#errmsg").html("Только цифры").show().fadeOut("slow"); 
         return false;
       }    
     });
@@ -122,15 +122,11 @@ $().ready(function() {
               <td><input type="checkbox" name="watermark" value="1" />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  Будут наложены водяные знаки на полное изображение дизайна</td>
             </tr>
 
-
           </table>
         </div>
       </div>
     </div>
   </div>
-
-
-
 
 <p class="subtitle">Дополнительные параметры, необязательны для заполнения.</p>
   <div class="rnd">
@@ -171,8 +167,6 @@ $().ready(function() {
 </select>
               </td>
             </tr>
-
-
 
             <tr>
               <td class="caption">Назначение сайта:</td>
@@ -244,7 +238,6 @@ $().ready(function() {
               <td class="caption">Только для взрослых:</td>
               <td><input type="checkbox" name="adult" value="1"<? if( $adult == 1 ): ?> checked="checked"<? endif; ?> />  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  Дизайн не будет показан не авторизированным пользователям и авторизированным пользователям, которые не достигли совершенолетия. </td>
             </tr>
-
 
           </table>
         </div>

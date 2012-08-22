@@ -111,7 +111,8 @@ class Blogs_mdl extends Model
 		return $query;
 	}
 
-	function get_all($start_from = FALSE, $per_page, $input = '')//Всего записей
+	//Всего записей
+	function get_all($start_from = FALSE, $per_page, $input = '')
 	{
 		$category = (isset($input['category'])) ? $input['category'] : '';
 
@@ -182,7 +183,8 @@ class Blogs_mdl extends Model
 		return $query;
 	}
 
-	function count_comments($blog)//Количество комментариев у записи
+	//Количество комментариев у записи
+	function count_comments($blog)
 	{
 		$this->db->where_in('blog_id', $blog);
 
@@ -201,7 +203,8 @@ class Blogs_mdl extends Model
 		return $this->db->count_all_results('blogs'); 
 	}
 
-	function count_blogs($user_id)//Количество записей у пользователя
+	//Количество записей у пользователя
+	function count_blogs($user_id)
 	{
 	    if( empty($user_id) )
 	    {
@@ -221,7 +224,8 @@ class Blogs_mdl extends Model
 * ---------------------------------------------------------------
 */
 
-	function get_categories()//Для списков
+	//Для списков
+	function get_categories()
 	{
 		$this->db->select('*');
 

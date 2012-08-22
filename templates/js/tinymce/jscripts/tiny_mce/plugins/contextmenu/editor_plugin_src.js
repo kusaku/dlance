@@ -42,7 +42,7 @@
 
 			ed.onContextMenu.add(function(ed, e) {
 				if (!e.ctrlKey) {
-					// Restore the last selection since it was removed
+				// Restore the last selection since it was removed
 					if (lastRng)
 						ed.selection.setRng(lastRng);
 
@@ -62,8 +62,8 @@
 			function hide(ed, e) {
 				lastRng = null;
 
-				// Since the contextmenu event moves
-				// the selection we need to store it away
+			// Since the contextmenu event moves
+			// the selection we need to store it away
 				if (e && e.button == 2) {
 					lastRng = ed.selection.getRng();
 					return;
@@ -142,6 +142,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('contextmenu', tinymce.plugins.ContextMenu);
 })();

@@ -5,11 +5,9 @@
 <div class="newsDate"><?=$date?></div>
 </noindex>
 
-
 <div class="newsContent">
 <?=nl2br($text)?>
 </div>
-
 
 <h3>Другие новости проекта:</h3>
 <? foreach($newest_news as $row): ?>

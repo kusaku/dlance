@@ -27,33 +27,31 @@
 </td>
 </tr>
 
-
 <tr>
 <td class="lbl">Сумма:</td>
 <td class="txt"><strong><?=$amount?> рублей</strong></td>
 </tr>
-
-
 
 <tr>
 <td class="lbl">Создан:</td>
 <td class="txt"><?=$date?></td>
 </tr>
 
-
 <tr>
 <td class="lbl">Статус:</td>
 <td class="txt"><?=$status?></td>
 </tr>
 
-<? if( $type == 2 and $status_id == 1 ): //Если платеж с кодом протекции?>
+//Если платеж с кодом протекции?>
+<? if( $type == 2 and $status_id == 1 ): 
 <tr>
 <td class="lbl">Срок протекции:</td>
 <td class="txt"><?=$time?></td>
 </tr>
 <? endif; ?>
 
-<? if( $type == 2 and $status_id == 1  and $user_id == $this->user_id ): //Если платеж с кодом протекции и отправитель пользователь?>
+//Если платеж с кодом протекции и отправитель пользователь?>
+<? if( $type == 2 and $status_id == 1  and $user_id == $this->user_id ): 
 <tr>
 <td class="lbl">Код протекции:</td>
 <td class="txt"><?=$code?></td>

@@ -21,10 +21,10 @@
 	{
 		var settings = $.extend({}, $.fn.tip.defaults, options);
 		
-		// Mode
+	// Mode
 		if (settings.onHover)
 		{
-			// Detect current elements
+		// Detect current elements
 			if (settings.stickIfCurrent)
 			{
 				this.filter('.'+settings.currentClass).each(function(i)
@@ -33,7 +33,7 @@
 				});
 			}
 			
-			// Effect
+		// Effect
 			if (settings.reverseHover)
 			{
 				$(this).createTip(settings);
@@ -142,7 +142,7 @@
 			var element = $(this);
 			var oldIE = ($.browser.msie && $.browser.version < 9);
 			
-			// If tip does not already exist (if current), create it
+		// If tip does not already exist (if current), create it
 			var tip = element.data('tip');
 			if (!tip)
 			{
@@ -154,8 +154,9 @@
 				element.updateTipContent(options.content);
 			}
 			
-			// Animation
-			if (!oldIE)	// IE6-8 filters do not allow correct animation (the arrow is truncated)
+		// Animation
+			// IE6-8 filters do not allow correct animation (the arrow is truncated)
+			if (!oldIE)	
 			{
 				var position = getTipPosition(element, tip, settings, false);
 				tip.stop(true).delay(settings.delay).animate({
@@ -184,7 +185,7 @@
 				
 				if ($.browser.msie && $.browser.version < 9)
 				{
-					// IE8 and lower filters do not allow correct animation (the arrow is truncated)
+				// IE8 and lower filters do not allow correct animation (the arrow is truncated)
 					tip.children('.arrow').remove();
 					this.title = tip.html();
 					element.data('tip', false);
@@ -192,7 +193,7 @@
 				}
 				else
 				{
-					// Hiding is not relative to the parent element, to prevent weird behaviour if parent is moved or removed
+				// Hiding is not relative to the parent element, to prevent weird behaviour if parent is moved or removed
 					var position = getFinalPosition(tip, settings);
 					var offset = tip.offset();
 					
@@ -222,7 +223,7 @@
 					}, {
 						complete: function()
 						{
-							// Restore node
+						// Restore node
 							var tip = $(this);
 							var node = tip.data('node');
 							if (node)
@@ -232,7 +233,7 @@
 								node.data('tip', false);
 							}
 							
-							// Remove tip
+						// Remove tip
 							tip.remove();
 						}
 					});
@@ -255,11 +256,11 @@
 			var element = $(this);
 			var tips = getTipDiv();
 			
-			// Insertion
+		// Insertion
 			tips.append('<div></div>');
 			var tip = tips.children(':last-child');
 			
-			// Position class
+		// Position class
 			if (settings.position == 'right' || element.hasClass('tip-right') || element.parent().hasClass('children-tip-right'))
 			{
 				tip.addClass('tip-right');
@@ -273,15 +274,15 @@
 				tip.addClass('tip-left');
 			}
 			
-			// Cross references
+		// Cross references
 			tip.data('node', element);
 			element.data('tip', tip);
 			element.data('settings', settings);
 			
-			// Content
+		// Content
 			element.updateTipContent(settings.content, hide);
 			
-			// Effect
+		// Effect
 			if (hide)
 			{
 				tip.css({opacity:0});	
@@ -304,7 +305,7 @@
 			var tip = element.data('tip');
 			var settings = element.data('settings');
 			
-			// If auto tip content
+		// If auto tip content
 			if (!content)
 			{
 				if (this.title && this.title.length > 0)
@@ -331,16 +332,16 @@
 				var finalContent = content;
 			}
 			
-			// If empty
+		// If empty
 			if (!finalContent || $.trim(finalContent).length == 0)
 			{
 				finalContent = '<em>No tip</em>';
 			}
 			
-			// Insert
+		// Insert
 			tip.html(finalContent+'<span class="arrow"><span></span></span>');
 			
-			// Position
+		// Position
 			tip.stop(true, true);
 			var position = getTipPosition(element, tip, settings, hide);
 			tip.offset(position);
@@ -445,7 +446,7 @@
 		}
 	}
 	
-	// If template common functions loaded
+// If template common functions loaded
 	if ($.fn.addTemplateSetup)
 	{
 		$.fn.addTemplateSetup(function()
@@ -455,7 +456,7 @@
 	}
 	else
 	{
-		// Default behaviour
+	// Default behaviour
 		$(document).ready(function()
 		{
 			$('.with-tip, .with-children-tip > *').tip();
@@ -477,18 +478,18 @@
 		return tips;
 	}
 	
-	// Handle viewport resizing
+// Handle viewport resizing
 	$(window).resize(function()
 	{
 		getTipDiv().children().each(function(i)
 		{
-			// Init
+		// Init
 			var tip = $(this);
 			var element = tip.data('node');
 			var settings = element.data('settings');
 			var isCurrent = settings.stickIfCurrent && element.hasClass(settings.currentClass);
 			
-			// Position
+		// Position
 			var animate = (settings.onHover && !isCurrent);
 			tip.stop(true, true);
 			var position = getTipPosition(element, tip, settings, animate);

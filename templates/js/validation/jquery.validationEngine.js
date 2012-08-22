@@ -10,7 +10,7 @@
 
 $(document).ready(function() {
 
-	// SUCCESS AJAX CALL, replace "success: false," by:     success : function() { callSuccessFunction() }, 
+// SUCCESS AJAX CALL, replace "success: false," by:     success : function() { callSuccessFunction() }, 
 	$("[class^=validate]").validationEngine({
 		success :  false,
 		failure : function() {}
@@ -18,10 +18,12 @@ $(document).ready(function() {
 });
 
 jQuery.fn.validationEngine = function(settings) {
-	if($.validationEngineLanguage){					// IS THERE A LANGUAGE LOCALISATION ?
+	// IS THERE A LANGUAGE LOCALISATION ?
+	if($.validationEngineLanguage){					
 		allRules = $.validationEngineLanguage.allRules
 	}else{
-		allRules = {"required":{    			  // Add your regex rules here, you can take telephone as an example
+		// Add your regex rules here, you can take telephone as an example
+		allRules = {"required":{    			  
 							"regex":"none",
 							"alertText":"Внимание! Поле не должно быть пустым!",
 							"alertTextCheckboxMultiple":"* Пожалуйста, выберите опцию",
@@ -76,10 +78,10 @@ jQuery.fn.validationEngine = function(settings) {
 		allrules:allRules,
 		success : false,
 		failure : function() {}
-	}, settings);	
+	}, settings);
 
-
-	$("form").bind("submit", function(caller){   // ON FORM SUBMIT, CONTROL AJAX FUNCTION IF SPECIFIED ON DOCUMENT READY
+	// ON FORM SUBMIT, CONTROL AJAX FUNCTION IF SPECIFIED ON DOCUMENT READY
+	$("form").bind("submit", function(caller){   
 		if(submitValidation(this) == false){
 			if (settings.success){
 				settings.success && settings.success(); 
@@ -93,12 +95,12 @@ jQuery.fn.validationEngine = function(settings) {
 	$(this).not("[type=checkbox]").bind("blur", function(caller){loadValidation(this)})
 	$(this+"[type=checkbox]").bind("click", function(caller){loadValidation(this)})
 	
-	var buildPrompt = function(caller,promptText) {			// ERROR PROMPT CREATION AND DISPLAY WHEN AN ERROR OCCUR
+	// ERROR PROMPT CREATION AND DISPLAY WHEN AN ERROR OCCUR
+	var buildPrompt = function(caller,promptText) {			
 		var divFormError = document.createElement('div')
 		var formErrorContent = document.createElement('div')
 		var arrow = document.createElement('div')
-		
-		
+
 		$(divFormError).addClass("formError")
 		$(divFormError).addClass($(caller).attr("name"))
 		$(formErrorContent).addClass("formErrorContent")
@@ -126,7 +128,8 @@ jQuery.fn.validationEngine = function(settings) {
 		})
 		$(divFormError).fadeTo("fast",0.8);
 	};
-	var updatePromptText = function(caller,promptText) {	// UPDATE TEXT ERROR IF AN ERROR IS ALREADY DISPLAYED
+	// UPDATE TEXT ERROR IF AN ERROR IS ALREADY DISPLAYED
+	var updatePromptText = function(caller,promptText) {	
 		updateThisPrompt =  $(caller).attr("name")
 		$("."+updateThisPrompt).find(".formErrorContent").html(promptText)
 		
@@ -138,7 +141,8 @@ jQuery.fn.validationEngine = function(settings) {
 			top:callerTopPosition
 		});
 	}
-	var loadValidation = function(caller) {		// GET VALIDATIONS TO BE EXECUTED
+	// GET VALIDATIONS TO BE EXECUTED
+	var loadValidation = function(caller) {		
 		
 		rulesParsing = $(caller).attr('class');
 		rulesRegExp = /\[(.*)\]/;
@@ -151,7 +155,8 @@ jQuery.fn.validationEngine = function(settings) {
 		return validateCalll
 		
 	};
-	var validateCall = function(caller,rules) {	// EXECUTE VALIDATION REQUIRED BY THE USER FOR THIS FILED
+	// EXECUTE VALIDATION REQUIRED BY THE USER FOR THIS FILED
+	var validateCall = function(caller,rules) {	
 		var promptText =""	
 		var isError = false
 		var prompt = $(caller).attr("name")
@@ -184,7 +189,8 @@ jQuery.fn.validationEngine = function(settings) {
 		}		
 		
 		/* VALIDATION FUNCTIONS */
-		function _required(caller,rules){   // VALIDATE BLANK FIELD
+		// VALIDATE BLANK FIELD
+		function _required(caller,rules){   
 			callerType = $(caller).attr("type")
 			
 			if (callerType == "text" || callerType == "password" || callerType == "textarea"){
@@ -207,7 +213,8 @@ jQuery.fn.validationEngine = function(settings) {
 				}
 			}	
 		}
-		function _customRegex(caller,rules,position){		 // VALIDATE REGEX RULES
+		// VALIDATE REGEX RULES
+		function _customRegex(caller,rules,position){		 
 			customRule = rules[position+1]
 			pattern = eval(settings.allrules[customRule].regex)
 			
@@ -216,7 +223,8 @@ jQuery.fn.validationEngine = function(settings) {
 				promptText += settings.allrules[customRule].alertText+"<br />"
 			}
 		}
-		function _confirm(caller,rules,position){		 // VALIDATE FIELD MATCH
+		// VALIDATE FIELD MATCH
+		function _confirm(caller,rules,position){		 
 			confirmField = rules[position+1]
 			
 			if($(caller).attr('value') != $("#"+confirmField).attr('value')){
@@ -224,7 +232,8 @@ jQuery.fn.validationEngine = function(settings) {
 				promptText += settings.allrules["confirm"].alertText+"<br />"
 			}
 		}
-		function _length(caller,rules,position){    // VALIDATE LENGTH
+		// VALIDATE LENGTH
+		function _length(caller,rules,position){    
 		
 			startLength = eval(rules[position+1])
 			endLength = eval(rules[position+2])
@@ -235,7 +244,8 @@ jQuery.fn.validationEngine = function(settings) {
 				promptText += settings.allrules["length"].alertText+startLength+settings.allrules["length"].alertText2+endLength+settings.allrules["length"].alertText3+"<br />"
 			}
 		}
-		function _minCheckbox(caller,rules,position){    // VALIDATE CHECKBOX NUMBER
+		// VALIDATE CHECKBOX NUMBER
+		function _minCheckbox(caller,rules,position){    
 		
 			nbCheck = eval(rules[position+1])
 			groupname = $(caller).attr("name")
@@ -248,14 +258,16 @@ jQuery.fn.validationEngine = function(settings) {
 		}
 		return(isError) ? isError : false;
 	};
-	var closePrompt = function(caller) {	// CLOSE PROMPT WHEN ERROR CORRECTED
+	// CLOSE PROMPT WHEN ERROR CORRECTED
+	var closePrompt = function(caller) {	
 		closingPrompt = $(caller).attr("name")
 
 		$("."+closingPrompt).fadeTo("fast",0,function(){
 			$("."+closingPrompt).remove()
 		});
 	};
-	var submitValidation = function(caller) {	// FORM SUBMIT VALIDATION LOOPING INLINE VALIDATION
+	// FORM SUBMIT VALIDATION LOOPING INLINE VALIDATION
+	var submitValidation = function(caller) {	
 		var stopForm = false
 		$(".formError").remove()
 		var toValidateSize = $(caller).find("[class^=validate]").size()
@@ -264,7 +276,8 @@ jQuery.fn.validationEngine = function(settings) {
 			var validationPass = loadValidation(this)
 			return(validationPass) ? stopForm = true : "";	
 		});
-		if(stopForm){							// GET IF THERE IS AN ERROR OR NOT FROM THIS VALIDATION FUNCTIONS
+		// GET IF THERE IS AN ERROR OR NOT FROM THIS VALIDATION FUNCTIONS
+		if(stopForm){							
 			destination = $(".formError:first").offset().top;
 			$("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1100)
 			return true;

@@ -10,7 +10,6 @@
 
 <?=validation_errors()?>
 
-
 <form action="/account/ad/" method="get" />
 <? if( !empty($ads) ): ?>
 <table class="services">
@@ -31,7 +30,6 @@
 
 	<? endforeach; ?>
 
-
 </tbody>
 </table>
 <? else: ?>
@@ -39,7 +37,6 @@
 <? endif; ?>
 <input type="submit" value="Получить код">
 </form>
-
 
   </div>
 

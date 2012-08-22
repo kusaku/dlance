@@ -56,7 +56,8 @@ class Tariff
 		return $this->_ci->tariff_mdl->update($user_id, $data);
 	}
 
-    function config($id)//Выбираем значение по тарифу, комиссия
+    //Выбираем значение по тарифу, комиссия
+    function config($id)
 	{
 		$this->_ci->load->model('tariff/tariff_mdl');
 

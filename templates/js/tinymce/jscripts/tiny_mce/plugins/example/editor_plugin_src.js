@@ -9,7 +9,7 @@
  */
 
 (function() {
-	// Load plugin specific language pack
+// Load plugin specific language pack
 	tinymce.PluginManager.requireLangPack('example');
 
 	tinymce.create('tinymce.plugins.ExamplePlugin', {
@@ -22,7 +22,7 @@
 		 * @param {string} url Absolute URL to where the plugin is located.
 		 */
 		init : function(ed, url) {
-			// Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
+		// Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
 			ed.addCommand('mceExample', function() {
 				ed.windowManager.open({
 					file : url + '/dialog.htm',
@@ -30,19 +30,21 @@
 					height : 120 + parseInt(ed.getLang('example.delta_height', 0)),
 					inline : 1
 				}, {
-					plugin_url : url, // Plugin absolute URL
-					some_custom_arg : 'custom arg' // Custom argument
+					// Plugin absolute URL
+					plugin_url : url, 
+					// Custom argument
+					some_custom_arg : 'custom arg' 
 				});
 			});
 
-			// Register example button
+		// Register example button
 			ed.addButton('example', {
 				title : 'example.desc',
 				cmd : 'mceExample',
 				image : url + '/img/example.gif'
 			});
 
-			// Add a node change handler, selects the button in the UI when a image is selected
+		// Add a node change handler, selects the button in the UI when a image is selected
 			ed.onNodeChange.add(function(ed, cm, n) {
 				cm.setActive('example', n.nodeName == 'IMG');
 			});
@@ -79,6 +81,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('example', tinymce.plugins.ExamplePlugin);
 })();

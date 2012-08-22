@@ -16,11 +16,11 @@ if ( ! function_exists('date_smart'))
 		);
 		$date = strtotime($date_input);
 
-		//Время
+	//Время
 		if($time) $time = ' в G:i';
 		else $time = '';
 
-		//Сегодня, вчера, завтра
+	//Сегодня, вчера, завтра
 		if(date('Y') == date('Y',$date))
 		{
 			if(date('z') == date('z', $date))
@@ -45,10 +45,10 @@ if ( ! function_exists('date_smart'))
 			if(isset($result_date)) return $result_date;
 		}
 
-		//Месяца
+	//Месяца
 		$month = $monthes[date('n',$date)];
 
-		//Года
+	//Года
 		if(date('Y') != date('Y', $date)) $year = 'Y г.';
 		else $year = '';
 
@@ -56,22 +56,23 @@ if ( ! function_exists('date_smart'))
 		return $result_date;
 	}
 
-
-	function date_await($date_input)//Сколько времени до событиая
+	//Сколько времени до событиая
+	function date_await($date_input)
 	{
 		$days = floor(($date_input - time())/86400);
 
-		$fmod_days = fmod($date_input - time(), 86400);//Узнаём остаток, после деления узнавания дня
-
+		//Узнаём остаток, после деления узнавания дня
+		$fmod_days = fmod($date_input - time(), 86400);
 
 		$hours = floor(($fmod_days)/3600);
 
-		$fmod_days = fmod($fmod_days, 3600);//Узнаём остаток, после деления узнавания дня
-
+		//Узнаём остаток, после деления узнавания дня
+		$fmod_days = fmod($fmod_days, 3600);
 
 		$mins = floor(($fmod_days)/60);
 
-		$fmod_mins = fmod($fmod_days, 60);//Узнаём остаток, после деления узнавания дня
+		//Узнаём остаток, после деления узнавания дня
+		$fmod_mins = fmod($fmod_days, 60);
 
 		$result_date = '';
 
@@ -93,7 +94,8 @@ if ( ! function_exists('date_smart'))
 		return  $result_date;
 	}
 
-	function date_age($day, $month, $year)//Возраст 
+	//Возраст 
+	function date_age($day, $month, $year)
 	{
 		$result_date = date('Y') - $year;
 

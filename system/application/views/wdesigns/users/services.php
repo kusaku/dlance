@@ -18,11 +18,8 @@
 <p class="desc"><?=$short_descr?></p>
 </div>
 
-
 <div id="yui-main">
 <div id="usermain" class="yui-b">
-
-
 
 <? if( !empty($services) ): ?>
 
@@ -33,7 +30,8 @@
 
 <? if( $row['parent_id'] == 0): ?>
 
-<? if( in_array($row['id'], $select_parent) ): //Выбранные разделы?>
+//Выбранные разделы?>
+<? if( in_array($row['id'], $select_parent) ): 
 <tr>
 <th class="txtl"><h5><?=$row['name']?></h5></th>
 </tr>
@@ -43,7 +41,8 @@
 
 	<? foreach($categories as $row2): ?>
 
-			<? if( $row['id'] == $row2['parent_id'] ): //Выбранные категории?>
+			//Выбранные категории?>
+			<? if( $row['id'] == $row2['parent_id'] ): 
 
 <? if( in_array($row2['id'], $select) ): ?>
 <tr>
@@ -59,17 +58,12 @@
 </tbody>
 </table>
 
-
  <? else: ?>
 <p>Услуги не предоставляются.</p>
 <? endif; ?>
 
-
 </div>
 </div>
-
-
-
 
 <div id="sidebar" class="yui-b">
 <div class="hd"></div>

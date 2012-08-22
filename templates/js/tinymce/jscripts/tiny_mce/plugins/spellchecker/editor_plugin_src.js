@@ -30,23 +30,23 @@
 			t.rpcUrl = ed.getParam("spellchecker_rpc_url", "{backend}");
 
 			if (t.rpcUrl == '{backend}') {
-				// Sniff if the browser supports native spellchecking (Don't know of a better way)
+			// Sniff if the browser supports native spellchecking (Don't know of a better way)
 				if (tinymce.isIE)
 					return;
 
 				t.hasSupport = true;
 
-				// Disable the context menu when spellchecking is active
+			// Disable the context menu when spellchecking is active
 				ed.onContextMenu.addToTop(function(ed, e) {
 					if (t.active)
 						return false;
 				});
 			}
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceSpellCheck', function() {
 				if (t.rpcUrl == '{backend}') {
-					// Enable/disable native spellchecker
+				// Enable/disable native spellchecker
 					t.editor.getBody().spellcheck = t.active = !t.active;
 					return;
 				}
@@ -99,7 +99,7 @@
 					t._done();
 			});
 
-			// Find selected language
+		// Find selected language
 			t.languages = {};
 			each(ed.getParam('spellchecker_languages', '+English=en,Danish=da,Dutch=nl,Finnish=fi,French=fr,German=de,Italian=it,Polish=pl,Portuguese=pt,Spanish=es,Swedish=sv', 'hash'), function(v, k) {
 				if (k.indexOf('+') === 0) {
@@ -115,9 +115,9 @@
 			var t = this, c, ed = t.editor;
 
 			if (n == 'spellchecker') {
-				// Use basic button if we use the native spellchecker
+			// Use basic button if we use the native spellchecker
 				if (t.rpcUrl == '{backend}') {
-					// Create simple toggle button if we have native support
+				// Create simple toggle button if we have native support
 					if (t.hasSupport)
 						c = cm.createButton(n, {title : 'spellchecker.desc', cmd : 'mceSpellCheck', scope : t});
 
@@ -151,8 +151,7 @@
 			}
 		},
 
-		// Internal functions
-
+	// Internal functions
 		_walk : function(n, f) {
 			var d = this.editor.getDoc(), w;
 
@@ -168,7 +167,7 @@
 		_getSeparators : function() {
 			var re = '', i, str = this.editor.getParam('spellchecker_word_separator_chars', '\\s!"#$%&()*+,-./:;<=>?@[\]^_{|}����������������\u201d\u201c');
 
-			// Build word separator regexp
+		// Build word separator regexp
 			for (i=0; i<str.length; i++)
 				re += '\\' + str.charAt(i);
 
@@ -178,24 +177,24 @@
 		_getWords : function() {
 			var ed = this.editor, wl = [], tx = '', lo = {}, rawWords = [];
 
-			// Get area text
+		// Get area text
 			this._walk(ed.getBody(), function(n) {
 				if (n.nodeType == 3)
 					tx += n.nodeValue + ' ';
 			});
 
-			// split the text up into individual words
+		// split the text up into individual words
 			if (ed.getParam('spellchecker_word_pattern')) {
-				// look for words that match the pattern
+			// look for words that match the pattern
 				rawWords = tx.match('(' + ed.getParam('spellchecker_word_pattern') + ')', 'gi');
 			} else {
-				// Split words by separator
+			// Split words by separator
 				tx = tx.replace(new RegExp('([0-9]|[' + this._getSeparators() + '])', 'g'), ' ');
 				tx = tinymce.trim(tx.replace(/(\s+)/g, ' '));
 				rawWords = tx.split(' ');
 			}
 
-			// Build word array and remove duplicates
+		// Build word array and remove duplicates
 			each(rawWords, function(v) {
 				if (!lo[v]) {
 					wl.push(v);
@@ -233,14 +232,14 @@
 			r4 = new RegExp('^(' + w + ')([' + re + ']?)$', 'g');
 			r5 = new RegExp('(' + w + ')([' + re + '])', 'g');
 
-			// Collect all text nodes
+		// Collect all text nodes
 			this._walk(this.editor.getBody(), function(n) {
 				if (n.nodeType == 3) {
 					nl.push(n);
 				}
 			});
 
-			// Wrap incorrect words in spans
+		// Wrap incorrect words in spans
 			each(nl, function(n) {
 				var v;
 
@@ -263,12 +262,12 @@
 		_showMenu : function(ed, e) {
 			var t = this, ed = t.editor, m = t._menu, p1, dom = ed.dom, vp = dom.getViewPort(ed.getWin()), wordSpan = e.target;
 
-			e = 0; // Fixes IE memory leak
+			// Fixes IE memory leak
+			e = 0; 
 
 			if (!m) {
 				p1 = DOM.getPos(ed.getContentAreaContainer());
-				//p2 = DOM.getPos(ed.getContainer());
-
+			//p2 = DOM.getPos(ed.getContainer());
 				m = ed.controlManager.createDropMenu('spellcheckermenu', {
 					offset_x : p1.x,
 					offset_y : p1.y,
@@ -309,7 +308,7 @@
 							dom.remove(wordSpan, 1);
 							t._checkDone();
 
-							// tell the server if we need to
+						// tell the server if we need to
 							if (ignoreRpc) {
 								ed.setProgressState(1);
 								t._sendRPC('ignoreWord', [t.selectedLang, word], function(r) {
@@ -327,7 +326,7 @@
 							t._removeWords(dom.decode(word));
 							t._checkDone();
 
-							// tell the server if we need to
+						// tell the server if we need to
 							if (ignoreRpc) {
 								ed.setProgressState(1);
 								t._sendRPC('ignoreWords', [t.selectedLang, word], function(r) {
@@ -336,7 +335,6 @@
 							}
 						}
 					});
-
 
 					if (t.editor.getParam("spellchecker_enable_learn_rpc")) {
 						m.add({
@@ -412,6 +410,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('spellchecker', tinymce.plugins.SpellcheckerPlugin);
 })();

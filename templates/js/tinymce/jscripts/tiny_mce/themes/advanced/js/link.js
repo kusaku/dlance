@@ -11,7 +11,7 @@ var LinkDialog = {
 	init : function() {
 		var f = document.forms[0], ed = tinyMCEPopup.editor;
 
-		// Setup browse button
+	// Setup browse button
 		document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser', 'href', 'file', 'theme_advanced_link');
 		if (isVisible('hrefbrowser'))
 			document.getElementById('href').style.width = '180px';
@@ -36,7 +36,7 @@ var LinkDialog = {
 		tinyMCEPopup.restoreSelection();
 		e = ed.dom.getParent(ed.selection.getNode(), 'A');
 
-		// Remove element if there is no href
+	// Remove element if there is no href
 		if (!f.href.value) {
 			if (e) {
 				tinyMCEPopup.execCommand("mceBeginUndoLevel");
@@ -51,7 +51,7 @@ var LinkDialog = {
 
 		tinyMCEPopup.execCommand("mceBeginUndoLevel");
 
-		// Create new anchor elements
+	// Create new anchor elements
 		if (e == null) {
 			ed.getDoc().execCommand("unlink", false, null);
 			tinyMCEPopup.execCommand("CreateLink", false, "#mce_temp_url#", {skip_undo : 1});
@@ -77,7 +77,7 @@ var LinkDialog = {
 			});
 		}
 
-		// Don't move caret if selection was image
+	// Don't move caret if selection was image
 		if (e.childNodes.length != 1 || e.firstChild.nodeName != 'IMG') {
 			ed.focus();
 			ed.selection.select(e);

@@ -319,9 +319,8 @@
 				}
 				.datepick-month-year { font-size:.8em !important; padding:0 !important; }
 				.datepick { width:auto !important }
-				.datepick-popup { z-index:100; } 
+				.datepick-popup { z-index:100; }
 
-			
 			.mini-calendar tbody th.unavailable,
 			.mini-calendar tbody td.unavailable,
 			.medium-calendar tbody th.unavailable,

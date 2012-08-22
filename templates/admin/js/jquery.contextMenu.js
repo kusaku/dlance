@@ -14,10 +14,10 @@
 		var list = [];
 		target.trigger('contextMenu', [list]);
 		
-		// If some menu elements added
+	// If some menu elements added
 		if (list.length > 0)
 		{
-			// Mouse position
+		// Mouse position
 			var posx = 0;
 			var posy = 0;
 			if (e.pageX || e.pageY)
@@ -36,10 +36,10 @@
 				left: posx+'px'
 			}).show().openDropDownMenu();
 			
-			// Listener
+		// Listener
 			$(document).bind('click', closeContextMenu);
 			
-			// Prevent browser menu
+		// Prevent browser menu
 			return false;
 		}
 	};
@@ -57,7 +57,7 @@
 		$(document).unbind('click', closeContextMenu);
 	};
 	
-	// Insert menu element
+// Insert menu element
 	$(document).ready(function()
 	{
 		$(document.body).append('<div id="contextMenu" class="menu"></div>');
@@ -80,7 +80,7 @@
 		
 		for (var element in list)
 		{
-			// If separation
+		// If separation
 			if (typeof(list[element]) != 'object')
 			{
 				html += '<li class="sep"></li>';
@@ -101,16 +101,16 @@
 					var closer = 'span';
 				}
 				
-				// Opening
+			// Opening
 				html += '<li'+icon+'><'+opener+alt+'>'+el.text+'</'+closer+'>';
 				
-				// If sub menus
+			// If sub menus
 				if (typeof(el.subs) == 'object' && el.subs.length > 0)
 				{
 					html += buildMenuLevel(el.subs);
 				}
 				
-				// Close
+			// Close
 				html += '</li>';
 			}
 		}

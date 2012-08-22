@@ -14,7 +14,6 @@
  */
 
 // ------------------------------------------------------------------------
-
 /**
  * File Uploading Class
  *
@@ -53,7 +52,7 @@ class MY_Upload extends CI_Upload {
 		{
 			$mime = $this->mimes_types(strtolower($val));
 
-			// Images get some additional checks
+		// Images get some additional checks
 			if (in_array($val, $image_types) && $this->is_image())
 			{
 				if (getimagesize($this->file_temp) === FALSE)
@@ -81,10 +80,8 @@ class MY_Upload extends CI_Upload {
 		return FALSE;
 	}
 
-	// --------------------------------------------------------------------
-
+// --------------------------------------------------------------------
 }
 // END Upload Class
-
 /* End of file MY_Upload.php */
 /* Location: ./system/application/libraries/MY_Upload.php */

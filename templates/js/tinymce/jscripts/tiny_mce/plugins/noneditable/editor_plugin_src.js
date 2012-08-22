@@ -22,7 +22,7 @@
 			ed.onNodeChange.addToTop(function(ed, cm, n) {
 				var sc, ec;
 
-				// Block if start or end is inside a non editable element
+			// Block if start or end is inside a non editable element
 				sc = ed.dom.getParent(ed.selection.getStart(), function(n) {
 					return ed.dom.hasClass(n, nonEditClass);
 				});
@@ -31,7 +31,7 @@
 					return ed.dom.hasClass(n, nonEditClass);
 				});
 
-				// Block or unblock
+			// Block or unblock
 				if (sc || ec) {
 					t._setDisabled(1);
 					return false;
@@ -53,7 +53,7 @@
 		_block : function(ed, e) {
 			var k = e.keyCode;
 
-			// Don't block arrow keys, pg up/down, and F1-F12
+		// Don't block arrow keys, pg up/down, and F1-F12
 			if ((k > 32 && k < 41) || (k > 111 && k < 124))
 				return;
 
@@ -85,6 +85,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('noneditable', tinymce.plugins.NonEditablePlugin);
 })();

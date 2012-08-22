@@ -17,10 +17,10 @@ var defaultDocTypes =
 	'XHTML 1.0 Frameset=<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">,' +
 	'XHTML 1.0 Strict=<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">,' +
 	'XHTML 1.1=<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">,' +
-	'HTML 4.01 Transitional=<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">,' +
+	//EN">,' +
+	'HTML 4.01 Transitional=<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional
 	'HTML 4.01 Strict=<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">,' +
 	'HTML 4.01 Frameset=<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">';
-
 var defaultEncodings = 
 	'Western european (iso-8859-1)=iso-8859-1,' +
 	'Central European (iso-8859-2)=iso-8859-2,' +
@@ -49,7 +49,7 @@ var defaultFontSizes = '10px,11px,12px,13px,14px,15px,16px';
 function init() {
 	var f = document.forms['fullpage'], el = f.elements, e, i, p, doctypes, encodings, mediaTypes, fonts, ed = tinyMCEPopup.editor, dom = tinyMCEPopup.dom, style;
 
-	// Setup doctype select box
+// Setup doctype select box
 	doctypes = ed.getParam("fullpage_doctypes", defaultDocTypes).split(',');
 	for (i=0; i<doctypes.length; i++) {
 		p = doctypes[i].split('=');
@@ -58,7 +58,7 @@ function init() {
 			addSelectValue(f, 'doctypes', p[0], p[1]);
 	}
 
-	// Setup fonts select box
+// Setup fonts select box
 	fonts = ed.getParam("fullpage_fonts", defaultFontNames).split(';');
 	for (i=0; i<fonts.length; i++) {
 		p = fonts[i].split('=');
@@ -67,12 +67,12 @@ function init() {
 			addSelectValue(f, 'fontface', p[0], p[1]);
 	}
 
-	// Setup fontsize select box
+// Setup fontsize select box
 	fonts = ed.getParam("fullpage_fontsizes", defaultFontSizes).split(',');
 	for (i=0; i<fonts.length; i++)
 		addSelectValue(f, 'fontsize', fonts[i], fonts[i]);
 
-	// Setup mediatype select boxs
+// Setup mediatype select boxs
 	mediaTypes = ed.getParam("fullpage_media_types", defaultMediaTypes).split(',');
 	for (i=0; i<mediaTypes.length; i++) {
 		p = mediaTypes[i].split('=');
@@ -83,7 +83,7 @@ function init() {
 		}
 	}
 
-	// Setup encodings select box
+// Setup encodings select box
 	encodings = ed.getParam("fullpage_encodings", defaultEncodings).split(',');
 	for (i=0; i<encodings.length; i++) {
 		p = encodings[i].split('=');
@@ -97,7 +97,7 @@ function init() {
 
 	document.getElementById('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick','bgcolor');
 	document.getElementById('link_color_pickcontainer').innerHTML = getColorPickerHTML('link_color_pick','link_color');
-	//document.getElementById('hover_color_pickcontainer').innerHTML = getColorPickerHTML('hover_color_pick','hover_color');
+//document.getElementById('hover_color_pickcontainer').innerHTML = getColorPickerHTML('hover_color_pick','hover_color');
 	document.getElementById('visited_color_pickcontainer').innerHTML = getColorPickerHTML('visited_color_pick','visited_color');
 	document.getElementById('active_color_pickcontainer').innerHTML = getColorPickerHTML('active_color_pick','active_color');
 	document.getElementById('textcolor_pickcontainer').innerHTML = getColorPickerHTML('textcolor_pick','textcolor');
@@ -106,7 +106,7 @@ function init() {
 	document.getElementById('script_src_pickcontainer').innerHTML = getBrowserHTML('script_src_browser','element_script_src','file','fullpage');
 	document.getElementById('bgimage_pickcontainer').innerHTML = getBrowserHTML('bgimage_browser','bgimage','image','fullpage');
 
-	// Resize some elements
+// Resize some elements
 	if (isVisible('stylesheetbrowser'))
 		document.getElementById('stylesheet').style.width = '220px';
 
@@ -116,31 +116,31 @@ function init() {
 	if (isVisible('bgimage_browser'))
 		document.getElementById('bgimage').style.width = '210px';
 
-	// Add iframe
+// Add iframe
 	dom.add(document.body, 'iframe', {id : 'documentIframe', src : 'javascript:""', style : {display : 'none'}});
 	doc = dom.get('documentIframe').contentWindow.document;
 	h = tinyMCEPopup.getWindowArg('head_html');
 
-	// Preprocess the HTML disable scripts and urls
+// Preprocess the HTML disable scripts and urls
 	h = h.replace(/<script>/gi, '<script type="text/javascript">');
 	h = h.replace(/type=([\"\'])?/gi, 'type=$1-mce-');
 	h = h.replace(/(src=|href=)/g, '_mce_$1');
 
-	// Write in the content in the iframe
+// Write in the content in the iframe
 	doc.write(h + '</body></html>');
 	doc.close();
 
-	// Parse xml and doctype
+// Parse xml and doctype
 	xmlVer = getReItem(/<\?\s*?xml.*?version\s*?=\s*?"(.*?)".*?\?>/gi, h, 1);
 	xmlEnc = getReItem(/<\?\s*?xml.*?encoding\s*?=\s*?"(.*?)".*?\?>/gi, h, 1);
 	docType = getReItem(/<\!DOCTYPE.*?>/gi, h.replace(/\n/g, ''), 0).replace(/ +/g, ' ');
 	f.langcode.value = getReItem(/lang="(.*?)"/gi, h, 1);
 
-	// Parse title
+// Parse title
 	if (e = doc.getElementsByTagName('title')[0])
 		el.metatitle.value = e.textContent || e.text;
 
-	// Parse meta
+// Parse meta
 	tinymce.each(doc.getElementsByTagName('meta'), function(n) {
 		var na = (n.getAttribute('name', 2) || '').toLowerCase(), va = n.getAttribute('content', 2), eq = n.getAttribute('httpEquiv', 2) || '';
 
@@ -155,7 +155,7 @@ function init() {
 			case "content-type":
 				tmp = getReItem(/charset\s*=\s*(.*)\s*/gi, va, 1);
 
-				// Override XML encoding
+			// Override XML encoding
 				if (tmp != "")
 					xmlEnc = tmp;
 
@@ -173,9 +173,8 @@ function init() {
 	if (xmlVer != '')
 		el.xml_pi.checked = true;
 
-	// Parse appearance
-
-	// Parse primary stylesheet
+// Parse appearance
+// Parse primary stylesheet
 	tinymce.each(doc.getElementsByTagName("link"), function(l) {
 		var m = l.getAttribute('media', 2) || '', t = l.getAttribute('type', 2) || '';
 
@@ -185,7 +184,7 @@ function init() {
 		}
 	});
 
-	// Get from style elements
+// Get from style elements
 	tinymce.each(doc.getElementsByTagName("style"), function(st) {
 		var tmp = parseStyleElement(st);
 
@@ -208,7 +207,7 @@ function init() {
 	f.bgcolor.value = tinyMCEPopup.dom.getAttrib(doc.body, "bgcolor");
 	f.bgimage.value = tinyMCEPopup.dom.getAttrib(doc.body, "background");
 
-	// Get from style info
+// Get from style info
 	style = tinyMCEPopup.dom.parseStyle(tinyMCEPopup.dom.getAttrib(doc.body, 'style'));
 
 	if (style['font-family'])
@@ -253,7 +252,7 @@ function init() {
 
 	f.style.value = tinyMCEPopup.dom.serializeStyle(style);
 
-	// Update colors
+// Update colors
 	updateColor('textcolor_pick', 'textcolor');
 	updateColor('bgcolor_pick', 'bgcolor');
 	updateColor('visited_color_pick', 'visited_color');
@@ -275,14 +274,14 @@ function updateAction() {
 
 	head = doc.getElementsByTagName('head')[0];
 
-	// Fix scripts without a type
+// Fix scripts without a type
 	nl = doc.getElementsByTagName('script');
 	for (i=0; i<nl.length; i++) {
 		if (tinyMCEPopup.dom.getAttrib(nl[i], '_mce_type') == '')
 			nl[i].setAttribute('_mce_type', 'text/javascript');
 	}
 
-	// Get primary stylesheet
+// Get primary stylesheet
 	nl = doc.getElementsByTagName("link");
 	for (i=0; i<nl.length; i++) {
 		l = nl[i];
@@ -301,7 +300,7 @@ function updateAction() {
 		}
 	}
 
-	// Add new link
+// Add new link
 	if (f.stylesheet.value != '') {
 		l = doc.createElement('link');
 

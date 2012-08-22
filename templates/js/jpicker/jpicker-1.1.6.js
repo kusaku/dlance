@@ -20,11 +20,14 @@
       if (precision === undefined) precision = 0;
       return Math.round(value * Math.pow(10, precision)) / Math.pow(10, precision);
     };
-  var Slider = // encapsulate slider functionality for the ColorMap and ColorBar - could be useful to use a jQuery UI draggable for this with certain extensions
+  // encapsulate slider functionality for the ColorMap and ColorBar - could be useful to use a jQuery UI draggable for this with certain extensions
+  var Slider = 
       function(bar, options)
       {
-        var $this = this, // private properties, methods, and events - keep these variables and classes invisible to outside code
-          arrow = bar.find('img:first'), // the arrow image to drag
+        // private properties, methods, and events - keep these variables and classes invisible to outside code
+        var $this = this, 
+          // the arrow image to drag
+          arrow = bar.find('img:first'), 
           minX = 0,
           maxX = 100,
           rangeX = 100,
@@ -41,22 +44,26 @@
             {
               for (var i = 0; i < changeEvents.length; i++) changeEvents[i].call($this, $this, context);
             },
-          mouseDown = // bind the mousedown to the bar not the arrow for quick snapping to the clicked location
+          // bind the mousedown to the bar not the arrow for quick snapping to the clicked location
+          mouseDown = 
             function(e)
             {
               var off = bar.offset();
               offset = { l: off.left | 0, t: off.top | 0 };
               clearTimeout(timeout);
-              timeout = setTimeout( // using setTimeout for visual updates - once the style is updated the browser will re-render internally allowing the next Javascript to run
+              // using setTimeout for visual updates - once the style is updated the browser will re-render internally allowing the next Javascript to run
+              timeout = setTimeout( 
                 function()
                 {
                   setValuesFromMousePosition.call($this, e);
                 }, 0);
-              // Bind mousemove and mouseup event to the document so it responds when dragged of of the bar - we will unbind these when on mouseup to save processing
+             // Bind mousemove and mouseup event to the document so it responds when dragged of of the bar - we will unbind these when on mouseup to save processing
               $(document).bind('mousemove', mouseMove).bind('mouseup', mouseUp);
-              e.preventDefault(); // don't try to select anything or drag the image to the desktop
+              // don't try to select anything or drag the image to the desktop
+              e.preventDefault(); 
             },
-          mouseMove = // set the values as the mouse moves
+          // set the values as the mouse moves
+          mouseMove = 
             function(e)
             {
               clearTimeout(timeout);
@@ -69,7 +76,8 @@
               e.preventDefault();
               return false;
             },
-          mouseUp = // unbind the document events - they aren't needed when not dragging
+          // unbind the document events - they aren't needed when not dragging
+          mouseUp = 
             function(e)
             {
               $(document).unbind('mouseup', mouseUp).unbind('mousemove', mouseMove);
@@ -77,14 +85,16 @@
               e.preventDefault();
               return false;
             },
-          setValuesFromMousePosition = // calculate mouse position and set value within the current range
+          // calculate mouse position and set value within the current range
+          setValuesFromMousePosition = 
             function(e)
             {
               var locX = e.pageX - offset.l,
                   locY = e.pageY - offset.t,
-                  barW = bar.w, // local copies for YUI compressor
+                  // local copies for YUI compressor
+                  barW = bar.w, 
                   barH = bar.h;
-              // keep the arrow within the bounds of the bar
+             // keep the arrow within the bounds of the bar
               if (locX < 0) locX = 0;
               else if (locX > barW) locX = barW;
               if (locY < 0) locY = 0;
@@ -103,25 +113,28 @@
               setTimeout(
                 function()
                 {
-                  if (rangeX > 0) // range is greater than zero
+                  // range is greater than zero
+                  if (rangeX > 0) 
                   {
-                    // constrain to bounds
+                   // constrain to bounds
                     if (x == maxX) arrowOffsetX = barW;
                     else arrowOffsetX = ((x / rangeX) * barW) | 0;
                   }
-                  if (rangeY > 0) // range is greater than zero
+                  // range is greater than zero
+                  if (rangeY > 0) 
                   {
-                    // constrain to bounds
+                   // constrain to bounds
                     if (y == maxY) arrowOffsetY = barH;
                     else arrowOffsetY = ((y / rangeY) * barH) | 0;
                   }
-                  // if arrow width is greater than bar width, center arrow and prevent horizontal dragging
-                  if (arrowW >= barW) arrowOffsetX = (barW >> 1) - (arrowW >> 1); // number >> 1 - superfast bitwise divide by two and truncate (move bits over one bit discarding lowest)
+                 // if arrow width is greater than bar width, center arrow and prevent horizontal dragging
+                  // number >> 1 - superfast bitwise divide by two and truncate (move bits over one bit discarding lowest)
+                  if (arrowW >= barW) arrowOffsetX = (barW >> 1) - (arrowW >> 1); 
                   else arrowOffsetX -= arrowW >> 1;
-                  // if arrow height is greater than bar height, center arrow and prevent vertical dragging
+                 // if arrow height is greater than bar height, center arrow and prevent vertical dragging
                   if (arrowH >= barH) arrowOffsetY = (barH >> 1) - (arrowH >> 1);
                   else arrowOffsetY -= arrowH >> 1;
-                  // set the arrow position based on these offsets
+                 // set the arrow position based on these offsets
                   arrow.css({ left: arrowOffsetX + 'px', top: arrowOffsetY + 'px' });
                 }, 0);
             },
@@ -272,14 +285,15 @@
           destroy =
             function()
             {
-              // unbind all possible events and null objects
+             // unbind all possible events and null objects
               $(document).unbind('mouseup', mouseUp).unbind('mousemove', mouseMove);
               bar.unbind('mousedown', mouseDown);
               bar = null;
               arrow = null;
               changeEvents = null;
             };
-        $.extend(true, $this, // public properties, methods, and event bindings - these we need to access from other controls
+        // public properties, methods, and event bindings - these we need to access from other controls
+        $.extend(true, $this, 
           {
             val: val,
             range: range,
@@ -287,20 +301,22 @@
             unbind: unbind,
             destroy: destroy
           });
-        // initialize this control
+       // initialize this control
         arrow.src = options.arrow && options.arrow.image;
         arrow.w = options.arrow && options.arrow.width || arrow.width();
         arrow.h = options.arrow && options.arrow.height || arrow.height();
         bar.w = options.map && options.map.width || bar.width();
         bar.h = options.map && options.map.height || bar.height();
-        // bind mousedown event
+       // bind mousedown event
         bar.bind('mousedown', mouseDown);
         bind.call($this, draw);
       },
-    ColorValuePicker = // controls for all the input elements for the typing in color values
+    // controls for all the input elements for the typing in color values
+    ColorValuePicker = 
       function(picker, color, bindedHex, alphaPrecision)
       {
-        var $this = this, // private properties and methods
+        // private properties and methods
+        var $this = this, 
           inputs = picker.find('td.Text input'),
           red = inputs.eq(3),
           green = inputs.eq(4),
@@ -311,7 +327,8 @@
           value = inputs.eq(2),
           hex = inputs.eq(inputs.length > 7 ? 7 : 6),
           ahex = inputs.length > 7 ? inputs.eq(8) : null,
-          keyDown = // input box key down - use arrows to alter color
+          // input box key down - use arrows to alter color
+          keyDown = 
             function(e)
             {
               if (e.target.value == '' && e.target != hex.get(0) && (bindedHex != null && e.target != bindedHex.get(0) || bindedHex == null)) return;
@@ -411,7 +428,8 @@
                   break;
               }
             },
-          keyUp = // input box key up - validate value and set color
+          // input box key up - validate value and set color
+          keyUp = 
             function(e)
             {
               if (e.target.value == '' && e.target != hex.get(0) && (bindedHex != null && e.target != bindedHex.get(0) || bindedHex == null)) return;
@@ -462,7 +480,8 @@
                   break;
               }
             },
-          blur = // input box blur - reset to original if value empty
+          // input box blur - reset to original if value empty
+          blur = 
             function(e)
             {
               if (color.val() != null)
@@ -485,7 +504,8 @@
                 }
               }
             },
-          validateKey = // validate key
+          // validate key
+          validateKey = 
             function(e)
             {
               switch(e.keyCode)
@@ -502,7 +522,8 @@
               }
               return true;
             },
-          setValueInRange = // constrain value within range
+          // constrain value within range
+          setValueInRange = 
             function(value, min, max)
             {
               if (value == '' || isNaN(value)) return min;
@@ -528,7 +549,7 @@
           destroy =
             function()
             {
-              // unbind all events and null objects
+             // unbind all events and null objects
               red.add(green).add(blue).add(alpha).add(hue).add(saturation).add(value).add(hex).add(bindedHex).add(ahex).unbind('keyup', keyUp).unbind('blur', blur);
               red.add(green).add(blue).add(alpha).add(hue).add(saturation).add(value).unbind('keydown', keyDown);
               color.unbind(colorChanged);
@@ -542,7 +563,8 @@
               hex = null;
               ahex = null;
             };
-        $.extend(true, $this, // public properties and methods
+        // public properties and methods
+        $.extend(true, $this, 
           {
             destroy: destroy
           });
@@ -552,9 +574,11 @@
       };
   $.jPicker =
     {
-      List: [], // array holding references to each active instance of the control
-      Color: // color object - we will be able to assign by any color space type or retrieve any color space info
-             // we want this public so we can optionally assign new color objects to initial values using inputs other than a string hex value (also supported)
+      // array holding references to each active instance of the control
+      List: [], 
+      // color object - we will be able to assign by any color space type or retrieve any color space info
+      Color: 
+            // we want this public so we can optionally assign new color objects to initial values using inputs other than a string hex value (also supported)
         function(init)
         {
           var $this = this,
@@ -821,7 +845,8 @@
               {
                 changeEvents = null;
               }
-          $.extend(true, $this, // public properties and methods
+          // public properties and methods
+          $.extend(true, $this, 
             {
               val: val,
               bind: bind,
@@ -836,7 +861,8 @@
             else if (init.h != null && init.s != null && init.v != null) val('hsv' + (init.a != null ? 'a' : ''), init);
           }
         },
-      ColorMethods: // color conversion methods  - make public to give use to external scripts
+      // color conversion methods  - make public to give use to external scripts
+      ColorMethods: 
         {
           hexToRgba:
             function(hex)
@@ -988,7 +1014,8 @@
             }
         }
     };
-  var Color = $.jPicker.Color, List = $.jPicker.List, ColorMethods = $.jPicker.ColorMethods; // local copies for YUI compressor
+  // local copies for YUI compressor
+  var Color = $.jPicker.Color, List = $.jPicker.List, ColorMethods = $.jPicker.ColorMethods; 
   $.fn.jPicker =
     function(options)
     {
@@ -996,8 +1023,10 @@
       return this.each(
         function()
         {
-          var $this = this, settings = $.extend(true, {}, $.fn.jPicker.defaults, options); // local copies for YUI compressor
-          if ($($this).get(0).nodeName.toLowerCase() == 'input') // Add color picker icon if binding to an input element and bind the events to the input
+          // local copies for YUI compressor
+          var $this = this, settings = $.extend(true, {}, $.fn.jPicker.defaults, options); 
+          // Add color picker icon if binding to an input element and bind the events to the input
+          if ($($this).get(0).nodeName.toLowerCase() == 'input') 
           {
             $.extend(true, settings,
               {
@@ -1021,12 +1050,15 @@
           }
           if (settings.window.expandable)
             $($this).after('<span class="jPicker"><span class="Icon"><span class="Color">&nbsp;</span><span class="Alpha">&nbsp;</span><span class="Image" title="Click To Open Color Picker">&nbsp;</span><span class="Container">&nbsp;</span></span></span>');
-          else settings.window.liveUpdate = false; // Basic control binding for inline use - You will need to override the liveCallback or commitCallback function to retrieve results
-          var isLessThanIE7 = parseFloat(navigator.appVersion.split('MSIE')[1]) < 7 && document.body.filters, // needed to run the AlphaImageLoader function for IE6
+          // Basic control binding for inline use - You will need to override the liveCallback or commitCallback function to retrieve results
+          else settings.window.liveUpdate = false; 
+          // needed to run the AlphaImageLoader function for IE6
+          var isLessThanIE7 = parseFloat(navigator.appVersion.split('MSIE')[1]) < 7 && document.body.filters, 
             container = null,
             colorMapDiv = null,
             colorBarDiv = null,
-            colorMapL1 = null, // different layers of colorMap and colorBar
+            // different layers of colorMap and colorBar
+            colorMapL1 = null, 
             colorMapL2 = null,
             colorMapL3 = null,
             colorBarL1 = null,
@@ -1035,26 +1067,37 @@
             colorBarL4 = null,
             colorBarL5 = null,
             colorBarL6 = null,
-            colorMap = null, // color maps
+            // color maps
+            colorMap = null, 
             colorBar = null,
             colorPicker = null,
-            elementStartX = null, // Used to record the starting css positions for dragging the control
+            // Used to record the starting css positions for dragging the control
+            elementStartX = null, 
             elementStartY = null,
-            pageStartX = null, // Used to record the mousedown coordinates for dragging the control
+            // Used to record the mousedown coordinates for dragging the control
+            pageStartX = null, 
             pageStartY = null,
-            activePreview = null, // color boxes above the radio buttons
+            // color boxes above the radio buttons
+            activePreview = null, 
             currentPreview = null,
             okButton = null,
             cancelButton = null,
-            grid = null, // preset colors grid
-            iconColor = null, // iconColor for popup icon
-            iconAlpha = null, // iconAlpha for popup icon
-            iconImage = null, // iconImage popup icon
-            moveBar = null, // drag bar
-            setColorMode = // set color mode and update visuals for the new color mode
+            // preset colors grid
+            grid = null, 
+            // iconColor for popup icon
+            iconColor = null, 
+            // iconAlpha for popup icon
+            iconAlpha = null, 
+            // iconImage popup icon
+            iconImage = null, 
+            // drag bar
+            moveBar = null, 
+            // set color mode and update visuals for the new color mode
+            setColorMode = 
               function(colorMode)
               {
-                var active = color.active, // local copies for YUI compressor
+                // local copies for YUI compressor
+                var active = color.active, 
                   clientPath = images.clientPath,
                   hex = active.val('hex'),
                   rgbMap,
@@ -1219,7 +1262,8 @@
                 if (active.val('ahex') == null) return;
                 activeColorChanged.call($this, active);
               },
-            activeColorChanged = // Update color when user changes text values
+            // Update color when user changes text values
+            activeColorChanged = 
               function(ui, context)
               {
                 if (context == null || (context != colorBar && context != colorMap)) positionMapAndBarArrows.call($this, ui, context);
@@ -1231,7 +1275,8 @@
                     updateBarVisuals.call($this, ui);
                   }, 0);
               },
-            mapValueChanged = // user has dragged the ColorMap pointer
+            // user has dragged the ColorMap pointer
+            mapValueChanged = 
               function(ui, context)
               {
                 var active = color.active;
@@ -1260,7 +1305,8 @@
                     break;
                 }
               },
-            colorBarValueChanged = // user has dragged the ColorBar slider
+            // user has dragged the ColorBar slider
+            colorBarValueChanged = 
               function(ui, context)
               {
                 var active = color.active;
@@ -1290,7 +1336,8 @@
                     break;
                 }
               },
-            positionMapAndBarArrows = // position map and bar arrows to match current color
+            // position map and bar arrows to match current color
+            positionMapAndBarArrows = 
               function(ui, context)
               {
                 if (context != colorMap)
@@ -1498,12 +1545,14 @@
                   else obj.css({ opacity: '' });
                 }
               },
-            revertColor = // revert color to original color when opened
+            // revert color to original color when opened
+            revertColor = 
               function()
               {
                 color.active.val('ahex', color.current.val('ahex'));
               },
-            commitColor = // commit the color changes
+            // commit the color changes
+            commitColor = 
               function()
               {
                 color.current.val('ahex', color.active.val('ahex'));
@@ -1562,15 +1611,17 @@
             moveBarMouseDown =
               function(e)
               {
-                var element = settings.window.element, // local copies for YUI compressor
+                // local copies for YUI compressor
+                var element = settings.window.element, 
                   page = settings.window.page;
                 elementStartX = parseInt(container.css('left'));
                 elementStartY = parseInt(container.css('top'));
                 pageStartX = e.pageX;
                 pageStartY = e.pageY;
-                // bind events to document to move window - we will unbind these on mouseup
+               // bind events to document to move window - we will unbind these on mouseup
                 $(document).bind('mousemove', documentMouseMove).bind('mouseup', documentMouseUp);
-                e.preventDefault(); // prevent attempted dragging of the column
+                // prevent attempted dragging of the column
+                e.preventDefault(); 
               },
             documentMouseMove =
               function(e)
@@ -1662,8 +1713,8 @@
                 container.addClass('jPicker Container');
                 if (win.expandable) container.hide();
                 container.get(0).onselectstart = function(event){ if (event.target.nodeName.toLowerCase() !== 'input') return false; };
-                // inject html source code - we are using a single table for this control - I know tables are considered bad, but it takes care of equal height columns and
-                // this control really is tabular data, so I believe it is the right move
+               // inject html source code - we are using a single table for this control - I know tables are considered bad, but it takes care of equal height columns and
+               // this control really is tabular data, so I believe it is the right move
                 var all = color.active.val('all');
                 if (win.alphaPrecision < 0) win.alphaPrecision = 0;
                 else if (win.alphaPrecision > 2) win.alphaPrecision = 2;
@@ -1679,7 +1730,8 @@
                       $(document.body).children('div.jPicker.Container').css({zIndex:10});
                       container.css({zIndex:20});
                     });
-                  container.css( // positions must be set and display set to absolute before source code injection or IE will size the container to fit the window
+                  // positions must be set and display set to absolute before source code injection or IE will size the container to fit the window
+                  container.css( 
                     {
                       left:
                         win.position.x == 'left' ? (popup.offset().left - 530 - (win.position.y == 'center' ? 25 : 0)) + 'px' :
@@ -1697,7 +1749,7 @@
                   container = $($this);
                   container.html(controlHtml);
                 }
-                // initialize the objects to the source code just injected
+               // initialize the objects to the source code just injected
                 var tbody = container.find('tbody:first');
                 colorMapDiv = tbody.find('div.Map:first');
                 colorBarDiv = tbody.find('div.Bar:first');
@@ -1712,7 +1764,7 @@
                 colorBarL4 = BarMaps.filter('.Map4:first');
                 colorBarL5 = BarMaps.filter('.Map5:first');
                 colorBarL6 = BarMaps.filter('.Map6:first');
-                // create color pickers and maps
+               // create color pickers and maps
                 colorMap = new Slider(colorMapDiv,
                   {
                     map:
@@ -1768,7 +1820,7 @@
                     setImg.call($this, preview.find('div:first'), images.clientPath + 'preview-opacity.png');
                   }, 0);
                 tbody.find('td.Radio input').bind('click', radioClicked);
-                // initialize quick list
+               // initialize quick list
                 if (color.quickList && color.quickList.length > 0)
                 {
                   var html = '';
@@ -1790,7 +1842,7 @@
                 color.active.bind(activeColorChanged);
                 $.isFunction(liveCallback) && color.active.bind(liveCallback);
                 color.current.bind(currentColorChanged);
-                // bind to input
+               // bind to input
                 if (win.expandable)
                 {
                   $this.icon = popup.parents('.Icon:first');
@@ -1855,7 +1907,8 @@
                 container.html('');
                 for (i = 0; i < List.length; i++) if (List[i] == $this) List.splice(i, 1);
               },
-            images = settings.images, // local copies for YUI compressor
+            // local copies for YUI compressor
+            images = settings.images, 
             localization = settings.localization,
             color =
               {
@@ -1863,15 +1916,20 @@
                 current: (typeof(settings.color.active)).toString().toLowerCase() == 'string' ? new Color({ ahex: !settings.window.alphaSupport && settings.color.active ? settings.color.active.substring(0, 6) + 'ff' : settings.color.active }) : new Color({ ahex: !settings.window.alphaSupport && settings.color.active.val('ahex') ? settings.color.active.val('ahex').substring(0, 6) + 'ff' : settings.color.active.val('ahex') }),
                 quickList: settings.color.quickList
               };
-          $.extend(true, $this, // public properties, methods, and callbacks
+          // public properties, methods, and callbacks
+          $.extend(true, $this, 
             {
-              commitCallback: commitCallback, // commitCallback function can be overridden to return the selected color to a method you specify when the user clicks "OK"
-              liveCallback: liveCallback, // liveCallback function can be overridden to return the selected color to a method you specify in live mode (continuous update)
-              cancelCallback: cancelCallback, // cancelCallback function can be overridden to a method you specify when the user clicks "Cancel"
+              // commitCallback function can be overridden to return the selected color to a method you specify when the user clicks "OK"
+              commitCallback: commitCallback, 
+              // liveCallback function can be overridden to return the selected color to a method you specify in live mode (continuous update)
+              liveCallback: liveCallback, 
+              // cancelCallback function can be overridden to a method you specify when the user clicks "Cancel"
+              cancelCallback: cancelCallback, 
               color: color,
               show: show,
               hide: hide,
-              destroy: destroy // destroys this control entirely, removing all events and objects, and removing itself from the List
+              // destroys this control entirely, removing all events and objects, and removing itself from the List
+              destroy: destroy 
             });
           List.push($this);
           setTimeout(

@@ -2,7 +2,8 @@
 
 class News_mdl extends Model
 {
-	function get($id)//Полный вывод
+	//Полный вывод
+	function get($id)
 	{
 	    $this->db->where('id', $id);
 
@@ -11,7 +12,8 @@ class News_mdl extends Model
 		return $this->db->get('news')->row_array();
 	}
 
-	function get_news()//Вывод
+	//Вывод
+	function get_news()
 	{
 		$this->db->select('*');
 
@@ -21,13 +23,15 @@ class News_mdl extends Model
 
 		for($i = 0; $i < $count; $i++) 
 		{
-			$query[$i]['date'] = date_smart($query[$i]['date']);//Дата размещения
+			//Дата размещения
+			$query[$i]['date'] = date_smart($query[$i]['date']);
 		}
 
 		return $query;
 	}
 
-	function get_all($start_from = FALSE, $per_page)//Страницы
+	//Страницы
+	function get_all($start_from = FALSE, $per_page)
 	{
 		if( $start_from !== FALSE ) 
 		{

@@ -309,7 +309,7 @@ function renderCharMapHTML() {
 function insertChar(chr) {
 	tinyMCEPopup.execCommand('mceInsertContent', false, '&#' + chr + ';');
 
-	// Refocus in window
+// Refocus in window
 	if (tinyMCEPopup.isWindow)
 		window.focus();
 

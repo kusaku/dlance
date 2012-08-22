@@ -15,12 +15,12 @@
 
 			t.editor = ed;
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceNonBreaking', function() {
 				ed.execCommand('mceInsertContent', false, (ed.plugins.visualchars && ed.plugins.visualchars.state) ? '<span _mce_bogus="1" class="mceItemHidden mceItemNbsp">&nbsp;</span>' : '&nbsp;');
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('nonbreaking', {title : 'nonbreaking.nonbreaking_desc', cmd : 'mceNonBreaking'});
 
 			if (ed.getParam('nonbreaking_force_tab')) {
@@ -45,9 +45,9 @@
 			};
 		}
 
-		// Private methods
+	// Private methods
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('nonbreaking', tinymce.plugins.Nonbreaking);
 })();

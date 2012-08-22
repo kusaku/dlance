@@ -35,8 +35,6 @@
 </div>
 <br />
 
-
-
 <? foreach($data as $row): ?>
   <div class="rnd">
     <div>
@@ -71,7 +69,6 @@
 <? endif; ?>
               </td>
             </tr>
-
 
           </table>
         </div>

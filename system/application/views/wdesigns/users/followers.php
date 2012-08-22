@@ -15,11 +15,8 @@
 <p class="desc"><?=$short_descr?></p>
 </div>
 
-
 <div id="yui-main">
 <div id="usermain" class="yui-b">
-
-
 
 <? if( !empty($followers) ): ?>
 <div class="following">
@@ -34,12 +31,8 @@
 <p>Подписчики отсутствуют.</p>
 <? endif; ?>
 
-
 </div>
 </div>
-
-
-
 
 <div id="sidebar" class="yui-b">
 <div class="hd"></div>
@@ -70,7 +63,6 @@
       </tr>
      <tr>
 
-
 <? if( $positive or $negative ): ?>
       <tr>
         <td>Отзывы:</td>
@@ -80,8 +72,6 @@
         </td>
       </tr>
 <? endif; ?>
-
-
 
       <tr>
         <td>Просмотров:</td>

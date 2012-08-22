@@ -5,9 +5,11 @@ $(document).ready(function(){
 	var totalCountGoods = 0;
 	if (!$.cookie("basket")) {$.cookie("basket", '', {path: "/"});}
 	basket = decodeURI($.cookie("basket"));
-	basketArray = basket.split(",");// ������� ��� ������
+	// ������� ��� ������
+	basketArray = basket.split(",");
 	for(var i=0; i<basketArray.length-1;i++) {
-		goodsId = basketArray[i].split(":"); // ������� id ������, ���� � ����������
+		// ������� id ������, ���� � ����������
+		goodsId = basketArray[i].split(":"); 
 		totalCountGoods+=parseInt(goodsId[1]);
 		totalprice+=parseInt(goodsId[1])*parseInt(goodsId[2]);
 	}
@@ -22,19 +24,21 @@ $(document).ready(function(){
 	$('#totalGoods').text(totalCountGoods);
 });
 
-
 $('a.addCart').click(function() {
-	data = $(this).attr('id').split('-');//����������� id � ������ � ��������� ��� �� ������� "-" ������� ���������.
+	//����������� id � ������ � ��������� ��� �� ������� "-" ������� ���������.
+	data = $(this).attr('id').split('-');
 	addCart(data[1], data[2], 1);
 	return false;
 });
 
-
 function addCart(p1, p2, p3){
 	if (!p3 || p3==0) {p3=1;}
-	msg.id = p1; 		  // ����
-	msg.price = parseInt(p2); // ����
-	msg.count = parseInt(p3); // ����������
+	// ����
+	msg.id = p1; 		  
+	// ����
+	msg.price = parseInt(p2); 
+	// ����������
+	msg.count = parseInt(p3); 
 	var check = false;
 	var cnt = false;
 	var totalCountGoods = 0;
@@ -55,7 +59,8 @@ function addCart(p1, p2, p3){
 
 	for(var i=0; i<basketArray.length-1;i++) {
 		goodsId = basketArray[i].split(":");
-		if(goodsId[0]==msg.id)	// ����, �� �������� �� �� ���� ����� �����
+		// ����, �� �������� �� �� ���� ����� �����
+		if(goodsId[0]==msg.id)	
 		{
 			check = true;
 			cnt   = goodsId[1];
@@ -70,9 +75,11 @@ function addCart(p1, p2, p3){
     }
     if(!check) {
         alert("���������!");
-        basketArray = basket.split(",");// ������� ��� ������
+        // ������� ��� ������
+        basketArray = basket.split(",");
         for(var i=0; i<basketArray.length-1;i++) {
-	    goodsId = basketArray[i].split(":"); // ������� id ������, ���� � ����������
+	    // ������� id ������, ���� � ����������
+	    goodsId = basketArray[i].split(":"); 
 	    totalCountGoods+=parseInt(goodsId[1]);
 	    totalprice+=parseInt(goodsId[1])*parseInt(goodsId[2]);
 	}
@@ -82,8 +89,6 @@ function addCart(p1, p2, p3){
 	$.cookie("basket", basket, {path: "/"});
     }
 }
-
-
 
 $('#clearBasket').click(function() {
 			$.cookie("totalPrice", '', {path: "/"});

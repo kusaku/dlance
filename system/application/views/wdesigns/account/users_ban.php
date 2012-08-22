@@ -1,7 +1,6 @@
 <div id="yui-main">
 <div class="yui-b">
 
-
 <?=validation_errors()?>
 <div class="rnd">
  <div>
@@ -18,8 +17,6 @@
   </div>
  </div>
 </div>
-
-
 
   </div>
 

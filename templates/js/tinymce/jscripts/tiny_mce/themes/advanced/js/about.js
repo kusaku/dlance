@@ -6,7 +6,7 @@ function init() {
 	tinyMCEPopup.resizeToInnerSize();
 	ed = tinyMCEPopup.editor;
 
-	// Give FF some time
+// Give FF some time
 	window.setTimeout(insertHelpIFrame, 10);
 
 	tcont = document.getElementById('plugintablecontainer');

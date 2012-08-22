@@ -8,7 +8,7 @@ var PasteTextDialog = {
 	insert : function() {
 		var h = tinyMCEPopup.dom.encode(document.getElementById('content').value), lines;
 
-		// Convert linebreaks into paragraphs
+	// Convert linebreaks into paragraphs
 		if (document.getElementById('linebreaks').checked) {
 			lines = h.split(/\r?\n/);
 			if (lines.length > 1) {

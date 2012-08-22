@@ -41,7 +41,6 @@
 
 $autoload['libraries'] = array('database','session','transaction','rating','events','template','form_validation','errors','tariff','common','settings');
 
-
 /**
 *  -------------------------------------------------------------------
 *   Auto-load Helper Files
@@ -53,7 +52,6 @@ $autoload['libraries'] = array('database','session','transaction','rating','even
 
 $autoload['helper'] = array('url','date', 'validation');
 
-
 /**
 *  -------------------------------------------------------------------
 *   Auto-load Plugins
@@ -64,7 +62,6 @@ $autoload['helper'] = array('url','date', 'validation');
 */
 
 $autoload['plugin'] = array();
-
 
 /**
 *  -------------------------------------------------------------------
@@ -81,7 +78,6 @@ $autoload['plugin'] = array();
 
 $autoload['config'] = array();
 
-
 /**
 *  -------------------------------------------------------------------
 *   Auto-load Language files
@@ -97,7 +93,6 @@ $autoload['config'] = array();
 
 $autoload['language'] = array();
 
-
 /**
 *  -------------------------------------------------------------------
 *   Auto-load Models
@@ -110,7 +105,6 @@ $autoload['language'] = array();
 
 $autoload['model'] = array('settings/load_settings_mdl', 'users/users_mdl');
 
-
 /**
 *  -------------------------------------------------------------------
 *   Auto-load Core Libraries
@@ -120,8 +114,5 @@ $autoload['model'] = array('settings/load_settings_mdl', 'users/users_mdl');
 * 
 */
 // $autoload['core'] = array();
-
-
-
 /* End of file autoload.php */
 /* Location: ./system/application/config/autoload.php */

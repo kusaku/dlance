@@ -41,8 +41,7 @@
 			};
 		},
 
-		// Private methods
-
+	// Private methods
 		_getDateTime : function(d, fmt) {
 			var ed = this.editor;
 
@@ -78,6 +77,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('insertdatetime', tinymce.plugins.InsertDateTime);
 })();

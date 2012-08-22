@@ -53,13 +53,13 @@ $(function() {
 			.animate({ fontSize: curParSize });
 	}
 	
-	//direction true = right, false = left
+//direction true = right, false = left
 	function change(direction) {
 	   
-	    //if not at the first or last panel
+	   //if not at the first or last panel
 		if((direction && !(curPanel < totalPanels)) || (!direction && (curPanel <= 1))) { return false; }	
         
-        //if not currently moving
+       //if not currently moving
         if (($("#slider").data("currentlyMoving") == false)) {
             
 			$("#slider").data("currentlyMoving", true);
@@ -81,46 +81,50 @@ $(function() {
 			
 			curPanel = next;
 			
-			//remove all previous bound functions
+		//remove all previous bound functions
 			$("#panel_"+(curPanel+1)).unbind();	
 			
-			//go forward
+		//go forward
 			$("#panel_"+(curPanel+1)).click(function(){ change(true); });
 			
-            //remove all previous bound functions															
+           //remove all previous bound functions															
 			$("#panel_"+(curPanel-1)).unbind();
 			
-			//go back
+		//go back
 			$("#panel_"+(curPanel-1)).click(function(){ change(false); }); 
 			
-			//remove all previous bound functions
+		//remove all previous bound functions
 			$("#panel_"+curPanel).unbind();
 		}
 	}
 	
-	// Set up "Current" panel and next and prev
+// Set up "Current" panel and next and prev
 	growBigger("#panel_3");	
 	var curPanel = 3;
 	
 	$("#panel_"+(curPanel+1)).click(function(){ change(true); });
 	$("#panel_"+(curPanel-1)).click(function(){ change(false); });
 	
-	//when the left/right arrows are clicked
+//when the left/right arrows are clicked
 	$(".right").click(function(){ change(true); });	
 	$(".left").click(function(){ change(false); });
 	
 	$(window).keydown(function(event){
 	  switch (event.keyCode) {
-			case 13: //enter
+			//enter
+			case 13: 
 				$(".right").click();
 				break;
-			case 32: //space
+			//space
+			case 32: 
 				$(".right").click();
 				break;
-	    case 37: //left arrow
+	    //left arrow
+	    case 37: 
 				$(".left").click();
 				break;
-			case 39: //right arrow
+			//right arrow
+			case 39: 
 				$(".right").click();
 				break;
 	  }

@@ -57,11 +57,11 @@ function init() {
 	else
 		document.getElementById("linklistcontainer").innerHTML = html;
 
-	// Resize some elements
+// Resize some elements
 	if (isVisible('filebrowser'))
 		document.getElementById('src').style.width = '230px';
 
-	// Setup form
+// Setup form
 	if (pl != "") {
 		pl = tinyMCEPopup.editor.plugins.media._parse(pl);
 
@@ -304,7 +304,7 @@ function getType(v) {
 
 	fo = ed.getParam("media_types", "flash=swf;flv=flv;shockwave=dcr;qt=mov,qt,mpg,mp3,mp4,mpeg;shockwave=dcr;wmp=avi,wmv,wm,asf,asx,wmx,wvx;rmp=rm,ra,ram").split(';');
 
-	// YouTube
+// YouTube
 	if (v.match(/watch\?v=(.+)(.*)/)) {
 		f.width.value = '425';
 		f.height.value = '350';
@@ -312,7 +312,7 @@ function getType(v) {
 		return 'flash';
 	}
 
-	// Google video
+// Google video
 	if (v.indexOf('http://video.google.com/videoplay?docid=') == 0) {
 		f.width.value = '425';
 		f.height.value = '326';
@@ -341,8 +341,9 @@ function switchType(v) {
 	selectByValue(d.forms[0], 'media_type', t);
 	changedType(t);
 
-	// Update qtsrc also
-	if (t == 'qt' && f.src.value.toLowerCase().indexOf('rtsp://') != -1) {
+// Update qtsrc also
+	//') != -1) {
+	if (t == 'qt' && f.src.value.toLowerCase().indexOf('rtsp:
 		alert(ed.getLang("media_qt_stream_warn"));
 
 		if (f.qt_qtsrc.value == '')
@@ -546,7 +547,7 @@ function generatePreview(c) {
 	if (f.height.value != "")
 		oldHeight = nh;
 
-	// After constrain
+// After constrain
 	pl = serializeParameters();
 
 	switch (f.media_type.options[f.media_type.selectedIndex].value) {
@@ -600,15 +601,16 @@ function generatePreview(c) {
 	pl.name = !pl.name ? 'eobj' : pl.name;
 	pl.align = !pl.align ? '' : pl.align;
 
-	// Avoid annoying warning about insecure items
+// Avoid annoying warning about insecure items
 	if (!tinymce.isIE || document.location.protocol != 'https:') {
 		h += '<object classid="' + cls + '" codebase="' + codebase + '" width="' + pl.width + '" height="' + pl.height + '" id="' + pl.id + '" name="' + pl.name + '" align="' + pl.align + '">';
 
 		for (n in pl) {
 			h += '<param name="' + n + '" value="' + pl[n] + '">';
 
-			// Add extra url parameter if it's an absolute URL
-			if (n == 'src' && pl[n].indexOf('://') != -1)
+		// Add extra url parameter if it's an absolute URL
+			//') != -1)
+			if (n == 'src' && pl[n].indexOf(':
 				h += '<param name="url" value="' + pl[n] + '" />';
 		}
 	}
@@ -620,7 +622,7 @@ function generatePreview(c) {
 
 	h += '></embed>';
 
-	// Avoid annoying warning about insecure items
+// Avoid annoying warning about insecure items
 	if (!tinymce.isIE || document.location.protocol != 'https:')
 		h += '</object>';
 

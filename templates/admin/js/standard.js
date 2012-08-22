@@ -4,10 +4,10 @@
 
 (function($)
 {
-	// Standard template setup
+// Standard template setup
 	$.fn.addTemplateSetup(function()
 	{
-		// Mini menu
+	// Mini menu
 		this.find('.mini-menu').css({opacity:0}).parent().hover(function()
 		{
 			$(this).children('.mini-menu').stop(true).animate({opacity:1});
@@ -18,18 +18,18 @@
 			
 		});
 		
-		// CSS Menu improvement
+	// CSS Menu improvement
 		this.find('.menu, .menu li:has(ul)').hover(function()
 		{
 			$(this).openDropDownMenu();
 			
 		}, function()
 		{
-			// Remove in case of future window resizing
+		// Remove in case of future window resizing
 			$(this).children('ul').removeClass('reverted');
 		});
 		
-		// Scroll top button
+	// Scroll top button
 		$('a[href="#top"]').click(function(event)
 		{
 			event.preventDefault();
@@ -37,25 +37,25 @@
 		});
 	});
 	
-	// Close buttons
+// Close buttons
 	$('.close-bt').live('click', function()
 	{
 		$(this).parent().fadeAndRemove();
 	});
 	
-	// Document initial setup
+// Document initial setup
 	$(document).ready(function()
 	{
-		// Notifications blocks
+	// Notifications blocks
 		var notifications = $('<ul id="notifications"></ul>').appendTo(document.body);
 		var notificationsTop = parseInt(notifications.css('top'));
 		
-		// If it is a standard page
+	// If it is a standard page
 		if (!$(document.body).hasClass('special-page'))
 		{
-			// Main nav - click style
+		// Main nav - click style
 			$('nav > ul > li').click(function(event) {
-				// If not already active and has sub-menu
+			// If not already active and has sub-menu
 				if (!$(this).hasClass('current') && $(this).find('ul li').length > 0)
 				{
 					$(this).addClass('current').siblings().removeClass('current');
@@ -67,7 +67,7 @@
 				offset: -3
 			});
 			
-			// Main nav - hover style
+		// Main nav - hover style
 			/*$('nav > ul > li').hover(function() {
 				$(this).addClass('current').siblings().removeClass('current');
 				$('nav > ul > li').refreshTip();
@@ -76,18 +76,18 @@
 				offset: -3
 			});*/
 			
-			// Advanced search field
+		// Advanced search field
 			if ($.fn.advancedSearchField)
 			{
 				$('#s').advancedSearchField();
 			}
 			
-			// Status bar buttons : drop-downs fade In/Out
+		// Status bar buttons : drop-downs fade In/Out
 			function convertDropLists()
 			{
 				$(this).find('.result-block .small-files-list').accessibleList({moreAfter:false});
 				
-				// Run only once
+			// Run only once
 				$(this).unbind('mouseenter', convertDropLists);
 			}
 			$('#status-infos li:has(.result-block)').hover(function()
@@ -106,13 +106,13 @@
 				
 			}).bind('mouseenter', convertDropLists);
 			
-			// Fixed control bar
+		// Fixed control bar
 			var controlBar = $('#control-bar');
 			if (controlBar.length > 0)
 			{
 				var cbPlaceHolder = controlBar.after('<div id="cb-place-holder" style="height:'+controlBar.outerHeight()+'px"></div>').next();
 				
-				// Effect
+			// Effect
 				controlBar.hover(function()
 				{
 					if ($(this).hasClass('fixed'))
@@ -128,10 +128,10 @@
 					}
 				});
 				
-				// Listener
+			// Listener
 				$(window).scroll(function()
 				{
-					// Check top position
+				// Check top position
 					var controlBarPos = controlBar.hasClass('fixed') ? cbPlaceHolder.offset().top : controlBar.offset().top;
 					
 					if ($(window).scrollTop() > controlBarPos)
@@ -141,7 +141,7 @@
 							cbPlaceHolder.height(controlBar.outerHeight()).show();
 							controlBar.addClass('fixed').stop(true).fadeTo('slow', 0.5);
 							
-							// Notifications
+						// Notifications
 							$('#notifications').animate({'top': controlBar.outerHeight()+notificationsTop});
 						}
 					}
@@ -152,11 +152,11 @@
 							cbPlaceHolder.hide();
 							controlBar.removeClass('fixed').stop(true).fadeTo('fast', 1, function()
 							{
-								// Required for IE
+							// Required for IE
 								$(this).css('filter', '');
 							});
 							
-							// Notifications
+						// Notifications
 							$('#notifications').animate({'top': notificationsTop});
 						}
 					}
@@ -173,13 +173,13 @@
 	{
 		var ul = this.children('ul');
 		
-		// Position check
+	// Position check
 		if (ul.offset().left+ul.outerWidth()-$(window).scrollLeft() > $(window).width())
 		{
 			ul.addClass('reverted');
 		}
 		
-		// Effect - IE < 9 uses filter for opacity, cutting out sub-menus
+	// Effect - IE < 9 uses filter for opacity, cutting out sub-menus
 		if (!$.browser.msie || $.browser.version > 8)
 		{
 			ul.stop(true).css({opacity:0}).animate({opacity:1});
@@ -187,7 +187,6 @@
 	};
 	
 })(jQuery);
-
 
 /**
  * Display a notification. If the page is not yet ready, delay the notification until it is ready.
@@ -201,25 +200,25 @@ var notify = function(message, options)
 {
 	var block = jQuery('#notifications');
 	
-	// If ready
+// If ready
 	if (block.length > 0)
 	{
 		var settings = jQuery.extend({}, notify.defaults, options);
 		
-		// Append message
+	// Append message
 		var closeButton = settings.closeButton ? '<span class="close-bt"></span>' : '';
 		var element = jQuery('#notifications').append('<li>'+message+closeButton+'</li>').children(':last-child');
 		
-		// Effect
+	// Effect
 		element.expand();
 		
-		// If closing
+	// If closing
 		if (settings.autoClose)
 		{
-			// Timer
+		// Timer
 			var timeoutId = setTimeout(function() { element.fadeAndRemove(); }, settings.closeDelay);
 			
-			// Prevent closing when hover
+		// Prevent closing when hover
 			element.hover(function()
 			{
 				clearTimeout(timeoutId);
@@ -232,14 +231,17 @@ var notify = function(message, options)
 	}
 	else
 	{
-		// Not ready, delay action
+	// Not ready, delay action
 		setTimeout(function() { notify(message, options); }, 40);
 	}
 };
 
 // Defaults values for the notify method
 notify.defaults = {
-	closeButton: true,			// Add a close button to the message
-	autoClose: true,			// Message will close after (closeDelay) ms
-	closeDelay: 8000			// Delay before message closes
+	// Add a close button to the message
+	closeButton: true,			
+	// Message will close after (closeDelay) ms
+	autoClose: true,			
+	// Delay before message closes
+	closeDelay: 8000			
 };

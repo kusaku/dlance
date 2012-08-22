@@ -1,7 +1,6 @@
 <div id="yui-main">
 <div class="yui-b">
 
-
 <h1><a href="/blogs/articles">Записи</a></h1>
 <p class="subtitle"> Список ваших записей. Для публикации новой записи нажмите: "<a href="/blogs/add">Добавить запись</a>"</p>
 
@@ -24,7 +23,6 @@
 <? else: ?>
 <p>Записи отсутствуют.</p>
 <? endif; ?>
-
 
   </div>
 

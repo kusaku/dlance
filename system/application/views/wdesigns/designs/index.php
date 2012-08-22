@@ -13,7 +13,8 @@
 			$active = $category;
 			foreach($categories as $row):
 				if( $active == $row['id'] ):
-					if( $row['parent_id'] != 0 )://Если у активной категории имеется раздел, присваиваем раздел
+					//Если у активной категории имеется раздел, присваиваем раздел
+					if( $row['parent_id'] != 0 ):
 						$active = $row['parent_id'];
 					endif;
 				endif;

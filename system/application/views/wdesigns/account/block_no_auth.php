@@ -14,7 +14,6 @@
 </ul>
 </div>
 
-
 <div class="sideblock mb0 noborder">
 <h3>Аккаунт</h3> 
 <ul>
@@ -66,7 +65,6 @@
 </ul>
 </div>
 </div>
-
 
 </div>
 </div>

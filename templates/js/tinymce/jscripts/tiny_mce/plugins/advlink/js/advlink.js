@@ -34,14 +34,14 @@ function init() {
 	document.getElementById('anchorlistcontainer').innerHTML = getAnchorListHTML('anchorlist','href');
 	document.getElementById('targetlistcontainer').innerHTML = getTargetListHTML('targetlist','target');
 
-	// Link list
+// Link list
 	html = getLinkListHTML('linklisthref','href');
 	if (html == "")
 		document.getElementById("linklisthrefrow").style.display = 'none';
 	else
 		document.getElementById("linklisthrefcontainer").innerHTML = html;
 
-	// Resize some elements
+// Resize some elements
 	if (isVisible('hrefbrowser'))
 		document.getElementById('href').style.width = '260px';
 
@@ -60,7 +60,7 @@ function init() {
 		var href = inst.dom.getAttrib(elm, 'href');
 		var onclick = inst.dom.getAttrib(elm, 'onclick');
 
-		// Setup form data
+	// Setup form data
 		setFormValue('href', href);
 		setFormValue('title', inst.dom.getAttrib(elm, 'title'));
 		setFormValue('id', inst.dom.getAttrib(elm, 'id'));
@@ -89,13 +89,13 @@ function init() {
 		setFormValue('target', inst.dom.getAttrib(elm, 'target'));
 		setFormValue('classes', inst.dom.getAttrib(elm, 'class'));
 
-		// Parse onclick data
+	// Parse onclick data
 		if (onclick != null && onclick.indexOf('window.open') != -1)
 			parseWindowOpen(onclick);
 		else
 			parseFunction(onclick);
 
-		// Select by the values
+	// Select by the values
 		selectByValue(formObj, 'dir', inst.dom.getAttrib(elm, 'dir'));
 		selectByValue(formObj, 'rel', inst.dom.getAttrib(elm, 'rel'));
 		selectByValue(formObj, 'rev', inst.dom.getAttrib(elm, 'rev'));
@@ -127,7 +127,7 @@ function setFormValue(name, value) {
 function parseWindowOpen(onclick) {
 	var formObj = document.forms[0];
 
-	// Preprocess center code
+// Preprocess center code
 	if (onclick.indexOf('return false;') != -1) {
 		formObj.popupreturn.checked = true;
 		onclick = onclick.replace('return false;', '');
@@ -173,7 +173,7 @@ function parseFunction(onclick) {
 	var formObj = document.forms[0];
 	var onClickData = parseLink(onclick);
 
-	// TODO: Add stuff here
+// TODO: Add stuff here
 }
 
 function getOption(opts, name) {
@@ -206,23 +206,24 @@ function parseLink(link) {
 
 	var fnName = link.replace(new RegExp("\\s*([A-Za-z0-9\.]*)\\s*\\(.*", "gi"), "$1");
 
-	// Is function name a template function
+// Is function name a template function
 	var template = templates[fnName];
 	if (template) {
-		// Build regexp
+	// Build regexp
 		var variableNames = template.match(new RegExp("'?\\$\\{[A-Za-z0-9\.]*\\}'?", "gi"));
 		var regExp = "\\s*[A-Za-z0-9\.]*\\s*\\(";
 		var replaceStr = "";
 		for (var i=0; i<variableNames.length; i++) {
-			// Is string value
+		// Is string value
 			if (variableNames[i].indexOf("'${") != -1)
 				regExp += "'(.*)'";
-			else // Number value
+			// Number value
+			else 
 				regExp += "([0-9]*)";
 
 			replaceStr += "$" + (i+1);
 
-			// Cleanup variable name
+		// Cleanup variable name
 			variableNames[i] = variableNames[i].replace(new RegExp("[^A-Za-z0-9]", "gi"), "");
 
 			if (i != variableNames.length-1) {
@@ -234,7 +235,7 @@ function parseLink(link) {
 
 		regExp += "\\);?";
 
-		// Build variable array
+	// Build variable array
 		var variables = [];
 		variables["_function"] = fnName;
 		var variableValues = link.replace(new RegExp(regExp, "gi"), replaceStr).split('<delim>');
@@ -251,7 +252,7 @@ function parseOptions(opts) {
 	if (opts == null || opts == "")
 		return [];
 
-	// Cleanup the options
+// Cleanup the options
 	opts = opts.toLowerCase();
 	opts = opts.replace(/;/g, ",");
 	opts = opts.replace(/[^0-9a-z=,]/g, "");
@@ -332,8 +333,7 @@ function buildOnClick() {
 	if (formObj.popupreturn.checked)
 		onclick += "return false;";
 
-	// tinyMCE.debug(onclick);
-
+// tinyMCE.debug(onclick);
 	formObj.onclick.value = onclick;
 
 	if (formObj.href.value == "")
@@ -352,7 +352,7 @@ function setAttrib(elm, attrib, value) {
 			value = valueElm.value;
 	}
 
-	// Clean up the style
+// Clean up the style
 	if (attrib == 'style')
 		value = dom.serializeStyle(dom.parseStyle(value), 'a');
 
@@ -387,7 +387,7 @@ function insertAction() {
 
 	elm = inst.dom.getParent(elm, "A");
 
-	// Remove element if there is no href
+// Remove element if there is no href
 	if (!document.forms[0].href.value) {
 		tinyMCEPopup.execCommand("mceBeginUndoLevel");
 		i = inst.selection.getBookmark();
@@ -400,7 +400,7 @@ function insertAction() {
 
 	tinyMCEPopup.execCommand("mceBeginUndoLevel");
 
-	// Create new anchor elements
+// Create new anchor elements
 	if (elm == null) {
 		inst.getDoc().execCommand("unlink", false, null);
 		tinyMCEPopup.execCommand("CreateLink", false, "#mce_temp_url#", {skip_undo : 1});
@@ -411,7 +411,7 @@ function insertAction() {
 	} else
 		setAllAttribs(elm);
 
-	// Don't move caret if selection was image
+// Don't move caret if selection was image
 	if (elm.childNodes.length != 1 || elm.firstChild.nodeName != 'IMG') {
 		inst.focus();
 		inst.selection.select(elm);
@@ -456,7 +456,7 @@ function setAllAttribs(elm) {
 	setAttrib(elm, 'onkeydown');
 	setAttrib(elm, 'onkeyup');
 
-	// Refresh in old MSIE
+// Refresh in old MSIE
 	if (tinyMCE.isMSIE5)
 		elm.outerHTML = elm.outerHTML;
 }
@@ -492,7 +492,7 @@ function getLinkListHTML(elm_id, target_form_element, onchange_func) {
 
 	return html;
 
-	// tinyMCE.debug('-- image list start --', html, '-- image list end --');
+// tinyMCE.debug('-- image list start --', html, '-- image list end --');
 }
 
 function getTargetListHTML(elm_id, target_form_element) {

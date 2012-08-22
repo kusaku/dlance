@@ -12,7 +12,6 @@
 * 
 */
 $config['base_url'] = "http://dlance.aks/";
-
 /**
 * --------------------------------------------------------------------------
 *  Index File
@@ -90,7 +89,6 @@ $config['charset'] = "UTF-8";
 */
 $config['enable_hooks'] = FALSE;
 
-
 /**
 * --------------------------------------------------------------------------
 *  Class Extension Prefix
@@ -104,7 +102,6 @@ $config['enable_hooks'] = FALSE;
 * 
 */
 $config['subclass_prefix'] = 'MY_';
-
 
 /**
 * --------------------------------------------------------------------------
@@ -126,7 +123,6 @@ $config['subclass_prefix'] = 'MY_';
 //$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 $config['permitted_uri_chars'] = '?A-Za-zА-Яа-я=+\s&0-9~%\.\:_\-';
 //$config['permitted_uri_chars'] = 'a-zа-яё 0-9~%.:_\-';
-
 /**
 * --------------------------------------------------------------------------
 *  Enable Query Strings
@@ -152,7 +148,8 @@ $config['permitted_uri_chars'] = '?A-Za-zА-Яа-я=+\s&0-9~%\.\:_\-';
 $config['enable_query_strings'] = FALSE;
 $config['controller_trigger']   = 'c';
 $config['function_trigger']     = 'm';
-$config['directory_trigger']    = 'd'; // experimental not currently in use
+// experimental not currently in use
+$config['directory_trigger']    = 'd'; 
 
 /**
 * --------------------------------------------------------------------------
@@ -298,7 +295,6 @@ $config['compress_output'] = FALSE;
 */
 $config['time_reference'] = 'local';
 
-
 /**
 * --------------------------------------------------------------------------
 *  Rewrite PHP Short Tags
@@ -310,8 +306,6 @@ $config['time_reference'] = 'local';
 * 
 */
 $config['rewrite_short_tags'] = FALSE;
-
-
 
 /* End of file config.php */
 /* Location: ./system/application/config/config.php */

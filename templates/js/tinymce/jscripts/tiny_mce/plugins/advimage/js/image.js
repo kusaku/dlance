@@ -44,7 +44,7 @@ var ImageDialog = {
 				nl.onmouseoutsrc.value = dom.getAttrib(n, 'onmouseout').replace(/^\s*this.src\s*=\s*\'([^\']+)\';?\s*$/, '$1');
 
 			if (ed.settings.inline_styles) {
-				// Move attribs to styles
+			// Move attribs to styles
 				if (dom.getAttrib(n, 'align'))
 					this.updateStyle('align');
 
@@ -59,26 +59,26 @@ var ImageDialog = {
 			}
 		}
 
-		// Setup browse button
+	// Setup browse button
 		document.getElementById('srcbrowsercontainer').innerHTML = getBrowserHTML('srcbrowser','src','image','theme_advanced_image');
 		if (isVisible('srcbrowser'))
 			document.getElementById('src').style.width = '260px';
 
-		// Setup browse button
+	// Setup browse button
 		document.getElementById('onmouseoversrccontainer').innerHTML = getBrowserHTML('overbrowser','onmouseoversrc','image','theme_advanced_image');
 		if (isVisible('overbrowser'))
 			document.getElementById('onmouseoversrc').style.width = '260px';
 
-		// Setup browse button
+	// Setup browse button
 		document.getElementById('onmouseoutsrccontainer').innerHTML = getBrowserHTML('outbrowser','onmouseoutsrc','image','theme_advanced_image');
 		if (isVisible('outbrowser'))
 			document.getElementById('onmouseoutsrc').style.width = '260px';
 
-		// If option enabled default contrain proportions to checked
+	// If option enabled default contrain proportions to checked
 		if (ed.getParam("advimage_constrain_proportions", true))
 			f.constrain.checked = true;
 
-		// Check swap image if valid data
+	// Check swap image if valid data
 		if (nl.onmouseoversrc.value || nl.onmouseoutsrc.value)
 			this.setSwapImage(true);
 		else
@@ -120,7 +120,7 @@ var ImageDialog = {
 
 		tinyMCEPopup.restoreSelection();
 
-		// Fixes crash in Safari
+	// Fixes crash in Safari
 		if (tinymce.isWebKit)
 			ed.getWin().focus();
 
@@ -132,7 +132,7 @@ var ImageDialog = {
 				align : getSelectValue(f, 'align')
 			};
 		} else {
-			// Remove deprecated values
+		// Remove deprecated values
 			args = {
 				vspace : '',
 				hspace : '',
@@ -217,7 +217,7 @@ var ImageDialog = {
 					tinymce.each(['top', 'right', 'bottom', 'left'], function(sv) {
 						sv = dom.getStyle(e, 'border-' + sv + '-width');
 
-						// False or not the same as prev
+					// False or not the same as prev
 						if (!sv || (sv != v && v !== 0)) {
 							v = 0;
 							return false;
@@ -362,7 +362,7 @@ var ImageDialog = {
 		var dom = tinyMCEPopup.dom, st, v, f = document.forms[0], img = dom.create('img', {style : dom.get('style').value});
 
 		if (tinyMCEPopup.editor.settings.inline_styles) {
-			// Handle align
+		// Handle align
 			if (ty == 'align') {
 				dom.setStyle(img, 'float', '');
 				dom.setStyle(img, 'vertical-align', '');
@@ -376,7 +376,7 @@ var ImageDialog = {
 				}
 			}
 
-			// Handle border
+		// Handle border
 			if (ty == 'border') {
 				dom.setStyle(img, 'border', '');
 
@@ -389,7 +389,7 @@ var ImageDialog = {
 				}
 			}
 
-			// Handle hspace
+		// Handle hspace
 			if (ty == 'hspace') {
 				dom.setStyle(img, 'marginLeft', '');
 				dom.setStyle(img, 'marginRight', '');
@@ -401,7 +401,7 @@ var ImageDialog = {
 				}
 			}
 
-			// Handle vspace
+		// Handle vspace
 			if (ty == 'vspace') {
 				dom.setStyle(img, 'marginTop', '');
 				dom.setStyle(img, 'marginBottom', '');
@@ -413,7 +413,7 @@ var ImageDialog = {
 				}
 			}
 
-			// Merge
+		// Merge
 			dom.get('style').value = dom.serializeStyle(dom.parseStyle(img.style.cssText), 'img');
 		}
 	},

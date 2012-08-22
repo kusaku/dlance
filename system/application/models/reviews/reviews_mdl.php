@@ -34,7 +34,8 @@ class Reviews_mdl extends Model
 *  Вывод
 * ---------------------------------------------------------------
 */
-	function get_reviews($start_from = FALSE, $per_page, $user_id, $type = '')//Выводим все отзывы пользователя
+	//Выводим все отзывы пользователя
+	function get_reviews($start_from = FALSE, $per_page, $user_id, $type = '')
 	{
 		if( $start_from !== FALSE ) 
 		{
@@ -81,7 +82,8 @@ class Reviews_mdl extends Model
 		return $query;
 	}
 
-	function count_reviews($user_id = '', $type)//Все отзывы пользователя
+	//Все отзывы пользователя
+	function count_reviews($user_id = '', $type)
 	{
 		if( $type )
 		{
@@ -95,7 +97,8 @@ class Reviews_mdl extends Model
 		return $this->db->count_all_results('reviews'); 
 	}
 
-	function count_reviews_positive($user_id = '')//Все положительные отзывы пользователя
+	//Все положительные отзывы пользователя
+	function count_reviews_positive($user_id = '')
 	{
 		$this->db->where('rating', 1);
 
@@ -104,7 +107,8 @@ class Reviews_mdl extends Model
 		return $this->db->count_all_results('reviews'); 
 	}
 
-	function count_reviews_negative($user_id = '')//Все отрицательные отзывы пользователя
+	//Все отрицательные отзывы пользователя
+	function count_reviews_negative($user_id = '')
 	{
 		$this->db->where('rating', -1);
 
@@ -118,7 +122,8 @@ class Reviews_mdl extends Model
 		$this->db->insert('reviews', $data);
 	}
 
-	function check($user_id = '', $from_id = '')//Проверка отзыва по пользователю
+	//Проверка отзыва по пользователю
+	function check($user_id = '', $from_id = '')
 	{
 		$this->db->where('user_id', $user_id);
 
@@ -132,7 +137,8 @@ class Reviews_mdl extends Model
 		return FALSE;
 	}
 
-	function last_date($user_id = '')//Дата последнего добавления отзыва пользователем
+	//Дата последнего добавления отзыва пользователем
+	function last_date($user_id = '')
 	{
 		$this->db->select_max('date');
 

@@ -11,7 +11,7 @@
 (function(tinymce) {
 	var each = tinymce.each;
 
-	// Checks if the selection/caret is at the start of the specified block element
+// Checks if the selection/caret is at the start of the specified block element
 	function isAtStart(rng, par) {
 		var doc = par.ownerDocument, rng2 = doc.createRange(), elm;
 
@@ -21,7 +21,7 @@
 		elm = doc.createElement('body');
 		elm.appendChild(rng2.cloneContents());
 
-		// Check for text characters of other elements that should be treated as content
+	// Check for text characters of other elements that should be treated as content
 		return elm.innerHTML.replace(/<(br|img|object|embed|input|textarea)[^>]*>/gi, '-').replace(/<[^>]+>/g, '').length == 0;
 	};
 
@@ -60,17 +60,17 @@
 					each(dom.select('> td, > th', tr), function(td, x) {
 						var x2, y2, rowspan, colspan;
 
-						// Skip over existing cells produced by rowspan
+					// Skip over existing cells produced by rowspan
 						if (grid[y]) {
 							while (grid[y][x])
 								x++;
 						}
 
-						// Get col/rowspan from cell
+					// Get col/rowspan from cell
 						rowspan = getSpanVal(td, 'rowspan');
 						colspan = getSpanVal(td, 'colspan');
 
-						// Fill out rowspan/colspan right and down
+					// Fill out rowspan/colspan right and down
 						for (y2 = y; y2 < y + rowspan; y2++) {
 							if (!grid[y2])
 								grid[y2] = [];
@@ -137,7 +137,7 @@
 		function cloneCell(cell) {
 			var formatNode;
 
-			// Clone formats
+		// Clone formats
 			tinymce.walk(cell, function(node) {
 				var curNode;
 
@@ -153,7 +153,7 @@
 						curNode = node;
 					});
 
-					// Add something to the inner node
+				// Add something to the inner node
 					if (curNode)
 						curNode.innerHTML = tinymce.isIE ? '&nbsp;' : '<br _mce_bogus="1" />';
 
@@ -177,13 +177,13 @@
 		function cleanup() {
 			var rng = dom.createRng();
 
-			// Empty rows
+		// Empty rows
 			each(dom.select('tr', table), function(tr) {
 				if (tr.cells.length == 0)
 					dom.remove(tr);
 			});
 
-			// Empty table
+		// Empty table
 			if (dom.select('tr', table).length == 0) {
 				rng.setStartAfter(table);
 				rng.setEndAfter(table);
@@ -192,16 +192,16 @@
 				return;
 			}
 
-			// Empty header/body/footer
+		// Empty header/body/footer
 			each(dom.select('thead,tbody,tfoot', table), function(part) {
 				if (part.rows.length == 0)
 					dom.remove(part);
 			});
 
-			// Restore selection to start position if it still exists
+		// Restore selection to start position if it still exists
 			buildGrid();
 
-			// Restore the selection to the closest table position
+		// Restore the selection to the closest table position
 			row = grid[Math.min(grid.length - 1, startPos.y)];
 			if (row) {
 				selection.select(row[Math.min(row.length - 1, startPos.x)].elm, true);
@@ -217,12 +217,12 @@
 				tr = dom.getNext(tr, 'tr');
 
 				if (tr) {
-					// Loop left to find real cell
+				// Loop left to find real cell
 					for (x2 = x; x2 >= 0; x2--) {
 						cell = grid[y + r][x2].elm;
 
 						if (cell.parentNode == tr) {
-							// Append clones after
+						// Append clones after
 							for (c = 1; c <= cols; c++)
 								dom.insertAfter(cloneCell(cell), cell);
 
@@ -231,7 +231,7 @@
 					}
 
 					if (x2 == -1) {
-						// Insert nodes before first cell
+					// Insert nodes before first cell
 						for (c = 1; c <= cols; c++)
 							tr.insertBefore(cloneCell(tr.cells[0]), tr.cells[0]);
 					}
@@ -252,7 +252,7 @@
 						if (colSpan > 1 || rowSpan > 1) {
 							cell.colSpan = cell.rowSpan = 1;
 
-							// Insert cells right
+						// Insert cells right
 							for (i = 0; i < colSpan - 1; i++)
 								dom.insertAfter(cloneCell(cell), cell);
 
@@ -266,7 +266,7 @@
 		function merge(cell, cols, rows) {
 			var startX, startY, endX, endY, x, y, startCell, endCell, cell, children;
 
-			// Use specified cell and cols/rows
+		// Use specified cell and cols/rows
 			if (cell) {
 				pos = getPos(cell);
 				startX = pos.x;
@@ -274,49 +274,49 @@
 				endX = startX + (cols - 1);
 				endY = startY + (rows - 1);
 			} else {
-				// Use selection
+			// Use selection
 				startX = startPos.x;
 				startY = startPos.y;
 				endX = endPos.x;
 				endY = endPos.y;
 			}
 
-			// Find start/end cells
+		// Find start/end cells
 			startCell = getCell(startX, startY);
 			endCell = getCell(endX, endY);
 
-			// Check if the cells exists and if they are of the same part for example tbody = tbody
+		// Check if the cells exists and if they are of the same part for example tbody = tbody
 			if (startCell && endCell && startCell.part == endCell.part) {
-				// Split and rebuild grid
+			// Split and rebuild grid
 				split();
 				buildGrid();
 
-				// Set row/col span to start cell
+			// Set row/col span to start cell
 				startCell = getCell(startX, startY).elm;
 				startCell.colSpan = (endX - startX) + 1;
 				startCell.rowSpan = (endY - startY) + 1;
 
-				// Remove other cells and add it's contents to the start cell
+			// Remove other cells and add it's contents to the start cell
 				for (y = startY; y <= endY; y++) {
 					for (x = startX; x <= endX; x++) {
 						cell = grid[y][x].elm;
 
 						if (cell != startCell) {
-							// Move children to startCell
+						// Move children to startCell
 							children = tinymce.grep(cell.childNodes);
 							each(children, function(node, i) {
-								// Jump over last BR element
+							// Jump over last BR element
 								if (node.nodeName != 'BR' || i != children.length - 1)
 									startCell.appendChild(node);
 							});
 
-							// Remove cell
+						// Remove cell
 							dom.remove(cell);
 						}
 					}
 				}
 
-				// Remove empty rows etc and restore caret location
+			// Remove empty rows etc and restore caret location
 				cleanup();
 			}
 		};
@@ -324,7 +324,7 @@
 		function insertRow(before) {
 			var posY, cell, lastCell, x, rowElm, newRow, newCell, otherCell;
 
-			// Find first/last row
+		// Find first/last row
 			each(grid, function(row, y) {
 				each(row, function(cell, x) {
 					if (isCellSelected(cell)) {
@@ -353,7 +353,7 @@
 							continue;
 						}
 					} else {
-						// Check if cell above can be expanded
+					// Check if cell above can be expanded
 						if (posY > 0 && grid[posY - 1][x]) {
 							otherCell = grid[posY - 1][x].elm;
 							rowSpan = getSpanVal(otherCell, 'rowspan');
@@ -364,7 +364,7 @@
 						}
 					}
 
-					// Insert new cell into new row
+				// Insert new cell into new row
 					newCell = cloneCell(cell)
 					newCell.colSpan = cell.colSpan;
 					newRow.appendChild(newCell);
@@ -384,7 +384,7 @@
 		function insertCol(before) {
 			var posX, lastCell;
 
-			// Find first/last column
+		// Find first/last column
 			each(grid, function(row, y) {
 				each(row, function(cell, x) {
 					if (isCellSelected(cell)) {
@@ -425,7 +425,7 @@
 		function deleteCols() {
 			var cols = [];
 
-			// Get selected column indexes
+		// Get selected column indexes
 			each(grid, function(row, y) {
 				each(row, function(cell, x) {
 					if (isCellSelected(cell) && tinymce.inArray(cols, x) === -1) {
@@ -456,7 +456,7 @@
 
 				nextTr = dom.getNext(tr, 'tr');
 
-				// Move down row spanned cells
+			// Move down row spanned cells
 				each(tr.cells, function(cell) {
 					var rowSpan = getSpanVal(cell, 'rowspan');
 
@@ -467,7 +467,7 @@
 					}
 				});
 
-				// Delete cells
+			// Delete cells
 				pos = getPos(tr.cells[0]);
 				each(grid[pos.y], function(cell) {
 					var rowSpan;
@@ -487,10 +487,10 @@
 				});
 			};
 
-			// Get selected rows and move selection out of scope
+		// Get selected rows and move selection out of scope
 			rows = getSelectedRows();
 
-			// Delete all selected rows
+		// Delete all selected rows
 			each(rows.reverse(), function(tr) {
 				deleteRow(tr);
 			});
@@ -522,7 +522,7 @@
 				targetRow = selectedRows[before ? 0 : selectedRows.length - 1],
 				targetCellCount = targetRow.cells.length;
 
-			// Calc target cell count
+		// Calc target cell count
 			each(grid, function(row) {
 				var match;
 
@@ -545,21 +545,21 @@
 			each(rows, function(row) {
 				var cellCount = row.cells.length, cell;
 
-				// Remove col/rowspans
+			// Remove col/rowspans
 				for (i = 0; i < cellCount; i++) {
 					cell = row.cells[i];
 					cell.colSpan = cell.rowSpan = 1;
 				}
 
-				// Needs more cells
+			// Needs more cells
 				for (i = cellCount; i < targetCellCount; i++)
 					row.appendChild(cloneCell(row.cells[cellCount - 1]));
 
-				// Needs less cells
+			// Needs less cells
 				for (i = targetCellCount; i < cellCount; i++)
 					dom.remove(row.cells[i]);
 
-				// Add before/after
+			// Add before/after
 				if (before)
 					targetRow.parentNode.insertBefore(row, targetRow);
 				else
@@ -633,17 +633,17 @@
 			endPos = getPos(cell);
 
 			if (startPos && endPos) {
-				// Get start/end positions
+			// Get start/end positions
 				startX = Math.min(startPos.x, endPos.x);
 				startY = Math.min(startPos.y, endPos.y);
 				endX = Math.max(startPos.x, endPos.x);
 				endY = Math.max(startPos.y, endPos.y);
 
-				// Expand end positon to include spans
+			// Expand end positon to include spans
 				maxX = endX;
 				maxY = endY;
 
-				// Expand startX
+			// Expand startX
 				for (y = startY; y <= maxY; y++) {
 					cell = grid[y][startX];
 
@@ -653,7 +653,7 @@
 					}
 				}
 
-				// Expand startY
+			// Expand startY
 				for (x = startX; x <= maxX; x++) {
 					cell = grid[startY][x];
 
@@ -663,7 +663,7 @@
 					}
 				}
 
-				// Find max X, Y
+			// Find max X, Y
 				for (y = startY; y <= endY; y++) {
 					for (x = startX; x <= endX; x++) {
 						cell = grid[y][x];
@@ -685,10 +685,10 @@
 					}
 				}
 
-				// Remove current selection
+			// Remove current selection
 				dom.removeClass(dom.select('td.mceSelected,th.mceSelected'), 'mceSelected');
 
-				// Add new selection
+			// Add new selection
 				for (y = startY; y <= maxY; y++) {
 					for (x = startX; x <= maxX; x++)
 						dom.addClass(grid[y][x].elm, 'mceSelected');
@@ -696,7 +696,7 @@
 			}
 		};
 
-		// Expose to public
+	// Expose to public
 		tinymce.extend(this, {
 			deleteTable : deleteTable,
 			split : split,
@@ -726,12 +726,12 @@
 			};
 
 			function cleanup() {
-				// Restore selection possibilities
+			// Restore selection possibilities
 				ed.getBody().style.webkitUserSelect = '';
 				ed.dom.removeClass(ed.dom.select('td.mceSelected,th.mceSelected'), 'mceSelected');
 			};
 
-			// Register buttons
+		// Register buttons
 			each([
 				['table', 'table.desc', 'mceInsertTable', true],
 				['delete_table', 'table.del', 'mceTableDelete'],
@@ -749,7 +749,7 @@
 				ed.addButton(c[0], {title : c[1], cmd : c[2], ui : c[3]});
 			});
 
-			// Select whole table is a table border is clicked
+		// Select whole table is a table border is clicked
 			if (!tinymce.isIE) {
 				ed.onClick.add(function(ed, e) {
 					e = e.target;
@@ -759,7 +759,7 @@
 				});
 			}
 
-			// Handle node change updates
+		// Handle node change updates
 			ed.onNodeChange.add(function(ed, cm, n) {
 				var p;
 
@@ -767,7 +767,7 @@
 				p = ed.dom.getParent(n, 'td,th,caption');
 				cm.setActive('table', n.nodeName === 'TABLE' || !!p);
 
-				// Disable table tools if we are in caption
+			// Disable table tools if we are in caption
 				if (p && p.nodeName === 'CAPTION')
 					p = 0;
 
@@ -790,7 +790,7 @@
 
 				winMan = ed.windowManager;
 
-				// Add cell selection logic
+			// Add cell selection logic
 				ed.onMouseDown.add(function(ed, e) {
 					if (e.button != 2) {
 						cleanup();
@@ -816,7 +816,7 @@
 							tableGrid.setEndCell(target);
 						}
 
-						// Remove current selection
+					// Remove current selection
 						sel = ed.selection.getSel();
 
 						if (sel.removeAllRanges)
@@ -831,7 +831,7 @@
 				ed.onMouseUp.add(function(ed, e) {
 					var rng, sel = ed.selection, selectedCells, nativeSel = sel.getSel(), walker, node, lastNode, endNode;
 
-					// Move selection to startCell
+				// Move selection to startCell
 					if (startCell) {
 						if (tableGrid)
 							ed.getBody().style.webkitUserSelect = '';
@@ -840,7 +840,7 @@
 							var walker = new tinymce.dom.TreeWalker(node, node);
 
 							do {
-								// Text node
+							// Text node
 								if (node.nodeType == 3 && tinymce.trim(node.nodeValue).length != 0) {
 									if (start)
 										rng.setStart(node, 0);
@@ -850,7 +850,7 @@
 									return;
 								}
 
-								// BR element
+							// BR element
 								if (node.nodeName == 'BR') {
 									if (start)
 										rng.setStartBefore(node);
@@ -862,7 +862,7 @@
 							} while (node = (start ? walker.next() : walker.prev()));
 						};
 
-						// Try to expand text selection as much as we can only Gecko supports cell selection
+					// Try to expand text selection as much as we can only Gecko supports cell selection
 						selectedCells = dom.select('td.mceSelected,th.mceSelected');
 						if (selectedCells.length > 0) {
 							rng = dom.createRng();
@@ -895,7 +895,7 @@
 					cleanup();
 				});
 
-				// Add context menu
+			// Add context menu
 				if (ed && ed.plugins.contextmenu) {
 					ed.plugins.contextmenu.onContextMenu.add(function(th, m, e) {
 						var sm, se = ed.selection, el = se.getNode() || ed.getBody();
@@ -919,13 +919,13 @@
 							m.add({title : 'table.del', icon : 'delete_table', cmd : 'mceTableDelete'});
 							m.addSeparator();
 
-							// Cell menu
+						// Cell menu
 							sm = m.addMenu({title : 'table.cell'});
 							sm.add({title : 'table.cell_desc', icon : 'cell_props', cmd : 'mceTableCellProps'});
 							sm.add({title : 'table.split_cells_desc', icon : 'split_cells', cmd : 'mceTableSplitCells'});
 							sm.add({title : 'table.merge_cells_desc', icon : 'merge_cells', cmd : 'mceTableMergeCells'});
 
-							// Row menu
+						// Row menu
 							sm = m.addMenu({title : 'table.row'});
 							sm.add({title : 'table.row_desc', icon : 'row_props', cmd : 'mceTableRowProps'});
 							sm.add({title : 'table.row_before_desc', icon : 'row_before', cmd : 'mceTableInsertRowBefore'});
@@ -937,7 +937,7 @@
 							sm.add({title : 'table.paste_row_before_desc', icon : 'paste', cmd : 'mceTablePasteRowBefore'}).setDisabled(!clipboardRows);
 							sm.add({title : 'table.paste_row_after_desc', icon : 'paste', cmd : 'mceTablePasteRowAfter'}).setDisabled(!clipboardRows);
 
-							// Column menu
+						// Column menu
 							sm = m.addMenu({title : 'table.col'});
 							sm.add({title : 'table.col_before_desc', icon : 'col_before', cmd : 'mceTableInsertColBefore'});
 							sm.add({title : 'table.col_after_desc', icon : 'col_after', cmd : 'mceTableInsertColAfter'});
@@ -947,27 +947,27 @@
 					});
 				}
 
-				// Fixes an issue on Gecko where it's impossible to place the caret behind a table
-				// This fix will force a paragraph element after the table but only when the forced_root_block setting is enabled
+			// Fixes an issue on Gecko where it's impossible to place the caret behind a table
+			// This fix will force a paragraph element after the table but only when the forced_root_block setting is enabled
 				if (!tinymce.isIE) {
 					function fixTableCaretPos() {
 						var last;
 
-						// Skip empty text nodes form the end
+					// Skip empty text nodes form the end
 						for (last = ed.getBody().lastChild; last && last.nodeType == 3 && !last.nodeValue.length; last = last.previousSibling) ;
 
 						if (last && last.nodeName == 'TABLE')
 							ed.dom.add(ed.getBody(), 'p', null, '<br mce_bogus="1" />');
 					};
 
-					// Fixes an bug where it's impossible to place the caret before a table in Gecko
-					// this fix solves it by detecting when the caret is at the beginning of such a table
-					// and then manually moves the caret infront of the table
+				// Fixes an bug where it's impossible to place the caret before a table in Gecko
+				// this fix solves it by detecting when the caret is at the beginning of such a table
+				// and then manually moves the caret infront of the table
 					if (tinymce.isGecko) {
 						ed.onKeyDown.add(function(ed, e) {
 							var rng, table, dom = ed.dom;
 
-							// On gecko it's not possible to place the caret before a table
+						// On gecko it's not possible to place the caret before a table
 							if (e.keyCode == 37 || e.keyCode == 38) {
 								rng = ed.selection.getRng();
 								table = dom.getParent(rng.startContainer, 'table');
@@ -1003,7 +1003,7 @@
 				}
 			});
 
-			// Register action commands
+		// Register action commands
 			each({
 				mceTableSplitCells : function(grid) {
 					grid.split();
@@ -1091,7 +1091,7 @@
 				});
 			});
 
-			// Register dialog commands
+		// Register dialog commands
 			each({
 				mceInsertTable : function(val) {
 					winMan.open({
@@ -1134,6 +1134,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('table', tinymce.plugins.TablePlugin);
 })(tinymce);

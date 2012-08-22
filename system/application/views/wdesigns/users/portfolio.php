@@ -18,16 +18,11 @@
 <p class="desc"><?=$short_descr?></p>
 </div>
 
-
 <div id="yui-main">
   <div id="usermain" class="yui-b">
 
 <? if( !empty($portfolio) ): ?>
 <?=show_highslide()?>
-
-
-
-
 
 <? foreach($portfolio as $row): ?>
 <div class="ptf-block">
@@ -57,13 +52,10 @@
 <p>Работы отсутствуют.</p>
 <? endif; ?>
 
-<br clear="all" /> 
+<br clear="all" />
 
-   
 </div>
 </div>
-
-
 
 <div id="sidebar" class="yui-b">
 <div class="hd"></div>

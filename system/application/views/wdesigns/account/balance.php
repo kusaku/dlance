@@ -1,12 +1,8 @@
 <div id="yui-main">
 <div class="yui-b">
 
-
 <h1><a href="/account/applications">Баланс</a></h1>
 <p class="subtitle">Пополнение баланса.</p>
-
-
-
 
 <div class="rnd">
  <div>
@@ -25,7 +21,6 @@
   </div>
  </div>
 </div>
-
 
   </div>
 

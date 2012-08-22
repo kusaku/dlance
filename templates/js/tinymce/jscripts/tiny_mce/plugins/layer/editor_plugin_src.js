@@ -15,7 +15,7 @@
 
 			t.editor = ed;
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceInsertLayer', t._insertLayer, t);
 
 			ed.addCommand('mceMoveForward', function() {
@@ -30,7 +30,7 @@
 				t._toggleAbsolute();
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('moveforward', {title : 'layer.forward_desc', cmd : 'mceMoveForward'});
 			ed.addButton('movebackward', {title : 'layer.backward_desc', cmd : 'mceMoveBackward'});
 			ed.addButton('absolute', {title : 'layer.absolute_desc', cmd : 'mceMakeAbsolute'});
@@ -55,8 +55,7 @@
 			};
 		},
 
-		// Private methods
-
+	// Private methods
 		_nodeChange : function(ed, cm, n) {
 			var le, p;
 
@@ -75,8 +74,7 @@
 			}
 		},
 
-		// Private methods
-
+	// Private methods
 		_visualAid : function(ed, e, s) {
 			var dom = ed.dom;
 
@@ -99,7 +97,7 @@
 					nl.push(n); 
 			}, 'childNodes');
 
-			// Find z-indexes
+		// Find z-indexes
 			for (i=0; i<nl.length; i++) {
 				z[i] = nl[i].style.zIndex ? parseInt(nl[i].style.zIndex) : 0;
 
@@ -108,9 +106,8 @@
 			}
 
 			if (d < 0) {
-				// Move back
-
-				// Try find a lower one
+			// Move back
+			// Try find a lower one
 				for (i=0; i<z.length; i++) {
 					if (z[i] < z[ci]) {
 						fi = i;
@@ -126,9 +123,8 @@
 						nl[ci].style.zIndex = z[ci] - 1;
 				}
 			} else {
-				// Move forward
-
-				// Try find a higher one
+			// Move forward
+			// Try find a higher one
 				for (i=0; i<z.length; i++) {
 					if (z[i] > z[ci]) {
 						fi = i;
@@ -207,6 +203,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('layer', tinymce.plugins.Layer);
 })();

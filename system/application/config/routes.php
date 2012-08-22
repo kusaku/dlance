@@ -49,7 +49,6 @@ $route['recovery'] = "users/recovery";
 $route['logout'] = "users/logout";
 $route['user/(:any)'] = "users/view/$1";
 
-
 $route['designs/(:num).html'] = "designs/view/$1";
 
 $route['news/(:num).html'] = "news/view/$1";
@@ -59,7 +58,6 @@ $route['blogs/(:num).html'] = "blogs/view/$1";
 $route['pages/(:any).html'] = "pages/view/$1";
 
 $route['account/payments/(:num).html'] = "account/payments_view/$1";
-
 
 $route['help/(:num).html'] = "help/view/$1";
 $route['404'] = 'pages';

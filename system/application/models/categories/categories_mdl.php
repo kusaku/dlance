@@ -16,7 +16,8 @@ class Categories_mdl extends Model
 		return $this->db->get('categories')->row_array();
 	}
 
-	function get_categories()//Для списков и вывода услуг в аккаунта - services
+	//Для списков и вывода услуг в аккаунта - services
+	function get_categories()
 	{
 		$this->db->select('id, name, parent_id');
 
@@ -41,7 +42,8 @@ class Categories_mdl extends Model
     }
 
 */
-	function get_categories_for_users()//Категории с колличеством пользователей предоставляющих данную услугу
+	//Категории с колличеством пользователей предоставляющих данную услугу
+	function get_categories_for_users()
 	{
 		$this->db->select('categories.name, categories.id, categories.parent_id, COUNT(ci_services.id) AS number');
 
@@ -81,7 +83,8 @@ class Categories_mdl extends Model
 		return FALSE;
 	}
 
-	function descr($id)//Описание
+	//Описание
+	function descr($id)
 	{
 		$this->db->select('descr');
 
@@ -96,7 +99,8 @@ class Categories_mdl extends Model
 		return FALSE;
 	}
 
-	function users_descr($id)//Описание для пользователей каталога
+	//Описание для пользователей каталога
+	function users_descr($id)
 	{
 		$this->db->select('users_descr');
 
@@ -116,7 +120,6 @@ class Categories_mdl extends Model
 		$this->db->select('parent_id');
 		$query = $this->db->get_where('categories', array('id '=> $id));
 
-
 		if( $query->num_rows() > 0 )
 		{
 			$row = $query->row();
@@ -127,7 +130,8 @@ class Categories_mdl extends Model
 			return FALSE;
 		}
 
-		if( $parent_id != 0 )//Если выбранная категория не является разделом - выводим проекты только с одной субкатегории
+		//Если выбранная категория не является разделом - выводим проекты только с одной субкатегории
+		if( $parent_id != 0 )
 		{
 			$array = array($id);
 			
@@ -136,7 +140,8 @@ class Categories_mdl extends Model
 
 		$this->db->select('id');
 
-		$this->db->where('parent_id', $id);//Выводим все подразделы главного раздела
+		//Выводим все подразделы главного раздела
+		$this->db->where('parent_id', $id);
 
 		$array = $this->db->get('categories')->result_array();
 

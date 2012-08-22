@@ -13,11 +13,9 @@ function changeRadio(el)
 		{
 			jQuery(this).parent().removeClass("radioChecked");
 		}
-	   
-	   
-	});					  
-	
-	
+
+	});
+
 	if(el.attr("class").indexOf("niceRadioDisabled")==-1)
 	{	
 		el.addClass("radioChecked");
@@ -40,8 +38,7 @@ function changeVisualRadio(input)
 		{
 			jQuery(this).parent().removeClass("radioChecked");
 		}
-	   
-	   
+
 	});
 
 	if(input.attr("checked")) 

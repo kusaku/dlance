@@ -438,7 +438,6 @@ form.topsearch input.topsubm {
 	color:#24981D;
 }
 
-
 .rtop, .ltop {
 	margin:0;
 	float:left;
@@ -751,7 +750,6 @@ img.thumblist {
 #bubble-2 p { font-size:85%; margin-bottom:10px; height:26px;}
 #bubble-3 p { font-size:85%; margin-bottom:10px; height:28px;}
 
-
 /* ������� */
 #rating {
 	font-size:12px;
@@ -762,7 +760,6 @@ img.thumblist {
 #rating .dislike {
 	color:#36C;
 }
-
 
 #rating ul {
 	float:left;
@@ -793,10 +790,6 @@ img.thumblist {
 	overflow:hidden;
 	line-height:130% !important;
 	}
-
-
-
-
 
 .top-payed{
 	margin: 0 0 10px 0;
@@ -841,11 +834,6 @@ div.plus{
 	height:14px;
 	background: #6CBA2C url(/templates/wdesigns/css/img/minus.png) top left repeat-x;
 }
-
-
-
-
-
 
 /* jColorSelect */
 .jColorSelect {
@@ -894,8 +882,6 @@ p#similar {
 		box-shadow: 0px 0px 5px #ac987e;
 }
 
-
-
 .membvote {
 	width:250px;
 	float:right;
@@ -915,10 +901,6 @@ p#similar {
 .membvote img {
 	width:30px;
 }
-
-
-
-
 
 /*
 |---------------------------------------------------------------
@@ -1354,7 +1336,6 @@ padding:10px 10px 15px;
 background: transparent url(img/rnd_tl.png) no-repeat top left;
 }
 
-
 div.order-title h1 { margin:0 0 8px 0; font-size:138.5%; font-weight:normal;}
 div.order-title p, div.order-title a { font-size:85%; margin:0; }
 div.order-text { margin-bottom:2em; font-size: 93%; line-height:140%; padding-top:1em;}
@@ -1412,7 +1393,6 @@ table.offers-list td.offer-text p { margin:0; padding:20px 10px; line-height:140
 table.offers-list td.offer-options {padding:8px 10px 6px 10px; border:0; background-color:#A9B6BE; color:#5B737F;}
 table.offers-list td.offer-options a {color:#FFF;}
 table.offers-list td.offer-separator { height:2px; line-height:2px; font-size:1px;background-color:#A9B6BE;}
-
 
 div#off-form {
 padding: 0;
@@ -1487,16 +1467,13 @@ table.reviewform td.reviewhint div {background-color:#A9B6BE; color:#FFF;width:4
 ul#panels { margin:0; padding:0; float:left; }
 ul#panels li { margin:0; padding:0; }
 
-
 #ptf {overflow:hidden;}
 #ptf  {margin-bottom:5px; position:relative;}
-
 
 .ptf-block {float:left; width:217px; height:200px; text-align:center; position:relative;}
 .ptf-image {height:150px; border-right:1px solid #DDE0E3; margin:0 0 11px 0; padding:0 5px;}
 .ptf-image img { margin-top:15px; border: 5px solid #DDE0E3;}
 .ptf-text {background-color:#A9B6BE; color:#FFF; padding:8px; font-size:85%;}
-
 
 table.listorder td.ordertitle img {
 	margin:10px;
@@ -2157,7 +2134,6 @@ padding:.5em 1em;
 background-color:#0972b5;
 }
 
-
 .event { 
 position: absolute; 
 top: 0; left: 0; 
@@ -2182,8 +2158,6 @@ font-weight:bold;
 width:99%;
 visibility:visible;
 }
-
-
 
 #intro {
     padding-bottom: 10px;
@@ -2283,12 +2257,6 @@ visibility:visible;
     display: none;
 }
 
-
-
-
-
-
-
 #tagcloud ul {
 	margin: 0px;
 	padding: 0px;
@@ -2359,8 +2327,6 @@ visibility:visible;
 	}
 
 .new_event {cursor:pointer}
-
-
 
 div.answer { margin:10px 0; border-top: 1px solid #D4DFE3; min-height:100px; }
 img.userpic { float:left; margin-right:10px; width:64px; height:64px; }

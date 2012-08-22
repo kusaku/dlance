@@ -9,13 +9,11 @@
  */
 
 /**
-	// String validation:
-
+// String validation:
 	if (!Validator.isEmail('myemail'))
 		alert('Invalid email.');
 
-	// Form validation:
-
+// Form validation:
 	var f = document.forms['myform'];
 
 	if (!Validator.isEmail(f.myemail))

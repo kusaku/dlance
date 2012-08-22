@@ -13,11 +13,11 @@
 		init : function(ed, url) {
 			this.editor = ed;
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceAdvLink', function() {
 				var se = ed.selection;
 
-				// No selection and not in link
+			// No selection and not in link
 				if (se.isCollapsed() && !ed.dom.getParent(se.getNode(), 'A'))
 					return;
 
@@ -31,7 +31,7 @@
 				});
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('link', {
 				title : 'advlink.link_desc',
 				cmd : 'mceAdvLink'
@@ -56,6 +56,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('advlink', tinymce.plugins.AdvancedLinkPlugin);
 })();

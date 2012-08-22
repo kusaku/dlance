@@ -15,12 +15,12 @@
 
 			pbRE = new RegExp(sep.replace(/[\?\.\*\[\]\(\)\{\}\+\^\$\:]/g, function(a) {return '\\' + a;}), 'g');
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mcePageBreak', function() {
 				ed.execCommand('mceInsertContent', 0, pb);
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('pagebreak', {title : 'pagebreak.desc', cmd : cls});
 
 			ed.onInit.add(function() {
@@ -72,6 +72,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('pagebreak', tinymce.plugins.PageBreakPlugin);
 })();

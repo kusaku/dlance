@@ -19,9 +19,11 @@ class Load_settings_mdl extends Model
 			$val = $row->value;
 			if( is_numeric($val) ) 
 			{
-				$val = $val + 0;//Преобразование в числовой тип
+				//Преобразование в числовой тип
+				$val = $val + 0;
 			}
-			$this->config->set_item($row->param, $val);//Сохранение конфигурационных данных 
+			//Сохранение конфигурационных данных 
+			$this->config->set_item($row->param, $val);
 		}
 	}
 }

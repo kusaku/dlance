@@ -15,7 +15,6 @@
 $smileys = array(
 
 //	smiley			image name						width	height	alt
-
 	':-)'			=>	array('grin.gif',			'19',	'19',	'grin'),
 	':lol:'			=>	array('lol.gif',			'19',	'19',	'LOL'),
 	':cheese:'		=>	array('cheese.gif',			'19',	'19',	'cheese'),
@@ -58,7 +57,8 @@ $smileys = array(
 	':vampire:'		=>	array('vampire.gif',		'19',	'19',	'vampire'),
 	':snake:'		=>	array('snake.gif',			'19',	'19',	'snake'),
 	':exclaim:'		=>	array('exclaim.gif',		'19',	'19',	'excaim'),	
-	':question:'	=>	array('question.gif',		'19',	'19',	'question') // no comma after last item
+	// no comma after last item
+	':question:'	=>	array('question.gif',		'19',	'19',	'question') 
 	
 		);
 

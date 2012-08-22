@@ -2,8 +2,6 @@
 
 <?=validation_errors()?>
 
-
-
 <div class="comments">
 						<div class="commentsHeader">
 							<h3>Комментарии:</h3>
@@ -43,7 +41,6 @@
 <? endif; ?>
 </div>
 <? if( $this->users_mdl->logged_in() ): ?>
-
 
 <div class="makeComment">
 						<div class="makeCommentHeader">

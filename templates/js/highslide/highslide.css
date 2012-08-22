@@ -126,7 +126,6 @@ a.highslide-credits:hover i {
 	/* NOTE! For IE6, you also need to update the highslide-ie6.css file. */
 }
 
-
 /*****************************************************************************/
 /* Controls for the galleries.											   */
 /* Remove these if you are not using a gallery							   */
@@ -171,7 +170,6 @@ a.highslide-credits:hover i {
 	display: none;
 	cursor: pointer;
 }
-
 
 /* The CSS sprites for the controlbar - see http://www.google.com/search?q=css+sprites */
 .highslide-controls .highslide-previous a {
@@ -653,7 +651,6 @@ a.highslide-credits:hover i {
 .text-controls .highslide-close span {
 	background-position: 0 -120px;
 }
-
 
 /*****************************************************************************/
 /* Styles for the thumbstrip.							                     */

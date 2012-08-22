@@ -83,7 +83,7 @@ $.fn.simpleColor = function(options) {
 'CCCC66','CCCC33','999966','999933','999900','666600',
 'FFFFFF','CCCCCC','999999','666666','333333','000000'];
 		
-	// Option defaults
+// Option defaults
     options = $.extend({
         defaultColor:  this.attr('defaultColor') || '#FFF',
         border:        this.attr('border') || '1px solid #000',
@@ -99,10 +99,10 @@ $.fn.simpleColor = function(options) {
         indicator:     this.attr('indicator') || null
     }, options || {});
 	
-	// Hide the input
+// Hide the input
 	this.hide();
 	
-	// Figure out the cell dimensions
+// Figure out the cell dimensions
 	options.totalWidth = options.columns * (options.cellWidth + (2 * options.cellMargin));
 	if ($.browser.msie) {
 		options.totalWidth += 2;
@@ -110,29 +110,28 @@ $.fn.simpleColor = function(options) {
 	
 	options.totalHeight = Math.ceil(options.colors.length / options.columns) * (options.cellHeight + (2 * options.cellMargin));
 	
-	// Store these options so they'll be available to the other functions
-	// TODO - must be a better way to do this, not sure what the 'official'
-	// jQuery method is. Ideally i want to pass these as a parameter to the 
-	// each() function but i'm not sure how
+// Store these options so they'll be available to the other functions
+// TODO - must be a better way to do this, not sure what the 'official'
+// jQuery method is. Ideally i want to pass these as a parameter to the 
+// each() function but i'm not sure how
 	$.simpleColorOptions = options;
 	
 	this.each(buildSelector);
 	
 	return this;
-	
-	
-	
+
 	function buildSelector(index) {
 		
 		var options = $.simpleColorOptions;
 		
-		// Create a container to hold everything
+	// Create a container to hold everything
 		var container = $("<div class='simpleColorContainer' />");
 		
-		// Create the color display box
+	// Create the color display box
 		var default_color = (this.value && this.value != '') ? this.value : options.defaultColor;
 
-		default_color =  '#' + default_color;//Изменение(1) так как в value у нас без #
+		//Изменение(1) так как в value у нас без #
+		default_color =  '#' + default_color;
 
 		var display_box = $("<div class='simpleColorDisplay' />");
 		display_box.css('backgroundColor', default_color);
@@ -141,18 +140,18 @@ $.fn.simpleColor = function(options) {
 		display_box.css('height',          options.boxHeight);
 		container.append(display_box);
 		
-		// Create the select button 
+	// Create the select button 
 		var select_button = $("<input type='button' value='Выбрать'" + 
 							  " class='simpleColorSelectButton "+options.buttonClass+"'>");
 		container.append(select_button);
 		
-		// Create the cancel button
+	// Create the cancel button
 		var cancel_button = $("<input type='button' value='Закрыть'" + 
 							  " class='simpleColorCancelButton "+options.buttonClass+"'>");
 		cancel_button.hide();
 		container.append(cancel_button);
 		
-		// Bind the select button to display the chooser
+	// Bind the select button to display the chooser
 		select_button.bind('click', {
 				container: container, 
 				input: this, 
@@ -162,14 +161,14 @@ $.fn.simpleColor = function(options) {
 				$(this).hide();
 				event.data.cancel_button.show();
 				
-				// Use an existing chooser if there is one
+			// Use an existing chooser if there is one
 				if (event.data.container.chooser) {
 					event.data.container.chooser.show();
 					
-				// Build the chooser
+			// Build the chooser
 				} else {
 		
-					// Make a chooser div to hold the cells
+				// Make a chooser div to hold the cells
 					var chooser = $("<div class='simpleColorChooser'/>");
 					chooser.css('border',  options.border);
 					chooser.css('margin',  '0px');
@@ -180,7 +179,7 @@ $.fn.simpleColor = function(options) {
 					event.data.container.chooser = chooser;
 					event.data.container.append(chooser);
 					
-					// Create the cells
+				// Create the cells
 					for (var i=0; i<options.colors.length; i++) {
 						var cell = $("<div class='simpleColorCell' id='" + options.colors[i] + "'/>");
 						cell.css('width',           options.cellWidth + 'px');
@@ -213,7 +212,7 @@ $.fn.simpleColor = function(options) {
 			}
 		);
 		
-		// Bind the cancel button to hide the chooser
+	// Bind the cancel button to hide the chooser
 		cancel_button.bind('click', {
 				container: container, 
 				select_button: select_button, 
@@ -245,9 +244,5 @@ $.fn.closeSelector = function() {
 	
 	return this;
 }
-	
-	
-	
-
 
 })(jQuery);

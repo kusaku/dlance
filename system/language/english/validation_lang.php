@@ -19,6 +19,5 @@ $lang['matches']			= "The %s field does not match the %s field.";
 $lang['is_natural']			= "The %s field must contain a number.";
 $lang['is_natural_no_zero']	= "The %s field must contain a number greater than zero.";
 
-
 /* End of file validation_lang.php */
 /* Location: ./system/language/english/validation_lang.php */

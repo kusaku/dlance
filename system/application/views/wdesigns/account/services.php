@@ -7,10 +7,6 @@
 
 <?=validation_errors()?>
 
-
-
-
-
 <form action="" method="post" />
 <? if( !empty($categories) ): ?>
 <table class="services">
@@ -47,8 +43,6 @@
 <? endif; ?>
 <input name="submit" type="submit" value="Сохранить">
 </form>
-
-
 
   </div>
 

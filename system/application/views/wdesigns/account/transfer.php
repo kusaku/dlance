@@ -14,19 +14,14 @@ $(document).ready(function()
 			$('.event2').css({display: "none"});
 		}
 
-	
 	});
 });
 </script>
 <div id="yui-main">
 <div class="yui-b">
 
-
 <h1><a href="/account/transfer">Перевод средств</a></h1>
 <p class="subtitle">Перевод внутрисервисных средств между пользователями.</p>
-
-
-
 
 <?=validation_errors()?>
 <form action="" method="post" />
@@ -78,7 +73,6 @@ $(document).ready(function()
   </div>
 <input type="submit" value="Отправить">
 </form>
-
 
   </div>
 

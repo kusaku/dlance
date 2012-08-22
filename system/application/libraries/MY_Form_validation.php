@@ -13,24 +13,28 @@ class MY_Form_validation extends CI_Form_validation {
 		return ( ! preg_match("/[^\||\'|\<|\>|\"|\$|\@|\/|\\\|\&]+$/", $str)) ? FALSE : TRUE;
 	}
 	
-	function nospecial($str)//Специальные символы запрещены
+	//Специальные символы запрещены
+	function nospecial($str)
 	{
 		return ( ! preg_match("/[^\||\'|\<|\>|\"|\!|\?|\$|\@|\/|\\\|\&\~\*\+]+$/", $str)) ? FALSE : TRUE;
 	}
 	
-	function cyrillic($str)//Только русские символы
+	//Только русские символы
+	function cyrillic($str)
 	{
-		//return ( ! preg_match("/^([а-яА-Я\ё])+$/i", $str)) ? FALSE : TRUE;
-		//XXX!
+	//return ( ! preg_match("/^([а-яА-Я\ё])+$/i", $str)) ? FALSE : TRUE;
+	//XXX!
 		return TRUE;
 	}
 
-	function skype($str)//Может содержать латинские символы, цифры, знак подчеркивания и дефис.
+	//Может содержать латинские символы, цифры, знак подчеркивания и дефис.
+	function skype($str)
 	{
 		return ( ! preg_match("/^[a-zA-z0-9_\-]+$/", $str)) ? FALSE : TRUE;
 	}
 
-	function telephone($str)//Может содержать латинские символы, цифры, знак подчеркивания и дефис.
+	//Может содержать латинские символы, цифры, знак подчеркивания и дефис.
+	function telephone($str)
 	{
 		return ( ! preg_match("/^[0-9\-\(\)\+]+$/", $str)) ? FALSE : TRUE;
 	}

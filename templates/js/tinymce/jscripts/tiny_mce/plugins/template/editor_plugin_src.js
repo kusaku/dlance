@@ -17,7 +17,7 @@
 
 			t.editor = ed;
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceTemplate', function(ui) {
 				ed.windowManager.open({
 					file : url + '/template.htm',
@@ -31,7 +31,7 @@
 
 			ed.addCommand('mceInsertTemplate', t._insertTemplate, t);
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('template', {title : 'template.desc', cmd : 'mceTemplate'});
 
 			ed.onPreProcess.add(function(ed, o) {
@@ -72,7 +72,7 @@
 
 			el = dom.create('div', null, h);
 
-			// Find template element within div
+		// Find template element within div
 			n = dom.select('.mceTmpl', el);
 			if (n && n.length > 0) {
 				el = dom.create('div', null);
@@ -84,15 +84,15 @@
 			};
 
 			each(dom.select('*', el), function(n) {
-				// Replace cdate
+			// Replace cdate
 				if (hasClass(n, ed.getParam('template_cdate_classes', 'cdate').replace(/\s+/g, '|')))
 					n.innerHTML = t._getDateTime(new Date(), ed.getParam("template_cdate_format", ed.getLang("template.cdate_format")));
 
-				// Replace mdate
+			// Replace mdate
 				if (hasClass(n, ed.getParam('template_mdate_classes', 'mdate').replace(/\s+/g, '|')))
 					n.innerHTML = t._getDateTime(new Date(), ed.getParam("template_mdate_format", ed.getLang("template.mdate_format")));
 
-				// Replace selection
+			// Replace selection
 				if (hasClass(n, ed.getParam('template_selected_content_classes', 'selcontent').replace(/\s+/g, '|')))
 					n.innerHTML = sel;
 			});
@@ -154,6 +154,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('template', tinymce.plugins.TemplatePlugin);
 })();

@@ -7,7 +7,8 @@ class Events_mdl extends Model
 		$this->db->insert('events', $data);
 	}
 
-	function get($user_id = '', $status = '')//Вывод новых событий пользователя
+	//Вывод новых событий пользователя
+	function get($user_id = '', $status = '')
 	{
 		$this->db->order_by('date', 'desc');
 
@@ -20,8 +21,8 @@ class Events_mdl extends Model
 		return $this->db->get('events')->result_array();
 	}
 
-
-	function get_all($start_from = FALSE, $per_page, $user_id = '', $status = '')//Вывод событий пользователя
+	//Вывод событий пользователя
+	function get_all($start_from = FALSE, $per_page, $user_id = '', $status = '')
 	{
 		$this->db->order_by('date', 'desc');
 
@@ -40,7 +41,6 @@ class Events_mdl extends Model
 		$this->db->where('user_id', $user_id);
 
 		$query = $this->db->get('events')->result_array();
-
 
 		$count = count($query);
 
@@ -64,7 +64,8 @@ class Events_mdl extends Model
 		return $this->db->count_all_results('events'); 
 	}
 
-	function count_new_events($user_id = '')//Новые события у пользователя для вывода на главной
+	//Новые события у пользователя для вывода на главной
+	function count_new_events($user_id = '')
 	{
 		$this->db->where('user_id', $user_id);
 

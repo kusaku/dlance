@@ -15,6 +15,5 @@
 			$code = $CI->load->view('tinymce/tinymce', $data, TRUE);
 		}
 
-		
 		return $code;
 	}

@@ -34,7 +34,6 @@
 <input type="submit" value="Редактировать">
 </form>
 
-
   </div>
 
 </div>

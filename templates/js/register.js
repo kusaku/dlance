@@ -17,19 +17,21 @@
 				$('#username_err').html(''); 
 				$('#email_err').html('');
 
-				$("#r").css("display", "inline");//Показываем кнопку оплатить
-				$("#sendbtn").css("display", "none");//Скрываем кнопку отправить
+				//Показываем кнопку оплатить
+				$("#r").css("display", "inline");
+				//Скрываем кнопку отправить
+				$("#sendbtn").css("display", "none");
 
 				$('#username_err').append(json.username);
 				$('#email_err').append(json.email);
 				
 				$('#register').html('Система успешно завершена, на указанный email был выслан код для активации аккаунта и данные для входа, после оплаты.');
-				
-				
+
 				fields = {
 					'cart' : $('#cart').val(),
 					'total_amount' : $('#total_amount').val(),
-					'code' : json.code//Вставляем в поле полученный код
+					//Вставляем в поле полученный код
+					'code' : json.code
 				}
 
 				$.ajax({
@@ -44,7 +46,6 @@
 						$("#robokassa").html(html);
 					}
 				});
-
 
 			}
 			else

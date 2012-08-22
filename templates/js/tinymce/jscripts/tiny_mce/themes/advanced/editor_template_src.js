@@ -11,13 +11,13 @@
 (function(tinymce) {
 	var DOM = tinymce.DOM, Event = tinymce.dom.Event, extend = tinymce.extend, each = tinymce.each, Cookie = tinymce.util.Cookie, lastExtID, explode = tinymce.explode;
 
-	// Tell it to load theme specific language pack(s)
+// Tell it to load theme specific language pack(s)
 	tinymce.ThemeManager.requireLangPack('advanced');
 
 	tinymce.create('tinymce.themes.AdvancedTheme', {
 		sizes : [8, 10, 12, 14, 18, 24, 36],
 
-		// Control name lookup, format: title, command
+	// Control name lookup, format: title, command
 		controls : {
 			bold : ['bold_desc', 'Bold'],
 			italic : ['italic_desc', 'Italic'],
@@ -66,7 +66,7 @@
 			t.url = url;
 			t.onResolveName = new tinymce.util.Dispatcher(this);
 
-			// Default settings
+		// Default settings
 			t.settings = s = extend({
 				theme_advanced_path : true,
 				theme_advanced_toolbar_location : 'bottom',
@@ -84,7 +84,7 @@
 				readonly : ed.settings.readonly
 			}, ed.settings);
 
-			// Setup default font_size_style_values
+		// Setup default font_size_style_values
 			if (!s.font_size_style_values)
 				s.font_size_style_values = "8pt,10pt,12pt,14pt,18pt,24pt,36pt";
 
@@ -92,7 +92,7 @@
 				s.font_size_style_values = tinymce.explode(s.font_size_style_values);
 				s.font_size_classes = tinymce.explode(s.font_size_classes || '');
 
-				// Parse string value
+			// Parse string value
 				o = {};
 				ed.settings.theme_advanced_font_sizes = s.theme_advanced_font_sizes;
 				each(ed.getParam('theme_advanced_font_sizes', '', 'hash'), function(v, k) {
@@ -119,7 +119,7 @@
 			if (s.theme_advanced_statusbar_location == 'none')
 				s.theme_advanced_statusbar_location = 0;
 
-			// Init editor
+		// Init editor
 			ed.onInit.add(function() {
 				if (!ed.settings.readonly)
 					ed.onNodeChange.add(t._nodeChanged, t);
@@ -215,7 +215,7 @@
 		_createStyleSelect : function(n) {
 			var t = this, ed = t.editor, ctrlMan = ed.controlManager, ctrl;
 
-			// Setup style select box
+		// Setup style select box
 			ctrl = ctrlMan.createListBox('styleselect', {
 				title : 'advanced.style_select',
 				onselect : function(name) {
@@ -228,7 +228,7 @@
 					ed.focus();
 					ed.undoManager.add();
 
-					// Toggle off the current format
+				// Toggle off the current format
 					matches = ed.formatter.matchAll(formatNames);
 					if (!name || matches[0] == name)
 						ed.formatter.remove(matches[0]);
@@ -238,11 +238,12 @@
 					ed.undoManager.add();
 					ed.nodeChanged();
 
-					return false; // No auto select
+					// No auto select
+					return false; 
 				}
 			});
 
-			// Handle specified format
+		// Handle specified format
 			ed.onInit.add(function() {
 				var counter = 0, formats = ed.getParam('style_formats');
 
@@ -278,7 +279,7 @@
 				}
 			});
 
-			// Auto import classes if the ctrl box is empty
+		// Auto import classes if the ctrl box is empty
 			if (ctrl.getLength() == 0) {
 				ctrl.onPostRender.add(function(ed, n) {
 					if (!ctrl.NativeListBox) {
@@ -309,12 +310,13 @@
 
 					ed.execCommand('FontName', false, v);
 
-					// Fake selection, execCommand will fire a nodeChange and update the selection
+				// Fake selection, execCommand will fire a nodeChange and update the selection
 					c.select(function(sv) {
 						return v == sv;
 					});
 
-					return false; // No auto select
+					// No auto select
+					return false; 
 				}
 			});
 
@@ -356,12 +358,13 @@
 				} else
 					ed.execCommand('FontSize', false, v.fontSize);
 
-				// Fake selection, execCommand will fire a nodeChange and update the selection
+			// Fake selection, execCommand will fire a nodeChange and update the selection
 				c.select(function(sv) {
 					return v == sv;
 				});
 
-				return false; // No auto select
+				// No auto select
+				return false; 
 			}});
 
 			if (c) {
@@ -491,12 +494,13 @@
 
 			n = o.targetNode;
 
-			// Add classes to first and last TRs
-			nl = DOM.stdMode ? sc.getElementsByTagName('tr') : sc.rows; // Quick fix for IE 8
+		// Add classes to first and last TRs
+			// Quick fix for IE 8
+			nl = DOM.stdMode ? sc.getElementsByTagName('tr') : sc.rows; 
 			DOM.addClass(nl[0], 'mceFirst');
 			DOM.addClass(nl[nl.length - 1], 'mceLast');
 
-			// Add classes to first and last TDs
+		// Add classes to first and last TDs
 			each(DOM.select('tr', tb), function(n) {
 				DOM.addClass(n.firstChild, 'mceFirst');
 				DOM.addClass(n.childNodes[n.childNodes.length - 1], 'mceLast');
@@ -574,13 +578,13 @@
 		resizeTo : function(w, h, store) {
 			var ed = this.editor, s = this.settings, e = DOM.get(ed.id + '_tbl'), ifr = DOM.get(ed.id + '_ifr');
 
-			// Boundery fix box
+		// Boundery fix box
 			w = Math.max(s.theme_advanced_resizing_min_width || 100, w);
 			h = Math.max(s.theme_advanced_resizing_min_height || 100, h);
 			w = Math.min(s.theme_advanced_resizing_max_width || 0xFFFF, w);
 			h = Math.min(s.theme_advanced_resizing_max_height || 0xFFFF, h);
 
-			// Resize iframe and container
+		// Resize iframe and container
 			DOM.setStyle(e, 'height', '');
 			DOM.setStyle(ifr, 'height', h);
 
@@ -588,14 +592,14 @@
 				DOM.setStyle(e, 'width', '');
 				DOM.setStyle(ifr, 'width', w);
 
-				// Make sure that the size is never smaller than the over all ui
+			// Make sure that the size is never smaller than the over all ui
 				if (w < e.clientWidth) {
 					w = e.clientWidth;
 					DOM.setStyle(ifr, 'width', e.clientWidth);
 				}
 			}
 
-			// Store away the size
+		// Store away the size
 			if (store && s.theme_advanced_resizing_use_cookie) {
 				Cookie.setHash("TinyMCE_" + ed.id + "_size", {
 					cw : w,
@@ -612,8 +616,7 @@
 			Event.clear(id + '_external_close');
 		},
 
-		// Internal functions
-
+	// Internal functions
 		_simpleLayout : function(s, tb, o, p) {
 			var t = this, ed = t.editor, lo = s.theme_advanced_toolbar_location, sl = s.theme_advanced_statusbar_location, n, ic, etb, c;
 
@@ -623,11 +626,11 @@
 				return ic;
 			}
 
-			// Create toolbar container at top
+		// Create toolbar container at top
 			if (lo == 'top')
 				t._addToolbars(tb, o);
 
-			// Create external toolbar
+		// Create external toolbar
 			if (lo == 'external') {
 				n = c = DOM.create('div', {style : 'position:relative'});
 				n = DOM.add(n, 'div', {id : ed.id + '_external', 'class' : 'mceExternalToolbar'});
@@ -656,7 +659,7 @@
 					DOM.show(e);
 					DOM.setStyle(e, 'top', 0 - DOM.getRect(ed.id + '_tblext').h - 1);
 
-					// Fixes IE rendering bug
+				// Fixes IE rendering bug
 					DOM.hide(e);
 					DOM.show(e);
 					e.style.filter = '';
@@ -670,13 +673,13 @@
 			if (sl == 'top')
 				t._addStatusBar(tb, o);
 
-			// Create iframe container
+		// Create iframe container
 			if (!s.theme_advanced_toolbar_container) {
 				n = DOM.add(tb, 'tr');
 				n = ic = DOM.add(n, 'td', {'class' : 'mceIframeContainer'});
 			}
 
-			// Create toolbar container at bottom
+		// Create toolbar container at bottom
 			if (lo == 'bottom')
 				t._addToolbars(tb, o);
 
@@ -743,7 +746,7 @@
 				if (di && di[n])
 					return;
 
-				// Compatiblity with 2.x
+			// Compatiblity with 2.x
 				if (n == 'tablecontrols') {
 					each(["table","|","row_props","cell_props","|","row_before","row_after","delete_row","|","col_before","col_after","delete_col","|","split_cells","merge_cells"], function(n) {
 						n = t.createControl(n, cf);
@@ -775,7 +778,7 @@
 
 			h.push(DOM.createHTML('a', {href : '#', accesskey : 'q', title : ed.getLang("advanced.toolbar_focus")}, '<!-- IE -->'));
 
-			// Create toolbar and add the controls
+		// Create toolbar and add the controls
 			for (i=1; (v = s['theme_advanced_buttons' + i]); i++) {
 				tb = cf.createToolbar("toolbar" + i, {'class' : 'mceToolbarRow' + i});
 
@@ -787,7 +790,7 @@
 
 				t._addControls(v, tb);
 
-				//n.appendChild(n = tb.render());
+			//n.appendChild(n = tb.render());
 				h.push(tb.renderHTML());
 
 				o.deltaHeight -= s.theme_advanced_row_height;
@@ -839,7 +842,7 @@
 						};
 
 						function endResize(e) {
-							// Stop listening
+						// Stop listening
 							Event.remove(DOM.doc, 'mousemove', mouseMoveHandler1);
 							Event.remove(ed.getDoc(), 'mousemove', mouseMoveHandler2);
 							Event.remove(DOM.doc, 'mouseup', mouseUpHandler1);
@@ -852,14 +855,14 @@
 
 						e.preventDefault();
 
-						// Get the current rect size
+					// Get the current rect size
 						startX = e.screenX;
 						startY = e.screenY;
 						ifrElm = DOM.get(t.editor.id + '_ifr');
 						startWidth = width = ifrElm.clientWidth;
 						startHeight = height = ifrElm.clientHeight;
 
-						// Register envent handlers
+					// Register envent handlers
 						mouseMoveHandler1 = Event.add(DOM.doc, 'mousemove', resizeOnMove);
 						mouseMoveHandler2 = Event.add(ed.getDoc(), 'mousemove', resizeOnMove);
 						mouseUpHandler1 = Event.add(DOM.doc, 'mouseup', endResize);
@@ -939,7 +942,7 @@
 					c.select(p.nodeName.toLowerCase());
 			}
 
-			// Find out current fontSize, fontFamily and fontClass
+		// Find out current fontSize, fontFamily and fontClass
 			getParent(function(n) {
 				if (n.nodeName === 'SPAN') {
 					if (!cl && n.className)
@@ -961,9 +964,9 @@
 				});
 			}
 
-			// Select font size
+		// Select font size
 			if (c = cm.get('fontsizeselect')) {
-				// Use computed style
+			// Use computed style
 				if (s.theme_advanced_runtime_fontsize && !fz && !cl)
 					fz = ed.dom.getStyle(n, 'fontSize', true);
 
@@ -986,22 +989,22 @@
 					/*if (n.getAttribute('_mce_bogus'))
 						return;
 */
-					// Ignore non element and hidden elements
+				// Ignore non element and hidden elements
 					if (n.nodeType != 1 || n.nodeName === 'BR' || (DOM.hasClass(n, 'mceItemHidden') || DOM.hasClass(n, 'mceItemRemoved')))
 						return;
 
-					// Fake name
+				// Fake name
 					if (v = DOM.getAttrib(n, 'mce_name'))
 						na = v;
 
-					// Handle prefix
+				// Handle prefix
 					if (tinymce.isIE && n.scopeName !== 'HTML')
 						na = n.scopeName + ':' + na;
 
-					// Remove internal prefix
+				// Remove internal prefix
 					na = na.replace(/mce\:/g, '');
 
-					// Handle node name
+				// Handle node name
 					switch (na) {
 						case 'b':
 							na = 'strong';
@@ -1067,7 +1070,7 @@
 					ti = na.title;
 					na = na.name;
 
-					//u = "javascript:tinymce.EditorManager.get('" + ed.id + "').theme._sel('" + (de++) + "');";
+				//u = "javascript:tinymce.EditorManager.get('" + ed.id + "').theme._sel('" + (de++) + "');";
 					pi = DOM.create('a', {'href' : "javascript:;", onmousedown : "return false;", title : ti, 'class' : 'mcePath_' + (de++)}, na);
 
 					if (p.hasChildNodes()) {
@@ -1079,8 +1082,7 @@
 			}
 		},
 
-		// Commands gets called by execCommand
-
+	// Commands gets called by execCommand
 		_sel : function(v) {
 			this.editor.execCommand('mceSelectNodeDepth', false, v);
 		},
@@ -1160,7 +1162,7 @@
 		_mceImage : function(ui, val) {
 			var ed = this.editor;
 
-			// Internal image object like a flash placeholder
+		// Internal image object like a flash placeholder
 			if (ed.dom.getAttrib(ed.selection.getNode(), 'class').indexOf('mceItem') != -1)
 				return;
 

@@ -35,12 +35,9 @@
 <div class="bbr"></div>
 </div>
 
-
 <br />
 <input type="submit" value="Редактировать">
 </form>
-
-
 
 </div>
 </div>

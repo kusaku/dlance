@@ -430,8 +430,7 @@ ul.arbo {
 	.picto-list li:last-child {
 		margin-bottom: 0;
 	}
-	
-	
+
 	.picto-list.icon-info li, .picto-list li.icon-info { background-image: url(../images/icons/fugue/information-blue.png); }
 	.picto-list.icon-image li, .picto-list li.icon-image { background-image: url(../images/icons/fugue/image.png); }
 	.picto-list.icon-user li, .picto-list li.icon-user { background-image: url(../images/icons/fugue/user.png); }

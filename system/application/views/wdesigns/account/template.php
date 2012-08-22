@@ -55,7 +55,7 @@
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript">
 	
-		// Load the Visualization API and the piechart package.
+	// Load the Visualization API and the piechart package.
 		google.load('visualization', '1', {'packages':['corechart']});
 		
 	</script>
@@ -68,12 +68,12 @@
 			 * Example context menu
 			 */
 			
-			// Context menu for all favorites
+		// Context menu for all favorites
 			$('.favorites li').bind('contextMenu', function(event, list)
 			{
 				var li = $(this);
 				
-				// Add links to the menu
+			// Add links to the menu
 				if (li.prev().length > 0)
 				{
 					list.push({ text: 'Move up', link:'#', icon:'up' });
@@ -82,13 +82,15 @@
 				{
 					list.push({ text: 'Move down', link:'#', icon:'down' });
 				}
-				list.push(false);	// Separator
+				// Separator
+				list.push(false);	
 			});
 			
-			// Extra options for the first one
+		// Extra options for the first one
 			$('.favorites li:first').bind('contextMenu', function(event, list)
 			{
-				list.push(false);	// Separator
+				// Separator
+				list.push(false);	
 				list.push({ text: '', icon:'terminal', link:'#', subs:[
 					{ text: ' ', link: '/administrator/', icon: 'blog' },
 					{ text: ' ', link: '/administrator/transaction/', icon: 'blog' }
@@ -99,7 +101,7 @@
 			 * Table sorting
 			 */
 			
-			// A small classes setup...
+		// A small classes setup...
 			$.fn.dataTableExt.oStdClasses.sWrapper = 'no-margin last-child';
 			$.fn.dataTableExt.oStdClasses.sInfo = 'message no-margin';
 			$.fn.dataTableExt.oStdClasses.sLength = 'float-left';
@@ -114,10 +116,10 @@
 			$.fn.dataTableExt.oStdClasses.sPageNext = 'control-next';
 			$.fn.dataTableExt.oStdClasses.sPageLast = 'control-last';
 			
-			// Apply to table
+		// Apply to table
 			$('.sortable').each(function(i)
 			{
-				// DataTable config
+			// DataTable config
 				var table = $(this),
 					oTable = table.dataTable({
 						/**
@@ -125,21 +127,25 @@
 						 * @url http://www.datatables.net/usage/columns
 						 */
 						aoColumns: [
-							{ bSortable: false },	// No sorting for this columns, as it only contains checkboxes
+							// No sorting for this columns, as it only contains checkboxes
+							{ bSortable: false },	
 							{ sType: 'string' },
 							{ bSortable: false },
-							{ sType: 'numeric', bUseRendered: false, fnRender: function(obj) // Append unit and add icon
+							// Append unit and add icon
+							{ sType: 'numeric', bUseRendered: false, fnRender: function(obj) 
 								{
 									return '<small><img src="images/icons/fugue/image.png" width="16" height="16" class="picto"> '+obj.aData[obj.iDataColumn]+' Ko</small>';
 								}
 							},
 							{ sType: 'date' },
-							{ sType: 'numeric', bUseRendered: false, fnRender: function(obj) // Size is given as float for sorting, convert to format 000 x 000
+							// Size is given as float for sorting, convert to format 000 x 000
+							{ sType: 'numeric', bUseRendered: false, fnRender: function(obj) 
 								{
 									return obj.aData[obj.iDataColumn].split('.').join(' x ');
 								}
 							},
-							{ bSortable: false }	// No sorting for actions column
+							// No sorting for actions column
+							{ bSortable: false }	
 						],
 						
 						/**
@@ -161,35 +167,35 @@
 						}
 					});
 				
-				// Sorting arrows behaviour
+			// Sorting arrows behaviour
 				table.find('thead .sort-up').click(function(event)
 				{
-					// Stop link behaviour
+				// Stop link behaviour
 					event.preventDefault();
 					
-					// Find column index
+				// Find column index
 					var column = $(this).closest('th'),
 						columnIndex = column.parent().children().index(column.get(0));
 					
-					// Send command
+				// Send command
 					oTable.fnSort([[columnIndex, 'asc']]);
 					
-					// Prevent bubbling
+				// Prevent bubbling
 					return false;
 				});
 				table.find('thead .sort-down').click(function(event)
 				{
-					// Stop link behaviour
+				// Stop link behaviour
 					event.preventDefault();
 					
-					// Find column index
+				// Find column index
 					var column = $(this).closest('th'),
 						columnIndex = column.parent().children().index(column.get(0));
 					
-					// Send command
+				// Send command
 					oTable.fnSort([[columnIndex, 'desc']]);
 					
-					// Prevent bubbling
+				// Prevent bubbling
 					return false;
 				});
 			});
@@ -233,7 +239,7 @@
 			});
 		});
 		
-		// Demo modal
+	// Demo modal
 		function openModal()
 		{
 			$.modal({

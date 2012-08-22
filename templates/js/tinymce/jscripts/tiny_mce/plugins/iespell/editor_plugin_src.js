@@ -18,7 +18,7 @@
 
 			t.editor = ed;
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceIESpell', function() {
 				try {
 					sp = new ActiveXObject("ieSpell.ieSpellExtension");
@@ -34,7 +34,7 @@
 				}
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('iespell', {title : 'iespell.iespell_desc', cmd : 'mceIESpell'});
 		},
 
@@ -49,6 +49,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('iespell', tinymce.plugins.IESpell);
 })();

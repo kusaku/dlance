@@ -16,7 +16,8 @@ function update(id){
 		url: "/account/update_event",
 		data: dataString,
 		cache: false,
-		success: function(html)//Тут нужно изменить img
+		//Тут нужно изменить img
+		success: function(html)
 		{
 			$('#event_'+ id + '').removeClass("new");
 		}
@@ -61,6 +62,5 @@ function update(id){
 	<? else: ?>
 		<p>События отсутствуют.</p>
 	<? endif; ?>
-
 
 </div>

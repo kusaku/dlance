@@ -15,10 +15,10 @@
 
 			t.editor = ed;
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceVisualChars', t._toggleVisualChars, t);
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('visualchars', {title : 'visualchars.desc', cmd : 'mceVisualChars'});
 
 			ed.onBeforeGetContent.add(function(ed, o) {
@@ -39,8 +39,7 @@
 			};
 		},
 
-		// Private methods
-
+	// Private methods
 		_toggleVisualChars : function(bookmark) {
 			var t = this, ed = t.editor, nl, i, h, d = ed.getDoc(), b = ed.getBody(), nv, s = ed.selection, bo, div, bm;
 
@@ -78,6 +77,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('visualchars', tinymce.plugins.VisualChars);
 })();

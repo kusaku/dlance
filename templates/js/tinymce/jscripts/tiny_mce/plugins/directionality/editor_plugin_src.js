@@ -57,8 +57,7 @@
 			};
 		},
 
-		// Private methods
-
+	// Private methods
 		_nodeChange : function(ed, cm, n) {
 			var dom = ed.dom, dir;
 
@@ -77,6 +76,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('directionality', tinymce.plugins.Directionality);
 })();

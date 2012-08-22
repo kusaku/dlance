@@ -11,7 +11,7 @@
 (function() {
 	var DOM = tinymce.DOM;
 
-	// Tell it to load theme specific language pack(s)
+// Tell it to load theme specific language pack(s)
 	tinymce.ThemeManager.requireLangPack('simple');
 
 	tinymce.create('tinymce.themes.SimpleTheme', {
@@ -40,14 +40,14 @@
 			n = sc = DOM.add(n, 'table', {cellPadding : 0, cellSpacing : 0, 'class' : 'mceLayout'});
 			n = tb = DOM.add(n, 'tbody');
 
-			// Create iframe container
+		// Create iframe container
 			n = DOM.add(tb, 'tr');
 			n = ic = DOM.add(DOM.add(n, 'td'), 'div', {'class' : 'mceIframeContainer'});
 
-			// Create toolbar container
+		// Create toolbar container
 			n = DOM.add(DOM.add(tb, 'tr', {'class' : 'last'}), 'td', {'class' : 'mceToolbar mceLast', align : 'center'});
 
-			// Create toolbar
+		// Create toolbar
 			tb = t.toolbar = cf.createToolbar("tools1");
 			tb.add(cf.createButton('bold', {title : 'simple.bold_desc', cmd : 'Bold'}));
 			tb.add(cf.createButton('italic', {title : 'simple.italic_desc', cmd : 'Italic'}));

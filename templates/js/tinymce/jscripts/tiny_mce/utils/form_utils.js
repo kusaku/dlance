@@ -106,7 +106,7 @@ function addSelectValue(form_obj, field_name, name, value) {
 }
 
 function addClassesToList(list_id, specific_option) {
-	// Setup class droplist
+// Setup class droplist
 	var styleSelectElm = document.getElementById(list_id);
 	var styles = tinyMCEPopup.getParam('theme_advanced_styles', false);
 	styles = tinyMCEPopup.getParam(specific_option, styles);
@@ -180,7 +180,7 @@ function getCSSSize(size) {
 	if (size == "")
 		return "";
 
-	// Add px
+// Add px
 	if (/^[0-9]+$/.test(size))
 		size += 'px';
 

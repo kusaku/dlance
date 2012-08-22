@@ -14,7 +14,8 @@ function vote(id, type)
 		url: "/designs/vote",
 		data: dataString,
 		cache: false,
-		success: function(html)//Получаем текст со страницы
+		//Получаем текст со страницы
+		success: function(html)
 		{
 			$('#rating').html(html);
 			$('#rating').fadeIn(300);
@@ -41,7 +42,8 @@ function send_report(id)
 		type: "POST",
 		url: "/designs/send_report",
 		data: dataString,
-		success: function(html)//Получаем текст со страницы
+		//Получаем текст со страницы
+		success: function(html)
 		{
 			alert('Жалоба отправлена');
 		}
@@ -70,7 +72,8 @@ function ban(id)
 		type: "POST",
 		url: "/designs/send_ban",
 		data: dataString,
-		success: function(html)//Получаем текст со страницы
+		//Получаем текст со страницы
+		success: function(html)
 		{
 			alert('Продукт забанен');
 		}
@@ -93,7 +96,8 @@ function addcart(id, kind)
 		url: "/account/cart_add",
 		data: dataString,
 		cache: false,
-		success: function(html)//Получаем текст со страницы
+		//Получаем текст со страницы
+		success: function(html)
 		{
 			$('#addcart').html(html);
 			$('#addcart').fadeIn(300);
@@ -118,7 +122,8 @@ function addcart(id, kind)
 			$active = $category_id;
 			foreach($categories as $row):
 				if( $active == $row['id'] ):
-					if( $row['parent_id'] != 0 )://Если у активной категории имеется раздел, присваиваем раздел
+					//Если у активной категории имеется раздел, присваиваем раздел
+					if( $row['parent_id'] != 0 ):
 						$active = $row['parent_id'];
 					endif;
 				endif;

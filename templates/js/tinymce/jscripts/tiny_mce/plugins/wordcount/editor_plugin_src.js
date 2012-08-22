@@ -25,7 +25,7 @@
 			ed.onPostRender.add(function(ed, cm) {
 				var row, id;
 
-				// Add it to the specified id or the theme advanced path
+			// Add it to the specified id or the theme advanced path
 				id = ed.getParam('wordcount_target_id');
 				if (!id) {
 					row = tinymce.DOM.get(ed.id + '_path_row');
@@ -62,7 +62,7 @@
 		_count : function(ed) {
 			var t = this, tc = 0;
 
-			// Keep multiple calls from happening at the same time
+		// Keep multiple calls from happening at the same time
 			if (t.block)
 				return;
 
@@ -72,9 +72,12 @@
 				var tx = ed.getContent({format : 'raw'});
 
 				if (tx) {
-					tx = tx.replace(/<.[^<>]*?>/g, ' ').replace(/&nbsp;|&#160;/gi, ' '); // remove html tags and space chars
-					tx = tx.replace(t.cleanre, ''); // remove numbers and punctuation
-					tx.replace(t.countre, function() {tc++;}); // count the words
+					// remove html tags and space chars
+					tx = tx.replace(/<.[^<>]*?>/g, ' ').replace(/&nbsp;|&#160;/gi, ' '); 
+					// remove numbers and punctuation
+					tx = tx.replace(t.cleanre, ''); 
+					// count the words
+					tx.replace(t.countre, function() {tc++;}); 
 				}
 
 				tinymce.DOM.setHTML(t.id, tc.toString());

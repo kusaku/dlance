@@ -173,7 +173,6 @@ $(document).ready(
 </td>
 </tr>
 
-
 <tr>
 <td class="caption">Страна:</td>
 <td>
@@ -293,9 +292,7 @@ $(document).ready(
 <div class="bbr"></div>
 </div>
 
-
 <br />
-
 
 <div class="ttl">
 <div class="ttr"></div>
@@ -324,9 +321,6 @@ $(document).ready(
 <br />
 <input type="submit" value="Сохранить изменения">
 </form>
-
-
-
 
   </div>
 

@@ -1,7 +1,6 @@
 <div id="yui-main">
 <div class="yui-b">
 
-
 <h1><a href="/account/cart">Корзина</a></h1>
 
 <? if( !empty($data) ): ?>
@@ -16,7 +15,6 @@
 <th>Название / Краткое описание</th>
 </tr>
 <? foreach($data as $row): ?>
-
 
 <tr>
 <td class="thumb" rowspan="3" style="width:150px;">
@@ -46,7 +44,6 @@
 </tr>
 <tr>
 
-
 <td class="options" colspan="2">
 
 <input name="designs[]" type="checkbox" value="<?=$row['id']?>" checked="checked"/>
@@ -69,7 +66,6 @@
 <? else: ?>
 <p>Дизайны отсутствуют.</p>
 <? endif; ?>
-
 
   </div>
 

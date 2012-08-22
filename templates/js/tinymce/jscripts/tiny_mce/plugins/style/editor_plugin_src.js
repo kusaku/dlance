@@ -11,7 +11,7 @@
 (function() {
 	tinymce.create('tinymce.plugins.StylePlugin', {
 		init : function(ed, url) {
-			// Register commands
+		// Register commands
 			ed.addCommand('mceStyleProps', function() {
 				ed.windowManager.open({
 					file : url + '/props.htm',
@@ -35,7 +35,7 @@
 				cm.setDisabled('styleprops', n.nodeName === 'BODY');
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('styleprops', {title : 'style.desc', cmd : 'mceStyleProps'});
 		},
 
@@ -50,6 +50,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('style', tinymce.plugins.StylePlugin);
 })();

@@ -23,14 +23,14 @@
 			var currentPage;
 			var pagination = false;
 			
-			// Detect lag in rendering (IE...)
+		// Detect lag in rendering (IE...)
 			if (list.height() == 0)
 			{
 				setTimeout(function() { list.accessibleList(options); }, 20);
 				return;
 			}
 			
-			// Setup
+		// Setup
 			list.css('overflow', 'hidden').addClass('relative');
 			var listHeight = list.height();
 			
@@ -39,7 +39,7 @@
 				var nbPages = Math.max(1, Math.ceil(lines.length/settings.pageSize));
 				currentPage = Math.max(1, Math.min(nbPages, settings.startPage));
 				
-				// Setup pages
+			// Setup pages
 				var width = list.width();
 				list.width(width);
 				var linePage = 0;
@@ -59,7 +59,7 @@
 					++lineRow;
 					if (lineRow == settings.pageSize)
 					{
-						// Detect listHeight
+					// Detect listHeight
 						if (height > listHeight)
 						{
 							listHeight = height;	
@@ -77,7 +77,7 @@
 				}).attr('scrollLeft', (currentPage-1)*width);
 				list.height(listHeight);
 				
-				// Create pagination
+			// Create pagination
 				pagination = listNode.after('<ul class="small-pagination"></ul>').next();
 				for (number = 0; number < nbPages; ++number)
 				{
@@ -86,18 +86,18 @@
 				var links = pagination.find('a');
 				links.click(function(event)
 				{
-					// Stop link action
+				// Stop link action
 					event.preventDefault();
 					var element = $(this);
 					
-					// Page number
+				// Page number
 					currentPage = parseInt(element.text());
 					if (isNaN(currentPage))
 					{
 						currentPage = 1;
 					}
 					
-					// Show page
+				// Show page
 					var scrollVal = (currentPage-1)*width;
 					if (inited && settings.animate)
 					{
@@ -108,7 +108,7 @@
 						list.attr('scrollLeft', scrollVal);
 					}
 					
-					// Style
+				// Style
 					element.parent().addClass('current').siblings().removeClass('current');
 					if (currentPage == 1)
 					{
@@ -127,14 +127,14 @@
 						pagination.find('li.next').css('visibility', 'visible');
 					}
 					
-					// Callback
+				// Callback
 					if (settings.after)
 					{
 						settings.after.call(list.get(0));
 					}
 				});
 				
-				// Prev / next buttons
+			// Prev / next buttons
 				pagination.prepend('<li class="prev"><a href="#">Prev</a></li>').find('li.prev a').click(function()
 				{
 					pagination.find('li.current').prev().not('.prev').children('a').trigger('click');
@@ -144,10 +144,10 @@
 					pagination.find('li.current').next().not('.next').children('a').trigger('click');
 				});
 				
-				// First update
+			// First update
 				links.eq(currentPage-1).trigger('click');
 				
-				// Prepare for next condition
+			// Prepare for next condition
 				listNode = pagination;
 			}
 			
@@ -157,10 +157,10 @@
 				
 				var more = $('<a href="#" class="search-less">'+settings.lessText+'</a>').insertAfter(listNode).click(function(event)
 				{
-					// Stop link action
+				// Stop link action
 					event.preventDefault();
 					
-					// Detect mode
+				// Detect mode
 					if (!expanded)
 					{
 						if (inited && settings.animate)
@@ -172,7 +172,7 @@
 							list.css({'height':listHeight});
 						}
 						
-						// Pagination
+					// Pagination
 						if (pagination)
 						{
 							if (inited && settings.animate)
@@ -185,13 +185,13 @@
 							}
 						}
 						
-						// More button
+					// More button
 						more.removeClass('search-more').addClass('search-less').text(settings.lessText);
 						expanded = true;
 					}
 					else
 					{
-						// Gather visible elements
+					// Gather visible elements
 						if (settings.pageSize && lines.length > settings.pageSize)
 						{
 							var visibleLines = lines;
@@ -207,7 +207,7 @@
 							var visibleLines = lines.filter(':lt('+settings.moreAfter+')');
 						}
 						
-						// Calculate visible height
+					// Calculate visible height
 						var visibleHeight = 0;
 						var visibleCount = visibleLines.length;
 						visibleLines.each(function(i)
@@ -228,7 +228,7 @@
 							list.css({'height': visibleHeight});
 						}
 						
-						// Pagination
+					// Pagination
 						if (pagination)
 						{
 							if (inited && settings.animate)
@@ -241,12 +241,12 @@
 							}
 						}
 						
-						// More button
+					// More button
 						more.removeClass('search-less').addClass('search-more').text(settings.moreText);
 						expanded = false;
 					}
 					
-					// Callback
+				// Callback
 					if (settings.after)
 					{
 						settings.after.call(list.get(0));
@@ -260,7 +260,7 @@
 			}
 		});
 		
-		// List ready
+	// List ready
 		inited = true;
 		
 		return this;

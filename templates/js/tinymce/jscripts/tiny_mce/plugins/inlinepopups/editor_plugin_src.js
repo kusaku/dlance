@@ -13,7 +13,7 @@
 
 	tinymce.create('tinymce.plugins.InlinePopups', {
 		init : function(ed, url) {
-			// Replace window manager
+		// Replace window manager
 			ed.onBeforeRenderUI.add(function() {
 				ed.windowManager = new tinymce.InlineWindowManager(ed);
 				DOM.loadCSS(url + '/skins/' + (ed.settings.inlinepopups_skin || 'clearlooks2') + "/window.css");
@@ -47,11 +47,11 @@
 			f = f || {};
 			p = p || {};
 
-			// Run native windows
+		// Run native windows
 			if (!f.inline)
 				return t.parent(f, p);
 
-			// Only store selection if the type is a normal window
+		// Only store selection if the type is a normal window
 			if (!f.type)
 				t.bookmark = ed.selection.getBookmark(1);
 
@@ -72,11 +72,10 @@
 			p.mce_window_id = id;
 			p.mce_auto_focus = f.auto_focus;
 
-			// Transpose
+		// Transpose
 //			po = DOM.getPos(ed.getContainer());
 //			f.left -= po.x;
 //			f.top -= po.y;
-
 			t.features = f;
 			t.params = p;
 			t.onOpen.dispatch(t, f, p);
@@ -105,7 +104,7 @@
 			if (f.movable)
 				opt += ' mceMovable';
 
-			// Create DOM objects
+		// Create DOM objects
 			t._addAll(DOM.doc.body, 
 				['div', {id : id, 'class' : (ed.settings.inlinepopups_skin || 'clearlooks2') + (tinymce.isIE && window.getSelection ? ' ie9' : ''), style : 'width:100px;height:100px'}, 
 					['div', {id : id + '_wrapper', 'class' : 'mceWrapper' + opt},
@@ -148,11 +147,11 @@
 
 			DOM.setStyles(id, {top : -10000, left : -10000});
 
-			// Fix gecko rendering bug, where the editors iframe messed with window contents
+		// Fix gecko rendering bug, where the editors iframe messed with window contents
 			if (tinymce.isGecko)
 				DOM.setStyle(id, 'overflow', 'auto');
 
-			// Measure borders
+		// Measure borders
 			if (!f.type) {
 				dw += DOM.get(id + '_left').clientWidth;
 				dw += DOM.get(id + '_right').clientWidth;
@@ -160,7 +159,7 @@
 				dh += DOM.get(id + '_bottom').clientHeight;
 			}
 
-			// Resize window
+		// Resize window
 			DOM.setStyles(id, {top : f.top, left : f.left, width : f.width + dw, height : f.height + dh});
 
 			u = f.url || f.file;
@@ -185,7 +184,7 @@
 				DOM.setHTML(id + '_content', f.content.replace('\n', '<br />'));
 			}
 
-			// Register events
+		// Register events
 			mdf = Event.add(id, 'mousedown', function(e) {
 				var n = e.target, w, vp;
 
@@ -199,7 +198,7 @@
 
 						vp = DOM.getViewPort();
 
-						// Reduce viewport size to avoid scrollbars
+					// Reduce viewport size to avoid scrollbars
 						vp.w -= 2;
 						vp.h -= 2;
 
@@ -208,7 +207,7 @@
 						DOM.setStyles(id + '_ifr', {width : vp.w - w.deltaWidth, height : vp.h - w.deltaHeight});
 						DOM.addClass(id + '_wrapper', 'mceMaximized');
 					} else if (n.className == 'mceMed') {
-						// Reset to old size
+					// Reset to old size
 						w.element.moveTo(w.oldPos.x, w.oldPos.y);
 						w.element.resizeTo(w.oldSize.w, w.oldSize.h);
 						w.iframeElement.resizeTo(w.oldSize.w - w.deltaWidth, w.oldSize.h - w.deltaHeight);
@@ -240,7 +239,7 @@
 				}
 			});
 
-			// Add window
+		// Add window
 			w = t.windows[id] = {
 				id : id,
 				mousedown_func : mdf,
@@ -256,7 +255,7 @@
 				t.focus(id);
 			});
 
-			// Setup blocker
+		// Setup blocker
 			if (t.count == 0 && t.editor.getParam('dialog_type', 'modal') == 'modal') {
 				DOM.add(DOM.doc.body, 'div', {
 					id : 'mceModalBlocker',
@@ -264,7 +263,8 @@
 					style : {zIndex : t.zIndex - 1}
 				});
 
-				DOM.show('mceModalBlocker'); // Reduces flicker in IE
+				// Reduces flicker in IE
+				DOM.show('mceModalBlocker'); 
 			} else
 				DOM.setStyle('mceModalBlocker', 'z-index', t.zIndex - 1);
 
@@ -274,7 +274,7 @@
 			t.focus(id);
 			t._fixIELayout(id, 1);
 
-			// Focus ok button
+		// Focus ok button
 			if (DOM.get(id + '_ok'))
 				DOM.get(id + '_ok').focus();
 
@@ -314,12 +314,12 @@
 		_startDrag : function(id, se, ac) {
 			var t = this, mu, mm, d = DOM.doc, eb, w = t.windows[id], we = w.element, sp = we.getXY(), p, sz, ph, cp, vp, sx, sy, sex, sey, dx, dy, dw, dh;
 
-			// Get positons and sizes
+		// Get positons and sizes
 //			cp = DOM.getPos(t.editor.getContainer());
 			cp = {x : 0, y : 0};
 			vp = DOM.getViewPort();
 
-			// Reduce viewport size to avoid scrollbars while dragging
+		// Reduce viewport size to avoid scrollbars while dragging
 			vp.w -= 2;
 			vp.h -= 2;
 
@@ -327,7 +327,7 @@
 			sey = se.screenY;
 			dx = dy = dw = dh = 0;
 
-			// Handle mouse up
+		// Handle mouse up
 			mu = Event.add(d, 'mouseup', function(e) {
 				Event.remove(d, 'mouseup', mu);
 				Event.remove(d, 'mousemove', mm);
@@ -353,7 +353,7 @@
 
 				t._fixIELayout(id, 0);
 
-				// Setup event blocker
+			// Setup event blocker
 				DOM.add(d.body, 'div', {
 					id : 'mceEventBlocker',
 					'class' : 'mceEventBlocker ' + (t.editor.settings.inlinepopups_skin || 'clearlooks2'),
@@ -366,7 +366,7 @@
 				eb = new Element('mceEventBlocker');
 				eb.update();
 
-				// Setup placeholder
+			// Setup placeholder
 				p = we.getXY();
 				sz = we.getSize();
 				sx = cp.x + p.x - vp.x;
@@ -375,7 +375,7 @@
 				ph = new Element('mcePlaceHolder');
 			};
 
-			// Handle mouse move/drag
+		// Handle mouse move/drag
 			mm = Event.add(d, 'mousemove', function(e) {
 				var x, y, v;
 
@@ -425,7 +425,7 @@
 						break;
 				}
 
-				// Boundary check
+			// Boundary check
 				if (dw < (v = w.features.min_width - sz.w)) {
 					if (dx !== 0)
 						dx += dw - v;
@@ -447,7 +447,7 @@
 				dx = Math.min(dx, (vp.w + vp.x) - (sx + sz.w + vp.x));
 				dy = Math.min(dy, (vp.h + vp.y) - (sy + sz.h + vp.y));
 
-				// Move if needed
+			// Move if needed
 				if (dx + dy !== 0) {
 					if (sx + dx < 0)
 						dx = 0;
@@ -458,7 +458,7 @@
 					ph.moveTo(sx + dx, sy + dy);
 				}
 
-				// Resize if needed
+			// Resize if needed
 				if (dw + dh !== 0)
 					ph.resizeTo(sz.w + dw, sz.h + dh);
 
@@ -482,7 +482,7 @@
 
 			id = t._findId(id || win);
 
-			// Probably not inline
+		// Probably not inline
 			if (!t.windows[id]) {
 				t.parent(win);
 				return;
@@ -500,11 +500,12 @@
 				Event.clear(id);
 				Event.clear(id + '_ifr');
 
-				DOM.setAttrib(id + '_ifr', 'src', 'javascript:""'); // Prevent leak
+				// Prevent leak
+				DOM.setAttrib(id + '_ifr', 'src', 'javascript:""'); 
 				w.element.remove();
 				delete t.windows[id];
 
-				// Find front most window and focus that
+			// Find front most window and focus that
 				each (t.windows, function(w) {
 					if (w.zIndex > ix) {
 						fw = w;
@@ -564,8 +565,7 @@
 			});
 		},
 
-		// Internal functions
-
+	// Internal functions
 		_findId : function(w) {
 			var t = this;
 
@@ -590,7 +590,7 @@
 			if (!tinymce.isIE6)
 				return;
 
-			// Fixes the bug where hover flickers and does odd things in IE6
+		// Fixes the bug where hover flickers and does odd things in IE6
 			each(['n','s','w','e','nw','ne','sw','se'], function(v) {
 				var e = DOM.get(id + '_resize_' + v);
 
@@ -605,18 +605,17 @@
 				e = 0;
 			});
 
-			// Fixes graphics glitch
+		// Fixes graphics glitch
 			if (w = this.windows[id]) {
-				// Fixes rendering bug after resize
+			// Fixes rendering bug after resize
 				w.element.hide();
 				w.element.show();
 
-				// Forced a repaint of the window
-				//DOM.get(id).style.filter = '';
-
-				// IE has a bug where images used in CSS won't get loaded
-				// sometimes when the cache in the browser is disabled
-				// This fix tries to solve it by loading the images using the image object
+			// Forced a repaint of the window
+			//DOM.get(id).style.filter = '';
+			// IE has a bug where images used in CSS won't get loaded
+			// sometimes when the cache in the browser is disabled
+			// This fix tries to solve it by loading the images using the image object
 				each(DOM.select('div,a', id), function(e, i) {
 					if (e.currentStyle.backgroundImage != 'none') {
 						img = new Image();
@@ -629,7 +628,7 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('inlinepopups', tinymce.plugins.InlinePopups);
 })();
 

@@ -12,7 +12,6 @@ function commission(amount)
 
 	$('#commission').html(commission);
 
-
 	/*Узнаём остаток для вывода*/
 	amount = amount - commission;
 
@@ -65,8 +64,6 @@ function commission(amount)
  </div>
 </div>
 
-
-
 <? if( !empty($data) ): ?>
 <table class="portfolio">
 <tr>
@@ -88,7 +85,6 @@ function commission(amount)
     </table>
 <?=$page_links?>
 <? endif; ?>
-
 
   </div>
 

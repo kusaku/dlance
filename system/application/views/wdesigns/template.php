@@ -4,12 +4,12 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="google-site-verification" content="GZ6LEudcMoq7OAIcz-ywUZjW9pM6jROZqY4Rn0y_Ei8" />
 		<meta name="yandex-verification" content="51dcabbe6fb5f2d8" />
-		<title><?=$title?> </title>
-		<? if( isset($description) ): ?>
-			<?=$description?>
+		<title><?= $title?> </title>
+		<? if (isset($description)): ?>
+		<?= $description?>
 		<? endif; ?>
-		<? if( isset($keywords) ): ?>
-			<?=$keywords?>
+		<? if (isset($keywords)): ?>
+		<?= $keywords?>
 		<? endif; ?>
 		<link rel="alternate" type="application/rss+xml" href="<?=base_url()?>rss/designs" title="Дизайны сайтов (RSS 2.0)" />
 		<link href="/design/css/base.css" rel="stylesheet" type="text/css" />
@@ -27,29 +27,33 @@
 		<script type="text/javascript" src="/design/js/jquery.simpleColor.js"></script>
 		<script type="text/javascript" src="/templates/js/jquery-autocomplete/jquery.autocomplete.js"></script>
 		<script type="text/javascript">
-		//<!--
-		$(function($){
-			$(function(){
-				$("#slider1").bxSlider({
-					infiniteLoop: false,
-					hideControlOnEnd: true
-				});
-				$("a.zoom").fancybox({titlePosition:'over'});
-				$("input[placeholder],textarea").placeholder();
-				var params = {
-					changedEl: "#selectel, #theme, #categorySelect, #feedback"
+			//<!--
+			$(function($){
+				$(function(){
+					$("#slider1").bxSlider({
+						infiniteLoop: false,
+						hideControlOnEnd: true
+					});
+					$("a.zoom").fancybox({
+						titlePosition: 'over'
+					});
+					$("input[placeholder],textarea").placeholder();
+					var params = {
+						changedEl: "#selectel, #theme, #categorySelect, #feedback"
 					}
-				cuSel(params);
-				$(".niceRadio").each(function() {
-					changeRadioStart($(this));
-				});
-				$("#tagsBottom,#tags, #tagsTop").autocomplete("<?=base_url()?>designs/tags/", {selectFirst:false});
-				$(".colorSample").simpleColor({
-					buttonClass: "colorButton"
+					cuSel(params);
+					$(".niceRadio").each(function(){
+						changeRadioStart($(this));
+					});
+					$("#tagsBottom,#tags, #tagsTop").autocomplete("<?=base_url()?>designs/tags/", {
+						selectFirst: false
+					});
+					$(".colorSample").simpleColor({
+						buttonClass: "colorButton"
+					});
 				});
 			});
-		})
-		//-->
+			//-->
 		</script>
 	</head>
 	<body>
@@ -59,60 +63,92 @@
 					<a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><img src="/design/images/logo_fd.png" alt="Ф.дизайн" /></a>
 				</div>
 				<div class="bannerPlace">
-					<!-- На баннер тоже функция нужна? -->
-					<a href="#" title="Эта реклама проплачена!"><img src="/design/images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+					<!-- На баннер тоже функция нужна? --><a href="#" title="Эта реклама проплачена!"><img src="/design/images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
 				</div>
 				<div class="authBlock">
 					<!-- Блок авторизации -->
-					<?=$login?>
+					<?= $login?>
 				</div>
 			</div>
 			<div class="navBlock">
 				<form class="fastSearch" action="/designs/search/" method="get">
-					<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsTop"/>
-					<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+					<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsTop"/><input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
 				</form>
 				<ul class="leftMenu">
-					<li><a href="<?=base_url()?>"><span>Главная</span></a></li>
-					<li><a href="/news"><span>Новости</span></a></li>
-					<li><a href="/designs"><span>Дизайны</span></a></li>
-					<li><a href="/users/all"><span>Дизайнеры</span></a></li>
-					<li><a href="/blogs"><span>Блоги</span></a></li>
+					<li>
+						<a href="<?=base_url()?>"><span>Главная</span></a>
+					</li>
+					<li>
+						<a href="/news"><span>Новости</span></a>
+					</li>
+					<li>
+						<a href="/designs"><span>Дизайны</span></a>
+					</li>
+					<li>
+						<a href="/users/all"><span>Дизайнеры</span></a>
+					</li>
+					<li>
+						<a href="/blogs"><span>Блоги</span></a>
+					</li>
 				</ul>
 				<ul class="rightMenu">
-					<li><a href="/users/support"><span>Обратная связь</span></a></li>
-					<li><a href="/faq"><span>ЧаВо</span></a></li>
-					<li><a href="/help"><span>Помощь</span></a></li>
+					<li>
+						<a href="/users/support"><span>Обратная связь</span></a>
+					</li>
+					<li>
+						<a href="/faq"><span>ЧаВо</span></a>
+					</li>
+					<li>
+						<a href="/help"><span>Помощь</span></a>
+					</li>
 				</ul>
 			</div>
 			<div class="main">
 				<!-- Основной контент выводим -->
-				<?=$content?>
+				<?= $content?>
 			</div>
 			<div class="pushBlock"></div>
 		</div>
 		<div class="navBlock">
 			<form class="fastSearch" action="/designs/search/" method="get">
-				<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsBottom"/>
-				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+				<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsBottom"/><input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
 			</form>
 			<ul class="leftMenu">
-				<li><a href="<?=base_url()?>"><span>Главная</span></a></li>
-				<li><a href="/news"><span>Новости</span></a></li>
-				<li><a href="/designs"><span>Дизайны</span></a></li>
-				<li><a href="/designs"><span>Дизайнеры</span></a></li>
-				<li><a href="/blogs"><span>Блоги</span></a></li>
+				<li>
+					<a href="<?=base_url()?>"><span>Главная</span></a>
+				</li>
+				<li>
+					<a href="/news"><span>Новости</span></a>
+				</li>
+				<li>
+					<a href="/designs"><span>Дизайны</span></a>
+				</li>
+				<li>
+					<a href="/designs"><span>Дизайнеры</span></a>
+				</li>
+				<li>
+					<a href="/blogs"><span>Блоги</span></a>
+				</li>
 			</ul>
 			<ul class="rightMenu">
-				<li><a href="/users/support"><span>Обратная связь</span></a></li>
-				<li><a href="/faq"><span>ЧаВо</span></a></li>
-				<li><a href="/help"><span>Помощь</span></a></li>
+				<li>
+					<a href="/users/support"><span>Обратная связь</span></a>
+				</li>
+				<li>
+					<a href="/faq"><span>ЧаВо</span></a>
+				</li>
+				<li>
+					<a href="/help"><span>Помощь</span></a>
+				</li>
 			</ul>
 		</div>
 		<div class="footer">
 			<div class="rightCopy">
-				<p>&copy; 2011 Все права защищены.<br/>
-				Проект компании <a href="http://fabricasaitov.ru" target="_blank">“Фабрика сайтов”</a>.</p>
+				<p>
+					&copy; 2011 Все права защищены.
+					<br/>
+					Проект компании <a href="http://fabricasaitov.ru" target="_blank">“Фабрика сайтов”</a>.
+				</p>
 			</div>
 			<div class="fabricaLogo">
 				<a href="http://fabricasaitov.ru" target="_blank"><img src="/design/images/cop.png" alt="Фабрика сайтов"/></a>

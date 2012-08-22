@@ -15,7 +15,6 @@
 <div class="yui-u premium"> &nbsp; </div>
 </div>
 
-
 <div id="topnav">
 	<div>
 		<div>
@@ -35,13 +34,10 @@
 	</div>
 </div>
 
-
-
 <div id="bd">
 
 		<h1>Системное сообщение</h1>
 <?=$message?>
-
 
 <? if( isset($_SERVER['HTTP_REFERER']) ): ?>
 <br />
@@ -69,8 +65,6 @@
 <ul></ul></div>
 	</div>
 </div>
-
-
 
 </div>
 <br>

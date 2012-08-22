@@ -11,15 +11,15 @@
 
 		var settings = {}, paSe = window.opener.tinyMCE.activeEditor.settings, oeID = window.opener.tinyMCE.activeEditor.id;
 
-		// Clone array
+	// Clone array
 		for (var n in paSe)
 			settings[n] = paSe[n];
 
-		// Override options for fullscreen
+	// Override options for fullscreen
 		for (var n in paSe.fullscreen_settings)
 			settings[n] = paSe.fullscreen_settings[n];
 
-		// Patch callbacks, make them point to window.opener
+	// Patch callbacks, make them point to window.opener
 		patchCallback(settings, 'urlconverter_callback');
 		patchCallback(settings, 'insertlink_callback');
 		patchCallback(settings, 'insertimage_callback');
@@ -32,7 +32,7 @@
 		patchCallback(settings, 'execcommand_callback');
 		patchCallback(settings, 'oninit');
 
-		// Set options
+	// Set options
 		delete settings.id;
 		settings['mode'] = 'exact';
 		settings['elements'] = 'fullscreenarea';
@@ -92,7 +92,7 @@
 			tinyMCE.init(settings);
 		}
 
-		// Add onunload
+	// Add onunload
 		tinymce.dom.Event.add(window, "beforeunload", unloadHandler);
 	</script>
 </head>

@@ -4,20 +4,24 @@
  
 (function($)
 {
-	// Change these values to fit your needs
+// Change these values to fit your needs
 	if (
-		($.browser.msie && parseFloat($.browser.version) < 7) ||			// IE 6 and lower
-		($.browser.mozilla && parseFloat($.browser.version) < 1.9) ||		// Firefox 2 and lower
-		($.browser.opera && parseFloat($.browser.version) < 9) ||			// Opera 8 and lower
-		($.browser.webkit && parseInt($.browser.version) < 400)				// Older Chrome and Safari
+		// IE 6 and lower
+		($.browser.msie && parseFloat($.browser.version) < 7) ||			
+		// Firefox 2 and lower
+		($.browser.mozilla && parseFloat($.browser.version) < 1.9) ||		
+		// Opera 8 and lower
+		($.browser.opera && parseFloat($.browser.version) < 9) ||			
+		// Older Chrome and Safari
+		($.browser.webkit && parseInt($.browser.version) < 400)				
 	) {
-		// If no cookie has been set
+	// If no cookie has been set
 		if (getCookie('forceAccess') !== 'yes')
 		{
-			// If coming back from the old browsers page
+		// If coming back from the old browsers page
 			if (window.location.search.indexOf('forceAccess=yes') > -1)
 			{
-				// Mark for future tests
+			// Mark for future tests
 				setCookie('forceAccess', 'yes');
 			}
 			else

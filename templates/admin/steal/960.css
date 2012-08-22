@@ -10,16 +10,12 @@ small {
 		color: #808080;
 	}
 
-
 /* Fixes width issues with form elements in the grid. */
 .grid_1 select,.grid_1 input,.grid_1 textarea{width:30px}.grid_1 select{width:40px}.grid_2 select,.grid_2 input,.grid_2 textarea{width:90px}.grid_2 select{width:100px}.grid_3 select,.grid_3 input,.grid_3 textarea{width:150px}.grid_3 select{width:160px}.grid_4 select,.grid_4 input,.grid_4 textarea{width:210px}.grid_4 select{width:220px}.grid_5 select,.grid_5 input,.grid_5 textarea{width:270px}.grid_5 select{width:280px}.grid_6 select,.grid_6 input,.grid_6 textarea{width:330px}.grid_6 select{width:340px}.grid_7 select,.grid_7 input,.grid_7 textarea{width:390px}.grid_7 select{width:400px}.grid_8 select,.grid_8 input,.grid_8 textarea{width:450px}.grid_8 select{width:460px}.grid_9 select,.grid_9 input,.grid_9 textarea{width:510px}.grid_9 select{width:520px}.grid_10 select,.grid_10 input,.grid_10 textarea{width:570px}.grid_10 select{width:580px}.grid_11 select,.grid_11 input,.grid_11 textarea{width:630px}.grid_11 select{width:640px}.grid_12 select,.grid_12 input,.grid_12 textarea{width:690px}.grid_12 select{width:700px}.grid_13 select,.grid_13 input,.grid_13 textarea{width:750px}.grid_13 select{width:760px}.grid_14 select,.grid_14 input,.grid_14 textarea{width:810px}.grid_14 select{width:820px}.grid_15 select,.grid_15 input,.grid_15 textarea{width:870px}.grid_15 select{width:880px}.grid_16 select,.grid_16 input,.grid_16 textarea{width:930px}.grid_16 select{width:940px}
-
-
 
 /*
 	960 Grid System ~ Core CSS.
 	Learn more ~ http://960.gs/
-
 	Licensed under GPL and MIT.
 */
 

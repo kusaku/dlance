@@ -113,7 +113,7 @@ function setAllAttribs(elm) {
 	setAttrib(elm, 'onkeydown');
 	setAttrib(elm, 'onkeyup');
 
-	// Refresh in old MSIE
+// Refresh in old MSIE
 //	if (tinyMCE.isMSIE5)
 //		elm.outerHTML = elm.outerHTML;
 }

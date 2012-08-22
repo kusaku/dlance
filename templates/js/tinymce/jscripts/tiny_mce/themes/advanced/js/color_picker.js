@@ -246,7 +246,7 @@ function setCol(e, c) {
 	try {
 		document.getElementById(e).style.backgroundColor = c;
 	} catch (ex) {
-		// Ignore IE warning
+	// Ignore IE warning
 	}
 }
 

@@ -2,7 +2,8 @@
 
 class Rating_mdl extends Model
 {
-	function value($param)//Вывод рейтинга пользователя
+	//Вывод рейтинга пользователя
+	function value($param)
 	{
 		$this->db->select('value');
 		$query = $this->db->get_where('rating', array('param '=> $param));
@@ -16,7 +17,8 @@ class Rating_mdl extends Model
 		return FALSE;
 	}
 
-	function get($user_id)//Вывод рейтинга пользователя
+	//Вывод рейтинга пользователя
+	function get($user_id)
 	{
 		$this->db->select('rating');
 		$query = $this->db->get_where('users', array('id '=> $user_id));
@@ -40,7 +42,7 @@ class Rating_mdl extends Model
 
 		$rating = $query['rating'] + $sum;
 
-		//Обновляем
+	//Обновляем
 		$this->db->update('users', array('rating' => $rating), array('id' => $user_id));
 	}
 
@@ -54,7 +56,7 @@ class Rating_mdl extends Model
 
 		$rating = $query['rating'] - $sum;
 
-		//Обновляем
+	//Обновляем
 		$this->db->update('users', array('rating' => $rating), array('id' => $user_id));
 	}
 }

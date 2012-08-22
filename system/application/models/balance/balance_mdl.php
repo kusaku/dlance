@@ -2,7 +2,8 @@
 
 class Balance_mdl extends Model
 {
-	function get($user_id)//Вывод баланса пользователя
+	//Вывод баланса пользователя
+	function get($user_id)
 	{
 		$this->db->select('balance');
 		$query = $this->db->get_where('users', array('id '=> $user_id));
@@ -26,7 +27,7 @@ class Balance_mdl extends Model
 
 		$balance = $query['balance'] + $sum;
 
-		//Обновляем
+	//Обновляем
 		$this->db->update('users', array('balance' => $balance), array('id' => $user_id));
 
 		$this->events->create($user_id, 'Увеличение баланса', 'plus_balance', $sum);
@@ -42,7 +43,7 @@ class Balance_mdl extends Model
 
 		$balance = $query['balance'] - $sum;
 
-		//Обновляем
+	//Обновляем
 		$this->db->update('users', array('balance' => $balance), array('id' => $user_id));
 
 		$this->events->create($user_id, 'Уменьшение баланса', 'minus_balance', $sum);

@@ -13,11 +13,13 @@ class Events
 		{
 			$rating = $this->_ci->rating->value($value);
 
-			if( !empty($multiple) )//Для баланса
+			//Для баланса
+			if( !empty($multiple) )
 			{
 				$rating = $rating * $multiple;
 
-				$rating = floor($rating);//Возвращает максимальное целое число
+				//Возвращает максимальное целое число
+				$rating = floor($rating);
 			}
 
 			if( $rating > 0 )

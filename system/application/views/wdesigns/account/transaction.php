@@ -16,7 +16,8 @@
 			<li>
 				<p class="type">
 					<?=$row['type']?>
-					<? if( $row['type_id'] == 2 and $row['status'] == 1 ): //Если платеж с кодом протекции?>
+					//Если платеж с кодом протекции?>
+					<? if( $row['type_id'] == 2 and $row['status'] == 1 ): 
 					(<?=$row['time']?>)
 					<? endif; ?>
 				</p>

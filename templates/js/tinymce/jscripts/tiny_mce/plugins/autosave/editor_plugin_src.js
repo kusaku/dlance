@@ -44,7 +44,7 @@
  */
 
 (function(tinymce) {
-	// Setup constants to help the compressor to reduce script size
+// Setup constants to help the compressor to reduce script size
 	var PLUGIN_NAME = 'autosave',
 		RESTORE_DRAFT = 'restoredraft',
 		TRUE = true,
@@ -73,7 +73,7 @@
 
 			self.editor = ed;
 
-			// Parses the specified time string into a milisecond number 10m, 10s etc.
+		// Parses the specified time string into a milisecond number 10m, 10s etc.
 			function parseTime(time) {
 				var multipels = {
 					s : 1000,
@@ -85,7 +85,7 @@
 				return (time[2] ? multipels[time[2]] : 1) * parseInt(time);
 			};
 
-			// Default config
+		// Default config
 			tinymce.each({
 				ask_before_unload : TRUE,
 				interval : '30s',
@@ -98,16 +98,16 @@
 					settings[key] = value;
 			});
 
-			// Parse times
+		// Parse times
 			settings.autosave_interval = parseTime(settings.autosave_interval);
 			settings.autosave_retention = parseTime(settings.autosave_retention);
 
-			// Register restore button
+		// Register restore button
 			ed.addButton(RESTORE_DRAFT, {
 				title : PLUGIN_NAME + ".restore_content",
 				onclick : function() {
 					if (ed.getContent({draft: true}).replace(/\s|&nbsp;|<\/?p[^>]*>|<br[^>]*>/gi, "").length > 0) {
-						// Show confirm dialog if the editor isn't empty
+					// Show confirm dialog if the editor isn't empty
 						ed.windowManager.confirm(
 							PLUGIN_NAME + ".warning_message",
 							function(ok) {
@@ -120,7 +120,7 @@
 				}
 			});
 
-			// Enable/disable restoredraft button depending on if there is a draft stored or not
+		// Enable/disable restoredraft button depending on if there is a draft stored or not
 			ed.onNodeChange.add(function() {
 				var controlManager = ed.controlManager;
 
@@ -129,12 +129,12 @@
 			});
 
 			ed.onInit.add(function() {
-				// Check if the user added the restore button, then setup auto storage logic
+			// Check if the user added the restore button, then setup auto storage logic
 				if (ed.controlManager.get(RESTORE_DRAFT)) {
-					// Setup storage engine
+				// Setup storage engine
 					self.setupStorage(ed);
 
-					// Auto save contents each interval time
+				// Auto save contents each interval time
 					setInterval(function() {
 						self.storeDraft();
 						ed.nodeChanged();
@@ -169,7 +169,7 @@
 			 */
 			self.onRemoveDraft = new Dispatcher(self);
 
-			// Add ask before unload dialog only add one unload handler
+		// Add ask before unload dialog only add one unload handler
 			if (!unloadHandlerAdded) {
 				window.onbeforeunload = tinymce.plugins.AutoSave._beforeUnloadHandler;
 				unloadHandlerAdded = TRUE;
@@ -215,10 +215,10 @@
 
 			self.key = PLUGIN_NAME + ed.id;
 
-			// Loop though each storage engine type until we find one that works
+		// Loop though each storage engine type until we find one that works
 			tinymce.each([
 				function() {
-					// Try HTML5 Local Storage
+				// Try HTML5 Local Storage
 					if (localStorage) {
 						localStorage.setItem(testKey, testVal);
 
@@ -231,7 +231,7 @@
 				},
 
 				function() {
-					// Try HTML5 Session Storage
+				// Try HTML5 Session Storage
 					if (sessionStorage) {
 						sessionStorage.setItem(testKey, testVal);
 
@@ -244,11 +244,11 @@
 				},
 
 				function() {
-					// Try IE userData
+				// Try IE userData
 					if (tinymce.isIE) {
 						ed.getElement().style.behavior = "url('#default#userData')";
 
-						// Fake localStorage on old IE
+					// Fake localStorage on old IE
 						return {
 							autoExpires : TRUE,
 
@@ -275,14 +275,14 @@
 					}
 				},
 			], function(setup) {
-				// Try executing each function to find a suitable storage engine
+			// Try executing each function to find a suitable storage engine
 				try {
 					self.storage = setup();
 
 					if (self.storage)
 						return false;
 				} catch (e) {
-					// Ignore
+				// Ignore
 				}
 			});
 		},
@@ -295,19 +295,19 @@
 		storeDraft : function() {
 			var self = this, storage = self.storage, editor = self.editor, expires, content;
 
-			// Is the contents dirty
+		// Is the contents dirty
 			if (storage) {
-				// If there is no existing key and the contents hasn't been changed since
-				// it's original value then there is no point in saving a draft
+			// If there is no existing key and the contents hasn't been changed since
+			// it's original value then there is no point in saving a draft
 				if (!storage.getItem(self.key) && !editor.isDirty())
 					return;
 
-				// Store contents if the contents if longer than the minlength of characters
+			// Store contents if the contents if longer than the minlength of characters
 				content = editor.getContent({draft: true});
 				if (content.length > editor.settings.autosave_minlength) {
 					expires = self.getExpDate();
 
-					// Store expiration date if needed IE userData has auto expire built in
+				// Store expiration date if needed IE userData has auto expire built in
 					if (!self.storage.autoExpires)
 						self.storage.setItem(self.key + "_expires", expires);
 
@@ -350,18 +350,18 @@
 			var self = this, storage = self.storage, expDate, exists;
 
 			if (storage) {
-				// Does the item exist at all
+			// Does the item exist at all
 				exists = !!storage.getItem(self.key);
 				if (exists) {
-					// Storage needs autoexpire
+				// Storage needs autoexpire
 					if (!self.storage.autoExpires) {
 						expDate = new Date(storage.getItem(self.key + "_expires"));
 
-						// Contents hasn't expired
+					// Contents hasn't expired
 						if (new Date().getTime() < expDate.getTime())
 							return TRUE;
 
-						// Remove it if it has
+					// Remove it if it has
 						self.removeDraft();
 					} else
 						return TRUE;
@@ -380,12 +380,12 @@
 			var self = this, storage = self.storage, key = self.key, content;
 
 			if (storage) {
-				// Get current contents and remove the existing draft
+			// Get current contents and remove the existing draft
 				content = storage.getItem(key);
 				storage.removeItem(key);
 				storage.removeItem(key + "_expires");
 
-				// Dispatch remove event if we had any contents
+			// Dispatch remove event if we had any contents
 				if (content) {
 					self.onRemoveDraft.dispatch(self, {
 						content : content
@@ -395,20 +395,20 @@
 		},
 
 		"static" : {
-			// Internal unload handler will be called before the page is unloaded
+		// Internal unload handler will be called before the page is unloaded
 			_beforeUnloadHandler : function(e) {
 				var msg;
 
 				tinymce.each(tinyMCE.editors, function(ed) {
-					// Store a draft for each editor instance
+				// Store a draft for each editor instance
 					if (ed.plugins.autosave)
 						ed.plugins.autosave.storeDraft();
 
-					// Never ask in fullscreen mode
+				// Never ask in fullscreen mode
 					if (ed.getParam("fullscreen_is_enabled"))
 						return;
 
-					// Setup a return message if the editor is dirty
+				// Setup a return message if the editor is dirty
 					if (!msg && ed.isDirty() && ed.getParam("autosave_ask_before_unload"))
 						msg = ed.getLang("autosave.unload_msg");
 				});

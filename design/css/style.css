@@ -529,8 +529,8 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .userEventsList li:first-child .event{padding: 4px 0 4px 25px;border-top:1px solid #b2c4c8;}
 .userEventsList li{display: block; width: 750px;}
 .userEventsList li p {margin: 0; line-height: 18px;}
-.userEventsList li .date{display:block; width:100px; height: 20px; padding: 5px 0 5px 10px; float: left; color:#b2c4c8;line-height: 18px;}
-.userEventsList li .event{display:block; width:615px; height: 20px; padding: 5px 0 4px 25px; float: left; border-bottom:1px solid #b2c4c8; background:url(../images/iconsevents.png) 0 -60px no-repeat;}
+.userEventsList li .date{display:block; width:130px; height: 20px; padding: 5px 0 5px 10px; float: left; color:#b2c4c8;line-height: 18px;}
+.userEventsList li .event{display:block; width:585px; height: 20px; padding: 5px 0 4px 25px; float: left; border-bottom:1px solid #b2c4c8; background:url(../images/iconsevents.png) 0 -60px no-repeat;}
 .userEventsList li .event span {color:#ff7900;}
 .userEventsList li .event a{text-decoration: underline;}
 .userEventsList li .event.people {background:url(../images/iconsevents.png) 0 -120px no-repeat;}

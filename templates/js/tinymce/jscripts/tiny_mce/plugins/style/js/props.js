@@ -127,8 +127,7 @@ function init() {
 function setupFormData() {
 	var ce = document.getElementById('container'), f = document.forms[0], s, b, i;
 
-	// Setup text fields
-
+// Setup text fields
 	selectByValue(f, 'text_font', ce.style.fontFamily, true, true);
 	selectByValue(f, 'text_size', getNum(ce.style.fontSize), true, true);
 	selectByValue(f, 'text_size_measurement', getMeasurement(ce.style.fontSize));
@@ -145,8 +144,7 @@ function setupFormData() {
 	f.text_linethrough.checked = inStr(ce.style.textDecoration, 'line-through');
 	f.text_blink.checked = inStr(ce.style.textDecoration, 'blink');
 
-	// Setup background fields
-
+// Setup background fields
 	f.background_color.value = tinyMCEPopup.editor.dom.toHex(ce.style.backgroundColor);
 	updateColor('background_color_pick', 'background_color');
 	f.background_image.value = ce.style.backgroundImage.replace(new RegExp("url\\('?([^']*)'?\\)", 'gi'), "$1");
@@ -157,8 +155,7 @@ function setupFormData() {
 	selectByValue(f, 'background_vpos', getNum(getVal(ce.style.backgroundPosition, 1)), true, true);
 	selectByValue(f, 'background_vpos_measurement', getMeasurement(getVal(ce.style.backgroundPosition, 1)));
 
-	// Setup block fields
-
+// Setup block fields
 	selectByValue(f, 'block_wordspacing', getNum(ce.style.wordSpacing), true, true);
 	selectByValue(f, 'block_wordspacing_measurement', getMeasurement(ce.style.wordSpacing));
 	selectByValue(f, 'block_letterspacing', getNum(ce.style.letterSpacing), true, true);
@@ -170,8 +167,7 @@ function setupFormData() {
 	selectByValue(f, 'block_whitespace', ce.style.whiteSpace, true, true);
 	selectByValue(f, 'block_display', ce.style.display, true, true);
 
-	// Setup box fields
-
+// Setup box fields
 	f.box_width.value = getNum(ce.style.width);
 	selectByValue(f, 'box_width_measurement', getMeasurement(ce.style.width));
 
@@ -188,8 +184,7 @@ function setupFormData() {
 	setupBox(f, ce, 'box_padding', 'padding', '');
 	setupBox(f, ce, 'box_margin', 'margin', '');
 
-	// Setup border fields
-
+// Setup border fields
 	setupBox(f, ce, 'border_style', 'border', 'Style');
 	setupBox(f, ce, 'border_width', 'border', 'Width');
 	setupBox(f, ce, 'border_color', 'border', 'Color');
@@ -204,14 +199,12 @@ function setupFormData() {
 	f.elements.border_color_bottom.value = tinyMCEPopup.editor.dom.toHex(f.elements.border_color_bottom.value);
 	f.elements.border_color_left.value = tinyMCEPopup.editor.dom.toHex(f.elements.border_color_left.value);
 
-	// Setup list fields
-
+// Setup list fields
 	selectByValue(f, 'list_type', ce.style.listStyleType, true, true);
 	selectByValue(f, 'list_position', ce.style.listStylePosition, true, true);
 	f.list_bullet_image.value = ce.style.listStyleImage.replace(new RegExp("url\\('?([^']*)'?\\)", 'gi'), "$1");
 
-	// Setup box fields
-
+// Setup box fields
 	selectByValue(f, 'positioning_type', ce.style.position, true, true);
 	selectByValue(f, 'positioning_visibility', ce.style.visibility, true, true);
 	selectByValue(f, 'positioning_overflow', ce.style.overflow, true, true);
@@ -389,7 +382,7 @@ function generateCSS() {
 
 	ce.style.cssText = "";
 
-	// Build text styles
+// Build text styles
 	ce.style.fontFamily = f.text_font.value;
 	ce.style.fontSize = f.text_size.value + (isNum(f.text_size.value) ? (f.text_size_measurement.value || 'px') : "");
 	ce.style.fontStyle = f.text_style.value;
@@ -411,8 +404,7 @@ function generateCSS() {
 
 	ce.style.textDecoration = s;
 
-	// Build background styles
-
+// Build background styles
 	ce.style.backgroundColor = f.background_color.value;
 	ce.style.backgroundImage = f.background_image.value != "" ? "url(" + f.background_image.value + ")" : "";
 	ce.style.backgroundRepeat = f.background_repeat.value;
@@ -425,8 +417,7 @@ function generateCSS() {
 		ce.style.backgroundPosition = s;
 	}
 
-	// Build block styles
-
+// Build block styles
 	ce.style.wordSpacing = f.block_wordspacing.value + (isNum(f.block_wordspacing.value) ? f.block_wordspacing_measurement.value : "");
 	ce.style.letterSpacing = f.block_letterspacing.value + (isNum(f.block_letterspacing.value) ? f.block_letterspacing_measurement.value : "");
 	ce.style.verticalAlign = f.block_vertical_alignment.value;
@@ -435,8 +426,7 @@ function generateCSS() {
 	ce.style.whiteSpace = f.block_whitespace.value;
 	ce.style.display = f.block_display.value;
 
-	// Build box styles
-
+// Build box styles
 	ce.style.width = f.box_width.value + (isNum(f.box_width.value) ? f.box_width_measurement.value : "");
 	ce.style.height = f.box_height.value + (isNum(f.box_height.value) ? f.box_height_measurement.value : "");
 	ce.style.styleFloat = f.box_float.value;
@@ -462,8 +452,7 @@ function generateCSS() {
 	} else
 		ce.style.margin = f.box_margin_top.value + (isNum(f.box_margin_top.value) ? f.box_margin_top_measurement.value : "");		
 
-	// Build border styles
-
+// Build border styles
 	if (!f.border_style_same.checked) {
 		ce.style.borderTopStyle = f.border_style_top.value;
 		ce.style.borderRightStyle = f.border_style_right.value;
@@ -488,14 +477,12 @@ function generateCSS() {
 	} else
 		ce.style.borderColor = f.border_color_top.value;
 
-	// Build list styles
-
+// Build list styles
 	ce.style.listStyleType = f.list_type.value;
 	ce.style.listStylePosition = f.list_position.value;
 	ce.style.listStyleImage = f.list_bullet_image.value != "" ? "url(" + f.list_bullet_image.value + ")" : "";
 
-	// Build positioning styles
-
+// Build positioning styles
 	ce.style.position = f.positioning_type.value;
 	ce.style.visibility = f.positioning_visibility.value;
 

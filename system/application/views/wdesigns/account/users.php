@@ -1,10 +1,8 @@
 <div id="yui-main">
 <div class="yui-b">
 
-
 <h1><a href="/account/users">Пользователи</a></h1>
 <p class="subtitle"> Список пользователей.</p>
-
 
 <? if( !empty($data) ): ?>
 <table class="offers">
@@ -38,7 +36,6 @@
 <? else: ?>
 <p>Платежи отсутствуют.</p>
 <? endif; ?>
-
 
   </div>
 

@@ -23,11 +23,11 @@
 			};
 
 			ed.onPreInit.add(function() {
-				// Force in _value parameter this extra parameter is required for older Opera versions
+			// Force in _value parameter this extra parameter is required for older Opera versions
 				ed.serializer.addRules('param[name|value|_mce_value]');
 			});
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceMedia', function() {
 				ed.windowManager.open({
 					file : url + '/media.htm',
@@ -39,7 +39,7 @@
 				});
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('media', {title : 'media.desc', cmd : 'mceMedia'});
 
 			ed.onNodeChange.add(function(ed, cm, n) {
@@ -202,7 +202,7 @@
 			};
 		},
 
-		// Private methods
+	// Private methods
 		_objectsToSpans : function(ed, o) {
 			var t = this, h = o.content;
 
@@ -258,7 +258,7 @@
 
 			each (p, function(v, k) {
 				if (!/^(width|height|codebase|classid|id|_cx|_cy)$/.test(k)) {
-					// Use url instead of src in IE for Windows media
+				// Use url instead of src in IE for Windows media
 					if (o.type == 'application/x-mplayer2' && k == 'src' && !p.url)
 						k = 'url';
 
@@ -277,7 +277,7 @@
 			var t = this, dom = t.editor.dom, im, ci;
 
 			each(dom.select('span', p), function(n) {
-				// Convert object into image
+			// Convert object into image
 				if (dom.getAttrib(n, 'class') == 'mceItemObject') {
 					ci = dom.getAttrib(n, "classid").toLowerCase().replace(/\s+/g, '');
 
@@ -311,7 +311,7 @@
 					return;
 				}
 
-				// Convert embed into image
+			// Convert embed into image
 				if (dom.getAttrib(n, 'class') == 'mceItemEmbed') {
 					switch (dom.getAttrib(n, 'type')) {
 						case 'application/x-shockwave-flash':
@@ -346,7 +346,7 @@
 
 			args = ['id', 'name', 'width', 'height', 'bgcolor', 'align', 'flashvars', 'src', 'wmode', 'allowfullscreen', 'quality', 'data'];	
 
-			// Create image
+		// Create image
 			im = dom.create('img', {
 				src : this.url + '/img/trans.gif',
 				width : dom.getAttrib(n, 'width') || 100,
@@ -355,7 +355,7 @@
 				'class' : cl
 			});
 
-			// Setup base parameters
+		// Setup base parameters
 			each(args, function(na) {
 				var v = dom.getAttrib(n, na);
 
@@ -363,25 +363,25 @@
 					pa[na] = v;
 			});
 
-			// Add optional parameters
+		// Add optional parameters
 			each(dom.select('span', n), function(n) {
 				if (dom.hasClass(n, 'mceItemParam'))
 					pa[dom.getAttrib(n, 'name')] = dom.getAttrib(n, '_mce_value');
 			});
 
-			// Use src not movie
+		// Use src not movie
 			if (pa.movie) {
 				pa.src = pa.movie;
 				delete pa.movie;
 			}
 
-			// No src try data
+		// No src try data
 			if (!pa.src) {
 				pa.src = pa.data;
 				delete pa.data;
 			}
 
-			// Merge with embed args
+		// Merge with embed args
 			n = dom.select('.mceItemEmbed', n)[0];
 			if (n) {
 				each(args, function(na) {
@@ -409,6 +409,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('media', tinymce.plugins.MediaPlugin);
 })();

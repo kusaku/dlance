@@ -6,7 +6,8 @@
    MIT (http://dev.jquery.com/browser/trunk/jquery/MIT-LICENSE.txt) licenses. 
    Please attribute the author if you use it. */
 
-(function($) { // Hide the namespace
+// Hide the namespace
+(function($) { 
 
 /* Add validation methods if validation plugin available. */
 if ($.fn.validate) {

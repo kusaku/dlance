@@ -20,7 +20,7 @@ class Colors
 			{
 				$half_delta = 0;
 			}
-			// WE HAVE TO RESIZE THE IMAGE, BECAUSE WE ONLY NEED THE MOST SIGNIFICANT COLORS.
+		// WE HAVE TO RESIZE THE IMAGE, BECAUSE WE ONLY NEED THE MOST SIGNIFICANT COLORS.
 			$size = GetImageSize($img);
 			$scale = 1;
 			if ($size[0]>0)
@@ -42,7 +42,7 @@ class Colors
 			$image_orig = imagecreatefromjpeg($img);
 			if ($size[2] == 3)
 			$image_orig = imagecreatefrompng($img);
-			// WE NEED NEAREST NEIGHBOR RESIZING, BECAUSE IT DOESN'T ALTER THE COLORS
+		// WE NEED NEAREST NEIGHBOR RESIZING, BECAUSE IT DOESN'T ALTER THE COLORS
 			imagecopyresampled($image_resized, $image_orig, 0, 0, 0, 0, $width, $height, $size[0], $size[1]);
 			$im = $image_resized;
 			$imgWidth = imagesx($im);
@@ -55,7 +55,7 @@ class Colors
 					$total_pixel_count++;
 					$index = imagecolorat($im,$x,$y);
 					$colors = imagecolorsforindex($im,$index);
-					// ROUND THE COLORS, TO REDUCE THE NUMBER OF DUPLICATE COLORS
+				// ROUND THE COLORS, TO REDUCE THE NUMBER OF DUPLICATE COLORS
 					if ( $delta > 1 )
 					{
 						$colors['red'] = intval((($colors['red'])+$half_delta)/$delta)*$delta;
@@ -94,11 +94,11 @@ class Colors
 				}
 			}
 
-			// Reduce gradient colors
+		// Reduce gradient colors
 			if ( $reduce_gradients )
 			{
-				// if you want to *eliminate* gradient variations use:
-				// ksort( &$hexarray );
+			// if you want to *eliminate* gradient variations use:
+			// ksort( &$hexarray );
 				arsort( &$hexarray, SORT_NUMERIC );
 
 				$gradients = array();
@@ -122,11 +122,11 @@ class Colors
 				}
 			}
 
-			// Reduce brightness variations
+		// Reduce brightness variations
 			if ( $reduce_brightness )
 			{
-				// if you want to *eliminate* brightness variations use:
-				// ksort( &$hexarray );
+			// if you want to *eliminate* brightness variations use:
+			// ksort( &$hexarray );
 				arsort( &$hexarray, SORT_NUMERIC );
 
 				$brightness = array();
@@ -152,7 +152,7 @@ class Colors
 
 			arsort( &$hexarray, SORT_NUMERIC );
 
-			// convert counts to percentages
+		// convert counts to percentages
 			foreach ($hexarray as $key => $value)
 			{
 				$hexarray[$key] = (float)$value / $total_pixel_count;
@@ -162,9 +162,8 @@ class Colors
 
 			if ( $count > 0 )
 			{
-				// only works in PHP5
-				// return array_slice( $hexarray, 0, $count, true );
-
+			// only works in PHP5
+			// return array_slice( $hexarray, 0, $count, true );
 				$arr = array();
 				foreach ($hexarray as $key => $value)
 				{
@@ -224,7 +223,7 @@ class Colors
 			$highest = $colors['blue'];
 		}
 
-		// Do not normalize white, black, or shades of grey unless low delta
+	// Do not normalize white, black, or shades of grey unless low delta
 		if ( $lowest == $highest )
 		{
 			if ($delta <= 32)
@@ -246,7 +245,7 @@ class Colors
 
 			if ( isset( $hexarray[$new_hex] ) )
 			{
-				// same color, different brightness - use it instead
+			// same color, different brightness - use it instead
 				return $new_hex;
 			}
 		}
@@ -313,7 +312,7 @@ class Colors
 		return $hex;
 	}
 
-	//определить к какому числу в массиве ближе всего данное число, в данном случае числа градации, для получения безопасных цветов
+//определить к какому числу в массиве ближе всего данное число, в данном случае числа градации, для получения безопасных цветов
 	function _graduation($n)
 	{
 		$x = array(0, 51, 102, 153, 204, 255);
@@ -337,7 +336,7 @@ class Colors
 		return $return; 
 	}
 
-	//Линейный вариант
+//Линейный вариант
 	function _graduation_2($n)
 	{
 		$x = array(0, 51, 102, 153, 204, 255);
@@ -405,11 +404,12 @@ class Colors
 'FFFFFF','CCCCCC','999999','666666','333333','000000'
 );
 
-		$index = '';//Необходимо узнать индекс цвета
+		//Необходимо узнать индекс цвета
+		$index = '';
 
-		// этот цикл пройдется по всему массиву
-		// и выведет имя ключа элемента массива
-		// значение которого равно $rgb
+	// этот цикл пройдется по всему массиву
+	// и выведет имя ключа элемента массива
+	// значение которого равно $rgb
 		while ($fruit_name = current($colors))
 		{
 	    	if( $fruit_name == $rgb ) {

@@ -8,7 +8,7 @@ var SearchReplaceDialog = {
 
 		f[m + '_panel_searchstring'].value = tinyMCEPopup.getWindowArg("search_string");
 
-		// Focus input field
+	// Focus input field
 		f[m + '_panel_searchstring'].focus();
 	},
 
@@ -35,7 +35,7 @@ var SearchReplaceDialog = {
 	searchNext : function(a) {
 		var ed = tinyMCEPopup.editor, se = ed.selection, r = se.getRng(), f, m = this.lastMode, s, b, fl = 0, w = ed.getWin(), wm = ed.windowManager, fo = 0;
 
-		// Get input
+	// Get input
 		f = document.forms[0];
 		s = f[m + '_panel_searchstring'].value;
 		b = f[m + '_panel_backwardsu'].checked;
@@ -50,7 +50,7 @@ var SearchReplaceDialog = {
 			return;
 
 		function fix() {
-			// Correct Firefox graphics glitches
+		// Correct Firefox graphics glitches
 			r = se.getRng().cloneRange();
 			ed.getDoc().execCommand('SelectAll', false, null);
 			se.setRng(r);
@@ -58,18 +58,19 @@ var SearchReplaceDialog = {
 
 		function replace() {
 			if (tinymce.isIE)
-				ed.selection.getRng().duplicate().pasteHTML(rs); // Needs to be duplicated due to selection bug in IE
+				// Needs to be duplicated due to selection bug in IE
+				ed.selection.getRng().duplicate().pasteHTML(rs); 
 			else
 				ed.getDoc().execCommand('InsertHTML', false, rs);
 		};
 
-		// IE flags
+	// IE flags
 		if (ca)
 			fl = fl | 4;
 
 		switch (a) {
 			case 'all':
-				// Move caret to beginning of text
+			// Move caret to beginning of text
 				ed.execCommand('SelectAll');
 				ed.selection.collapse(true);
 
@@ -81,7 +82,8 @@ var SearchReplaceDialog = {
 						fo = 1;
 
 						if (b) {
-							r.moveEnd("character", -(rs.length)); // Otherwise will loop forever
+							// Otherwise will loop forever
+							r.moveEnd("character", -(rs.length)); 
 						}
 					}
 
@@ -114,7 +116,7 @@ var SearchReplaceDialog = {
 			r = ed.getDoc().selection.createRange();
 		}
 
-		// Whats the point
+	// Whats the point
 		if (!s)
 			return;
 

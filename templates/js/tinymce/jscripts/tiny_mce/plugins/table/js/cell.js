@@ -15,7 +15,7 @@ function init() {
 	var formObj = document.forms[0];
 	var st = ed.dom.parseStyle(ed.dom.getAttrib(tdElm, "style"));
 
-	// Get table cell data
+// Get table cell data
 	var celltype = tdElm.nodeName.toLowerCase();
 	var align = ed.dom.getAttrib(tdElm, 'align');
 	var valign = ed.dom.getAttrib(tdElm, 'valign');
@@ -30,7 +30,7 @@ function init() {
 	var dir = ed.dom.getAttrib(tdElm, 'dir');
 	var scope = ed.dom.getAttrib(tdElm, 'scope');
 
-	// Setup form
+// Setup form
 	addClassesToList('class', 'table_cell_styles');
 	TinyMCE_EditableSelects.init();
 
@@ -50,7 +50,7 @@ function init() {
 		selectByValue(formObj, 'dir', dir);
 		selectByValue(formObj, 'scope', scope);
 
-		// Resize some elements
+	// Resize some elements
 		if (isVisible('backgroundimagebrowser'))
 			document.getElementById('backgroundimage').style.width = '180px';
 
@@ -69,9 +69,9 @@ function updateAction() {
 	trElm = ed.dom.getParent(el, "tr");
 	tableElm = ed.dom.getParent(el, "table");
 
-	// Cell is selected
+// Cell is selected
 	if (ed.dom.hasClass(tdElm, 'mceSelected')) {
-		// Update all selected sells
+	// Update all selected sells
 		tinymce.each(ed.dom.select('td.mceSelected,th.mceSelected'), function(td) {
 			updateCell(td);
 		});
@@ -176,14 +176,14 @@ function updateCell(td, skip_id) {
 	td.setAttribute('scope', formObj.scope.value);
 	ed.dom.setAttrib(td, 'class', getSelectValue(formObj, 'class'));
 
-	// Clear deprecated attributes
+// Clear deprecated attributes
 	ed.dom.setAttrib(td, 'width', '');
 	ed.dom.setAttrib(td, 'height', '');
 	ed.dom.setAttrib(td, 'bgColor', '');
 	ed.dom.setAttrib(td, 'borderColor', '');
 	ed.dom.setAttrib(td, 'background', '');
 
-	// Set styles
+// Set styles
 	td.style.width = getCSSSize(formObj.width.value);
 	td.style.height = getCSSSize(formObj.height.value);
 	if (formObj.bordercolor.value != "") {
@@ -201,7 +201,7 @@ function updateCell(td, skip_id) {
 		td.style.backgroundImage = '';
 
 	if (curCellType != celltype) {
-		// changing to a different node type
+	// changing to a different node type
 		var newCell = doc.createElement(celltype);
 
 		for (var c=0; c<td.childNodes.length; c++)

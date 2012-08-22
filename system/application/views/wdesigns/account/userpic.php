@@ -6,8 +6,6 @@
 
 <? if( !empty($error) ) {?><div class="error"><?=$error?></div><? } ?>
 
-
-
 <div class="main">
 <form action="/account/userpic" method="post" enctype="multipart/form-data">
 <div class="ttl">
@@ -32,9 +30,6 @@
 <input type="submit" value="Загрузить">
 </form>
 </div>
-
-
-
 
   </div>
 

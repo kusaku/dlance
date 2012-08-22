@@ -12,7 +12,8 @@ $lang['ut_failed']          = 'Не пройден';
 $lang['ut_boolean']         = 'Boolean';
 $lang['ut_integer']         = 'Integer';
 $lang['ut_float']           = 'Float';
-$lang['ut_double']          = 'Float'; // can be the same as float
+// can be the same as float
+$lang['ut_double']          = 'Float'; 
 $lang['ut_string']          = 'String';
 $lang['ut_array']           = 'Array';
 $lang['ut_object']          = 'Object';

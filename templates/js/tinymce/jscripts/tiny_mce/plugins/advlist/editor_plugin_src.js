@@ -32,7 +32,7 @@
 				return formats;
 			};
 
-			// Setup number formats from config or default
+		// Setup number formats from config or default
 			t.numlist = ed.getParam("advlist_number_styles") || buildFormats("default,lower-alpha,lower-greek,lower-roman,upper-alpha,upper-roman");
 			t.bullist = ed.getParam("advlist_bullet_styles") || buildFormats("default,circle,disc,square");
 		},
@@ -41,7 +41,7 @@
 			var t = this, btn, format;
 
 			if (name == 'numlist' || name == 'bullist') {
-				// Default to first item if it's a default item
+			// Default to first item if it's a default item
 				if (t[name][0].title == 'advlist.def')
 					format = t[name][0];
 
@@ -49,7 +49,7 @@
 					var state = true;
 
 					each(format.styles, function(value, name) {
-						// Format doesn't match
+					// Format doesn't match
 						if (t.editor.dom.getStyle(node, name) != value) {
 							state = false;
 							return false;
@@ -62,14 +62,14 @@
 				function applyListFormat() {
 					var list, ed = t.editor, dom = ed.dom, sel = ed.selection;
 
-					// Check for existing list element
+				// Check for existing list element
 					list = dom.getParent(sel.getNode(), 'ol,ul');
 
-					// Switch/add list type if needed
+				// Switch/add list type if needed
 					if (!list || list.nodeName == (name == 'bullist' ? 'OL' : 'UL') || hasFormat(list, format))
 						ed.execCommand(name == 'bullist' ? 'InsertUnorderedList' : 'InsertOrderedList');
 
-					// Append styles to new list element
+				// Append styles to new list element
 					if (format) {
 						list = dom.getParent(sel.getNode(), 'ol,ul');
 
@@ -95,7 +95,7 @@
 						if (list || format) {
 							fmtList = t[name];
 
-							// Unselect existing items
+						// Unselect existing items
 							each(menu.items, function(item) {
 								var state = true;
 
@@ -116,7 +116,7 @@
 								}
 							});
 
-							// Select the current format
+						// Select the current format
 							if (!list)
 								menu.items[format.id].setSelected(1);
 						}
@@ -149,6 +149,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('advlist', tinymce.plugins.AdvListPlugin);
 })();

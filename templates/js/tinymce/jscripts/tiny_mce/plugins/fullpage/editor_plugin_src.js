@@ -15,7 +15,7 @@
 
 			t.editor = ed;
 
-			// Register commands
+		// Register commands
 			ed.addCommand('mceFullPageProperties', function() {
 				ed.windowManager.open({
 					file : url + '/fullpage.htm',
@@ -28,7 +28,7 @@
 				});
 			});
 
-			// Register buttons
+		// Register buttons
 			ed.addButton('fullpage', {title : 'fullpage.desc', cmd : 'mceFullPageProperties'});
 
 			ed.onBeforeSetContent.add(t._setContent, t);
@@ -46,8 +46,7 @@
 			};
 		},
 
-		// Private plugin internal methods
-
+	// Private plugin internal methods
 		_setBodyAttribs : function(ed, o) {
 			var bdattr, i, len, kv, k, v, t, attr = this.head.match(/body(.*?)>/i);
 
@@ -85,14 +84,14 @@
 		_setContent : function(ed, o) {
 			var t = this, sp, ep, c = o.content, v, st = '';
 
-			// Ignore raw updated if we already have a head, this will fix issues with undo/redo keeping the head/foot separate
+		// Ignore raw updated if we already have a head, this will fix issues with undo/redo keeping the head/foot separate
 			if (o.format == 'raw' && t.head)
 				return;
 
 			if (o.source_view && ed.getParam('fullpage_hide_in_source_view'))
 				return;
 
-			// Parse out head, body and footer
+		// Parse out head, body and footer
 			c = c.replace(/<(\/?)BODY/gi, '<$1body');
 			sp = c.indexOf('<body');
 
@@ -148,6 +147,6 @@
 		}
 	});
 
-	// Register plugin
+// Register plugin
 	tinymce.PluginManager.add('fullpage', tinymce.plugins.FullPagePlugin);
 })();

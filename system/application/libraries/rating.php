@@ -7,7 +7,8 @@ class Rating
 		$this->_ci =& get_instance();
 	}
 
-    function value($user_id)//Получаем пункты рейтинга за какое нибудь действие
+    //Получаем пункты рейтинга за какое нибудь действие
+    function value($user_id)
 	{
 		$this->_ci->load->model('rating/rating_mdl');
 

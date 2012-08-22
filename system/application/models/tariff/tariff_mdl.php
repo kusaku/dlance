@@ -2,7 +2,8 @@
 
 class Tariff_mdl extends Model
 {
-	function value($id, $param)//Вывод значения тарифа
+	//Вывод значения тарифа
+	function value($id, $param)
 	{
 		$this->db->select($param);
 
@@ -17,7 +18,8 @@ class Tariff_mdl extends Model
 		return FALSE;
 	}
 
-	function get($user_id)//Вывод тарифа пользователя
+	//Вывод тарифа пользователя
+	function get($user_id)
 	{
 		$this->db->select('tariffs.name');
 
@@ -35,7 +37,8 @@ class Tariff_mdl extends Model
 		return FALSE;
 	}
 
-	function id($user_id)//Вывод тарифа пользователя
+	//Вывод тарифа пользователя
+	function id($user_id)
 	{
 		$this->db->select('tariff');
 

@@ -12,7 +12,7 @@ function init() {
 	var formObj = document.forms[0];
 	var st = dom.parseStyle(dom.getAttrib(trElm, "style"));
 
-	// Get table row data
+// Get table row data
 	var rowtype = trElm.parentNode.nodeName.toLowerCase();
 	var align = dom.getAttrib(trElm, 'align');
 	var valign = dom.getAttrib(trElm, 'valign');
@@ -26,9 +26,9 @@ function init() {
 
 	selectByValue(formObj, 'rowtype', rowtype);
 
-	// Any cells selected
+// Any cells selected
 	if (dom.select('td.mceSelected,th.mceSelected', trElm).length == 0) {
-		// Setup form
+	// Setup form
 		addClassesToList('class', 'table_row_styles');
 		TinyMCE_EditableSelects.init();
 
@@ -43,7 +43,7 @@ function init() {
 		selectByValue(formObj, 'class', className, true, true);
 		selectByValue(formObj, 'dir', dir);
 
-		// Resize some elements
+	// Resize some elements
 		if (isVisible('backgroundimagebrowser'))
 			document.getElementById('backgroundimage').style.width = '180px';
 
@@ -60,7 +60,7 @@ function updateAction() {
 	trElm = dom.getParent(inst.selection.getStart(), "tr");
 	tableElm = dom.getParent(inst.selection.getStart(), "table");
 
-	// Update all selected rows
+// Update all selected rows
 	if (dom.select('td.mceSelected,th.mceSelected', trElm).length > 0) {
 		tinymce.each(tableElm.rows, function(tr) {
 			var i;
@@ -121,7 +121,7 @@ function updateRow(tr_elm, skip_id, skip_parent) {
 	var rowtype = getSelectValue(formObj, 'rowtype');
 	var doc = inst.getDoc();
 
-	// Update row element
+// Update row element
 	if (!skip_id)
 		tr_elm.setAttribute('id', formObj.id.value);
 
@@ -132,12 +132,12 @@ function updateRow(tr_elm, skip_id, skip_parent) {
 	tr_elm.setAttribute('style', dom.serializeStyle(dom.parseStyle(formObj.style.value)));
 	dom.setAttrib(tr_elm, 'class', getSelectValue(formObj, 'class'));
 
-	// Clear deprecated attributes
+// Clear deprecated attributes
 	tr_elm.setAttribute('background', '');
 	tr_elm.setAttribute('bgColor', '');
 	tr_elm.setAttribute('height', '');
 
-	// Set styles
+// Set styles
 	tr_elm.style.height = getCSSSize(formObj.height.value);
 	tr_elm.style.backgroundColor = formObj.bgcolor.value;
 
@@ -146,12 +146,12 @@ function updateRow(tr_elm, skip_id, skip_parent) {
 	else
 		tr_elm.style.backgroundImage = '';
 
-	// Setup new rowtype
+// Setup new rowtype
 	if (curRowType != rowtype && !skip_parent) {
-		// first, clone the node we are working on
+	// first, clone the node we are working on
 		var newRow = tr_elm.cloneNode(1);
 
-		// next, find the parent of its new destination (creating it if necessary)
+	// next, find the parent of its new destination (creating it if necessary)
 		var theTable = dom.getParent(tr_elm, "table");
 		var dest = rowtype;
 		var newParent = null;
@@ -172,13 +172,13 @@ function updateRow(tr_elm, skip_id, skip_parent) {
 				theTable.appendChild(newParent);
 		}
 
-		// append the row to the new parent
+	// append the row to the new parent
 		newParent.appendChild(newRow);
 
-		// remove the original
+	// remove the original
 		tr_elm.parentNode.removeChild(tr_elm);
 
-		// set tr_elm to the new node
+	// set tr_elm to the new node
 		tr_elm = newRow;
 	}
 

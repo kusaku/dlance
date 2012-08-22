@@ -43,10 +43,10 @@
 		return this;
 	};
 	
-	// Common (mobile and standard) template setup
+// Common (mobile and standard) template setup
 	$.fn.addTemplateSetup(function()
 	{
-		// Collapsible fieldsets
+	// Collapsible fieldsets
 		this.find('fieldset legend > a, .fieldset .legend > a').click(function(event)
 		{
 			$(this).toggleFieldsetOpen();
@@ -54,13 +54,13 @@
 		});
 		this.find('fieldset.collapse, .fieldset.collapse').toggleFieldsetOpen().removeClass('collapse');
 		
-		// Equalize tab content-blocks heights
+	// Equalize tab content-blocks heights
 		this.find('.tabs.same-height, .side-tabs.same-height, .mini-tabs.same-height, .controls-tabs.same-height').equalizeTabContentHeight();
 		
-		// Update tabs
+	// Update tabs
 		this.find('.js-tabs').updateTabs();
 		
-		// Input switches
+	// Input switches
 		this.find('input[type=radio].switch, input[type=checkbox].switch').hide().after('<span class="switch-replace"></span>').next().click(function() {
 			$(this).prev().click();
 		}).prev('.with-tip').next().addClass('with-tip').each(function()
@@ -74,20 +74,20 @@
 			$(this).attr('title', $(this).prev().attr('title'));
 		});
 		
-		// Tabs links behaviour
+	// Tabs links behaviour
 		this.find('.js-tabs a[href^="#"]').click(function(event)
 		{
 			event.preventDefault();
 			
-			// If hashtag enabled
+		// If hashtag enabled
 			if ($.fn.updateTabs.enabledHash)
 			{
-				// Retrieve hash parts
+			// Retrieve hash parts
 				var element = $(this);
 				var hash = $.trim(window.location.hash || '');
 				if (hash.length > 1)
 				{
-					// Remove hash from other tabs of the group
+				// Remove hash from other tabs of the group
 					var hashParts = hash.substring(1).split('&');
 					var dummyIndex;
 					while ((dummyIndex = $.inArray('', hashParts)) > -1)
@@ -112,20 +112,20 @@
 					var hashParts = [];
 				}
 				
-				// Add current tab to hash (not if default)
+			// Add current tab to hash (not if default)
 				var defaultTab = getDefaultTabIndex(element.parent().parent());
 				if (element.parent().index() != defaultTab)
 				{
 					hashParts.push(element.attr('href').substring(1));
 				}
 				
-				// If only one tab, add a empty id to prevent document from jumping to selected content
+			// If only one tab, add a empty id to prevent document from jumping to selected content
 				if (hashParts.length == 1)
 				{
 					hashParts.unshift('');
 				}
 				
-				// Put hash, will trigger refresh
+			// Put hash, will trigger refresh
 				window.location.hash = (hashParts.length > 0) ? '#'+hashParts.join('&') : '#none';
 			}
 			else
@@ -137,13 +137,13 @@
 		});
 	});
 	
-	// Document initial setup
+// Document initial setup
 	$(document).ready(function()
 	{
-		// Template setup
+	// Template setup
 		$(document.body).applyTemplateSetup();
 		
-		// Listener
+	// Listener
 		$(window).bind('hashchange', function()
 		{
 			$(document.body).find('.js-tabs').updateTabs();
@@ -172,7 +172,7 @@
 	 */
 	$.fn.updateTabs = function()
 	{
-		// If hashtags enabled
+	// If hashtags enabled
 		if ($.fn.updateTabs.enabledHash)
 		{
 			var hash = $.trim(window.location.hash || '');
@@ -184,15 +184,15 @@
 			var hashParts = [];
 		}
 		
-		// Check all tabs
+	// Check all tabs
 		var hasHash = (hashParts.length > 0);
 		this.each(function(i)
 		{
-			// Check if already inited
+		// Check if already inited
 			var tabGroup = $(this);
 			var defaultTab = getDefaultTabIndex(tabGroup);
 			
-			// Look for current tab
+		// Look for current tab
 			var current = false;
 			if ($.fn.updateTabs.enabledHash)
 			{
@@ -219,7 +219,7 @@
 				current = tabGroup.children('.current:first');
 			}
 			
-			// If none found : get the default tab
+		// If none found : get the default tab
 			if (!current)
 			{
 				current = tabGroup.children(':eq('+defaultTab+')');
@@ -227,22 +227,22 @@
 			
 			if (current.length > 0)
 			{
-				// Display current tab content block
+			// Display current tab content block
 				hash = $.trim(current.children('a').attr('href').substring(1));
 				if (hash.length > 0)
 				{
-					// Highlight current
+				// Highlight current
 					current.addClass('current');
 					var tabContainer = $('#'+hash),
 						tabHidden = tabContainer.is(':hidden');
 					
-					// Show if hidden
+				// Show if hidden
 					if (tabHidden)
 					{
 						tabContainer.show();
 					}
 					
-					// Hide others
+				// Hide others
 					current.siblings().removeClass('current').children('a').each(function(i)
 					{
 						var hash = $.trim($(this).attr('href').substring(1));
@@ -250,12 +250,12 @@
 						{
 							var tabContainer = $('#'+hash);
 							
-							// Hide if visible
+						// Hide if visible
 							if (tabContainer.is(':visible'))
 							{
 								tabContainer.trigger('tabhide').hide();
 							}
-							// Or init if first round
+						// Or init if first round
 							else if (!tabContainer.data('tabInited'))
 							{
 								tabContainer.trigger('tabhide');
@@ -264,12 +264,12 @@
 						}
 					});
 					
-					// Callback
+				// Callback
 					if (tabHidden)
 					{
 						tabContainer.trigger('tabshow');
 					}
-					// Or init if first round
+				// Or init if first round
 					else if (!tabContainer.data('tabInited'))
 					{
 						tabContainer.trigger('tabshow');
@@ -323,10 +323,10 @@
 		var firstMargin;
 		var lastMargin;
 		
-		// Process in reverse order to equalize sub-tabs first
+	// Process in reverse order to equalize sub-tabs first
 		for (i = this.length-1; i >= 0; --i)
 		{
-			// Look for max height
+		// Look for max height
 			maxHeight = -1;
 			tabContainers = [];
 			this.eq(i).find('a[href^="#"]').each(function(i)
@@ -339,7 +339,7 @@
 					{
 						blockHeight = block.outerHeight()+parseInt(block.css('margin-bottom'));
 						
-						// First element top-margin affects real height
+					// First element top-margin affects real height
 						marginAdjustTop = 0;
 						first = block.children(':first');
 						if (first.length > 0)
@@ -351,7 +351,7 @@
 							}
 						}
 						
-						// Same for last element bottom-margin
+					// Same for last element bottom-margin
 						marginAdjustBot = 0;
 						last = block.children(':last');
 						if (last.length > 0)
@@ -373,12 +373,12 @@
 				}
 			});
 			
-			// Setup height
+		// Setup height
 			for (g = 0; g < tabContainers.length; ++g)
 			{
 				tabContainers[g][0].height(maxHeight-parseInt(tabContainers[g][0].css('padding-top'))-parseInt(tabContainers[g][0].css('padding-bottom'))-parseInt(tabContainers[g][0].css('margin-bottom'))-tabContainers[g][1]);
 				
-				// Only the first tab remains visible
+			// Only the first tab remains visible
 				if (g > 0)
 				{
 					tabContainers[g][0].hide();
@@ -465,7 +465,7 @@
 		
 		this.each(function(i)
 		{
-			// Locate content block
+		// Locate content block
 			var block = $(this);
 			if (!block.hasClass('block-content'))
 			{
@@ -480,7 +480,7 @@
 				}
 			}
 			
-			// Compose message
+		// Compose message
 			var messageClass = (settings.type == 'info') ? 'message' : 'message '+settings.type;
 			if (settings.noMargin)
 			{
@@ -488,7 +488,7 @@
 			}
 			var finalMessage = (typeof message == 'object') ? '<ul class="'+messageClass+'"><li>'+message.join('</li><li>')+'</li></ul>' : '<p class="'+messageClass+'">'+message+'</p>';
 			
-			// Insert message
+		// Insert message
 			if (settings.position == 'top')
 			{
 				var children = block.find('h1, .h1, .block-controls, .block-header, .wizard-steps');
@@ -530,7 +530,7 @@
 		return this;
 	};
 	
-	// Default config for the blockMessage function
+// Default config for the blockMessage function
 	$.fn.blockMessage.defaults = {
 		type: 'info',
 		position: 'top',
@@ -551,7 +551,7 @@
 		
 		this.each(function(i)
 		{
-			// Locate content block
+		// Locate content block
 			var block = $(this);
 			if (!block.hasClass('block-content'))
 			{
@@ -597,11 +597,14 @@
 		return this;
 	};
 	
-	// Default config for the blockMessage function
+// Default config for the blockMessage function
 	$.fn.removeBlockMessages.defaults = {
-		only: false,				// string or array of strings of message classes which will be removed
-		except: false,				// except: string or array of strings of message classes which will not be removed (ignored if only is provided)
-		animate: true				// animate: true to remove the message with an animation (default), else false
+		// string or array of strings of message classes which will be removed
+		only: false,				
+		// except: string or array of strings of message classes which will not be removed (ignored if only is provided)
+		except: false,				
+		// animate: true to remove the message with an animation (default), else false
+		animate: true				
 	};
 	
 	/**
@@ -623,16 +626,16 @@
 				'paddingBottom': 0
 			};
 			
-			// IE8 and lower do not understand border-xx-width
+		// IE8 and lower do not understand border-xx-width
 			// http://forum.jquery.com/topic/ie-invalid-argument
 			if (!$.browser.msie || $.browser.version > 8)
 			{
-				// Border width is not set to 0 because it does not allow fluid movement 
+			// Border width is not set to 0 because it does not allow fluid movement 
 				anim.borderTopWidth = '1px';
 				anim.borderBottomWidth = '1px';
 			}
 			
-			// Detection of elements sticking to their predecessor
+		// Detection of elements sticking to their predecessor
 			var prev = element.prev();
 			if (prev.length === 0 && parseInt(element.css('margin-bottom'))+marginTop !== 0)
 			{
@@ -640,14 +643,14 @@
 				anim.marginBottom = Math.min(0, marginBottom);
 			}
 			
-			// Effect
+		// Effect
 			element.stop(true).css({
 				'overflow': 'hidden'
 			}).animate(anim, {
 				'duration': duration,
 				'complete': function()
 				{
-					// Reset properties
+				// Reset properties
 					$(this).css({
 						'display': 'none',
 						'overflow': '',
@@ -660,7 +663,7 @@
 						'marginBottom': ''
 					});
 					
-					// Callback function
+				// Callback function
 					if (callback)
 					{
 						callback.apply(this);
@@ -681,11 +684,11 @@
 	{
 		this.each(function(i)
 		{
-			// Init
+		// Init
 			var element = $(this);
 			element.css('display', 'block');
 			
-			// Reset and get values
+		// Reset and get values
 			element.stop(true).css({
 				'overflow': '',
 				'height': '',
@@ -702,7 +705,7 @@
 			var marginTop = parseInt(element.css('margin-top'));
 			var marginBottom = parseInt(element.css('margin-bottom'));
 			
-			// Initial and target values
+		// Initial and target values
 			var css = {
 				'overflow': 'hidden',
 				'height': 0,
@@ -715,21 +718,21 @@
 				'paddingBottom': paddingBottom
 			};
 			
-			// IE8 and lower do not understand border-xx-width
+		// IE8 and lower do not understand border-xx-width
 			// http://forum.jquery.com/topic/ie-invalid-argument
 			if (!$.browser.msie || $.browser.version > 8)
 			{
 				var borderTopWidth = parseInt(element.css('border-top-width'));
 				var borderBottomWidth = parseInt(element.css('border-bottom-width'));
 				
-				// Border width is not set to 0 because it does not allow fluid movement 
+			// Border width is not set to 0 because it does not allow fluid movement 
 				css.borderTopWidth = '1px';
 				css.borderBottomWidth = '1px';
 				anim.borderTopWidth = borderTopWidth;
 				anim.borderBottomWidth = borderBottomWidth;
 			}
 			
-			// Detection of elements sticking to their predecessor
+		// Detection of elements sticking to their predecessor
 			var prev = element.prev();
 			if (prev.length === 0 && parseInt(element.css('margin-bottom'))+marginTop !== 0)
 			{
@@ -739,12 +742,12 @@
 				anim.marginBottom = marginBottom;
 			}
 			
-			// Effect
+		// Effect
 			element.stop(true).css(css).animate(anim, {
 				'duration': duration,
 				'complete': function()
 				{
-					// Reset properties
+				// Reset properties
 					$(this).css({
 						'display': '',
 						'overflow': '',
@@ -757,13 +760,13 @@
 						'marginBottom': ''
 					});
 					
-					// Callback function
+				// Callback function
 					if (callback)
 					{
 						callback.apply(this);
 					}
 					
-					// Required for IE7 - don't ask me why...
+				// Required for IE7 - don't ask me why...
 					if ($.browser.msie && $.browser.version < 8)
 					{
 						$(this).css('zoom', 1);
@@ -784,7 +787,7 @@
 	{
 		$(this).fold(duration, function()
 		{
-			// Callback function
+		// Callback function
 			if (callback)
 			{
 				callback.apply(this);
@@ -807,10 +810,10 @@
 			'duration': duration,
 			'complete': function()
 			{
-				// No folding required if the element has position: absolute (not in the elements flow)
+			// No folding required if the element has position: absolute (not in the elements flow)
 				if ($(this).css('position') == 'absolute')
 				{
-					// Callback function
+				// Callback function
 					if (callback)
 					{
 						callback.apply(this);
@@ -822,7 +825,7 @@
 				{
 					$(this).slideUp(duration, function()
 					{
-						// Callback function
+					// Callback function
 						if (callback)
 						{
 							callback.apply(this);
@@ -847,10 +850,11 @@
 			/*
 			 * Tip: if you want to add animation or do anything that should not occur at startup closing, 
 			 * check if the element has the class 'collapse':
-			 * if (!$(this).hasClass('collapse')) { // Anything that sould no occur at startup }
+			 // Anything that sould no occur at startup }
+			 * if (!$(this).hasClass('collapse')) { 
 			 */
 			
-			// Change
+		// Change
 			$(this).closest('fieldset, .fieldset').toggleClass('collapsed');
 		});
 		
@@ -868,18 +872,18 @@
 		{
 			var element = $(this);
 			
-			// Add layer
+		// Add layer
 			var refElement = getNodeRefElement(this);
 			var layer = $('<div class="loading-mask"><span>'+settings.message+'</span></div>').insertAfter(refElement);
 			
-			// Position
+		// Position
 			var elementOffset = element.position();
 			layer.css({
 				top: elementOffset.top+'px',
 				left: elementOffset.left+'px'
 			}).width(element.outerWidth()).height(element.outerHeight());
 			
-			// Effect
+		// Effect
 			var span = layer.children('span');
 			var marginTop = parseInt(span.css('margin-top'));
 			span.css({'opacity':0, 'marginTop':(marginTop-40)+'px'});
@@ -903,18 +907,18 @@
 	{
 		var element = $(node);
 		
-		// Special case
+	// Special case
 		if (node.nodeName.toLowerCase() == 'document' || node.nodeName.toLowerCase() == 'body')
 		{
 			var refElement = $(document.body).children(':last').get(0);
 		}
 		else
 		{
-			// Look for the reference element, the one after which the layer will be inserted
+		// Look for the reference element, the one after which the layer will be inserted
 			var refElement = node;
 			var offsetParent = element.offsetParent().get(0);
 			
-			// List of elements in which we can add a div
+		// List of elements in which we can add a div
 			var absPos = ['absolute', 'relative'];
 			while (refElement && refElement !== offsetParent && !$.inArray($(refElement.parentNode).css('position'), absPos))
 			{
@@ -925,7 +929,7 @@
 		return refElement;
 	}
 	
-	// Default params for the loading effect layer
+// Default params for the loading effect layer
 	$.fn.addEffectLayer.defaults = {
 		message: 'Please wait...'
 	};
@@ -936,12 +940,12 @@
 	 */
 	$.fn.loadWithEffect = function()
 	{
-		// Add effect layer
+	// Add effect layer
 		this.addEffectLayer({
 			message: $.fn.loadWithEffect.defaults.message
 		});
 		
-		// Rewrite callback function
+	// Rewrite callback function
 		var target = this;
 		var callback = false;
 		var args = $.makeArray(arguments);
@@ -957,24 +961,24 @@
 			index = 1;
 		}
 		
-		// Custom callback
+	// Custom callback
 		args[index] = function(responseText, textStatus, XMLHttpRequest)
 		{
-			// Get the effect layer
+		// Get the effect layer
 			var refElement = getNodeRefElement(this);
 			var layer = $(refElement).next('.loading-mask');
 			var span = layer.children('span');
 			
-			// If success
+		// If success
 			if (textStatus == 'success' || textStatus == 'notmodified')
 			{
-				// Initial callback
+			// Initial callback
 				if (callback)
 				{
 					callback.apply(this, arguments);
 				}
 				
-				// Remove effect layer
+			// Remove effect layer
 				layer.stop(true);
 				span.stop(true);
 				var currentMarginTop = parseInt(span.css('margin-top'));
@@ -993,17 +997,17 @@
 				{
 					event.preventDefault();
 					
-					// Relaunch request
+				// Relaunch request
 					$.fn.load.apply(target, args);
 					
-					// Reset
+				// Reset
 					span.removeClass('error').html($.fn.loadWithEffect.defaults.message).css('margin-left', '');
 				});
 				span.children('a:last').click(function(event)
 				{
 					event.preventDefault();
 					
-					// Remove effect layer
+				// Remove effect layer
 					layer.stop(true);
 					span.stop(true);
 					var currentMarginTop = parseInt(span.css('margin-top'));
@@ -1016,18 +1020,18 @@
 					});
 				});
 				
-				// Centering
+			// Centering
 				span.css('margin-left', -Math.round(span.outerWidth()/2));
 			}
 		};
 		
-		// Redirect to jQuery load
+	// Redirect to jQuery load
 		$.fn.load.apply(target, args);
 		
 		return this;
 	};
 	
-	// Default texts for the loading effect layer
+// Default texts for the loading effect layer
 	$.fn.loadWithEffect.defaults = {
 		message: 'Loading...',
 		errorMessage: 'Error while loading',

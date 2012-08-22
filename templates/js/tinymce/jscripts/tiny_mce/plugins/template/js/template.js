@@ -14,7 +14,7 @@ var TemplateDialog = {
  		tsrc = ed.getParam("template_templates", false);
  		sel = document.getElementById('tpath');
 
-		// Setup external template list
+	// Setup external template list
 		if (!tsrc && typeof(tinyMCETemplateList) != 'undefined') {
 			for (x=0, tsrc = []; x<tinyMCETemplateList.length; x++)
 				tsrc.push({title : tinyMCETemplateList[x][0], src : tinyMCETemplateList[x][1], description : tinyMCETemplateList[x][2]});
@@ -93,7 +93,7 @@ var TemplateDialog = {
 
 		x = window.ActiveXObject ? g('Msxml2.XMLHTTP') || g('Microsoft.XMLHTTP') : new XMLHttpRequest();
 
-		// Synchronous AJAX load file
+	// Synchronous AJAX load file
 		x.overrideMimeType && x.overrideMimeType(t);
 		x.open("GET", u, false);
 		x.send(null);

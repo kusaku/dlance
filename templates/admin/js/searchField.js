@@ -30,25 +30,25 @@
 	{
 		var settings = $.extend({}, $.fn.advancedSearchField.defaults, options);
 		
-		// Setup
+	// Setup
 		this.before('<input type="hidden" name="search-last" id="search-last" value="">').focus(function() {
 			
-			// Stop closing
+		// Stop closing
 			if (closeTimeout)
 			{
 				clearTimeout(closeTimeout);
 			}
 			
-			// Add event listener
+		// Add event listener
 			$(this).bind('keyup', updateSearch);
 			updateSearch();
 			
 		}).blur(function() {
 			
-			// Remove event listener
+		// Remove event listener
 			$(this).unbind('keyup', updateSearch);
 			
-			// Timeout for result hiding - needed for search block interactions
+		// Timeout for result hiding - needed for search block interactions
 			closeTimeout = setTimeout(closeSearch, 500);
 			
 		}).after('<div id="search-result" class="result-block"><span class="arrow"><span></span></span><div id="server-search">'+settings.messageLoading+'</div><p id="search-info" class="result-info">-</p></div>').next().hide();
@@ -59,7 +59,7 @@
 		 */
 		function closeSearch()
 		{
-			// Hide elements
+		// Hide elements
 			$('#s').hideTip();
 			$('#search-result').fadeOut();
 		};
@@ -70,16 +70,16 @@
 		 */
 		function updateSearch()
 		{
-			// Elements
+		// Elements
 			var result = $('#search-result');
 			
-			// Current search
+		// Current search
 			var s = $.trim($('#s').val());
 			
-			// Parsing
+		// Parsing
 			if (s.length == 0)
 			{
-				// Tip
+			// Tip
 				$('#s').showTip({
 					content: settings.tipFocus
 				});
@@ -88,7 +88,7 @@
 			}
 			else if (s.length < settings.minSearchLength)
 			{
-				// Tip
+			// Tip
 				$('#s').showTip({
 					content: settings.tipTooShort
 				});
@@ -101,33 +101,33 @@
 				var lastS = last.val();
 				var info = $('#search-info');
 				
-				// Hide tip
+			// Hide tip
 				$('#s').hideTip();
 				
-				// Show search results block
+			// Show search results block
 				result.fadeIn();
 				
-				// Detect changes
+			// Detect changes
 				if (lastS != s)
 				{
-					// Store search
+				// Store search
 					$('#search-last').val(s);
 					
-					// Stop previous request timeout
+				// Stop previous request timeout
 					if (ajaxTimeout)
 					{
 						clearTimeout(ajaxTimeout);
 					}
 					
-					// Empty block
+				// Empty block
 					result.children().not('.arrow, #server-search, #search-info').remove();
 					
-					// If search within nav
+				// If search within nav
 					if (settings.enableNavSearch)
 					{
 						result.children('.arrow:first').after('<h2>'+settings.titleTemplateResult+'</h2>'+searchInNav(s)+'<hr>');
 						
-						// If hiding too long matches list
+					// If hiding too long matches list
 						if ($.fn.accessibleList && (settings.moreButtonAfter > 0 || settings.matchesPerPage > 0))
 						{
 							result.children('ul:first').accessibleList({
@@ -135,17 +135,17 @@
 								'pageSize': settings.matchesPerPage,
 								'after': function()
 								{
-									// Restore focus
+								// Restore focus
 									$('#s').focus();
 								}
 							});
 						}
 					}
 					
-					// Message
+				// Message
 					$('#search-info').addClass('loading').text(settings.messageLoading);
 					
-					// Ajax call
+				// Ajax call
 					var date = new Date();
 					if (!lastRequest || lastRequest < date.getTime()-noUpdateDelay)
 					{
@@ -167,11 +167,11 @@
 		 */
 		function searchInNav(s)
 		{
-			// Split keywords
+		// Split keywords
 			var keywords = s.toLowerCase().split(/\s+/);
 			var nbKeywords = keywords.length;
 			
-			// Search links
+		// Search links
 			var links = $('nav a');
 			var matches = [];
 			links.each(function(i)
@@ -189,12 +189,12 @@
 				
 				if (textMatch)
 				{
-					// All keywords found
+				// All keywords found
 					matches.push(this);
 				}
 			});
 			
-			// Build results list
+		// Build results list
 			var nbMatches = matches.length;
 			if (nbMatches > 0)
 			{
@@ -203,7 +203,7 @@
 				
 				for (var m = 0; m < nbMatches; ++m)
 				{
-					// Text with highlighted keywords
+				// Text with highlighted keywords
 					var link = $(matches[m]);
 					var text = link.text();
 					var path = [text];
@@ -212,7 +212,7 @@
 						text = text.replace(new RegExp('('+keywords[i]+')', 'gi'), '<strong>$1</strong>');
 					}
 					
-					// Path
+				// Path
 					var parent = link;
 					while ((parent = parent.parent().parent().prev('a')) && parent.length > 0)
 					{
@@ -235,11 +235,11 @@
 		 */
 		function sendRequest()
 		{
-			// Search url
+		// Search url
 			var url = $('#s').parents('form:first').attr('action');
 			if (!url || url == '')
 			{
-				// Page url without hash
+			// Page url without hash
 				url = document.location.href.match(/^([^#]+)/)[1];
 			}
 			
@@ -265,7 +265,7 @@
 		return this;
 	};
 	
-	// Function's default configuration
+// Function's default configuration
 	$.fn.advancedSearchField.defaults = {
 		/**
 		 * Minimum search string length

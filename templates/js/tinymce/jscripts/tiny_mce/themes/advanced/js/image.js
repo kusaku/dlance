@@ -11,7 +11,7 @@ var ImageDialog = {
 	init : function() {
 		var f = document.forms[0], ed = tinyMCEPopup.editor;
 
-		// Setup browse button
+	// Setup browse button
 		document.getElementById('srcbrowsercontainer').innerHTML = getBrowserHTML('srcbrowser','src','image','theme_advanced_image');
 		if (isVisible('srcbrowser'))
 			document.getElementById('src').style.width = '180px';
@@ -103,7 +103,7 @@ var ImageDialog = {
 		if (tinyMCEPopup.editor.settings.inline_styles) {
 			st = tinyMCEPopup.dom.parseStyle(this.styleVal);
 
-			// Handle align
+		// Handle align
 			v = getSelectValue(f, 'align');
 			if (v) {
 				if (v == 'left' || v == 'right') {
@@ -118,7 +118,7 @@ var ImageDialog = {
 				delete st['vertical-align'];
 			}
 
-			// Handle border
+		// Handle border
 			v = f.border.value;
 			if (v || v == '0') {
 				if (v == '0')
@@ -128,7 +128,7 @@ var ImageDialog = {
 			} else
 				delete st['border'];
 
-			// Handle hspace
+		// Handle hspace
 			v = f.hspace.value;
 			if (v) {
 				delete st['margin'];
@@ -139,7 +139,7 @@ var ImageDialog = {
 				delete st['margin-right'];
 			}
 
-			// Handle vspace
+		// Handle vspace
 			v = f.vspace.value;
 			if (v) {
 				delete st['margin'];
@@ -150,7 +150,7 @@ var ImageDialog = {
 				delete st['margin-bottom'];
 			}
 
-			// Merge
+		// Merge
 			st = tinyMCEPopup.dom.parseStyle(dom.serializeStyle(st), 'img');
 			this.styleVal = dom.serializeStyle(st, 'img');
 		}
@@ -192,7 +192,7 @@ var ImageDialog = {
 					tinymce.each(['top', 'right', 'bottom', 'left'], function(sv) {
 						sv = dom.getStyle(e, 'border-' + sv + '-width');
 
-						// False or not the same as prev
+					// False or not the same as prev
 						if (!sv || (sv != v && v !== 0)) {
 							v = 0;
 							return false;

@@ -30,7 +30,8 @@ class Account_mdl extends Model
 *  Платежи
 * ---------------------------------------------------------------
 */
-	function get_payment($id)//Выводи платеж для просмотра
+	//Выводи платеж для просмотра
+	function get_payment($id)
 	{
 		$this->db->where('payments.id', $id);
 
@@ -50,7 +51,8 @@ class Account_mdl extends Model
 
 		if( $query['type'] == 2 )
 		{
-			$query['time'] = date_await($query['time']);//Осталось
+			//Осталось
+			$query['time'] = date_await($query['time']);
 		}
 
 		$query['status_id'] = $query['status'];
@@ -65,7 +67,8 @@ class Account_mdl extends Model
 		return $query;
 	}
 
-	function get_payments($start_from = FALSE, $per_page, $user_id)//Вывод всех платежей
+	//Вывод всех платежей
+	function get_payments($start_from = FALSE, $per_page, $user_id)
 	{
 		$this->db->order_by('date', 'desc');
 
@@ -105,7 +108,8 @@ class Account_mdl extends Model
 
 			if( $query[$i]['type'] == 2 )
 			{
-				$query[$i]['time'] = date_await($query[$i]['time']);//Осталось
+				//Осталось
+				$query[$i]['time'] = date_await($query[$i]['time']);
 			}
 
 			switch($query[$i]['type'])
@@ -125,7 +129,8 @@ class Account_mdl extends Model
 		return $this->db->count_all_results('payments');
 	}
 
-	function check($id = '', $status = '', $user_id = '')//Проверка на существование платежа, для завершения
+	//Проверка на существование платежа, для завершения
+	function check($id = '', $status = '', $user_id = '')
 	{
 		if( !empty($status) )
 		{
@@ -147,11 +152,13 @@ class Account_mdl extends Model
 		return FALSE;
 	}
 
-	function enter($id)//Завершить платеж
+	//Завершить платеж
+	function enter($id)
 	{
 		$this->db->update('payments', array('status' => 2), array('id' => $id));
 
-		$this->db->select('amount, recipient_id');//Выбираем сумму платежа и получателя
+		//Выбираем сумму платежа и получателя
+		$this->db->select('amount, recipient_id');
 
 		$query = $this->db->get_where('payments', array('id' => $id));
 
@@ -161,14 +168,16 @@ class Account_mdl extends Model
 		
 		$recipient_id = $query['recipient_id'];
 		
-		$this->balance_mdl->plus_balance($recipient_id, $amount);//Прибавляем к балансу получателя
+		//Прибавляем к балансу получателя
+		$this->balance_mdl->plus_balance($recipient_id, $amount);
 	}
 /**
 * ---------------------------------------------------------------
 *  Подписка на рубрики
 * ---------------------------------------------------------------
 */
-	function get_categories_followers($user_id = '')//Выводим категории на которые мы подписаны
+	//Выводим категории на которые мы подписаны
+	function get_categories_followers($user_id = '')
 	{
 		$this->db->select('categories_followers.*, designs_categories.name, designs_categories.parent_id');
 
@@ -179,14 +188,16 @@ class Account_mdl extends Model
 		return $this->db->get('categories_followers')->result_array();
 	}
 
-	function del_categories_followers($user_id = '')//Удаляем старые рубрики
+	//Удаляем старые рубрики
+	function del_categories_followers($user_id = '')
 	{
 		$this->db->where('user_id', $user_id);
 
 		$this->db->delete('categories_followers');
 	}
 
-	function add_categories_followers($services = '')//Вносим новые рубрики
+	//Вносим новые рубрики
+	function add_categories_followers($services = '')
 	{
 		$this->db->insert('categories_followers', $services);
 	}
@@ -229,15 +240,16 @@ class Account_mdl extends Model
 
 		$this->db->select('users.username, users.userpic, users_followers.*');
 
-
-		if( !empty($user_id) )//Для профиля пользователя, выводим всех кто подписан на данного пользователя
+		//Для профиля пользователя, выводим всех кто подписан на данного пользователя
+		if( !empty($user_id) )
 		{
 			$this->db->where('users_followers.follows', $user_id);
 			
 			$this->db->join('users', 'users.id = users_followers.user_id');
 		}
 
-		if( !empty($follows) )//Для аккаунта пользователя, выводим всех на кого подписан данный пользователь
+		//Для аккаунта пользователя, выводим всех на кого подписан данный пользователь
+		if( !empty($follows) )
 		{
 			$this->db->where('users_followers.user_id', $follows);
 			
@@ -249,14 +261,16 @@ class Account_mdl extends Model
 
 	function count_followers($user_id = '', $follows = '') 
 	{
-		if( !empty($user_id) )//Для профиля пользователя, выводим всех кто подписан на данного пользователя
+		//Для профиля пользователя, выводим всех кто подписан на данного пользователя
+		if( !empty($user_id) )
 		{
 			$this->db->where('users_followers.follows', $user_id);
 			
 			$this->db->join('users', 'users.id = users_followers.user_id');
 		}
 
-		if( !empty($follows) )//Для аккаунта пользователя, выводим всех на кого подписан данный пользователь
+		//Для аккаунта пользователя, выводим всех на кого подписан данный пользователь
+		if( !empty($follows) )
 		{
 			$this->db->where('users_followers.user_id', $follows);
 			
@@ -295,20 +309,26 @@ class Account_mdl extends Model
 		for($i = 0; $i < $count; $i++) 
 		{
 	
-			$date = now() - $query[$i]['date'];//От текущей даты отнимаем дату создания загрузки, получаем время прошедшее с момента создания загрузки
+			//От текущей даты отнимаем дату создания загрузки, получаем время прошедшее с момента создания загрузки
+			$date = now() - $query[$i]['date'];
 	
-			$left_date = $this->config->item('download_period') - $date;//От периода на скачивание отнимаем время прошедшее с момента создания загрзуки, Получаем остаток времени
+			//От периода на скачивание отнимаем время прошедшее с момента создания загрзуки, Получаем остаток времени
+			$left_date = $this->config->item('download_period') - $date;
 
-			if( $left_date < 0 )//Если остаток времени меньше нуля то удаляем
+			//Если остаток времени меньше нуля то удаляем
+			if( $left_date < 0 )
 			{
 				$query[$i]['left_date'] = 'Период загрузки истёк, загрузка будет удалена.';
 	
-				$this->del('downloads', $query[$i]['id']);//Удаляем поле с таблицы
+				//Удаляем поле с таблицы
+				$this->del('downloads', $query[$i]['id']);
 			}
 			else
 			{
-				$left_date = now() + $left_date;//Прибавляем  остаток к текущему времени
-				$left_date = date_await($left_date);//date_await - сколько времени до события, событие это время когда время данное на загрузку истекёт
+				//Прибавляем  остаток к текущему времени
+				$left_date = now() + $left_date;
+				//date_await - сколько времени до события, событие это время когда время данное на загрузку истекёт
+				$left_date = date_await($left_date);
 			
 				$query[$i]['left_date'] = $left_date;
 			}
@@ -357,7 +377,8 @@ class Account_mdl extends Model
 		return $this->db->get('cart')->result_array();
 	}
 
-	function buy_check($design_id = '', $user_id = '')//Проверка на существование покупки
+	//Проверка на существование покупки
+	function buy_check($design_id = '', $user_id = '')
 	{
 	    if( empty($design_id) or empty($user_id) )
 	    {
@@ -410,7 +431,8 @@ class Account_mdl extends Model
 
 		for($i = 0; $i < $count; $i++) 
 		{
-			$query[$i]['date'] = date_smart($query[$i]['date']);//Дата размещения
+			//Дата размещения
+			$query[$i]['date'] = date_smart($query[$i]['date']);
 
 			$query[$i]['category_id'] = $query[$i]['category'];
 
@@ -452,7 +474,8 @@ class Account_mdl extends Model
 		return $query->num_rows();
 	}
 
-	function cart_check($design_id = '', $user_id = '', $session_id = '')//Проверка принадлежит ли товар в корзине пользователю
+	//Проверка принадлежит ли товар в корзине пользователю
+	function cart_check($design_id = '', $user_id = '', $session_id = '')
 	{
 	    if( empty($design_id) )
 	    {
@@ -479,7 +502,8 @@ class Account_mdl extends Model
 		return FALSE;
 	}
 
-	function cart_check_del($id = '', $user_id = '', $session_id = '')//Проверка принадлежит ли товар в корзине пользователю
+	//Проверка принадлежит ли товар в корзине пользователю
+	function cart_check_del($id = '', $user_id = '', $session_id = '')
 	{
 	    if( empty($id) )
 	    {
@@ -532,7 +556,8 @@ class Account_mdl extends Model
 
 		for($i = 0; $i < $count; $i++) 
 		{
-			$query[$i]['date'] = date_smart($query[$i]['date']);//Дата размещения
+			//Дата размещения
+			$query[$i]['date'] = date_smart($query[$i]['date']);
 
 			$query[$i]['category_id'] = $query[$i]['category'];
 
@@ -682,7 +707,8 @@ class Account_mdl extends Model
 
 		$this->db->where('user_id', $user_id);
 
-		$this->db->where('status', 1);//Выводим только заявки которые ожидают
+		//Выводим только заявки которые ожидают
+		$this->db->where('status', 1);
 
 		$query = $this->db->get('balance_applications')->result_array();
 		
@@ -714,9 +740,11 @@ class Account_mdl extends Model
 		{
 			$row = $query->row();
 
-			$this->balance_mdl->plus($user_id, $row->amount);//Прибавляем баланс обратно
+			//Прибавляем баланс обратно
+			$this->balance_mdl->plus($user_id, $row->amount);
 
-			$this->db->where('id', $id);//Удаляем заявку
+			//Удаляем заявку
+			$this->db->where('id', $id);
 
 			$this->db->delete('balance_applications');
 		}
@@ -742,7 +770,8 @@ class Account_mdl extends Model
 
 		$this->db->where('user_id', $user_id);
 
-		$this->db->where('status', 1);//Статус должен быть в ожидании, чтобы можно было отменить
+		//Статус должен быть в ожидании, чтобы можно было отменить
+		$this->db->where('status', 1);
 
 		if( $this->db->count_all_results('balance_applications') > 0 ) 
 		{ 
@@ -777,7 +806,8 @@ class Account_mdl extends Model
 * ---------------------------------------------------------------
 */
 
-	function get_services($user_id = '')//Выводим данные группы для редактирования
+	//Выводим данные группы для редактирования
+	function get_services($user_id = '')
 	{
 		$this->db->select('services.*, categories.name, categories.parent_id');
 
@@ -788,14 +818,16 @@ class Account_mdl extends Model
 		return $this->db->get('services')->result_array();
 	}
 
-	function del_services($user_id = '')//Удаляем старые рубрики
+	//Удаляем старые рубрики
+	function del_services($user_id = '')
 	{
 		$this->db->where('user_id', $user_id);
 
 		$this->db->delete('services');
 	}
 
-	function add_services($services = '')//Вносим новые рубрики
+	//Вносим новые рубрики
+	function add_services($services = '')
 	{
 		$this->db->insert('services', $services);
 	}
@@ -805,7 +837,8 @@ class Account_mdl extends Model
 *  Портфолио
 * ---------------------------------------------------------------
 */
-	function get_portfolio($user_id)//Для вывода в профиле
+	//Для вывода в профиле
+	function get_portfolio($user_id)
 	{
 		$this->db->order_by('position', 'desc');
 
@@ -816,7 +849,8 @@ class Account_mdl extends Model
 		return $this->db->get('portfolio')->result_array();
 	}
 
-	function get_image($id)//Для редактирования
+	//Для редактирования
+	function get_image($id)
 	{
 		$this->db->where('id', $id);
 
@@ -858,63 +892,67 @@ class Account_mdl extends Model
 
 	function up_portfolio($id, $user_id)
 	{
-		//Выводим позицию объекта
+	//Выводим позицию объекта
 		$this->db->select('position');
 
 		$query = $this->db->get_where('portfolio', array('id' => $id))->row_array();
 
 		$position = $query['position'];
 
-
-		$this->db->where('position >', $position);//Проверяем есть ли что то выше нас
+		//Проверяем есть ли что то выше нас
+		$this->db->where('position >', $position);
 
 		$this->db->where('user_id', $this->user_id);
 
 		if( $this->db->count_all_results('portfolio') > 0 )
 		{		
 
-			$this->db->select_min('position');//Узнаём id объекта выше нас, выше нас по минимуму
+			//Узнаём id объекта выше нас, выше нас по минимуму
+			$this->db->select_min('position');
 
 			$query = $this->db->get_where('portfolio', array('position >' => $position))->row_array();
 	
-			$replace_position = $query['position'];//Позиция которая выше нас по минимуму
+			//Позиция которая выше нас по минимуму
+			$replace_position = $query['position'];
 
+			//Заменяем на нашу позицию
+			$this->db->update('portfolio', array('position' => $position), array('position' => $replace_position, 'user_id' => $user_id));
 
-			$this->db->update('portfolio', array('position' => $position), array('position' => $replace_position, 'user_id' => $user_id));//Заменяем на нашу позицию
-
-			$this->db->update('portfolio', array('position' => $replace_position), array('id' => $id));//Передвигаем наш объект выше
+			//Передвигаем наш объект выше
+			$this->db->update('portfolio', array('position' => $replace_position), array('id' => $id));
 		}
 	}
 
 	function down_portfolio($id, $user_id)
 	{
-		//Выводим позицию объекта
+	//Выводим позицию объекта
 		$this->db->select('position');
 
 		$query = $this->db->get_where('portfolio', array('id' => $id))->row_array();
-		//echo $query['position'];
-
+	//echo $query['position'];
 		$position = $query['position'];
 
-
-		$this->db->where('position <', $position);//Проверяем есть ли что то ниже нас
+		//Проверяем есть ли что то ниже нас
+		$this->db->where('position <', $position);
 
 		$this->db->where('user_id', $this->user_id);
 
 		if( $this->db->count_all_results('portfolio') > 0 )
 		{		
 
-			$this->db->select_max('position');//Узнаём id объекта ниже нас, ниже нас по минимуму
+			//Узнаём id объекта ниже нас, ниже нас по минимуму
+			$this->db->select_max('position');
 
 			$query = $this->db->get_where('portfolio', array('position <' => $position))->row_array();
 	
-			$replace_position = $query['position'];//Позиция которая ниже нас по минимуму
+			//Позиция которая ниже нас по минимуму
+			$replace_position = $query['position'];
 
+			//Заменяем на нашу позицию
+			$this->db->update('portfolio', array('position' => $position), array('position' => $replace_position, 'user_id' => $user_id));
 
-
-			$this->db->update('portfolio', array('position' => $position), array('position' => $replace_position, 'user_id' => $user_id));//Заменяем на нашу позицию
-
-			$this->db->update('portfolio', array('position' => $replace_position), array('id' => $id));//Передвигаем наш объект выше
+			//Передвигаем наш объект выше
+			$this->db->update('portfolio', array('position' => $replace_position), array('id' => $id));
 		}
 	}
 /**
@@ -938,11 +976,6 @@ class Account_mdl extends Model
 		$this->db->update('profile', $data);
 	}
 
-
-
-
-
-
 /**
 * ---------------------------------------------------------------
 *  МОДЕРАТОР
@@ -954,7 +987,8 @@ class Account_mdl extends Model
 *  пользователи
 * ---------------------------------------------------------------
 */
-	function get_users($start_from = FALSE, $per_page, $input = '')//Расширенный поиск
+	//Расширенный поиск
+	function get_users($start_from = FALSE, $per_page, $input = '')
 	{
 		if( $start_from !== FALSE ) 
 		{

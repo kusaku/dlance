@@ -20,8 +20,6 @@ h1,h2
 {
 }
 
-
-
 body
 {
 	font-family: Arial, sans-serif;
@@ -82,14 +80,12 @@ a:hover
 	color: #E0E8EF;
 }
 
-
 /* Content */
 
 #content
 {
 	line-height: 1.5em;
 }
-
 
 #content p
 {
@@ -249,7 +245,6 @@ a:hover
 	clear: both;
 }
 
-
 /* Menu */
 
 #menu
@@ -371,8 +366,7 @@ ul#cssmenu ul li:hover ul,
 ul#cssmenu li.iehover ul,
 ul#cssmenu ul li.iehover ul {
         display: block;
-} 
-
+}
 
 #regtable p{color:#333;font-size:11px}
 #regtable input{border:1px #ccc solid;width:150px;color:#333;font:11px Verdana, Geneva, sans-serif;background-color:#f9f9f9}
@@ -398,7 +392,6 @@ ul#cssmenu ul li.iehover ul {
 .centerconlk li a:hover{
 	color: #003366;
 }
-
 
 /* 
    Posts 

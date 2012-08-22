@@ -22,10 +22,10 @@ $.fn.extend({
 			max: options && !options.scroll ? 10 : 150
 		}, options);
 		
-		// if highlight is set to false, replace it with a do-nothing function
+	// if highlight is set to false, replace it with a do-nothing function
 		options.highlight = options.highlight || function(value) { return value; };
 		
-		// if the formatMatch option is not specified, then use formatItem for backwards compatibility
+	// if the formatMatch option is not specified, then use formatItem for backwards compatibility
 		options.formatMatch = options.formatMatch || options.formatItem;
 		
 		return this.each(function() {
@@ -64,7 +64,7 @@ $.Autocompleter = function(input, options) {
 		BACKSPACE: 8
 	};
 
-	// Create $ object for input element
+// Create $ object for input element
 	var $input = $(input).attr("autocomplete", "off").addClass(options.inputClass);
 
 	var timeout;
@@ -79,7 +79,7 @@ $.Autocompleter = function(input, options) {
 	
 	var blockSubmit;
 	
-	// prevent form submit in opera when selecting with return key
+// prevent form submit in opera when selecting with return key
 	$.browser.opera && $(input.form).bind("submit.autocomplete", function() {
 		if (blockSubmit) {
 			blockSubmit = false;
@@ -87,12 +87,12 @@ $.Autocompleter = function(input, options) {
 		}
 	});
 	
-	// only opera doesn't trigger keydown multiple times while pressed, others don't work with keypress at all
+// only opera doesn't trigger keydown multiple times while pressed, others don't work with keypress at all
 	$input.bind(($.browser.opera ? "keypress" : "keydown") + ".autocomplete", function(event) {
-		// a keypress means the input has focus
-		// avoids issue where input had focus before the autocomplete was applied
+	// a keypress means the input has focus
+	// avoids issue where input had focus before the autocomplete was applied
 		hasFocus = 1;
-		// track last key pressed
+	// track last key pressed
 		lastKeyPressCode = event.keyCode;
 		switch(event.keyCode) {
 		
@@ -132,12 +132,12 @@ $.Autocompleter = function(input, options) {
 				}
 				break;
 			
-			// matches also semicolon
+		// matches also semicolon
 			case options.multiple && $.trim(options.multipleSeparator) == "," && KEY.COMMA:
 			case KEY.TAB:
 			case KEY.RETURN:
 				if( selectCurrent() ) {
-					// stop default to prevent a form submit, Opera needs special handling
+				// stop default to prevent a form submit, Opera needs special handling
 					event.preventDefault();
 					blockSubmit = true;
 					return false;
@@ -154,8 +154,8 @@ $.Autocompleter = function(input, options) {
 				break;
 		}
 	}).focus(function(){
-		// track whether the field has focus, we shouldn't process any
-		// results if the field no longer has focus
+	// track whether the field has focus, we shouldn't process any
+	// results if the field no longer has focus
 		hasFocus++;
 	}).blur(function() {
 		hasFocus = 0;
@@ -163,12 +163,12 @@ $.Autocompleter = function(input, options) {
 			hideResults();
 		}
 	}).click(function() {
-		// show select when clicking in a focused field
+	// show select when clicking in a focused field
 		if ( hasFocus++ > 1 && !select.visible() ) {
 			onChange(0, true);
 		}
 	}).bind("search", function() {
-		// TODO why not just specifying both arguments?
+	// TODO why not just specifying both arguments?
 		var fn = (arguments.length > 1) ? arguments[1] : null;
 		function findValueCallback(q, data) {
 			var result;
@@ -190,7 +190,7 @@ $.Autocompleter = function(input, options) {
 		cache.flush();
 	}).bind("setOptions", function() {
 		$.extend(options, arguments[1]);
-		// if we've updated the data, repopulate
+	// if we've updated the data, repopulate
 		if ( "data" in arguments[1] )
 			cache.populate();
 	}).bind("unautocomplete", function() {
@@ -198,8 +198,7 @@ $.Autocompleter = function(input, options) {
 		$input.unbind();
 		$(input.form).unbind(".autocomplete");
 	});
-	
-	
+
 	function selectCurrent() {
 		var selected = select.selected();
 		if( !selected )
@@ -223,8 +222,8 @@ $.Autocompleter = function(input, options) {
 					progress += seperator;
 				});
 				words[wordAt] = v;
-				// TODO this should set the cursor to the right position, but it gets overriden somewhere
-				//$.Autocompleter.Selection(input, progress + seperator, progress + seperator);
+			// TODO this should set the cursor to the right position, but it gets overriden somewhere
+			//$.Autocompleter.Selection(input, progress + seperator, progress + seperator);
 				v = words.join( options.multipleSeparator );
 			}
 			v += options.multipleSeparator;
@@ -286,16 +285,16 @@ $.Autocompleter = function(input, options) {
 		return words[words.length - 1];
 	}
 	
-	// fills in the input box w/the first match (assumed to be the best match)
-	// q: the term entered
-	// sValue: the first matching result
+// fills in the input box w/the first match (assumed to be the best match)
+// q: the term entered
+// sValue: the first matching result
 	function autoFill(q, sValue){
-		// autofill in the complete box w/the first match as long as the user hasn't entered in more data
-		// if the last user key pressed was backspace, don't autofill
+	// autofill in the complete box w/the first match as long as the user hasn't entered in more data
+	// if the last user key pressed was backspace, don't autofill
 		if( options.autoFill && (lastWord($input.val()).toLowerCase() == q.toLowerCase()) && lastKeyPressCode != KEY.BACKSPACE ) {
-			// fill in the value (keep the case the user has typed)
+		// fill in the value (keep the case the user has typed)
 			$input.val($input.val() + sValue.substring(lastWord(previousValue).length));
-			// select the portion of the value not typed by the user (so the next character will erase)
+		// select the portion of the value not typed by the user (so the next character will erase)
 			$(input).selection(previousValue.length, previousValue.length + sValue.length);
 		}
 	};
@@ -311,10 +310,10 @@ $.Autocompleter = function(input, options) {
 		clearTimeout(timeout);
 		stopLoading();
 		if (options.mustMatch) {
-			// call search and run callback
+		// call search and run callback
 			$input.search(
 				function (result){
-					// if no value found, clear the input box
+				// if no value found, clear the input box
 					if( !result ) {
 						if (options.multiple) {
 							var words = trimWords($input.val()).slice(0, -1);
@@ -345,10 +344,10 @@ $.Autocompleter = function(input, options) {
 		if (!options.matchCase)
 			term = term.toLowerCase();
 		var data = cache.load(term);
-		// recieve the cached data
+	// recieve the cached data
 		if (data && data.length) {
 			success(term, data);
-		// if an AJAX url has been supplied, try loading the data now
+	// if an AJAX url has been supplied, try loading the data now
 		} else if( (typeof options.url == "string") && (options.url.length > 0) ){
 			
 			var extraParams = {
@@ -359,9 +358,9 @@ $.Autocompleter = function(input, options) {
 			});
 			
 			$.ajax({
-				// try to leverage ajaxQueue plugin to abort previous requests
+			// try to leverage ajaxQueue plugin to abort previous requests
 				mode: "abort",
-				// limit abortion to this input
+			// limit abortion to this input
 				port: "autocomplete" + input.name,
 				dataType: options.dataType,
 				url: options.url,
@@ -376,7 +375,7 @@ $.Autocompleter = function(input, options) {
 				}
 			});
 		} else {
-			// if we have a failure, we need to empty the list -- this prevents the the [TAB] key from selecting the last successful match
+		// if we have a failure, we need to empty the list -- this prevents the the [TAB] key from selecting the last successful match
 			select.emptyList();
 			failure(term);
 		}
@@ -460,20 +459,20 @@ $.Autocompleter.Cache = function(options) {
 	
 	function populate(){
 		if( !options.data ) return false;
-		// track the matches
+	// track the matches
 		var stMatchSets = {},
 			nullData = 0;
 
-		// no url was specified, we need to adjust the cache length to make sure it fits the local data store
+	// no url was specified, we need to adjust the cache length to make sure it fits the local data store
 		if( !options.url ) options.cacheLength = 1;
 		
-		// track all options for minChars = 0
+	// track all options for minChars = 0
 		stMatchSets[""] = [];
 		
-		// loop through the array and create a lookup structure
+	// loop through the array and create a lookup structure
 		for ( var i = 0, ol = options.data.length; i < ol; i++ ) {
 			var rawValue = options.data[i];
-			// if rawValue is a string, make an array otherwise just reference the array
+		// if rawValue is a string, make an array otherwise just reference the array
 			rawValue = (typeof rawValue == "string") ? [rawValue] : rawValue;
 			
 			var value = options.formatMatch(rawValue, i+1, options.data.length);
@@ -481,36 +480,36 @@ $.Autocompleter.Cache = function(options) {
 				continue;
 				
 			var firstChar = value.charAt(0).toLowerCase();
-			// if no lookup array for this character exists, look it up now
+		// if no lookup array for this character exists, look it up now
 			if( !stMatchSets[firstChar] ) 
 				stMatchSets[firstChar] = [];
 
-			// if the match is a string
+		// if the match is a string
 			var row = {
 				value: value,
 				data: rawValue,
 				result: options.formatResult && options.formatResult(rawValue) || value
 			};
 			
-			// push the current match into the set list
+		// push the current match into the set list
 			stMatchSets[firstChar].push(row);
 
-			// keep track of minChars zero items
+		// keep track of minChars zero items
 			if ( nullData++ < options.max ) {
 				stMatchSets[""].push(row);
 			}
 		};
 
-		// add the data items to the cache
+	// add the data items to the cache
 		$.each(stMatchSets, function(i, value) {
-			// increase the cache size
+		// increase the cache size
 			options.cacheLength++;
-			// add to the cache
+		// add to the cache
 			add(i, value);
 		});
 	}
 	
-	// populate any existing data
+// populate any existing data
 	setTimeout(populate, 25);
 	
 	function flush(){
@@ -530,16 +529,16 @@ $.Autocompleter.Cache = function(options) {
 			 * to loop through all the data collections looking for matches
 			 */
 			if( !options.url && options.matchContains ){
-				// track all matches
+			// track all matches
 				var csub = [];
-				// loop through all the data grids for matches
+			// loop through all the data grids for matches
 				for( var k in data ){
-					// don't search through the stMatchSets[""] (minChars: 0) cache
-					// this prevents duplicates
+				// don't search through the stMatchSets[""] (minChars: 0) cache
+				// this prevents duplicates
 					if( k.length > 0 ){
 						var c = data[k];
 						$.each(c, function(i, x) {
-							// if we've got a match, add it to the array
+						// if we've got a match, add it to the array
 							if (matchSubset(x.value, q)) {
 								csub.push(x);
 							}
@@ -548,7 +547,7 @@ $.Autocompleter.Cache = function(options) {
 				}				
 				return csub;
 			} else 
-			// if the exact item exists, use it
+		// if the exact item exists, use it
 			if (data[q]){
 				return data[q];
 			} else
@@ -584,7 +583,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		element,
 		list;
 	
-	// Create results
+// Create results
 	function init() {
 		if (!needsInit)
 			return;
@@ -602,7 +601,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		}).click(function(event) {
 			$(target(event)).addClass(CLASSES.ACTIVE);
 			select();
-			// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
+		// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
 			input.focus();
 			return false;
 		}).mousedown(function() {
@@ -621,7 +620,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 		var element = event.target;
 		while(element && element.tagName != "LI")
 			element = element.parentNode;
-		// more fun with IE, sometimes event.target is empty, just ignore it then
+	// more fun with IE, sometimes event.target is empty, just ignore it then
 		if(!element)
 			return [];
 		return element;
@@ -676,7 +675,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 			listItems.slice(0, 1).addClass(CLASSES.ACTIVE);
 			active = 0;
 		}
-		// apply bgiframe if available
+	// apply bgiframe if available
 		if ( $.fn.bgiframe )
 			list.bgiframe();
 	}
@@ -741,7 +740,7 @@ $.Autocompleter.Select = function (options, input, select, config) {
 					var scrollbarsVisible = listHeight > options.scrollHeight;
                     list.css('height', scrollbarsVisible ? options.scrollHeight : listHeight );
 					if (!scrollbarsVisible) {
-						// IE doesn't recalculate width when scrollbar disappears
+					// IE doesn't recalculate width when scrollbar disappears
 						listItems.width( list.width() - parseInt(listItems.css("padding-left")) - parseInt(listItems.css("padding-right")) );
 					}
                 }
