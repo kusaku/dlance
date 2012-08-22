@@ -1,0 +1,5337 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DocBlox Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+       // add the sliding behaviour to the file navigation and show it
+       // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">system/database/DB_active_rec.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CCI_DB_active_record">\CI_DB_active_record</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\CI_DB_active_record" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\CI_DB_active_record<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>CodeIgniter\Drivers</small><p class="short-description">Active Record Class</p>
+<div class="long-description"><p>This is the platform-independent base Active Record implementation class.</p>
+</div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_system_database_DB_driver.html#%5CCI_DB_driver">\CI_DB_driver</a></dd>
+<dt>Author</dt>
+<dd>ExpressionEngine Dev Team
+         
+    </dd>
+<dt>Category</dt>
+<dd>Database
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://codeigniter.com/user_guide/database/">http://codeigniter.com/user_guide/database/</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\CI_DB_active_record::$CACHE" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$CACHE</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24CACHE">\CI_DB_driver::$CACHE</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24CACHE">\CI_DB_driver::$CACHE</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$_protect_identifiers" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$_protect_identifiers</span>= 'TRUE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24_protect_identifiers">\CI_DB_driver::$_protect_identifiers</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>TRUE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24_protect_identifiers">\CI_DB_driver::$_protect_identifiers</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$_reserved_identifiers" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$_reserved_identifiers</span>= 'array('*')'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24_reserved_identifiers">\CI_DB_driver::$_reserved_identifiers</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array('*')</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24_reserved_identifiers">\CI_DB_driver::$_reserved_identifiers</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$_trans_depth" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$_trans_depth</span>= '0'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24_trans_depth">\CI_DB_driver::$_trans_depth</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24_trans_depth">\CI_DB_driver::$_trans_depth</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$_trans_status" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$_trans_status</span>= 'TRUE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24_trans_status">\CI_DB_driver::$_trans_status</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>TRUE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24_trans_status">\CI_DB_driver::$_trans_status</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_aliased_tables" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_aliased_tables</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_exists" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_exists</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_from" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_from</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_groupby" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_groupby</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_having" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_having</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_join" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_join</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_like" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_like</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_orderby" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_orderby</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_select" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_select</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_set" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_set</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_cache_where" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_cache_where</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_caching" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_caching</span>= 'FALSE'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_distinct" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_distinct</span>= 'FALSE'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_from" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_from</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_groupby" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_groupby</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_having" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_having</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_join" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_join</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_like" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_like</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_limit" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_limit</span>= 'FALSE'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_offset" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_offset</span>= 'FALSE'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_order" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_order</span>= 'FALSE'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_orderby" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_orderby</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_select" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_select</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_set" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_set</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_store_array" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_store_array</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_where" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_where</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$ar_wherein" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$ar_wherein</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$autoinit" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$autoinit</span>= 'TRUE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24autoinit">\CI_DB_driver::$autoinit</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>TRUE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24autoinit">\CI_DB_driver::$autoinit</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$benchmark" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$benchmark</span>= '0'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24benchmark">\CI_DB_driver::$benchmark</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24benchmark">\CI_DB_driver::$benchmark</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$bind_marker" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$bind_marker</span>= ''?''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24bind_marker">\CI_DB_driver::$bind_marker</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>'?'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24bind_marker">\CI_DB_driver::$bind_marker</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$cache_autodel" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$cache_autodel</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24cache_autodel">\CI_DB_driver::$cache_autodel</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24cache_autodel">\CI_DB_driver::$cache_autodel</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$cache_on" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$cache_on</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24cache_on">\CI_DB_driver::$cache_on</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24cache_on">\CI_DB_driver::$cache_on</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$cachedir" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$cachedir</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24cachedir">\CI_DB_driver::$cachedir</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24cachedir">\CI_DB_driver::$cachedir</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$char_set" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$char_set</span>= ''utf8''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24char_set">\CI_DB_driver::$char_set</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>'utf8'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24char_set">\CI_DB_driver::$char_set</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$conn_id" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$conn_id</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24conn_id">\CI_DB_driver::$conn_id</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24conn_id">\CI_DB_driver::$conn_id</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$curs_id" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$curs_id</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24curs_id">\CI_DB_driver::$curs_id</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24curs_id">\CI_DB_driver::$curs_id</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$data_cache" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$data_cache</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24data_cache">\CI_DB_driver::$data_cache</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24data_cache">\CI_DB_driver::$data_cache</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$database" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$database</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24database">\CI_DB_driver::$database</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24database">\CI_DB_driver::$database</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$db_debug" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$db_debug</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24db_debug">\CI_DB_driver::$db_debug</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24db_debug">\CI_DB_driver::$db_debug</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$dbcollat" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$dbcollat</span>= ''utf8_general_ci''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24dbcollat">\CI_DB_driver::$dbcollat</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>'utf8_general_ci'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24dbcollat">\CI_DB_driver::$dbcollat</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$dbdriver" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$dbdriver</span>= ''mysql''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24dbdriver">\CI_DB_driver::$dbdriver</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>'mysql'</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24dbdriver">\CI_DB_driver::$dbdriver</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$dbprefix" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$dbprefix</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24dbprefix">\CI_DB_driver::$dbprefix</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24dbprefix">\CI_DB_driver::$dbprefix</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$hostname" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$hostname</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24hostname">\CI_DB_driver::$hostname</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24hostname">\CI_DB_driver::$hostname</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$limit_used" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$limit_used</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24limit_used">\CI_DB_driver::$limit_used</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24limit_used">\CI_DB_driver::$limit_used</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$password" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$password</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24password">\CI_DB_driver::$password</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24password">\CI_DB_driver::$password</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$pconnect" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$pconnect</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24pconnect">\CI_DB_driver::$pconnect</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24pconnect">\CI_DB_driver::$pconnect</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$port" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$port</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24port">\CI_DB_driver::$port</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24port">\CI_DB_driver::$port</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$queries" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$queries</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24queries">\CI_DB_driver::$queries</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24queries">\CI_DB_driver::$queries</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$query_count" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$query_count</span>= '0'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24query_count">\CI_DB_driver::$query_count</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24query_count">\CI_DB_driver::$query_count</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$query_times" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$query_times</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24query_times">\CI_DB_driver::$query_times</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24query_times">\CI_DB_driver::$query_times</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$result_id" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$result_id</span>= 'FALSE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24result_id">\CI_DB_driver::$result_id</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>FALSE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24result_id">\CI_DB_driver::$result_id</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$save_queries" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$save_queries</span>= 'TRUE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24save_queries">\CI_DB_driver::$save_queries</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>TRUE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24save_queries">\CI_DB_driver::$save_queries</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$stmt_id" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$stmt_id</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24stmt_id">\CI_DB_driver::$stmt_id</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24stmt_id">\CI_DB_driver::$stmt_id</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$swap_pre" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$swap_pre</span>= ''''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24swap_pre">\CI_DB_driver::$swap_pre</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>''</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24swap_pre">\CI_DB_driver::$swap_pre</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$trans_enabled" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$trans_enabled</span>= 'TRUE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24trans_enabled">\CI_DB_driver::$trans_enabled</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>TRUE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24trans_enabled">\CI_DB_driver::$trans_enabled</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$trans_strict" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$trans_strict</span>= 'TRUE'
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24trans_strict">\CI_DB_driver::$trans_strict</a></small>
+</div>
+<div class="code-tabs">
+<strong>Default value</strong><code>TRUE</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24trans_strict">\CI_DB_driver::$trans_strict</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::$username" class="anchor"></a><div class="property public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$username</span>= ''
+                </code><div class="description">
+<span class="attribute">inherited</span><small>Inherited from:
+                        <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24username">\CI_DB_driver::$username</a></small>
+</div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_system_database_DB_driver.html#%5CCI_DB_driver::%24username">\CI_DB_driver::$username</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\CI_DB_active_record::CI_DB_driver()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">CI_DB_driver</span><span class="nb-faded-text">(
+           $params
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Constructor.  Accepts one parameter containing the database
+connection settings.</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::CI_DB_driver()">\CI_DB_driver::CI_DB_driver()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$params</th>
+<td></td>
+<td><em><p>array</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_cache_init()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_cache_init</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Initialize the Cache Class</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::_cache_init()">\CI_DB_driver::_cache_init()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_compile_select()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_compile_select</span><span class="nb-faded-text">(
+           $select_override
+              =
+              FALSE
+          )
+        </span>
+        :
+          \string</code><div class="description"><p class="short_description">Compile the SELECT statement</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a query string based on which functions were used.
+Should not be called directly.  The get() function calls it.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$select_override</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_create_alias_from_table()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_create_alias_from_table</span><span class="nb-faded-text">(
+           $item
+          )
+        </span>
+        :
+          \string</code><div class="description"><p class="short_description">Determines the alias name based on the table</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$item</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_has_operator()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_has_operator</span><span class="nb-faded-text">(
+           $str
+          )
+        </span>
+        :
+          \bool</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Tests whether the string has an SQL operator</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::_has_operator()">\CI_DB_driver::_has_operator()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_having()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_having</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              '',  $type
+              =
+              'AND ',  $escape
+              =
+              TRUE
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Sets the HAVING values</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Called by having() or or_having()</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_like()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_like</span><span class="nb-faded-text">(
+           $field,  $match
+              =
+              '',  $type
+              =
+              'AND ',  $side
+              =
+              'both',  $not
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Like</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Called by like() or orlike()</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$match</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$side</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$not</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_max_min_avg_sum()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_max_min_avg_sum</span><span class="nb-faded-text">(
+          \string $select
+              =
+              '', \string $alias
+              =
+              '',  $type
+              =
+              'MAX'
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Processing Function for the four functions above:</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>select_max()
+    select_min()
+    select_avg()
+ select_sum()</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$select</th>
+<td>\string</td>
+<td><em><p>the field</p></em></td>
+</tr>
+<tr>
+<th>$alias</th>
+<td>\string</td>
+<td><em><p>an alias</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_merge_cache()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_merge_cache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description"><p class="short_description">Merge Cache</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When called, this function merges any cached AR arrays with
+locally called ones.</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_object_to_array()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_object_to_array</span><span class="nb-faded-text">(
+           $object
+          )
+        </span>
+        :
+          \array</code><div class="description"><p class="short_description">Object to Array</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Takes an object as input and converts the class variables to array key/vals</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$object</th>
+<td></td>
+<td><em><p>object</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_protect_identifiers()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_protect_identifiers</span><span class="nb-faded-text">(
+           $item,  $prefix_single
+              =
+              FALSE,  $protect_identifiers
+              =
+              NULL,  $field_exists
+              =
+              TRUE
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Protect Identifiers</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::_protect_identifiers()">\CI_DB_driver::_protect_identifiers()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This function is used extensively by the Active Record class, and by
+a couple functions in this class.
+It takes a column or table name (optionally with an alias) and inserts
+the table prefix onto it.  Some logic is necessary in order to deal with
+column names that include the path.  Consider a query like this:</p>
+
+<p>SELECT * FROM hostname.database.table.column AS c FROM hostname.database.table</p>
+
+<p>Or a query with aliasing:</p>
+
+<p>SELECT m.member_id, m.member_name FROM members AS m</p>
+
+<p>Since the column name can include up to four segments (host, DB, table, column)
+or also have an alias prefix, we need to do a bit of work to figure this out and
+insert the table prefix (if it exists) in the proper position, and escape only
+the correct identifiers.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$item</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$prefix_single</th>
+<td></td>
+<td><em><p>bool</p></em></td>
+</tr>
+<tr>
+<th>$protect_identifiers</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$field_exists</th>
+<td></td>
+<td><em><p>bool</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_reset_run()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_reset_run</span><span class="nb-faded-text">(
+          \array $ar_reset_items
+          )
+        </span>
+        :
+          \void</code><div class="description"><p class="short_description">Resets the active record values.  Called by the get() function</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$ar_reset_items</th>
+<td>\array</td>
+<td><em><p>An array of fields to reset</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_reset_select()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_reset_select</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description"><p class="short_description">Resets the active record values.  Called by the get() function</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_reset_write()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_reset_write</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description"><p class="short_description">Resets the active record "write" values.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Called by the insert() update() and delete() functions</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_track_aliases()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_track_aliases</span><span class="nb-faded-text">(
+          \string $table
+          )
+        </span>
+        :
+          \string</code><div class="description"><p class="short_description">Track Aliases</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Used to track SQL statements written with aliased tables.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>The table to inspect</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_where()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_where</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              NULL,  $type
+              =
+              'AND ',  $escape
+              =
+              NULL
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Where</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Called by where() or orwhere()</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::_where_in()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_where_in</span><span class="nb-faded-text">(
+          \string $key
+              =
+              NULL, \array $values
+              =
+              NULL, \boolean $not
+              =
+              FALSE,  $type
+              =
+              'AND '
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Where_in</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Called by where_in, where_in_or, where_not_in, where_not_in_or</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>\string</td>
+<td><em><p>The field to search</p></em></td>
+</tr>
+<tr>
+<th>$values</th>
+<td>\array</td>
+<td><em><p>The values searched on</p></em></td>
+</tr>
+<tr>
+<th>$not</th>
+<td>\boolean</td>
+<td><em><p>If the statement would be IN or NOT IN</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::cache_delete()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">cache_delete</span><span class="nb-faded-text">(
+           $segment_one
+              =
+              '',  $segment_two
+              =
+              ''
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Delete the cache files associated with a particular URI</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::cache_delete()">\CI_DB_driver::cache_delete()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$segment_one</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$segment_two</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::cache_delete_all()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">cache_delete_all</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Delete All cache files</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::cache_delete_all()">\CI_DB_driver::cache_delete_all()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::cache_off()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">cache_off</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Disable Query Caching</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::cache_off()">\CI_DB_driver::cache_off()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::cache_on()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">cache_on</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Enable Query Caching</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::cache_on()">\CI_DB_driver::cache_on()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::cache_set_path()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">cache_set_path</span><span class="nb-faded-text">(
+          \string $path
+              =
+              ''
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Set Cache Directory Path</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::cache_set_path()">\CI_DB_driver::cache_set_path()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>\string</td>
+<td><em><p>the path to the cache directory</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::call_function()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">call_function</span><span class="nb-faded-text">(
+          \string $function
+          )
+        </span>
+        :
+          \mixed</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Enables a native PHP function to be run, using a platform agnostic wrapper.</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::call_function()">\CI_DB_driver::call_function()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$function</th>
+<td>\string</td>
+<td><em><p>the function name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\mixed</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::close()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">close</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Close DB Connection</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::close()">\CI_DB_driver::close()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::compile_binds()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">compile_binds</span><span class="nb-faded-text">(
+          \string $sql, \array $binds
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Compile Bindings</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::compile_binds()">\CI_DB_driver::compile_binds()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sql</th>
+<td>\string</td>
+<td><em><p>the sql statement</p></em></td>
+</tr>
+<tr>
+<th>$binds</th>
+<td>\array</td>
+<td><em><p>an array of bind data</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::count_all_results()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">count_all_results</span><span class="nb-faded-text">(
+           $table
+              =
+              ''
+          )
+        </span>
+        :
+          \string</code><div class="description"><p class="short_description">"Count All Results" query</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a platform-specific query string that counts all records
+returned by an Active Record query.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::db_set_charset()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">db_set_charset</span><span class="nb-faded-text">(
+           $charset,  $collation
+          )
+        </span>
+        :
+          \resource</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Set client character set</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::db_set_charset()">\CI_DB_driver::db_set_charset()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$charset</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$collation</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\resource</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::dbprefix()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">dbprefix</span><span class="nb-faded-text">(
+          \string $table
+              =
+              ''
+          )
+        </span>
+        :
+          \string</code><div class="description"><p class="short_description">DB Prefix</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Prepends a database prefix if one exists in configuration</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::delete()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">delete</span><span class="nb-faded-text">(
+          \mixed $table
+              =
+              '', \mixed $where
+              =
+              '', \mixed $limit
+              =
+              NULL,  $reset_data
+              =
+              TRUE
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Delete</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compiles a delete string and runs the query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\mixed</td>
+<td><em><p>the table(s) to delete from. String or array</p>
+</em></td>
+</tr>
+<tr>
+<th>$where</th>
+<td>\mixed</td>
+<td><em><p>the where clause</p></em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>\mixed</td>
+<td><em><p>the limit clause</p></em></td>
+</tr>
+<tr>
+<th>$reset_data</th>
+<td></td>
+<td><em><p>boolean</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::display_error()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">display_error</span><span class="nb-faded-text">(
+          \string $error
+              =
+              '', \string $swap
+              =
+              '', \boolean $native
+              =
+              FALSE
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Display an error message</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::display_error()">\CI_DB_driver::display_error()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$error</th>
+<td>\string</td>
+<td><em><p>the error message</p></em></td>
+</tr>
+<tr>
+<th>$swap</th>
+<td>\string</td>
+<td><em><p>any "swap" values</p>
+</em></td>
+</tr>
+<tr>
+<th>$native</th>
+<td>\boolean</td>
+<td><em><p>whether to localize the message</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td>sends the application/error_db.php template</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::distinct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">distinct</span><span class="nb-faded-text">(
+           $val
+              =
+              TRUE
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">DISTINCT</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Sets a flag which tells the query string compiler to add DISTINCT</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$val</th>
+<td></td>
+<td><em><p>bool</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::elapsed_time()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">elapsed_time</span><span class="nb-faded-text">(
+          \integer $decimals
+              =
+              6
+          )
+        </span>
+        :
+          \integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Calculate the aggregate query elapsed time</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::elapsed_time()">\CI_DB_driver::elapsed_time()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$decimals</th>
+<td>\integer</td>
+<td><em><p>The number of decimal places</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\integer</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::empty_table()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">empty_table</span><span class="nb-faded-text">(
+          \string $table
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Empty Table</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compiles a delete string and runs "DELETE FROM table"</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table to empty</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::escape()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">escape</span><span class="nb-faded-text">(
+           $str
+          )
+        </span>
+        :
+          \integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">"Smart" Escape String</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::escape()">\CI_DB_driver::escape()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Escapes data based on type
+Sets boolean and null types</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$str</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\integer</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::field_data()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">field_data</span><span class="nb-faded-text">(
+          \string $table
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns an object with field data</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::field_data()">\CI_DB_driver::field_data()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::field_exists()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">field_exists</span><span class="nb-faded-text">(
+           $field_name,  $table_name
+          )
+        </span>
+        :
+          \boolean</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Determine if a particular field exists</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::field_exists()">\CI_DB_driver::field_exists()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field_name</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$table_name</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\boolean</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::flush_cache()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">flush_cache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description"><p class="short_description">Flush Cache</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Empties the AR cache</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::from()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">from</span><span class="nb-faded-text">(
+          \mixed $from
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">From</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates the FROM portion of the query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$from</th>
+<td>\mixed</td>
+<td><em><p>can be a string or array</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::get()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get</span><span class="nb-faded-text">(
+          \string $table
+              =
+              '', \string $limit
+              =
+              null, \string $offset
+              =
+              null
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Get</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compiles the select statement based on the other functions called
+and runs the query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table</p></em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>\string</td>
+<td><em><p>the limit clause</p></em></td>
+</tr>
+<tr>
+<th>$offset</th>
+<td>\string</td>
+<td><em><p>the offset clause</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::get_where()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">get_where</span><span class="nb-faded-text">(
+          \string $table
+              =
+              '', \string $where
+              =
+              null, \string $limit
+              =
+              null,  $offset
+              =
+              null
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Get_Where</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Allows the where clause, limit and offset to be added directly</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the where clause</p></em></td>
+</tr>
+<tr>
+<th>$where</th>
+<td>\string</td>
+<td><em><p>the limit clause</p></em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td>\string</td>
+<td><em><p>the offset clause</p></em></td>
+</tr>
+<tr>
+<th>$offset</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::getwhere()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getwhere</span><span class="nb-faded-text">(
+           $table
+              =
+              '',  $where
+              =
+              null,  $limit
+              =
+              null,  $offset
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">getwhere() is an alias of get_where()
+this function is here for backwards compatibility, as
+getwhere() has been deprecated</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$where</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$offset</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::group_by()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">group_by</span><span class="nb-faded-text">(
+           $by
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">GROUP BY</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$by</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::groupby()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">groupby</span><span class="nb-faded-text">(
+           $by
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">groupby() is an alias of group_by()
+this function is here for backwards compatibility, as
+groupby() has been deprecated</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$by</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::having()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">having</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              '',  $escape
+              =
+              TRUE
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Sets the HAVING value</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Separates multiple calls with AND</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::insert()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">insert</span><span class="nb-faded-text">(
+          \string $table
+              =
+              '', \array $set
+              =
+              NULL
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Insert</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compiles an insert string and runs the query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table to retrieve the results from</p></em></td>
+</tr>
+<tr>
+<th>$set</th>
+<td>\array</td>
+<td><em><p>an associative array of insert values</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::insert_string()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">insert_string</span><span class="nb-faded-text">(
+          \string $table, \array $data
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Generate an insert string</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::insert_string()">\CI_DB_driver::insert_string()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table upon which the query will be performed</p></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td>\array</td>
+<td><em><p>an associative array data of key/values</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::is_write_type()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">is_write_type</span><span class="nb-faded-text">(
+          \string $sql
+          )
+        </span>
+        :
+          \boolean</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Determines if a query is a "write" type.</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::is_write_type()">\CI_DB_driver::is_write_type()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sql</th>
+<td>\string</td>
+<td><em><p>An SQL query string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\boolean</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::join()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">join</span><span class="nb-faded-text">(
+           $table, \string $cond, \string $type
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Join</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates the JOIN portion of the query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$cond</th>
+<td>\string</td>
+<td><em><p>the join condition</p></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td>\string</td>
+<td><em><p>the type of join</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::last_query()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">last_query</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns the last query that was executed</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::last_query()">\CI_DB_driver::last_query()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::like()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">like</span><span class="nb-faded-text">(
+           $field,  $match
+              =
+              '',  $side
+              =
+              'both'
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Like</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a %LIKE% portion of the query. Separates
+multiple calls with AND</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$match</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$side</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::limit()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">limit</span><span class="nb-faded-text">(
+          \integer $value, \integer $offset
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Sets the LIMIT value</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$value</th>
+<td>\integer</td>
+<td><em><p>the limit value</p></em></td>
+</tr>
+<tr>
+<th>$offset</th>
+<td>\integer</td>
+<td><em><p>the offset value</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::list_fields()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">list_fields</span><span class="nb-faded-text">(
+          \string $table
+              =
+              ''
+          )
+        </span>
+        :
+          \array</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Fetch MySQL Field Names</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::list_fields()">\CI_DB_driver::list_fields()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::list_tables()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">list_tables</span><span class="nb-faded-text">(
+           $constrain_by_prefix
+              =
+              FALSE
+          )
+        </span>
+        :
+          \array</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns an array of table names</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::list_tables()">\CI_DB_driver::list_tables()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$constrain_by_prefix</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\array</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::load_rdriver()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">load_rdriver</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Load the result drivers</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::load_rdriver()">\CI_DB_driver::load_rdriver()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td>the name of the result class</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::not_like()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">not_like</span><span class="nb-faded-text">(
+           $field,  $match
+              =
+              '',  $side
+              =
+              'both'
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Not Like</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a NOT LIKE portion of the query. Separates
+multiple calls with AND</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$match</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$side</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::offset()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">offset</span><span class="nb-faded-text">(
+          \integer $offset
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Sets the OFFSET value</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$offset</th>
+<td>\integer</td>
+<td><em><p>the offset value</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::or_having()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">or_having</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              '',  $escape
+              =
+              TRUE
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Sets the OR HAVING value</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Separates multiple calls with OR</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::or_like()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">or_like</span><span class="nb-faded-text">(
+           $field,  $match
+              =
+              '',  $side
+              =
+              'both'
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">OR Like</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a %LIKE% portion of the query. Separates
+multiple calls with OR</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$match</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$side</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::or_not_like()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">or_not_like</span><span class="nb-faded-text">(
+           $field,  $match
+              =
+              '',  $side
+              =
+              'both'
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">OR Not Like</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a NOT LIKE portion of the query. Separates
+multiple calls with OR</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$match</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$side</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::or_where()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">or_where</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              NULL,  $escape
+              =
+              TRUE
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">OR Where</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates the WHERE portion of the query. Separates
+multiple calls with OR</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::or_where_in()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">or_where_in</span><span class="nb-faded-text">(
+          \string $key
+              =
+              NULL, \array $values
+              =
+              NULL
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Where_in_or</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a WHERE field IN ('item', 'item') SQL query joined with
+OR if appropriate</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>\string</td>
+<td><em><p>The field to search</p></em></td>
+</tr>
+<tr>
+<th>$values</th>
+<td>\array</td>
+<td><em><p>The values searched on</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::or_where_not_in()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">or_where_not_in</span><span class="nb-faded-text">(
+          \string $key
+              =
+              NULL, \array $values
+              =
+              NULL
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Where_not_in_or</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a WHERE field NOT IN ('item', 'item') SQL query joined
+with OR if appropriate</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>\string</td>
+<td><em><p>The field to search</p></em></td>
+</tr>
+<tr>
+<th>$values</th>
+<td>\array</td>
+<td><em><p>The values searched on</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::order_by()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">order_by</span><span class="nb-faded-text">(
+           $orderby, \string $direction
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Sets the ORDER BY value</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orderby</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$direction</th>
+<td>\string</td>
+<td><em><p>direction: asc or desc</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::orderby()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">orderby</span><span class="nb-faded-text">(
+           $orderby,  $direction
+              =
+              ''
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">orderby() is an alias of order_by()
+this function is here for backwards compatibility, as
+orderby() has been deprecated</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$orderby</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$direction</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::orhaving()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">orhaving</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              '',  $escape
+              =
+              TRUE
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">orhaving() is an alias of or_having()
+this function is here for backwards compatibility, as
+orhaving() has been deprecated</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::orlike()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">orlike</span><span class="nb-faded-text">(
+           $field,  $match
+              =
+              '',  $side
+              =
+              'both'
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">orlike() is an alias of or_like()
+this function is here for backwards compatibility, as
+orlike() has been deprecated</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$field</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$match</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$side</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::orwhere()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">orwhere</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              NULL,  $escape
+              =
+              TRUE
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">orwhere() is an alias of or_where()
+this function is here for backwards compatibility, as
+orwhere() has been deprecated</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::platform()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">platform</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">The name of the platform in use (mysql, mssql, etc...)</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::platform()">\CI_DB_driver::platform()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::primary()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">primary</span><span class="nb-faded-text">(
+          \string $table
+              =
+              ''
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Primary</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::primary()">\CI_DB_driver::primary()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Retrieves the primary key.  It assumes that the row in the first
+position is the primary key</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::protect_identifiers()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">protect_identifiers</span><span class="nb-faded-text">(
+          \mixed $item,  $prefix_single
+              =
+              FALSE
+          )
+        </span>
+        :
+          \mixed</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Protect Identifiers</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::protect_identifiers()">\CI_DB_driver::protect_identifiers()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>This function adds backticks if appropriate based on db type</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$item</th>
+<td>\mixed</td>
+<td><em><p>the item to escape</p></em></td>
+</tr>
+<tr>
+<th>$prefix_single</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\mixed</td>
+<td>the item with backticks</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::query()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">query</span><span class="nb-faded-text">(
+          \string $sql, \array $binds
+              =
+              FALSE,  $return_object
+              =
+              TRUE
+          )
+        </span>
+        :
+          \mixed</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Execute the query</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::query()">\CI_DB_driver::query()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Accepts an SQL string as input and returns a result object upon
+successful execution of a "read" type query.  Returns boolean TRUE
+upon successful execution of a "write" type query. Returns boolean
+FALSE upon failure, and if the $db_debug variable is set to TRUE
+will raise an error.</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sql</th>
+<td>\string</td>
+<td><em><p>An SQL query string</p></em></td>
+</tr>
+<tr>
+<th>$binds</th>
+<td>\array</td>
+<td><em><p>An array of binding data</p></em></td>
+</tr>
+<tr>
+<th>$return_object</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\mixed</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::select()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">select</span><span class="nb-faded-text">(
+           $select
+              =
+              '*',  $escape
+              =
+              NULL
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Select</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates the SELECT portion of the query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$select</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::select_avg()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">select_avg</span><span class="nb-faded-text">(
+          \string $select
+              =
+              '', \string $alias
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Select Average</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a SELECT AVG(field) portion of a query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$select</th>
+<td>\string</td>
+<td><em><p>the field</p></em></td>
+</tr>
+<tr>
+<th>$alias</th>
+<td>\string</td>
+<td><em><p>an alias</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::select_max()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">select_max</span><span class="nb-faded-text">(
+          \string $select
+              =
+              '', \string $alias
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Select Max</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a SELECT MAX(field) portion of a query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$select</th>
+<td>\string</td>
+<td><em><p>the field</p></em></td>
+</tr>
+<tr>
+<th>$alias</th>
+<td>\string</td>
+<td><em><p>an alias</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::select_min()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">select_min</span><span class="nb-faded-text">(
+          \string $select
+              =
+              '', \string $alias
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Select Min</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a SELECT MIN(field) portion of a query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$select</th>
+<td>\string</td>
+<td><em><p>the field</p></em></td>
+</tr>
+<tr>
+<th>$alias</th>
+<td>\string</td>
+<td><em><p>an alias</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::select_sum()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">select_sum</span><span class="nb-faded-text">(
+          \string $select
+              =
+              '', \string $alias
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Select Sum</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a SELECT SUM(field) portion of a query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$select</th>
+<td>\string</td>
+<td><em><p>the field</p></em></td>
+</tr>
+<tr>
+<th>$alias</th>
+<td>\string</td>
+<td><em><p>an alias</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::set()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">set</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              '',  $escape
+              =
+              TRUE
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">The "set" function.  Allows key/value pairs to be set for inserting or updating</p></div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em><p>string</p></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em><p>boolean</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::simple_query()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">simple_query</span><span class="nb-faded-text">(
+          \string $sql
+          )
+        </span>
+        :
+          \mixed</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Simple Query
+This is a simplified version of the query() function.  Internally
+we only use it when running transaction commands since they do
+not require all the features of the main query() function.</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::simple_query()">\CI_DB_driver::simple_query()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sql</th>
+<td>\string</td>
+<td><em><p>the sql query</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\mixed</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::start_cache()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">start_cache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description"><p class="short_description">Start Cache</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Starts AR caching</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::stop_cache()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">stop_cache</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description"><p class="short_description">Stop Cache</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Stops AR caching</p>
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::table_exists()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">table_exists</span><span class="nb-faded-text">(
+           $table_name
+          )
+        </span>
+        :
+          \boolean</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Determine if a particular table exists</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::table_exists()">\CI_DB_driver::table_exists()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table_name</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\boolean</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::total_queries()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">total_queries</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \integer</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns the total number of queries</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::total_queries()">\CI_DB_driver::total_queries()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\integer</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::trans_complete()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">trans_complete</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \bool</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Complete Transaction</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::trans_complete()">\CI_DB_driver::trans_complete()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::trans_off()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">trans_off</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Disable Transactions
+This permits transactions to be disabled at run-time.</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::trans_off()">\CI_DB_driver::trans_off()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::trans_start()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">trans_start</span><span class="nb-faded-text">(
+           $test_mode
+              =
+              FALSE
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Start Transaction</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::trans_start()">\CI_DB_driver::trans_start()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$test_mode</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::trans_status()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">trans_status</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \bool</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Lets you retrieve the transaction flag to determine if it has failed</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::trans_status()">\CI_DB_driver::trans_status()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\bool</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::trans_strict()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">trans_strict</span><span class="nb-faded-text">(
+           $mode
+              =
+              TRUE
+          )
+        </span>
+        :
+          \void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Enable/disable Transaction Strict Mode
+When strict mode is enabled, if you are running multiple groups of
+transactions, if one group fails all groups will be rolled back.</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::trans_strict()">\CI_DB_driver::trans_strict()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>If strict mode is disabled, each group is treated autonomously, meaning
+a failure of one group will not affect any others</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mode</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::truncate()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">truncate</span><span class="nb-faded-text">(
+          \string $table
+              =
+              ''
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Truncate</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compiles a truncate string and runs the query
+If the database does not support the truncate() command
+This function maps to "DELETE FROM table"</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table to truncate</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::update()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">update</span><span class="nb-faded-text">(
+          \string $table
+              =
+              '', \array $set
+              =
+              NULL, \mixed $where
+              =
+              NULL,  $limit
+              =
+              NULL
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Update</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Compiles an update string and runs the query</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table to retrieve the results from</p></em></td>
+</tr>
+<tr>
+<th>$set</th>
+<td>\array</td>
+<td><em><p>an associative array of update values</p></em></td>
+</tr>
+<tr>
+<th>$where</th>
+<td>\mixed</td>
+<td><em><p>the where clause</p></em></td>
+</tr>
+<tr>
+<th>$limit</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::update_string()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">update_string</span><span class="nb-faded-text">(
+          \string $table, \array $data, \mixed $where
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Generate an update string</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::update_string()">\CI_DB_driver::update_string()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$table</th>
+<td>\string</td>
+<td><em><p>the table upon which the query will be performed</p></em></td>
+</tr>
+<tr>
+<th>$data</th>
+<td>\array</td>
+<td><em><p>an associative array data of key/values</p>
+</em></td>
+</tr>
+<tr>
+<th>$where</th>
+<td>\mixed</td>
+<td><em><p>the "where" statement</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::version()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">version</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \string</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Database Version Number.  Returns a string containing the
+version of the database being used</p>
+<small>Inherited from:
+                    <a href="db_system_database_DB_driver.html#%5CCI_DB_driver::version()">\CI_DB_driver::version()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description">
+</div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::where()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">where</span><span class="nb-faded-text">(
+           $key,  $value
+              =
+              NULL,  $escape
+              =
+              TRUE
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Where</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates the WHERE portion of the query. Separates
+multiple calls with AND</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$value</th>
+<td></td>
+<td><em><p>mixed</p></em></td>
+</tr>
+<tr>
+<th>$escape</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::where_in()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">where_in</span><span class="nb-faded-text">(
+          \string $key
+              =
+              NULL, \array $values
+              =
+              NULL
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Where_in</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a WHERE field IN ('item', 'item') SQL query joined with
+AND if appropriate</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>\string</td>
+<td><em><p>The field to search</p></em></td>
+</tr>
+<tr>
+<th>$values</th>
+<td>\array</td>
+<td><em><p>The values searched on</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\CI_DB_active_record::where_not_in()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">where_not_in</span><span class="nb-faded-text">(
+          \string $key
+              =
+              NULL, \array $values
+              =
+              NULL
+          )
+        </span>
+        :
+          \object</code><div class="description"><p class="short_description">Where_not_in</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Generates a WHERE field NOT IN ('item', 'item') SQL query joined
+with AND if appropriate</p>
+</div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td>\string</td>
+<td><em><p>The field to search</p></em></td>
+</tr>
+<tr>
+<th>$values</th>
+<td>\array</td>
+<td><em><p>The values searched on</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\object</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.16.0</a>.
+    </small></body></html>
