@@ -31,9 +31,9 @@ function send_report(id)
 
 	var dataString = 'id='+ id +'&text='+ text;
 
-    if(text.length > 256)
+		if(text.length > 256)
 	{
-        alert('Текст сообщения не должно содержать больше 256 символов');
+				alert('Текст сообщения не должно содержать больше 256 символов');
 
 		return false;
 	}
@@ -63,7 +63,7 @@ function ban(id)
 
 	if(text.length > 256)
 	{
-        alert('Текст сообщения не должно содержать больше 256 символов');
+				alert('Текст сообщения не должно содержать больше 256 символов');
 
 		return false;
 	}
@@ -172,8 +172,8 @@ function addcart(id, kind)
 							<p><span>Рейтинг:</span> <?=$rating?><br/>
 							<? if( $status_id == 1 ): ?>
 								<? if( $this->user_id != $user_id ): ?>
-									<? if( $sales == 0 ): ?><a href="#"  onclick="addcart(<?=$id?>, 2)" class="buyout"><span>Выкупить за <? if( $sales > 0 ): ?> <? endif; ?><strong><?=$price_2?> руб.</span></a><span>Скачиваний:</span> 0</p><? endif; ?>
-									<p><a href="#"  onclick="addcart(<?=$id?>, 1)" class="buy"><span>Купить</span></a><span>Цена:</span> <? if( $status_id == 2 ): ?> <? endif; ?><strong><?=$price_1?> руб.</p><? endif; ?>
+									<? if( $sales == 0 ): ?><a href="#"	onclick="addcart(<?=$id?>, 2)" class="buyout"><span>Выкупить за <? if( $sales > 0 ): ?> <? endif; ?><strong><?=$price_2?> руб.</span></a><span>Скачиваний:</span> 0</p><? endif; ?>
+									<p><a href="#"	onclick="addcart(<?=$id?>, 1)" class="buy"><span>Купить</span></a><span>Цена:</span> <? if( $status_id == 2 ): ?> <? endif; ?><strong><?=$price_1?> руб.</p><? endif; ?>
 									<? endif; ?>
 							<p class="moreInfo"><a href="#">Дополнительная информация:</a></p>
 						</div>

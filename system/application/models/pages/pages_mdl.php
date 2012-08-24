@@ -4,7 +4,7 @@ class Pages_mdl extends Model
 {
 	function get($name)
 	{
-	    $this->db->where('name', $name);
+			$this->db->where('name', $name);
 
 		$this->db->select('*');
 

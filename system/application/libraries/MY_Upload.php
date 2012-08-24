@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php	if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * CodeIgniter
  *
@@ -38,7 +38,7 @@ class MY_Upload extends CI_Upload {
 		if( in_array($file, $this->allowed_types) )
 		{
 			return TRUE;
-		}   
+		}	 
 
 		if (count($this->allowed_types) == 0 OR ! is_array($this->allowed_types))
 		{

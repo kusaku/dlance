@@ -18,11 +18,11 @@
 								<th scope="col">Дата регистрации</th>
 								<th scope="col">Последний визит</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/users/?order_field=balance<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'balance' and  $input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/users/?order_field=balance&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'balance' and  $input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/users/?order_field=balance<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'balance' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/users/?order_field=balance&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'balance' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
 									Баланс
 								</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/users/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/users/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/users/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'rating' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/users/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'rating' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
 									Рейтинг
 								</th>
 								<th scope="col" class="table-actions">Действие</th>

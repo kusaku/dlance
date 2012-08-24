@@ -30,7 +30,7 @@
 		<?= nl2br($row['text'])?>
 	</div>
 	<div class="blogComments">
-		Дата: <?= $date?> Автор:    <a href="/user/<?=$username?>"><?= $username?></a>
+		Дата: <?= $date?> Автор:		<a href="/user/<?=$username?>"><?= $username?></a>
 		&nbsp; Категория: <a href="/blogs/index/?category=<?=$category_id?>"><?= $category?></a>
 		&nbsp;
 	</div>

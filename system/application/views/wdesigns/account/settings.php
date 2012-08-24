@@ -140,7 +140,7 @@
 					<option value=""></option>
 					<option value="2">Россия</option>
 					<option value="1">Украина</option>
-					<option value="0" disabled>--------------------------------------------------  </option>
+					<option value="0" disabled>--------------------------------------------------	</option>
 					<option value="42">Австралия</option>
 					<option value="3">Австрия</option>
 					<option value="43">Азербайджан</option>
@@ -303,7 +303,7 @@
 		</fieldset>
 		<fieldset class="adult">
 			<label for="agree4">Показывать контент "только для взрослых":</label>
-			<span class="niceCheck"><input name="adult" type="checkbox" value="1"<? if (! empty($adult)): ?> checked="checked"<? endif; ?><? if ($age < 19): ?>disabled="disabled"<? endif; ?>    /></span>
+			<span class="niceCheck"><input name="adult" type="checkbox" value="1"<? if (! empty($adult)): ?> checked="checked"<? endif; ?><? if ($age < 19): ?>disabled="disabled"<? endif; ?>		/></span>
 			<p>Пользователяем с возрастом менее 18 данная опция не доступна</p>
 		</fieldset>
 		<fieldset>

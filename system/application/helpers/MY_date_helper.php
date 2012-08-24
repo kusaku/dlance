@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php	if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 if ( ! function_exists('date_smart'))
 {
@@ -91,7 +91,7 @@ if ( ! function_exists('date_smart'))
 			$result_date .= ' '.$mins.' минут';
 		}
 
-		return  $result_date;
+		return	$result_date;
 	}
 
 	//Возраст 
@@ -101,6 +101,6 @@ if ( ! function_exists('date_smart'))
 
 		if( $month > date('m') || $month == date('m') && $day > date('d') ) $result_date = date('Y') - $year -1;
 
-		return  $result_date;
+		return	$result_date;
 	}
 }

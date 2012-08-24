@@ -39,7 +39,7 @@
 		<? if( !empty($users_descr) ): ?>
 			<div class="sideblock nomargin">
 				<p class="freetext"><?=$users_descr?></p>
-			</div>  
+			</div>	
 		<? endif; ?>
 	</div>
 </div>

@@ -239,7 +239,7 @@
 							url: "/administrator/reports_close/",
 							data: dataString,
 							cache: false,
-							//   
+							//	 
 							success: function(html)
 							{
 			
@@ -258,14 +258,14 @@
 							url: "/administrator/reports_view/",
 							data: dataString,
 							cache: false,
-							//   
+							//	 
 							success: function(html)
 							{
 								text = html;
 			
-								//  
+								//	
 								$.modal({
-									content:  '<p>' + text + '</p>',
+									content:	'<p>' + text + '</p>',
 									title: 'Дизайн с ID ' + id,
 									maxWidth: 500,
 									buttons: {

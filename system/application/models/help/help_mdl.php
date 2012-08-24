@@ -4,7 +4,7 @@ class Help_mdl extends Model
 {
 	function get($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('*');
 

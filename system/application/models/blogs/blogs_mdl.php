@@ -4,7 +4,7 @@ class Blogs_mdl extends Model
 {
 /**
 * ---------------------------------------------------------------
-*  Операции с базой данных
+*	Операции с базой данных
 * ---------------------------------------------------------------
 */
 	function add($data)
@@ -14,14 +14,14 @@ class Blogs_mdl extends Model
 
 	function edit($id, $data) 
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->update('blogs', $data);
 	}
 
 	function del($id) 
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->delete('blogs');
 	}
@@ -32,46 +32,46 @@ class Blogs_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Полный вывод
+*	Полный вывод
 * ---------------------------------------------------------------
 */
 	function get($id)
 	{
 		$this->db->select('*');
 
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		return $this->db->get('blogs')->row_array();
 	}
 /**
 * ---------------------------------------------------------------
-*  Комментарий
+*	Комментарий
 * ---------------------------------------------------------------
 */
 	function get_comment($id)
 	{
 		$this->db->select('*');
 
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		return $this->db->get('blogs_comments')->row_array();
 	}
 
 	function edit_comment($id, $data) 
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->update('blogs_comments', $data);
 	}
 
 	function del_comment($id) 
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->delete('blogs_comments');
 	}
 
-    function check_comment($id, $user_id = '') 
+		function check_comment($id, $user_id = '') 
 	{
 		$this->db->where('id', $id);
 
@@ -84,7 +84,7 @@ class Blogs_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Вывод всех записей
+*	Вывод всех записей
 * ---------------------------------------------------------------
 */
 	function get_blogs()
@@ -123,7 +123,7 @@ class Blogs_mdl extends Model
 			$this->db->limit($per_page, $start_from);
 		}
 
-    	$this->db->order_by('date', 'desc');
+			$this->db->order_by('date', 'desc');
 
 		if( $category ) 
 		{
@@ -139,7 +139,7 @@ class Blogs_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Подсчет для постраничной навигации
+*	Подсчет для постраничной навигации
 * ---------------------------------------------------------------
 */
 	function count_all($input = '')
@@ -163,7 +163,7 @@ class Blogs_mdl extends Model
 
 	function get_comments($blog_id)
 	{
-    	$this->db->order_by('date', 'desc');
+			$this->db->order_by('date', 'desc');
 
 		$this->db->select('blogs_comments.*, users.username, users.userpic');
 
@@ -191,7 +191,7 @@ class Blogs_mdl extends Model
 		return $this->db->count_all_results('blogs_comments'); 
 	}
 
-    function check($id, $user_id = '') 
+		function check($id, $user_id = '') 
 	{
 		$this->db->where('id', $id);
 
@@ -206,10 +206,10 @@ class Blogs_mdl extends Model
 	//Количество записей у пользователя
 	function count_blogs($user_id)
 	{
-	    if( empty($user_id) )
-	    {
+			if( empty($user_id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		if( $user_id ) 
 		{
@@ -220,7 +220,7 @@ class Blogs_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Категории
+*	Категории
 * ---------------------------------------------------------------
 */
 

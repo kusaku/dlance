@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Load_settings_mdl extends Model
-{   
+{	 
 	function __construct()
 	{
 		parent::Model();

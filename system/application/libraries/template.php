@@ -21,7 +21,7 @@ class Template
 		$this->theme = 'wdesigns';
 	}
 
-    function build($view, $data = array(), $title = '', $section = FALSE) 
+		function build($view, $data = array(), $title = '', $section = FALSE) 
 	{
 		$template['title'] = $this->title($title);
 
@@ -85,7 +85,7 @@ class Template
 		$this->_ci->load->view($theme.'/template', $template);
 	}
 
-    function build_admin($view, $data = array(), $title = '') 
+		function build_admin($view, $data = array(), $title = '') 
 	{
 		if( !$this->_ci->admin_mdl->logged_in() )
 		{
@@ -110,13 +110,13 @@ class Template
 
 	function set_metadata($name, $content)
 	{
-        $name = htmlspecialchars(strip_tags($name));
-        $content = htmlspecialchars(strip_tags($content));
+				$name = htmlspecialchars(strip_tags($name));
+				$content = htmlspecialchars(strip_tags($content));
 
-        if($name == 'keywords' && !strpos($content, ','))
-        {
-        	$content = preg_replace('/[\s]+/', ', ', trim($content));
-        }
+				if($name == 'keywords' && !strpos($content, ','))
+				{
+					$content = preg_replace('/[\s]+/', ', ', trim($content));
+				}
 
 		$metadata = '<meta name="'.$name.'" content="'.$content.'" />';
 
@@ -132,10 +132,10 @@ class Template
 
 /**
 * ---------------------------------------------------------------
-*  Контроллер вывода подсказан, только для авторизированных, только для тех у кого не отключены уведомления, события, повышения репутации и т д
+*	Контроллер вывода подсказан, только для авторизированных, только для тех у кого не отключены уведомления, события, повышения репутации и т д
 * ---------------------------------------------------------------
 */
-    function hint() 
+		function hint() 
 	{
 		$settings = $this->_ci->users_mdl->get_settings($this->_ci->session->userdata('id'));
 
@@ -170,7 +170,7 @@ $(document).ready(function()
 	{
 		// находим все подсказки
 		var massiv = [], data = $('.event');
-    	
+			
 		// перебираем все
 		for( var i = 0, size = data.length;i < size; i++ )
 		{

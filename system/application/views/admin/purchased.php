@@ -271,11 +271,11 @@
 								<th scope="col">Дизайн</th>
 								<th scope="col">Покупатель</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/purchased/?order_field=buyer<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'buyer' and  $input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/purchased/?order_field=buyer&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'buyer' and  $input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/purchased/?order_field=buyer<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'buyer' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/purchased/?order_field=buyer&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'buyer' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
 									Продавец
 								</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/purchased/?order_field=kind<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'kind' and  $input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/purchased/?order_field=kind&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'kind' and  $input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/purchased/?order_field=kind<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'kind' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/purchased/?order_field=kind&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'kind' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
 									Вид
 								</th>
 								<th scope="col">Сумма</th>
