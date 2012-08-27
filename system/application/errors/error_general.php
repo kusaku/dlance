@@ -1,72 +1,121 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
-<title>Системное сообщение | Dlance.ru</title>
-<link rel="shortcut icon" href="favicon.ico">
-<link rel="stylesheet" type="text/css" href="/templates/wdesigns/css/styles.css">
-<link rel="alternate" type="application/rss+xml" href="http://ci.ru/rss/projects" title="Проекты (RSS 2.0)">
-</head>
-<body>
-<div id="custom-doc" class="yui-t5">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="google-site-verification" content="GZ6LEudcMoq7OAIcz-ywUZjW9pM6jROZqY4Rn0y_Ei8" />
+		<meta name='yandex-verification' content='51dcabbe6fb5f2d8' />
+		<title>Системное сообщение | Dlance.ru</title>
+		<link rel="alternate" type="application/rss+xml" href="/rss/designs" title="Дизайны сайтов (RSS 2.0)">
+		<link href="/design/css/base.css" rel="stylesheet" type="text/css" />
+		<link href="/design/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="/design/css/cusel.css" rel="stylesheet" type="text/css" />
+		<link href="/design/css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="/templates/js/jquery-autocomplete/jquery.autocomplete.css" />
+		<script type="text/javascript" src="/design/js/jquery-1.6.3.min.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.bxSlider.min.js"></script>
+		<script type="text/javascript" src="/design/js/cusel-min-2.4.1.js"></script>
+		<script type="text/javascript" src="/design/js/radio.js"></script>
+		<script type="text/javascript" src="/design/js/checkbox.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.simpleColor.js"></script>
+		<script type="text/javascript" src="/templates/js/jquery-autocomplete/jquery.autocomplete.js"></script>
+		<script type="text/javascript">
+		(function($){
+			$(function(){
+				$("#slider1").bxSlider({
+					infiniteLoop: false,
+					hideControlOnEnd: true
+				});
+				$("a.zoom").fancybox({titlePosition:'over'});
+				$("input[placeholder],textarea").placeholder();
+				var params = {
+					changedEl: "#selectel, #theme, #categorySelect, #feedback"
+					}
+				cuSel(params);
+				$(".niceRadio").each(function() {
+					changeRadioStart($(this));
+				});
+				$("#tagsBottom,#tags, #tagsTop").autocomplete("/designs/tags/", {selectFirst:false});
+				$(".colorSample").simpleColor({
+					buttonClass: "colorButton"
+				});
+			});
+		}(jQuery))
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="header">
+				<div class="logoFd">
+					<a href="/" title="Ф.Дизайн"><img src="/design/images/logo_fd.png" alt="Ф.дизайн" /></a>
+				</div>
+				<div class="bannerPlace">
+					<!-- На баннер тоже функция нужна? -->
+					<a href="#" title="Эта реклама проплачена!"><img src="/design/images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+				</div>
+				<div class="authBlock">
+					<!-- Блок авторизации -->
+					<?=$login?>
+				</div>
+			</div>
+			<div class="navBlock">
+				<form class="fastSearch" action="/designs/search/" method="get">
+					<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="" id="tagsTop"/>
+					<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+				</form>
+				<ul class="leftMenu">
+					<li><a href="/"><span>Главная</span></a></li>
+					<li><a href="/news"><span>Новости</span></a></li>
+					<li><a href="/designs"><span>Дизайны</span></a></li>
+					<li><a href="/users/all"><span>Дизайнеры</span></a></li>
+					<li><a href="/blogs"><span>Блоги</span></a></li>
+				</ul>
+				<ul class="rightMenu">
+					<li><a href="/users/support"><span>Обратная связь</span></a></li>
+					<li><a href="/faq"><span>ЧаВо</span></a></li>
+					<li><a href="/help"><span>Помощь</span></a></li>
+				</ul>
+			</div>
+			<div class="main">
 
-<div id="top" class="yui-gd">
-<div class="yui-u first logo"><a href="/"><span></span></a> </div>
-<div class="yui-u premium"> &nbsp; </div>
-</div>
+				<h1>Системное сообщение</h1>
+				<?=$message?>
 
-<div id="topnav">
-	<div>
-		<div>
-			<div style="position:relative;">
-<ul>
-<li class="first"><a href="/">Главная</a></li>
-<li><a href="/news">Новости проекта</a></li>
-<li><a href="/designs">Дизайны</a></li>
-<li><a href="/designs/search">Поиск дизайнов</a></li>
-<li><a href="/users/all">Каталог дизайнеров</a></li>
-<li><a href="/blogs">Блоги</a></li>
-<li><a href="/help">Помощь</a></li>
-<li><a href="/users/support">Обратная связь</a></li>
-</ul>
+				<? if( isset($_SERVER['HTTP_REFERER']) ): ?>
+				<br />
+				<a href="<?=$_SERVER['HTTP_REFERER']?>">Вернуться назад</a>
+				<? endif ?>
+				<br clear="all">
+			</div>
+			<div class="pushBlock"></div>
+		</div>
+		<div class="navBlock">
+			<form class="fastSearch" action="/designs/search/" method="get">
+				<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="" id="tagsBottom"/>
+				<input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+			</form>
+			<ul class="leftMenu">
+				<li><a href="/"><span>Главная</span></a></li>
+				<li><a href="/news"><span>Новости</span></a></li>
+				<li><a href="/designs"><span>Дизайны</span></a></li>
+				<li><a href="/designs"><span>Дизайнеры</span></a></li>
+				<li><a href="/blogs"><span>Блоги</span></a></li>
+			</ul>
+			<ul class="rightMenu">
+				<li><a href="/users/support"><span>Обратная связь</span></a></li>
+				<li><a href="/faq"><span>ЧаВо</span></a></li>
+				<li><a href="/help"><span>Помощь</span></a></li>
+			</ul>
+		</div>
+		<div class="footer">
+			<div class="rightCopy">
+				<p>&copy; 2011 Все права защищены.<br/>
+				Проект компании <a href="http://fabricasaitov.ru" target="_blank">“Фабрика сайтов”</a>.</p>
+			</div>
+			<div class="fabricaLogo">
+				<a href="http://fabricasaitov.ru" target="_blank"><img src="/design/images/cop.png" alt="Фабрика сайтов"/></a>
 			</div>
 		</div>
-	</div>
-</div>
-
-<div id="bd">
-
-		<h1>Системное сообщение</h1>
-<?=$message?>
-
-<? if( isset($_SERVER['HTTP_REFERER']) ): ?>
-<br />
-<a href="<?=$_SERVER['HTTP_REFERER']?>">Вернуться назад</a>
-<? endif ?>
-<br clear="all">
-<div style="font-size:11px;" class="mt20 clearfix"></div>
-</div>
-
-<div id="ft">
-	<div id="ft-inner" class="yui-gf">
-		<div id="copyright" class="yui-u first"> 
-
-		</div>
-	<div id="bottomnav" class="yui-u"><ul>
-<li><a href="/">Главная</a></li>
-<li><a href="/news">Новости проекта</a></li>
-<li><a href="/designs">Дизайны</a></li>
-<li><a href="/users/all">Каталог дизайнеров</a></li>
-<li><a href="/blogs">Блоги</a></li>
-<li><a href="/help">Помощь</a></li>
-<li><a href="/users/support">Обратная связь</a></li>
-</ul>
-
-<ul></ul></div>
-	</div>
-</div>
-
-</div>
-<br>
-</body>
+	</body>
 </html>
