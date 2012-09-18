@@ -1,8 +1,8 @@
+/files
+/img/captcha
+/system/cache
+/user_guide
+/userpics
 .buildpath
 .project
 .settings
-/system/cache
-/img/captcha
-/userpics
-/files
-/user_guide
