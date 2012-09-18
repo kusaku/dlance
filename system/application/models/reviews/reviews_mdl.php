@@ -4,34 +4,34 @@ class Reviews_mdl extends Model
 {
 /**
 * ---------------------------------------------------------------
-*  Для редактирования
+*	Для редактирования
 * ---------------------------------------------------------------
 */
 	function get($id)
 	{
 		$this->db->select('*');
 
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		return $this->db->get('reviews')->row_array();
 	}
 
 	function edit($id, $data) 
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->update('reviews', $data);
 	}
 
 	function del($id) 
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->delete('reviews');
 	}
 /**
 * ---------------------------------------------------------------
-*  Вывод
+*	Вывод
 * ---------------------------------------------------------------
 */
 	//Выводим все отзывы пользователя
@@ -55,7 +55,7 @@ class Reviews_mdl extends Model
 
 		$this->db->from('reviews');
 
-	    $this->db->where('reviews.user_id', $user_id);
+			$this->db->where('reviews.user_id', $user_id);
 
 		$this->db->join('users', 'users.id = reviews.from_id');
 

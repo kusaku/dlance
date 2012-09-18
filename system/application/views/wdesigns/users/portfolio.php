@@ -1,11 +1,11 @@
 <div class="yui-g">
-  <ul class="usernav">
-    <li><a href="/user/<?=$username?>">Информация</a></li>
-    <li><a href="/users/designs/<?=$username?>">Дизайны</a></li>
-    <li class="active"><a href="/users/portfolio/<?=$username?>">Портфолио</a></li>
-    <li><a href="/users/services/<?=$username?>">Услуги</a></li>
-    <li><a href="/users/reviews/<?=$username?>">Отзывы</a></li>
-    <li><a href="/users/followers/<?=$username?>">Подписчики</a></li>
+	<ul class="usernav">
+		<li><a href="/user/<?=$username?>">Информация</a></li>
+		<li><a href="/users/designs/<?=$username?>">Дизайны</a></li>
+		<li class="active"><a href="/users/portfolio/<?=$username?>">Портфолио</a></li>
+		<li><a href="/users/services/<?=$username?>">Услуги</a></li>
+		<li><a href="/users/reviews/<?=$username?>">Отзывы</a></li>
+		<li><a href="/users/followers/<?=$username?>">Подписчики</a></li>
  </ul>
 </div>
 
@@ -19,7 +19,7 @@
 </div>
 
 <div id="yui-main">
-  <div id="usermain" class="yui-b">
+	<div id="usermain" class="yui-b">
 
 <? if( !empty($portfolio) ): ?>
 <?=show_highslide()?>
@@ -29,9 +29,9 @@
 <? if( $this->user_id == $row['user_id'] ): ?>
 <span style="font-size:11px;">
 <a href="/account/images_down/<?=$row['id']?>" title="Переместить вниз"><img src="/templates/wdesigns/css/img/down.gif" alt="Переместить вниз"></a>
-*  
+*	
 <a href="/account/images_up/<?=$row['id']?>" title="Переместить вниз"><img src="/templates/wdesigns/css/img/up.gif" alt="Переместить вверх"></a>
-*  
+*	
 <a href="/account/images_edit/<?=$row['id']?>">Редактировать</a> | <a href="/account/images_del/<?=$row['id']?>">Удалить</a>
 </span>
 <? endif; ?>
@@ -75,35 +75,35 @@
 </div>
 <div class="sendpm"><a href="/contacts/send/<?=$username?>">Личное сообщение</a></div>
 
-    <table class="userstats">
-      <tr>
-        <td>Дата регистрации:</td>
-        <td><?=$created?></td>
-      </tr>
+		<table class="userstats">
+			<tr>
+				<td>Дата регистрации:</td>
+				<td><?=$created?></td>
+			</tr>
 
-      <tr>
-        <td>Последний визит:</td>
-        <td><?=$last_login?></td>
-      </tr>
-     <tr>
+			<tr>
+				<td>Последний визит:</td>
+				<td><?=$last_login?></td>
+			</tr>
+		 <tr>
 
-      <tr>
-        <td>Просмотров:</td>
-        <td><?=$views?></td>
-      </tr>
-      <tr>
-      <tr>
-        <td>Местоположение:</td>
-        <td><?=$country_id?> / <?=$city_id?></td>
-      </tr>
-      <tr>
-        <td colspan="2" class="noborder green">
-        </td>
-     </tr>
-    </table>
+			<tr>
+				<td>Просмотров:</td>
+				<td><?=$views?></td>
+			</tr>
+			<tr>
+			<tr>
+				<td>Местоположение:</td>
+				<td><?=$country_id?> / <?=$city_id?></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="noborder green">
+				</td>
+		 </tr>
+		</table>
 
 <? if( !empty($website) ):?><b><noindex><a href="<?=$website?>" target="_blank" rel="nofollow"><?=$website?></a></noindex></b><? endif; ?>
 
-    </div>
+		</div>
 <div class="ft"></div>
 </div>

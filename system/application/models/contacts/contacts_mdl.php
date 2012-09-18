@@ -78,7 +78,7 @@ class Contacts_mdl extends Model
 
 		$message = $this->load->view('emails/new_message', $data, TRUE);
 
-		$this->common->email($email, $subject, $message);
+		//$this->common->email($email, $subject, $message);
 	}
 
 	function count_messages($contact = '')
@@ -106,7 +106,7 @@ class Contacts_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Контакты
+*	Контакты
 * ---------------------------------------------------------------
 */
 	//Выводим все группы пользователя
@@ -219,7 +219,7 @@ class Contacts_mdl extends Model
 		if( !empty($user_id) )
 		{
 			$this->db->where('user_id', $user_id);
-	    }
+			}
 
 		$this->db->where('id', $id);
 
@@ -237,17 +237,17 @@ class Contacts_mdl extends Model
 		if( !empty($user_id) )
 		{
 			$this->db->where('user_id', $user_id);
-	    }
+			}
 
 		if( !empty($contact) )
 		{
 			$this->db->where('contact', $contact);
-	    }
+			}
 
 		if( !empty($group_id) )
 		{
 			$this->db->where('group_id', $group_id);
-	    }
+			}
 
 		return $this->db->count_all_results('contacts'); 
 	}
@@ -266,7 +266,7 @@ class Contacts_mdl extends Model
 
 	function del_group($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->delete('groups');
 	}

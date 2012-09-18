@@ -4,7 +4,7 @@ class Account_mdl extends Model
 {
 /**
 * ---------------------------------------------------------------
-*  Операции с базами
+*	Операции с базами
 * ---------------------------------------------------------------
 */
 	function add($table, $data)
@@ -27,7 +27,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Платежи
+*	Платежи
 * ---------------------------------------------------------------
 */
 	//Выводи платеж для просмотра
@@ -59,9 +59,9 @@ class Account_mdl extends Model
 
 		switch($query['status'])
 		{
-    		case 1: $query['status']  = 'Ожидание'; break;
-    		case 2: $query['status']  = 'Завершён'; break;
-    		case 3: $query['status']  = 'Возвращен'; break;
+				case 1: $query['status']	= 'Ожидание'; break;
+				case 2: $query['status']	= 'Завершён'; break;
+				case 3: $query['status']	= 'Возвращен'; break;
 		}
 
 		return $query;
@@ -101,9 +101,9 @@ class Account_mdl extends Model
 
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Ожидание'; break;
-    			case 2: $query[$i]['status']  = 'Завершён'; break;
-    			case 3: $query[$i]['status']  = 'Возвращен'; break;
+					case 1: $query[$i]['status']	= 'Ожидание'; break;
+					case 2: $query[$i]['status']	= 'Завершён'; break;
+					case 3: $query[$i]['status']	= 'Возвращен'; break;
 			}
 
 			if( $query[$i]['type'] == 2 )
@@ -114,8 +114,8 @@ class Account_mdl extends Model
 
 			switch($query[$i]['type'])
 			{
-    			case 1: $query[$i]['type']  = 'Прямой платеж'; break;
-    			case 2: $query[$i]['type']  = 'С протекцией сделки'; break;
+					case 1: $query[$i]['type']	= 'Прямой платеж'; break;
+					case 2: $query[$i]['type']	= 'С протекцией сделки'; break;
 			}
 		}
 		
@@ -135,14 +135,14 @@ class Account_mdl extends Model
 		if( !empty($status) )
 		{
 			$this->db->where('status', $status);
-	    }
+			}
 
 		if( !empty($user_id) )
 		{
 			$this->db->where('user_id', $user_id);
-	    }
+			}
 
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		if( $this->db->count_all_results('payments') > 0 ) 
 		{ 
@@ -173,7 +173,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Подписка на рубрики
+*	Подписка на рубрики
 * ---------------------------------------------------------------
 */
 	//Выводим категории на которые мы подписаны
@@ -203,10 +203,10 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Подписка
+*	Подписка
 * 
-*  user_id пользователь который подписан
-*  follows пользователь на которого подписаны
+*	user_id пользователь который подписан
+*	follows пользователь на которого подписаны
 * 
 * ---------------------------------------------------------------
 */
@@ -283,7 +283,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Загрузки
+*	Загрузки
 * ---------------------------------------------------------------
 */
 	function get_downloads($start_from = FALSE, $per_page, $user_id = '')
@@ -325,7 +325,7 @@ class Account_mdl extends Model
 			}
 			else
 			{
-				//Прибавляем  остаток к текущему времени
+				//Прибавляем	остаток к текущему времени
 				$left_date = now() + $left_date;
 				//date_await - сколько времени до события, событие это время когда время данное на загрузку истекёт
 				$left_date = date_await($left_date);
@@ -339,7 +339,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Загрузка файла
+*	Загрузка файла
 * ---------------------------------------------------------------
 */
 	function get_download($code)
@@ -352,7 +352,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Купить дизайн
+*	Купить дизайн
 * ---------------------------------------------------------------
 */
 	function pay_designs($array = '')
@@ -380,10 +380,10 @@ class Account_mdl extends Model
 	//Проверка на существование покупки
 	function buy_check($design_id = '', $user_id = '')
 	{
-	    if( empty($design_id) or empty($user_id) )
-	    {
+			if( empty($design_id) or empty($user_id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		$this->db->where('design_id', $design_id);
 
@@ -398,7 +398,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Корзина
+*	Корзина
 * ---------------------------------------------------------------
 */
 	function get_cart($start_from = FALSE, $per_page, $user_id = '', $session_id = '')
@@ -415,15 +415,15 @@ class Account_mdl extends Model
 
 		$this->db->join('designs', 'designs.id = cart.design_id');
 
-	    if( !empty($user_id) )
-	    {
+			if( !empty($user_id) )
+			{
 			$this->db->where('cart.user_id', $user_id);
-	    }
+			}
 
-	    if( !empty($session_id) )
-	    {
+			if( !empty($session_id) )
+			{
 			$this->db->where('cart.session_id', $session_id);
-	    }
+			}
 
 		$query = $this->db->get('cart')->result_array();
 
@@ -444,9 +444,9 @@ class Account_mdl extends Model
 
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Открыт'; break;
-    			case 2: $query[$i]['status']  = 'Выкуплен'; break;
-    			case 3: $query[$i]['status']  = 'Закрыт'; break;
+					case 1: $query[$i]['status']	= 'Открыт'; break;
+					case 2: $query[$i]['status']	= 'Выкуплен'; break;
+					case 3: $query[$i]['status']	= 'Закрыт'; break;
 			}
 		}
 		
@@ -459,15 +459,15 @@ class Account_mdl extends Model
 
 		$this->db->join('designs', 'designs.id = cart.design_id');
 
-	    if( !empty($user_id) )
-	    {
+			if( !empty($user_id) )
+			{
 			$this->db->where('cart.user_id', $user_id);
-	    }
+			}
 
-	    if( !empty($session_id) )
-	    {
+			if( !empty($session_id) )
+			{
 			$this->db->where('cart.session_id', $session_id);
-	    }
+			}
 
 		$query = $this->db->get('cart');
 
@@ -477,22 +477,22 @@ class Account_mdl extends Model
 	//Проверка принадлежит ли товар в корзине пользователю
 	function cart_check($design_id = '', $user_id = '', $session_id = '')
 	{
-	    if( empty($design_id) )
-	    {
+			if( empty($design_id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		$this->db->where('design_id', $design_id);
 
-	    if( !empty($user_id) )
-	    {
+			if( !empty($user_id) )
+			{
 			$this->db->where('user_id', $user_id);
-	    }
+			}
 
-	    if( !empty($session_id) )
-	    {
+			if( !empty($session_id) )
+			{
 			$this->db->where('session_id', $session_id);
-	    }
+			}
 
 		if( $this->db->count_all_results('cart') > 0 ) 
 		{
@@ -505,22 +505,22 @@ class Account_mdl extends Model
 	//Проверка принадлежит ли товар в корзине пользователю
 	function cart_check_del($id = '', $user_id = '', $session_id = '')
 	{
-	    if( empty($id) )
-	    {
+			if( empty($id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		$this->db->where('id', $id);
 
-	    if( !empty($user_id) )
-	    {
+			if( !empty($user_id) )
+			{
 			$this->db->where('user_id', $user_id);
-	    }
+			}
 
-	    if( !empty($session_id) )
-	    {
+			if( !empty($session_id) )
+			{
 			$this->db->where('session_id', $session_id);
-	    }
+			}
 
 		if( $this->db->count_all_results('cart') > 0 ) 
 		{
@@ -531,7 +531,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Купленные
+*	Купленные
 * ---------------------------------------------------------------
 */
 	function get_purchased($start_from = FALSE, $per_page, $user_id = '')
@@ -584,10 +584,10 @@ class Account_mdl extends Model
 
 	function purchased_check($design_id = '', $user_id = '')
 	{
-	    if( empty($design_id) or empty($user_id) )
-	    {
+			if( empty($design_id) or empty($user_id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		$this->db->where('design_id', $design_id);
 
@@ -603,10 +603,10 @@ class Account_mdl extends Model
 
 	function get_file($id = '')
 	{
-	    if( empty($id) )
-	    {
+			if( empty($id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		$this->db->select('dfile');
 		$query = $this->db->get_where('designs', array('id' => $id));
@@ -621,7 +621,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  История
+*	История
 * ---------------------------------------------------------------
 */
 	function get_transaction($user_id = '')
@@ -646,7 +646,7 @@ class Account_mdl extends Model
 
 /**
 * ---------------------------------------------------------------
-*  Кошельки
+*	Кошельки
 * ---------------------------------------------------------------
 */
 	function get_purses($user_id = '')
@@ -673,10 +673,10 @@ class Account_mdl extends Model
 
 	function purse_check($id = '', $user_id = '')
 	{
-	    if( empty($id) or empty($user_id) )
-	    {
+			if( empty($id) or empty($user_id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		$this->db->where('id', $id);
 
@@ -691,7 +691,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Заявки на вывод
+*	Заявки на вывод
 * ---------------------------------------------------------------
 */
 	function get_applications($start_from = FALSE, $per_page, $user_id = '')
@@ -722,8 +722,8 @@ class Account_mdl extends Model
 
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Ожидание'; break;
-    			case 2: $query[$i]['status']  = 'Завершён'; break;
+					case 1: $query[$i]['status']	= 'Ожидание'; break;
+					case 2: $query[$i]['status']	= 'Завершён'; break;
 			}
 		}
 		
@@ -761,10 +761,10 @@ class Account_mdl extends Model
 
 	function withdraw_check($id = '', $user_id = '')
 	{
-	    if( empty($id) or empty($user_id) )
-	    {
+			if( empty($id) or empty($user_id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		$this->db->where('id', $id);
 
@@ -782,7 +782,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Указатели
+*	Указатели
 * ---------------------------------------------------------------
 */
 	function get_ads()
@@ -802,7 +802,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Услуги
+*	Услуги
 * ---------------------------------------------------------------
 */
 
@@ -834,7 +834,7 @@ class Account_mdl extends Model
 	
 /**
 * ---------------------------------------------------------------
-*  Портфолио
+*	Портфолио
 * ---------------------------------------------------------------
 */
 	//Для вывода в профиле
@@ -885,7 +885,7 @@ class Account_mdl extends Model
 		if( !empty($user_id) )
 		{
 			$this->db->where('user_id', $user_id);
-	    }
+			}
 		
 		return $this->db->count_all_results('portfolio');
 	}
@@ -957,7 +957,7 @@ class Account_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Профиль
+*	Профиль
 * ---------------------------------------------------------------
 */
 	function get_profile($user_id)
@@ -978,13 +978,13 @@ class Account_mdl extends Model
 
 /**
 * ---------------------------------------------------------------
-*  МОДЕРАТОР
+*	МОДЕРАТОР
 * ---------------------------------------------------------------
 */
 
 /**
 * ---------------------------------------------------------------
-*  пользователи
+*	пользователи
 * ---------------------------------------------------------------
 */
 	//Расширенный поиск
@@ -997,7 +997,7 @@ class Account_mdl extends Model
 
 		$this->db->select('*');
 
-    	$query = $this->db->get('users')->result_array();
+			$query = $this->db->get('users')->result_array();
 
 		$count = count($query);
 

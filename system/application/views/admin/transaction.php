@@ -290,12 +290,12 @@
 							<tr>
 								<th scope="col">Пользователь</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/transaction/?order_field=descr<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'descr' and  $input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/transaction/?order_field=descr&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'descr' and  $input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/transaction/?order_field=descr<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'descr' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/transaction/?order_field=descr&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'descr' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
 									Описание
 								</th>
 								<th scope="col">Сумма</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/transaction/?order_field=date<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'date' and  $input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/transaction/?order_field=date&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'date' and  $input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/transaction/?order_field=date<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'date' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/transaction/?order_field=date&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'date' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
 									Дата
 								</th>
 							</tr>

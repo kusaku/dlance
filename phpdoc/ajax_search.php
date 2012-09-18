@@ -21,8 +21,7 @@ $xml->load('search_index.xml');
 $xpath = new DOMXPath($xml);
 
 $qry = $xpath->query(
-    //value[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', "
-    "
+    "//value[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', "
     . "'abcdefghijklmnopqrstuvwxyz'), '$term')]/.."
 );
 $results = array();

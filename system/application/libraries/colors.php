@@ -2,8 +2,8 @@
 
 class Colors
 {
-	var $PREVIEW_WIDTH    = 150;
-	var $PREVIEW_HEIGHT   = 150;
+	var $PREVIEW_WIDTH		= 150;
+	var $PREVIEW_HEIGHT	 = 150;
 
 	var $error;
 
@@ -194,7 +194,7 @@ class Colors
 		$lowest = 255;
 		$highest = 0;
 		$colors['red'] = hexdec( substr( $hex, 0, 2 ) );
-		$colors['green']  = hexdec( substr( $hex, 2, 2 ) );
+		$colors['green']	= hexdec( substr( $hex, 2, 2 ) );
 		$colors['blue'] = hexdec( substr( $hex, 4, 2 ) );
 
 		if ($colors['red'] < $lowest)
@@ -256,7 +256,7 @@ class Colors
 	function _find_adjacent( $hex, $gradients, $delta )
 	{
 		$red = hexdec( substr( $hex, 0, 2 ) );
-		$green  = hexdec( substr( $hex, 2, 2 ) );
+		$green	= hexdec( substr( $hex, 2, 2 ) );
 		$blue = hexdec( substr( $hex, 4, 2 ) );
 
 		if ($red > $delta)
@@ -360,7 +360,7 @@ class Colors
 			elseif( $y-$x[$keys[$key-1]] < $x[$keys[$key+1]]-$y ) $return = $x[$keys[$key-1]];
 			else $return = $x[$keys[$key+1]];
 		}
-		return $return;  
+		return $return;	
 	}
 	
 	function rangecolors($rgb)
@@ -412,9 +412,9 @@ class Colors
 	// значение которого равно $rgb
 		while ($fruit_name = current($colors))
 		{
-	    	if( $fruit_name == $rgb ) {
-	        	$index = key($colors);
-	    	}
+				if( $fruit_name == $rgb ) {
+						$index = key($colors);
+				}
 			next($colors);
 		}
 		

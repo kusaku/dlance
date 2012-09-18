@@ -7,7 +7,7 @@ class Transaction
 		$this->_ci =& get_instance();
 	}
 
-    function create($user_id, $descr, $amount) 
+		function create($user_id, $descr, $amount) 
 	{
 		if( empty($amount) )
 		{

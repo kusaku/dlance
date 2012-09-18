@@ -4,7 +4,7 @@ class Categories_mdl extends Model
 {
 /**
 * ---------------------------------------------------------------
-*  Каталог, и есть услуги пользователей
+*	Каталог, и есть услуги пользователей
 * ---------------------------------------------------------------
 */
 	function get($id)
@@ -25,11 +25,11 @@ class Categories_mdl extends Model
 	}
 
 /*	
-        $query = "SELECT ci_categories.name, ci_categories.id, ci_categories.parent_id, COUNT(ci_services.id) AS number".
-                    " FROM ci_categories LEFT JOIN ci_services ON ci_categories.id = ci_services.category".
-                    " GROUP BY ci_categories.id";
+				$query = "SELECT ci_categories.name, ci_categories.id, ci_categories.parent_id, COUNT(ci_services.id) AS number".
+										" FROM ci_categories LEFT JOIN ci_services ON ci_categories.id = ci_services.category".
+										" GROUP BY ci_categories.id";
 
-        $query = $this->db->query($query);
+				$query = $this->db->query($query);
 
 		if( $query->num_rows() == 0 )
 		{
@@ -39,7 +39,7 @@ class Categories_mdl extends Model
 		{
 			return $query->result_array();
 		}
-    }
+		}
 
 */
 	//Категории с колличеством пользователей предоставляющих данную услугу
@@ -162,10 +162,10 @@ class Categories_mdl extends Model
 
 	function category_check($id = '')
 	{
-	    if( empty($id) )
-	    {
+			if( empty($id) )
+			{
 			return FALSE;
-	    }
+			}
 
 		$this->db->where('id', $id);
 

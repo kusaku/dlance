@@ -39,7 +39,7 @@
 		<? if( !empty($users_descr) ): ?>
 			<div class="sideblock nomargin">
 				<p class="freetext"><?=$users_descr?></p>
-			</div>  
+			</div>	
 		<? endif; ?>
 	</div>
 </div>
@@ -58,7 +58,7 @@
 									<span>от</span>
 									<input name="age_start" type="text" size="1" maxlength="2" value="<?=$input['age_start']?>"> 
 									<span>до</span> 
-									<input name="age_end" type="text" size="1" maxlength="2"  value="<?=$input['age_end']?>">
+									<input name="age_end" type="text" size="1" maxlength="2"	value="<?=$input['age_end']?>">
 									<span>лет</span> 
 								</fieldset>
 							</div>
@@ -206,7 +206,7 @@
 					<div class="searchResultsHeader">
 						<div class="sortBy">
 							<p>сортировать по:</p>
-							<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?>
+							<? if( $input['order_field'] == 'rating' and	$input['order_type'] == 'desc' ): ?>
 								<a class="abs" href="/users/search/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Рейтинг &darr;</a>
 							<? else: ?>
 								<a href="/users/search/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Рейтинг &uarr;</a>

@@ -11,7 +11,7 @@ font-size:			12px;
 color:				#000;
 }
 
-#content  {
+#content	{
 border:				#999 1px solid;
 background-color:	#fff;
 padding:			20px 20px 12px 20px;

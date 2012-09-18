@@ -5,7 +5,7 @@ class News_mdl extends Model
 	//Полный вывод
 	function get($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('*');
 
@@ -38,7 +38,7 @@ class News_mdl extends Model
 			$this->db->limit($per_page, $start_from);
 		}
 
-    	$this->db->order_by('date', 'desc');
+			$this->db->order_by('date', 'desc');
 
 		return $this->get_news();
 	}
@@ -49,10 +49,10 @@ class News_mdl extends Model
 	}
 
 	function get_newest($limit = 10)
-  	{
-    	$this->db->order_by('date', 'desc');
-    	$this->db->limit($limit);
+		{
+			$this->db->order_by('date', 'desc');
+			$this->db->limit($limit);
 
-    	return $this->get_news();
-  	}
+			return $this->get_news();
+		}
 }

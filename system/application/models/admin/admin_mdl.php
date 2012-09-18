@@ -43,7 +43,7 @@ class Admin_mdl extends Model
 		return $this->db->get($table)->result_array();
 	}
 
-	function get_events($input = '')  
+	function get_events($input = '')	
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -61,7 +61,7 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = events.user_id');
 
-    	$query = $this->db->get('events')->result_array();
+			$query = $this->db->get('events')->result_array();
 
 		$count = count($query);
 
@@ -84,8 +84,8 @@ class Admin_mdl extends Model
 
 		$this->db->where('username', $username);
 		$this->db->where('password', $password);
-    	$this->db->select('id, password');
-    	$this->db->limit(1);
+			$this->db->select('id, password');
+			$this->db->limit(1);
 
 		$query = $this->db->get('administrator');
 
@@ -102,7 +102,7 @@ class Admin_mdl extends Model
 		}
 
 		return FALSE;
-    }
+		}
 
 	//Хэшируем пароль для сессии, пароль + IP
 	function hash_password_session($password)
@@ -143,7 +143,7 @@ class Admin_mdl extends Model
 	{
 		$password = $this->hash_password_db($password);
 
-    	$this->db->select('password');
+			$this->db->select('password');
 
 		$query = $this->db->get('administrator');
 
@@ -163,7 +163,7 @@ class Admin_mdl extends Model
 	//Проверяем ip, для защиты от перехвата сессии
 	function check_password($password)
 	{
-    	$this->db->select('password');
+			$this->db->select('password');
 
 		$query = $this->db->get('administrator');
 
@@ -181,7 +181,7 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  категории дизайнов
+*	категории дизайнов
 * ---------------------------------------------------------------
 */
 	//Для списков и вывода услуг в аккаунта - services
@@ -195,7 +195,7 @@ class Admin_mdl extends Model
 	//Категория
 	function get_designs_category($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('*');
 
@@ -209,13 +209,13 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Заявки на вывод
+*	Заявки на вывод
 * ---------------------------------------------------------------
 */
 	//Категория
 	function get_report($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('text');
 
@@ -242,7 +242,7 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = reports.user_id');
 
-    	return $this->db->get('reports')->result_array();
+			return $this->db->get('reports')->result_array();
 	}
 
 	function count_new_reports()
@@ -272,7 +272,7 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = reports.user_id');
 
-    	$query = $this->db->get('reports')->result_array();
+			$query = $this->db->get('reports')->result_array();
 
 		$count = count($query);
 
@@ -280,8 +280,8 @@ class Admin_mdl extends Model
 		{
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Открыт'; break;
-    			case 2: $query[$i]['status']  = 'Закрыт'; break;
+					case 1: $query[$i]['status']	= 'Открыт'; break;
+					case 2: $query[$i]['status']	= 'Закрыт'; break;
 			}
 
 			$query[$i]['date'] = date_smart($query[$i]['date']);
@@ -290,19 +290,19 @@ class Admin_mdl extends Model
 		return $query;
 	}
 
-	function count_reports()  
+	function count_reports()	
 	{
 		return $this->db->count_all_results('reports');
 	}
 /**
 * ---------------------------------------------------------------
-*  Заявки на вывод
+*	Заявки на вывод
 * ---------------------------------------------------------------
 */
 	//Категория
 	function get_application($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('*');
 
@@ -328,7 +328,7 @@ class Admin_mdl extends Model
 
 		$this->db->join('users', 'users.id = balance_applications.user_id');
 
-    	$query = $this->db->get('balance_applications')->result_array();
+			$query = $this->db->get('balance_applications')->result_array();
 
 		$count = count($query);
 
@@ -340,15 +340,15 @@ class Admin_mdl extends Model
 
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Ожидание'; break;
-    			case 2: $query[$i]['status']  = 'Завершён'; break;
+					case 1: $query[$i]['status']	= 'Ожидание'; break;
+					case 2: $query[$i]['status']	= 'Завершён'; break;
 			}
 		}
 
 		return $query;
 	}
 
-	function count_applications($input = '')  
+	function count_applications($input = '')	
 	{
 		$status = (isset($input['status'])) ? $input['status'] : '';
 
@@ -361,7 +361,7 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  История операций
+*	История операций
 * ---------------------------------------------------------------
 */
 	//Расширенный поиск
@@ -406,7 +406,7 @@ class Admin_mdl extends Model
 			$this->db->order_by($order_field, $order_type);
 		}
 
-    	$query = $this->db->get('transaction')->result_array();
+			$query = $this->db->get('transaction')->result_array();
 
 		$count = count($query);
 
@@ -418,7 +418,7 @@ class Admin_mdl extends Model
 		return $query;
 	}
 
-	function total_sum_transaction($input = '')  
+	function total_sum_transaction($input = '')	
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -455,7 +455,7 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function count_transaction($input = '')  
+	function count_transaction($input = '')	
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -475,7 +475,7 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  История операций
+*	История операций
 * ---------------------------------------------------------------
 */
 	//Расширенный поиск
@@ -513,7 +513,7 @@ class Admin_mdl extends Model
 			$this->db->order_by($order_field, $order_type);
 		}
 
-    	$query = $this->db->get('purchased')->result_array();
+			$query = $this->db->get('purchased')->result_array();
 
 		$count = count($query);
 
@@ -536,15 +536,15 @@ class Admin_mdl extends Model
 
 			switch($query[$i]['kind'])
 			{
-    			case 1: $query[$i]['kind']  = 'Покупка'; break;
-    			case 2: $query[$i]['kind']  = 'Выкуп'; break;
+					case 1: $query[$i]['kind']	= 'Покупка'; break;
+					case 2: $query[$i]['kind']	= 'Выкуп'; break;
 			}
 		}
 
 		return $query;
 	}
 
-	function count_purchased($input = '')  
+	function count_purchased($input = '')	
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -564,10 +564,10 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Общая статистика сервиса
+*	Общая статистика сервиса
 * ---------------------------------------------------------------
 */
-	function info_count_addition($input = '')  
+	function info_count_addition($input = '')	
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -607,7 +607,7 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function info_count_output($input = '')  
+	function info_count_output($input = '')	
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -647,7 +647,7 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function info_count_users($input = '')  
+	function info_count_users($input = '')	
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
 		$date_end = (isset($input['date_end'])) ? $input['date_end'] : '';
@@ -756,14 +756,14 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Категории
+*	Категории
 * ---------------------------------------------------------------
 */
 
 	//Категория
 	function get_help_category($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('*');
 
@@ -771,14 +771,14 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Категории
+*	Категории
 * ---------------------------------------------------------------
 */
 
 	//Категория
 	function get_category($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('*');
 
@@ -787,7 +787,7 @@ class Admin_mdl extends Model
 
 /**
 * ---------------------------------------------------------------
-*  Профиль
+*	Профиль
 * ---------------------------------------------------------------
 */
 	function access()
@@ -801,13 +801,13 @@ class Admin_mdl extends Model
 
 /**
 * ---------------------------------------------------------------
-*  Пользователи
+*	Пользователи
 * ---------------------------------------------------------------
 */
 	//Получение одного пользователя по логину для профиля
 	function get_user($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('*');
 
@@ -822,8 +822,8 @@ class Admin_mdl extends Model
 
 		switch($query['sex'])
 		{
-    		case 1: $query['sex']  = 'Мужской'; break;
-    		case 2: $query['sex']  = 'Женский'; break;
+				case 1: $query['sex']	= 'Мужской'; break;
+				case 2: $query['sex']	= 'Женский'; break;
 		}
 	
 		return $query;
@@ -860,7 +860,7 @@ class Admin_mdl extends Model
 
 		$this->db->select('*');
 
-    	$query = $this->db->get('users')->result_array();
+			$query = $this->db->get('users')->result_array();
 
 		$count = count($query);
 
@@ -874,7 +874,7 @@ class Admin_mdl extends Model
 		return $query;
 	}
 
-	function count_users($input)  
+	function count_users($input)	
 	{
 		$keywords = (isset($input['keywords'])) ? $input['keywords'] : '';
 		$age_start = (isset($input['age_start'])) ? $input['age_start'] : '';
@@ -897,7 +897,7 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Дизайны
+*	Дизайны
 * ---------------------------------------------------------------
 */
 
@@ -932,7 +932,7 @@ class Admin_mdl extends Model
 		return FALSE;
 	}
 
-	function count_designs($input = '')  
+	function count_designs($input = '')	
 	{
 		$status = (isset($input['status'])) ? $input['status'] : '';
 
@@ -974,9 +974,9 @@ class Admin_mdl extends Model
 		
 			switch($query[$i]['status'])
 			{
-    			case 1: $query[$i]['status']  = 'Открыт'; break;
-    			case 2: $query[$i]['status']  = 'Выкуплен'; break;
-    			case 3: $query[$i]['status']  = 'Закрыт'; break;
+					case 1: $query[$i]['status']	= 'Открыт'; break;
+					case 2: $query[$i]['status']	= 'Выкуплен'; break;
+					case 3: $query[$i]['status']	= 'Закрыт'; break;
 			}
 		}
 		
@@ -1022,14 +1022,14 @@ class Admin_mdl extends Model
 
 /**
 * ---------------------------------------------------------------
-*  Страницы
+*	Страницы
 * ---------------------------------------------------------------
 */
 
 	//Страница
 	function get_page($id)
 	{
-	    $this->db->where('id', $id);
+			$this->db->where('id', $id);
 
 		$this->db->select('*');
 
@@ -1055,7 +1055,7 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Настройки
+*	Настройки
 * ---------------------------------------------------------------
 */
 
@@ -1079,7 +1079,7 @@ class Admin_mdl extends Model
 	}
 /**
 * ---------------------------------------------------------------
-*  Настройки
+*	Настройки
 * ---------------------------------------------------------------
 */
 	function get_settings()
@@ -1105,7 +1105,7 @@ class Admin_mdl extends Model
 	{
 		foreach($data as $row => $value):
 
-			$this->db->update('settings', array('value' => $value), array('param' =>  $row));
+			$this->db->update('settings', array('value' => $value), array('param' =>	$row));
 
 		endforeach;
 	}
@@ -1114,7 +1114,7 @@ class Admin_mdl extends Model
 	{
 		foreach($data as $row => $value):
 
-			$this->db->update('rating', array('value' => $value), array('param' =>  $row));
+			$this->db->update('rating', array('value' => $value), array('param' =>	$row));
 
 		endforeach;
 	}

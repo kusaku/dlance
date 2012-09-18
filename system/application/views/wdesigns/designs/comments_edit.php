@@ -2,21 +2,21 @@
 <h1 class="title">Форма редактирования комментариев</h1>
 <p class="subtitle">Редактировать комментарий</p>
 <form action="" method="post" />
-  <div class="rnd">
-    <div>
-      <div>
-        <div style="overflow:hidden;">
-          <table class="order-form">
+	<div class="rnd">
+		<div>
+			<div>
+				<div style="overflow:hidden;">
+					<table class="order-form">
 
-            <tr>
-              <td class="caption">Текст:</td>
-              <td class="frnt"><textarea name="text" rows="10" cols="49"><?=$text?></textarea></td>
-            </tr>
+						<tr>
+							<td class="caption">Текст:</td>
+							<td class="frnt"><textarea name="text" rows="10" cols="49"><?=$text?></textarea></td>
+						</tr>
 
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 <input type="submit" value="Сохранить изменения">
 </form>

@@ -13,7 +13,7 @@
 			<input type="password" class="password" name="password" size="16" maxlength="32" />
 		</fieldset>
 		<fieldset>
-			<span class="niceCheck"><input type="checkbox" class="authcheckbox" name="rcookiettl"  value="86400" /></span>
+			<span class="niceCheck"><input type="checkbox" class="authcheckbox" name="rcookiettl"	value="86400" /></span>
 			<label for="rcookiettl">Запомнить</label>
 		</fieldset>
 		<fieldset>

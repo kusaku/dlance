@@ -30,11 +30,11 @@
 						</div>
 						<div class="black-cell">Сортировать по</div>
 						<div>
-							<span class="column-sort"><a href="/administrator/categories_followers/?order_field=balance<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'balance' and  $input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/categories_followers/?order_field=balance&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'balance' and  $input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+							<span class="column-sort"><a href="/administrator/categories_followers/?order_field=balance<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'balance' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/categories_followers/?order_field=balance&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'balance' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
 							Баланс
 						</div>
 						<div>
-							<span class="column-sort"><a href="/administrator/categories_followers/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/categories_followers/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'rating' and  $input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+							<span class="column-sort"><a href="/administrator/categories_followers/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'rating' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/categories_followers/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'rating' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
 							Рейтинг
 						</div>
 					</div>
