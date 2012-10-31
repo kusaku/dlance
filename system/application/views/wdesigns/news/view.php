@@ -10,6 +10,6 @@
 </div>
 
 <h3>Другие новости проекта:</h3>
-<? foreach($newest_news as $row): ?>
+<?php foreach($newest_news as $row): ?>
 	<p><?=$row['date']?> | <a class="orange" href="/news/<?=$row['id']?>.html"><?=$row['title']?></a></p>
-<? endforeach; ?>
+<?php endforeach; ?>

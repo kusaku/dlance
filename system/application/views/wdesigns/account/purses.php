@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div class="content">
 	<div class="userMoneyHeader top">
 		<div class="addItem">
@@ -24,9 +24,9 @@
 		</ul>
 	</div>
 	<div class="userMoneyList">
-		<? if (! empty($data)): ?>
+		<?php if (! empty($data)): ?>
 		<ul class="worksList">
-			<? foreach ($data as $row): ?>
+			<?php foreach ($data as $row): ?>
 			<li>
 				<p class="ctype">
 					<img src="images/yad.png" alt="Нужен тип кошелька" />
@@ -48,14 +48,14 @@
 					<a href="/account/purses_del/<?=$row['id']?>">удалить</a>
 				</p>
 			</li>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 		</ul>
-		<? else : ?>
+		<?php else : ?>
 		<ul class="worksList">
 			<li>
 				<p>Кошельки отсутствуют.</p>
 			</li>
 		</ul>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>

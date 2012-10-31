@@ -107,17 +107,17 @@
 
 <p>Once loaded you'll add the calendar script to the <head> of your page like this:</p>
 
-<?php echo js_calendar_script('my_form');  ?>
+<?= js_calendar_script('my_form');  ?>
 
 <p>The above function will be passed the name of your form.</p>
 
 <p>Then to show the actual calendar you'll do this:</p>
 
-<?php echo js_calendar_write('entry_date', time(), true);?>
+<?= js_calendar_write('entry_date', time(), true);?>
 
 <form name="my_form">
 <input type="text" name="entry_date" value="" onblur="update_calendar(this.name, this.value);" />
-<p><a href="javascript:void(0);" onClick="set_to_time('entry_date', '<?php echo time();?>')" >Today</a></p>
+<p><a href="javascript:void(0);" onClick="set_to_time('entry_date', '<?= time();?>')" >Today</a></p>
 </form>
 
 <p>Note:  The first parameter is the name of the field containing your date, the second parameter contains the "now" time,

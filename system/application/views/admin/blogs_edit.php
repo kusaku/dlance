@@ -25,9 +25,9 @@
 				</label>
 				<select name="category">
 					<option></option>
-					<? foreach ($categories as $row): ?>
-					<option value="<?=$row['id']?>"<? if ($row['id'] == $category): ?> selected="selected"<? endif; ?>><?= $row['name']?></option>
-					<? endforeach; ?>
+					<?php foreach ($categories as $row): ?>
+					<option value="<?=$row['id']?>"<?php if ($row['id'] == $category): ?> selected="selected"<?php endif; ?>><?= $row['name']?></option>
+					<?php endforeach; ?>
 				</select>
 			</p>
 		</div>

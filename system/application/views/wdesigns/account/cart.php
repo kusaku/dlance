@@ -1,6 +1,6 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div class="content">
-	<? if (! empty($data)): ?>
+	<?php if (! empty($data)): ?>
 	<form action="/account/pay" method="post">
 		<div class="userBasketHeader">
 			<div class="makeOrder">
@@ -13,7 +13,7 @@
 		</div>
 		<div class="contentWrapperBorderLeft" style="min-height: 500px;">
 			<ul class="cartItemsList">
-				<? foreach ($data as $row): ?>
+				<?php foreach ($data as $row): ?>
 				<li class="cartItem">
 					<div class="itemImg">
 						<a href="<?=$row['full_image']?>" class="zoom"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>" /></a>
@@ -42,21 +42,21 @@
 						</p>
 					</div>
 					<div class="priceBlock">
-						<? if ($row['status_id'] == 1): ?>
-						<input name="designs[]" type="checkbox" value="<?=$row['id']?>" checked="checked" style="display:none;"/><? endif; ?>
+						<?php if ($row['status_id'] == 1): ?>
+						<input name="designs[]" type="checkbox" value="<?=$row['id']?>" checked="checked" style="display:none;"/><?php endif; ?>
 						<a href="/account/cart_del/<?=$row['id']?>" class="delete" title="удалить из корзины">x</a>
-						<? if ($row['kind'] == 1): ?>
+						<?php if ($row['kind'] == 1): ?>
 						<p>
 							Цена покупки: <span><?= $row['price_1']?> руб.</span>
 						</p>
-						<? else : ?>
+						<?php else : ?>
 						<p>
 							Цена выкупа: <span><?= $row['price_2']?> руб.</span>
 						</p>
-						<? endif; ?>
+						<?php endif; ?>
 					</div>
 				</li>
-				<? endforeach; ?>
+				<?php endforeach; ?>
 			</ul>
 			<div class="clear"></div>
 			<div class="userBasketBottom">
@@ -69,12 +69,12 @@
 			</div>
 		</div>
 	</form>
-	<? else : ?>
+	<?php else : ?>
 	<div class="userBasketHeader">
 		<h3>Корзина:</h3>
 	</div>
 	<div class="contentWrapperBorderLeft" style="min-height: 500px;">
 		<p>Корзина пуста.</p>
 	</div>
-	<? endif; ?>
+	<?php endif; ?>
 </div>

@@ -1,8 +1,7 @@
 <div class="sideBar">
 	<div class="designsCategories">
 		<h3><a href="/users/all/">Все дизайнеры</a></h3>
-		<?
-		if( !empty($category) )
+		<?php if( !empty($category) )
 		{
 			$active = $category;
 			foreach($categories as $row):
@@ -16,31 +15,31 @@
 		}
 		?>
 		<ul>
-		<? foreach($categories as $row): ?> 
+		<?php foreach($categories as $row): ?> 
 
-			<? if( $row['parent_id'] == 0 ) :?>
-				<li class="<? if( !empty($active) and $row['id'] == $active ): ?>active<? endif ?>"><a href="/users/search/?category=<?=$row['id']?>"><?=$row['name']?></a>
-			<? endif; ?>
+			<?php if( $row['parent_id'] == 0 ) :?>
+				<li class="<?php if( !empty($active) and $row['id'] == $active ): ?>active<?php endif ?>"><a href="/users/search/?category=<?=$row['id']?>"><?=$row['name']?></a>
+			<?php endif; ?>
 
-			<? if( !empty($active) and $active == $row['id'] ):?>
+			<?php if( !empty($active) and $active == $row['id'] ):?>
 				<ul>
-				<? foreach($categories as $row2): ?>
-					<? if( $row['id'] == $row2['parent_id'] ): ?>
+				<?php foreach($categories as $row2): ?>
+					<?php if( $row['id'] == $row2['parent_id'] ): ?>
 						<li class="lvl-2"><a href="/users/search/?category=<?=$row2['id']?>"><?=$row2['name']?></a> <span>(<?=$row2['number']?>)</span></li>
-					<? endif; ?>
-				<? endforeach; ?>
+					<?php endif; ?>
+				<?php endforeach; ?>
 				</ul>
 			</li>
-			<? else: ?>
-				<? if ($row['parent_id']==0){ echo "</li>"; }?>
-			<? endif; ?>
-		<? endforeach; ?>
+			<?php else: ?>
+				<?php if ($row['parent_id']==0){ echo "</li>"; }?>
+			<?php endif; ?>
+		<?php endforeach; ?>
 		</ul>
-		<? if( !empty($users_descr) ): ?>
+		<?php if( !empty($users_descr) ): ?>
 			<div class="sideblock nomargin">
 				<p class="freetext"><?=$users_descr?></p>
 			</div>	
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>
 			<div class="content">
@@ -66,16 +65,16 @@
 								<label>Категория:</label>
 								<select name="category">
 									<option value="">Не важно</option>
-									<? foreach($categories as $row): ?> 
-										<? if( $row['parent_id'] == 0): ?>
+									<?php foreach($categories as $row): ?> 
+										<?php if( $row['parent_id'] == 0): ?>
 											<optgroup label="<?=$row['name']?>">
-										<? endif; ?>
-										<? foreach($categories as $row2): ?>
-											<? if( $row['id'] == $row2['parent_id'] ): ?>
-												<option value="<?=$row2['id']?>"<? if( $input['category'] == $row2['id']): ?>selected="selected<? endif; ?>"><?=$row2['name']?></option>
-											<? endif; ?>
-										<? endforeach; ?>
-									<? endforeach; ?>
+										<?php endif; ?>
+										<?php foreach($categories as $row2): ?>
+											<?php if( $row['id'] == $row2['parent_id'] ): ?>
+												<option value="<?=$row2['id']?>"<?php if( $input['category'] == $row2['id']): ?>selected="selected<?php endif; ?>"><?=$row2['name']?></option>
+											<?php endif; ?>
+										<?php endforeach; ?>
+									<?php endforeach; ?>
 								</select>
 							</fieldset>
 							<fieldset>
@@ -206,19 +205,19 @@
 					<div class="searchResultsHeader">
 						<div class="sortBy">
 							<p>сортировать по:</p>
-							<? if( $input['order_field'] == 'rating' and	$input['order_type'] == 'desc' ): ?>
-								<a class="abs" href="/users/search/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Рейтинг &darr;</a>
-							<? else: ?>
-								<a href="/users/search/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>">Рейтинг &uarr;</a>
-							<? endif; ?>
+							<?php if( $input['order_field'] == 'rating' and	$input['order_type'] == 'desc' ): ?>
+								<a class="abs" href="/users/search/?order_field=rating&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">Рейтинг &darr;</a>
+							<?php else: ?>
+								<a href="/users/search/?order_field=rating<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">Рейтинг &uarr;</a>
+							<?php endif; ?>
 						</div>
 						<h3>Результаты поиска:</h3>
 					</div>
 					<div class="searchResultsList">
-						<? if( !empty($data) ): $n = 0; ?>
+						<?php if( !empty($data) ): $n = 0; ?>
 							<!-- ?=show_highslide()? -->
 							<ul class="designersList">
-							<? foreach($data as $row => $value): ?>
+							<?php foreach($data as $row => $value): ?>
 								<li>
 									<p class="number"><?=$row+1?></p>
 									<a href="/user/<?=$value['username']?>" title="перейти к портфолио" class="avatar <?=$value['tariffname']?>">
@@ -238,18 +237,18 @@
 									<!-- Не уверен, что это рейтинг -->
 									<div class="rating"><?=$value['rating']?></div>
 								</li>
-							<? endforeach; ?>
+							<?php endforeach; ?>
 							</ul>
-						<? else: ?>
+						<?php else: ?>
 							<p>Пользователей не найдено.</p>
-						<? endif; ?>
+						<?php endif; ?>
 						<div class="paginationControl">
 							<?=$page_links?>
 						</div>
 						<div class="itemsOnPage">
 							<p>кол-во результатов на страницу:</p>
 							<ul class="pageList">
-							<? $results = array(10,20,50,100);
+							<?php $results = array(10,20,50,100);
 								foreach ($results as $items){
 									if($items==$input['result']){
 										echo "<li class=\"active\">".$items."</li>";

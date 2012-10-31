@@ -1,4 +1,4 @@
-<? if (! empty($data)): ?>
+<?php if (! empty($data)): ?>
 <form action="/contacts/move" method="post">
 	<table class="contractors">
 		<tr>
@@ -6,7 +6,7 @@
 			<td class="topline title">Пользователь</td>
 			<td class="topline rht" style="width:100px;">Число сообщений</td>
 		</tr>
-		<? foreach ($data as $row): ?>
+		<?php foreach ($data as $row): ?>
 		<tr>
 			<td class="num">
 				<input name="users[]" value="<?=$row['id']?>" type="checkbox" />
@@ -47,10 +47,10 @@
 				)
 			</td>
 		</tr>
-		<? endforeach; ?>
+		<?php endforeach; ?>
 	</table>
 </form>
 <?= $page_links?>
-<? else : ?>
+<?php else : ?>
 <p>Контакты не найдены.</p>
-<? endif; ?>
+<?php endif; ?>

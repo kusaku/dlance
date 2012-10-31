@@ -1,29 +1,43 @@
-<? $this->load->view('wdesigns/users/block'); ?>
-
+<?php $this->load->view('wdesigns/users/block'); ?>
 <div class="content">
-	<? if( !empty($data) ): ?>
-	<? foreach($data as $row): ?>
-	<div class="userPortfolioHeader">
-		<h3><?=$row['category']?>:</h3>
+	<?php if (! empty($data)): ?>
+	<?php foreach ($data as $cat_name_path=>$designs): ?>
+	<div class="userPortfolioHeader top">
+		<h3><?= $cat_name_path?>:</h3>
 		<ul class="userPortfolioCategory">
-			<li><a href="#" class="active">сайты:</a> <span>99</span></li>
-			<li><a href="#">баннеры:</a> <span>99</span></li>
-			<li><a href="#">flash анимация:</a> <span>99</span></li>
-			<li><a href="#">все работы</a></li>
-		</ul>
-	</div>
-	<div class="userPortfolioList">
-		<ul class="worksList">
-			<li>
-				<a href="<?=$row['full_image']?>" class="zoom" title="zoom prewiev"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a>
-				<a href="/account/cart_add/<?=$row['id']?>" class="sign"><?=$row['status']?></a>
-			</li>
-		</ul>
-	</div>
-	<? endforeach; ?>
-	<div class="contentWrapperBorderLeft" style="height:200px;">
-	</div>
-	<? else: ?>
-		<p>Дизайны отсутствуют.</p>
-	<? endif; ?>
+		<?php
+		/*
+		 <li>
+		 <a href="#" class="active">сайты:</a>
+		 <span>99</span>
+		 </li>
+		 <li>
+		 <a href="#">баннеры:</a>
+		 <span>99</span>
+		 </li>
+		 <li>
+		 <a href="#">flash анимация:</a>
+		 <span>99</span>
+		 </li>
+		 <li>
+		 */
+		?>
+		<a href="#">все работы</a>
+		</li>
+	</ul>
+</div>
+<div class="userPortfolioList">
+	<ul class="worksList">
+		<?php foreach ($designs as $row): ?>
+		<li>
+			<a href="<?=$row['full_image']?>" class="zoom" title="zoom prewiev"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a><a href="#" class="sign"><?= $row['status']?></a>
+		</li>
+		<?php endforeach; ?>
+	</ul>
+</div>
+<?php endforeach; ?>
+<div class="contentWrapperBorderLeft" style="height:200px;"></div>
+<?php else : ?>
+<p>Дизайны отсутствуют.</p>
+<?php endif; ?>
 </div>

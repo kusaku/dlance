@@ -2,11 +2,11 @@
 	<div class="designsCategories">
 		<h3><a href="/blogs">Все блоги</a></h3>
 		<ul>
-			<? foreach ($categories as $row): ?>
+			<?php foreach ($categories as $row): ?>
 			<li class="lvl-1">
 				<a href="/blogs/index/?category=<?=$row['id']?>"><?= $row['name']?></a>
 			</li>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 		</ul>
 	</div>
 </div>
@@ -15,8 +15,8 @@
 		<a href="/blogs/add/"><b>+ Добавить запись</b></a>
 	</div>
 	<br/>
-	<? if (! empty($blogs)): ?>
-	<? foreach ($blogs as $row): ?>
+	<?php if (! empty($blogs)): ?>
+	<?php foreach ($blogs as $row): ?>
 	<div class="blogTitle">
 		<a href="/blogs/<?=$row['id']?>.html"><?= $row['title']?></a>
 	</div>
@@ -31,9 +31,9 @@
 		&nbsp;|&nbsp; Категория: <a href="/blogs/index/?category=<?=$row['category_id']?>"><?= $row['category']?></a>
 		&nbsp;|&nbsp; <span>Автор: <a href="/user/<?=$row['username']?>"><?= $row['username']?></a></span>
 	</div>
-	<? endforeach; ?>
+	<?php endforeach; ?>
 	<?= $page_links?>
-	<? else : ?>
+	<?php else : ?>
 	<p>Ничего не найдено.</p>
-	<? endif; ?>
+	<?php endif; ?>
 </div>

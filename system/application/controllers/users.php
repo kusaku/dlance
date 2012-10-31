@@ -1,7 +1,7 @@
 <?php 
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-	
+
 class Users extends Controller {
 	public $user_id;
 	
@@ -41,8 +41,10 @@ class Users extends Controller {
 
 	function _email_support($data) {
 		//Админу
-		$email = $this->config->item('email');
-		$subject = $data['subject'];
+		//$email = $this->config->item('email');
+		// XXX добавить в конфиг!
+		$email = 'dlance-fos@fabricasaitov.ru';
+		$subject = nl2br($data['subject']);
 		
 		if ( empty($email)) {
 			return FALSE;
@@ -99,8 +101,7 @@ class Users extends Controller {
 			$rnd_str = random_string('numeric', 6);
 			
 			//Записываем строку в сессии
-			$ses_data = array(
-			);
+			$ses_data = array( );
 			$ses_data['captcha_rnd_str'] = $rnd_str;
 			
 			$this->session->set_userdata($ses_data);
@@ -108,8 +109,7 @@ class Users extends Controller {
 			//Форумируем картинку
 			$vals = array(
 				'word'=>$rnd_str,'img_path'=>'./img/captcha/','img_url'=>base_url().'img/captcha/',
-					'font_path'=>'./system/fonts/texb.tff','img_width'=>120,'img_height'=>30,
-					'expiration'=>10
+					'font_path'=>'./system/fonts/texb.tff','img_width'=>120,'img_height'=>30,'expiration'=>10
 			);
 			
 			$cap = create_captcha($vals);
@@ -154,9 +154,9 @@ class Users extends Controller {
 			
 			$res['code'] = $code;
 		} else {
-			$res['username_err'] = iconv('windows-1251', 'UTF-8', form_error('username'));
+			$res['username_err'] = form_error('username');
 			
-			$res['email_err'] = iconv('windows-1251', 'UTF-8', form_error('email'));
+			$res['email_err'] = form_error('email');
 		}
 		
 		echo json_encode($res);
@@ -298,8 +298,7 @@ class Users extends Controller {
 			$rnd_str = random_string('numeric', 6);
 			
 			//Записываем строку в сессии
-			$ses_data = array(
-			);
+			$ses_data = array( );
 			$ses_data['captcha_rnd_str'] = $rnd_str;
 			
 			$this->session->set_userdata($ses_data);
@@ -307,8 +306,7 @@ class Users extends Controller {
 			//Форумируем картинку
 			$vals = array(
 				'word'=>$rnd_str,'img_path'=>'./img/captcha/','img_url'=>base_url().'img/captcha/',
-					'font_path'=>'./system/fonts/texb.tff','img_width'=>120,'img_height'=>30,
-					'expiration'=>10
+					'font_path'=>'./system/fonts/texb.tff','img_width'=>120,'img_height'=>30,'expiration'=>10
 			);
 			
 			$cap = create_captcha($vals);
@@ -324,7 +322,7 @@ class Users extends Controller {
 	 * ---------------------------------------------------------------
 	 */
 
-	function all($start_page = 0) {
+	function index($start_page = 0) {
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 		
 		$per_page = 10;
@@ -336,8 +334,7 @@ class Users extends Controller {
 		
 		$category_array = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		$url = '';
 		
@@ -420,7 +417,7 @@ class Users extends Controller {
 			'order_type'=>(isset($input['order_type'])) ? $input['order_type'] : 'desc',
 		);
 		
-		$this->template->build('users/all', $data, $title);
+		$this->template->build('users/index', $data, $title);
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -442,8 +439,7 @@ class Users extends Controller {
 		
 		$category = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		$title = 'Поиск дизайнера';
 		
@@ -575,13 +571,11 @@ class Users extends Controller {
 			'keywords'=>(isset($input['keywords'])) ? $input['keywords'] : '','country_id'=>(isset($input['country_id'])) ? $input['country_id'] : '',
 				'city_id'=>(isset($input['city_id'])) ? $input['city_id'] : '','age_start'=>(isset($input['age_start'])) ? $input['age_start'] : '',
 				'age_end'=>(isset($input['age_end'])) ? $input['age_end'] : '','price_1_start'=>(isset($input['price_1_start'])) ? $input['price_1_start'] : '',
-				'price_1_end'=>(isset($input['price_1_end'])) ? $input['price_1_end'] : '',
-				'price_2_start'=>(isset($input['price_2_start'])) ? $input['price_2_start'] : '',
-				'price_2_end'=>(isset($input['price_2_end'])) ? $input['price_2_end'] : '',
-				'category'=>$category,'order_field'=>(isset($input['order_field'])) ? $input['order_field'] : '',
+				'price_1_end'=>(isset($input['price_1_end'])) ? $input['price_1_end'] : '','price_2_start'=>(isset($input['price_2_start'])) ? $input['price_2_start'] : '',
+				'price_2_end'=>(isset($input['price_2_end'])) ? $input['price_2_end'] : '','category'=>$category,
+				'order_field'=>(isset($input['order_field'])) ? $input['order_field'] : '',
 			//Если не задан ордер тип, ставим desc
-			'order_type'=>(isset($input['order_type'])) ? $input['order_type'] : 'desc',
-				'result'=>$per_page,
+			'order_type'=>(isset($input['order_type'])) ? $input['order_type'] : 'desc','result'=>$per_page,
 		);
 		
 		$data['categories'] = $this->categories_mdl->get_categories_for_users();
@@ -653,65 +647,7 @@ class Users extends Controller {
 		
 		$this->template->build('users/services', $data, $title);
 	}
-	/**
-	 * ---------------------------------------------------------------
-	 *	Подписчики
-	 * ---------------------------------------------------------------
-	 */
-
-	function followers($username = '', $start_page = 0) {
-		if (!$data = $this->users_mdl->get($username)) {
-			show_404('page');
-		}
-		
-		if ($cause = $this->_check_banned($data['id'])) {
-			show_error('Пользователь заблокирован.<br><br>Причина: '.$cause.'');
-		}
-		
-		parse_str($_SERVER['QUERY_STRING'], $_GET);
-		
-		$type = '';
-		
-		if (! empty($_GET['type'])) {
-			$type = $_GET['type'];
-			
-			$url['type'] = 'type='.$_GET['type'];
-		}
-		
-		$this->users_mdl->update_views($data['id']);
-		
-		$data['positive'] = $this->reviews_mdl->count_reviews_positive($data['id']);
-		
-		$data['negative'] = $this->reviews_mdl->count_reviews_negative($data['id']);
-		
-		$per_page = 10;
-		
-		$start_page = intval($start_page);
-		if ($start_page < 0) {
-			$start_page = 0;
-		}
-		
-		$config['uri_segment'] = '4';
-		$config['base_url'] = base_url().'/users/followers/'.$username.'';
-		//$this->reviews_mdl->count_reviews($data['id'], $type);
-		$config['total_rows'] = 10;
-		$config['per_page'] = $per_page;
-		
-		$this->pagination->initialize($config);
-		
-		$data['page_links'] = $this->pagination->create_links();
-		
-		if (! empty($url)) {
-			$url = implode("&", $url);
-			$data['page_links'] = str_replace('">', '/?'.$url.'">', $data['page_links']);
-		}
-		
-		$data['followers'] = $this->account_mdl->get_followers($start_page, $per_page, $data['id']);
-		
-		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Отзывы';
-		
-		$this->template->build('users/followers', $data, $title);
-	}
+	
 	/**
 	 * ---------------------------------------------------------------
 	 *	Отзывы пользователя
@@ -866,6 +802,53 @@ class Users extends Controller {
 	}
 	/**
 	 * ---------------------------------------------------------------
+	 *	Подписаться
+	 * ---------------------------------------------------------------
+	 */
+	//Проверяем подписан ли подписчик уже, если нет добавляем
+
+	function subscribe($user = '') {
+		if (!$this->errors->access()) {
+			return;
+		}
+		
+		$user_id = $this->users_mdl->get_id($user);
+		if (is_numeric($user_id) and !$this->_check_subscribe($user_id)) {
+			$data = array(
+				'user_id'=>$this->user_id,'date'=>now(),'follows'=>$user_id
+			);
+			
+			$this->account_mdl->add('users_followers', $data);
+		}
+		
+		redirect('user/'.$user);
+	}
+	/**
+	 * ---------------------------------------------------------------
+	 *	Удаление подписки
+	 * ---------------------------------------------------------------
+	 */
+
+	function unsubscribe($user = '') {
+		if (!$this->errors->access()) {
+			return;
+		}
+		
+		$user_id = $this->users_mdl->get_id($user);
+		if (is_numeric($user_id) and $this->_check_subscribe($user_id)) {
+			$this->account_mdl->subscribe_del($this->user_id, $user_id);
+		}
+		
+		redirect('user/'.$user);
+	}
+
+	function _check_subscribe($user_id) {
+		//Если пользователь уже находится в подписчиках
+		return $this->account_mdl->subscribe_check($this->user_id, $user_id) > 0 ? TRUE : FALSE;
+	}
+	
+	/**
+	 * ---------------------------------------------------------------
 	 *	Дизайны пользователя
 	 * ---------------------------------------------------------------
 	 */
@@ -889,22 +872,25 @@ class Users extends Controller {
 			$start_page = 0;
 		}
 		
-		$input['user_id'] = $data['id'];
-		
 		$config['uri_segment'] = '4';
-		$config['base_url'] = base_url().'/users/designs/'.$username.'';
-		$config['total_rows'] = $this->designs_mdl->count_designs($input);
+		$config['base_url'] = base_url().'/users/'.$username;
 		$config['per_page'] = $per_page;
 		
 		$this->pagination->initialize($config);
 		
 		$data['page_links'] = $this->pagination->create_links();
 		
-		$data['data'] = $this->designs_mdl->get_designs($start_page, $per_page, $input);
+		$categories = $this->designs_mdl->get_categories();
 		
-		$data['used_colors'] = $this->designs_mdl->used_colors($data['id']);
+		foreach ($this->designs_mdl->get_user_designs($data['id'], $start_page, $per_page) as $item) {
+			// невротебенно же!
+			$cat_name_path = implode(' &gt ', $categories[$item['category']]['name_path']);
+			$designs[$cat_name_path][] = $item;
+		}
 		
-		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Портфолио';
+		$data['data'] = $designs;
+		
+		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Дизайны';
 		
 		$this->template->build('users/designs', $data, $title);
 	}
@@ -1014,7 +1000,7 @@ class Users extends Controller {
 	}
 
 	function _login_check($username) {
-		if ($this->users_mdl->login($username, $this->input->post('password'))) {
+		if ($this->users_mdl->login($username, $this->input->post('password'), TRUE, $this->input->post('rcookiettl'))) {
 			return TRUE;
 		}
 		

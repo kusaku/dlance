@@ -34,12 +34,12 @@
 				<label for="title">Группа</label>
 				<select name="team" style="width:100%">
 					<option></option>
-					<? foreach ($teams as $row): ?>
+					<?php foreach ($teams as $row): ?>
 					<option value="<?=$row['id']?>"
-						<? if ($team == $row['id']): ?> selected="selected" <? endif; ?>>
+						<?php if ($team == $row['id']): ?> selected="selected" <?php endif; ?>>
 						<?= $row['name']?>
 					</option>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 				</select>
 			</p>
 		</div>

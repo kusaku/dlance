@@ -1,16 +1,16 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div id="yui-main">
 	<div class="yui-b">
 		<h1><a href="/blogs/articles">Записи</a></h1>
 		<p class="subtitle">
 			Список ваших записей. Для публикации новой записи нажмите: "<a href="/blogs/add">Добавить запись</a>"
 		</p>
-		<? if (! empty($data)): ?>
+		<?php if (! empty($data)): ?>
 		<table class="listorder">
 			<tr>
 				<td class="topline lft txtl">Заголовок</td>
 			</tr>
-			<? foreach ($data as $row): ?>
+			<?php foreach ($data as $row): ?>
 			<tr>
 				<td class="ordertitle">
 					<a href="/blogs/<?=$row['id']?>.html"><?= $row['title']?></a>
@@ -24,12 +24,12 @@
 					</div>
 				</td>
 			</tr>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 		</table>
 		<?= $page_links?>
-		<? else : ?>
+		<?php else : ?>
 		<p>Записи отсутствуют.</p>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>
 <!--/yui-main-->

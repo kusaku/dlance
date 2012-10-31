@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div class="content">
 	<div class="cartResults">
 		<div class="userBasketHeader">
@@ -6,9 +6,9 @@
 		</div>
 		<div class="contentWrapperBorderLeft">
 			<div class="searchResultsList">
-				<? if (! empty($data)): ?>
+				<?php if (! empty($data)): ?>
 				<ul class="designsList">
-					<? foreach ($data as $row): ?>
+					<?php foreach ($data as $row): ?>
 					<li>
 						<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
 						<p>
@@ -31,7 +31,7 @@
 							<a href="/account/create_download/<?=$row['design_id']?>">Перейти к скачке</a>
 						</p>
 					</li>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 				</ul>
 				<div class="paginationControl">
 					<?= $page_links?>
@@ -40,7 +40,7 @@
 				<div class="itemsOnPage">
 				<p>кол-во дизайнов на страницу:</p>
 				<ul class="pageList">
-				<? $results = array(10,20,50,100);
+				<?php $results = array(10,20,50,100);
 				foreach ($results as $items){
 				if($items==$input['result']){
 				echo "<li class=\"active\">".$items."</li>";
@@ -58,9 +58,9 @@
 				</ul>
 				</div>
 				-->
-				<? else : ?>
+				<?php else : ?>
 				<p>Дизайны отсутствуют.</p>
-				<? endif; ?>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>

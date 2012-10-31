@@ -1,5 +1,6 @@
+<?php $this->load->view('wdesigns/account/block'); ?>
 <?=validation_errors()?>
-<? if( !empty($error) ) {?><?=$error?><? } ?>
+<?php if( !empty($error) ) {?><?=$error?><?php } ?>
 <h1 class="title">Форма добавления работы</h1>
 <p class="subtitle">Добавить работу</p>
 <form action="" method="post" enctype="multipart/form-data"/>

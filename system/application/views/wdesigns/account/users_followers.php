@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 
 <div class="content">
 	<div class="userResponseHeader">
@@ -10,9 +10,9 @@
 		<h3>Рассылка по пользователям:</h3>
 	</div>
 	<div class="contentWrapperBorderLeft" style="min-height:580px;">
-		<? if( !empty($data) ): ?>
+		<?php if( !empty($data) ): ?>
 		<ul class="subscribersList">
-			<? foreach($data as $row): ?>
+			<?php foreach($data as $row): ?>
 			<li>
 				<div class="userInfo">
 					<div class="avatar lite">
@@ -22,13 +22,13 @@
 					<div class="tooltip"><p><span><a href="/user/<?=$row['username']?>" title="перейти к портфолио <?=$row['username']?>"><?=$row['username']?></a> <a href="/account/subscribe_del/<?=$row['follows']?>" class="delete">x</a></span></p></div>
 				</div>
 			</li>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 		</ul>
 		<div class="paginationControl">
 			<?=$page_links?>
 		</div>
-		<? else: ?>
+		<?php else: ?>
 			<p>Подписчики отсутствуют.</p>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>

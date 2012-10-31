@@ -15,7 +15,7 @@ strong {font-weight:bold;}
 em {font-style:italic;}
 
 a {color:#818181; text-decoration:underline;}
-a:hover {color:#ff7b0b; text-decoration:none;}
+a:hover, a:active, a.active {color:#ff7b0b; text-decoration:none;}
 
 .wrapper,
 .header,
@@ -61,10 +61,10 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .navBlock .fastSearch .submitFastSearch {background:url(../images/searchbtn.png) #ff7900; border:0; display:inline-block; width:60px; height:20px; padding:0 0 3px 8px; float:left;color:#ffffff; text-decoration:underline; font-size:12px; line-height:18px;text-align:left; cursor:pointer;vertical-align:baseline}
 .navBlock ul{display:inline-block; list-style:none; padding:10px 0; margin:0;}
 .navBlock ul li{display:inline-block; float:left; margin:0 15px 0 0;}
-.navBlock ul li a{display:block; padding:0 0 0 6px; font-size:110%;}
+.navBlock ul li a{display:block; padding:0 0 0 6px; font-size:120%;}
 .navBlock ul li a span{display:block; padding:2px 6px 2px 0;}
-.navBlock ul li a:hover{background:#ff7900 url(../images/menua.png) top left no-repeat; border-radius:3px; color:#ffffff;}
-.navBlock ul li a:hover span{display:block; border-radius:3px; background:#ff7900 url(../images/menua.png) top right no-repeat;}
+.navBlock ul li a:hover, .navBlock ul li a.active{background:#ff7900 url(../images/menua.png) top left no-repeat; border-radius:3px; color:#ffffff;}
+.navBlock ul li a:hover span,.navBlock ul li a.active span{display:block; border-radius:3px; background:#ff7900 url(../images/menua.png) top right no-repeat;}
 .navBlock .leftMenu {float:left;}
 .navBlock .rightMenu {float:right;}
 
@@ -111,7 +111,6 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .sideBar .designsCategories ul ul {margin:0 0 0 1em;}
 .sideBar .designsCategories ul a {font-size:12px;}
 .sideBar .designsCategories ul a:hover,
-.sideBar .designsCategories ul a.active {color:#ff7b0b; text-decoration:none;}
 .sideBar .designsCategories ul ul a {color:#b2c4c8;}
 .sideBar .designsCategories ul span {color:#ff7b0b;}
 
@@ -229,7 +228,6 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main .content .paginationControl ul li, .paginationControl span {padding:0 3px;}
 .main .content .paginationControl a {text-decoration:underline; color:#828282;}
 .main .content .paginationControl a:hover {text-decoration:none; color:#828282;}
-.main .content .paginationControl .active {color:#ff7900;}
 
 .main .content .itemsOnPage {padding:0 15px 0 0; line-height:16px; font-size:10px;}
 .main .content .itemsOnPage *{float:left; margin:0;}
@@ -237,7 +235,6 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .main .content .itemsOnPage ul li, .paginationControl span {padding:0 3px;}
 .main .content .itemsOnPage  a {text-decoration:underline; color:#828282;}
 .main .content .itemsOnPage  a:hover {text-decoration:none; color:#828282;}
-.main .content .itemsOnPage  .active {color:#ff7900;}
 
 .main .content .templateCardHeader {display:block; height:26px; width:750px; background:url(../images/headertempl.png) 0 0 no-repeat #ffffff; color:#ffffff; line-height:18px;}
 .main .content .templateCardHeader h3{font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; display:inline-block; margin:0;}
@@ -407,7 +404,6 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 /*.userInfo p.contacts a{color:#ff7900; text-decoration:none;}*/
 .userInfo a.name {color:#000000;}
 .userInfo span {display:inline; width:45px;} 
-.userInfo a.active {text-decoration:none; color:#ff7900;}
 
 .sideBar .userInfo a.name {color:#000000; text-decoration:none;}
 .sideBar .userInfo span {color:#ff7900;}
@@ -418,8 +414,6 @@ a:hover {color:#ff7b0b; text-decoration:none;}
 .sideTabsBlock ul li {margin:3px 0;}
 .sideTabsBlock ul ul {margin:0 0 0 1em;}
 .sideTabsBlock ul{font-size:12px;}
-.sideTabsBlock ul a:hover,
-.sideTabsBlock ul a.active {color:#ff7b0b; text-decoration:none;}
 .sideTabsBlock ul ul a {color:#b2c4c8;}
 .sideTabsBlock ul span {color:#ff7b0b;}
 

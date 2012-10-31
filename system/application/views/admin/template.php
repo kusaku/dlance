@@ -282,12 +282,12 @@
 			
 					}
 					
-					<? if( $count_new_reports ): ?>
+					<?php if( $count_new_reports ): ?>
 						notify('Новые жалобы');
-					<? endif; ?>
+					<?php endif; ?>
 				
 		</script>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1251"></head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
 	<body>
 		<!-- The template uses conditional comments to add wrappers div for ie8 and ie7 - just add .ie or .ie7 prefix to your css selectors when needed --><!--[if lt IE 9]><div class="ie"><![endif]--><!--[if lt IE 8]><div class="ie7"><![endif]--><!-- Header --><!-- Server status -->
 		<header>
@@ -309,110 +309,110 @@
 		<!-- End server status --><!-- Main nav -->
 		<nav id="main-nav">
 			<ul class="container_12">
-				<li class="home<? if( $view == 'index' or $view == 'applications' or $view == 'mailer' ): ?> current<? endif; ?>" onClick="location.href='/administrator/'">
+				<li class="home<?php if( $view == 'index' or $view == 'applications' or $view == 'mailer' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/'">
 					<a href="#" title="Главная">Главная</a>
 					<ul>
-						<li<? if ($view == 'index'): ?> class="current"<? endif; ?>><a href="/administrator/" title="Статистика">Статистика</a>
+						<li<?php if ($view == 'index'): ?> class="current"<?php endif; ?>><a href="/administrator/" title="Статистика">Статистика</a>
 						</li>
-						<li<? if ($view == 'applications'): ?> class="current"<? endif; ?>><a href="/administrator/applications/" title="Заявки">Заявки</a>
+						<li<?php if ($view == 'applications'): ?> class="current"<?php endif; ?>><a href="/administrator/applications/" title="Заявки">Заявки</a>
 						</li>
-						<li<? if ($view == 'mailer'): ?> class="current"<? endif; ?>><a href="/administrator/mailer/" title="Рассылка">Рассылка</a>
+						<li<?php if ($view == 'mailer'): ?> class="current"<?php endif; ?>><a href="/administrator/mailer/" title="Рассылка">Рассылка</a>
 						</li>
 					</ul>
 				</li>
-				<li class="write<? if( $view == 'blogs' ): ?> current<? endif; ?>" onClick="location.href='/administrator/blogs/'">
+				<li class="write<?php if( $view == 'blogs' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/blogs/'">
 					<a href="#" title="Блоги">Блоги</a>
 					<ul>
-						<li<? if ($view == 'blogs'): ?> class="current"<? endif; ?>><a href="/administrator/blogs/" title="Записи">Записи</a>
+						<li<?php if ($view == 'blogs'): ?> class="current"<?php endif; ?>><a href="/administrator/blogs/" title="Записи">Записи</a>
 						</li>
 					</ul>
 				</li>
-				<li class="write<? if( $view == 'pages' or $view == 'pages_add' ): ?> current<? endif; ?>" onClick="location.href='/administrator/pages/'">
+				<li class="write<?php if( $view == 'pages' or $view == 'pages_add' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/pages/'">
 					<a href="#" title="Страницы">Страницы</a>
 					<ul>
-						<li<? if ($view == 'pages'): ?> class="current"<? endif; ?>><a href="/administrator/pages/" title="Список">Список</a>
+						<li<?php if ($view == 'pages'): ?> class="current"<?php endif; ?>><a href="/administrator/pages/" title="Список">Список</a>
 						</li>
-						<li<? if ($view == 'pages_add'): ?> class="current"<? endif; ?>><a href="/administrator/pages_add/" title="Добавить">Добавить</a>
+						<li<?php if ($view == 'pages_add'): ?> class="current"<?php endif; ?>><a href="/administrator/pages_add/" title="Добавить">Добавить</a>
 						</li>
 					</ul>
 				</li>
-				<li class="write<? if( $view == 'help_pages' or $view == 'help_pages_add' or $view == 'help_categories' or $view == 'help_categories_add' ): ?> current<? endif; ?>" onClick="location.href='/administrator/help_pages/'">
+				<li class="write<?php if( $view == 'help_pages' or $view == 'help_pages_add' or $view == 'help_categories' or $view == 'help_categories_add' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/help_pages/'">
 					<a href="#" title="Помощь">Помощь</a>
 					<ul>
-						<li<? if ($view == 'help_pages'): ?> class="current"<? endif; ?>><a href="/administrator/help_pages/" title="Страницы">Страницы</a>
+						<li<?php if ($view == 'help_pages'): ?> class="current"<?php endif; ?>><a href="/administrator/help_pages/" title="Страницы">Страницы</a>
 						</li>
-						<li<? if ($view == 'help_pages_add'): ?> class="current"<? endif; ?>><a href="/administrator/help_pages_add/" title="Добавить страницу">Добавить страницу</a>
+						<li<?php if ($view == 'help_pages_add'): ?> class="current"<?php endif; ?>><a href="/administrator/help_pages_add/" title="Добавить страницу">Добавить страницу</a>
 						</li>
-						<li<? if ($view == 'help_categories'): ?> class="current"<? endif; ?>><a href="/administrator/help_categories/" title="Категории">Категории</a>
+						<li<?php if ($view == 'help_categories'): ?> class="current"<?php endif; ?>><a href="/administrator/help_categories/" title="Категории">Категории</a>
 						</li>
-						<li<? if ($view == 'help_categories_add'): ?> class="current"<? endif; ?>><a href="/administrator/help_categories_add/" title="Добавить категорию">Добавить категорию</a>
+						<li<?php if ($view == 'help_categories_add'): ?> class="current"<?php endif; ?>><a href="/administrator/help_categories_add/" title="Добавить категорию">Добавить категорию</a>
 						</li>
 					</ul>
 				</li>
-				<li class="write<? if( $view == 'news' or $view == 'news_add' ): ?> current<? endif; ?>" onClick="location.href='/administrator/news/'">
+				<li class="write<?php if( $view == 'news' or $view == 'news_add' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/news/'">
 					<a href="#" title="Новости">Новости</a>
 					<ul>
-						<li<? if ($view == 'news'): ?> class="current"<? endif; ?>><a href="/administrator/news/" title="Список">Список</a>
+						<li<?php if ($view == 'news'): ?> class="current"<?php endif; ?>><a href="/administrator/news/" title="Список">Список</a>
 						</li>
-						<li<? if ($view == 'news_add'): ?> class="current"<? endif; ?>><a href="/administrator/news_add/" title="Добавить">Добавить</a>
+						<li<?php if ($view == 'news_add'): ?> class="current"<?php endif; ?>><a href="/administrator/news_add/" title="Добавить">Добавить</a>
 						</li>
 					</ul>
 				</li>
-				<li class="write<? if( $view == 'reports' ): ?> current<? endif; ?>" onClick="location.href='/administrator/reports/'">
+				<li class="write<?php if( $view == 'reports' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/reports/'">
 					<a href="#" title="Жалобы">Жалобы</a>
 					<ul>
-						<li<? if ($view == 'reports'): ?> class="current"<? endif; ?>><a href="/administrator/reports/" title="Список">Список</a>
+						<li<?php if ($view == 'reports'): ?> class="current"<?php endif; ?>><a href="/administrator/reports/" title="Список">Список</a>
 						</li>
 					</ul>
 				</li>
-				<li class="comments<? if( $view == 'categories' or $view == 'categories_add' ): ?> current<? endif; ?>" onClick="location.href='/administrator/categories/'">
+				<li class="comments<?php if( $view == 'categories' or $view == 'categories_add' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/categories/'">
 					<a href="#" title="Категории">Категории</a>
 					<ul>
-						<li<? if ($view == 'categories'): ?> class="current"<? endif; ?>><a href="/administrator/categories/" title="Список">Список</a>
+						<li<?php if ($view == 'categories'): ?> class="current"<?php endif; ?>><a href="/administrator/categories/" title="Список">Список</a>
 						</li>
-						<li<? if ($view == 'categories_add'): ?> class="current"<? endif; ?>><a href="/administrator/categories_add/" title="Добавить">Добавить</a>
+						<li<?php if ($view == 'categories_add'): ?> class="current"<?php endif; ?>><a href="/administrator/categories_add/" title="Добавить">Добавить</a>
 						</li>
 					</ul>
 				</li>
-				<li class="medias<? if( $view == 'designs' or $view == 'designs_categories' or $view == 'designs_categories_add' ): ?> current<? endif; ?>" onClick="location.href='/administrator/designs/'">
+				<li class="medias<?php if( $view == 'designs' or $view == 'designs_categories' or $view == 'designs_categories_add' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/designs/'">
 					<a href="#" title="Дизайны">Дизайны</a>
 					<ul>
-						<li<? if ($view == 'designs'): ?> class="current"<? endif; ?>><a href="/administrator/designs/" title="Список">Список</a>
+						<li<?php if ($view == 'designs'): ?> class="current"<?php endif; ?>><a href="/administrator/designs/" title="Список">Список</a>
 						</li>
-						<li<? if ($view == 'designs_categories'): ?> class="current"<? endif; ?>><a href="/administrator/designs_categories/" title="Категории">Категории</a>
+						<li<?php if ($view == 'designs_categories'): ?> class="current"<?php endif; ?>><a href="/administrator/designs_categories/" title="Категории">Категории</a>
 						</li>
-						<li<? if ($view == 'designs_categories_add'): ?> class="current"<? endif; ?>><a href="/administrator/designs_categories_add/" title="Добавить категорию">Добавить категорию</a>
+						<li<?php if ($view == 'designs_categories_add'): ?> class="current"<?php endif; ?>><a href="/administrator/designs_categories_add/" title="Добавить категорию">Добавить категорию</a>
 						</li>
 					</ul>
 				</li>
-				<li class="users<? if( $view == 'users' or $view == 'tariffs' or $view == 'tariffs_add' ): ?> current<? endif; ?>" onClick="location.href='/administrator/users/'">
+				<li class="users<?php if( $view == 'users' or $view == 'tariffs' or $view == 'tariffs_add' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/users/'">
 					<a href="#" title="Пользователи">Пользователи</a>
 					<ul>
-						<li<? if ($view == 'users'): ?> class="current"<? endif; ?>><a href="/administrator/users/" title="Список">Список</a>
+						<li<?php if ($view == 'users'): ?> class="current"<?php endif; ?>><a href="/administrator/users/" title="Список">Список</a>
 						</li>
-						<li<? if ($view == 'tariffs'): ?> class="current"<? endif; ?>><a href="/administrator/tariffs/" title="Тарифы">Тарифы</a>
+						<li<?php if ($view == 'tariffs'): ?> class="current"<?php endif; ?>><a href="/administrator/tariffs/" title="Тарифы">Тарифы</a>
 						</li>
-						<li<? if ($view == 'tariffs_add'): ?> class="current"<? endif; ?>><a href="/administrator/tariffs_add/" title="Добавить тариф">Добавить тариф</a>
+						<li<?php if ($view == 'tariffs_add'): ?> class="current"<?php endif; ?>><a href="/administrator/tariffs_add/" title="Добавить тариф">Добавить тариф</a>
 						</li>
 					</ul>
 				</li>
-				<li class="stats<? if( $view == 'transaction' or $view == 'purchased' ): ?> current<? endif; ?>" onClick="location.href='/administrator/transaction/'">
+				<li class="stats<?php if( $view == 'transaction' or $view == 'purchased' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/transaction/'">
 					<a href="#" title="Статистика">Статистика</a>
 					<ul>
-						<li<? if ($view == 'transaction'): ?> class="current"<? endif; ?>><a href="/administrator/transaction/" title="История операций">История операций</a>
+						<li<?php if ($view == 'transaction'): ?> class="current"<?php endif; ?>><a href="/administrator/transaction/" title="История операций">История операций</a>
 						</li>
-						<li<? if ($view == 'purchased'): ?> class="current"<? endif; ?>><a href="/administrator/purchased/" title="Покупки дизайнов">Покупки дизайнов</a>
+						<li<?php if ($view == 'purchased'): ?> class="current"<?php endif; ?>><a href="/administrator/purchased/" title="Покупки дизайнов">Покупки дизайнов</a>
 						</li>
 					</ul>
 				</li>
-				<li class="settings<? if( $view == 'settings' or $view == 'rating' or $view == 'profile' ): ?> current<? endif; ?>" onClick="location.href='/administrator/settings/'">
+				<li class="settings<?php if( $view == 'settings' or $view == 'rating' or $view == 'profile' ): ?> current<?php endif; ?>" onClick="location.href='/administrator/settings/'">
 					<a href="#" title="Настройки">Настройки</a>
 					<ul>
-						<li<? if ($view == 'settings'): ?> class="current"<? endif; ?>><a href="/administrator/settings/" title="Общии настройки">Общии настройки</a>
+						<li<?php if ($view == 'settings'): ?> class="current"<?php endif; ?>><a href="/administrator/settings/" title="Общии настройки">Общии настройки</a>
 						</li>
-						<li<? if ($view == 'rating'): ?> class="current"<? endif; ?>><a href="/administrator/rating/" title="Настройка рейтинга">Настройка рейтинга</a>
+						<li<?php if ($view == 'rating'): ?> class="current"<?php endif; ?>><a href="/administrator/rating/" title="Настройка рейтинга">Настройка рейтинга</a>
 						</li>
-						<li<? if ($view == 'profile'): ?> class="current"<? endif; ?>><a href="/administrator/profile/" title="Профиль">Профиль</a>
+						<li<?php if ($view == 'profile'): ?> class="current"<?php endif; ?>><a href="/administrator/profile/" title="Профиль">Профиль</a>
 						</li>
 					</ul>
 				</li>
@@ -462,8 +462,8 @@
 						<div id="comments-list" class="result-block">
 							<span class="arrow"><span></span></span>
 							<ul class="small-files-list icon-comment">
-								<? if (! empty($new_reports)): ?>
-								<? foreach ($new_reports as $row): ?>
+								<?php if (! empty($new_reports)): ?>
+								<?php foreach ($new_reports as $row): ?>
 								<li>
 									<a href="#" onClick="openModal(<?=$row['id']?>); return false;"><strong><?= $row['username']?></strong>: <?= $row['text']?>
 										<br>
@@ -472,8 +472,8 @@
 										</small>
 									</a>
 								</li>
-								<? endforeach; ?>
-								<? endif; ?>
+								<?php endforeach; ?>
+								<?php endif; ?>
 							</ul>
 							<p id="comments-info" class="result-info">
 								<a href="/administrator/reports/">Смотреть все &raquo;</a>

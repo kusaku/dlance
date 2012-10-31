@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div id="yui-main">
 	<div class="yui-b">
 		<h1><a href="/account/applications">Баланс</a></h1>

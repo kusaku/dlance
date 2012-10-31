@@ -36,7 +36,7 @@
 	<input type="button" id="sendbtn" value="Отправить" onclick="send()"/>
 </div>
 <br/>
-<? foreach ($data as $row): ?>
+<?php foreach ($data as $row): ?>
 <div class="rnd">
 	<div>
 		<div>
@@ -61,11 +61,11 @@
 					<tr>
 						<td class="caption">Цена:</td>
 						<td>
-							<? if ($row['kind'] == 1): ?>
+							<?php if ($row['kind'] == 1): ?>
 							Покупка: <?= $row['price_1']?>
-							<? else : ?>
+							<?php else : ?>
 							Выкуп: <?= $row['price_2']?>
-							<? endif; ?>
+							<?php endif; ?>
 						</td>
 					</tr>
 				</table>
@@ -73,4 +73,4 @@
 		</div>
 	</div>
 </div>
-<? endforeach; ?>
+<?php endforeach; ?>

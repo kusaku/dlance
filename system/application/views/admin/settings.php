@@ -28,12 +28,12 @@
 			<p>
 				<label for="title">Период добавления отзыва</label>
 				<select name="reviews_add">
-					<option value="1"<? if ($reviews_add == 1): ?> selected="selected"<? endif; ?>>1 час</option>
-					<option value="2"<? if ($reviews_add == 2): ?> selected="selected"<? endif; ?>>2 часа</option>
-					<option value="24"<? if ($reviews_add == 24): ?> selected="selected"<? endif; ?>>1 день</option>
-					<option value="48"<? if ($reviews_add == 48): ?> selected="selected"<? endif; ?>>2 дня</option>
-					<option value="168"<? if ($reviews_add == 168): ?> selected="selected"<? endif; ?>>1 неделя</option>
-					<option value="336"<? if ($reviews_add == 336): ?> selected="selected"<? endif; ?>>2 недели</option>
+					<option value="1"<?php if ($reviews_add == 1): ?> selected="selected"<?php endif; ?>>1 час</option>
+					<option value="2"<?php if ($reviews_add == 2): ?> selected="selected"<?php endif; ?>>2 часа</option>
+					<option value="24"<?php if ($reviews_add == 24): ?> selected="selected"<?php endif; ?>>1 день</option>
+					<option value="48"<?php if ($reviews_add == 48): ?> selected="selected"<?php endif; ?>>2 дня</option>
+					<option value="168"<?php if ($reviews_add == 168): ?> selected="selected"<?php endif; ?>>1 неделя</option>
+					<option value="336"<?php if ($reviews_add == 336): ?> selected="selected"<?php endif; ?>>2 недели</option>
 				</select>
 			</p>
 		</div>
@@ -41,12 +41,12 @@
 			<p>
 				<label for="title">Период загрузки</label>
 				<select name="download_period">
-					<option value="1"<? if ($download_period == 1): ?> selected="selected"<? endif; ?>>1 час</option>
-					<option value="2"<? if ($download_period == 2): ?> selected="selected"<? endif; ?>>2 часа</option>
-					<option value="24"<? if ($download_period == 24): ?> selected="selected"<? endif; ?>>1 день</option>
-					<option value="48"<? if ($download_period == 48): ?> selected="selected"<? endif; ?>>2 дня</option>
-					<option value="168"<? if ($download_period == 168): ?> selected="selected"<? endif; ?>>1 неделя</option>
-					<option value="336"<? if ($download_period == 336): ?> selected="selected"<? endif; ?>>2 недели</option>
+					<option value="1"<?php if ($download_period == 1): ?> selected="selected"<?php endif; ?>>1 час</option>
+					<option value="2"<?php if ($download_period == 2): ?> selected="selected"<?php endif; ?>>2 часа</option>
+					<option value="24"<?php if ($download_period == 24): ?> selected="selected"<?php endif; ?>>1 день</option>
+					<option value="48"<?php if ($download_period == 48): ?> selected="selected"<?php endif; ?>>2 дня</option>
+					<option value="168"<?php if ($download_period == 168): ?> selected="selected"<?php endif; ?>>1 неделя</option>
+					<option value="336"<?php if ($download_period == 336): ?> selected="selected"<?php endif; ?>>2 недели</option>
 				</select>
 			</p>
 		</div>
@@ -54,8 +54,8 @@
 			<p>
 				<label>Модерация</label>
 				<select name="moder">
-					<option value="0"<? if ($moder == 0): ?> selected="selected"<? endif; ?>>Выключена</option>
-					<option value="1"<? if ($moder == 1): ?> selected="selected"<? endif; ?>>Включена</option>
+					<option value="0"<?php if ($moder == 0): ?> selected="selected"<?php endif; ?>>Выключена</option>
+					<option value="1"<?php if ($moder == 1): ?> selected="selected"<?php endif; ?>>Включена</option>
 				</select>
 			</p>
 		</div>
@@ -99,8 +99,8 @@
 					<small>Режим взаимодействия с сервером</small>
 				</label>
 				<select name="pay_robox_mode">
-					<option value="0"<?if ($pay_robox_mode == 0){?>selected<? } ?>>Тестовый режим</option>
-					<option value="1"<?if ($pay_robox_mode == 1){?>selected<? } ?>>Боевой режим</option>
+					<option value="0"<?if ($pay_robox_mode == 0){?>selected<?php } ?>>Тестовый режим</option>
+					<option value="1"<?if ($pay_robox_mode == 1){?>selected<?php } ?>>Боевой режим</option>
 				</select>
 			</p>
 		</div>
@@ -152,8 +152,8 @@
 					<small>Проверка на наличие кошелька</small>
 				</label>
 				<select name="pay_qiwi_agt">
-					<option value="0"<?if ($pay_qiwi_agt == 0){?>selected<? } ?>>Нет</option>
-					<option value="1"<?if ($pay_qiwi_agt == 1){?>selected<? } ?>>Да</option>
+					<option value="0"<?if ($pay_qiwi_agt == 0){?>selected<?php } ?>>Нет</option>
+					<option value="1"<?if ($pay_qiwi_agt == 1){?>selected<?php } ?>>Да</option>
 				</select>
 			</p>
 		</div>

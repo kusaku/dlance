@@ -1,10 +1,10 @@
 <?php 
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-	
+
 class Users_mdl extends Model {
 
-	function login($username, $password, $hash = TRUE) {
+	function login($username, $password, $hash = TRUE, $remember = FALSE) {
 		if ( empty($username) || empty($password)) {
 			return FALSE;
 		}
@@ -37,6 +37,11 @@ class Users_mdl extends Model {
 			}
 			
 			$this->update_last_login($result->id);
+			
+			if ($remember) {
+				// 2 weeks
+				$this->session->sess_expiration = 60 * 60 * 24 * 7 * 2;
+			}
 			
 			$this->session->set_userdata('id', $result->id);
 			
@@ -234,7 +239,22 @@ class Users_mdl extends Model {
 			case 2:
 				$query['sex'] = 'Женский';
 				break;
+			default:
+				$query['sex'] = 'Не указано';
+				break;				
 		}
+		
+		$this->load->model(array(
+			'designs_mdl','reviews_mdl','account_mdl'
+		));
+		
+		// XXX bug? $this->designs_mdl and etc. is not loaded at this time!
+		$_ci = $this->common->_ci;
+		
+		$query['designs_count'] = $_ci->designs_mdl->count_user_designs($query['id']);
+		$query['services_count'] = $_ci->account_mdl->count_services($query['id']);
+		$query['reviews_count'] = $_ci->reviews_mdl->count_reviews($query['id']);
+		$query['subscribers_count'] = $_ci->account_mdl->count_followers($query['id']);
 		
 		return $query;
 	}
@@ -597,11 +617,10 @@ class Users_mdl extends Model {
 		$this->common->email($email, $subject = 'Активация аккаунта', $message);
 		
 		$data = array(
-			'username'=>$username,'email'=>$email,'password'=>$password,'name'=>$name,
-				'surname'=>$surname,'sex'=>$sex,'country_id'=>$country_id,'city_id'=>$city_id,
-				'day'=>$dob_day,'month'=>$dob_month,'year'=>$dob_year,'userpic'=>'/userpics/standart.jpg',
-				'ip_address'=>$this->input->ip_address(),'created'=>now(),'last_login'=>now(),
-				'active'=>0,'activation_code'=>$activation_code
+			'username'=>$username,'email'=>$email,'password'=>$password,'name'=>$name,'surname'=>$surname,
+				'sex'=>$sex,'country_id'=>$country_id,'city_id'=>$city_id,'day'=>$dob_day,'month'=>$dob_month,
+				'year'=>$dob_year,'userpic'=>'/userpics/standart.jpg','ip_address'=>$this->input->ip_address(),
+				'created'=>now(),'last_login'=>now(),'active'=>0,'activation_code'=>$activation_code
 		);
 		
 		$this->db->insert('users', $data);

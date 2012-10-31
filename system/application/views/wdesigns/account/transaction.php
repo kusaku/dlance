@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div class="content">
 	<div class="userMoneyHeader top">
 		<h3>История операций:</h3>
@@ -15,16 +15,16 @@
 		</ul>
 	</div>
 	<div class="userMoneyList">
-		<? if (! empty($data)): ?>
+		<?php if (! empty($data)): ?>
 		<ul class="worksList">
-			<? foreach ($data as $row): ?>
+			<?php foreach ($data as $row): ?>
 			<li>
 				<p class="type">
 					<?= $row['type']?>
-					<? //Если платеж с кодом протекции ?>
-					<? if ($row['type_id'] == 2 and $row['status'] == 1): ?>
+					<?php //Если платеж с кодом протекции ?>
+					<?php if ($row['type_id'] == 2 and $row['status'] == 1): ?>
 					(<?= $row['time']?>)
-					<? endif; ?>
+					<?php endif; ?>
 				</p>
 				<p class="date">
 					<?= $row['date']?>
@@ -36,17 +36,17 @@
 					<?= $row['descr']?>
 				</p>
 			</li>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 		</ul>
 		<div class="paginationControl">
 			<?= $page_links?>
 		</div>
-		<? else : ?>
+		<?php else : ?>
 		<ul class="worksList">
 			<li>
 				<p class="type">История отсутствует.</p>
 			</li>
 		</ul>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>

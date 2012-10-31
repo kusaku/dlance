@@ -24,16 +24,16 @@ Load the plugin using:
 
 Once loaded you'll add the calendar script to the <head> of your page like this:
 
-<?php echo js_calendar_script('my_form');  ?>
+<?= js_calendar_script('my_form');  ?>
 
 The above function will be passed the name of your form.
 
 Then to show the actual calendar you'll do this:
 
-<?php echo js_calendar_write('entry_date', time(), true);?>
+<?= js_calendar_write('entry_date', time(), true);?>
 <form name="my_form">
 <input type="text" name="entry_date" value="" onblur="update_calendar(this.name, this.value);" />
-<p><a href="javascript:void(0);" onClick="set_to_time('entry_date', '<?php echo time();?>')" >Today</a></p>
+<p><a href="javascript:void(0);" onClick="set_to_time('entry_date', '<?= time();?>')" >Today</a></p>
 </form>
 
 
@@ -132,30 +132,30 @@ ob_start();
 ?>
 <script type="text/javascript">
 <!--
-var form_name	= "<?php echo $form_name; ?>";
+var form_name	= "<?= $form_name; ?>";
 var format		= 'us'; // eu or us
 var days		= new Array(
-					'<?php echo $CI->lang->line('cal_su');?>', // Sunday, short name
-					'<?php echo $CI->lang->line('cal_mo');?>', // Monday, short name
-					'<?php echo $CI->lang->line('cal_tu');?>', // Tuesday, short name
-					'<?php echo $CI->lang->line('cal_wed');?>', // Wednesday, short name
-					'<?php echo $CI->lang->line('cal_thu');?>', // Thursday, short name
-					'<?php echo $CI->lang->line('cal_fri');?>', // Friday, short name
-					'<?php echo $CI->lang->line('cal_sat');?>' // Saturday, short name
+					'<?= $CI->lang->line('cal_su');?>', // Sunday, short name
+					'<?= $CI->lang->line('cal_mo');?>', // Monday, short name
+					'<?= $CI->lang->line('cal_tu');?>', // Tuesday, short name
+					'<?= $CI->lang->line('cal_wed');?>', // Wednesday, short name
+					'<?= $CI->lang->line('cal_thu');?>', // Thursday, short name
+					'<?= $CI->lang->line('cal_fri');?>', // Friday, short name
+					'<?= $CI->lang->line('cal_sat');?>' // Saturday, short name
 				);
 var months		= new Array(
-					'<?php echo $CI->lang->line('cal_january');?>',
-					'<?php echo $CI->lang->line('cal_february');?>',
-					'<?php echo $CI->lang->line('cal_march');?>',
-					'<?php echo $CI->lang->line('cal_april');?>',
-					'<?php echo $CI->lang->line('cal_mayl');?>',
-					'<?php echo $CI->lang->line('cal_june');?>',
-					'<?php echo $CI->lang->line('cal_july');?>',
-					'<?php echo $CI->lang->line('cal_august');?>',
-					'<?php echo $CI->lang->line('cal_september');?>',
-					'<?php echo $CI->lang->line('cal_october');?>',
-					'<?php echo $CI->lang->line('cal_november');?>',
-					'<?php echo $CI->lang->line('cal_december');?>'
+					'<?= $CI->lang->line('cal_january');?>',
+					'<?= $CI->lang->line('cal_february');?>',
+					'<?= $CI->lang->line('cal_march');?>',
+					'<?= $CI->lang->line('cal_april');?>',
+					'<?= $CI->lang->line('cal_mayl');?>',
+					'<?= $CI->lang->line('cal_june');?>',
+					'<?= $CI->lang->line('cal_july');?>',
+					'<?= $CI->lang->line('cal_august');?>',
+					'<?= $CI->lang->line('cal_september');?>',
+					'<?= $CI->lang->line('cal_october');?>',
+					'<?= $CI->lang->line('cal_november');?>',
+					'<?= $CI->lang->line('cal_december');?>'
 				);
 var last_click	= new Array();
 var current_month  = '';

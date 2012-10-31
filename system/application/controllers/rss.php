@@ -12,15 +12,11 @@ class Rss extends Controller {
 	}
 
 	function designs() {
-		$data['encoding'] = 'windows-1251';
-		
+		$data['encoding'] = 'UTF-8';
 		$data['feed_name'] = 'Дизайны сайтов | Dlance.ru';
-		
 		$data['feed_url'] = 'http://www.dlance.ru';
 		$data['page_description'] = 'Дизайны сайтов на сервисе Dlance.ru';
-		
 		$data['page_language'] = 'ru-ru';
-		
 		$data['posts'] = $this->designs_mdl->get_designs(0, 50);
 		
 		header("Content-Type: application/rss+xml");

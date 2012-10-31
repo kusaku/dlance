@@ -1,7 +1,7 @@
 <?php 
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-	
+
 class Contacts extends Controller {
 	public $user_id;
 	
@@ -76,7 +76,7 @@ class Contacts extends Controller {
 			$contacts['page_links'] = str_replace('">', '/?'.$url.'">', $contacts['page_links']);
 		}
 		
-		$data['contacts'] = $this->load->view('wdesigns/contacts/contacts', $contacts, TRUE);
+		$data['contactlist'] = $this->load->view('wdesigns/contacts/contacts', $contacts, TRUE);
 		
 		$this->template->build('contacts/view', $data, $title = 'Контакты / Сообщения');
 	}
@@ -132,12 +132,12 @@ class Contacts extends Controller {
 			return;
 		}
 		
-		if (!$contact = $this->users_mdl->get_id($username)) {
-			show_404('page');
+		if ($username == $this->username) {
+			redirect('contacts/');
 		}
 		
-		if ($contact == $this->user_id) {
-			redirect('contacts/');
+		if (!$contact = $this->users_mdl->get_id($username)) {
+			show_404('page');
 		}
 		
 		$rules = array(

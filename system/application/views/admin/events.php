@@ -15,31 +15,31 @@
 				<div class="no-margin">
 					<table cellspacing="0" class="list-calendar">
 						<tbody>
-							<? foreach ($days as $row=>$value): ?>
+							<?php foreach ($days as $row=>$value): ?>
 							<tr class="empty">
 								<th scope="row">
 									<?= $value?>
 								</th>
 								<td>
-									<? if (! empty($events[$value])): ?><? $cur_events = $events[$value]; ?>
+									<?php if (! empty($events[$value])): ?><?php $cur_events = $events[$value]; ?>
 									<ul class="events">
-										<? foreach ($events[$value] as $row=>$value): ?>
+										<?php foreach ($events[$value] as $row=>$value): ?>
 										<li>
 											<b><?= $value['date']?></b>
 											<strong><?= $value['username']?></strong>: <?= $value['title']?>
 										</li>
-										<? if ($row == 25): break; endif; ?>
-										<? endforeach; ?>
+										<?php if ($row == 25): break; endif; ?>
+										<?php endforeach; ?>
 									</ul>
 									<div class="more-events">
 										<a href="#">Смотреть остальные <?= count($cur_events)?> событий</a>
 									</div>
-									<? else : ?>
+									<?php else : ?>
 									Нет событий
-									<? endif; ?>
+									<?php endif; ?>
 								</td>
 							</tr>
-							<? endforeach; ?>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>

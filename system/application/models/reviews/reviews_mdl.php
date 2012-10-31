@@ -83,9 +83,9 @@ class Reviews_mdl extends Model
 	}
 
 	//Все отзывы пользователя
-	function count_reviews($user_id = '', $type)
+	function count_reviews($user_id = '', $type = '')
 	{
-		if( $type )
+		if( !empty($type) )
 		{
 			if( $type == 'positive' ) $this->db->where('reviews.rating', 1);
 			

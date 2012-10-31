@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 
 <div id="yui-main">
 	<div id="order-page" class="yui-b clearfix">
@@ -51,27 +51,27 @@
 					<?= $status?>
 				</td>
 			</tr>
-			<? //Если платеж с кодом протекции ?>
-			<? if ($type == 2 and $status_id == 1): ?>
+			<?php //Если платеж с кодом протекции ?>
+			<?php if ($type == 2 and $status_id == 1): ?>
 			<tr>
 				<td class="lbl">Срок протекции:</td>
 				<td class="txt">
 					<?= $time?>
 				</td>
 			</tr>
-			<? endif; ?>
-			<? //Если платеж с кодом протекции и отправитель пользователь ?>
-			<? if ($type == 2 and $status_id == 1 and $user_id == $this->user_id): ?>
+			<?php endif; ?>
+			<?php //Если платеж с кодом протекции и отправитель пользователь ?>
+			<?php if ($type == 2 and $status_id == 1 and $user_id == $this->user_id): ?>
 			<tr>
 				<td class="lbl">Код протекции:</td>
 				<td class="txt">
 					<?= $code?>
 				</td>
 			</tr>
-			<? endif; ?>
+			<?php endif; ?>
 		</table>
 		<?= $text?>
-		<? if ($recipient_id == $this->user_id and $status_id == 1): ?>
+		<?php if ($recipient_id == $this->user_id and $status_id == 1): ?>
 		<?= validation_errors()?>
 		<div class="rnd">
 			<div>
@@ -79,11 +79,11 @@
 					<div>
 						<div id="msearch">
 							<form action="" method="post" /><input type="hidden" name="payment_id" value="<?=$id?>">
-							<? if ($type == 2): ?>
+							<?php if ($type == 2): ?>
 							Код протекции:
 							<div>
 								<input name="code" type="text" maxlength="6"></div>
-							<? endif; ?>
+							<?php endif; ?>
 							<div>
 								<input type="submit" value="Принять"></div>
 							</form>
@@ -92,6 +92,6 @@
 				</div>
 			</div>
 		</div>
-		<? endif; ?>
+		<?php endif; ?>
 	</div><!--/order-page-->
 </div><!--/yui-main-->

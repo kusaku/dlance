@@ -1,5 +1,5 @@
 <?=validation_errors()?>
-<? if( !empty($error) ) {?><?=$error?><? } ?>
+<?php if( !empty($error) ) {?><?=$error?><?php } ?>
 <h1 class="title">Форма добавления изображения</h1>
 <p class="subtitle">Добавить изображения</p>
 <form action="" method="post" enctype="multipart/form-data"/>

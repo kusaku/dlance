@@ -3,10 +3,10 @@
 <link rel="stylesheet" href="/templates/admin/steal/colour.css" type="text/css" media="screen" charset="utf-8">
 <?=validation_errors()?>
 <?=show_tinimce('text')?>
-<? if( !empty($error) ): ?><?=$error?><? endif; ?>
-<? if( !empty($count) ): ?>
+<?php if( !empty($error) ): ?><?=$error?><?php endif; ?>
+<?php if( !empty($count) ): ?>
 <strong>Всего отправлено <?=$count?> писем.</strong>
-<? endif; ?>
+<?php endif; ?>
 <form action="" method="post" enctype="multipart/form-data">
 	<div id="content" class="container_16 clearfix">
 		<div class="grid_16">
@@ -44,13 +44,13 @@
 	</div>
 </form>
 
-<? if (! empty($mailer)): ?>
+<?php if (! empty($mailer)): ?>
 <table width="100%" border="0" cellpadding="5" cellspacing="5">
 	<tr>
 		<td width="250px">Пользователь</td>
 		<td>Email</td>
 	</tr>
-	<? foreach ($mailer as $row): ?>
+	<?php foreach ($mailer as $row): ?>
 	<tr>
 		<td>
 			<a class="black" href="/user/<?=$row['username']?>">
@@ -64,8 +64,8 @@
 			<?= $row['email']?>
 		</td>
 	</tr>
-	<? endforeach; ?>
+	<?php endforeach; ?>
 </table>
-<? else: ?>
+<?php else: ?>
 <p>Подписчиков не найдено.</p>
-<? endif; ?>
+<?php endif; ?>

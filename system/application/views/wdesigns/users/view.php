@@ -1,29 +1,44 @@
-<? $this->load->view('wdesigns/users/block'); ?>
-
-<div class="content">
-	<? if( !empty($data) ): ?>
-	<? foreach($data as $row): ?>
-	<div class="userPortfolioHeader">
-		<h3><?=$row['category']?>:</h3>
-		<ul class="userPortfolioCategory">
-			<li><a href="#" class="active">сайты:</a> <span>99</span></li>
-			<li><a href="#">баннеры:</a> <span>99</span></li>
-			<li><a href="#">flash анимация:</a> <span>99</span></li>
-			<li><a href="#">все работы</a></li>
-		</ul>
+<?php $this->load->view('wdesigns/users/block'); ?>
+<div id="usercard" class="bd clearfix">
+	<img src="images/user.gif" class="grp-icon" />
+	<div class="sendpm">
+		<a href="/contacts/send/<?=$username?>">Личное сообщение</a>
 	</div>
-	<div class="userPortfolioList">
-		<ul class="worksList">
-			<li>
-				<a href="<?=$row['full_image']?>" class="zoom" title="zoom prewiev"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a>
-				<a href="/account/cart_add/<?=$row['id']?>" class="sign"><?=$row['status']?></a>
-			</li>
-		</ul>
-	</div>
-	<? endforeach; ?>
-	<div class="contentWrapperBorderLeft" style="height:200px;">
-	</div>
-	<? else: ?>
-		<p>Дизайны отсутствуют.</p>
-	<? endif; ?>
+	<table class="userstats">
+		<tr>
+			<td>Дата регистрации:</td>
+			<td>
+				<?= $created?>
+			</td>
+		</tr>
+		<tr>
+			<td>Последний визит:</td>
+			<td>
+				<?= $last_login?>
+			</td>
+		</tr>
+		<tr>
+			<td>Просмотров:</td>
+			<td>
+				<?= $views?>
+			</td>
+		</tr>
+		<tr>
+			<td>Местоположение:</td>
+			<td>
+				<?= $country_id?>
+				/ 
+				<?= $city_id?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="noborder green"></td>
+		</tr>
+	</table>
+	<?php if (! empty($website)): ?>
+	<b><a href="<?=$website?>" target="_blank" rel="nofollow">
+			<?= $website?>
+		</a></b>
+	<?php endif; ?>
 </div>
+<div class="ft"></div>

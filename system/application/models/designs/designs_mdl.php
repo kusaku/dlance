@@ -1,7 +1,7 @@
 <?php 
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-	
+
 class Designs_mdl extends Model {
 	/**
 	 * ---------------------------------------------------------------
@@ -126,6 +126,9 @@ class Designs_mdl extends Model {
 			case 2:
 				$query['flash'] = 'Нет';
 				break;
+			default:
+				$query['flash'] = 'Не указано';
+				break;
 		}
 		
 		switch ($query['stretch']) {
@@ -135,7 +138,12 @@ class Designs_mdl extends Model {
 			case 2:
 				$query['stretch'] = 'Фиксированная';
 				break;
+			default:
+				$query['stretch'] = 'Не указано';
+				break;
 		}
+		
+		$query['columns'] == 0 and $query['columns'] = 'Не указано';
 		
 		switch ($query['quality']) {
 			case 1:
@@ -147,6 +155,9 @@ class Designs_mdl extends Model {
 			case 3:
 				$query['quality'] = 'Полное соответствие W3C';
 				break;
+			default:
+				$query['quality'] = 'Не указано';
+				break;
 		}
 		
 		switch ($query['type']) {
@@ -155,6 +166,9 @@ class Designs_mdl extends Model {
 				break;
 			case 2:
 				$query['type'] = 'Табличная';
+				break;
+			default:
+				$query['type'] = 'Не указано';
 				break;
 		}
 		
@@ -165,6 +179,9 @@ class Designs_mdl extends Model {
 			case 2:
 				$query['tone'] = 'Темный';
 				break;
+			default:
+				$query['tone'] = 'Не указано';
+				break;
 		}
 		
 		switch ($query['bright']) {
@@ -173,6 +190,9 @@ class Designs_mdl extends Model {
 				break;
 			case 2:
 				$query['bright'] = 'Яркий';
+				break;
+			default:
+				$query['bright'] = 'Не указано';
 				break;
 		}
 		
@@ -185,6 +205,18 @@ class Designs_mdl extends Model {
 				break;
 			case 3:
 				$query['style'] = 'Старый';
+				break;
+			default:
+				$query['style'] = 'Не указано';
+				break;
+		}
+		
+		switch ($query['adult']) {
+			case 0:
+				$query['adult'] = 'Нет';
+				break;
+			default:
+				$query['adult'] = 'Да';
 				break;
 		}
 		
@@ -299,16 +331,13 @@ class Designs_mdl extends Model {
 		$query = $this->db->get('tags');
 		
 		if ($query->num_rows() > 0) {
-			$tags = array(
-			);
+			$tags = array( );
 			
 			foreach ($query->result_array() as $row)
 				$tags[$row['tag']] = $row['tag_count'];
 			return $tags;
-		}
-		else
-			return array(
-			);
+		} else
+			return array( );
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -332,16 +361,13 @@ class Designs_mdl extends Model {
 		return $query;
 		
 		if ($query->num_rows() > 0) {
-			$tags = array(
-			);
+			$tags = array( );
 			
 			foreach ($query->result_array() as $row)
 				$tags[$row['color']] = $row['color_count'];
 			return $tags;
-		}
-		else
-			return array(
-			);
+		} else
+			return array( );
 	}
 	
 	/**
@@ -503,6 +529,30 @@ class Designs_mdl extends Model {
 	 *	Вывод дизайнов
 	 * ---------------------------------------------------------------
 	 */
+	 
+	// Новое! Вывод количества дизайнов пользователя
+
+	function count_user_designs($user_id) {
+		$this->db->where('status', 1);
+		
+		$this->db->where('user_id', $user_id);
+		
+		return $this->db->count_all_results('designs');
+	}
+	
+	// Новое! Вывод дизайнов пользователя
+
+	function get_user_designs($user_id, $start_page, $per_page) {
+		$this->db->select('*');
+		
+		$this->db->where('user_id', $user_id);
+		
+		$this->db->order_by('views', 'desc');
+		
+		$this->db->limit($per_page, $start_page * $per_page);
+		
+		return $this->db->get('designs')->result_array();
+	}
 
 	function get_designs($start_from = FALSE, $per_page, $input = '') {
 		$keywords = (isset($input['keywords'])) ? $input['keywords'] : '';
@@ -607,10 +657,7 @@ class Designs_mdl extends Model {
 			$sql .= " ORDER BY `date` DESC";
 		}
 		
-		$query = " SELECT *".
-		" FROM ci_designs LEFT JOIN ci_designs_options ON ci_designs.id = ci_designs_options.design_id".
-		" WHERE ".$sql.
-		" LIMIT ".$start_from.", ".$per_page.";";
+		$query = " SELECT *"." FROM ci_designs LEFT JOIN ci_designs_options ON ci_designs.id = ci_designs_options.design_id"." WHERE ".$sql." LIMIT ".$start_from.", ".$per_page.";";
 		
 		$query = $this->db->query($query);
 		
@@ -654,8 +701,7 @@ class Designs_mdl extends Model {
 		//Результаты implode в кавычки
 		$tags = "'".implode("', '", $tags)."'";
 		
-		$query = " SELECT id".
-		" FROM ci_tags WHERE `tag` IN ($tags) ".";";
+		$query = " SELECT id"." FROM ci_tags WHERE `tag` IN ($tags) ".";";
 		
 		$query = $this->db->query($query);
 		
@@ -769,9 +815,7 @@ class Designs_mdl extends Model {
 			$sql .= " and `price_2` <= '$price_2_end'";
 		}
 		
-		$query = " SELECT id".
-		" FROM ci_designs LEFT JOIN ci_designs_options ON ci_designs.id = ci_designs_options.design_id".
-		" WHERE ".$sql.";";
+		$query = " SELECT id"." FROM ci_designs LEFT JOIN ci_designs_options ON ci_designs.id = ci_designs_options.design_id"." WHERE ".$sql.";";
 		
 		$query = $this->db->query($query);
 		
@@ -827,15 +871,13 @@ class Designs_mdl extends Model {
 	function get_similar($id, $limit = 10) {
 		$query = " SELECT ci_designs.id, title, small_image"." FROM ci_tags LEFT JOIN ci_designs ON ci_tags.design_id = ci_designs.id ".
 		//Исключаем сам дизайн, по которому находятся похожии
-		" WHERE design_id != ".$id.""." and moder = 1".
-		" and tag IN (SELECT tag FROM ci_tags WHERE design_id = ".$id.")".
+		" WHERE design_id != ".$id.""." and moder = 1"." and tag IN (SELECT tag FROM ci_tags WHERE design_id = ".$id.")".
 		
 		//Дизайн существует и имеет статус открыт
 		" and design_id IN (SELECT id FROM ci_designs WHERE status = 1)".
 		
 		//Не выводим забаненные продукты
-		" and design_id NOT IN (SELECT design_id FROM ci_designs_banned)".
-		" GROUP BY id".
+		" and design_id NOT IN (SELECT design_id FROM ci_designs_banned)"." GROUP BY id".
 		//Случайный порядок
 		" ORDER BY rand()".
 		//Лимит
@@ -1108,12 +1150,19 @@ class Designs_mdl extends Model {
 	function get_categories() {
 		$this->db->select('*');
 		
-		$query = $this->db->get('designs_categories')->result_array();
+		$query = array( );
 		
-		$count = count($query);
+		foreach ($this->db->get('designs_categories')->result_array() as $item) {
+			$query[$item['id']] = $item;
+			$query[$item['id']]['number'] = $this->count_comments($item['id']);
+		}
 		
-		for ($i = 0; $i < $count; $i++) {
-			$query[$i]['number'] = $this->count_comments($query[$i]['id']);
+		foreach ($query as & $item) {
+			$item['name_path'] = array();
+			$parent = $item;
+			do {
+				array_unshift($item['name_path'], $parent['name']);
+			} while ($parent = $query[$parent['parent_id']]);
 		}
 		
 		return $query;

@@ -1,7 +1,7 @@
 <?php 
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-	
+
 class Designs extends Controller {
 	public $user_id;
 	
@@ -99,8 +99,7 @@ class Designs extends Controller {
 		
 		$category = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		$title = 'Дизайны сайта. Купить шаблон для сайта, Купить дизайн сайта';
 		
@@ -197,8 +196,7 @@ class Designs extends Controller {
 		
 		$category = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		$title = 'Поиск дизайнов сайта';
 		
@@ -318,14 +316,11 @@ class Designs extends Controller {
 		$data['input'] = array(
 			'keywords'=>(isset($input['keywords'])) ? $input['keywords'] : '','tags'=>(isset($input['tags'])) ? $input['tags'] : '',
 				'price_1_start'=>(isset($input['price_1_start'])) ? $input['price_1_start'] : '',
-				'price_1_end'=>(isset($input['price_1_end'])) ? $input['price_1_end'] : '',
-				'price_2_start'=>(isset($input['price_2_start'])) ? $input['price_2_start'] : '',
-				'price_2_end'=>(isset($input['price_2_end'])) ? $input['price_2_end'] : '',
-			'order_field'=>(isset($input['order_field'])) ? $input['order_field'] : '',
+				'price_1_end'=>(isset($input['price_1_end'])) ? $input['price_1_end'] : '','price_2_start'=>(isset($input['price_2_start'])) ? $input['price_2_start'] : '',
+				'price_2_end'=>(isset($input['price_2_end'])) ? $input['price_2_end'] : '','order_field'=>(isset($input['order_field'])) ? $input['order_field'] : '',
 			//Если не задан ордер тип, ставим desc
-			'order_type'=>(isset($input['order_type'])) ? $input['order_type'] : 'desc',
-			'color'=>(isset($input['color'])) ? $input['color'] : '',
-			'category'=>$category,'result'=>$per_page,
+			'order_type'=>(isset($input['order_type'])) ? $input['order_type'] : 'desc','color'=>(isset($input['color'])) ? $input['color'] : '',
+				'category'=>$category,'result'=>$per_page,
 		);
 		
 		/**
@@ -684,6 +679,8 @@ class Designs extends Controller {
 		
 		$data['comments'] = $this->load->view('wdesigns/designs/comments', $comments, TRUE);
 		
+		$data['user_is_owner'] = ($data['user_id'] == $this->user_id);
+		
 		$this->template->build('designs/view', $data, $title = ''.$data['title'].' | Дизайны сайта');
 	}
 	/**
@@ -735,8 +732,6 @@ class Designs extends Controller {
 	function send_report() {
 		$id = $this->input->post('id');
 		$text = $this->input->post('text');
-		
-		$text = iconv('UTF-8', 'windows-1251', $this->input->post('text'));
 		
 		$data = array(
 			'design_id'=>$id,'user_id'=>$this->user_id,'date'=>now(),'text'=>$text,'status'=>1
@@ -807,12 +802,11 @@ class Designs extends Controller {
 				'field'=>'source','label'=>'Исходники','rules'=>'required'
 			),array(
 				'field'=>'tags','label'=>'Тэги','rules'=>'required|callback__tags_check'
-			),			/**
+			),/**
 			 * ---------------------------------------------------------------
 			 *	Дополнительные параметры, для запоминания
 			 * ---------------------------------------------------------------
-			 */
-			array(
+			 */array(
 				'field'=>'sub','label'=>'Сопутствующие товары','rules'=>'max_length[64]'
 			),array(
 				'field'=>'flash','label'=>'Флэш','rules'=>'numeric'
@@ -941,13 +935,13 @@ class Designs extends Controller {
 		 */
 		if (isset($_FILES['file']['tmp_name']) and $form_validation) {
 			//Если не существует папки у пользователя
-			if (!file_exists(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'')) {
-				mkdir(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'', 0777, true);
+			if (!file_exists('./files/download/'.$this->username.'')) {
+				mkdir('./files/download/'.$this->username.'', 0777, true);
 			}
 			
 			$config['encrypt_name'] = TRUE;
 			$config['upload_path'] = './files/download/'.$this->username.'/';
-			$config['allowed_types'] = 'rar|zip';
+			$config['allowed_types'] = '7z|gz|zip|rar|psd|ai|png';
 			$config['max_size'] = '100000';
 			
 			$this->upload->initialize($config);
@@ -979,10 +973,8 @@ class Designs extends Controller {
 					'price_2'=>$this->input->post('price_2'),'source'=>htmlspecialchars($this->input->post('source')),
 					'small_image'=>'/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'],
 					'smallbw_image'=>'/files/designs/'.$data['raw_name'].'_smallbw'.$data['file_ext'],
-					'mid_image'=>'/files/designs/'.$data['raw_name'].'_mid'.$data['file_ext'],
-					'full_image'=>'/files/designs/'.$data['file_name'],'dfile'=>$this->username.'/'.$data_file['file_name'],
-					'status'=>1,
-				'moder'=>$moder
+					'mid_image'=>'/files/designs/'.$data['raw_name'].'_mid'.$data['file_ext'],'full_image'=>'/files/designs/'.$data['file_name'],
+					'dfile'=>$this->username.'/'.$data_file['file_name'],'status'=>1,'moder'=>$moder
 			);
 			
 			$this->designs_mdl->add('designs', $data);
@@ -1024,9 +1016,8 @@ class Designs extends Controller {
 				'design_id'=>$design_id,'flash'=>$this->input->post('flash'),'stretch'=>$this->input->post('stretch'),
 					'columns'=>$this->input->post('columns'),'destination'=>$this->input->post('destination'),
 					'quality'=>$this->input->post('quality'),'type'=>$this->input->post('type'),
-					'tone'=>$this->input->post('tone'),'bright'=>$this->input->post('bright'),
-					'style'=>$this->input->post('style'),'theme'=>$this->input->post('theme'),
-					'adult'=>$this->input->post('adult')
+					'tone'=>$this->input->post('tone'),'bright'=>$this->input->post('bright'),'style'=>$this->input->post('style'),
+					'theme'=>$this->input->post('theme'),'adult'=>$this->input->post('adult')
 			);
 			
 			$this->designs_mdl->add_options($data);
@@ -1335,8 +1326,7 @@ class Designs extends Controller {
 					'category'=>$this->input->post('category_id'),'price_1'=>$this->input->post('price_1'),
 					'price_2'=>$this->input->post('price_2'),'source'=>htmlspecialchars($this->input->post('source')),
 					'small_image'=>$small_image,'smallbw_image'=>$smallbw_image,'mid_image'=>$mid_image,
-					'full_image'=>$full_image,
-				'dfile'=>$dfile,'status'=>1
+					'full_image'=>$full_image,'dfile'=>$dfile,'status'=>1
 			);
 			
 			$this->designs_mdl->edit('designs', $id, $data);
@@ -1349,9 +1339,8 @@ class Designs extends Controller {
 				'flash'=>$this->input->post('flash'),'stretch'=>$this->input->post('stretch'),
 					'columns'=>$this->input->post('columns'),'destination'=>$this->input->post('destination'),
 					'quality'=>$this->input->post('quality'),'type'=>$this->input->post('type'),
-					'tone'=>$this->input->post('tone'),'bright'=>$this->input->post('bright'),
-					'style'=>$this->input->post('style'),'theme'=>$this->input->post('theme'),
-					'adult'=>$this->input->post('adult')
+					'tone'=>$this->input->post('tone'),'bright'=>$this->input->post('bright'),'style'=>$this->input->post('style'),
+					'theme'=>$this->input->post('theme'),'adult'=>$this->input->post('adult')
 			);
 			
 			$this->designs_mdl->edit_options($id, $data);
@@ -1558,8 +1547,6 @@ class Designs extends Controller {
 		$id = $this->input->post('id');
 		
 		$text = $this->input->post('text');
-		
-		$text = iconv('UTF-8', 'windows-1251', $this->input->post('text'));
 		
 		$data = array(
 			'design_id'=>$id,'cause'=>$text

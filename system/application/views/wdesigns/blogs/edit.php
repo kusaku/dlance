@@ -17,9 +17,9 @@
 							<td class="frnt cat">
 <select name="category_id">
 <option></option>
-<? foreach($categories as $row): ?> 
-<option value="<?=$row['id']?>"<? if( $row['id'] == $category ): ?> selected="selected"<? endif; ?>><?=$row['name']?></option>
-<? endforeach; ?>
+<?php foreach($categories as $row): ?> 
+<option value="<?=$row['id']?>"<?php if( $row['id'] == $category ): ?> selected="selected"<?php endif; ?>><?=$row['name']?></option>
+<?php endforeach; ?>
 </select>
 							</td>
 						</tr>

@@ -1,7 +1,7 @@
 <div id="yui-main">
 	<div class="yui-b">
 		<h1><a href="/account/cart">Корзина</a></h1>
-		<? if (! empty($data)): ?>
+		<?php if (! empty($data)): ?>
 		<?= show_highslide()?>
 		<form action="/account/pay_no_auth" method="post">
 			<div align="right">
@@ -13,7 +13,7 @@
 					<th style="width:150px;">Превью</th>
 					<th>Название / Краткое описание</th>
 				</tr>
-				<? foreach ($data as $row): ?>
+				<?php foreach ($data as $row): ?>
 				<tr>
 					<td class="thumb" rowspan="3" style="width:150px;">
 						<a href="<?=$row['full_image']?>" class="highslide" onclick="return hs.expand(this)"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a>
@@ -33,34 +33,34 @@
 				<tr>
 					<td>
 						Добавлено: <?= $row['date']?> |			 
-						<? if ($row['kind'] == 1): ?>
+						<?php if ($row['kind'] == 1): ?>
 						Цена - Покупка: <?= $row['price_1']?>
-						<? else : ?>
+						<?php else : ?>
 						Цена - Выкуп: <?= $row['price_2']?>
-						<? endif; ?>
+						<?php endif; ?>
 					</td>
 				</tr>
 				<tr>
 					<td class="options" colspan="2">
 						<input name="designs[]" type="checkbox" value="<?=$row['id']?>" checked="checked"/><span class="fr">
-							<? if ($row['status_id'] == 1): ?>
+							<?php if ($row['status_id'] == 1): ?>
 							<a href="/account/buy/<?=$row['design_id']?>"><strong>Оплатить</strong>
 							</a>| 
-							<? endif; ?>
+							<?php endif; ?>
 							<a href="/account/cart_del/<?=$row['id']?>">Удалить</a></span>
 					</td>
 				</tr>
-				<? endforeach; ?>
+				<?php endforeach; ?>
 			</table>
 			<div align="right">
 				<input type="submit" value="Оплатить" />
 			</div>
 		</form>
 		<?= $page_links?>
-		<? else : ?>
+		<?php else : ?>
 		<p>Дизайны отсутствуют.</p>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>
 <!--/yui-main-->
-<? $this->load->view('wdesigns/account/block_no_auth'); ?>
+<?php $this->load->view('wdesigns/account/block_no_auth'); ?>

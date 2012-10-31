@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 		$('form :radio[name=type]').click(function(){

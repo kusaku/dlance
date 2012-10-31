@@ -7,7 +7,7 @@
 				<div class="block-controls">
 					<ul class="controls-buttons"></ul>
 				</div>
-				<? if (! empty($categories)): ?>
+				<?php if (! empty($categories)): ?>
 				<div class="no-margin">
 					<table class="table" cellspacing="0" width="100%">
 						<thead>
@@ -20,8 +20,8 @@
 							</tr>
 						</thead>
 						<tbody>
-							<? foreach ($categories as $row): ?>
-							<? if ($row['parent_id'] == 0): //Разделы ?>
+							<?php foreach ($categories as $row): ?>
+							<?php if ($row['parent_id'] == 0): //Разделы ?>
 							<tr>
 								<th scope="row" class="table-check-cell">
 									<input type="checkbox" name="categories[]" value="<?=$row['id']?>" />
@@ -33,9 +33,9 @@
 									<a href="/administrator/categories_edit/<?=$row['id']?>" title="Редактировать" class="with-tip"><img src="/templates/admin/images/icons/fugue/pencil.png" width="16" height="16"></a>
 								</td>
 							</tr>
-							<? endif; ?>
-							<? foreach ($categories as $row2): ?>
-							<? if ($row['id'] == $row2['parent_id']): ?>
+							<?php endif; ?>
+							<?php foreach ($categories as $row2): ?>
+							<?php if ($row['id'] == $row2['parent_id']): ?>
 							<tr>
 								<th scope="row" class="table-check-cell">
 									<input type="checkbox" name="categories[]" value="<?=$row['id']?>" />
@@ -47,15 +47,15 @@
 									<a href="/administrator/categories_edit/<?=$row['id']?>" title="Редактировать" class="with-tip"><img src="/templates/admin/images/icons/fugue/pencil.png" width="16" height="16"></a>
 								</td>
 							</tr>
-							<? endif; ?>
-							<? endforeach; ?>
-							<? endforeach; ?>
+							<?php endif; ?>
+							<?php endforeach; ?>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>
-				<? else : ?>
+				<?php else : ?>
 				<p>Ничего не найдено.</p>
-				<? endif; ?>
+				<?php endif; ?>
 				<div class="block-footer">
 					<img src="/templates/admin/images/icons/fugue/arrow-curve-000-left.png" width="16" height="16" class="picto">
 					<select name="action" id="action" class="small">

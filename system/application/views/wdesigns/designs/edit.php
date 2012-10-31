@@ -41,7 +41,7 @@ $().ready(function() {
 <h1 class="title">Форма добавления новых дизайнов</h1>
 <p class="subtitle">Добавить новый дизайн</p>
 <?=validation_errors()?>
-<? if( !empty($error) ) {?><?=$error?><? } ?>
+<?php if( !empty($error) ) {?><?=$error?><?php } ?>
 <form action="" method="post" enctype="multipart/form-data">
 	<div class="rnd">
 		<div>
@@ -58,18 +58,18 @@ $().ready(function() {
 							<td class="frnt cat">
 <select name="category_id">
 <option></option>
-<? foreach($categories as $row): ?> 
+<?php foreach($categories as $row): ?> 
 
-<? if( $row['parent_id'] == 0): ?>
+<?php if( $row['parent_id'] == 0): ?>
 <optgroup label="<?=$row['name']?>">
-<? endif; ?>
+<?php endif; ?>
 
-	<? foreach($categories as $row2): ?>
-			<? if( $row['id'] == $row2['parent_id'] ): ?>
-				<option value="<?=$row2['id']?>"<? if( $row2['id'] == $category ): ?> selected="selected"<? endif; ?>><?=$row2['name']?></option>
-			<? endif; ?>
-	<? endforeach; ?>
-<? endforeach; ?>
+	<?php foreach($categories as $row2): ?>
+			<?php if( $row['id'] == $row2['parent_id'] ): ?>
+				<option value="<?=$row2['id']?>"<?php if( $row2['id'] == $category ): ?> selected="selected"<?php endif; ?>><?=$row2['name']?></option>
+			<?php endif; ?>
+	<?php endforeach; ?>
+<?php endforeach; ?>
 </select>
 							</td>
 						</tr>
@@ -95,7 +95,7 @@ $().ready(function() {
 
 						<tr>
 							<td class="caption">Тэги:</td>
-							<td class="frnt"><input type="text" class="text" name="tags" value="<? foreach($tags as $row): ?><?=$row['tag']?>, <? endforeach; ?>" size="64" maxlength="64"	id="tags" />	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	&nbsp;	Не менее одного тэга</td>
+							<td class="frnt"><input type="text" class="text" name="tags" value="<?php foreach($tags as $row): ?><?=$row['tag']?>, <?php endforeach; ?>" size="64" maxlength="64"	id="tags" />	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	&nbsp;	Не менее одного тэга</td>
 						</tr>
 
 						<tr>
@@ -136,22 +136,22 @@ $().ready(function() {
 					<table class="order-form">
 						<tr>
 							<td class="caption">Сопутствующие товары:</td>
-							<td class="frnt"><input type="text" class="text" name="sub" value="<? foreach($sub as $row): ?><?=$row['sub']?>, <? endforeach; ?>" size="64" maxlength="64" id="sub" />	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	&nbsp;	вводите ID продуктов через запятую</td>
+							<td class="frnt"><input type="text" class="text" name="sub" value="<?php foreach($sub as $row): ?><?=$row['sub']?>, <?php endforeach; ?>" size="64" maxlength="64" id="sub" />	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	&nbsp;	вводите ID продуктов через запятую</td>
 						</tr>
 
 						<tr>
 							<td class="caption">Флэш:<?=$flash?></td>
 							<td>
-<input type="radio" name="flash" value="1"<? if( $flash == 1 ): ?> checked="checked"<? endif; ?> /> Да &nbsp &nbsp
-<input type="radio" name="flash" value="2"<? if( $flash == 2 ): ?> checked="checked"<? endif; ?> /> Нет
+<input type="radio" name="flash" value="1"<?php if( $flash == 1 ): ?> checked="checked"<?php endif; ?> /> Да &nbsp &nbsp
+<input type="radio" name="flash" value="2"<?php if( $flash == 2 ): ?> checked="checked"<?php endif; ?> /> Нет
 							</td>
 						</tr>
 
 						<tr>
 							<td class="caption">Стретч:</td>
 							<td>
-<input type="radio" name="stretch" value="1"<? if( $stretch == 1 ): ?> checked="checked"<? endif; ?> /> Тянущаяся &nbsp &nbsp
-<input type="radio" name="stretch" value="2"<? if( $stretch == 2 ): ?> checked="checked"<? endif; ?> /> Фиксированная
+<input type="radio" name="stretch" value="1"<?php if( $stretch == 1 ): ?> checked="checked"<?php endif; ?> /> Тянущаяся &nbsp &nbsp
+<input type="radio" name="stretch" value="2"<?php if( $stretch == 2 ): ?> checked="checked"<?php endif; ?> /> Фиксированная
 							</td>
 						</tr>
 
@@ -160,10 +160,10 @@ $().ready(function() {
 							<td>
 <select name="columns">
 <option></option>
-<option value="1"<? if( $columns == 1 ): ?> selected="selected"<? endif; ?> />1</option>
-<option value="2"<? if( $columns == 2 ): ?> selected="selected"<? endif; ?> />2</option>
-<option value="3"<? if( $columns == 3 ): ?> selected="selected"<? endif; ?> />3</option>
-<option value="4"<? if( $columns == 4 ): ?> selected="selected"<? endif; ?> />4</option>
+<option value="1"<?php if( $columns == 1 ): ?> selected="selected"<?php endif; ?> />1</option>
+<option value="2"<?php if( $columns == 2 ): ?> selected="selected"<?php endif; ?> />2</option>
+<option value="3"<?php if( $columns == 3 ): ?> selected="selected"<?php endif; ?> />3</option>
+<option value="4"<?php if( $columns == 4 ): ?> selected="selected"<?php endif; ?> />4</option>
 </select>
 							</td>
 						</tr>
@@ -173,9 +173,9 @@ $().ready(function() {
 							<td class="frnt cat">
 <select name="destination">
 <option></option>
-<? foreach($destinations as $row): ?> 
-<option value="<?=$row['id']?>"<? if( $row['id'] == $destination ): ?> selected="selected"<? endif; ?>><?=$row['name']?></option>
-<? endforeach; ?>
+<?php foreach($destinations as $row): ?> 
+<option value="<?=$row['id']?>"<?php if( $row['id'] == $destination ): ?> selected="selected"<?php endif; ?>><?=$row['name']?></option>
+<?php endforeach; ?>
 </select>
 							</td>
 						</tr>
@@ -183,42 +183,42 @@ $().ready(function() {
 						<tr>
 							<td class="caption">Тех Качество:</td>
 							<td>
-<input type="radio" name="quality" value="1"<? if( $quality == 1 ): ?> checked="checked"<? endif; ?> /> Только для IE &nbsp &nbsp
-<input type="radio" name="quality" value="2"<? if( $quality == 2 ): ?> checked="checked"<? endif; ?> /> Кроссбраузерная верстка&nbsp &nbsp
-<input type="radio" name="quality" value="3"<? if( $quality == 3 ): ?> checked="checked"<? endif; ?> /> Полное соответствие W3C
+<input type="radio" name="quality" value="1"<?php if( $quality == 1 ): ?> checked="checked"<?php endif; ?> /> Только для IE &nbsp &nbsp
+<input type="radio" name="quality" value="2"<?php if( $quality == 2 ): ?> checked="checked"<?php endif; ?> /> Кроссбраузерная верстка&nbsp &nbsp
+<input type="radio" name="quality" value="3"<?php if( $quality == 3 ): ?> checked="checked"<?php endif; ?> /> Полное соответствие W3C
 							</td>
 						</tr>
 
 						<tr>
 							<td class="caption">Тип Верстки:</td>
 							<td>
-<input type="radio" name="type" value="1"<? if( $type == 1 ): ?> checked="checked"<? endif; ?> /> Блочная верстка &nbsp &nbsp
-<input type="radio" name="type" value="2"<? if( $type == 2 ): ?> checked="checked"<? endif; ?> /> Табличная
+<input type="radio" name="type" value="1"<?php if( $type == 1 ): ?> checked="checked"<?php endif; ?> /> Блочная верстка &nbsp &nbsp
+<input type="radio" name="type" value="2"<?php if( $type == 2 ): ?> checked="checked"<?php endif; ?> /> Табличная
 							</td>
 						</tr>
 
 						<tr>
 							<td class="caption">Тон:</td>
 							<td>
-<input type="radio" name="tone" value="1"<? if( $tone == 1 ): ?> checked="checked"<? endif; ?> /> Светлый &nbsp &nbsp
-<input type="radio" name="tone" value="2"<? if( $tone == 2 ): ?> checked="checked"<? endif; ?> /> Темный
+<input type="radio" name="tone" value="1"<?php if( $tone == 1 ): ?> checked="checked"<?php endif; ?> /> Светлый &nbsp &nbsp
+<input type="radio" name="tone" value="2"<?php if( $tone == 2 ): ?> checked="checked"<?php endif; ?> /> Темный
 							</td>
 						</tr>
 
 						<tr>
 							<td class="caption">Яркость:</td>
 							<td>
-<input type="radio" name="bright" value="1"<? if( $bright == 1 ): ?> checked="checked"<? endif; ?> /> Спокойный &nbsp &nbsp
-<input type="radio" name="bright" value="2"<? if( $bright == 2 ): ?> checked="checked"<? endif; ?> /> Яркий
+<input type="radio" name="bright" value="1"<?php if( $bright == 1 ): ?> checked="checked"<?php endif; ?> /> Спокойный &nbsp &nbsp
+<input type="radio" name="bright" value="2"<?php if( $bright == 2 ): ?> checked="checked"<?php endif; ?> /> Яркий
 							</td>
 						</tr>
 
 						<tr>
 							<td class="caption">Стиль:</td>
 							<td>
-<input type="radio" name="style" value="1"<? if( $style == 1 ): ?> checked="checked"<? endif; ?> /> Новый &nbsp &nbsp
-<input type="radio" name="style" value="2"<? if( $style == 2 ): ?> checked="checked"<? endif; ?> /> Классический	&nbsp &nbsp
-<input type="radio" name="style" value="3"<? if( $style == 3 ): ?> checked="checked"<? endif; ?> /> Старый
+<input type="radio" name="style" value="1"<?php if( $style == 1 ): ?> checked="checked"<?php endif; ?> /> Новый &nbsp &nbsp
+<input type="radio" name="style" value="2"<?php if( $style == 2 ): ?> checked="checked"<?php endif; ?> /> Классический	&nbsp &nbsp
+<input type="radio" name="style" value="3"<?php if( $style == 3 ): ?> checked="checked"<?php endif; ?> /> Старый
 							</td>
 						</tr>
 
@@ -227,16 +227,16 @@ $().ready(function() {
 							<td class="frnt cat">
 <select name="theme">
 <option></option>
-<? foreach($themes as $row): ?> 
-<option value="<?=$row['id']?>"<? if( $row['id'] == $theme ): ?> selected="selected"<? endif; ?>><?=$row['name']?></option>
-<? endforeach; ?>
+<?php foreach($themes as $row): ?> 
+<option value="<?=$row['id']?>"<?php if( $row['id'] == $theme ): ?> selected="selected"<?php endif; ?>><?=$row['name']?></option>
+<?php endforeach; ?>
 </select>
 							</td>
 						</tr>
 
 						<tr>
 							<td class="caption">Только для взрослых:</td>
-							<td><input type="checkbox" name="adult" value="1"<? if( $adult == 1 ): ?> checked="checked"<? endif; ?> />	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	&nbsp;	Дизайн не будет показан не авторизированным пользователям и авторизированным пользователям, которые не достигли совершенолетия. </td>
+							<td><input type="checkbox" name="adult" value="1"<?php if( $adult == 1 ): ?> checked="checked"<?php endif; ?> />	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	&nbsp;	Дизайн не будет показан не авторизированным пользователям и авторизированным пользователям, которые не достигли совершенолетия. </td>
 						</tr>
 
 					</table>

@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div id="yui-main">
 	<div class="yui-b">
 		<h1><a href="/account/tariffs">Виртуальный статус</a></h1>
@@ -18,7 +18,7 @@
 						<strong><?= $name?></strong>
 					</td>
 				</tr>
-				<? if ($id != 1): ?>
+				<?php if ($id != 1): ?>
 				<tr>
 					<td class="caption">До окончания:</td>
 					<td>
@@ -37,13 +37,13 @@
 						<?= $price_of_year?>	 рублей
 					</td>
 				</tr>
-				<? endif; ?>
+				<?php endif; ?>
 			</table>
 		</div>
 		<div class="bbl">
 			<div class="bbr"></div>
 		</div>
-		<? if ($id != 1): ?>
+		<?php if ($id != 1): ?>
 		<br/>
 		<form action="" method="post" /><input name="tariff" type="hidden" value="<?=$this->user_tariff?>" />
 		<select name="period">
@@ -51,6 +51,6 @@
 			<option value="2">Год</option>
 		</select>
 		<input type="submit" value="Продлить"></form>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div><!--/yui-main-->

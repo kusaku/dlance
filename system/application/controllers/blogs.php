@@ -47,8 +47,7 @@ class Blogs extends Controller {
 		
 		$category = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		$title = 'Блоги';
 		

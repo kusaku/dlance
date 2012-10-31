@@ -9,7 +9,7 @@
 						<?= $page_links?>
 					</ul>
 				</div>
-				<? if (! empty($data)): ?>
+				<?php if (! empty($data)): ?>
 				<div class="no-margin">
 					<table class="table" cellspacing="0" width="100%">
 						<thead>
@@ -23,7 +23,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<? foreach ($data as $row): ?>
+							<?php foreach ($data as $row): ?>
 							<tr>
 								<th scope="row" class="table-check-cell">
 									<input type="checkbox" name="pages[]" value="<?=$row['id']?>" />
@@ -38,13 +38,13 @@
 									<a href="/administrator/pages_edit/<?=$row['id']?>" title="Редактировать" class="with-tip"><img src="/templates/admin/images/icons/fugue/pencil.png" width="16" height="16"></a>
 								</td>
 							</tr>
-							<? endforeach; ?>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>
-				<? else : ?>
+				<?php else : ?>
 				<p>Ничего не найдено.</p>
-				<? endif; ?>
+				<?php endif; ?>
 				<ul class="message no-margin">
 					<li>
 						Результатов: <?= $count?>

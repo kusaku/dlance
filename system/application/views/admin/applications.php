@@ -12,7 +12,7 @@
 						<?= $page_links?>
 					</ul>
 				</div>
-				<? if (! empty($data)): ?>
+				<?php if (! empty($data)): ?>
 				<div class="no-margin">
 					<table class="table" cellspacing="0" width="100%">
 						<thead>
@@ -26,7 +26,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<? foreach ($data as $row): ?>
+							<?php foreach ($data as $row): ?>
 							<tr>
 								<td>
 									<a href="/administrator/users_edit/<?=$row['id']?>"><?= $row['username']?></a>
@@ -44,17 +44,17 @@
 									<?= $row['status']?>
 								</td>
 								<td class="table-actions">
-									<? if ($row['status_id'] == 1): ?><a href="/administrator/applications_done/<?=$row['id']?>">Оплачена</a>
-									<? endif; ?>
+									<?php if ($row['status_id'] == 1): ?><a href="/administrator/applications_done/<?=$row['id']?>">Оплачена</a>
+									<?php endif; ?>
 								</td>
 							</tr>
-							<? endforeach; ?>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>
-				<? else : ?>
+				<?php else : ?>
 				<p>Ничего не найдено.</p>
-				<? endif; ?>
+				<?php endif; ?>
 				<ul class="message no-margin">
 					<li>
 						Результатов: <?= $count?>

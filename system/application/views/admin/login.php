@@ -119,7 +119,7 @@
 			});
 			
 		</script>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1251"></head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
 	<!-- the 'special-page' class is only an identifier for scripts -->
 	<body class="special-page login-bg dark">
 		<!-- The template uses conditional comments to add wrappers div for ie8 and ie7 - just add .ie, .ie7 or .ie6 prefix to your css selectors when needed --><!--[if lt IE 9]><div class="ie"><![endif]--><!--[if lt IE 8]><div class="ie7"><![endif]-->

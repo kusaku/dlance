@@ -2,9 +2,9 @@
 	<div class="designsCategories">
 		<h3><a href="/help/">Все разделы</a></h3>
 		<ul>
-		<? foreach($categories as $row): ?> 
+		<?php foreach($categories as $row): ?> 
 			<li class="lvl-1"><a href="/help/index/?category=<?=$row['id']?>"><?=$row['name']?></a></li>
-		<? endforeach; ?>
+		<?php endforeach; ?>
 		</ul>
 	</div>
 </div>

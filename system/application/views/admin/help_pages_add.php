@@ -25,9 +25,9 @@
 				</label>
 				<select name="category" style="width:100%">
 					<option></option>
-					<? foreach ($categories as $row): ?>
+					<?php foreach ($categories as $row): ?>
 					<option value="<?=$row['id']?>"><?= $row['name']?></option>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 				</select>
 			</p>
 		</div>

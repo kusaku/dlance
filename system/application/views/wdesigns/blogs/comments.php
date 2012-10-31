@@ -5,9 +5,9 @@
 		<h3>Комментарии:</h3>
 		<a href="#">Оставить комментарий</a>
 	</div>
-	<? if (! empty($data)): ?>
+	<?php if (! empty($data)): ?>
 	<ul class="commentsList">
-		<? foreach ($data as $row): ?>
+		<?php foreach ($data as $row): ?>
 		<li>
 			<div class="userInfo">
 				<div class="avatar">
@@ -28,21 +28,21 @@
 				<?= parse_smileys(nl2br($row['text']), '/img/smileys/')?>
 			</div>
 			<!--
-			<? if( $this->team == 2 ) :?>
+			<?php if( $this->team == 2 ) :?>
 			<ul class="ocard">
 			<li><a href="/designs/comments_edit/<?=$row['id']?>">Редактировать</a></li>
 			<li><a href="/designs/comments_del/<?=$row['id']?>">Удалить</a></li>
 			</ul>
-			<? endif; ?>
+			<?php endif; ?>
 			-->
 		</li>
-		<? endforeach; ?>
+		<?php endforeach; ?>
 	</ul>
-	<? else : ?>
+	<?php else : ?>
 	<p>Коментарии отсутствуют.</p>
-	<? endif; ?>
+	<?php endif; ?>
 </div>
-<? if ($this->users_mdl->logged_in()): ?>
+<?php if ($this->users_mdl->logged_in()): ?>
 <div class="makeComment">
 	<div class="makeCommentHeader">
 		<h3>Оставить комментарий</h3>
@@ -59,6 +59,6 @@
 		<input type="submit" name="newcomment" value="Отправить" class="commentBtn" />
 	</form>
 </div>
-<? else : ?>
+<?php else : ?>
 <p>Для добавление комментариев, вам необходимо <a href="/account">залогиниться или зарегистрироваться</a>.</p>
-<? endif; ?>
+<?php endif; ?>

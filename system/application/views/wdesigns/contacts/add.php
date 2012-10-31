@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div id="yui-main">
 	<div class="yui-b">
 		<h1><a href="">Контакты / Сообщения</a></h1>
@@ -13,9 +13,9 @@
 						<h1 class="market-title">Группы</h1>
 						<div id="msearch">
 							<div>
-								<select name="group_id" onchange="document.location.href = '/contacts/index/?group_id=' + this.value"<? foreach ($groups as $row): ?>
+								<select name="group_id" onchange="document.location.href = '/contacts/index/?group_id=' + this.value"<?php foreach ($groups as $row): ?>
 									<option value="<?=$row['id']?>"><?= $row['name']?>(<?= $row['count_contacts']?>)</option>
-									<? endforeach; ?>
+									<?php endforeach; ?>
 								</select>
 							</div>
 						</div>

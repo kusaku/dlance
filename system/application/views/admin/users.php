@@ -9,7 +9,7 @@
 						<?= $page_links?>
 					</ul>
 				</div>
-				<? if (! empty($data)): ?>
+				<?php if (! empty($data)): ?>
 				<div class="no-margin">
 					<table class="table" cellspacing="0" width="100%">
 						<thead>
@@ -18,18 +18,18 @@
 								<th scope="col">Дата регистрации</th>
 								<th scope="col">Последний визит</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/users/?order_field=balance<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'balance' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/users/?order_field=balance&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'balance' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/users/?order_field=balance<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>" title="Sort up" class="sort-up<?php if( $input['order_field'] == 'balance' and	$input['order_type'] == 'desc' ): ?> active<?php endif;?>"></a><a href="/administrator/users/?order_field=balance&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>" title="Sort down" class="sort-down<?php if( $input['order_field'] == 'balance' and	$input['order_type'] == 'asc' ): ?> active<?php endif;?>"></a></span>
 									Баланс
 								</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/users/?order_field=rating<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'rating' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/users/?order_field=rating&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'rating' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/users/?order_field=rating<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>" title="Sort up" class="sort-up<?php if( $input['order_field'] == 'rating' and	$input['order_type'] == 'desc' ): ?> active<?php endif;?>"></a><a href="/administrator/users/?order_field=rating&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>" title="Sort down" class="sort-down<?php if( $input['order_field'] == 'rating' and	$input['order_type'] == 'asc' ): ?> active<?php endif;?>"></a></span>
 									Рейтинг
 								</th>
 								<th scope="col" class="table-actions">Действие</th>
 							</tr>
 						</thead>
 						<tbody>
-							<? foreach ($data as $row): ?>
+							<?php foreach ($data as $row): ?>
 							<tr>
 								<td>
 									<a href="/user/<?=$row['username']?>" target="_new"><?= $row['surname']?><?= $row['name']?>(<?= $row['username']?>)</a>
@@ -50,13 +50,13 @@
 									<a href="/administrator/users_edit/<?=$row['id']?>" title="Редактировать" class="with-tip"><img src="/templates/admin/images/icons/fugue/pencil.png" width="16" height="16"></a>
 								</td>
 							</tr>
-							<? endforeach; ?>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>
-				<? else : ?>
+				<?php else : ?>
 				<p>Ничего не найдено.</p>
-				<? endif; ?>
+				<?php endif; ?>
 				<ul class="message no-margin">
 					<li>
 						Результатов: <?= $count?>

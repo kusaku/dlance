@@ -59,9 +59,9 @@
 							<label for="stats-period">Год</label>
 							<span class="input-type-text">
 								<select name="year" onchange="document.location.href = '/administrator/index/?year=' + this.value">
-									<? foreach ($years as $row=>$value): ?>
-									 <option value="<?=$value?>"<? if ($input['year'] == $value): ?>selected="selected"<? endif; ?>><?= $value?></option>
-									<? endforeach; ?>
+									<?php foreach ($years as $row=>$value): ?>
+									 <option value="<?=$value?>"<?php if ($input['year'] == $value): ?>selected="selected"<?php endif; ?>><?= $value?></option>
+									<?php endforeach; ?>
 									>
 								</select>
 								<img src="/templates/admin/images/icons/fugue/calendar-month.png" width="16" height="16"></span>

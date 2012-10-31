@@ -1,13 +1,13 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div id="yui-main">
 	<div class="yui-b">
 		<h1><a href="/account/userpic">Юзерпик</a></h1>
 		<p class="subtitle"> Ваш юзерпик </p>
-		<? if (! empty($error)) { ?>
+		<?php if (! empty($error)) { ?>
 		<div class="error">
 			<?= $error?>
 		</div>
-		<? } ?>
+		<?php } ?>
 		<div class="main">
 			<form action="/account/userpic" method="post" enctype="multipart/form-data">
 				<div class="ttl">

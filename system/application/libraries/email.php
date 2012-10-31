@@ -84,22 +84,14 @@ class CI_Email {
   var $_IP = FALSE;
   var $_smtp_auth = FALSE;
   var $_replyto_flag = FALSE;
-  var $_debug_msg = array(
-  );
-  var $_recipients = array(
-  );
-  var $_cc_array = array(
-  );
-  var $_bcc_array = array(
-  );
-  var $_headers = array(
-  );
-  var $_attach_name = array(
-  );
-  var $_attach_type = array(
-  );
-  var $_attach_disp = array(
-  );
+  var $_debug_msg = array( );
+  var $_recipients = array( );
+  var $_cc_array = array( );
+  var $_bcc_array = array( );
+  var $_headers = array( );
+  var $_attach_name = array( );
+  var $_attach_type = array( );
+  var $_attach_disp = array( );
   var $_protocols = array(
     'mail','sendmail','smtp'
   );
@@ -123,8 +115,7 @@ class CI_Email {
    * The constructor can be passed an array of config values
    */
 
-  function CI_Email($config = array(
-  )) {
+  function CI_Email($config = array( )) {
     $this->CI = &get_instance();
     $this->CI->load->plugin('phpmailer');
     $this->mailer = new PHPMailer();
@@ -147,8 +138,7 @@ class CI_Email {
    * @return	void
    */
 
-  function initialize($config = array(
-  )) {
+  function initialize($config = array( )) {
     $this->clear();
     foreach ($config as $key=>$val) {
       if (isset($this->$key)) {
@@ -177,12 +167,9 @@ class CI_Email {
     $this->_finalbody = "";
     $this->_header_str = "";
     $this->_replyto_flag = FALSE;
-    $this->_recipients = array(
-    );
-    $this->_headers = array(
-    );
-    $this->_debug_msg = array(
-    );
+    $this->_recipients = array( );
+    $this->_headers = array( );
+    $this->_debug_msg = array( );
     
     $this->_set_header('User-Agent', $this->useragent);
     $this->_set_header('Date', $this->_set_date());
@@ -195,12 +182,9 @@ class CI_Email {
     $this->mailer->ClearCustomHeaders();
     
     if ($clear_attachments !== FALSE) {
-      $this->_attach_name = array(
-      );
-      $this->_attach_type = array(
-      );
-      $this->_attach_disp = array(
-      );
+      $this->_attach_name = array( );
+      $this->_attach_type = array( );
+      $this->_attach_disp = array( );
       
       $this->mailer->ClearAttachments();
     }
@@ -617,8 +601,7 @@ class CI_Email {
       }
     }
     
-    $clean_email = array(
-    );
+    $clean_email = array( );
     
     foreach ($email as $addy) {
       if (preg_match('/\<(.*)\>/', $addy, $match)) {
@@ -659,8 +642,7 @@ class CI_Email {
     
     // If the current word is surrounded by {unwrap} tags we'll
     // strip the entire chunk and replace it with a marker.
-    $unwrap = array(
-    );
+    $unwrap = array( );
     if (preg_match_all("|(\{unwrap\}.+?\{/unwrap\})|s", $str, $matches)) {
       for ($i = 0; $i < count($matches['0']); $i++) {
         $unwrap[] = $matches['1'][$i];
@@ -769,8 +751,7 @@ class CI_Email {
     
     $set = "";
     
-    $chunk = array(
-    );
+    $chunk = array( );
     
     for ($i = 0; $i < count($this->_bcc_array); $i++) {
       if (isset($this->_bcc_array[$i])) {
@@ -1204,8 +1185,7 @@ class CI_Email {
         break;
     }
     
-    $attachment = array(
-    );
+    $attachment = array( );
     
     $z = 0;
     

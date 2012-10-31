@@ -19,9 +19,9 @@
 							<td class="frnt cat">
 <select name="category_id">
 <option></option>
-<? foreach($categories as $row): ?> 
+<?php foreach($categories as $row): ?> 
 <option value="<?=$row['id']?>"<?=set_select('category_id', ''.$row['id'].''); ?>><?=$row['name']?></option>
-<? endforeach; ?>
+<?php endforeach; ?>
 </select>
 							</td>
 						</tr>

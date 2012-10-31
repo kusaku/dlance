@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 
 <div class="content">
 	<div class="userMoneyHeader top">
@@ -10,28 +10,28 @@
 		</ul>
 	</div>
 	<div class="userMoneyList">
-		<? if( !empty($data) ): ?>
+		<?php if( !empty($data) ): ?>
 		<ul class="worksList">
-			<? foreach($data as $row): ?>
+			<?php foreach($data as $row): ?>
 			<li>
 				<p class="type">
 					<?=$row['type']?>
 					<?//Если платеж с кодом протекции?>
-					<? if( $row['type_id'] == 2 and $row['status'] == 1 ):?> 
+					<?php if( $row['type_id'] == 2 and $row['status'] == 1 ):?> 
 					(<?=$row['time']?>)
-					<? endif; ?>
+					<?php endif; ?>
 				</p>
 				<p class="date"><?=$row['date']?></p>
 				<p class="cost"><span><?=$row['amount']?> RUB</span></p>
 				<p class="comment"><?=$row['descr']?></p>
 			</li>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 		</ul>
-		<? else: ?>
+		<?php else: ?>
 		<ul class="worksList">
 			<li><p class="type">История отсутствует.</p></li>
 		</ul>
-		<? endif; ?>
+		<?php endif; ?>
 		<p class="subtitle">
 		Список платежей. Для создания нового перевода нажмите: "<a href="/account/transfer/">Создать перевод</a>"<br />
 		Для принятия отправленного вам платежа, кликните по номеру.

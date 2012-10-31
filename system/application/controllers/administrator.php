@@ -194,8 +194,7 @@ class Administrator extends Controller {
 		
 		$url = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		//Результатов на страницу
 		if (! empty($_GET['result']) and is_numeric($_GET['result'])) {
@@ -284,8 +283,7 @@ class Administrator extends Controller {
 		$cur_month = $month;
 		
 		//Массив с годами, для поля селект
-		$array = array(
-		);
+		$array = array( );
 		
 		for ($y = 2010; $y < $cur_year + 1; $y++) {
 			$array[] = $y;
@@ -313,11 +311,9 @@ class Administrator extends Controller {
 		//Получаем сколько всего дней в текущем месяце заданного года
 		$total_days = days_in_month($cur_month, $cur_year);
 		
-		$days = array(
-		);
+		$days = array( );
 		
-		$events = array(
-		);
+		$events = array( );
 		
 		for ($d = 1; $d < $total_days + 1; $d++) {
 			$days[] = $d;
@@ -391,8 +387,7 @@ class Administrator extends Controller {
 		$cur_year = $year;
 		
 		//Массив с годами, для поля селект
-		$array = array(
-		);
+		$array = array( );
 		
 		for ($y = 2010; $y < $cur_year + 1; $y++) {
 			$array[] = $y;
@@ -515,8 +510,7 @@ class Administrator extends Controller {
 		
 		$url = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		//Результатов на страницу
 		if (! empty($_GET['result']) and is_numeric($_GET['result'])) {
@@ -640,8 +634,7 @@ class Administrator extends Controller {
 		
 		$url = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		//Результатов на страницу
 		if (! empty($_GET['result']) and is_numeric($_GET['result'])) {
@@ -770,8 +763,7 @@ class Administrator extends Controller {
 		
 		$url = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		//Результатов на страницу
 		if (! empty($_GET['result']) and is_numeric($_GET['result'])) {
@@ -1098,8 +1090,7 @@ class Administrator extends Controller {
 	function info() {
 		parse_str($_SERVER['QUERY_STRING'], $_GET);
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		if (! empty($_GET['range'])) {
 			$input['range'] = $_GET['range'];
@@ -1230,8 +1221,7 @@ class Administrator extends Controller {
 		
 		$url = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		//Статус
 		if (! empty($_GET['status'])) {
@@ -1537,8 +1527,7 @@ class Administrator extends Controller {
 		
 		$url = '';
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		//Результатов на страницу
 		if (! empty($_GET['result']) and is_numeric($_GET['result'])) {

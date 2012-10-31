@@ -12,7 +12,7 @@
 						<?= $page_links?>
 					</ul>
 				</div>
-				<? if (! empty($data)): ?>
+				<?php if (! empty($data)): ?>
 				<div class="no-margin">
 					<table class="table" cellspacing="0" width="100%">
 						<thead>
@@ -28,7 +28,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<? foreach ($data as $row): ?>
+							<?php foreach ($data as $row): ?>
 							<tr>
 								<th scope="row" class="table-check-cell">
 									<input type="checkbox" name="reports[]" value="<?=$row['id']?>" />
@@ -49,13 +49,13 @@
 									<a href="#" onClick="openModal(<?=$row['id']?>); return false;" title="Открыть" class="with-tip">Открыть</a>
 								</td>
 							</tr>
-							<? endforeach; ?>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>
-				<? else : ?>
+				<?php else : ?>
 				<p>Ничего не найдено.</p>
-				<? endif; ?>
+				<?php endif; ?>
 				<ul class="message no-margin">
 					<li>
 						Результатов: <?= $count?>

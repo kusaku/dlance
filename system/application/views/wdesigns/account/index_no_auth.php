@@ -6,4 +6,4 @@
 	</div>
 </div>
 <!--/yui-main-->
-<? $this->load->view('wdesigns/account/block_no_auth'); ?>
+<?php $this->load->view('wdesigns/account/block_no_auth'); ?>

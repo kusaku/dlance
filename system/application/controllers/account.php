@@ -1,7 +1,7 @@
 <?php 
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-	
+
 class Account extends Controller {
 	public $user_id;
 	
@@ -48,6 +48,7 @@ class Account extends Controller {
 		if (!$this->errors->access()) {
 			return;
 		}
+		
 		$this->config->item('pay_robox_login');
 		// регистрационная информация (логин, пароль #1)
 		
@@ -319,8 +320,7 @@ class Account extends Controller {
 			return;
 		}
 		
-		$data = array(
-		);
+		$data = array( );
 		
 		$data['purse'] = 'R344515119665';
 		
@@ -490,8 +490,8 @@ class Account extends Controller {
 		);
 		
 		$data = array(
-			'user_id'=>$this->user_id,'recipient_id'=>$this->input->post('recipient'),
-				'date'=>now(),'type'=>$this->input->post('type'),'code'=>'','time'=>$this->input->post('time'),
+			'user_id'=>$this->user_id,'recipient_id'=>$this->input->post('recipient'),'date'=>now(),
+				'type'=>$this->input->post('type'),'code'=>'','time'=>$this->input->post('time'),
 				'amount'=>$this->input->post('amount'),'text'=>htmlspecialchars($this->input->post('text')),
 				'status'=>1
 		);
@@ -866,60 +866,50 @@ class Account extends Controller {
 		
 		$this->template->build('account/users_followers', $data, $title = 'Подписки на пользовательские работы');
 	}
+	
 	/**
 	 * ---------------------------------------------------------------
-	 *	Подписаться
-	 * ---------------------------------------------------------------
-	 */
-	//Проверяем подписан ли подписчик уже, если нет добавляем
-
-	function subscribe($follows = '') {
-		if (!$this->errors->access()) {
-			return;
-		}
-		
-		if ($this->_check_subscribe($follows)) {
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
-		}
-		
-		$data = array(
-			'user_id'=>$this->user_id,'date'=>now(),'follows'=>$follows
-		);
-		
-		$this->account_mdl->add('users_followers', $data);
-		
-		redirect('account/users_followers');
-	}
-	/**
-	 * ---------------------------------------------------------------
-	 *	Удаление подписки
+	 *	Подписчики
 	 * ---------------------------------------------------------------
 	 */
 
-	function subscribe_del($follows = '') {
-		if (!$this->errors->access()) {
-			return;
+	function followers($start_page = 0) {
+		
+		$this->users_mdl->update_views($this->user_id);
+		
+		$data['positive'] = $this->reviews_mdl->count_reviews_positive($data['id']);
+		
+		$data['negative'] = $this->reviews_mdl->count_reviews_negative($data['id']);
+		
+		$per_page = 10;
+		
+		$start_page = intval($start_page);
+		if ($start_page < 0) {
+			$start_page = 0;
 		}
 		
-		//Если подписка не найдена перенаправляем
+		$config['uri_segment'] = '4';
+		$config['base_url'] = base_url().'/account/followers/'.$username.'';
+		//$this->reviews_mdl->count_reviews($data['id'], $type);
+		$config['total_rows'] = 10;
+		$config['per_page'] = $per_page;
 		
-		if (!$this->_check_subscribe($follows)) {
-			redirect('account/users_followers');
+		$this->pagination->initialize($config);
+		
+		$data['page_links'] = $this->pagination->create_links();
+		
+		if (! empty($url)) {
+			$url = implode("&", $url);
+			$data['page_links'] = str_replace('">', '/?'.$url.'">', $data['page_links']);
 		}
 		
-		$this->account_mdl->subscribe_del($this->user_id, $follows);
+		$data['followers'] = $this->account_mdl->get_followers($start_page, $per_page, $data['id']);
 		
-		redirect('account/users_followers');
+		$title = $data['name'].' '.$data['surname'].' ('.$data['username'].') | Отзывы';
+		
+		$this->template->build('account/followers', $data, $title);
 	}
-
-	function _check_subscribe($follows) {
-		//Если пользователь уже находится в подписчиках
-		
-		if ($this->account_mdl->subscribe_check($this->user_id, $follows)) {
-			return TRUE;
-		}
-		return FALSE;
-	}
+	
 	/**
 	 * ---------------------------------------------------------------
 	 *	Корзина
@@ -1572,29 +1562,23 @@ class Account extends Controller {
 	 */
 
 	function download($code) {
-		//Выбираем файл по коду, если нет выдаём ошибку
-		
+	
 		if (!$data = $this->account_mdl->get_download($code)) {
 			show_404('page');
 		}
 		
 		//После сверяем ip если ip другой то выдаём ошибку
-		
 		if ($data['ip'] != $this->input->ip_address()) {
 			show_error('Ip не действителен.');
 		}
 		
 		//Затем проверяем, действительна ли ссылка по времени, если нет удаляем это поле с файлом
-		
 		//От текущей даты отнимаем дату создания загрузки, получаем время прошедшее с момента создания загрузки
-		
 		$date = now() - $data['date'];
 		
 		//Если время прошедшее с момента создания файла больше чем заданное время продолжительности ссылки то выдаём ошибку и УДАЛЯЕМ ЗАГРУЗКУ
-		
 		if ($date > $this->config->item('download_period')) {
 			$this->account_mdl->del('downloads', $data['id']);
-			
 			show_error('Период загрузки истёк, загрузка будет удалена.');
 		}
 		
@@ -1605,21 +1589,15 @@ class Account extends Controller {
 		 */
 		 
 		//Настояший путь к файлу
-		
 		$file = 'files/download/'.$data['file'].'';
-		
 		$type = explode('.', $file);
-		
 		$type = $type[1];
 		
 		//Случайное название файла
-		
 		$fname = md5(time()).'.'.$type;
-		
 		$fsize = filesize($file);
 		
 		//Закачка
-		
 		$fdown = $file;
 		
 		/**
@@ -1641,37 +1619,25 @@ class Account extends Controller {
 			header("Content-Length: ".$fsize);
 			
 			while (!feof($f)) {
-			
 				if (connection_aborted()) {
 					fclose($f);
-					
 					break;
 				}
-				
 				echo fread($f, 10000);
-				
 				sleep(1);
 			}
 			
 			fclose($f);
 		} else {// Получить значение переменной HTTP_RANGE
-		
 			preg_match("/bytes=(\d+)-/", getenv('HTTP_RANGE'), $m);
-			
 			// Размер фрагмента
-			
 			$csize = $fsize - $m[1];
-			
 			// Позиция, с которой начинать чтение файла
-			
 			$p1 = $fsize - $csize;
-			
 			// Конец фрагмента
-			
 			$p2 = $fsize - 1;
 			
 			// Установить позицию чтения в файле
-			
 			$f = fopen($fdown, 'r');
 			fseek($f, $p1);
 			
@@ -1686,17 +1652,12 @@ class Account extends Controller {
 			while (!feof($f)) {
 				if (connection_aborted()) {
 					fclose($f);
-					
 					break;
 				}
-				
 				echo fread($f, 10000);
-				
 				sleep(1);
 			}
-			
 			fclose($f);
-			
 		}
 	}
 	/**
@@ -1806,8 +1767,7 @@ class Account extends Controller {
 			return;
 		}
 		
-		$data = array(
-		);
+		$data = array( );
 		
 		$data['data'] = $this->account_mdl->get_transaction($this->user_id);
 		
@@ -1824,8 +1784,7 @@ class Account extends Controller {
 			return;
 		}
 		
-		$data = array(
-		);
+		$data = array( );
 		
 		$data['data'] = $this->account_mdl->get_purses($this->user_id);
 		
@@ -2035,8 +1994,7 @@ class Account extends Controller {
 			$start_page = 0;
 		}
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		$input['user_id'] = $this->user_id;
 		
@@ -2073,8 +2031,7 @@ class Account extends Controller {
 			$start_page = 0;
 		}
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		if (! empty($_GET['status'])) {
 			$status = '';
@@ -2109,9 +2066,17 @@ class Account extends Controller {
 			$data['page_links'] = str_replace('">', '/?'.$url.'">', $data['page_links']);
 		}
 		
-		$data['data'] = $this->designs_mdl->get_designs($start_page, $per_page, $input);
+		$categories = $this->designs_mdl->get_categories();
 		
-		$this->template->build('account/designs', $data, $title = 'Список дизайнов');
+		foreach ($this->designs_mdl->get_user_designs($this->user_id, $start_page, $per_page) as $item) {
+			// невротебенно же!
+			$cat_name_path = implode(' &gt ', $categories[$item['category']]['name_path']);
+			$designs[$cat_name_path][] = $item;
+		}
+		
+		$data['data'] = $designs;
+		
+		$this->template->build('account/designs', $data, $title = 'Редактировать дизайны | Аккаунт');
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -2139,8 +2104,7 @@ class Account extends Controller {
 			return;
 		}
 		
-		$data = array(
-		);
+		$data = array( );
 		
 		$submit = (bool)$this->input->post('submit');
 		
@@ -2281,20 +2245,14 @@ class Account extends Controller {
 			}
 		}
 		
-		if ($submit and $this->input->post('userfile')) {
+		if ($submit and isset($_FILES['userfile'])) {
 		
 			$this->load->library('upload');
 			$this->load->library('Image_lib');
 			
-			$config['upload_path'] = './userpics/';
-			$config['allowed_types'] = 'gif|jpg|jpeg|png';
-			$config['overwrite'] = TRUE;
-			$config['max_size'] = '1000';
-			$config['max_width'] = '1024';
-			$config['max_height'] = '768';
-			
-			$this->upload->initialize($config);
-			unset($config);
+			$this->upload->initialize(array(
+				'upload_path'=>'./userpics/','allowed_types'=>'gif|jpg|jpeg|png','overwrite'=>TRUE,'max_size'=>'1024','max_width'=>'2048','max_height'=>'2048'
+			));
 			
 			if ($this->upload->do_upload()) {
 				$filedata = $this->upload->data();
@@ -2307,13 +2265,9 @@ class Account extends Controller {
 				
 				$path = './userpics/'.$filedata['orig_name'].'';
 				
-				$config['source_image'] = $path;
-				$config['maintain_ratio'] = FALSE;
-				$config['width'] = 100;
-				$config['height'] = 100;
-				$config['new_image'] = './userpics/userpic'.$filedata['file_ext'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_'.$this->username;
+				$this->image_lib->initialize(array(
+					'source_image'=>$path,'maintain_ratio'=>TRUE,'width'=>100,'height'=>100,'new_image'=>'./userpics/userpic'.$filedata['file_ext'].'','create_thumb'=>TRUE,'thumb_marker'=>'_'.$this->username,
+				));
 				
 				$this->image_lib->initialize($config);
 				$this->image_lib->resize();
@@ -2321,15 +2275,19 @@ class Account extends Controller {
 				//Удаляем оригинал
 				unlink($path);
 				
+				$this->userpic = '/userpics/userpic_'.$this->username.$filedata['file_ext'];
+				
 				//Юзерпик
 				$this->users_mdl->edit($this->user_id, array(
-					'userpic'=>'/userpics/userpic_'.$this->username.''.$filedata['file_ext'].''
+					'userpic'=>$this->userpic,
 				));
+				
 			} else {
 				$data['error'] = $this->upload->display_errors();
 			}
 			
 		}
+		define('TRUE', FALSE);
 		
 		//Получаем настройки для отображения
 		$data += $this->users_mdl->profile();
@@ -2398,46 +2356,7 @@ class Account extends Controller {
 		
 		$this->template->build('account/profile', $data, $title = 'Настройки профиля');
 	}
-	/**
-	 * ---------------------------------------------------------------
-	 *	Пароль
-	 * ---------------------------------------------------------------
-	 */
-
-	function password() {
-		if (!$this->errors->access()) {
-			return;
-		}
-		
-		$rules = array(
-			array(
-				'field'=>'old_password','label'=>'Старый пароль','rules'=>'required|callback__password_check'
-			),array(
-				'field'=>'password1','label'=>'Новый пароль','rules'=>'required|min_length[6]|max_length[24]|matches[password2]'
-			),array(
-				'field'=>'password2','label'=>'Повтор пароля','rules'=>'required'
-			)
-		);
-		
-		$password = $this->input->post('password1');
-		
-		$this->form_validation->set_rules($rules);
-		
-		if ($this->form_validation->run()) {
-			$this->users_mdl->change_password($this->user_id, $password);
-		}
-		
-		$this->template->build('account/password', $data = '', $title = 'Пароль | Настройки профиля');
-	}
-
-	function _password_check($password) {
-		if ($this->users_mdl->password_check($this->user_id, $password)) {
-			return TRUE;
-		} else {
-			$this->form_validation->set_message('_password_check', 'Действующий пароль введён неверно');
-			return FALSE;
-		}
-	}
+	
 	/**
 	 * ---------------------------------------------------------------
 	 *	Услуги
@@ -2500,7 +2419,7 @@ class Account extends Controller {
 			$data['select'] = $select;
 		}
 		
-		$this->template->build('account/services', $data, $title = 'Услуги | Настройки профиля');
+		$this->template->build('account/services', $data, $title = 'Редактировать услуги | Аккаунт');
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -2579,7 +2498,23 @@ class Account extends Controller {
 	 * ---------------------------------------------------------------
 	 */
 
-	function images_add() {
+	function portfolio() {
+		if (!$this->errors->access()) {
+			return;
+		}
+		
+		$data['portfolio'] = $this->account_mdl->get_portfolio($this->user_id);
+		
+		$this->template->build('account/portfolio', $data, 'Редактировать портфолио | Аккаунт');
+	}
+	
+	/**
+	 * ---------------------------------------------------------------
+	 *	Портфолио/Редактирование
+	 * ---------------------------------------------------------------
+	 */
+
+	function portfolio_add() {
 		if (!$this->errors->access()) {
 			return;
 		}
@@ -2643,9 +2578,7 @@ class Account extends Controller {
 					
 					$this->account_mdl->add_porfolio($data);
 					
-					//Перекидываем на страницу вывода изображений
-					
-					redirect('users/portfolio/'.$this->username);
+					redirect('account/portfolio/');
 				}
 				
 			} else {
@@ -2660,13 +2593,8 @@ class Account extends Controller {
 		
 		$this->template->build('portfolio/add', $data, $title = 'Добавить изображение | Настройки профиля');
 	}
-	/**
-	 * ---------------------------------------------------------------
-	 *	Портфолио/Редактирование
-	 * ---------------------------------------------------------------
-	 */
 
-	function images_edit($id = '') {
+	function portfolio_edit($id = '') {
 		if (!$this->errors->access()) {
 			return;
 		}
@@ -2741,9 +2669,7 @@ class Account extends Controller {
 			
 			$this->account_mdl->edit_porfolio($id, $data);
 			
-			//Перекидываем на страницу вывода изображений
-			
-			redirect('users/portfolio/'.$this->username);
+			redirect('account/portfolio/');
 		}
 		
 		$data = $this->account_mdl->get_image($id);
@@ -2756,7 +2682,7 @@ class Account extends Controller {
 	 * ---------------------------------------------------------------
 	 */
 
-	function images_del($id = '') {
+	function portfolio_del($id = '') {
 		if (!$this->errors->access()) {
 			return;
 		}
@@ -2767,9 +2693,7 @@ class Account extends Controller {
 		
 		$this->account_mdl->del_porfolio($id);
 		
-		//Перекидываем на страницу вывода изображений
-		
-		redirect('users/images/'.$this->username);
+		redirect('account/portfolio/');
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -2777,7 +2701,7 @@ class Account extends Controller {
 	 * ---------------------------------------------------------------
 	 */
 
-	function images_up($id = '') {
+	function portfolio_up($id = '') {
 		if (!$this->errors->access()) {
 			return;
 		}
@@ -2788,9 +2712,7 @@ class Account extends Controller {
 		
 		$this->account_mdl->up_portfolio($id, $this->user_id);
 		
-		//Перекидываем на страницу вывода изображений
-		
-		redirect('users/images/'.$this->username);
+		redirect('account/portfolio/');
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -2798,7 +2720,7 @@ class Account extends Controller {
 	 * ---------------------------------------------------------------
 	 */
 
-	function images_down($id = '') {
+	function portfolio_down($id = '') {
 		if (!$this->errors->access()) {
 			return;
 		}
@@ -2811,7 +2733,7 @@ class Account extends Controller {
 		
 		//Перекидываем на страницу вывода изображений
 		
-		redirect('users/images/'.$this->username);
+		redirect('account/portfolio/');
 	}
 
 	function _check_porfolio($id = '') {
@@ -2821,75 +2743,7 @@ class Account extends Controller {
 		
 		return FALSE;
 	}
-	/**
-	 * ---------------------------------------------------------------
-	 *	Юзерпик
-	 * ---------------------------------------------------------------
-	 */
-
-	function userpic() {
-		if (!$this->errors->access()) {
-			return;
-		}
-		
-		$this->load->library('upload');
-		$this->load->library('Image_lib');
-		
-		$data['userpic'] = $this->userpic;
-		
-		if (isset($_FILES['userfile']['tmp_name'])) {
-			$config['upload_path'] = './userpics/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['overwrite'] = TRUE;
-			$config['max_size'] = '1000';
-			$config['max_width'] = '1024';
-			$config['max_height'] = '768';
-			
-			$this->upload->initialize($config);
-			unset($config);
-			
-			if ($this->upload->do_upload()) {
-				$data = $this->upload->data();
-				
-				//Если изображение не стандартное удаляем
-				
-				if ($this->userpic != '/userpics/standart.jpg') {
-					unlink('.'.$this->userpic);
-				}
-				
-				$path = './userpics/'.$data['orig_name'].'';
-				
-				$config['source_image'] = $path;
-				$config['maintain_ratio'] = FALSE;
-				$config['width'] = 100;
-				$config['height'] = 100;
-				$config['new_image'] = './userpics/userpic'.$data['file_ext'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_'.$this->username;
-				
-				$this->image_lib->initialize($config);
-				
-				$this->image_lib->resize();
-				
-				//Удаляем оригинал
-				
-				unlink($path);
-				
-				//Юзерпик
-				
-				$data = array(
-					'userpic'=>'/userpics/userpic_'.$this->username.''.$data['file_ext'].''
-				);
-				
-				$this->users_mdl->edit($this->user_id, $data);
-			} else {
-				$data['error'] = $this->upload->display_errors();
-			}
-			
-		}
-		
-		$this->template->build('account/userpic', $data, $title = 'Настройка юзерпика | Настройки профиля');
-	}
+	
 	/**
 	 * ---------------------------------------------------------------
 	 *	Удаление события
@@ -2897,6 +2751,10 @@ class Account extends Controller {
 	 */
 
 	function delete_message() {
+		if (!$this->errors->access()) {
+			return;
+		}
+		
 		$id = $this->input->post('id');
 		
 		if ( empty($id)) {
@@ -2916,6 +2774,10 @@ class Account extends Controller {
 	 */
 
 	function delete_message_all() {
+		if (!$this->errors->access()) {
+			return;
+		}
+		
 		$this->db->update('events', array(
 			'status'=>2
 		), array(
@@ -2979,8 +2841,7 @@ class Account extends Controller {
 			$start_page = 0;
 		}
 		
-		$input = array(
-		);
+		$input = array( );
 		
 		if (! empty($_GET['status'])) {
 			$status = '';

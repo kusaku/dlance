@@ -24,11 +24,11 @@
 				</label>
 				<select name="category">
 					<option></option>
-					<? foreach ($categories as $row): ?>
-					<? if ($row['parent_id'] == 0): ?>
-					<option value="<?=$row['id']?>"<? if ($row['id'] == $parent_id): ?> selected="selected"<? endif; ?>><?= $row['name']?></option>
-					<? endif; ?>
-					<? endforeach; ?>
+					<?php foreach ($categories as $row): ?>
+					<?php if ($row['parent_id'] == 0): ?>
+					<option value="<?=$row['id']?>"<?php if ($row['id'] == $parent_id): ?> selected="selected"<?php endif; ?>><?= $row['name']?></option>
+					<?php endif; ?>
+					<?php endforeach; ?>
 				</select>
 			</p>
 		</div>

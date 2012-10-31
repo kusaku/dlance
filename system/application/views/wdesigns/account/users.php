@@ -1,9 +1,9 @@
-<? $this->load->view('wdesigns/account/block'); ?>		
+<?php $this->load->view('wdesigns/account/block'); ?>		
 <div id="yui-main">
 	<div class="yui-b">
 		<h1><a href="/account/users">Пользователи</a></h1>
 		<p class="subtitle"> Список пользователей.</p>
-		<? if (! empty($data)): ?>
+		<?php if (! empty($data)): ?>
 		<table class="offers">
 			<tr>
 				<th class="txtl">Пользователь</th>
@@ -13,7 +13,7 @@
 				<th style="width:100px;">Рейтинг</th>
 				<th style="width:60px;"></th>
 			</tr>
-			<? foreach ($data as $row): ?>
+			<?php foreach ($data as $row): ?>
 			<tr>
 				<td class="title">
 					<a href="/user/<?=$row['username']?>"><?= $row['surname']?><?= $row['name']?>(<?= $row['username']?>)</a>
@@ -31,18 +31,18 @@
 					<?= $row['rating']?>
 				</td>
 				<td class="state txtc">
-					<? if ($this->users_mdl->check_banned($row['id'])): ?>
+					<?php if ($this->users_mdl->check_banned($row['id'])): ?>
 					<strong>Забанен</strong>
-					<? else : ?>
+					<?php else : ?>
 					<a href="/account/users_ban/<?=$row['id']?>">Забанить</a>
-					<? endif; ?>
+					<?php endif; ?>
 				</td>
 			</tr>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 		</table>
 		<?= $page_links?>
-		<? else : ?>
+		<?php else : ?>
 		<p>Платежи отсутствуют.</p>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>

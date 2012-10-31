@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div class="content">
 	<script type='text/javascript' src='/templates/js/thickbox/thickbox.js'></script>
 	<link rel="stylesheet" type="text/css" href="/templates/js/thickbox/thickbox.css" />
@@ -25,22 +25,26 @@
 	<div class="userEventsHeader">
 		<h3>События:</h3>
 		<ul class="userEventsCategory">
-			<li>
-				<a href="#">репутация:</a>
-				<span>37</span>
-			</li>
-			<li>
-				<a href="#">сообщения:</a>
-				<span>45</span>
-			</li>
-			<li>
-				<a href="#">финансы:</a>
-				<span>13</span>
-			</li>
-			<li>
-				<a href="#">дизайны:</a>
-				<span>24</span>
-			</li>
+			<?php 
+			/*
+			 <li>
+			 <a href="#">репутация:</a>
+			 <span>37</span>
+			 </li>
+			 <li>
+			 <a href="#">сообщения:</a>
+			 <span>45</span>
+			 </li>
+			 <li>
+			 <a href="#">финансы:</a>
+			 <span>13</span>
+			 </li>
+			 <li>
+			 <a href="#">дизайны:</a>
+			 <span>24</span>
+			 </li>
+			 */
+			?>
 			<li>
 				<a href="/account/events" class="active">все</a>
 			</li>
@@ -58,14 +62,14 @@
 			</li>
 		</ul>
 	</div>
-	<? if (! empty($data)): ?>
+	<?php if (! empty($data)): ?>
 	<ul class="userEventsList">
-		<? foreach ($data as $row): ?>
-		<? if ($row['status'] == 1): ?>
+		<?php foreach ($data as $row): ?>
+		<?php if ($row['status'] == 1): ?>
 		<li id="event_<?=$row['id']?>" onclick="update(<?=$row['id']?>)" class="new">
-		<? else : ?>
+		<?php else : ?>
 		<li>
-			<? endif; ?>
+			<?php endif; ?>
 			<p class="date">
 				<?= $row['date']?>
 			</p>
@@ -73,12 +77,12 @@
 				<?= $row['title']?>
 			</p>
 		</li>
-		<? endforeach; ?>
+		<?php endforeach; ?>
 	</ul>
 	<div class="userEventsPagination">
 		<?= $page_links?>
 	</div>
-	<? else : ?>
+	<?php else : ?>
 	<p>События отсутствуют.</p>
-	<? endif; ?>
+	<?php endif; ?>
 </div>

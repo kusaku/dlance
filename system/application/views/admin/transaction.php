@@ -255,14 +255,14 @@
 						<span>
 							<select name="sort">
 								<option value="0">Все</option>
-								<option value="Пополнение"<? if( $input['sort'] == 'Пополнение' ): ?> selected="selected"<? endif; ?>>Пополнение</option>
-								<option value="Вывод средств"<? if( $input['sort'] == 'Вывод средств' ): ?> selected="selected"<? endif; ?>>Вывод средств</option>
-								<option value="Перевод средств"<? if( $input['sort'] == 'Перевод средств' ): ?> selected="selected"<? endif; ?>>Перевод средств</option>
-								<option value="Получение средств"<? if( $input['sort'] == 'Получение средств' ): ?> selected="selected"<? endif; ?>>Получение средств</option>
-								<option value="Установка виртуального статуса"<? if( $input['sort'] == 'Установка виртуального статуса' ): ?> selected="selected"<? endif; ?>>Установка виртуального статуса</option>
-								<option value="Продление виртуального статуса"<? if( $input['sort'] == 'Продление виртуального статуса' ): ?> selected="selected"<? endif; ?>>Продление виртуального статуса</option>
-								<option value="Продажа дизайна"<? if( $input['sort'] == 'Продажа дизайна' ): ?> selected="selected"<? endif; ?>>Продажа дизайна</option>
-								<option value="Покупка дизайна"<? if( $input['sort'] == 'Покупка дизайна' ): ?> selected="selected"<? endif; ?>>Покупка дизайна</option>
+								<option value="Пополнение"<?php if( $input['sort'] == 'Пополнение' ): ?> selected="selected"<?php endif; ?>>Пополнение</option>
+								<option value="Вывод средств"<?php if( $input['sort'] == 'Вывод средств' ): ?> selected="selected"<?php endif; ?>>Вывод средств</option>
+								<option value="Перевод средств"<?php if( $input['sort'] == 'Перевод средств' ): ?> selected="selected"<?php endif; ?>>Перевод средств</option>
+								<option value="Получение средств"<?php if( $input['sort'] == 'Получение средств' ): ?> selected="selected"<?php endif; ?>>Получение средств</option>
+								<option value="Установка виртуального статуса"<?php if( $input['sort'] == 'Установка виртуального статуса' ): ?> selected="selected"<?php endif; ?>>Установка виртуального статуса</option>
+								<option value="Продление виртуального статуса"<?php if( $input['sort'] == 'Продление виртуального статуса' ): ?> selected="selected"<?php endif; ?>>Продление виртуального статуса</option>
+								<option value="Продажа дизайна"<?php if( $input['sort'] == 'Продажа дизайна' ): ?> selected="selected"<?php endif; ?>>Продажа дизайна</option>
+								<option value="Покупка дизайна"<?php if( $input['sort'] == 'Покупка дизайна' ): ?> selected="selected"<?php endif; ?>>Покупка дизайна</option>
 							</select>
 						</span>
 					</div>
@@ -283,25 +283,25 @@
 						<?= $page_links?>
 					</ul>
 				</div>
-				<? if (! empty($data)): ?>
+				<?php if (! empty($data)): ?>
 				<div class="no-margin">
 					<table class="table" cellspacing="0" width="100%">
 						<thead>
 							<tr>
 								<th scope="col">Пользователь</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/transaction/?order_field=descr<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'descr' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/transaction/?order_field=descr&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'descr' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/transaction/?order_field=descr<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>" title="Sort up" class="sort-up<?php if( $input['order_field'] == 'descr' and	$input['order_type'] == 'desc' ): ?> active<?php endif;?>"></a><a href="/administrator/transaction/?order_field=descr&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>" title="Sort down" class="sort-down<?php if( $input['order_field'] == 'descr' and	$input['order_type'] == 'asc' ): ?> active<?php endif;?>"></a></span>
 									Описание
 								</th>
 								<th scope="col">Сумма</th>
 								<th scope="col">
-									<span class="column-sort"><a href="/administrator/transaction/?order_field=date<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort up" class="sort-up<? if( $input['order_field'] == 'date' and	$input['order_type'] == 'desc' ): ?> active<? endif;?>"></a><a href="/administrator/transaction/?order_field=date&order_type=asc<? if( !empty($url) ): ?>&<?=$url?><? endif;?>" title="Sort down" class="sort-down<? if( $input['order_field'] == 'date' and	$input['order_type'] == 'asc' ): ?> active<? endif;?>"></a></span>
+									<span class="column-sort"><a href="/administrator/transaction/?order_field=date<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>" title="Sort up" class="sort-up<?php if( $input['order_field'] == 'date' and	$input['order_type'] == 'desc' ): ?> active<?php endif;?>"></a><a href="/administrator/transaction/?order_field=date&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>" title="Sort down" class="sort-down<?php if( $input['order_field'] == 'date' and	$input['order_type'] == 'asc' ): ?> active<?php endif;?>"></a></span>
 									Дата
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<? foreach ($data as $row): ?>
+							<?php foreach ($data as $row): ?>
 							<tr>
 								<td>
 									<a href="/user/<?=$row['username']?>">
@@ -318,13 +318,13 @@
 									<?= $row['date']?>
 								</td>
 							</tr>
-							<? endforeach; ?>
+							<?php endforeach; ?>
 						</tbody>
 					</table>
 				</div>
-				<? else : ?>
+				<?php else : ?>
 				<p>Ничего не найдено.</p>
-				<? endif; ?>
+				<?php endif; ?>
 				<ul class="message no-margin">
 					<li>
 						Результатов: 

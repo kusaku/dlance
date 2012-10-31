@@ -1,10 +1,6 @@
-<?php
-$config['charset'] = 'windows-1251';
+<?php 
+$config['email'] = 'root@kusaku.su';
+$config['charset'] = 'UTF-8';
 $config['protocol'] = 'mail';
-
 $config['mailtype'] = 'text';
-
-$config['crlf'] = "\r\n";
-$config['newline'] = "\r\n";
 $config['wordwrap'] = TRUE;
-?>

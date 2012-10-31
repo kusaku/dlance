@@ -29,6 +29,7 @@
 					<li>Установить виртуальный статус</li>
 				</ul>
 			</div>
+			<?php /*
 			<div class="sideblock mb0 noborder">
 				<h3>Финансовые операции</h3>
 				<ul>
@@ -40,6 +41,7 @@
 					<li>Платежи</li>
 				</ul>
 			</div>
+			*/ ?>
 			<div class="sideblock mb0 noborder">
 				<h3>Рассылки</h3>
 				<ul>

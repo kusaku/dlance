@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <script type="text/javascript">
 function commission(amount)
 {
@@ -27,16 +27,16 @@ function commission(amount)
 							<form action="" method="post">
 								Номер кошелька:
 								<div>
-									<? if (! empty($purses)): ?>
+									<?php if (! empty($purses)): ?>
 									<select name="purse">
-										<? foreach ($purses as $row): ?>
+										<?php foreach ($purses as $row): ?>
 										<option value="<?=$row['purse']?>"<?= set_select('purse', ''.$row['purse'].''); ?>><?= $row['purse']?></option>
-										<? endforeach; ?>
+										<?php endforeach; ?>
 									</select>
-									<? else : ?>
+									<?php else : ?>
 									Перед выводом необходимо <a href="/account/purses_add">указать</a>
 									кошелек.
-									<? endif; ?>
+									<?php endif; ?>
 								</div>
 								<script type="text/javascript" src="/templates/js/commission.js"></script>
 								Сумма:
@@ -59,7 +59,7 @@ function commission(amount)
 				</div>
 			</div>
 		</div>
-		<? if (! empty($data)): ?>
+		<?php if (! empty($data)): ?>
 		<table class="portfolio">
 			<tr>
 				<th class="txtl" style="width: 100px;">Дата</th>
@@ -68,7 +68,7 @@ function commission(amount)
 				<th style="width: 60px;">Статус</th>
 				<th></th>
 			</tr>
-			<? foreach ($data as $row): ?>
+			<?php foreach ($data as $row): ?>
 			<tr>
 				<td class="title">
 					<?= $row['date']?>
@@ -87,10 +87,10 @@ function commission(amount)
 					<span class="fr"><a href="/account/withdraw_del/<?=$row['id']?>">Отменить</a></span>
 				</td>
 			</tr>
-			<? endforeach; ?>
+			<?php endforeach; ?>
 		</table>
 		<?= $page_links?>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>
 <!--/yui-main-->

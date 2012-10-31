@@ -1,4 +1,4 @@
-<? if ($logged_in): ?>
+<?php if ($logged_in): ?>
 <div class="userInfo">
 	<div class="avatar <?=$tariff?>">
 		<a href="/account" title="Перейти к портфолио <?=$username?>"></a>
@@ -19,11 +19,11 @@
 </div>
 <div class="userPanel">
 	<a href="/account/settings" class="settings">Настройки</a>
-	<a href="/account" class="orange">Мой кабинет</a>
-	<a href="/contacts/" class="inbox"><span><? if ($messages): ?><?= $messages?><? else : ?>0 <? endif; ?></span></a>
+	<a href="/account">Мой кабинет</a>
+	<a href="/contacts/" class="inbox"><span><?php if ($messages): ?><?= $messages?><?php else : ?>0 <?php endif; ?></span></a>
 	<a href="/logout">Выход</a>
 </div>
-<? else: ?>
+<?php else: ?>
 <h3>Авторизация</h3>
 <a href="/register" class="topReg">Регистрация</a>
 <form class="topAuth" name="login" action="/login" method="post">
@@ -35,4 +35,4 @@
 		<span class="niceCheck"><input name="rcookiettl" value="86400" type="checkbox"/></span><a href="/recovery" class="forgetPassword">забыли пароль?</a>
 	</fieldset>
 </form>
-<? endif; ?>
+<?php endif; ?>

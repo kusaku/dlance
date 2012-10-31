@@ -1,4 +1,4 @@
-<? $this->load->view('wdesigns/account/block'); ?>
+<?php $this->load->view('wdesigns/account/block'); ?>
 <div id="yui-main">
 	<div class="yui-b">
 		<h1><a href="">Контакты / Сообщения</a></h1>
@@ -18,26 +18,26 @@
 			</li>
 		</ul>
 		<div class="message">
-			<? if (! empty($messages)): ?>
-			<? foreach ($messages as $row): ?>
-			<? if ($row['reading']): ?>
+			<?php if (! empty($messages)): ?>
+			<?php foreach ($messages as $row): ?>
+			<?php if ($row['reading']): ?>
 			<div align="right">
 				Прочитано: <?= $row['reading']?>
 			</div>
-			<? endif; ?>
+			<?php endif; ?>
 			<strong><?= $row['sender_id']?></strong>
 			<?= date_smart($row['date'])?>:
 			<br/>
 			<?= nl2br($row['text'])?>
-			<hr/><? endforeach; ?>
+			<hr/><?php endforeach; ?>
 			<?= $page_links?>
-			<? else : ?>
+			<?php else : ?>
 			Сообщения не найдено.
-			<? endif; ?>
+			<?php endif; ?>
 		</div>
-		<? if ($black_list): ?>
+		<?php if ($black_list): ?>
 		Переписка отключена
-		<? else : ?>
+		<?php else : ?>
 		<?= validation_errors()?>
 		<div id="send">
 			<form action="" method="post">
@@ -48,6 +48,6 @@
 					<input type="submit" value="Отправить"></div>
 			</form>
 		</div>
-		<? endif; ?>
+		<?php endif; ?>
 	</div>
 </div>
