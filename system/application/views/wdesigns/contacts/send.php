@@ -1,22 +1,24 @@
 <?php $this->load->view('wdesigns/account/block'); ?>
-<div id="yui-main">
+<div id="yui-main" class="content">
 	<div class="yui-b">
 		<h1><a href="">Контакты / Сообщения</a></h1>
-		<img src="<?=$userpic?>" alt="" class="avatar" />
-		<ul class="ucard">
-			<li class="utitle">
-				<a class="black" href="/user/<?=$username?>"><?= $username?></a>
-			</li>
-			<li>
-				Последний визит: <?= $last_login?>
-			</li>
-			<li>
-				Дата регистрации: <?= $created?>
-			</li>
-			<li>
-				<a href="#send">Написать сообщение</a>
-			</li>
-		</ul>
+		<div class="userInfo">
+			<img src="<?=$userpic?>" alt="" class="avatar" />
+			<ul class="ucard">
+				<li class="utitle">
+					<a class="black" href="/user/<?=$username?>"><?= $username?></a>
+				</li>
+				<li>
+					Последний визит: <?= $last_login?>
+				</li>
+				<li>
+					Дата регистрации: <?= $created?>
+				</li>
+				<li>
+					<a href="#send">Написать сообщение</a>
+				</li>
+			</ul>
+		</div>
 		<div class="message">
 			<?php if (! empty($messages)): ?>
 			<?php foreach ($messages as $row): ?>

@@ -112,6 +112,7 @@ a:hover, a:active, a.active {color:#ff7b0b; text-decoration:none;}
 .sideBar .designsCategories ul a {font-size:12px;}
 .sideBar .designsCategories ul a:hover,
 .sideBar .designsCategories ul ul a {color:#b2c4c8;}
+.sideBar .designsCategories ul a.active{color:#ff7b0b;}
 .sideBar .designsCategories ul span {color:#ff7b0b;}
 
 .sideBar .tagsCloud {position:relative;width:160px; margin:0 0 8px 0;}
@@ -407,6 +408,8 @@ a:hover, a:active, a.active {color:#ff7b0b; text-decoration:none;}
 .userInfo a.name {color:#000000;}
 .userInfo span {display:inline; width:45px;} 
 
+.userInfo .ucard{list-style:none;}
+
 .sideBar .userInfo a.name {color:#000000; text-decoration:none;}
 .sideBar .userInfo span {color:#ff7900;}
 
@@ -565,8 +568,8 @@ a:hover, a:active, a.active {color:#ff7b0b; text-decoration:none;}
 .userPortfolioHeader.top { border-left:1px solid #ffffff;}
 .userPortfolioHeader.closed {height: 26px; padding: 0 0 5px 10px;}
 .userPortfolioHeader.closed h3{background:none;}
-.userPortfolioHeader h3{display:inline-block; height:26px; width: 145px; float: left; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; margin: 0;background:url(../images/headerworks_h3.png) 10px 0 no-repeat;}
-.userPortfolioHeader .userPortfolioCategory {display:block; height: 26px; padding:0; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:left;}
+.userPortfolioHeader h3{display:inline-block; height:26px; ; float: left; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; margin: 0;background:url(../images/searchresulth3.png) 0px 0 no-repeat;}
+.userPortfolioHeader .userPortfolioCategory {display:block; height: 26px; padding:0 0 0 13px; margin: 0;color:#ffffff; line-height: 16px;text-decoration: none;float:left;background:url(../images/headerworks.png) -145px 0 no-repeat;}
 .userPortfolioHeader .userPortfolioCategory li{display: block; float: left; padding: 3px 9px 3px 8px; line-height: 14px;}
 .userPortfolioHeader .userPortfolioCategory a {color:#ffffff; display:inline-block; height:23px; padding: 0; text-decoration:underline;}
 .userPortfolioHeader .userPortfolioCategory span {display:inline-block; height:23px; padding: 0;}
