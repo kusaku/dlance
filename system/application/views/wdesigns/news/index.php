@@ -1,3 +1,4 @@
+<div class="newsContent">
 <h2>Новости проекта</h2>
 
 <?php if( !empty($news) ): ?>
@@ -10,4 +11,5 @@
 <?php else: ?>
 <p>Ничего не найдено.</p>
 <?php endif; ?>
+</div>
 

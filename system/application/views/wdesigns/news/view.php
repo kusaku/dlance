@@ -1,3 +1,4 @@
+<div class="newsContent">
 <h2>Новости проекта</h2><br/>
 <h3><b><?=$title?></b></h3>
 <div class="newsQuote"><?=$descr?></div>
@@ -13,3 +14,4 @@
 <?php foreach($newest_news as $row): ?>
 	<p><?=$row['date']?> | <a class="orange" href="/news/<?=$row['id']?>.html"><?=$row['title']?></a></p>
 <?php endforeach; ?>
+</div>
