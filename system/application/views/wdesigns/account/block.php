@@ -1,14 +1,14 @@
 <div class="sideBar">
 <div class="userInfo">
 	<p class="contacts">
-		<a href="/user/<?=$username?>" class="name"><?= $username?></a>
+		<a href="/user/<?=$username?>" class="name"><?=$this->username?></a>
 	</p>
 	<p>
-		<?= "{$name} {$surname}"?>
+		<?=$this->user->name?> <?=$this->user->surname?>
 	</p>
 	<div class="avatar <?=$tariff?>">
 		<a href="/users/portfolio/<?=$this->username?>" title="Перейти к портфолио"></a>
-		<img src="<?=$userpic?>" alt="<?=$this->username?> avi" />
+		<img src="<?=$this->userpic?>" alt="<?=$this->username?> avi" />
 	</div>
 	<p>
 		<a href="/account/events/">События:</a>

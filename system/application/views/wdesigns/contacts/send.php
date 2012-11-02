@@ -1,6 +1,6 @@
 <?php $this->load->view('wdesigns/account/block'); ?>
 <div id="yui-main" class="content">
-	<div class="yui-b">
+	<div class="yui-b services">
 		<h1><a href="">Контакты / Сообщения</a></h1>
 		<div class="userInfo">
 			<img src="<?=$userpic?>" alt="" class="avatar" />
@@ -47,7 +47,9 @@
 					<textarea cols="10" rows="10" name="text" style="width:100%"><?= set_value('text')?></textarea>
 				</div>
 				<div>
-					<input type="submit" value="Отправить"></div>
+					<br/>
+					<button name="submit" type="submit" value="Отправить" class="orangeBtn80">Отправить</button></form>
+				</div>
 			</form>
 		</div>
 		<?php endif; ?>

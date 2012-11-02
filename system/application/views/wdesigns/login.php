@@ -7,7 +7,7 @@
 	<p>
 		<a href="/account" class="name"><?= $username?></a>
 		<br/>
-		<?= $name?><?= $surname?>
+		<?= $name?> <?= $surname?>
 	</p>
 	<p>
 		<span>Рейтинг:</span>

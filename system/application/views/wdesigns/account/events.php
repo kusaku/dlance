@@ -44,7 +44,7 @@
 			 */
 			?>
 			<li>
-				<a href="/account/events" class="active">все</a>
+				<a href="/account/events">все</a>
 			</li>
 		</ul>
 		<ul class="userEventsSelect">
@@ -56,7 +56,7 @@
 				<a href="/account/events/?status=2">старые</a>
 			</li>
 			<li>
-				<a href="/account/events" class="active">все</a>
+				<a href="/account/events">все</a>
 			</li>
 		</ul>
 	</div>

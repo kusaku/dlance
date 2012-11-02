@@ -510,6 +510,10 @@ a:hover, a:active, a.active {color:#ff7b0b; text-decoration:none;}
 .userSettings .userSettingsRight .avatarSmall {width: 40px; height:40px;}
 .userSettings .userSettingsRight .reg-submit {background:url(../images/commentbtn.png) #ff7900; border:0; display:inline-block; width:80px; height:20px; padding:0 0 3px 0px; margin:3px 0 0 270px; float:left;color:#ffffff; text-decoration:underline; font-size:12px; line-height:18px;text-align:center; cursor:pointer;vertical-align:baseline}
 
+.services {border-left:1px solid #B2C4C8;padding:0 0 0 10px;}
+.services td{padding:2px 3px;}
+.orangeBtn80{background:url(../images/commentbtn.png) #ff7900; border:0; display:inline-block; width:80px; height:20px; padding:0 0 3px 0px; margin:3px 0 0 0;color:#ffffff; text-decoration:underline; font-size:12px; line-height:18px;text-align:center; cursor:pointer;vertical-align:baseline}
+
 .userEventsHeader {display:block; height:26px; width:750px; background:url(../images/headeruserevents.png) 0 0 no-repeat #ff7900; margin: 0 0 0 10px;}
 .userEventsHeader h3{display:inline-block; height:26px; width: 100px; float: left; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px; margin: 0;}
 .userEventsHeader .userEventsCategory {display:block; height: 26px; width: 410px; padding:0 0 0 12px; margin: 0;color:#ffffff; line-height: 12px;text-decoration: none;float:left;}
