@@ -17,7 +17,7 @@ class Rss extends Controller {
 		$data['feed_url'] = 'http://www.dlance.ru';
 		$data['page_description'] = 'Дизайны сайтов на сервисе Dlance.ru';
 		$data['page_language'] = 'ru-ru';
-		$data['posts'] = $this->designs_mdl->get_designs(0, 50);
+		$data['posts'] = $this->designs_mdl->get_designs(array('limit'=>50, 'offset'=>0));
 		
 		header("Content-Type: application/rss+xml");
 		

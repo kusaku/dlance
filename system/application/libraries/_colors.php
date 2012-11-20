@@ -289,7 +289,6 @@ class Colors {
  //$colors = array_unique($colors);
  var_dump($colors);
  */
-
 /*
  for ($v1 = 0; $v1 < 256; $v1 += 17) {
  for ($v2 = 0; $v2 < 256; $v2 += 17) {
@@ -303,17 +302,14 @@ class Colors {
  }
  }
  */
- 
 /*
  $c = new Colors;
  $c->loadImage('/home/aks/Images/.dummy/pepper.png');
  $s = $c->getStat();
  var_dump($s);
  */
- 
 /*
  //$s = Colors::proxyColor('h0s0v0', 'h0s0v0');
  //var_dump($s, count($s));
  */
- 
- 
+﻿ 

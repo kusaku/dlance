@@ -6,7 +6,8 @@
 	</div>
 	<div class="designsCategories">
 		<h3><a href="/designs">Дизайны:</a></h3>
-		<?php if (! empty($category)) {
+		<?php 
+		if (! empty($category)) {
 			$active = $category;
 			foreach ($categories as $row):
 				if ($active == $row['id']):
@@ -48,58 +49,14 @@
 		<div class="searchResultsHeader">
 			<div class="sortBy">
 				<p>сортировать по:</p>
-				<?php if ($input['order_field'] == 'title'): ?>
-				<?php if ($input['order_field'] == 'title' and $input['order_type'] == 'desc'): ?>
-				<a class="abs" href="/designs/index/?order_field=title&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">названию &darr;</a>
-				<?php else : ?>
-				<a class="abs" href="/designs/index/?order_field=title<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">названию &uarr;</a>
-				<?php endif; ?>
-				<?php else : ?>
-				<a href="/designs/index/?order_field=title<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">названию</a>
-				<?php endif; ?>
-				<?php if ($input['order_field'] == 'rating'): ?>
-				<?php if ($input['order_field'] == 'rating' and $input['order_type'] == 'desc'): ?>
-				<a class="abs" href="/designs/index/?order_field=rating&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">рейтингу &darr;</a>
-				<?php else : ?>
-				<a class="abs" href="/designs/index/?order_field=rating<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">рейтингу &uarr;</a>
-				<?php endif; ?>
-				<?php else : ?>
-				<a href="/designs/index/?order_field=rating<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">рейтингу</a>
-				<?php endif; ?>
-				<?php if ($input['order_field'] == 'sales'): ?>
-				<?php if ($input['order_field'] == 'sales' and $input['order_type'] == 'desc'): ?>
-				<a class="abs" href="/designs/index/?order_field=sales&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">кол-ву покупок &darr;</a>
-				<?php else : ?>
-				<a class="abs" href="/designs/index/?order_field=sales<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">кол-ву покупок &uarr;</a>
-				<?php endif; ?>
-				<?php else : ?>
-				<a href="/designs/index/?order_field=sales<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">кол-ву покупок</a>
-				<?php endif; ?>
-				<?php if ($input['order_field'] == 'price_1'): ?>
-				<?php if ($input['order_field'] == 'price_1' and $input['order_type'] == 'desc'): ?>
-				<a class="abs" href="/designs/index/?order_field=price_1&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">цене &darr;</a>
-				<?php else : ?>
-				<a class="abs" href="/designs/index/?order_field=price_1<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">цене &uarr;</a>
-				<?php endif; ?>
-				<?php else : ?>
-				<a href="/designs/index/?order_field=price_1<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">цене</a>
-				<?php endif; ?>
-				<?php if ($input['order_field'] == 'price_2'): ?>
-				<?php if ($input['order_field'] == 'price_2' and $input['order_type'] == 'desc'): ?>
-				<a class="abs" href="/designs/index/?order_field=price_2&order_type=asc<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">цене выкупа &darr;</a>
-				<?php else : ?>
-				<a class="abs" href="/designs/index/?order_field=price_2<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">цене выкупа &uarr;</a>
-				<?php endif; ?>
-				<?php else : ?>
-				<a href="/designs/index/?order_field=price_2<?php if( !empty($url) ): ?>&<?=$url?><?php endif;?>">цене выкупа</a>
-				<?php endif; ?>
+				названию<a<?= ($search['order_by'] == 'title' and $search['order_dir'] == 'asc') ? 'class="abs"' : ''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'title','order_dir'=>'asc')));?>&">&darr;</a>
+				<a<?= ($search['order_by'] == 'title' and $search['order_dir'] == 'desc') ? 'class="abs"' : ''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'title','order_dir'=>'desc')));?>&">&uarr;</a>
+				рейтингу<a<?= ($search['order_by'] == 'rating' and $search['order_dir'] == 'asc') ? 'class="abs"' : ''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'rating','order_dir'=>'asc')));?>&">&darr;</a>
+				<a<?= ($search['order_by'] == 'rating' and $search['order_dir'] == 'desc') ? 'class="abs"' : ''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'rating','order_dir'=>'desc')));?>&">&uarr;</a>
+				кол-ву покупок<a<?= ($search['order_by'] == 'sales' and $search['order_dir'] == 'asc') ? 'class="abs"' : ''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'sales','order_dir'=>'asc')));?>&">&darr;</a>
+				<a<?= ($search['order_by'] == 'sales' and $search['order_dir'] == 'desc') ? 'class="abs"' : ''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'sales','order_dir'=>'desc')));?>&">&uarr;</a>
 			</div>
 			<h3>Все дизайны сайтов:</h3>
-		</div>
-		<div>
-			<p>
-				<a href="/designs/add/"><strong>+ Добавить дизайн на продажу</strong></a>
-			</p>
 		</div>
 		<div class="searchResultsList">
 			<?php if (! empty($data)): ?>
@@ -157,6 +114,24 @@
 			<?php endif; ?>
 			<div class="paginationControl">
 				<?= $page_links?>
+			</div>
+			<div class="itemsOnPage">
+				<p>Элементов на страницу:</p>
+				<ul class="pageList">
+					<?php foreach (array( 10,20,50,100 ) as $limit): ?>
+					<?php if ($limit == $search['limit']): ?>
+					<li class="active">
+						<?= $limit?>
+					</li>
+					<?php else : ?>
+					<li>
+						<a href="/designs/search/?<?=http_build_query(array_merge($search, array('limit'=>$limit)));?>">
+							<?= $limit?>
+						</a>
+					</li>
+					<?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
 			</div>
 		</div>
 	</div>

@@ -64,11 +64,9 @@ class Designs extends Controller {
 		$data['newest_users'] = $this->users_mdl->get_newest_users();
 		
 		//Пользовательский рейтинг
-		$input['order_field'] = 'rating';
-		
-		$input['order_type'] = 'desc';
-		
-		$data['top_designs'] = $this->designs_mdl->get_designs(0, 4, $input);
+		$data['top_designs'] = $this->designs_mdl->get_designs(array(
+			'order_by'=>'rating','order_dir'=>'desc','limit'=>4,'offset'=>0,
+		));
 		
 		$data['descr'] = $this->config->item('description');
 		$data['keywords'] = $this->config->item('keywords');
@@ -84,95 +82,74 @@ class Designs extends Controller {
 	 * ---------------------------------------------------------------
 	 */
 
-	function index($start_page = 0) {
-		parse_str($_SERVER['QUERY_STRING'], $_GET);
-		
-		$per_page = 20;
-		
-		$start_page = intval($start_page);
-		
-		if ($start_page < 0) {
-			$start_page = 0;
-		}
-		
-		$url = '';
-		
-		$category = '';
-		
-		$input = array( );
-		
+	function index($offset = 0) {
 		$title = 'Дизайны сайта. Купить шаблон для сайта, Купить дизайн сайта';
 		
-		//Категория
-		if (! empty($_GET['category'])) {
-			$category = $_GET['category'];
-			
-			if (!$this->_category_check($category)) {
-				$category = 1;
-			}
-			
-			$data['category'] = $category;
-			
-			//Выводим название категории
-			$title = $this->designs_mdl->design_title($category).' | '.$title;
-			
-			$input['category_array'] = $this->designs_mdl->cat_array($category);
-			
-			$url['category'] = 'category='.$category;
+		$search = array(
+			'offset'=>intval($offset)
+		);
+		
+		if (! empty($_REQUEST['limit'])) {
+			$search['limit'] = min(20, intval($_REQUEST['limit']));
 		}
 		
-		//Для прикрепления к ссылке сортировки
-		$data['url'] = $url;
+		if (! empty($_REQUEST['category']) and $this->_category_check($_REQUEST['category'])) {
+			$search['category'] = $_REQUEST['category'];
+			$title = $this->designs_mdl->design_title($_REQUEST['category']).' | '.$title;
+		}
 		
 		//Сортировка
-		if (! empty($_GET['order_field'])) {
-			$order_field = $_GET['order_field'];
-			
-			if ($order_field == 'price_1' or $order_field == 'price_2' or $order_field == 'rating' or $order_field == 'title' or $order_field == 'sales') {
-				$input['order_field'] = $_GET['order_field'];
-				$url['order_field'] = 'order_field='.$_GET['order_field'];
-			}
+		switch (! empty($_REQUEST['order_by'])) {
+			default:
+			case ($_REQUEST['order_by'] == 'title'):
+				$search['order_by'] = 'title';
+				break;
+			case ($_REQUEST['order_by'] == 'buy_price'):
+				$search['order_by'] = 'buy_price';
+				break;
+			case ($_REQUEST['order_by'] == 'buyout_price'):
+				$search['order_by'] = 'buyout_price';
+				break;
+			case ($_REQUEST['order_by'] == 'rating'):
+				$search['order_by'] = 'rating';
+				break;
+			case ($_REQUEST['order_by'] == 'sales'):
+				$search['order_by'] = 'sales';
+				break;
 		}
 		
 		//Тип сортировки
-		if (! empty($_GET['order_type'])) {
-			$input['order_type'] = $_GET['order_type'];
-			$url['order_type'] = 'order_type='.$_GET['order_type'];
-		} else {
-			$input['order_type'] = 'desc';
+		switch (! empty($_REQUEST['order_dir'])) {
+			default:
+			case ($_REQUEST['order_dir'] == 'asc'):
+				$search['order_dir'] = 'asc';
+				break;
+			case ($_REQUEST['order_dir'] == 'desc'):
+				$search['order_dir'] = 'desc';
+				break;
 		}
 		
-		$config['base_url'] = base_url().'/designs/index/';
-		$config['total_rows'] = $this->designs_mdl->count_designs($input);
-		$config['per_page'] = $per_page;
+		$data['data'] = $this->designs_mdl->get_designs($search);
+		$total_rows = $this->designs_mdl->count_designs($search);
+		$data['total_rows'] = $total_rows;
 		
-		$this->pagination->initialize($config);
-		
-		$data['data'] = $this->designs_mdl->get_designs($start_page, $per_page, $input);
+		$this->pagination->initialize(array(
+			'base_url'=>base_url().'/designs/search/','total_rows'=>$total_rows,'per_page'=>20,
+		));
 		
 		$data['page_links'] = $this->pagination->create_links();
 		
-		if (! empty($url)) {
-			$url = implode("&", $url);
-			$data['page_links'] = str_replace('">', '/?'.$url.'">', $data['page_links']);
-		}
-		
 		if (! empty($data['url'])) {
-			$data['url'] = implode("&", $data['url']);
+			$data['page_links'] = str_replace('">', '/?'.$data['url'].'">', $data['page_links']);
 		}
 		
+		$data['search'] = $search;
 		/**
 		 * Блок
 		 */
-		//категории
+		// Категории
 		$data['categories'] = $this->designs_mdl->get_categories();
-		
-		$data['input'] = array(
-			'order_field'=>(isset($input['order_field'])) ? $input['order_field'] : '',
-			//Если не задан ордер тип, ставим desc
-			'order_type'=>(isset($input['order_type'])) ? $input['order_type'] : 'desc',
-		);
-		
+		$data['colorbars'] = $this->designs_mdl->get_color_cloud();
 		$this->template->build('designs/index', $data, $title);
 	}
 	/**
@@ -181,156 +158,86 @@ class Designs extends Controller {
 	 * ---------------------------------------------------------------
 	 */
 
-	function search($start_page = 0) {
-		parse_str($_SERVER['QUERY_STRING'], $_GET);
-		
-		$per_page = 20;
-		
-		$start_page = intval($start_page);
-		
-		if ($start_page < 0) {
-			$start_page = 0;
-		}
-		
-		$url = '';
-		
-		$category = '';
-		
-		$input = array( );
-		
+	function search($offset = 0) {
 		$title = 'Поиск дизайнов сайта';
 		
-		//Категория
-		if (! empty($_GET['category'])) {
-			$category = $_GET['category'];
-			
-			if (!$this->_category_check($category)) {
-				$category = 1;
-			}
-			
-			$data['category'] = $category;
-			
-			//Выводим название категории
-			$title = $this->designs_mdl->design_title($category).' | '.$title;
-			
-			$input['category_array'] = $this->designs_mdl->cat_array($category);
-			
-			$url['category'] = 'category='.$category;
+		$search = array(
+			'offset'=>intval($offset)
+		);
+		
+		if (! empty($_REQUEST['limit'])) {
+			$search['limit'] = min(20, intval($_REQUEST['limit']));
 		}
 		
-		//Результатов на страницу
-		if (! empty($_GET['result']) and is_numeric($_GET['result']) and $_GET['result'] > 0) {
-			$input['per_page'] = $_GET['result'];
-			$url['result'] = 'result='.$_GET['result'];
-			
-			$per_page = $input['per_page'];
+		if (! empty($_REQUEST['category']) and $this->_category_check($_REQUEST['category'])) {
+			$search['category'] = $_REQUEST['category'];
+			$title = $this->designs_mdl->design_title($_REQUEST['category']).' | '.$title;
 		}
 		
-		//Ключевые слова
-		if (! empty($_GET['keywords'])) {
-			$input['keywords'] = $_GET['keywords'];
-			$url['keywords'] = 'keywords='.$_GET['keywords'];
-		}
+		//empty($_REQUEST['tags']) or $search['tags'] = preg_split('/,\s*/', $_REQUEST['tags']);
+		//empty($_REQUEST['colors']) or $search['colors'] = preg_split('/,\s*/', $_REQUEST['colors']);
 		
-		//Цвет
-		if (! empty($_GET['color'])) {
-			$input['color'] = $_GET['color'];
-			$url['color'] = 'color='.$_GET['color'];
-		}
+		// XXX fuck!
+		empty($_REQUEST['tags']) or $search['tags'] = $_REQUEST['tags'];
+		empty($_REQUEST['color']) or $search['color'] = $_REQUEST['color'];
 		
-		//Тэги
-		if (! empty($_GET['tags'])) {
-			$input['tags'] = $_GET['tags'];
-			$url['tags'] = 'tags='.$_GET['tags'];
-		}
-		
-		//Цена за покупку от
-		if (! empty($_GET['price_1_start']) and is_numeric($_GET['price_1_start'])) {
-			$input['price_1_start'] = $_GET['price_1_start'];
-			$url['price_1_start'] = 'price_1_start='.$_GET['price_1_start'];
-		}
-		
-		//Цена за покупку до
-		if (! empty($_GET['price_1_end']) and is_numeric($_GET['price_1_end'])) {
-			$input['price_1_end'] = $_GET['price_1_end'];
-			$url['price_1_end'] = 'price_1_end='.$_GET['price_1_end'];
-		}
-		
-		//Цена за выкуп от
-		if (! empty($_GET['price_2_start']) and is_numeric($_GET['price_2_start'])) {
-			$input['price_2_start'] = $_GET['price_2_start'];
-			$url['price_2_start'] = 'price_2_start='.$_GET['price_2_start'];
-		}
-		
-		//Цена за выкуп до
-		if (! empty($_GET['price_2_end']) and is_numeric($_GET['price_2_end'])) {
-			$input['price_2_end'] = $_GET['price_2_end'];
-			$url['price_2_end'] = 'price_2_end='.$_GET['price_2_end'];
-		}
-		
-		//Для прикрепления к ссылке сортировки
-		$data['url'] = $url;
+		empty($_REQUEST['buy_from']) or $search['buy_from'] = $_REQUEST['buy_from'];
+		empty($_REQUEST['buy_to']) or $search['buy_to'] = $_REQUEST['buy_to'];
+		empty($_REQUEST['buyout_from']) or $search['buyout_from'] = $_REQUEST['buyout_from'];
+		empty($_REQUEST['buyout_to']) or $search['buyout_to'] = $_REQUEST['buyout_to'];
 		
 		//Сортировка
-		if (! empty($_GET['order_field'])) {
-		
-			$order_field = $_GET['order_field'];
-			
-			if ($order_field == 'price_1' or $order_field == 'price_2' or $order_field == 'rating' or $order_field == 'title' or $order_field == 'sales') {
-				$input['order_field'] = $_GET['order_field'];
-				$url['order_field'] = 'order_field='.$_GET['order_field'];
-			}
-			
+		switch (! empty($_REQUEST['order_by'])) {
+			default:
+			case ($_REQUEST['order_by'] == 'title'):
+				$search['order_by'] = 'title';
+				break;
+			case ($_REQUEST['order_by'] == 'buy_price'):
+				$search['order_by'] = 'buy_price';
+				break;
+			case ($_REQUEST['order_by'] == 'buyout_price'):
+				$search['order_by'] = 'buyout_price';
+				break;
+			case ($_REQUEST['order_by'] == 'rating'):
+				$search['order_by'] = 'rating';
+				break;
+			case ($_REQUEST['order_by'] == 'sales'):
+				$search['order_by'] = 'sales';
+				break;
 		}
 		
 		//Тип сортировки
-		if (! empty($_GET['order_type'])) {
-			$input['order_type'] = $_GET['order_type'];
-			$url['order_type'] = 'order_type='.$_GET['order_type'];
-		} else {
-			$input['order_type'] = 'desc';
+		switch (! empty($_REQUEST['order_dir'])) {
+			default:
+			case ($_REQUEST['order_dir'] == 'asc'):
+				$search['order_dir'] = 'asc';
+				break;
+			case ($_REQUEST['order_dir'] == 'desc'):
+				$search['order_dir'] = 'desc';
+				break;
 		}
 		
-		$config['base_url'] = base_url().'/designs/search/';
-		$config['total_rows'] = $this->designs_mdl->count_designs($input);
-		$config['per_page'] = $per_page;
+		$data['data'] = $this->designs_mdl->get_designs($search);
+		$total_rows = $this->designs_mdl->count_designs($search);
+		$data['total_rows'] = $total_rows;
 		
-		$this->pagination->initialize($config);
-		
-		$data['data'] = $this->designs_mdl->get_designs($start_page, $per_page, $input);
+		$this->pagination->initialize(array(
+			'base_url'=>base_url().'/designs/search/','total_rows'=>$total_rows,'per_page'=>20,
+		));
 		
 		$data['page_links'] = $this->pagination->create_links();
 		
-		$data['total_rows'] = $config['total_rows'];
-		
-		if (! empty($url)) {
-			$url = implode("&", $url);
-			
-			$data['page_links'] = str_replace('">', '/?'.$url.'">', $data['page_links']);
-		}
-		
 		if (! empty($data['url'])) {
-			$data['url'] = implode("&", $data['url']);
+			$data['page_links'] = str_replace('">', '/?'.$data['url'].'">', $data['page_links']);
 		}
 		
-		$data['input'] = array(
-			'keywords'=>(isset($input['keywords'])) ? $input['keywords'] : '','tags'=>(isset($input['tags'])) ? $input['tags'] : '',
-				'price_1_start'=>(isset($input['price_1_start'])) ? $input['price_1_start'] : '',
-				'price_1_end'=>(isset($input['price_1_end'])) ? $input['price_1_end'] : '','price_2_start'=>(isset($input['price_2_start'])) ? $input['price_2_start'] : '',
-				'price_2_end'=>(isset($input['price_2_end'])) ? $input['price_2_end'] : '','order_field'=>(isset($input['order_field'])) ? $input['order_field'] : '',
-			//Если не задан ордер тип, ставим desc
-			'order_type'=>(isset($input['order_type'])) ? $input['order_type'] : 'desc','color'=>(isset($input['color'])) ? $input['color'] : '',
-				'category'=>$category,'result'=>$per_page,
-		);
-		
+		$data['search'] = $search;
 		/**
 		 * Блок
 		 */
-		//категории
+		// Категории
 		$data['categories'] = $this->designs_mdl->get_categories();
-		
-		$data['colors'] = $this->designs_mdl->get_color_cloud();
-		
+		$data['colorbars'] = $this->designs_mdl->get_color_cloud();
 		$this->template->build('designs/search', $data, $title);
 	}
 	/**
@@ -747,11 +654,15 @@ class Designs extends Controller {
 	//Все существующии тэги
 
 	function tags() {
-		$tags = $this->designs_mdl->get_tags();
+		$tags = $this->designs_mdl->get_tags($_REQUEST['term'], 10);
 		
-		foreach ($tags as $row) {
-			echo $row['tag']."\n";
+		foreach ($tags as & $tag) {
+			$tag = $tag['tag'];
 		}
+		
+		sort($tags);
+		
+		echo json_encode($tags);
 	}
 	
 	//Все существующии дизайны, для поля сопутствующии товары
@@ -844,10 +755,10 @@ class Designs extends Controller {
 		if (isset($_FILES['userfile']['tmp_name']) and $form_validation) {
 			$config['encrypt_name'] = TRUE;
 			$config['upload_path'] = './files/designs/';
-			$config['allowed_types'] = 'jpg|png|jpeg|JPG';
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
 			$config['max_size'] = '2000';
-			$config['max_width'] = '2000';
-			$config['max_height'] = '2000';
+			//$config['max_width'] = '2048';
+			//$config['max_height'] = '2048';
 			
 			$this->upload->initialize($config);
 			
@@ -856,7 +767,7 @@ class Designs extends Controller {
 				
 				$path = './files/designs/'.$data['file_name'].'';
 				
-				// RESIZING THUMB
+				// resizing thumb
 				$config['source_image'] = $path;
 				$config['maintain_ratio'] = TRUE;
 				$config['width'] = 200;
@@ -867,14 +778,14 @@ class Designs extends Controller {
 				$this->image_lib->initialize($config);
 				$this->image_lib->resize();
 				
-				// CROPING THUMB
+				// croping thumb
 				$thumb = $this->image_lib->full_dst_path;
 				$config['source_image'] = $thumb;
-				$config['maintain_ratio'] = false;
+				$config['maintain_ratio'] = FALSE;
 				$config['width'] = 138;
 				$config['height'] = 88;
 				$config['new_image'] = $thumb;
-				$config['create_thumb'] = false;
+				$config['create_thumb'] = FALSE;
 				$this->image_lib->initialize($config);
 				$this->image_lib->crop();
 				
@@ -884,13 +795,13 @@ class Designs extends Controller {
 				$config['width'] = 138;
 				$config['height'] = 88;
 				$config['new_image'] = $thumb;
-				$config['create_thumb'] = true;
+				$config['create_thumb'] = TRUE;
 				$config['thumb_marker'] = 'bw';
 				$this->image_lib->initialize($config);
 				$this->image_lib->resize();
 				$this->image_lib->grayscale();
 				
-				// RESIZING BIG THUMB
+				// resizing big thumb
 				$config['source_image'] = $path;
 				$config['maintain_ratio'] = TRUE;
 				$config['width'] = 400;
@@ -904,11 +815,11 @@ class Designs extends Controller {
 				// CROPING BIG THUMB
 				$thumb = $this->image_lib->full_dst_path;
 				$config['source_image'] = $thumb;
-				$config['maintain_ratio'] = false;
+				$config['maintain_ratio'] = FALSE;
 				$config['width'] = 358;
 				$config['height'] = 288;
 				$config['new_image'] = $thumb;
-				$config['create_thumb'] = false;
+				$config['create_thumb'] = FALSE;
 				$this->image_lib->initialize($config);
 				$this->image_lib->crop();
 				
@@ -989,24 +900,90 @@ class Designs extends Controller {
 			 *	Цвета
 			 * ---------------------------------------------------------------
 			 */
+			 
 			$this->load->library('colors');
 			
-			$delta = 24;
-			$reduce_brightness = true;
-			$reduce_gradients = true;
-			$num_results = 10;
-			
-			$colors = $this->colors->Get_Color($full_image, $num_results, $reduce_brightness, $reduce_gradients, $delta);
-			
-			foreach ($colors as $hex=>$count) {
-				$a[] = "('".$design_id."', '".trim($hex)."', '".$count."')";
+			if ($this->colors->loadImage($full_image)) {
+				$histogram = $this->colors->getStat();
 			}
 			
-			$a = implode(", ", $a);
+			$a = array(
+			);
+			foreach ($histogram as $value=>$count) {
+				$a[] = "('{$design_id}', '{$value}', '{$count}')";
+			}
 			
-			$query = "INSERT INTO ci_colors (design_id, color, percent) VALUES ".$a;
+			$a = implode(', ', $a);
+			
+			$query = "INSERT INTO ci_colors (design_id, color, percent) VALUES {$a}";
 			
 			$query = $this->db->query($query);
+			
+			/**
+			 * ---------------------------------------------------------------
+			 *	Тэги
+			 * ---------------------------------------------------------------
+			 */
+			 
+			$color_tags = array(
+			);
+			
+			foreach ($this->db->query('SELECT `tag`, `color`, `range` FROM `ci_color_tags`')->result_object() as $color_tag) {
+			
+				$colors = array_merge($this->colors->proxy4rgb($color_tag->color, $color_tag->range), $this->colors->proxy4hsv($color_tag->color, $color_tag->range));
+				
+				foreach ($histogram as $value=>$count) {
+					if (array_search($value, $colors) !== FALSE) {
+						$color_tags[] = $color_tag->tag;
+					}
+				}
+			}
+			
+			$tags = preg_split('/[\s,]+/', strtolower($this->input->post('tags')));
+			
+			$tags = array_merge($tags, $color_tags);
+			
+			$tags = array_unique($tags);
+			
+			$tags = array_filter($tags);
+			$a = array(
+			);
+			foreach ($tags as $value) {
+				$a[] = "('{$design_id}', '{$value}')";
+			}
+			
+			$a = implode(', ', $a);
+			
+			$query = "INSERT INTO ci_tags (design_id, tag) VALUES ".$a;
+			
+			$query = $this->db->query($query);
+			
+			/**
+			 * ---------------------------------------------------------------
+			 *	Сопутствующии товары
+			 * ---------------------------------------------------------------
+			 */
+			 
+			$sub = $this->input->post('sub');
+			if (! empty($sub)) {
+				$sub = preg_split('/[\s,]+/', strtolower($sub));
+				
+				$sub = array_unique($sub);
+				
+				$sub = array_filter($sub);
+				$a = array(
+				);
+				//Вставка данных
+				foreach ($sub as $row=>$value) {
+					$a[] = "('{$design_id}', '{$value}')";
+				}
+				
+				$a = implode(', ', $a);
+				
+				$query = "INSERT INTO ci_associated (design_id, sub) VALUES ".$a;
+				
+				$query = $this->db->query($query);
+			}
 			/**
 			 * ---------------------------------------------------------------
 			 *	Дополнительные параметры, отдельная таблица
@@ -1019,73 +996,14 @@ class Designs extends Controller {
 					'tone'=>$this->input->post('tone'),'bright'=>$this->input->post('bright'),'style'=>$this->input->post('style'),
 					'theme'=>$this->input->post('theme'),'adult'=>$this->input->post('adult')
 			);
-			
+			if ( empty($data['destination']))
+				$data['destination'] = NULL;
+			;
+			if ( empty($data['theme']))
+				$data['theme'] = NULL;
+			//var_dump($data);
+			//die;
 			$this->designs_mdl->add_options($data);
-			/**
-			 * ---------------------------------------------------------------
-			 *	Сопутствующии товары
-			 * ---------------------------------------------------------------
-			 */
-			//Обработка данных
-			$a = '';
-			
-			$sub = $this->input->post('sub');
-			
-			//Удаляем пробелы в начале и конце
-			$sub = trim($sub);
-			
-			//Убираем запятую в конце
-			$sub = eregi_replace("\,+$", "", $sub);
-			
-			//Создаём массив
-			$sub = explode(",", $sub);
-			
-			//только уникальные значения
-			$sub = array_unique($sub);
-			
-			//Вставка данных
-			foreach ($sub as $row=>$value) {
-				$a[] = "('".$design_id."', '".trim($value)."')";
-			}
-			
-			$a = implode(", ", $a);
-			
-			$query = "INSERT INTO ci_associated (design_id, sub) VALUES ".$a;
-			
-			$query = $this->db->query($query);
-			/**
-			 * ---------------------------------------------------------------
-			 *	Тэги
-			 * ---------------------------------------------------------------
-			 */
-			$a = '';
-			
-			$tags = $this->input->post('tags');
-			
-			//Удаляем пробелы в начале и конце
-			$tags = trim($tags);
-			
-			//все буквенные символы переведены в нижний регистр, для точной проверки уникальности
-			$tags = strtolower($tags);
-			
-			//Убираем запятую в конце
-			$tags = eregi_replace("\,+$", "", $tags);
-			
-			//Создаём массив
-			$tags = explode(",", $tags);
-			
-			//Удаляем неуникальные элементы
-			$tags = array_unique($tags);
-			
-			foreach ($tags as $row=>$value) {
-				$a[] = "('".$design_id."', '".trim($value)."')";
-			}
-			
-			$a = implode(", ", $a);
-			
-			$query = "INSERT INTO ci_tags (design_id, tag) VALUES ".$a;
-			
-			$query = $this->db->query($query);
 			/**
 			 * ---------------------------------------------------------------
 			 *	Рассылка/По пользователю/По рубрикам

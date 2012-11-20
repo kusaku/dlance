@@ -299,12 +299,12 @@ function addcart(id, kind){
 					<?= $style?>
 				</label>
 			</fieldset>
-      <fieldset>
-        <label>
-          &laquo;Для взрослых&raquo;:
-          <?= $adult?>
-        </label>
-      </fieldset>
+			<fieldset>
+				<label>
+					&laquo;Для взрослых&raquo;:
+					<?= $adult?>
+				</label>
+			</fieldset>
 		</div>
 		<?= $comments?>
 	</div>

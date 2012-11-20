@@ -45,7 +45,7 @@ class Designs_mdl extends Model {
 		
 		$this->db->where('id', $id);
 		
-		return $this->db->get('designs_comments')->row_array();
+		return $this->db->get('designs_comments')->row_array( );
 	}
 
 	function edit_comment($id, $data) {
@@ -86,7 +86,7 @@ class Designs_mdl extends Model {
 		
 		$this->db->join('designs_options', 'designs_options.design_id = designs.id', 'LEFT');
 		
-		$query = $this->db->get('designs')->row_array();
+		$query = $this->db->get('designs')->row_array( );
 		
 		if (!$query)
 			return FALSE;
@@ -115,7 +115,11 @@ class Designs_mdl extends Model {
 		
 		$query['category'] = $this->designs_mdl->name($query['category']);
 		
+		if(empty($query['category'])) $query['category'] = 'Не указано';
+		
 		$query['theme'] = $this->designs_mdl->theme($query['theme']);
+		
+		if(empty($query['theme'])) $query['theme'] = 'Не указано';
 		
 		$query['destination'] = $this->designs_mdl->destination($query['destination']);
 		
@@ -235,7 +239,7 @@ class Designs_mdl extends Model {
 		
 		$this->db->select('*');
 		
-		return $this->db->get('designs')->row_array();
+		return $this->db->get('designs')->row_array( );
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -266,7 +270,7 @@ class Designs_mdl extends Model {
 				'id'=>$design_id
 			));
 			
-			$views = $query->row_array();
+			$views = $query->row_array( );
 			
 			$views = $views['views'] + 1;
 			
@@ -291,7 +295,7 @@ class Designs_mdl extends Model {
 			'id'=>$id
 		));
 		
-		$query = $query->row_array();
+		$query = $query->row_array( );
 		
 		$sales = $query['sales'] + 1;
 		
@@ -308,14 +312,23 @@ class Designs_mdl extends Model {
 	 * ---------------------------------------------------------------
 	 */
 
-	function get_tags() {
+	function get_tags($like = '', $limit = 10) {
+	
+		$this->db->distinct();
 		$this->db->select('tag');
-		
+		$this->db->like('tag', $like, 'after');
 		$this->db->order_by('tag', 'desc');
+		$this->db->limit($limit);
+		$keyword_tags = $this->db->get('tags')->result_array();
 		
 		$this->db->distinct();
+		$this->db->select('tag');
+		$this->db->like('tag', $like, 'after');
+		$this->db->order_by('tag', 'desc');
+		$this->db->limit($limit);
+		$color_tags = $this->db->get('color_tags')->result_array();
 		
-		return $this->db->get('tags')->result_array();
+		return $keyword_tags + $color_tags;
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -354,20 +367,32 @@ class Designs_mdl extends Model {
 		
 		$this->db->order_by('color_count', 'desc');
 		
-		$query = $this->db->get('colors');
+		$query = $this->db->get('colors')->result_array();
 		
-		$query = $query->result_array();
+		$this->load->library('colors');
+		
+		foreach ($query as & $row) {
+			$color = $this->colors->deformat($row['color'], $is_rgb, $is_hsv);
+			
+			if ($is_rgb) {
+				list($r,$g,$b) = $color;
+				list($r,$g,$b) = array(
+					$r * 16 + $r,$g * 16 + $g,$b * 16 + $b
+				);
+			}
+			
+			if ($is_hsv) {
+				list($h,$s,$v) = $color;
+				list($h,$s,$v) = array(
+					$h * 24 % 360,$s * 16 + $s,$v * 16 + $v
+				);
+				list($r,$g,$b) = $this->colors->hsv2rgb($h, $s, $v);
+			}
+			
+			$row['color'] = sprintf('%02x%02x%02x', $r, $g, $b);
+		}
 		
 		return $query;
-		
-		if ($query->num_rows() > 0) {
-			$tags = array( );
-			
-			foreach ($query->result_array() as $row)
-				$tags[$row['color']] = $row['color_count'];
-			return $tags;
-		} else
-			return array( );
 	}
 	
 	/**
@@ -554,116 +579,94 @@ class Designs_mdl extends Model {
 		return $this->db->get('designs')->result_array();
 	}
 
-	function get_designs($start_from = FALSE, $per_page, $input = '') {
-		$keywords = (isset($input['keywords'])) ? $input['keywords'] : '';
-		$price_1_start = (isset($input['price_1_start'])) ? $input['price_1_start'] : '';
-		$price_1_end = (isset($input['price_1_end'])) ? $input['price_1_end'] : '';
-		$price_2_start = (isset($input['price_2_start'])) ? $input['price_2_start'] : '';
-		$price_2_end = (isset($input['price_2_end'])) ? $input['price_2_end'] : '';
-		$category = (isset($input['category_array'])) ? $input['category_array'] : '';
+	function get_designs($search = array( ), $count = FALSE) {
 		
-		//Аккаунт
-		$user_id = (isset($input['user_id'])) ? $input['user_id'] : '';
-		$status = (isset($input['status'])) ? $input['status'] : '';
+		$search = array_merge(array('limit'=>20, 'offset'=>0), $search);
 		
-		$order_field = (isset($input['order_field'])) ? $input['order_field'] : '';
-		$order_type = (isset($input['order_type'])) ? $input['order_type'] : '';
+		$where = array( );
+		$order = array( );
 		
-		$tags = (isset($input['tags'])) ? $input['tags'] : '';
-		$color = (isset($input['color'])) ? $input['color'] : '';
-		
-		//Если аккаунт
-		if (! empty($user_id)) {
-			$sql = "`user_id` = '$user_id'";
-			
-			if (! empty($status)) {
-				$sql .= " and `status` = '$status'";
-			}
-		}
-		//Если не аккаунт выводим только открытые
-		else {
-			$sql = "`status` = '1'";
+		if (isset($search['buy_from'])) {
+			$where[] = "`price_1` >= '{$search['buy_from']}'";
 		}
 		
-		// и модерированные
-		$sql .= " and `moder` = 1";
-		
-		//Если в настройках отключен показ только для взрослых
-		if ($this->adult == 0) {
-			//Не выводим адалт дизайны
-			$sql .= " and `adult` = '0'";
+		if (isset($search['buy_to'])) {
+			$where[] = "`price_1` <= '{$search['buy_to']}'";
 		}
 		
-		//НЕ выводим заблокированные продукты
-		$sql .= " and id NOT IN (SELECT design_id FROM ci_designs_banned)";
+		if (isset($search['buyout_from'])) {
+			$where[] = "`price_2` >= '{$search['buyout_from']}'";
+		}
 		
-		//Цвет
-		if (! empty($color)) {
-			//$sql .= " and id IN (SELECT design_id FROM ci_colors WHERE `color` = '$color' )";
+		if (isset($search['buyout_to'])) {
+			$where[] = "`price_2` <= '{$search['buyout_to']}'";
+		}
+		
+		if (isset($search['category'])) {
+			$categories = $this->designs_mdl->cat_array($search['category']);
+			$where[] = '`category` IN (\''.implode('\', \'', $categories).'\')';
+		}
+		
+		if (isset($search['tags'])) {
+			$tags = preg_split('/,\s*/', $_REQUEST['tags']);
+			$where[] = '`id` IN (SELECT `design_id` FROM `ci_tags` WHERE `tag` IN (\''.implode('\', \'', $tags).'\'))';
+		}
+		
+		if (isset($search['color'])) {
+			$colors = array( );
 			$this->load->library('colors');
 			
-			$colors = $this->colors->rangecolors($color);
+			$rgb = $this->colors->hex2rgb($search['color']);
+			$rgb_s = $this->colors->downsample4rgb($rgb);
+			$rgb_f = $this->colors->format4rgb($rgb_s);
+			$hsv = $this->colors->rgb2hsv($rgb);
+			$hsv_s = $this->colors->downsample4hsv($hsv);
+			$hsv_f = $this->colors->format4hsv($hsv_s);
 			
-			//Результаты implode в кавычки
-			$colors = "'".implode("', '", $colors)."'";
+			$colors = array_merge($colors, $this->colors->proxy4rgb($rgb_f), $this->colors->proxy4hsv($hsv_f));
 			
-			$sql .= " and id IN (SELECT design_id FROM ci_colors WHERE `color` IN ($colors) )";
+			$where[] = '`id` IN (SELECT `design_id` FROM `ci_colors` WHERE `color` IN (\''.implode('\', \'', $colors).'\'))';
 		}
 		
-		//Тэги, если тэг не найден, ищем как ключевое слово
-		if (! empty($tags)) {
-			if ($this->_tags_check($tags)) {
-				$tags = explode(", ", $tags);
-				
-				//Результаты implode в кавычки
-				$tags = "'".implode("', '", $tags)."'";
-				
-				$sql .= " and id IN (SELECT design_id FROM ci_tags WHERE `tag` IN ($tags) )";
+		if (isset($search['user_id'])) {
+			$where[] = "`user_id` = '{$search['user_id']}'";
+			if (isset($search['status'])) {
+				$where[] = "`status` = '{$search['status']}'";
 			} else {
-				$sql .= " and (`title` LIKE '%$tags%' or `text` LIKE '%$tags%')";
+				$where[] = "`status` = '1'";
 			}
 		}
 		
-		if (! empty($category)) {
-			$category = implode(", ", $category);
-			
-			$sql .= " and category IN ($category)";
+		$where[] = "`moder` = '1'";
+		
+		$where[] = "`status` = '1'";
+		
+		$where[] = "`id` NOT IN (SELECT `design_id` FROM `ci_designs_banned`)";
+		
+		if ($this->adult == 0) {
+			$where[] = "`adult` = '0'";
 		}
 		
-		//Цена за покупку от
-		if (! empty($price_1_start)) {
-			$sql .= " and `price_1` >= '$price_1_start'";
-		}
-		
-		//Цена за покупку до
-		if (! empty($price_1_end)) {
-			$sql .= " and `price_1` <= '$price_1_end'";
-		}
-		
-		//Цена выкуп от
-		if (! empty($price_2_start)) {
-			$sql .= " and `price_2` >= '$price_2_start'";
-		}
-		
-		//Цена выкуп до
-		if (! empty($price_2_end)) {
-			$sql .= " and `price_2` <= '$price_2_end'";
-		}
-		
-		//Сортировка
-		if (! empty($order_field)) {
-			$sql .= " ORDER BY $order_field $order_type";
+		if (isset($search['order_by'])) {
+			$dir = isset($search['order_dir']) ? strtoupper($search['order_dir']) : 'ASC';
+			$order[] = "`{$search['order_by']}` {$dir}";
 		} else {
-			$sql .= " ORDER BY `date` DESC";
+			$order[] = '`id` DESC';
 		}
 		
-		$query = " SELECT *"." FROM ci_designs LEFT JOIN ci_designs_options ON ci_designs.id = ci_designs_options.design_id"." WHERE ".$sql." LIMIT ".$start_from.", ".$per_page.";";
+		if ($count) {
+			$query = 'SELECT COUNT(*) as `count` FROM `ci_designs` INNER JOIN `ci_designs_options` ON `ci_designs`.`id` = `ci_designs_options`.`design_id` WHERE '.implode(' AND ', $where);
+			$row = $this->db->query($query)->row();
+			return $row->count;
+		}
+		
+		$query = 'SELECT * FROM `ci_designs` LEFT JOIN `ci_designs_options` ON `ci_designs`.`id` = `ci_designs_options`.`design_id` WHERE '.implode(' AND ', $where);
+		$query .= ' ORDER BY '.implode(', ', $order);
+		$query .= " LIMIT {$search['offset']}, {$search['limit']}";
 		
 		$query = $this->db->query($query);
 		
-		if ($query->num_rows() == 0) {
-			return FALSE;
-		} else {
+		if ($query->num_rows() > 0) {
 			$query = $query->result_array();
 			
 			$count = count($query);
@@ -690,26 +693,20 @@ class Designs_mdl extends Model {
 						break;
 				}
 			}
-			
 			return $query;
 		}
 	}
 
-	function _tags_check($tags = '') {
-		$tags = explode(", ", $tags);
+	function _tags_check($tags = array( )) {
+		if (is_string($tags)) {
+			$tags = preg_split('/,\s*/', $tags);
+		}
 		
-		//Результаты implode в кавычки
-		$tags = "'".implode("', '", $tags)."'";
-		
-		$query = " SELECT id"." FROM ci_tags WHERE `tag` IN ($tags) ".";";
+		$query = 'SELECT `id` FROM `ci_tags` WHERE `tag` IN (\''.implode('\', \'', $tags).'\')';
 		
 		$query = $this->db->query($query);
 		
-		if ($query->num_rows() == 0) {
-			return FALSE;
-		} else {
-			return TRUE;
-		}
+		return $query->num_rows() != 0;
 	}
 	
 	/**
@@ -718,108 +715,8 @@ class Designs_mdl extends Model {
 	 * ---------------------------------------------------------------
 	 */
 
-	function count_designs($input = '') {
-		$keywords = (isset($input['keywords'])) ? $input['keywords'] : '';
-		$price_1_start = (isset($input['price_1_start'])) ? $input['price_1_start'] : '';
-		$price_1_end = (isset($input['price_1_end'])) ? $input['price_1_end'] : '';
-		$price_2_start = (isset($input['price_2_start'])) ? $input['price_2_start'] : '';
-		$price_2_end = (isset($input['price_2_end'])) ? $input['price_2_end'] : '';
-		$category = (isset($input['category_array'])) ? $input['category_array'] : '';
-		
-		//Аккаунт
-		$user_id = (isset($input['user_id'])) ? $input['user_id'] : '';
-		//Аккаунт
-		$status = (isset($input['status'])) ? $input['status'] : '';
-		
-		$order_field = (isset($input['order_field'])) ? $input['order_field'] : '';
-		$order_type = (isset($input['order_type'])) ? $input['order_type'] : '';
-		
-		$tags = (isset($input['tags'])) ? $input['tags'] : '';
-		$color = (isset($input['color'])) ? $input['color'] : '';
-		
-		//Если аккаунт
-		if (! empty($user_id)) {
-			$sql = "`user_id` = '$user_id'";
-			
-			if (! empty($status)) {
-				$sql .= " and `status` = '$status'";
-			}
-		}
-		//Если не аккаунт выводим только открытые и модерированные
-		else {
-			$sql = "`status` = '1'";
-		}
-		
-		// и модерированные
-		$sql .= " and `moder` = 1";
-		
-		//Если в настройках отключен показ только для взрослых
-		if ($this->adult == 0) {
-			//Не выводим адалт дизайны
-			$sql .= " and `adult` = '0'";
-		}
-		
-		//НЕ выводим заблокированные продукты
-		$sql .= " and id NOT IN (SELECT design_id FROM ci_designs_banned)";
-		
-		//Цвет
-		if (! empty($color)) {
-			//$sql .= " and id IN (SELECT design_id FROM ci_colors WHERE `color` = '$color' )";
-			$this->load->library('colors');
-			
-			$colors = $this->colors->rangecolors($color);
-			
-			//Результаты implode в кавычки
-			$colors = "'".implode("', '", $colors)."'";
-			
-			$sql .= " and id IN (SELECT design_id FROM ci_colors WHERE `color` IN ($colors) )";
-		}
-		
-		//Тэги, если тэг не найден, ищем как ключевое слово
-		if (! empty($tags)) {
-			if ($this->_tags_check($tags)) {
-				$tags = explode(", ", $tags);
-				
-				//Результаты implode в кавычки
-				$tags = "'".implode("', '", $tags)."'";
-				
-				$sql .= " and id IN (SELECT design_id FROM ci_tags WHERE `tag` IN ($tags) )";
-			} else {
-				$sql .= " and (`title` LIKE '%$tags%' or `text` LIKE '%$tags%')";
-			}
-		}
-		
-		if (! empty($category)) {
-			$category = implode(", ", $category);
-			
-			$sql .= " and category IN ($category)";
-		}
-		
-		//Цена за покупку от
-		if (! empty($price_1_start)) {
-			$sql .= " and `price_1` >= '$price_1_start'";
-		}
-		
-		//Цена за покупку до
-		if (! empty($price_1_end)) {
-			$sql .= " and `price_1` <= '$price_1_end'";
-		}
-		
-		//Цена выкуп от
-		if (! empty($price_2_start)) {
-			$sql .= " and `price_2` >= '$price_2_start'";
-		}
-		
-		//Цена выкуп до
-		if (! empty($price_2_end)) {
-			$sql .= " and `price_2` <= '$price_2_end'";
-		}
-		
-		$query = " SELECT id"." FROM ci_designs LEFT JOIN ci_designs_options ON ci_designs.id = ci_designs_options.design_id"." WHERE ".$sql.";";
-		
-		$query = $this->db->query($query);
-		
-		return $query->num_rows();
+	function count_designs($search = array( )) {
+		return $this->get_designs($search, TRUE);
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -1010,7 +907,7 @@ class Designs_mdl extends Model {
 		
 		$this->db->where('id', $id);
 		
-		return $this->db->get('images')->row_array();
+		return $this->db->get('images')->row_array( );
 	}
 	
 	//получение id пользователя проекта
@@ -1114,7 +1011,7 @@ class Designs_mdl extends Model {
 			'id'=>$id
 		));
 		
-		$rating = $query->row_array();
+		$rating = $query->row_array( );
 		
 		if ($type == 1) {
 			$rating = $rating['rating'] + 1;
@@ -1158,7 +1055,7 @@ class Designs_mdl extends Model {
 		}
 		
 		foreach ($query as & $item) {
-			$item['name_path'] = array();
+			$item['name_path'] = array( );
 			$parent = $item;
 			do {
 				array_unshift($item['name_path'], $parent['name']);
@@ -1265,49 +1162,15 @@ class Designs_mdl extends Model {
 	 */
 
 	function cat_array($id) {
-		$this->db->select('parent_id');
-		$query = $this->db->get_where('designs_categories', array(
-			'id '=>$id
-		));
+		$result = $this->db->query("SELECT `id` FROM `ci_designs_categories` WHERE `parent_id` = '{$id}' OR `id` = '{$id}'")->result_array();
 		
-		if ($query->num_rows() > 0) {
-			$row = $query->row();
-			$parent_id = $row->parent_id;
-		} else {
-			return FALSE;
+		foreach ($result as & $row) {
+			$row = $row['id'];
 		}
 		
-		//Если выбранная категория не является разделом - выводим проекты только с одной субкатегории
-		if ($parent_id != 0) {
-			$array = array(
-				$id
-			);
-			
-			return $array;
-		}
-		
-		$this->db->select('id');
-		
-		//Выводим все подразделы главного раздела
-		$this->db->where('parent_id', $id);
-		
-		$array = $this->db->get('designs_categories')->result_array();
-		
-		$a = '';
-		foreach ($array as $row):
-			$a .= $row['id'];
-			$a .= ', ';
-		endforeach;
-		
-		$a = trim($a);
-		;
-		
-		$a = substr($a, 0, -1);
-		
-		$array = explode(", ", $a);
-		
-		return $array;
+		return $result;
 	}
+	
 	/**
 	 * ---------------------------------------------------------------
 	 *	Проверка сущестования категории
@@ -1317,11 +1180,7 @@ class Designs_mdl extends Model {
 	function category_check($id) {
 		$this->db->where('id', $id);
 		
-		if ($this->db->count_all_results('designs_categories') > 0) {
-			return TRUE;
-		}
-		
-		return FALSE;
+		return $this->db->count_all_results('designs_categories') > 0;
 	}
 	/**
 	 * ---------------------------------------------------------------

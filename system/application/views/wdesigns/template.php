@@ -1,63 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="google-site-verification" content="GZ6LEudcMoq7OAIcz-ywUZjW9pM6jROZqY4Rn0y_Ei8" />
-	<meta name="yandex-verification" content="51dcabbe6fb5f2d8" />
-	<title><?= $title?> </title>
-	<?php if (isset($description)): ?>
-	<?= $description?>
-	<?php endif; ?>
-	<?php if (isset($keywords)): ?>
-	<?= $keywords?>
-	<?php endif; ?>
-	<link rel="alternate" type="application/rss+xml" href="<?=base_url()?>rss/designs" title="Дизайны сайтов (RSS 2.0)" />
-	<link href="/design/css/base.css" rel="stylesheet" type="text/css" />
-	<link href="/design/css/style.css" rel="stylesheet" type="text/css" />
-	<link href="/design/css/cusel.css" rel="stylesheet" type="text/css" />
-	<link href="/design/css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" />
-	<link href="/design/js/jquery-autocomplete/jquery.autocomplete.css" rel="stylesheet" type="text/css"  />
-	<script type="text/javascript" src="/design/js/jquery-1.6.3.min.js"></script>
-	<script type="text/javascript" src="/design/js/jquery.bxSlider.min.js"></script>
-	<script type="text/javascript" src="/design/js/cusel-min-2.4.1.js"></script>
-	<script type="text/javascript" src="/design/js/jquery.fancybox-1.3.4.pack.js"></script>
-	<script type="text/javascript" src="/design/js/jquery.placeholder.min.js"></script>
-	<script type="text/javascript" src="/design/js/jquery.simpleColor.js"></script>
-	<script type="text/javascript" src="/design/js/jquery-autocomplete/jquery.autocomplete.js"></script>
-	<script type="text/javascript" src="/design/js/main.js"></script>
-	<?php 
-	/*
-	 <script type="text/javascript">
-	 //<!--
-	 $(function($){
-	 $(function(){
-	 $("#slider1").bxSlider({
-	 infiniteLoop: false,
-	 hideControlOnEnd: true
-	 });
-	 $("a.zoom").fancybox({
-	 titlePosition: 'over'
-	 });
-	 $("input[placeholder],textarea").placeholder();
-	 var params = {
-	 changedEl: "#selectel, #theme, #categorySelect, #feedback"
-	 }
-	 cuSel(params);
-	 $(".niceRadio").each(function(){
-	 changeRadioStart($(this));
-	 });
-	 $("#tagsBottom,#tags, #tagsTop").autocomplete("<?=base_url()?>designs/tags/", {
-	 selectFirst: false
-	 });
-	 $(".colorSample").simpleColor({
-	 buttonClass: "colorButton"
-	 });
-	 });
-	 });
-	 //-->
-	 </script>
-	 */
-	?>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="google-site-verification" content="GZ6LEudcMoq7OAIcz-ywUZjW9pM6jROZqY4Rn0y_Ei8" />
+		<meta name="yandex-verification" content="51dcabbe6fb5f2d8" />
+		<title><?= $title; ?></title>
+		<?= isset($description) ? $description : ''; ?>
+		<?= isset($keywords) ? $keywords : ''; ?>
+		<link rel="alternate" type="application/rss+xml" href="<?=base_url()?>rss/designs" title="Дизайны сайтов (RSS 2.0)" />
+		<link type="text/css" href="/design/css/base.css" rel="stylesheet"/>
+		<link type="text/css" href="/design/css/style.css" rel="stylesheet"/>
+		<link type="text/css" href="/design/css/cusel.css" rel="stylesheet" />
+		<link type="text/css" href="/design/css/jquery.fancybox-1.3.4.css" rel="stylesheet" />
+		<link type="text/css" href="/design/js/smoothness/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="/design/js/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="/design/js/jquery-ui-1.9.1.custom.min.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.bxSlider.min.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="/design/js/jquery.placeholder.min.js"></script>
+		<script type="text/javascript" src="/design/js/cusel-min-2.4.1.js"></script>
+		<script type="text/javascript" src="/design/js/main.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">
