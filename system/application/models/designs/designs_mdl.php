@@ -529,7 +529,7 @@ class Designs_mdl extends Model {
 	 */
 
 	function get_design_sub($design_id) {
-		$this->db->select('designs.id, designs.title, designs.small_image');
+		$this->db->select('designs.id, designs.title, designs.small_image1');
 		
 		$this->db->where('design_id', $design_id);
 		
@@ -766,17 +766,17 @@ class Designs_mdl extends Model {
 	 */
 
 	function get_similar($id, $limit = 10) {
-		$query = " SELECT ci_designs.id, title, small_image"." FROM ci_tags LEFT JOIN ci_designs ON ci_tags.design_id = ci_designs.id ".
+		$query = " SELECT ci_designs.id, title, small_image1 FROM ci_tags LEFT JOIN ci_designs ON ci_tags.design_id = ci_designs.id ".
 		//Исключаем сам дизайн, по которому находятся похожии
-		" WHERE design_id != ".$id.""." and moder = 1"." and tag IN (SELECT tag FROM ci_tags WHERE design_id = ".$id.")".
+		" WHERE design_id != ".$id." and moder = 1 and tag IN (SELECT tag FROM ci_tags WHERE design_id = ".$id.")".
 		
 		//Дизайн существует и имеет статус открыт
-		" and design_id IN (SELECT id FROM ci_designs WHERE status = 1)".
+		" AND design_id IN (SELECT id FROM ci_designs WHERE status = 1)".
 		
 		//Не выводим забаненные продукты
-		" and design_id NOT IN (SELECT design_id FROM ci_designs_banned)"." GROUP BY id".
+		" AND design_id NOT IN (SELECT design_id FROM ci_designs_banned) GROUP BY id".
 		//Случайный порядок
-		" ORDER BY rand()".
+		" ORDER BY RAND()".
 		//Лимит
 		" LIMIT ".$limit."";
 		
@@ -1033,7 +1033,7 @@ class Designs_mdl extends Model {
 	 */
 
 	function get_sub() {
-		$this->db->select('id, title, small_image');
+		$this->db->select('id, title, small_image1');
 		
 		return $this->db->get('designs')->result_array();
 	}

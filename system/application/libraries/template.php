@@ -21,10 +21,15 @@ class Template {
 		$this->theme = 'wdesigns';
 	}
 
-	function build($view, $data = array( ), $title = '', $section = FALSE) {
+	function build($view, $data = array(
+	), $title = '', $section = FALSE) {
 		$template['title'] = $this->title($title);
 		
 		$theme = $this->theme;
+		
+		$template['login'] = array(
+			'logged_in'=>$this->_ci->users_mdl->logged_in()
+		);
 		
 		if ($this->_ci->users_mdl->logged_in()) {
 			$this->hint();
@@ -51,8 +56,11 @@ class Template {
 			$template['login'] = '';
 		}
 		
-		$template['login']['logged_in'] = $this->_ci->users_mdl->logged_in();
 		$template['login'] = $this->_ci->load->view($theme.'/login', $template['login'], TRUE);
+		
+		if (!isset($_SESSION['login_block'])) {
+			$_SESSION['login_block'] = $template['login'];
+		}
 		
 		if (isset($data['descr'])) {
 			$data['description'] = $this->set_metadata('description', $data['descr']);
@@ -72,7 +80,8 @@ class Template {
 		$this->_ci->load->view($theme.'/template', $template);
 	}
 
-	function build_admin($view, $data = array( ), $title = '') {
+	function build_admin($view, $data = array(
+	), $title = '') {
 		if (!$this->_ci->admin_mdl->logged_in()) {
 			redirect('administrator/login');
 		}
@@ -135,8 +144,7 @@ class Template {
 			return FALSE;
 		}
 		
-		$this->script =
-<<<HERE
+		$this->script = <<<HERE
 <script type="text/javascript" language="javascript">
 $(document).ready(function()
 {

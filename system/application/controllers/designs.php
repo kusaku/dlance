@@ -275,9 +275,9 @@ class Designs extends Controller {
 			$config['encrypt_name'] = TRUE;
 			$config['upload_path'] = './files/images/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-			$config['max_size'] = '1000';
-			$config['max_width'] = '1600';
-			$config['max_height'] = '1200';
+			//$config['max_size'] = '1000';
+			//$config['max_width'] = '1600';
+			//$config['max_height'] = '1200';
 			
 			$this->upload->initialize($config);
 			unset($config);
@@ -364,9 +364,9 @@ class Designs extends Controller {
 			$config['encrypt_name'] = TRUE;
 			$config['upload_path'] = './files/images/';
 			$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-			$config['max_size'] = '1000';
-			$config['max_width'] = '1600';
-			$config['max_height'] = '1200';
+			//$config['max_size'] = '1000';
+			//$config['max_width'] = '1600';
+			//$config['max_height'] = '1200';
 			
 			$this->upload->initialize($config);
 			unset($config);
@@ -707,8 +707,13 @@ class Designs extends Controller {
 				'field'=>'category_id','label'=>'Категория','rules'=>'required'
 			),array(
 				'field'=>'price_1','label'=>'Цена','rules'=>'required|numeric'
-			),array(
+			),
+			/*array(
 				'field'=>'price_2','label'=>'Цена выкупа','rules'=>'required|numeric'
+			)
+			*/
+			array(
+				'field'=>'image1','label'=>'Превью 1','rules'=>'required'
 			),array(
 				'field'=>'source','label'=>'Исходники','rules'=>'required'
 			),array(
@@ -752,18 +757,24 @@ class Designs extends Controller {
 		 *	Загрузка изображения
 		 * ---------------------------------------------------------------
 		 */
-		if (isset($_FILES['userfile']['tmp_name']) and $form_validation) {
+		 
+		 /**
+		 * дальше мне стыдно за код
+		 */
+		 
+		// первое изображение
+		if (isset($_FILES['image1']['tmp_name']) and $form_validation) {
 			$config['encrypt_name'] = TRUE;
 			$config['upload_path'] = './files/designs/';
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
-			$config['max_size'] = '2000';
+			//$config['max_size'] = '2000';
 			//$config['max_width'] = '2048';
 			//$config['max_height'] = '2048';
 			
 			$this->upload->initialize($config);
 			
-			if ($this->upload->do_upload()) {
-				$data = $this->upload->data();
+			if ($this->upload->do_upload('image1')) {
+				$file1 = $data = $this->upload->data();
 				
 				$path = './files/designs/'.$data['file_name'].'';
 				
@@ -789,18 +800,6 @@ class Designs extends Controller {
 				$this->image_lib->initialize($config);
 				$this->image_lib->crop();
 				
-				// Creating BW thumb
-				$thumb = $this->image_lib->full_dst_path;
-				$config['source_image'] = $thumb;
-				$config['width'] = 138;
-				$config['height'] = 88;
-				$config['new_image'] = $thumb;
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = 'bw';
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				$this->image_lib->grayscale();
-				
 				// resizing big thumb
 				$config['source_image'] = $path;
 				$config['maintain_ratio'] = TRUE;
@@ -812,7 +811,7 @@ class Designs extends Controller {
 				$this->image_lib->initialize($config);
 				$this->image_lib->resize();
 				
-				// CROPING BIG THUMB
+				// croping big thumb
 				$thumb = $this->image_lib->full_dst_path;
 				$config['source_image'] = $thumb;
 				$config['maintain_ratio'] = FALSE;
@@ -839,6 +838,161 @@ class Designs extends Controller {
 				$data['error'] = $this->upload->display_errors();
 			}
 		}
+		
+		// второе изображение
+		if (isset($_FILES['image2']['tmp_name']) and $form_validation) {
+			$config['encrypt_name'] = TRUE;
+			$config['upload_path'] = './files/designs/';
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+			//$config['max_size'] = '2000';
+			//$config['max_width'] = '2048';
+			//$config['max_height'] = '2048';
+			
+			$this->upload->initialize($config);
+			
+			if ($this->upload->do_upload('image2')) {
+				$file2 = $data = $this->upload->data();
+				
+				$path = './files/designs/'.$data['file_name'].'';
+				
+				// resizing thumb
+				$config['source_image'] = $path;
+				$config['maintain_ratio'] = TRUE;
+				$config['width'] = 200;
+				$config['height'] = 200;
+				$config['new_image'] = './files/designs/'.$data['file_name'].'';
+				$config['create_thumb'] = TRUE;
+				$config['thumb_marker'] = '_small';
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+				
+				// croping thumb
+				$thumb = $this->image_lib->full_dst_path;
+				$config['source_image'] = $thumb;
+				$config['maintain_ratio'] = FALSE;
+				$config['width'] = 138;
+				$config['height'] = 88;
+				$config['new_image'] = $thumb;
+				$config['create_thumb'] = FALSE;
+				$this->image_lib->initialize($config);
+				$this->image_lib->crop();
+				
+				// resizing big thumb
+				$config['source_image'] = $path;
+				$config['maintain_ratio'] = TRUE;
+				$config['width'] = 400;
+				$config['height'] = 400;
+				$config['new_image'] = './files/designs/'.$data['file_name'].'';
+				$config['create_thumb'] = TRUE;
+				$config['thumb_marker'] = '_mid';
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+				
+				// croping big thumb
+				$thumb = $this->image_lib->full_dst_path;
+				$config['source_image'] = $thumb;
+				$config['maintain_ratio'] = FALSE;
+				$config['width'] = 358;
+				$config['height'] = 288;
+				$config['new_image'] = $thumb;
+				$config['create_thumb'] = FALSE;
+				$this->image_lib->initialize($config);
+				$this->image_lib->crop();
+				
+				//Налаживаем водяной знак
+				if ($this->input->post('watermark')) {
+					$config['source_image'] = $path;
+					$config['wm_type'] = 'overlay';
+					$config['wm_overlay_path'] = './img/watermark/watermark.png';
+					$config['wm_vrt_alignment'] = 'bottom';
+					$config['wm_hor_alignment'] = 'right';
+					$config['create_thumb'] = FALSE;
+					$this->image_lib->initialize($config);
+					$this->image_lib->watermark();
+				}
+				
+			} else {
+				$data['error'] = $this->upload->display_errors();
+			}
+		}
+		
+		// третье изображение
+		if (isset($_FILES['image3']['tmp_name']) and $form_validation) {
+			$config['encrypt_name'] = TRUE;
+			$config['upload_path'] = './files/designs/';
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+			//$config['max_size'] = '2000';
+			//$config['max_width'] = '2048';
+			//$config['max_height'] = '2048';
+			
+			$this->upload->initialize($config);
+			
+			if ($this->upload->do_upload('image3')) {
+				$file3 = $data = $this->upload->data();
+				
+				$path = './files/designs/'.$data['file_name'].'';
+				
+				// resizing thumb
+				$config['source_image'] = $path;
+				$config['maintain_ratio'] = TRUE;
+				$config['width'] = 200;
+				$config['height'] = 200;
+				$config['new_image'] = './files/designs/'.$data['file_name'].'';
+				$config['create_thumb'] = TRUE;
+				$config['thumb_marker'] = '_small';
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+				
+				// croping thumb
+				$thumb = $this->image_lib->full_dst_path;
+				$config['source_image'] = $thumb;
+				$config['maintain_ratio'] = FALSE;
+				$config['width'] = 138;
+				$config['height'] = 88;
+				$config['new_image'] = $thumb;
+				$config['create_thumb'] = FALSE;
+				$this->image_lib->initialize($config);
+				$this->image_lib->crop();
+				
+				// resizing big thumb
+				$config['source_image'] = $path;
+				$config['maintain_ratio'] = TRUE;
+				$config['width'] = 400;
+				$config['height'] = 400;
+				$config['new_image'] = './files/designs/'.$data['file_name'].'';
+				$config['create_thumb'] = TRUE;
+				$config['thumb_marker'] = '_mid';
+				$this->image_lib->initialize($config);
+				$this->image_lib->resize();
+				
+				// croping big thumb
+				$thumb = $this->image_lib->full_dst_path;
+				$config['source_image'] = $thumb;
+				$config['maintain_ratio'] = FALSE;
+				$config['width'] = 358;
+				$config['height'] = 288;
+				$config['new_image'] = $thumb;
+				$config['create_thumb'] = FALSE;
+				$this->image_lib->initialize($config);
+				$this->image_lib->crop();
+				
+				//Налаживаем водяной знак
+				if ($this->input->post('watermark')) {
+					$config['source_image'] = $path;
+					$config['wm_type'] = 'overlay';
+					$config['wm_overlay_path'] = './img/watermark/watermark.png';
+					$config['wm_vrt_alignment'] = 'bottom';
+					$config['wm_hor_alignment'] = 'right';
+					$config['create_thumb'] = FALSE;
+					$this->image_lib->initialize($config);
+					$this->image_lib->watermark();
+				}
+				
+			} else {
+				$data['error'] = $this->upload->display_errors();
+			}
+		}
+		
 		/**
 		 * ---------------------------------------------------------------
 		 *	Загрузка файла
@@ -857,7 +1011,7 @@ class Designs extends Controller {
 			
 			$this->upload->initialize($config);
 			
-			if ($this->upload->do_upload("file")) {
+			if ($this->upload->do_upload('file')) {
 				$data_file = $this->upload->data();
 				
 				$path = './files/download/'.$this->username.'/'.$data_file['file_name'].'';
@@ -870,8 +1024,6 @@ class Designs extends Controller {
 		//Дальше работаем над остальными полями
 		//Форма должна пройти валидацию и пройти все загрузки без ошибок
 		if ($form_validation and !isset($data['error'])) {
-			$full_image = 'files/designs/'.$data['file_name'].'';
-			
 			//Модерация
 			$moder = $this->config->item('moder');
 			
@@ -882,18 +1034,25 @@ class Designs extends Controller {
 				'descr'=>character_limiter(htmlspecialchars($this->input->post('text')), 255),
 					'category'=>$this->input->post('category_id'),'price_1'=>$this->input->post('price_1'),
 					'price_2'=>$this->input->post('price_2'),'source'=>htmlspecialchars($this->input->post('source')),
-					'small_image'=>'/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'],
-					'smallbw_image'=>'/files/designs/'.$data['raw_name'].'_smallbw'.$data['file_ext'],
-					'mid_image'=>'/files/designs/'.$data['raw_name'].'_mid'.$data['file_ext'],'full_image'=>'/files/designs/'.$data['file_name'],
-					'dfile'=>$this->username.'/'.$data_file['file_name'],'status'=>1,'moder'=>$moder
+				//image1
+				'small_image1'=>'/files/designs/'.$file1['raw_name'].'_small'.$file1['file_ext'],
+					'mid_image1'=>'/files/designs/'.$file1['raw_name'].'_mid'.$file1['file_ext'],
+					'full_image1'=>'/files/designs/'.$file1['file_name'],
+				//image2
+				'small_image2'=>'/files/designs/'.$file2['raw_name'].'_small'.$file2['file_ext'],
+					'mid_image2'=>'/files/designs/'.$file2['raw_name'].'_mid'.$file2['file_ext'],
+					'full_image2'=>'/files/designs/'.$file2['file_name'],
+				//image3
+				'small_image3'=>'/files/designs/'.$file3['raw_name'].'_small'.$file3['file_ext'],
+					'mid_image3'=>'/files/designs/'.$file3['raw_name'].'_mid'.$file3['file_ext'],
+					'full_image3'=>'/files/designs/'.$file3['file_name'],
+				//datafile
+				'dfile'=>$this->username.'/'.$data_file['file_name'],'status'=>1,'moder'=>$moder
 			);
 			
 			$this->designs_mdl->add('designs', $data);
 			
 			$design_id = $this->db->insert_id();
-			
-			//Сохраняем переменную для рассылки по рубрикам
-			$category = $data['category'];
 			
 			/**
 			 * ---------------------------------------------------------------
@@ -901,23 +1060,38 @@ class Designs extends Controller {
 			 * ---------------------------------------------------------------
 			 */
 			 
-			$this->load->library('colors');
-			
-			if ($this->colors->loadImage($full_image)) {
-				$histogram = $this->colors->getStat();
+			if (isset($_FILES['detector']['tmp_name'])/* and $form_validation*/) {
+				$config['encrypt_name'] = TRUE;
+				$config['upload_path'] = '/tmp/';
+				$config['allowed_types'] = 'gif|jpg|jpeg|png';
+				//$config['max_size'] = '2000';
+				//$config['max_width'] = '2048';
+				//$config['max_height'] = '2048';
+				
+				$this->upload->initialize($config);
+				
+				if ($this->upload->do_upload('detector')) {
+					$data = $this->upload->data();
+					
+					$this->load->library('colors');
+					
+					if ($this->colors->loadImage('/tmp/'.$data['file_name'])) {
+						$histogram = $this->colors->getStat();
+					}
+					
+					$a = array(
+					);
+					foreach ($histogram as $value=>$count) {
+						$a[] = "('{$design_id}', '{$value}', '{$count}')";
+					}
+					
+					$a = implode(', ', $a);
+					
+					$query = "INSERT INTO ci_colors (design_id, color, percent) VALUES {$a}";
+					
+					$query = $this->db->query($query);
+				}
 			}
-			
-			$a = array(
-			);
-			foreach ($histogram as $value=>$count) {
-				$a[] = "('{$design_id}', '{$value}', '{$count}')";
-			}
-			
-			$a = implode(', ', $a);
-			
-			$query = "INSERT INTO ci_colors (design_id, color, percent) VALUES {$a}";
-			
-			$query = $this->db->query($query);
 			
 			/**
 			 * ---------------------------------------------------------------
@@ -1001,8 +1175,7 @@ class Designs extends Controller {
 			;
 			if ( empty($data['theme']))
 				$data['theme'] = NULL;
-			//var_dump($data);
-			//die;
+				
 			$this->designs_mdl->add_options($data);
 			/**
 			 * ---------------------------------------------------------------
@@ -1024,7 +1197,8 @@ class Designs extends Controller {
 				$this->common->email($row['email'], $subject, $message);
 			}
 			//По рубрике выбираем всех пользователей(user_id) которые подписаны на рубрику(category) и рассылаем
-			$mailer = $this->designs_mdl->get_mailer_categories($category, $this->user_id);
+			
+			$mailer = $this->designs_mdl->get_mailer_categories($data['category'], $this->user_id);
 			
 			foreach ($mailer as $row) {
 				$data = array(
@@ -1060,309 +1234,311 @@ class Designs extends Controller {
 		
 		$this->template->build('designs/add', $data, $title = 'Добавить дизайн');
 	}
-	/**
-	 * ---------------------------------------------------------------
-	 *	Редактирование дизайна
-	 * ---------------------------------------------------------------
-	 */
-
-	function edit($id = '') {
-		if (!$this->errors->access()) {
-			return;
-		}
-		
-		//Если не существует дизайна со статусом ожидание У ПОЛЬЗОВАТЕЛЯ
-		if (!$this->_check_action($id)) {
-			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
-		}
-		
-		$this->load->library('upload');
-		$this->load->library('Image_lib');
-		$this->load->helper('text');
-		
-		$rules = array(
-			array(
-				'field'=>'title','label'=>'Заголовок','rules'=>'required|text|max_length[64]'
-			),array(
-				'field'=>'text','label'=>'Текст','rules'=>'required|max_length[10000]'
-			),array(
-				'field'=>'category_id','label'=>'Категория','rules'=>'required'
-			),array(
-				'field'=>'price_1','label'=>'Цена','rules'=>'required|numeric'
-			),array(
-				'field'=>'price_2','label'=>'Цена выкупа','rules'=>'required|numeric'
-			),array(
-				'field'=>'source','label'=>'Исходники','rules'=>'required'
-			),array(
-				'field'=>'tags','label'=>'Тэги','rules'=>'required|callback__tags_check'
-			)
-		);
-		
-		$this->form_validation->set_rules($rules);
-		
-		$form_validation = $this->form_validation->run();
-		
-		if (isset($_FILES['userfile']['tmp_name']) and $form_validation) {
-			$config['encrypt_name'] = TRUE;
-			$config['upload_path'] = './files/designs/';
-			$config['allowed_types'] = 'jpg|png|jpeg|JPG';
-			$config['max_size'] = '2000';
-			$config['max_width'] = '1800';
-			$config['max_height'] = '1800';
-			
-			$this->upload->initialize($config);
-			unset($config);
-			
-			if ($this->upload->do_upload()) {
-				$data = $this->upload->data();
-				
-				$path = './files/designs/'.$data['file_name'].'';
-				
-				// RESIZING THUMB
-				$config['source_image'] = $path;
-				$config['maintain_ratio'] = TRUE;
-				$config['width'] = 200;
-				$config['height'] = 200;
-				$config['new_image'] = './files/designs/'.$data['file_name'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_small';
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				
-				// CROPING THUMB
-				$thumb = $this->image_lib->full_dst_path;
-				$config['source_image'] = $thumb;
-				$config['maintain_ratio'] = false;
-				$config['width'] = 138;
-				$config['height'] = 88;
-				$config['new_image'] = $thumb;
-				$config['create_thumb'] = false;
-				$this->image_lib->initialize($config);
-				$this->image_lib->crop();
-				
-				// Creating BW thumb
-				$thumb = $this->image_lib->full_dst_path;
-				$config['source_image'] = $thumb;
-				$config['width'] = 138;
-				$config['height'] = 88;
-				$config['new_image'] = $thumb;
-				$config['create_thumb'] = true;
-				$config['thumb_marker'] = 'bw';
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				$this->image_lib->grayscale();
-				
-				// RESIZING BIG THUMB
-				$config['source_image'] = $path;
-				$config['maintain_ratio'] = TRUE;
-				$config['width'] = 400;
-				$config['height'] = 400;
-				$config['new_image'] = './files/designs/'.$data['file_name'].'';
-				$config['create_thumb'] = TRUE;
-				$config['thumb_marker'] = '_mid';
-				$this->image_lib->initialize($config);
-				$this->image_lib->resize();
-				
-				// CROPING BIG THUMB
-				$thumb = $this->image_lib->full_dst_path;
-				$config['source_image'] = $thumb;
-				$config['maintain_ratio'] = false;
-				$config['width'] = 358;
-				$config['height'] = 288;
-				$config['new_image'] = $thumb;
-				$config['create_thumb'] = false;
-				$this->image_lib->initialize($config);
-				$this->image_lib->crop();
-				
-				//Налаживаем водяной знак
-				if ($this->input->post('watermark')) {
-					$config['source_image'] = $path;
-					$config['wm_type'] = 'overlay';
-					$config['wm_overlay_path'] = './img/watermark/watermark.png';
-					$config['wm_vrt_alignment'] = 'bottom';
-					$config['wm_hor_alignment'] = 'right';
-					$config['create_thumb'] = FALSE;
-					$this->image_lib->initialize($config);
-					$this->image_lib->watermark();
-				}
-				
-				$small_image = '/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'];
-				$smallbw_image = '/files/designs/'.$data['raw_name'].'_smallbw'.$data['file_ext'];
-				$mid_image = '/files/designs/'.$data['raw_name'].'_mid'.$data['file_ext'];
-				$full_image = '/files/designs/'.$data['file_name'];
-			}
-		}
-		
-		//Если не существует, оставляем прошлые изображения
-		if (!isset($small_image) or !isset($full_image)) {
-			$data = $this->designs_mdl->get_edit($id);
-			$small_image = $data['small_image'];
-			$smallbw_image = $data['smallbw_image'];
-			$mid_image = $data['mid_image'];
-			$full_image = $data['full_image'];
-		}
-		/**
-		 * ---------------------------------------------------------------
-		 *	Загрузка файла
-		 * ---------------------------------------------------------------
-		 */
-		if (isset($_FILES['file']['tmp_name']) and $form_validation) {
-			//Если не существует папки у пользователя
-			if (!file_exists(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'')) {
-				mkdir(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'', 0777, true);
-			}
-			
-			$config['encrypt_name'] = TRUE;
-			$config['upload_path'] = './files/download/'.$this->username.'/';
-			$config['allowed_types'] = 'zip|rar';
-			$config['max_size'] = '100000';
-			
-			$this->upload->initialize($config);
-			
-			if ($this->upload->do_upload("file")) {
-				$data_file = $this->upload->data();
-				
-				$path = './files/download/'.$this->username.'/'.$data_file['file_name'].'';
-				
-				$dfile = $this->username.'/'.$data_file['file_name'];
-			}
-		}
-		
-		//Если не существует, оставляем прошлый файл
-		if (!isset($dfile)) {
-			$data = $this->designs_mdl->get_edit($id);
-			$dfile = $data['dfile'];
-		}
-		
-		//Дальше работаем над остальными полями
-		if ($form_validation and empty($data['error'])) {
-		
-			$data = array(
-				'title'=>$this->input->post('title'),'text'=>htmlspecialchars($this->input->post('text')),
-				//Описание для SE
-				'descr'=>character_limiter(htmlspecialchars($this->input->post('text')), 255),
-					'category'=>$this->input->post('category_id'),'price_1'=>$this->input->post('price_1'),
-					'price_2'=>$this->input->post('price_2'),'source'=>htmlspecialchars($this->input->post('source')),
-					'small_image'=>$small_image,'smallbw_image'=>$smallbw_image,'mid_image'=>$mid_image,
-					'full_image'=>$full_image,'dfile'=>$dfile,'status'=>1
-			);
-			
-			$this->designs_mdl->edit('designs', $id, $data);
-			/**
-			 * ---------------------------------------------------------------
-			 *	Дополнительные параметры, отдельная таблица
-			 * ---------------------------------------------------------------
-			 */
-			$data = array(
-				'flash'=>$this->input->post('flash'),'stretch'=>$this->input->post('stretch'),
-					'columns'=>$this->input->post('columns'),'destination'=>$this->input->post('destination'),
-					'quality'=>$this->input->post('quality'),'type'=>$this->input->post('type'),
-					'tone'=>$this->input->post('tone'),'bright'=>$this->input->post('bright'),'style'=>$this->input->post('style'),
-					'theme'=>$this->input->post('theme'),'adult'=>$this->input->post('adult')
-			);
-			
-			$this->designs_mdl->edit_options($id, $data);
-			
-			/**
-			 * ---------------------------------------------------------------
-			 *	Сопутствующии товары, удаляем старые добавляем новые
-			 * ---------------------------------------------------------------
-			 */
-			$this->designs_mdl->delete_design_sub($id);
-			
-			//Обработка данных
-			$a = '';
-			
-			$sub = $this->input->post('sub');
-			
-			//Удаляем пробелы в начале и конце
-			$sub = trim($sub);
-			
-			//удаляем все пробелы, для точной проверки уникальности
-			while (strpos($sub, ' ') !== false) {
-				$sub = str_replace(' ', '', $sub);
-			}
-			;
-			
-			//Убираем запятую в конце
-			$sub = eregi_replace("\,+$", "", $sub);
-			
-			//Создаём массив
-			$sub = explode(",", $sub);
-			
-			//только уникальные значения
-			$sub = array_unique($sub);
-			
-			//Вставка данных
-			foreach ($sub as $row=>$value) {
-				$a[] = "('".$id."', '".trim($value)."')";
-			}
-			
-			$a = implode(", ", $a);
-			
-			$query = "INSERT INTO ci_associated (design_id, sub) VALUES ".$a;
-			
-			$query = $this->db->query($query);
-			/**
-			 * ---------------------------------------------------------------
-			 *	Тэги, удаляем старые добавляем новые
-			 * ---------------------------------------------------------------
-			 */
-			$this->designs_mdl->delete_design_tags($id);
-			
-			$a = '';
-			
-			$tags = $this->input->post('tags');
-			
-			//Удаляем пробелы в начале и конце
-			$tags = trim($tags);
-			
-			//все буквенные символы переведены в нижний регистр, для точной проверки уникальности
-			$tags = strtolower($tags);
-			
-			//удаляем все пробелы, для точной проверки уникальности
-			while (strpos($tags, ' ') !== false) {
-				$tags = str_replace(' ', '', $tags);
-			}
-			;
-			
-			//Убираем запятую в конце
-			$tags = eregi_replace("\,+$", "", $tags);
-			
-			//Создаём массив
-			$tags = explode(",", $tags);
-			
-			//Удаляем неуникальные элементы
-			$tags = array_unique($tags);
-			
-			foreach ($tags as $row=>$value) {
-				$a[] = "('".$id."', '".trim($value)."')";
-			}
-			
-			$a = implode(", ", $a);
-			
-			$query = "INSERT INTO ci_tags (design_id, tag) VALUES ".$a;
-			
-			$query = $this->db->query($query);
-			
-			redirect('designs/'.$id.'.html');
-		}
-		
-		$data = $this->designs_mdl->get_edit($id);
-		
-		$data['categories'] = $this->designs_mdl->get_categories();
-		
-		$data['themes'] = $this->designs_mdl->get_themes();
-		
-		$data['destinations'] = $this->designs_mdl->get_destinations();
-		
-		//Также вывести тэги и id сопутствующих товаров
-		$data['tags'] = $this->designs_mdl->get_design_tags($id);
-		
-		$data['sub'] = $this->designs_mdl->get_associated_designs_edit($id);
-		
-		$this->template->build('designs/edit', $data, $title = 'Редактировать дизайн');
-	}
+	
+	//	/**
+	//	 * ---------------------------------------------------------------
+	//	 *	Редактирование дизайна
+	//	 * ---------------------------------------------------------------
+	//	 */
+	//
+	//	function edit($id = '') {
+	//		if (!$this->errors->access()) {
+	//			return;
+	//		}
+	//
+	//		//Если не существует дизайна со статусом ожидание У ПОЛЬЗОВАТЕЛЯ
+	//		if (!$this->_check_action($id)) {
+	//			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
+	//		}
+	//
+	//		$this->load->library('upload');
+	//		$this->load->library('Image_lib');
+	//		$this->load->helper('text');
+	//
+	//		$rules = array(
+	//			array(
+	//				'field'=>'title','label'=>'Заголовок','rules'=>'required|text|max_length[64]'
+	//			),array(
+	//				'field'=>'text','label'=>'Текст','rules'=>'required|max_length[10000]'
+	//			),array(
+	//				'field'=>'category_id','label'=>'Категория','rules'=>'required'
+	//			),array(
+	//				'field'=>'price_1','label'=>'Цена','rules'=>'required|numeric'
+	//			),array(
+	//				'field'=>'price_2','label'=>'Цена выкупа','rules'=>'required|numeric'
+	//			),array(
+	//				'field'=>'source','label'=>'Исходники','rules'=>'required'
+	//			),array(
+	//				'field'=>'tags','label'=>'Тэги','rules'=>'required|callback__tags_check'
+	//			)
+	//		);
+	//
+	//		$this->form_validation->set_rules($rules);
+	//
+	//		$form_validation = $this->form_validation->run();
+	//
+	//		if (isset($_FILES['userfile']['tmp_name']) and $form_validation) {
+	//			$config['encrypt_name'] = TRUE;
+	//			$config['upload_path'] = './files/designs/';
+	//			$config['allowed_types'] = 'jpg|png|jpeg|JPG';
+	//			$config['max_size'] = '2000';
+	//			$config['max_width'] = '1800';
+	//			$config['max_height'] = '1800';
+	//
+	//			$this->upload->initialize($config);
+	//			unset($config);
+	//
+	//			if ($this->upload->do_upload()) {
+	//				$data = $this->upload->data();
+	//
+	//				$path = './files/designs/'.$data['file_name'].'';
+	//
+	//				// RESIZING THUMB
+	//				$config['source_image'] = $path;
+	//				$config['maintain_ratio'] = TRUE;
+	//				$config['width'] = 200;
+	//				$config['height'] = 200;
+	//				$config['new_image'] = './files/designs/'.$data['file_name'].'';
+	//				$config['create_thumb'] = TRUE;
+	//				$config['thumb_marker'] = '_small';
+	//				$this->image_lib->initialize($config);
+	//				$this->image_lib->resize();
+	//
+	//				// CROPING THUMB
+	//				$thumb = $this->image_lib->full_dst_path;
+	//				$config['source_image'] = $thumb;
+	//				$config['maintain_ratio'] = false;
+	//				$config['width'] = 138;
+	//				$config['height'] = 88;
+	//				$config['new_image'] = $thumb;
+	//				$config['create_thumb'] = false;
+	//				$this->image_lib->initialize($config);
+	//				$this->image_lib->crop();
+	//
+	//				// Creating BW thumb
+	//				$thumb = $this->image_lib->full_dst_path;
+	//				$config['source_image'] = $thumb;
+	//				$config['width'] = 138;
+	//				$config['height'] = 88;
+	//				$config['new_image'] = $thumb;
+	//				$config['create_thumb'] = true;
+	//				$config['thumb_marker'] = 'bw';
+	//				$this->image_lib->initialize($config);
+	//				$this->image_lib->resize();
+	//				$this->image_lib->grayscale();
+	//
+	//				// RESIZING BIG THUMB
+	//				$config['source_image'] = $path;
+	//				$config['maintain_ratio'] = TRUE;
+	//				$config['width'] = 400;
+	//				$config['height'] = 400;
+	//				$config['new_image'] = './files/designs/'.$data['file_name'].'';
+	//				$config['create_thumb'] = TRUE;
+	//				$config['thumb_marker'] = '_mid';
+	//				$this->image_lib->initialize($config);
+	//				$this->image_lib->resize();
+	//
+	//				// CROPING BIG THUMB
+	//				$thumb = $this->image_lib->full_dst_path;
+	//				$config['source_image'] = $thumb;
+	//				$config['maintain_ratio'] = false;
+	//				$config['width'] = 358;
+	//				$config['height'] = 288;
+	//				$config['new_image'] = $thumb;
+	//				$config['create_thumb'] = false;
+	//				$this->image_lib->initialize($config);
+	//				$this->image_lib->crop();
+	//
+	//				//Налаживаем водяной знак
+	//				if ($this->input->post('watermark')) {
+	//					$config['source_image'] = $path;
+	//					$config['wm_type'] = 'overlay';
+	//					$config['wm_overlay_path'] = './img/watermark/watermark.png';
+	//					$config['wm_vrt_alignment'] = 'bottom';
+	//					$config['wm_hor_alignment'] = 'right';
+	//					$config['create_thumb'] = FALSE;
+	//					$this->image_lib->initialize($config);
+	//					$this->image_lib->watermark();
+	//				}
+	//
+	//				$small_image = '/files/designs/'.$data['raw_name'].'_small'.$data['file_ext'];
+	//				$smallbw_image = '/files/designs/'.$data['raw_name'].'_smallbw'.$data['file_ext'];
+	//				$mid_image = '/files/designs/'.$data['raw_name'].'_mid'.$data['file_ext'];
+	//				$full_image = '/files/designs/'.$data['file_name'];
+	//			}
+	//		}
+	//
+	//		//Если не существует, оставляем прошлые изображения
+	//		if (!isset($small_image) or !isset($full_image)) {
+	//			$data = $this->designs_mdl->get_edit($id);
+	//			$small_image = $data['small_image'];
+	//			$smallbw_image = $data['smallbw_image'];
+	//			$mid_image = $data['mid_image'];
+	//			$full_image = $data['full_image'];
+	//		}
+	//		/**
+	//		 * ---------------------------------------------------------------
+	//		 *	Загрузка файла
+	//		 * ---------------------------------------------------------------
+	//		 */
+	//		if (isset($_FILES['file']['tmp_name']) and $form_validation) {
+	//			//Если не существует папки у пользователя
+	//			if (!file_exists(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'')) {
+	//				mkdir(''.$_SERVER['DOCUMENT_ROOT'].'/files/download/'.$this->username.'', 0777, true);
+	//			}
+	//
+	//			$config['encrypt_name'] = TRUE;
+	//			$config['upload_path'] = './files/download/'.$this->username.'/';
+	//			$config['allowed_types'] = 'zip|rar';
+	//			$config['max_size'] = '100000';
+	//
+	//			$this->upload->initialize($config);
+	//
+	//			if ($this->upload->do_upload("file")) {
+	//				$data_file = $this->upload->data();
+	//
+	//				$path = './files/download/'.$this->username.'/'.$data_file['file_name'].'';
+	//
+	//				$dfile = $this->username.'/'.$data_file['file_name'];
+	//			}
+	//		}
+	//
+	//		//Если не существует, оставляем прошлый файл
+	//		if (!isset($dfile)) {
+	//			$data = $this->designs_mdl->get_edit($id);
+	//			$dfile = $data['dfile'];
+	//		}
+	//
+	//		//Дальше работаем над остальными полями
+	//		if ($form_validation and empty($data['error'])) {
+	//
+	//			$data = array(
+	//				'title'=>$this->input->post('title'),'text'=>htmlspecialchars($this->input->post('text')),
+	//				//Описание для SE
+	//				'descr'=>character_limiter(htmlspecialchars($this->input->post('text')), 255),
+	//					'category'=>$this->input->post('category_id'),'price_1'=>$this->input->post('price_1'),
+	//					'price_2'=>$this->input->post('price_2'),'source'=>htmlspecialchars($this->input->post('source')),
+	//					'small_image'=>$small_image,'smallbw_image'=>$smallbw_image,'mid_image'=>$mid_image,
+	//					'full_image'=>$full_image,'dfile'=>$dfile,'status'=>1
+	//			);
+	//
+	//			$this->designs_mdl->edit('designs', $id, $data);
+	//			/**
+	//			 * ---------------------------------------------------------------
+	//			 *	Дополнительные параметры, отдельная таблица
+	//			 * ---------------------------------------------------------------
+	//			 */
+	//			$data = array(
+	//				'flash'=>$this->input->post('flash'),'stretch'=>$this->input->post('stretch'),
+	//					'columns'=>$this->input->post('columns'),'destination'=>$this->input->post('destination'),
+	//					'quality'=>$this->input->post('quality'),'type'=>$this->input->post('type'),
+	//					'tone'=>$this->input->post('tone'),'bright'=>$this->input->post('bright'),'style'=>$this->input->post('style'),
+	//					'theme'=>$this->input->post('theme'),'adult'=>$this->input->post('adult')
+	//			);
+	//
+	//			$this->designs_mdl->edit_options($id, $data);
+	//
+	//			/**
+	//			 * ---------------------------------------------------------------
+	//			 *	Сопутствующии товары, удаляем старые добавляем новые
+	//			 * ---------------------------------------------------------------
+	//			 */
+	//			$this->designs_mdl->delete_design_sub($id);
+	//
+	//			//Обработка данных
+	//			$a = '';
+	//
+	//			$sub = $this->input->post('sub');
+	//
+	//			//Удаляем пробелы в начале и конце
+	//			$sub = trim($sub);
+	//
+	//			//удаляем все пробелы, для точной проверки уникальности
+	//			while (strpos($sub, ' ') !== false) {
+	//				$sub = str_replace(' ', '', $sub);
+	//			}
+	//			;
+	//
+	//			//Убираем запятую в конце
+	//			$sub = eregi_replace("\,+$", "", $sub);
+	//
+	//			//Создаём массив
+	//			$sub = explode(",", $sub);
+	//
+	//			//только уникальные значения
+	//			$sub = array_unique($sub);
+	//
+	//			//Вставка данных
+	//			foreach ($sub as $row=>$value) {
+	//				$a[] = "('".$id."', '".trim($value)."')";
+	//			}
+	//
+	//			$a = implode(", ", $a);
+	//
+	//			$query = "INSERT INTO ci_associated (design_id, sub) VALUES ".$a;
+	//
+	//			$query = $this->db->query($query);
+	//			/**
+	//			 * ---------------------------------------------------------------
+	//			 *	Тэги, удаляем старые добавляем новые
+	//			 * ---------------------------------------------------------------
+	//			 */
+	//			$this->designs_mdl->delete_design_tags($id);
+	//
+	//			$a = '';
+	//
+	//			$tags = $this->input->post('tags');
+	//
+	//			//Удаляем пробелы в начале и конце
+	//			$tags = trim($tags);
+	//
+	//			//все буквенные символы переведены в нижний регистр, для точной проверки уникальности
+	//			$tags = strtolower($tags);
+	//
+	//			//удаляем все пробелы, для точной проверки уникальности
+	//			while (strpos($tags, ' ') !== false) {
+	//				$tags = str_replace(' ', '', $tags);
+	//			}
+	//			;
+	//
+	//			//Убираем запятую в конце
+	//			$tags = eregi_replace("\,+$", "", $tags);
+	//
+	//			//Создаём массив
+	//			$tags = explode(",", $tags);
+	//
+	//			//Удаляем неуникальные элементы
+	//			$tags = array_unique($tags);
+	//
+	//			foreach ($tags as $row=>$value) {
+	//				$a[] = "('".$id."', '".trim($value)."')";
+	//			}
+	//
+	//			$a = implode(", ", $a);
+	//
+	//			$query = "INSERT INTO ci_tags (design_id, tag) VALUES ".$a;
+	//
+	//			$query = $this->db->query($query);
+	//
+	//			redirect('designs/'.$id.'.html');
+	//		}
+	//
+	//		$data = $this->designs_mdl->get_edit($id);
+	//
+	//		$data['categories'] = $this->designs_mdl->get_categories();
+	//
+	//		$data['themes'] = $this->designs_mdl->get_themes();
+	//
+	//		$data['destinations'] = $this->designs_mdl->get_destinations();
+	//
+	//		//Также вывести тэги и id сопутствующих товаров
+	//		$data['tags'] = $this->designs_mdl->get_design_tags($id);
+	//
+	//		$data['sub'] = $this->designs_mdl->get_associated_designs_edit($id);
+	//
+	//		$this->template->build('designs/edit', $data, $title = 'Редактировать дизайн');
+	//	}
+	
 	/**
 	 * ---------------------------------------------------------------
 	 *	Закрытие дизайна
@@ -1566,3 +1742,4 @@ class Designs extends Controller {
 		return FALSE;
 	}
 }
+

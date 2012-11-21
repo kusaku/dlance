@@ -5,7 +5,7 @@
 		<div class="addResponse">
 			<div class="addResponseRightBrdr">
 				<span>+</span>
-				<a href="/users/reviews_add/<?=$username?>">добавить отзыв</a>
+				<a href="/user/review/add/<?=$username?>">добавить отзыв</a>
 			</div>
 		</div>
 		<?php endif; ?>

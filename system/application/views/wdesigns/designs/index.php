@@ -64,7 +64,7 @@
 				<?php foreach ($data as $row): ?>
 				<?php if ($row['sales'] == 0): ?>
 				<li class="unique">
-					<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
+					<a href="<?=$row['full_image1']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image1']?>" alt="<?=$row['title']?>"/></a>
 					<p>
 						<a href="/designs/<?=$row['id']?>.html"><?= $row['title']?></a>
 					</p>
@@ -86,7 +86,7 @@
 				</li>
 				<?php else : ?>
 				<li>
-					<a href="<?=$row['full_image']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>"/></a>
+					<a href="<?=$row['full_image1']?>" class="zoom" title="<?=$row['title']?>"><img src="<?=$row['small_image1']?>" alt="<?=$row['title']?>"/></a>
 					<p>
 						<a href="/designs/<?=$row['id']?>.html"><?= $row['title']?></a>
 					</p>

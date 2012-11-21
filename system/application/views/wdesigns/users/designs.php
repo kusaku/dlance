@@ -30,7 +30,7 @@
 	<ul class="worksList">
 		<?php foreach ($designs as $row): ?>
 		<li>
-			<a href="<?=$row['full_image']?>" class="zoom" title="zoom prewiev"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a><a href="#" class="sign"><?= $row['status']?></a>
+			<a href="<?=$row['full_image1']?>" class="zoom" title="zoom prewiev"><img src="<?=$row['small_image1']?>" title="<?=$row['title']?>" /></a><a href="#" class="sign"><?= $row['status']?></a>
 		</li>
 		<?php endforeach; ?>
 	</ul>

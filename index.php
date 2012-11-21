@@ -10,6 +10,11 @@
 * 
 */
 	error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+	
+/**
+ * Another database-aware session 
+ */
+	session_start();
 
 /**
 * ---------------------------------------------------------------

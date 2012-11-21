@@ -22,7 +22,7 @@
 						<tr>
 							<td class="caption">Загрузка изображения:</td>
 							<td>
-							<img src="<?=$small_image?>" /><br />
+							<img src="<?=$small_image1?>" /><br />
 							<input class="file" name="userfile" type="file">	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	&nbsp;	Размер — до 1 Мб, Формат — JPG, Разрешение - до 1024x768 px</td>
 						</tr>
 

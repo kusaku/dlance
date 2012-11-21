@@ -71,13 +71,13 @@
 	<form action="" method="post" enctype="multipart/form-data"/>
 	<table class="order-form">
 		<tr>
-			<td class="caption">Заголовок(максимум 64 символов):</td>
+			<td class="caption">Заголовок(максимум 64 символов)<em style="color:red;">*</em>:</td>
 			<td class="frnt">
 				<input type="text" class="text" name="title" value="<?=set_value('title')?>" size="64" maxlength="64" style="width:540px"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="caption">Категория:</td>
+			<td class="caption">Категория<em style="color:red;">*</em>:</td>
 			<td class="frnt cat">
 				<select name="category_id">
 					<option></option>
@@ -95,45 +95,63 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="caption">Цена:</td>
+			<td class="caption">Цена<em style="color:red;">*</em>:</td>
 			<td>
 				<input type="text" name="price_1" value="<?=set_value('price_1')?>" size="12" maxlength="12" style="width:40px"/>рублей
 			</td>
 		</tr>
-		<tr>
+		<!--tr>
 			<td class="caption">Цена выкупа:</td>
 			<td>
 				<input type="text" name="price_2" value="<?=set_value('price_2')?>" size="12" maxlength="12" style="width:40px"/>рублей
 			</td>
-		</tr>
+		</tr-->
 		<tr>
-			<td class="caption">Описание(максимум 10000 символов):</td>
+			<td class="caption">Описание(максимум 10000 символов)<em style="color:red;">*</em>:</td>
 			<td class="frnt">
 				<textarea name="text" rows="10" cols="49"><?= set_value('text')?></textarea>
 			</td>
 		</tr>
 		<tr>
-			<td class="caption">Тэги, цвета:</td>
+			<td class="caption">Тэги, цвета<em style="color:red;">*</em>:</td>
 			<td class="frnt">
 				<input type="text" class="text" name="tags" value="<?=set_value('tags')?>" size="64" maxlength="64" style="width:340px" id="tags" />Не менее одного тэга
 			</td>
 		</tr>
 		<tr>
-			<td class="caption">Исходники:</td>
+			<td class="caption">Исходники<em style="color:red;">*</em>:</td>
 			<td class="frnt">
 				<input type="text" class="text" name="source" value="<?=set_value('source')?>" size="64" maxlength="64" style="width:340px"/>
 			</td>
 		</tr>
 		<tr>
-			<td class="caption">Загрузка изображения:</td>
+			<td class="caption">Изображение для определения цвета:</td>
 			<td>
-				<input class="file" name="userfile" type="file" />Размер — до 1 Мб, Формат — JPG, Разрешение - до 1024x768 px
+				<input class="file" name="detector" type="file" />
+			</td>
+		</tr>		
+		<tr>
+			<td class="caption">Превью 1<em style="color:red;">*</em>:</td>
+			<td>
+				<input class="file" name="image1" type="file" />
 			</td>
 		</tr>
 		<tr>
-			<td class="caption">Файл:</td>
+			<td class="caption">Превью 2:</td>
 			<td>
-				<input class="file" name="file" type="file" />Размер — до 100 Мб, Формат — ZIP, RAR
+				<input class="file" name="image2" type="file" />
+			</td>
+		</tr>
+		<tr>
+			<td class="caption">Превью 3:</td>
+			<td>
+				<input class="file" name="image3" type="file" />
+			</td>
+		</tr>		
+		<tr>
+			<td class="caption">Файл (архив)<em style="color:red;">*</em>:</td>
+			<td>
+				<input class="file" name="file" type="file" />
 			</td>
 		</tr>
 		<tr>
@@ -255,8 +273,14 @@
 		<tr>
 			<td class="caption">Только для взрослых:</td>
 			<td>
-				<span class="niceCheck"><input type="checkbox" name="adult" value="1"<?= set_checkbox('adult', '1'); ?>/></span>Дизайн не будет показан не авторизированным пользователям и авторизированным пользователям, которые не достигли совершенолетия. 
+				<span class="niceCheck"><input type="checkbox" name="adult" value="1"<?= set_checkbox('adult', '1'); ?>/></span>
+				Дизайн не будет показан не авторизированным пользователям и авторизированным пользователям, которые не достигли совершенолетия. 
 			</td>
 		</tr>
-	</table><input type="submit" value="Добавить" class="reg-submit"></form>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="Добавить" class="reg-submit"></form>
+			</td>
+		</tr>
+	</table>
 </div>

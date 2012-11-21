@@ -186,9 +186,11 @@ function addcart(id, kind){
 				<p>
 					<span>Скачиваний:</span>
 					<?= $sales?>
+					<!--
 					<?php if ($sales == 0 and !$user_is_owner): ?>
 					<a href="#" onclick="addcart(<?=$id?>, 2)" class="buyout"><span>Выкупить за <strong> <?= $price_2?> руб.</strong></span></a>
 					<?php endif; ?>
+					-->
 				</p>
 				<?php if ($status_id == 1): ?>
 				<p>
@@ -217,9 +219,11 @@ function addcart(id, kind){
 							buildPager: function(slideIndex){
 								switch (slideIndex) {
 									case 0:
-										return '<a href=""><img src="<?=$small_image?>" /></a>';
+										return '<a href=""><img src="<?=$small_image1?>" /></a>';
 									case 1:
-										return '<a href=""><img src="<?=$small_image?>" /></a>';
+										return '<a href=""><img src="<?=$small_image2?>" /></a>';
+									case 3:
+										return '<a href=""><img src="<?=$small_image2?>" /></a>';
 								}
 							}
 						});
@@ -228,11 +232,18 @@ function addcart(id, kind){
 			</script>
 			<ul id="featurelist">
 				<li>
-					<a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?php if (!empty($mid_image)) {echo $mid_image;} else {echo $full_image;} ?>" alt="template"/></a>
+					<a href="<?=$full_image1?>" class="zoom" title="zoom preview"><img src="<?php if (!empty($mid_image1)) {echo $mid_image1;} else {echo $full_image1;} ?>" alt="template"/></a>
 				</li>
+				<?php if(!empty($full_image2)): ?>
 				<li>
-					<a href="<?=$full_image?>" class="zoom" title="zoom prewiev"><img src="<?php if (!empty($mid_image)) {echo $mid_image;} else {echo $full_image;} ?>" alt="template"/></a>
+					<a href="<?=$full_image2?>" class="zoom" title="zoom preview"><img src="<?php if (!empty($mid_image2)) {echo $mid_image2;} else {echo $full_image2;} ?>" alt="template"/></a>
 				</li>
+				<?php endif; ?>
+				<?php if(!empty($full_image3)): ?>
+				<li>
+					<a href="<?=$full_image3?>" class="zoom" title="zoom preview"><img src="<?php if (!empty($mid_image3)) {echo $mid_image3;} else {echo $full_image3;} ?>" alt="template"/></a>
+				</li>
+				<?php endif; ?>
 			</ul>
 		</div>
 		<div class="moreInfo">
