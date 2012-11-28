@@ -1,22 +1,24 @@
 <?php $this->load->view('wdesigns/account/block'); ?>
-<div id="yui-main">
-	<div class="yui-b">
+<div id="yui-main" class="content">
+	<div class="yui-b services">
 		<h1><a href="">Контакты / Сообщения</a></h1>
-		<img src="<?=$userpic?>" alt="" class="avatar" />
-		<ul class="ucard">
-			<li class="utitle">
-				<a class="black" href="/user/<?=$username?>"><?= $username?></a>
-			</li>
-			<li>
-				Последний визит: <?= $last_login?>
-			</li>
-			<li>
-				Дата регистрации: <?= $created?>
-			</li>
-			<li>
-				<a href="#send">Написать сообщение</a>
-			</li>
-		</ul>
+		<div class="userInfo">
+			<img src="<?=$userpic?>" alt="" class="avatar" />
+			<ul class="ucard">
+				<li class="utitle">
+					<a class="black" href="/user/<?=$username?>"><?= $username?></a>
+				</li>
+				<li>
+					Последний визит: <?= $last_login?>
+				</li>
+				<li>
+					Дата регистрации: <?= $created?>
+				</li>
+				<li>
+					<a href="#send">Написать сообщение</a>
+				</li>
+			</ul>
+		</div>
 		<div class="message">
 			<?php if (! empty($messages)): ?>
 			<?php foreach ($messages as $row): ?>
@@ -45,7 +47,9 @@
 					<textarea cols="10" rows="10" name="text" style="width:100%"><?= set_value('text')?></textarea>
 				</div>
 				<div>
-					<input type="submit" value="Отправить"></div>
+					<br/>
+					<button name="submit" type="submit" value="Отправить" class="orangeBtn80">Отправить</button></form>
+				</div>
 			</form>
 		</div>
 		<?php endif; ?>

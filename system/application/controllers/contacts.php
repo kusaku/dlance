@@ -19,6 +19,7 @@ class Contacts extends Controller {
 			$this->type = $this->session->userdata('type');
 			
 			$user = $this->users_mdl->get_user_by_id($this->user_id);
+			$this->user = $user;
 			$this->username = $user->username;
 			$this->userpic = $user->userpic;
 			$this->team = $user->team;

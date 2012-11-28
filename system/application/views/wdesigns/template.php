@@ -28,7 +28,7 @@
 					<a href="<?=base_url()?>" title="<?=$this->config->item('title')?>"><img src="/design/images/logo_fd.png" alt="Ф.дизайн" /></a>
 				</div>
 				<div class="bannerPlace">
-					<a href="#" title="Эта реклама проплачена!"><img src="/design/images/banner_top.png" alt="Нашего партнера баннер, включите картинки" /></a>
+					
 				</div>
 				<div class="authBlock">
 					<?= $login?>

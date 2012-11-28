@@ -104,6 +104,21 @@ function addcart(id, kind){
 </script>
 
 <div class="sideBar">
+	<div class="userInfo">
+		<div class="avatar <?=$tariff?>">
+			<a href="/contacts/send/<?=$username?>" title="Личное сообщение"></a>
+			<img src="<?=$userpic?>" alt="<?=$username?> avi" />
+		</div>
+		<p class="contacts">
+			<a href="/user/<?=$username?>" class="name"><?= $username?></a>
+		</p>
+		<p>
+			<?= "{$name} {$surname}"?>
+		</p>
+		<p>
+			<a href="/contacts/send/<?=$username?>" title="Личное сообщение">Личное сообщение</a>
+		</p>
+	</div>
 	<div class="tagsCloud slideBox">
 		<ul id="slider1">
 			<!-- Облако тегов, вывод надо рассчитать -->
