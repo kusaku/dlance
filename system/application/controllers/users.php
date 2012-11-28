@@ -953,10 +953,6 @@ class Users extends Controller {
 	 */
 
 	function activate($code = '') {
-		if ($this->users_mdl->logged_in() or !$code) {
-			redirect('');
-		}
-		
 		if ($this->users_mdl->activate($code)) {
 			show_error('Активация успешно завершена');
 		} else {
@@ -965,13 +961,13 @@ class Users extends Controller {
 	}
 	/**
 	 * ---------------------------------------------------------------
-	 *	Активация пользователя
+	 *	Активация пользователя (по-умолчанию, смю routes.php)
 	 * ---------------------------------------------------------------
 	 */
 
 	function activate_2($code = '') {
 		if ($this->users_mdl->activate_2($code)) {
-			redirect('');
+			show_error('Активация успешно завершена');
 		} else {
 			show_error('Активация не удалась');
 		}

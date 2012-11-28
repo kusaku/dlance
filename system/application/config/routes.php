@@ -43,11 +43,11 @@ if (!defined('BASEPATH'))
  *
  */
  
-$route['default_controller'] = "designs";
+$route['default_controller'] = "designs/main";
 $route['scaffolding_trigger'] = '';
 $route['login'] = "users/login";
-$route['activate'] = "users/activate";
 $route['register'] = "users/register";
+$route['activate/(:any)'] = "users/activate_2/$1";
 $route['recovery'] = "users/recovery";
 $route['logout'] = "users/logout";
 //$route['user/(:any)/designs'] = "users/designs/$1";

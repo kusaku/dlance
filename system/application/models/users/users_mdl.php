@@ -607,7 +607,7 @@ class Users_mdl extends Model {
 		
 		$activation_code = sha1(md5(microtime()));
 		
-		$code = base_url().'users/activate/'."$activation_code";
+		$code = base_url()."activate/{$activation_code}";
 		
 		//Отправка почты
 		$message = $this->load->view('emails/activate', array(

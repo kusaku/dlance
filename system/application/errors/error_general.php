@@ -64,20 +64,15 @@
 				</ul>
 			</div>
 			<div class="main">
-				<style type="text/css">
-					#content {
-						border: #999 1px solid;
-						background-color: #fff;
-						padding: 20px 20px 12px 20px;
-					}
-				</style>
 				<div id="content">
-					<h1>Ошибка</h1>
+					<h1>Сообщение</h1>
+					<br/>
 					<?= $message; ?>
+					<br/>
 				</div>
 				<?php if (isset($_SERVER['HTTP_REFERER'])): ?>
-				<div id="content">
-					<a href="<?=$_SERVER['HTTP_REFERER']?>">Go back</a>
+				<div id="content">					
+					<a href="<?=$_SERVER['HTTP_REFERER']?>">назад</a>
 				</div>
 				<?php endif?>
 			</div>

@@ -68,7 +68,7 @@
 							<a class="username" href="/user/<?=$value['username']?>" title="перейти к портфолио"><?= $value['username']?></a>
 						</p>
 						<p>
-							<?= $value['name']?><?= $value['surname']?>
+							<?= "{$value['name']} {$value['surname']}"?>
 						</p>
 						<p>
 							<a class="message" href="/contacts/send/<?=$value['username']?>">Личное сообщение</a>

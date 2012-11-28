@@ -41,7 +41,9 @@ class Designs extends Controller {
 		$title = $this->config->item('title');
 		
 		// TODO Выводим последнии 20 дизайнов, сделать через настройку
-		$data['data'] = $this->designs_mdl->get_designs(0, 10);
+		$data['data'] = $this->designs_mdl->get_designs(array(
+			'order_by'=>'date','order_dir'=>'desc','limit'=>10,'offset'=>0,
+		));
 		
 		/**
 		 * Блок
@@ -65,7 +67,7 @@ class Designs extends Controller {
 		
 		//Пользовательский рейтинг
 		$data['top_designs'] = $this->designs_mdl->get_designs(array(
-			'order_by'=>'rating','order_dir'=>'desc','limit'=>4,'offset'=>0,
+			'order_by'=>'rating','order_dir'=>'desc','limit'=>15,'offset'=>0,
 		));
 		
 		$data['descr'] = $this->config->item('description');
@@ -86,11 +88,12 @@ class Designs extends Controller {
 		$title = 'Дизайны сайта. Купить шаблон для сайта, Купить дизайн сайта';
 		
 		$search = array(
-			'offset'=>intval($offset)
+			'offset'=>intval($offset),
+			'limit'=>20,
 		);
 		
 		if (! empty($_REQUEST['limit'])) {
-			$search['limit'] = min(20, intval($_REQUEST['limit']));
+			$search['limit'] = max(10, min(100, intval($_REQUEST['limit'])));
 		}
 		
 		if (! empty($_REQUEST['category']) and $this->_category_check($_REQUEST['category'])) {
@@ -162,11 +165,12 @@ class Designs extends Controller {
 		$title = 'Поиск дизайнов сайта';
 		
 		$search = array(
-			'offset'=>intval($offset)
+			'offset'=>intval($offset),
+			'limit'=>20,
 		);
 		
 		if (! empty($_REQUEST['limit'])) {
-			$search['limit'] = min(20, intval($_REQUEST['limit']));
+			$search['limit'] = max(10, min(100, intval($_REQUEST['limit'])));
 		}
 		
 		if (! empty($_REQUEST['category']) and $this->_category_check($_REQUEST['category'])) {
@@ -707,13 +711,6 @@ class Designs extends Controller {
 				'field'=>'category_id','label'=>'Категория','rules'=>'required'
 			),array(
 				'field'=>'price_1','label'=>'Цена','rules'=>'required|numeric'
-			),
-			/*array(
-				'field'=>'price_2','label'=>'Цена выкупа','rules'=>'required|numeric'
-			)
-			*/
-			array(
-				'field'=>'image1','label'=>'Превью 1','rules'=>'required'
 			),array(
 				'field'=>'source','label'=>'Исходники','rules'=>'required'
 			),array(

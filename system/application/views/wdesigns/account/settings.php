@@ -136,7 +136,7 @@
 				<label for="country_id">Страна:</label>
 				<script type="text/javascript" src="/templates/js/location.min.js"></script>
 				<script type="text/javascript" src="/templates/js/location_data.js"></script>
-				<select id="country_id" name="country_id" class="text" OnChange="list_cities(this.value)">
+				<select id="country_id" name="country_id" class="text">
 					<option value=""></option>
 					<option value="2">Россия</option>
 					<option value="1">Украина</option>

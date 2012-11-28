@@ -182,6 +182,12 @@ function addcart(id, kind){
 				<span>Подробно:</span>
 				<?= $text?>
 			</p>
+			<p>
+				<span>Цвета:</span>
+				<?php foreach ($colors as $row): ?>
+					<span class="colorBar" style="margin:2px 2px;height:10px;width:10px;display:inline-block;background: #<?= $row['color']; ?>" rel="<?= $row['color']; ?>" href="#"></span>
+				<?php endforeach; ?>
+			</p>
 			<div class="statistica">
 				<p>
 					<span>Скачиваний:</span>
@@ -219,11 +225,11 @@ function addcart(id, kind){
 							buildPager: function(slideIndex){
 								switch (slideIndex) {
 									case 0:
-										return '<a href=""><img src="<?=$small_image1?>" /></a>';
+										return '<a href="<?=$mid_image1?>"><img src="<?=$small_image1?>" /></a>';
 									case 1:
-										return '<a href=""><img src="<?=$small_image2?>" /></a>';
-									case 3:
-										return '<a href=""><img src="<?=$small_image2?>" /></a>';
+										return '<a href="<?=$mid_image2?>"><img src="<?=$small_image2?>" /></a>';
+									case 2:
+										return '<a href="<?=$mid_image3?>"><img src="<?=$small_image3?>" /></a>';
 								}
 							}
 						});
@@ -231,17 +237,19 @@ function addcart(id, kind){
 				}(jQuery))
 			</script>
 			<ul id="featurelist">
+				<?php if(!empty($full_image1)): ?>
 				<li>
-					<a href="<?=$full_image1?>" class="zoom" title="zoom preview"><img src="<?php if (!empty($mid_image1)) {echo $mid_image1;} else {echo $full_image1;} ?>" alt="template"/></a>
+					<a href="<?=$full_image1?>" class="zoom" title="zoom preview"><img src="<?= $mid_image1; ?>" alt="template"/></a>
 				</li>
+				<?php endif; ?>
 				<?php if(!empty($full_image2)): ?>
 				<li>
-					<a href="<?=$full_image2?>" class="zoom" title="zoom preview"><img src="<?php if (!empty($mid_image2)) {echo $mid_image2;} else {echo $full_image2;} ?>" alt="template"/></a>
+					<a href="<?=$full_image2?>" class="zoom" title="zoom preview"><img src="<?= $mid_image2; ?>" alt="template"/></a>
 				</li>
 				<?php endif; ?>
 				<?php if(!empty($full_image3)): ?>
 				<li>
-					<a href="<?=$full_image3?>" class="zoom" title="zoom preview"><img src="<?php if (!empty($mid_image3)) {echo $mid_image3;} else {echo $full_image3;} ?>" alt="template"/></a>
+					<a href="<?=$full_image3?>" class="zoom" title="zoom preview"><img src="<?= $mid_image3; ?>" alt="template"/></a>
 				</li>
 				<?php endif; ?>
 			</ul>

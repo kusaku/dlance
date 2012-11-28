@@ -7,14 +7,11 @@
 	<p>
 		<a href="/account" class="name"><?= $username?></a>
 		<br/>
-		<?= $name?><?= $surname?>
+		<?= "{$name} {$surname}"?>
 	</p>
 	<p>
 		<span>Рейтинг:</span>
 		<span class="orange"><?= $rating?></span>
-		<br/>
-		<span>Баланс:</span>
-		<a href="/account/balance/" class="orange"><?= $balance?> руб.</a>
 	</p>
 </div>
 <div class="userPanel">

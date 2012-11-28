@@ -174,9 +174,6 @@
 				рейтингу
 				<a <?=($search['order_by']=='rating' and $search['order_dir']=='asc') ? 'class="abs"':''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'rating','order_dir'=>'asc')));?>&">&darr;</a>
 				<a <?=($search['order_by']=='rating' and $search['order_dir']=='desc') ? 'class="abs"':''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'rating','order_dir'=>'desc')));?>&">&uarr;</a>
-				кол-ву покупок
-				<a <?=($search['order_by']=='sales' and $search['order_dir']=='asc') ? 'class="abs"':''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'sales','order_dir'=>'asc')));?>&">&darr;</a>
-				<a <?=($search['order_by']=='sales' and $search['order_dir']=='desc') ? 'class="abs"':''?> href="/designs/search/?<?=http_build_query(array_merge($search, array('order_by'=>'sales','order_dir'=>'desc')));?>&">&uarr;</a>
 			</div>
 			<h3>Результаты поиска:</h3>
 		</div>
@@ -199,12 +196,10 @@
 					<p>
 						Рейтинг: <span><?= $row['rating']?></span>
 						<br/>
-						<span class="new">Скачиваний: <?= $row['sales']?></span>
-						<br/>
 						Цена: <span><?= $row['price_1']?> руб.</span>
 					</p>
 					<p class="details">
-						<a href="/designs/<?=$row['id']?>.html">Купить первым!</a>
+						<a href="/designs/<?=$row['id']?>.html">Подробнее</a>
 					</p>
 				</li>
 				<?php else : ?>
@@ -221,12 +216,10 @@
 					<p>
 						Рейтинг: <span><?= $row['rating']?></span>
 						<br/>
-						Скачиваний: <span><?= $row['sales']?></span>
-						<br/>
 						Цена: <span><?= $row['price_1']?> руб.</span>
 					</p>
 					<p class="details">
-						<a href="/designs/<?=$row['id']?>.html">Подробно</a>
+						<a href="/designs/<?=$row['id']?>.html">Подробнее</a>
 					</p>
 				</li>
 				<?php endif; ?>

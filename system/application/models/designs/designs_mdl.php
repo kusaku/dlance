@@ -358,18 +358,24 @@ class Designs_mdl extends Model {
 	 * ---------------------------------------------------------------
 	 */
 
-	function get_color_cloud($limit = 10) {
-		$this->db->limit($limit);
-		
+	function get_color_cloud($limit = 10, $design_id = FALSE) {
 		$this->db->select('color, COUNT(color) AS color_count');
+		
+		if ($design_id) {
+					$this->db->where('design_id', $design_id);
+		}
 		
 		$this->db->group_by('color');
 		
 		$this->db->order_by('color_count', 'desc');
 		
+		$this->db->limit($limit);
+		
 		$query = $this->db->get('colors')->result_array();
 		
+		
 		$this->load->library('colors');
+		$existed = array();
 		
 		foreach ($query as & $row) {
 			$color = $this->colors->deformat($row['color'], $is_rgb, $is_hsv);
@@ -389,8 +395,17 @@ class Designs_mdl extends Model {
 				list($r,$g,$b) = $this->colors->hsv2rgb($h, $s, $v);
 			}
 			
-			$row['color'] = sprintf('%02x%02x%02x', $r, $g, $b);
+			$hex = sprintf('%02x%02x%02x', $r, $g, $b);
+			
+			if (isset($existed[$hex])) {
+				$row = FALSE;
+			} else {
+				$existed[$hex] = 1;
+				$row['color'] = $hex;
+			}
 		}
+		
+		$query = array_filter($query);
 		
 		return $query;
 	}
@@ -470,11 +485,7 @@ class Designs_mdl extends Model {
 	 */
 
 	function get_design_colors($id) {
-		$this->db->select('color, percent');
-		
-		$this->db->where('design_id', $id);
-		
-		return $this->db->get('colors')->result_array();
+		return $this->get_color_cloud(10, $id);
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -580,7 +591,7 @@ class Designs_mdl extends Model {
 	}
 
 	function get_designs($search = array( ), $count = FALSE) {
-		
+	$q;	
 		$search = array_merge(array('limit'=>20, 'offset'=>0), $search);
 		
 		$where = array( );
