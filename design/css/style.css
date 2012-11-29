@@ -115,6 +115,7 @@ a:hover, a:active, a.active {color:#ff7b0b; text-decoration:none;}
 .sideBar .designsCategories ul a.active{color:#ff7b0b;}
 .sideBar .designsCategories ul span {color:#ff7b0b;}
 
+.sideBar .tagsCloud h3{display:block; height:26px; width:180px; background:url(../images/headerlefttop.png) 0 0 no-repeat #ff7900; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
 .sideBar .tagsCloud {position:relative;width:160px; margin:0 0 8px 0;}
 .sideBar .tagsCloud .bx-wrapper{position:relative;}
 .sideBar .tagsCloud .bx-wrapper .bx-window { overflow:hidden;left:11px;}

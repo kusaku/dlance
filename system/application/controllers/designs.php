@@ -88,8 +88,7 @@ class Designs extends Controller {
 		$title = 'Дизайны сайта. Купить шаблон для сайта, Купить дизайн сайта';
 		
 		$search = array(
-			'offset'=>intval($offset),
-			'limit'=>20,
+			'offset'=>intval($offset),'limit'=>20,
 		);
 		
 		if (! empty($_REQUEST['limit'])) {
@@ -153,6 +152,10 @@ class Designs extends Controller {
 		// Категории
 		$data['categories'] = $this->designs_mdl->get_categories();
 		$data['colorbars'] = $this->designs_mdl->get_color_cloud();
+		
+		//Популярные дизайны
+		$data['tagcloud'] = $this->tagcloud();
+		
 		$this->template->build('designs/index', $data, $title);
 	}
 	/**
@@ -165,8 +168,7 @@ class Designs extends Controller {
 		$title = 'Поиск дизайнов сайта';
 		
 		$search = array(
-			'offset'=>intval($offset),
-			'limit'=>20,
+			'offset'=>intval($offset),'limit'=>20,
 		);
 		
 		if (! empty($_REQUEST['limit'])) {
@@ -242,6 +244,9 @@ class Designs extends Controller {
 		// Категории
 		$data['categories'] = $this->designs_mdl->get_categories();
 		$data['colorbars'] = $this->designs_mdl->get_color_cloud();
+		
+		//Популярные дизайны
+		$data['tagcloud'] = $this->tagcloud();
 		$this->template->build('designs/search', $data, $title);
 	}
 	/**
@@ -583,8 +588,9 @@ class Designs extends Controller {
 		
 		$comments['smiley'] = $this->table->generate($col_array);
 		
-		//Популярные дизайны
-		$data['tagcloud'] = $this->tagcloud();
+		//Теги дизайна
+		$data['tagcloud'] = $this->tagcloud($id);
+		
 		//категории
 		$data['categories'] = $this->designs_mdl->get_categories();
 		
@@ -600,36 +606,31 @@ class Designs extends Controller {
 	 * ---------------------------------------------------------------
 	 */
 
-	function tagcloud() {
-		$tagcloud = $this->designs_mdl->get_tag_cloud();
+	function tagcloud($id = FALSE) {
+		$tagcloud = $this->designs_mdl->get_tag_cloud($id);
 		
-		asort($tagcloud);
+		if(empty($tagcloud)) {
+			return '';
+		}
 		
-		$min = reset($tagcloud);
-		$max = end($tagcloud);
+		$min = min($tagcloud);
+		$max = max($tagcloud);
 		
-		$minSize = 1;
-		$maxSize = 5;
 		$out = '';
 		$outPages = '';
-		$tagsCount = 0;
-		
-		// здесь можно задать сортировку элементов
-		// большие метки в начале
-		arsort($tagcloud);
+		$counter = 0;
 		
 		foreach ($tagcloud as $tag=>$count) {
-			$fontSize = round((($count - $min) / ($max - $min)) * ($maxSize - $minSize) + $minSize);
-			$tagsCount++;
-			if (!($tagsCount % 9)) {
-				$out .= "<li><a class=\"size".$fontSize."\" href=\"/designs/search/?tags=".$tag."\"><span>".$tag."</span></a></li>";
-				$outPages .= "<li><ul class=\"tagsCloudBlock\">".$out."</ul></li>";
+			$factor = ($min == $max) ? 0.5 : ($count - $min) / ($max - $min);
+			$page = 1 + floor(4 * $factor);
+			$out .= "<li><a class=\"size{$page}\"  href=\"/designs/search/?tags={$tag}\"><span>{$tag}</span></a></li>";
+			if (++$counter % 10 == 0) {
+				$outPages .= "<li><ul class=\"tagsCloudBlock\">{$out}</ul></li>";
 				$out = '';
-			} else {
-				$out .= "<li><a class=\"size".$fontSize."\" href=\"/designs/search/?tags=".$tag."\"><span>".$tag."</span></a></li>";
 			}
-			
 		}
+		
+		empty($out) or $outPages .= "<li><ul class=\"tagsCloudBlock\">{$out}</ul></li>";
 		
 		//добавил нужные обертки
 		return $outPages;
@@ -760,7 +761,7 @@ class Designs extends Controller {
 		 */
 		 
 		// первое изображение
-		if (isset($_FILES['image1']['tmp_name']) and $form_validation) {
+		if ($form_validation and $_FILES['image1']['error'] == 0) {
 			$config['encrypt_name'] = TRUE;
 			$config['upload_path'] = './files/designs/';
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -837,7 +838,7 @@ class Designs extends Controller {
 		}
 		
 		// второе изображение
-		if (isset($_FILES['image2']['tmp_name']) and $form_validation) {
+		if ($form_validation and $_FILES['image2']['error'] == 0) {
 			$config['encrypt_name'] = TRUE;
 			$config['upload_path'] = './files/designs/';
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -914,7 +915,7 @@ class Designs extends Controller {
 		}
 		
 		// третье изображение
-		if (isset($_FILES['image3']['tmp_name']) and $form_validation) {
+		if ($form_validation and $_FILES['image3']['error'] == 0) {
 			$config['encrypt_name'] = TRUE;
 			$config['upload_path'] = './files/designs/';
 			$config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -995,7 +996,7 @@ class Designs extends Controller {
 		 *	Загрузка файла
 		 * ---------------------------------------------------------------
 		 */
-		if (isset($_FILES['file']['tmp_name']) and $form_validation) {
+		if ($form_validation and $_FILES['file']['error'] == 0) {
 			//Если не существует папки у пользователя
 			if (!file_exists('./files/download/'.$this->username.'')) {
 				mkdir('./files/download/'.$this->username.'', 0777, true);
@@ -1015,7 +1016,6 @@ class Designs extends Controller {
 			} else {
 				$data['error'] = $this->upload->display_errors();
 			}
-			
 		}
 		
 		//Дальше работаем над остальными полями
@@ -1032,17 +1032,17 @@ class Designs extends Controller {
 					'category'=>$this->input->post('category_id'),'price_1'=>$this->input->post('price_1'),
 					'price_2'=>$this->input->post('price_2'),'source'=>htmlspecialchars($this->input->post('source')),
 				//image1
-				'small_image1'=>'/files/designs/'.$file1['raw_name'].'_small'.$file1['file_ext'],
-					'mid_image1'=>'/files/designs/'.$file1['raw_name'].'_mid'.$file1['file_ext'],
-					'full_image1'=>'/files/designs/'.$file1['file_name'],
+				'small_image1'=>$file1 ? '/files/designs/'.$file1['raw_name'].'_small'.$file1['file_ext'] : '',
+					'mid_image1'=>$file1 ? '/files/designs/'.$file1['raw_name'].'_mid'.$file1['file_ext'] : '',
+					'full_image1'=>$file1 ? '/files/designs/'.$file1['file_name'] : '',
 				//image2
-				'small_image2'=>'/files/designs/'.$file2['raw_name'].'_small'.$file2['file_ext'],
-					'mid_image2'=>'/files/designs/'.$file2['raw_name'].'_mid'.$file2['file_ext'],
-					'full_image2'=>'/files/designs/'.$file2['file_name'],
+				'small_image2'=>$file2 ? '/files/designs/'.$file2['raw_name'].'_small'.$file2['file_ext'] : '',
+					'mid_image2'=>$file2 ? '/files/designs/'.$file2['raw_name'].'_mid'.$file2['file_ext'] : '',
+					'full_image2'=>$file2 ? '/files/designs/'.$file2['file_name'] : '',
 				//image3
-				'small_image3'=>'/files/designs/'.$file3['raw_name'].'_small'.$file3['file_ext'],
-					'mid_image3'=>'/files/designs/'.$file3['raw_name'].'_mid'.$file3['file_ext'],
-					'full_image3'=>'/files/designs/'.$file3['file_name'],
+				'small_image3'=>$file3 ? '/files/designs/'.$file3['raw_name'].'_small'.$file3['file_ext'] : '',
+					'mid_image3'=>$file3 ? '/files/designs/'.$file3['raw_name'].'_mid'.$file3['file_ext'] : '',
+					'full_image3'=>$file3 ? '/files/designs/'.$file3['file_name'] : '',
 				//datafile
 				'dfile'=>$this->username.'/'.$data_file['file_name'],'status'=>1,'moder'=>$moder
 			);
@@ -1057,7 +1057,7 @@ class Designs extends Controller {
 			 * ---------------------------------------------------------------
 			 */
 			 
-			if (isset($_FILES['detector']['tmp_name'])/* and $form_validation*/) {
+			if ($_FILES['detector']['error'] == 0) {
 				$config['encrypt_name'] = TRUE;
 				$config['upload_path'] = '/tmp/';
 				$config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -1110,7 +1110,7 @@ class Designs extends Controller {
 				}
 			}
 			
-			$tags = preg_split('/[\s,]+/', strtolower($this->input->post('tags')));
+			$tags = preg_split('/,\s*/', strtolower($this->input->post('tags')));
 			
 			$tags = array_merge($tags, $color_tags);
 			
@@ -1137,7 +1137,7 @@ class Designs extends Controller {
 			 
 			$sub = $this->input->post('sub');
 			if (! empty($sub)) {
-				$sub = preg_split('/[\s,]+/', strtolower($sub));
+				$sub = preg_split('/,\s*/', strtolower($sub));
 				
 				$sub = array_unique($sub);
 				

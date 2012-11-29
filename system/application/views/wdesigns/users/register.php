@@ -81,7 +81,7 @@
 					<option value=""></option>
 					<option value="2">Россия</option>
 					<option value="1">Украина</option>
-					<option value="0" disabled>-----------------------------------------</option>
+					<option value="0" disabled="disabled">-----------------------------------------</option>
 					<option value="42">Австралия</option>
 					<option value="3">Австрия</option>
 					<option value="43">Азербайджан</option>

@@ -129,18 +129,18 @@
 				<label for="sex">Пол:</label>
 				<input class="niceRadio" type="radio" name="sex" value="1"<?php if ($sex == 1): ?> checked="checked"<?php endif; ?> />
 				<label class="checkboxValue">Мужской</label>
-				<input class="niceRadio" type="radio" name="sex" value="2"/>
+				<input class="niceRadio" type="radio" name="sex" value="2"<?php if ($sex == 2): ?> checked="checked"<?php endif; ?>/>
 				<label class="checkboxValue">Женский</label>
 			</fieldset>
 			<fieldset>
 				<label for="country_id">Страна:</label>
 				<script type="text/javascript" src="/templates/js/location.min.js"></script>
 				<script type="text/javascript" src="/templates/js/location_data.js"></script>
-				<select id="country_id" name="country_id" class="text">
+				<select id="country_id" name="country_id" class="text" onchange="list_cities(this.value)">
 					<option value=""></option>
 					<option value="2">Россия</option>
 					<option value="1">Украина</option>
-					<option value="0" disabled>--------------------------------------------------	</option>
+					<option value="0" disabled="disabled">--------------------------------------------------	</option>
 					<option value="42">Австралия</option>
 					<option value="3">Австрия</option>
 					<option value="43">Азербайджан</option>
@@ -246,7 +246,7 @@
 			</fieldset>
 			<fieldset>
 				<label for="info">О себе:</label>
-				<textarea class="validate[required,custom[noSpecialCaracters2]] text-input" name="short_descr" rows="3"><?= $short_descr?></textarea>
+				<textarea class="validate[required,custom[noSpecialCaracters]] text-input" name="short_descr" rows="3"><?= $short_descr?></textarea>
 			</fieldset>
 			<fieldset>
 				<label for="resume">
@@ -258,7 +258,7 @@
 						(HTML-теги не поддерживаются, максимум 5000 символов)
 					</span>
 				</label>
-				<textarea name="full_descr" rows="7"><?= $full_descr?></textarea>
+				<textarea class="validate[required,custom[noSpecialCaracters]] text-input" name="full_descr" rows="7"><?= $full_descr?></textarea>
 			</fieldset>
 		</div>
 	</div>
@@ -308,15 +308,15 @@
 		</fieldset>
 		<fieldset>
 			<label for="">Старый пароль:</label>
-			<input type="password" class="validate[required,length[6,24]] text-input" name="old_password" size="56" maxlength="24" />
+			<input type="password" class="novalidate[required,length[6,24]] text-input" name="old_password" size="56" maxlength="24" />
 		</fieldset>
 		<fieldset>
 			<label for="">Новый пароль:</label>
-			<input id="password1" type="password" class="validate[required,length[6,24]] text-input" name="password1" size="56" maxlength="24" />
+			<input id="password1" type="password" class="novalidate[required,length[6,24]] text-input" name="password1" size="56" maxlength="24" />
 		</fieldset>
 		<fieldset>
 			<label for="">Повтор пароля:</label>
-			<input type="password" class="validate[required,confirm[password1]] text-input" name="password2" size="56" maxlength="24" />
+			<input type="password" class="novalidate[required,confirm[password1]] text-input" name="password2" size="56" maxlength="24" />
 		</fieldset>
 		<fieldset>
 			<button class="reg-submit" type="submit" value="1" name="submit">Сохранить</button>

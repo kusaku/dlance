@@ -77,9 +77,9 @@
 		</li>
 		<?php endforeach; ?>
 	</ul>
-	<div class="userEventsPagination">
+	<div class="paginationControl">
 		<?= $page_links?>
-	</div>
+	</div>	
 	<?php else : ?>
 	<p>События отсутствуют.</p>
 	<?php endif; ?>

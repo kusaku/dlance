@@ -336,21 +336,24 @@ class Designs_mdl extends Model {
 	 * ---------------------------------------------------------------
 	 */
 
-	function get_tag_cloud() {
-		$this->db->select('tag, COUNT(tag) AS tag_count');
+	function get_tag_cloud($design_id = FALSE) {
+		if ($design_id) {
+			$query = "SELECT `tag`, COUNT(`tag`) AS `tag_count` FROM `ci_tags` WHERE `design_id` = '{$design_id}' GROUP BY `tag` ORDER BY `tag_count` LIMIT 200";
+		} else {
+			$query = "SELECT `tag`, COUNT(`tag`) AS `tag_count` FROM `ci_tags` GROUP BY `tag` ORDER BY `tag_count` LIMIT 200";
+		}
 		
-		$this->db->group_by('tag');
+		$query = "SELECT `tmp`.* FROM ({$query}) AS `tmp` ORDER BY RAND() LIMIT 20";
 		
-		$query = $this->db->get('tags');
+		$query = $this->db->query($query);
+
+		$tags = array( );
 		
-		if ($query->num_rows() > 0) {
-			$tags = array( );
-			
-			foreach ($query->result_array() as $row)
-				$tags[$row['tag']] = $row['tag_count'];
-			return $tags;
-		} else
-			return array( );
+		foreach ($query->result_array() as $row) {
+			$tags[$row['tag']] = $row['tag_count'];
+		}
+		
+		return $tags;
 	}
 	/**
 	 * ---------------------------------------------------------------

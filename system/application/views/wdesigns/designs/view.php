@@ -120,9 +120,10 @@ function addcart(id, kind){
 		</p>
 	</div>
 	<div class="tagsCloud slideBox">
+		<h3>Теги дизайна:</h3>
 		<ul id="slider1">
 			<!-- Облако тегов, вывод надо рассчитать -->
-			<?= $tagclou;?>
+			<?= $tagcloud?>
 		</ul>
 	</div>
 	<div class="designsCategories">
@@ -200,7 +201,7 @@ function addcart(id, kind){
 			<p>
 				<span>Цвета:</span>
 				<?php foreach ($colors as $row): ?>
-					<span class="colorBar" style="margin:2px 2px;height:10px;width:10px;display:inline-block;background: #<?= $row['color']; ?>" rel="<?= $row['color']; ?>" href="#"></span>
+				<a href="/designs/search/?color=<?= $row['color']; ?>" class="colorBar" style="margin:2px 2px;height:14px;width:14px;display:inline-block;border:1px solid silver;background: #<?= $row['color']; ?>"></a>
 				<?php endforeach; ?>
 			</p>
 			<div class="statistica">

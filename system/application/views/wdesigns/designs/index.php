@@ -1,6 +1,22 @@
+<script type="text/javascript">
+	(function($){
+		$(function(){
+			$("#slider1").bxSlider({
+				infiniteLoop: false,
+				hideControlOnEnd: true
+			});
+			$("a.zoom").fancybox({
+				titlePosition: 'over'
+			});
+			$("input[placeholder]").placeholder();
+		});
+	}(jQuery));
+</script>
 <div class="sideBar">
 	<div class="tagsCloud slideBox">
+		<h3>Популярные теги:</h3>
 		<ul id="slider1">
+			<!-- Облако тегов, вывод надо рассчитать -->
 			<?= $tagcloud?>
 		</ul>
 	</div>
@@ -119,7 +135,7 @@
 					</li>
 					<?php else : ?>
 					<li>
-						<a href="/designs/search/?<?=http_build_query(array_merge($search, array('limit'=>$limit)));?>">
+						<a href="/designs/index/?<?=http_build_query(array_merge($search, array('limit'=>$limit)));?>">
 							<?= $limit?>
 						</a>
 					</li>

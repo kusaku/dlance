@@ -1,5 +1,20 @@
+<script type="text/javascript">
+	(function($){
+		$(function(){
+			$("#slider1").bxSlider({
+				infiniteLoop: false,
+				hideControlOnEnd: true
+			});
+			$("a.zoom").fancybox({
+				titlePosition: 'over'
+			});
+			$("input[placeholder]").placeholder();
+		});
+	}(jQuery));
+</script>
 <div class="sideBar">
 	<div class="tagsCloud slideBox">
+		<h3>Популярные теги:</h3>
 		<ul id="slider1">
 			<!-- Облако тегов, вывод надо рассчитать -->
 			<?= $tagcloud?>
