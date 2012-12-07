@@ -1,4 +1,5 @@
 <?php $this->load->view('wdesigns/account/block'); ?>
+<div class="content">
 <script type='text/javascript' src='/templates/js/jquery-autocomplete/jquery.autocomplete.js'></script>
 <link rel="stylesheet" type="text/css" href="/templates/js/jquery-autocomplete/jquery.autocomplete.css" />
 <script type="text/javascript">
@@ -50,7 +51,7 @@
 				<div style="overflow:hidden;">
 					<table class="order-form">
 						<tr>
-							<td class="caption">Заголовок(максимум 64 символов):</td>
+							<td class="caption">Заголовок (максимум 64 символов):</td>
 							<td class="frnt">
 								<input type="text" class="text" name="title" value="<?=set_value('title')?>" size="64" maxlength="64" style="width:540px"/>
 							</td>
@@ -86,7 +87,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="caption">Описание(максимум 10000 символов):</td>
+							<td class="caption">Описание (максимум 10000 символов):</td>
 							<td class="frnt">
 								<textarea name="text" rows="10" cols="49"><?= set_value('text')?></textarea>
 							</td>
@@ -251,4 +252,5 @@
 			</div>
 		</div>
 	</div><input type="submit" value="Добавить" class="reg-submit"></form>
+</div>
 </div>

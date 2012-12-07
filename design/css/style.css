@@ -361,7 +361,7 @@ a:hover, a:active, a.active {color:#ff7b0b; text-decoration:none;}
 .registrationForm #userSex label{float:left; margin: 2px 12px 0 1px;}
 
 .registrationForm td {padding: 3px; vertical-align:top;}
-.registrationForm td.caption {width: 140px;}
+.registrationForm td.caption {width: 140px;font-size:120%;}
 .registrationForm td select{width: 200px;}
 .registrationForm td label{float:left; margin: 2px 12px 0 1px; font-size: 12px;}
 
