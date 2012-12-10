@@ -36,7 +36,7 @@
 			</div>
 			<div class="navBlock">
 				<form class="fastSearch" action="/designs/search/" method="get">
-					<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsTop"/><input name="fastbtn" type="submit" value="Поиск" class="submitFastSearch"/>
+					<input placeholder="Введите запрос" class="inputFastSearch" name="tags" type="text" value="<?=$input['tags']?>" id="tagsTop"/><button type="submit" class="submitFastSearch">Поиск</button>
 				</form>
 				<ul class="leftMenu">
 					<li>
@@ -52,7 +52,7 @@
 						<a href="/users"><span>Дизайнеры</span></a>
 					</li>
 					<li>
-						<a href="/blogs"><span>Блоги</span></a>
+						<a href="/account/cart"><span>Корзина (<b id="cart_count"><?= "$cart_count" ?></b>)</span></a>
 					</li>
 				</ul>
 				<ul class="rightMenu">

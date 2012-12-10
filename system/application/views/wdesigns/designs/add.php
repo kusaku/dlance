@@ -217,7 +217,7 @@
 				<label>Только для IE &nbsp &nbsp</label>
 				<input type="radio" class="niceRadio" name="quality" value="2"<?= set_radio('quality', '2'); ?>/>
 				<label>Кроссбраузерная верстка&nbsp &nbsp</label>
-				<input type="radio" class="niceRadio" name="quality" value="2"<?= set_radio('quality', '2'); ?>/>
+				<input type="radio" class="niceRadio" name="quality" value="3"<?= set_radio('quality', '3'); ?>/>
 				<label>Полное соответствие W3C</label>
 			</td>
 		</tr>

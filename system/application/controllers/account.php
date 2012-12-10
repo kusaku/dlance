@@ -21,17 +21,15 @@ class Account extends Controller {
 		$this->load->model('balance/balance_mdl');
 		$this->load->model('blogs/blogs_mdl');
 		$this->load->model('designs/designs_mdl');
-		$this->load->helper('highslide');
 		$this->load->model('account/account_mdl');
 		$this->load->library('pagination');
 		if ($this->users_mdl->logged_in()) {
 			$this->user_id = $this->session->userdata('id');
 			
-			$user = $this->users_mdl->get_user_by_id($this->user_id);
-			
-			$this->username = $user->username;
-			$this->userpic = $user->userpic;
-			$this->team = $user->team;
+			$this->user = $this->users_mdl->get_user_by_id($this->user_id);
+			$this->username = $this->user->username;
+			$this->userpic = $this->user->userpic;
+			$this->team = $this->user->team;
 			$this->user_tariff = $this->tariff->id($this->user_id);
 			$this->adult = $this->settings->value($this->user_id, 'adult');
 		} else {
@@ -320,7 +318,8 @@ class Account extends Controller {
 			return;
 		}
 		
-		$data = array( );
+		$data = array(
+		);
 		
 		$data['purse'] = 'R344515119665';
 		
@@ -874,7 +873,7 @@ class Account extends Controller {
 	 */
 
 	function followers($start_page = 0) {
-		
+	
 		$this->users_mdl->update_views($this->user_id);
 		
 		$data['positive'] = $this->reviews_mdl->count_reviews_positive($data['id']);
@@ -1105,17 +1104,19 @@ class Account extends Controller {
 		//Если дизайн уже был добавлен в корзину
 		
 		if ($this->_check_action_cart($id)) {
-			echo 'Товар уже добавлен';
-			
-			die;
+			echo json_encode(array(
+				'success'=>FALSE,'message'=>'Товар уже добавлен',
+			));
+			return;
 		}
 		
 		//Если дизайн уже был куплен
 		
 		if ($this->_check_purchased($id)) {
-			echo 'Товар уже куплен';
-			
-			die;
+			echo json_encode(array(
+				'success'=>FALSE,'message'=>'Товар уже куплен',
+			));
+			return;
 		}
 		
 		//Выводим всю информацию по дизайну
@@ -1123,20 +1124,24 @@ class Account extends Controller {
 		$design = $this->designs_mdl->get_edit($id);
 		
 		if ($design['sales'] > 0 and $kind == 2) {
-			echo 'Товар нелья выкупить';
-			
-			die;
+			echo json_encode(array(
+				'success'=>FALSE,'message'=>'Товар нелья выкупит',
+			));
+			return;
 		}
 		
 		if ($design['user_id'] == $this->user_id) {
-			echo 'Товар принадлежит вам';
-			
-			die;
+			echo json_encode(array(
+				'success'=>FALSE,'message'=>'Товар принадлежит вам',
+			));
+			return;
 		}
 		
 		$this->account_mdl->add('cart', $data);
 		
-		echo '<a href="/account/cart/">Товар добавлен</a>';
+		echo json_encode(array(
+			'success'=>TRUE,'message'=>'Товар добавлен в <a href="/account/cart/">корзину</a>',
+		));
 	}
 
 	function _check_action_cart($design_id) {
@@ -1767,7 +1772,8 @@ class Account extends Controller {
 			return;
 		}
 		
-		$data = array( );
+		$data = array(
+		);
 		
 		$data['data'] = $this->account_mdl->get_transaction($this->user_id);
 		
@@ -1784,7 +1790,8 @@ class Account extends Controller {
 			return;
 		}
 		
-		$data = array( );
+		$data = array(
+		);
 		
 		$data['data'] = $this->account_mdl->get_purses($this->user_id);
 		
@@ -1994,7 +2001,8 @@ class Account extends Controller {
 			$start_page = 0;
 		}
 		
-		$input = array( );
+		$input = array(
+		);
 		
 		$input['user_id'] = $this->user_id;
 		
@@ -2031,7 +2039,8 @@ class Account extends Controller {
 			$start_page = 0;
 		}
 		
-		$input = array( );
+		$input = array(
+		);
 		
 		if (! empty($_GET['status'])) {
 			$status = '';
@@ -2104,7 +2113,8 @@ class Account extends Controller {
 			return;
 		}
 		
-		$data = array( );
+		$data = array(
+		);
 		
 		$submit = (bool)$this->input->post('submit');
 		
@@ -2259,7 +2269,7 @@ class Account extends Controller {
 				
 				//Если изображение не стандартное удаляем
 				
-				if ($this->userpic != '/userpics/standart.jpg') {
+				if (preg_match('/gravatar/', $this->userpic) == 0) {
 					unlink('.'.$this->userpic);
 				}
 				
@@ -2283,11 +2293,11 @@ class Account extends Controller {
 				));
 				
 			} else {
+				$this->userpic = 'https://secure.gravatar.com/avatar/'.md5(strtolower($this->input->post('email'))).'?rating=PG&size=100&default=monsterid';
 				$data['error'] = $this->upload->display_errors();
 			}
 			
 		}
-		define('TRUE', FALSE);
 		
 		//Получаем настройки для отображения
 		$data += $this->users_mdl->profile();
@@ -2797,19 +2807,17 @@ class Account extends Controller {
 		
 		//Если юзерпик не стандартный удаляем
 		
-		if ($this->userpic != '/userpics/standart.jpg') {
+		if (preg_match('/gravatar/', $this->userpic) == 0) {
 			unlink('.'.$this->userpic);
 		}
 		
-		//Меняем юзерпик на стандартный
-		
 		$data = array(
-			'userpic'=>'/userpics/standart.jpg'
+			'userpic'=>'https://secure.gravatar.com/avatar/'.md5(strtolower($this->user->email)).'?rating=PG&size=100&default=monsterid'
 		);
 		
 		$this->users_mdl->edit($this->user_id, $data);
 		
-		redirect('/account/userpic');
+		redirect('/account/settings');
 	}
 	
 	/**
@@ -2841,7 +2849,8 @@ class Account extends Controller {
 			$start_page = 0;
 		}
 		
-		$input = array( );
+		$input = array(
+		);
 		
 		if (! empty($_GET['status'])) {
 			$status = '';

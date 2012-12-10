@@ -51,7 +51,6 @@
 		<h3>Свежие дизайны:</h3>
 		<ul class="freshDesignsList">
 			<?php if (! empty($data)): ?>
-			<!-- ?=show_highslide()? -->
 			<?php foreach ($data as $row): ?>
 			<li>
 				<!-- Здесь нужна серая превьюшка --><a href="<?=$row['full_image1']?>" class="zoom grey" title="<?=$row['title']?>"><img src="<?=$row['small_image1']?>" alt="<?=$row['title']?>"/></a>

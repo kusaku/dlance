@@ -2,7 +2,6 @@
 	<div class="yui-b">
 		<h1><a href="/account/cart">Корзина</a></h1>
 		<?php if (! empty($data)): ?>
-		<?= show_highslide()?>
 		<form action="/account/pay_no_auth" method="post">
 			<div align="right">
 				<input type="submit" value="Оплатить" />
@@ -16,7 +15,7 @@
 				<?php foreach ($data as $row): ?>
 				<tr>
 					<td class="thumb" rowspan="3" style="width:150px;">
-						<a href="<?=$row['full_image']?>" class="highslide" onclick="return hs.expand(this)"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a>
+						<a href="<?=$row['full_image']?>" onclick="return hs.expand(this)"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a>
 					</td>
 					<td class="info">
 						Категория: <?= $row['category']?>

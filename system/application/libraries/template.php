@@ -31,6 +31,8 @@ class Template {
 			'logged_in'=>$this->_ci->users_mdl->logged_in()
 		);
 		
+		$this->_ci->load->model('account/account_mdl');
+		
 		if ($this->_ci->users_mdl->logged_in()) {
 			$this->hint();
 			
@@ -52,8 +54,11 @@ class Template {
 			$template['login']['balance'] = $this->_ci->balance_mdl->get($this->_ci->user_id);
 			$template['login']['rating'] = $this->_ci->rating->get($this->_ci->user_id);
 			$template['login']['tariff'] = $this->_ci->tariff->get($this->_ci->user_id);
+			
+			$template['cart_count'] = $this->_ci->account_mdl->count_cart($this->_ci->user_id, '');
 		} else {
 			$template['login'] = '';
+			$template['cart_count'] = $this->_ci->account_mdl->count_cart('', $this->_ci->session->userdata('session_id'));
 		}
 		
 		$template['login'] = $this->_ci->load->view($theme.'/login', $template['login'], TRUE);

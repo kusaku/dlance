@@ -16,7 +16,7 @@
 				<?php foreach ($data as $row): ?>
 				<li class="cartItem">
 					<div class="itemImg">
-						<a href="<?=$row['full_image']?>" class="zoom"><img src="<?=$row['small_image']?>" alt="<?=$row['title']?>" /></a>
+						<a href="<?=$row['full_image1']?>" class="zoom"><img height="154" src="<?=$row['mid_image1']?>" alt="<?=$row['title']?>" /></a>
 					</div>
 					<div class="itemMainDescr">
 						<h3><a href="/designs/<?=$row['design_id']?>.html"><?= $row['title']?></a></h3>

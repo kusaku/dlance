@@ -215,7 +215,6 @@
 					</div>
 					<div class="searchResultsList">
 						<?php if( !empty($data) ): $n = 0; ?>
-							<!-- ?=show_highslide()? -->
 							<ul class="designersList">
 							<?php foreach($data as $row => $value): ?>
 								<li>

@@ -1,5 +1,5 @@
 <script src="/templates/js/register.js" type="text/javascript"></script>
-<?= show_highslide()?>
+
 <h1 class="title">Оформление покупки</h1>
 <p class="subtitle">Дополнительные параметры, необязательны для заполнения.</p>
 <div id="register" style="margin:10px;"></div>
@@ -51,9 +51,9 @@
 					<tr>
 						<td class="caption">Дизайн:</td>
 						<td>
-							<div class="highslide-gallery">
+							<div class="gallery">
 								<div style="width: 170px;">
-									<a href="<?=$row['full_image']?>" class="highslide" onclick="return hs.expand(this)"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a>
+									<a href="<?=$row['full_image']?>" onclick="return hs.expand(this)"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>" /></a>
 								</div>
 							</div>
 						</td>

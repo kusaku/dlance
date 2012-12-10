@@ -18,8 +18,8 @@
 		</li>
 	</ul>
 	<div class="ptf-image brdrl">
-		<a href="<?=$row['full_image']?>" class="highslide" onclick="return hs.expand(this)"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>"></a>
-		<div class="highslide-caption">
+		<a href="<?=$row['full_image']?>" onclick="return hs.expand(this)"><img src="<?=$row['small_image']?>" title="<?=$row['title']?>"></a>
+		<div class="caption">
 			<?= $row['descr']?>
 		</div>
 	</div>

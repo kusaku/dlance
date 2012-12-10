@@ -51,6 +51,7 @@ $route['activate/(:any)'] = "users/activate_2/$1";
 $route['recovery'] = "users/recovery";
 $route['logout'] = "users/logout";
 //$route['user/(:any)/designs'] = "users/designs/$1";
+$route['users/all/(:any)'] = "users/index/$1";
 $route['user/portfolio/(:any)'] = "users/portfolio/$1";
 $route['user/services/(:any)'] = "users/services/$1";
 $route['user/reviews/(:any)'] = "users/reviews/$1";

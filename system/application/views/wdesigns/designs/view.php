@@ -84,19 +84,35 @@ function ban(id){
 function addcart(id, kind){
 	var dataString = 'id=' + id + '&kind=' + kind;
 	
-	$('#addcart').fadeOut(300);
-	
-	$.ajax({
-		type: "POST",
-		url: "/account/cart_add",
-		data: dataString,
-		cache: false,
-		//Получаем текст со страницы
-		success: function(html){
-			$('#addcart').html(html);
-			$('#addcart').fadeIn(300);
+	jQuery.post('/account/cart_add', {
+		id: id,
+		kind: kind
+	}, function(data, textStatus, jqXHR){
+		if (data.result) {
+			$('#cart_count').text(1 + parseInt($('#cart_count').text()))
+			
+			$('<span/>').text(data.message).dialog({
+				buttons: [{
+					text: 'Закрыть',
+					click: function(){
+						$(this).dialog('close');
+					}
+				}],
+				title: 'Сообщение'
+			});
 		}
-	});
+		else {
+			$('<span/>').text(data.message).dialog({
+				buttons: [{
+					text: 'Закрыть',
+					click: function(){
+						$(this).dialog('close');
+					}
+				}],
+				title: 'Ошибка'
+			});
+		}
+	}, 'json');
 	
 	return false;
 }
@@ -105,6 +121,7 @@ function addcart(id, kind){
 
 <div class="sideBar">
 	<div class="userInfo">
+		<h3>Дизайнер:</h3>
 		<div class="avatar <?=$tariff?>">
 			<a href="/contacts/send/<?=$username?>" title="Личное сообщение"></a>
 			<img src="<?=$userpic?>" alt="<?=$username?> avi" />
@@ -178,6 +195,9 @@ function addcart(id, kind){
 			<h3><?= $title?></h3>
 		</div>
 		<div class="templateDesription">
+			<?php if ($user_id == $this->user_id): ?>
+				<a href="/designs/edit/<?=$id?>">изменить</a>
+			<?php endif; ?>
 			<p>
 				<span>Рейтинг:</span>
 				<?= $rating?>
@@ -270,10 +290,10 @@ function addcart(id, kind){
 				<?php endif; ?>
 			</ul>
 		</div>
-		<div class="moreInfo">
-			<p class="moreInfo">
-				<a href="#">Дополнительная информация:</a>
-			</p>
+		<div class="moreInfo comments">
+		<div class="commentsHeader">
+			<h3>Дополнительная информация:</h3>
+		</div>
 			<fieldset>
 				<label>
 					<label>Сопутствующие товары:</label>

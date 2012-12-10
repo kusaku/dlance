@@ -194,7 +194,6 @@
 		</div>
 		<div class="searchResultsList">
 			<?php if (! empty($data)): ?>
-			<? /*=show_highslide() */ ?>
 			<ul class="designsList">
 				<?php foreach ($data as $row): ?>
 				<?php if ($row['sales'] == 0): ?>

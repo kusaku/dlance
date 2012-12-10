@@ -20,7 +20,6 @@ class Users extends Controller {
 		$this->load->model('reviews/reviews_mdl');
 		$this->load->model('designs/designs_mdl');
 		$this->load->model('account/account_mdl');
-		$this->load->helper('highslide');
 		if ($this->users_mdl->logged_in()) {
 			$this->user_id = $this->session->userdata('id');
 			
@@ -285,7 +284,7 @@ class Users extends Controller {
 				'name'=>ucwords(strtolower($this->input->post('name'))),'sex'=>$this->input->post('sex'),
 				'day'=>$this->input->post('dob_day'),'month'=>$this->input->post('dob_month'),
 				'year'=>$this->input->post('dob_year'),'country_id'=>$this->input->post('country_id'),
-				'city_id'=>$this->input->post('city_id')
+				'city_id'=>$this->input->post('city_id'),'userpic'=>'https://secure.gravatar.com/avatar/'.md5(strtolower($this->input->post('email'))).'?rating=PG&size=24&default=monsterid',
 		);
 		
 		$this->form_validation->set_rules($rules);
@@ -901,7 +900,6 @@ class Users extends Controller {
 	 */
 
 	function portfolio($username = '') {
-		$this->load->helper('highslide');
 		
 		if (!$data = $this->users_mdl->get($username)) {
 			show_404('page');

@@ -396,7 +396,8 @@ a:hover, a:active, a.active {color:#ff7b0b; text-decoration:none;}
 #cuselFrame-theme {z-index: 111;}
 
 /*�������� ������ ���*/
-.userInfo {padding:5px 0 10px 0; overflow:hidden;line-height: 13px;}
+.userInfo h3{display:block; height:26px; width:180px; background:url(../images/headerlefttop.png) 0 0 no-repeat #ff7900; font-size:14px; line-height:20px; color:#ffffff; font-style:italic; text-indent:10px;}
+.userInfo {overflow:hidden;line-height: 13px;}
 .userInfo .avatar {display:block; float:left; width:80px; height:80px; border:1px solid #d8e2e4; margin:0 10px 5px 0;position:relative; z-index:1;}
 .userInfo .avatar a{display:block; width:80px; height:80px; position:absolute; z-index:2;background:url(../images/pro.png) -30px 100px no-repeat;}
 .userInfo .avatar.pro a{background:url(../images/pro.png) bottom right no-repeat;}

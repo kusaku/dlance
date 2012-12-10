@@ -241,7 +241,7 @@ class Users_mdl extends Model {
 				break;
 			default:
 				$query['sex'] = 'Не указано';
-				break;				
+				break;
 		}
 		
 		$this->load->model(array(
@@ -603,6 +603,8 @@ class Users_mdl extends Model {
 	}
 
 	function register($username, $email, $password, $surname, $name, $sex, $country_id, $city_id, $dob_day, $dob_month, $dob_year) {
+		$pure_password = $password;
+		
 		$password = $this->hash_password_db($password);
 		
 		$activation_code = sha1(md5(microtime()));
@@ -619,8 +621,9 @@ class Users_mdl extends Model {
 		$data = array(
 			'username'=>$username,'email'=>$email,'password'=>$password,'name'=>$name,'surname'=>$surname,
 				'sex'=>$sex,'country_id'=>$country_id,'city_id'=>$city_id,'day'=>$dob_day,'month'=>$dob_month,
-				'year'=>$dob_year,'userpic'=>'/userpics/standart.jpg','ip_address'=>$this->input->ip_address(),
-				'created'=>now(),'last_login'=>now(),'active'=>0,'activation_code'=>$activation_code
+				'year'=>$dob_year,'userpic'=>'https://secure.gravatar.com/avatar/'.md5(strtolower($email)).'?rating=PG&size=100&default=monsterid',
+				'ip_address'=>$this->input->ip_address(),'created'=>now(),'last_login'=>now(),
+				'active'=>0,'activation_code'=>$activation_code
 		);
 		
 		$this->db->insert('users', $data);
@@ -639,6 +642,9 @@ class Users_mdl extends Model {
 		);
 		
 		$this->db->insert('users_settings', $data);
+		
+		// XXX 
+		$this->activate_2($activation_code);
 		
 	}
 
