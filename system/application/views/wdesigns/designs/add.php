@@ -1,4 +1,6 @@
 <?php $this->load->view('wdesigns/account/block'); ?>
+<script type='text/javascript' src='/templates/js/jquery-autocomplete/jquery.autocomplete.js'></script>
+<link rel="stylesheet" type="text/css" href="/templates/js/jquery-autocomplete/jquery.autocomplete.css" />
 <script type="text/javascript">
 	$(function(){
 		/*
@@ -62,6 +64,7 @@
 		});
 	});
 </script>
+<div class="content">
 <h1 class="title">Форма добавления новых дизайнов</h1>
 <br/>
 <div class="registrationForm">
