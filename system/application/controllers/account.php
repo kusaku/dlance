@@ -1233,6 +1233,60 @@ class Account extends Controller {
 		
 		$this->db->delete('cart');
 	}
+	
+	/**
+	 * ---------------------------------------------------------------
+	 *	Очистка всей корзины
+	 * ---------------------------------------------------------------
+	 */
+
+
+	function cart_purge() {
+	
+		if (! empty($this->user_id)) {
+			$this->db->where('user_id', $this->user_id);
+		} else {
+			$this->db->where('session_id', $this->session->userdata('session_id'));
+		}
+		
+		$this->db->delete('cart');
+		
+		redirect('account/cart');
+		
+	}
+	
+	/**
+	 * ---------------------------------------------------------------
+	 *	Очистка всей корзины
+	 * ---------------------------------------------------------------
+	 */
+
+
+	function cart_checkout() {
+	
+		if ( empty($this->user_id) or !$this->errors->access()) {
+			redirect('login');
+		}
+		
+		$query = 'SELECT `design`.`id`, `design`.`title`, `thisuser`.`email` AS `thisuser_email`, `thisuser`.`name` AS `thisuser_name`, `thisuser`.`surname` AS `thisuser_surname`, `thisuser`.`telephone` AS `thisuser_telephone`,  `user`.`email`, `user`.`name`, `user`.`surname` FROM `ci_cart`';
+		$query .= ' JOIN `ci_designs` AS `design` ON `design`.`id` = `ci_cart`.`design_id`';
+		$query .= ' JOIN `ci_users` AS `user` ON `user`.`id` = `design`.`user_id`';
+		$query .= " JOIN `ci_users` AS `thisuser` ON `thisuser`.`id` = '{$this->user_id}'";
+		$query .= " WHERE `ci_cart`.`user_id` = '{$this->user_id}'";
+		
+		foreach ($this->db->query($query)->result_array() as $row) {
+		
+			$message = $this->load->view('emails/purchase', $row + array(
+				'my_id'=>$this->user_id,'my_name'=>$this->username
+			), TRUE);
+			
+			//$this->common->email($user['email'], 'Запрос на покупку дизайна', $message);
+			$this->common->email('sedrak.k@fabricasaitov.ru', 'Запрос на покупку Вашего дизайна', $message);
+		}
+		
+		return $this->cart_purge();
+	}
+	
 	/**
 	 * ---------------------------------------------------------------
 	 *	Форма оплаты

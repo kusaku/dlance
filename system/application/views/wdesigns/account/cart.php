@@ -4,7 +4,6 @@
 	<form action="/account/pay" method="post">
 		<div class="userBasketHeader">
 			<div class="makeOrder">
-				<input type="submit" value="оформить заказ" class="likeLink"/>
 			</div>
 			<div class="clearCart">
 				<a href="#">очистить корзину</a>
@@ -61,7 +60,6 @@
 			<div class="clear"></div>
 			<div class="userBasketBottom">
 				<div class="makeOrder">
-					<input type="submit" value="оформить заказ" class="likeLink"/>
 				</div>
 				<div class="clearCart">
 					<a href="#">очистить корзину</a>

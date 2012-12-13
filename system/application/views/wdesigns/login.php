@@ -28,8 +28,8 @@
 		<input name="username" size="12" maxlength="32" type="text" value="" placeholder="login" class="inputTopAuth"/><input name="password" size="12" maxlength="32" type="password" value="" placeholder="password" class="inputTopPass"/><input name="submit" type="submit" value="вход" class="submitLogin"/>
 	</fieldset>
 	<fieldset>
-		<label for="remember">запомнить меня</label>
-		<span class="niceCheck"><input name="rcookiettl" value="86400" type="checkbox"/></span><a href="/recovery" class="forgetPassword">забыли пароль?</a>
+		<span class="niceCheck"><input name="rcookiettl" value="86400" type="checkbox"/></span> <label for="rcookiettl">запомнить меня</label>
+		<a href="/recovery" class="forgetPassword">забыли пароль?</a>
 	</fieldset>
 </form>
 <?php endif; ?>

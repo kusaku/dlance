@@ -613,7 +613,7 @@ class Users_mdl extends Model {
 		
 		//Отправка почты
 		$message = $this->load->view('emails/activate', array(
-			'username'=>$username,'code'=>$code
+			'username'=>$username,'surname'=>$surname,'name'=>$name,'code'=>$code
 		), TRUE);
 		
 		$this->common->email($email, $subject = 'Активация аккаунта', $message);
@@ -643,7 +643,7 @@ class Users_mdl extends Model {
 		
 		$this->db->insert('users_settings', $data);
 		
-		// XXX 
+		// XXX
 		$this->activate_2($activation_code);
 		
 	}

@@ -188,7 +188,7 @@ class Users extends Controller {
 		
 		if ($this->form_validation->run() or $this->users_mdl->logged_in()) {
 			if (!$this->_last_auth()) {
-				$this->events->create($this->session->userdata('id'), 'Авторизация в системе', 'auth');#Событие с повышением репутации
+				$this->events->create($this->session->userdata('id'), 'Авторизация в системе', 'auth');
 			}
 			
 			redirect('/account');

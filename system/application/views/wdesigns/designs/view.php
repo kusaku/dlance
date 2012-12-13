@@ -88,10 +88,10 @@ function addcart(id, kind){
 		id: id,
 		kind: kind
 	}, function(data, textStatus, jqXHR){
-		if (data.result) {
+		if (data.success) {
 			$('#cart_count').text(1 + parseInt($('#cart_count').text()))
 			
-			$('<span/>').text(data.message).dialog({
+			$('<span/>').html(data.message).dialog({
 				buttons: [{
 					text: 'Закрыть',
 					click: function(){
@@ -102,7 +102,7 @@ function addcart(id, kind){
 			});
 		}
 		else {
-			$('<span/>').text(data.message).dialog({
+			$('<span/>').html(data.message).dialog({
 				buttons: [{
 					text: 'Закрыть',
 					click: function(){

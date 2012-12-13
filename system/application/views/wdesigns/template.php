@@ -60,9 +60,6 @@
 						<a href="/users/support"><span>Обратная связь</span></a>
 					</li>
 					<li>
-						<a href="/faq"><span>ЧаВо</span></a>
-					</li>
-					<li>
 						<a href="/help"><span>Помощь</span></a>
 					</li>
 				</ul>
