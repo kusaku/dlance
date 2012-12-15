@@ -33,7 +33,7 @@
 					<td>
 						Добавлено: <?= $row['date']?> |			 
 						<?php if ($row['kind'] == 1): ?>
-						Цена - Покупка: <?= $row['price_1']?>
+						Цена - Заказ: <?= $row['price_1']?>
 						<?php else : ?>
 						Цена - Выкуп: <?= $row['price_2']?>
 						<?php endif; ?>

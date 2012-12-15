@@ -401,7 +401,7 @@
 					<ul>
 						<li<?php if ($view == 'transaction'): ?> class="current"<?php endif; ?>><a href="/administrator/transaction/" title="История операций">История операций</a>
 						</li>
-						<li<?php if ($view == 'purchased'): ?> class="current"<?php endif; ?>><a href="/administrator/purchased/" title="Покупки дизайнов">Покупки дизайнов</a>
+						<li<?php if ($view == 'purchased'): ?> class="current"<?php endif; ?>><a href="/administrator/purchased/" title="Заказы дизайнов">Заказы дизайнов</a>
 						</li>
 					</ul>
 				</li>

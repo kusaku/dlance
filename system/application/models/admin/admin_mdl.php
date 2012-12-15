@@ -536,7 +536,7 @@ class Admin_mdl extends Model
 
 			switch($query[$i]['kind'])
 			{
-					case 1: $query[$i]['kind']	= 'Покупка'; break;
+					case 1: $query[$i]['kind']	= 'Заказ'; break;
 					case 2: $query[$i]['kind']	= 'Выкуп'; break;
 			}
 		}
@@ -700,7 +700,7 @@ class Admin_mdl extends Model
 		return $this->db->count_all_results('designs');
 	}
 
-	//Всего покупок
+	//Всего заказов
 	function info_count_purchased($input = '', $kind = '', $user_id = '')
 	{
 		$date_start = (isset($input['date_start'])) ? $input['date_start'] : '';
@@ -975,7 +975,7 @@ class Admin_mdl extends Model
 			switch($query[$i]['status'])
 			{
 					case 1: $query[$i]['status']	= 'Открыт'; break;
-					case 2: $query[$i]['status']	= 'Выкуплен'; break;
+					case 2: $query[$i]['status']	= 'Вызаказан'; break;
 					case 3: $query[$i]['status']	= 'Закрыт'; break;
 			}
 		}

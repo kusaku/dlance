@@ -7,7 +7,7 @@
 				<a href="/administrator/designs">Все</a>
 				| <a href="/administrator/designs/?status=1">Открытые</a>
 				| <a href="/administrator/designs/?status=3">Закрытые</a>
-				| <a href="/administrator/designs/?status=2">Выкупленные</a>
+				| <a href="/administrator/designs/?status=2">Вызаказанные</a>
 				<div class="block-controls">
 					<ul class="controls-buttons">
 						<?= $page_links?>

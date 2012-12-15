@@ -89,8 +89,8 @@
 												// Create our data table.
 													var data = new google.visualization.DataTable();
 													var raw_data = [['Продуктов', <?=$products[1]?>, <?=$products[2]?>, <?=$products[3]?>, <?=$products[4]?>, <?=$products[5]?>, <?=$products[6]?>, <?=$products[7]?>, <?=$products[8]?>, <?=$products[9]?>, <?=$products[10]?>, <?=$products[11]?>, <?=$products[12]?>],
-																	['Покупок', <?=$purchased[1]?>, <?=$purchased[2]?>, <?=$purchased[3]?>, <?=$purchased[4]?>, <?=$purchased[5]?>, <?=$purchased[6]?>, <?=$purchased[7]?>, <?=$purchased[8]?>, <?=$purchased[9]?>, <?=$purchased[10]?>, <?=$purchased[11]?>, <?=$purchased[12]?>],
-																	['Выкуплено', <?=$purchased_2[1]?>, <?=$purchased_2[2]?>, <?=$purchased_2[3]?>, <?=$purchased_2[4]?>, <?=$purchased_2[5]?>, <?=$purchased_2[6]?>, <?=$purchased_2[7]?>, <?=$purchased_2[8]?>, <?=$purchased_2[9]?>, <?=$purchased_2[10]?>, <?=$purchased_2[11]?>, <?=$purchased_2[12]?>],
+																	['Заказов', <?=$purchased[1]?>, <?=$purchased[2]?>, <?=$purchased[3]?>, <?=$purchased[4]?>, <?=$purchased[5]?>, <?=$purchased[6]?>, <?=$purchased[7]?>, <?=$purchased[8]?>, <?=$purchased[9]?>, <?=$purchased[10]?>, <?=$purchased[11]?>, <?=$purchased[12]?>],
+																	['Вызаказано', <?=$purchased_2[1]?>, <?=$purchased_2[2]?>, <?=$purchased_2[3]?>, <?=$purchased_2[4]?>, <?=$purchased_2[5]?>, <?=$purchased_2[6]?>, <?=$purchased_2[7]?>, <?=$purchased_2[8]?>, <?=$purchased_2[9]?>, <?=$purchased_2[10]?>, <?=$purchased_2[11]?>, <?=$purchased_2[12]?>],
 																	['Пользователи', <?=$users[1]?>, <?=$users[2]?>, <?=$users[3]?>, <?=$users[4]?>, <?=$users[5]?>, <?=$users[6]?>, <?=$users[7]?>, <?=$users[8]?>, <?=$users[9]?>, <?=$users[10]?>, <?=$users[11]?>, <?=$users[12]?>]];
 													
 													var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

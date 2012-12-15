@@ -2,7 +2,7 @@
 <div class="content">
 	<div class="cartResults">
 		<div class="userBasketHeader">
-			<h3>Купленные:</h3>
+			<h3>Заказанные:</h3>
 		</div>
 		<div class="contentWrapperBorderLeft">
 			<div class="searchResultsList">

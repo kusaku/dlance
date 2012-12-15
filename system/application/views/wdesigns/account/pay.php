@@ -1,6 +1,6 @@
 <script src="/templates/js/register.js" type="text/javascript"></script>
 
-<h1 class="title">Оформление покупки</h1>
+<h1 class="title">Оформление заказа</h1>
 <p class="subtitle">Дополнительные параметры, необязательны для заполнения.</p>
 <div id="register" style="margin:10px;"></div>
 <input name="cart" type="hidden" id="cart" value="<?=$cart?>" />
@@ -62,7 +62,7 @@
 						<td class="caption">Цена:</td>
 						<td>
 							<?php if ($row['kind'] == 1): ?>
-							Покупка: <?= $row['price_1']?>
+							Заказ: <?= $row['price_1']?>
 							<?php else : ?>
 							Выкуп: <?= $row['price_2']?>
 							<?php endif; ?>

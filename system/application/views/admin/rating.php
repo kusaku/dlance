@@ -40,7 +40,7 @@
 		</div>
 		<div class="grid_3">
 			<p>
-				<label for="title">Покупка дизайна</label>
+				<label for="title">Заказ дизайна</label>
 				<input type="text" name="buy_design" maxlength="16" value="<?=$buy_design?>"></p>
 		</div>
 		<div class="grid_3">

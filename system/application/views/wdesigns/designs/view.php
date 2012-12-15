@@ -89,7 +89,7 @@ function addcart(id, kind){
 		kind: kind
 	}, function(data, textStatus, jqXHR){
 		if (data.success) {
-			$('#cart_count').text(1 + parseInt($('#cart_count').text()))
+			$('.cart_count').text(1 + parseInt($('.cart_count').text()))
 			
 			$('<span/>').html(data.message).dialog({
 				buttons: [{
@@ -224,24 +224,21 @@ function addcart(id, kind){
 				<a href="/designs/search/?color=<?= $row['color']; ?>" class="colorBar" style="margin:2px 2px;height:14px;width:14px;display:inline-block;border:1px solid silver;background: #<?= $row['color']; ?>"></a>
 				<?php endforeach; ?>
 			</p>
+			<p>
+				<span>Дополнительная информация:</span>
+				<?=implode(', ', $properties)?>
+			</p>
 			<div class="statistica">
-				<p>
-					<span>Скачиваний:</span>
-					<?= $sales?>
-					<!--
-					<?php if ($sales == 0 and !$user_is_owner): ?>
-					<a href="#" onclick="addcart(<?=$id?>, 2)" class="buyout"><span>Выкупить за <strong> <?= $price_2?> руб.</strong></span></a>
-					<?php endif; ?>
-					-->
-				</p>
 				<?php if ($status_id == 1): ?>
 				<p>
+					<?php if ($price_1 > 0): ?>
 					<span>Цена:</span>
 					<strong>
 						<?= $price_1?>
 						руб.</strong>
+					<?php endif; ?>
 					<?php if (!$user_is_owner): ?>
-						<a href="#" onclick="addcart(<?=$id?>, 1)" class="buy"><span>Купить</span></a>
+						<a href="#" onclick="addcart(<?=$id?>, 1)" class="buy"><span>Заказать</span></a>
 					<?php endif; ?>
 				</p>
 				<?php endif; ?>
@@ -291,76 +288,6 @@ function addcart(id, kind){
 			</ul>
 		</div>
 		<div class="moreInfo comments">
-		<div class="commentsHeader">
-			<h3>Дополнительная информация:</h3>
-		</div>
-			<fieldset>
-				<label>
-					<label>Сопутствующие товары:</label>
-					это не предусмотрено в модели, но я выведу, чтобы обратить внимание.
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Флеш:
-					<?= $flash; ?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Стретч:
-					<?= $stretch; ?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Тип:
-					<?= $type; ?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Количество колонок: 
-					<?= $columns; ?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Тех. качество:
-					<?= $quality; ?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Тема:
-					<?= $theme?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Тон:
-					<?= $tone?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Яркость:
-					<?= $bright?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					Стиль:
-					<?= $style?>
-				</label>
-			</fieldset>
-			<fieldset>
-				<label>
-					&laquo;Для взрослых&raquo;:
-					<?= $adult?>
-				</label>
-			</fieldset>
-		</div>
 		<?= $comments?>
 	</div>
 </div>

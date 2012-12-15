@@ -40,12 +40,12 @@ class Designs_mdl extends Model {
 		
 		$this->db->delete('designs_options');
 	}
-	
+
 	function del_views($design_id) {
 		$this->db->where('design_id', $design_id);
 		
 		$this->db->delete('designs_views');
-	}	
+	}
 	/**
 	 * ---------------------------------------------------------------
 	 *	Комментарий
@@ -113,53 +113,50 @@ class Designs_mdl extends Model {
 		
 		$query['category_id'] = $query['category'];
 		
-		$query['category'] = $this->designs_mdl->name($query['category']);
+		$query['category'] = $this->name($query['category']);
 		
 		if ( empty($query['category']) and $expand_values)
 			$query['category'] = 'Не указано';
 			
-		$query['theme'] = $this->designs_mdl->theme($query['theme']);
+		$query['theme'] = $this->theme($query['theme']);
 		
 		if ( empty($query['theme']) and $expand_values)
 			$query['theme'] = 'Не указано';
 			
-		$query['destination'] = $this->designs_mdl->destination($query['destination']);
+		$query['destination'] = $this->destination($query['destination']);
+		
+		$query['properties'] = array(
+		);
 		
 		if ($expand_values) {
 		
 			switch ($query['status']) {
 				case 1:
-					$query['status'] = 'Открыт';
+					$query['properties']['status'] = 'Открыт';
 					break;
 				case 2:
-					$query['status'] = 'Выкуплен';
+					$query['properties']['status'] = 'Вызаказан';
 					break;
 				case 3:
-					$query['status'] = 'Закрыт';
+					$query['properties']['status'] = 'Закрыт';
 					break;
 			}
 			
 			switch ($query['flash']) {
 				case 1:
-					$query['flash'] = 'Да';
+					$query['properties']['flash'] = 'С флеш';
 					break;
 				case 2:
-					$query['flash'] = 'Нет';
-					break;
-				default:
-					$query['flash'] = 'Не указано';
+					$query['properties']['flash'] = 'Без флеш';
 					break;
 			}
 			
 			switch ($query['stretch']) {
 				case 1:
-					$query['stretch'] = 'Тянущаяся';
+					$query['properties']['stretch'] = 'Тянущаяся верстка';
 					break;
 				case 2:
-					$query['stretch'] = 'Фиксированная';
-					break;
-				default:
-					$query['stretch'] = 'Не указано';
+					$query['properties']['stretch'] = 'Фиксированная верстка';
 					break;
 			}
 			
@@ -167,76 +164,58 @@ class Designs_mdl extends Model {
 			
 			switch ($query['quality']) {
 				case 1:
-					$query['quality'] = 'Только для IE';
+					$query['properties']['quality'] = 'Только для IE';
 					break;
 				case 2:
-					$query['quality'] = 'Кроссбраузерная верстка';
+					$query['properties']['quality'] = 'Кроссбраузерная верстка';
 					break;
 				case 3:
-					$query['quality'] = 'Полное соответствие W3C';
-					break;
-				default:
-					$query['quality'] = 'Не указано';
+					$query['properties']['quality'] = 'Полное соответствие W3C';
 					break;
 			}
 			
 			switch ($query['type']) {
 				case 1:
-					$query['type'] = 'Блочная верстка';
+					$query['properties']['type'] = 'Блочная верстка';
 					break;
 				case 2:
-					$query['type'] = 'Табличная';
-					break;
-				default:
-					$query['type'] = 'Не указано';
+					$query['properties']['type'] = 'Табличная верстка';
 					break;
 			}
 			
 			switch ($query['tone']) {
 				case 1:
-					$query['tone'] = 'Светлый';
+					$query['properties']['tone'] = 'Светлый';
 					break;
 				case 2:
-					$query['tone'] = 'Темный';
-					break;
-				default:
-					$query['tone'] = 'Не указано';
+					$query['properties']['tone'] = 'Темный';
 					break;
 			}
 			
 			switch ($query['bright']) {
 				case 1:
-					$query['bright'] = 'Спокойный';
+					$query['properties']['bright'] = 'Спокойный';
 					break;
 				case 2:
-					$query['bright'] = 'Яркий';
-					break;
-				default:
-					$query['bright'] = 'Не указано';
+					$query['properties']['bright'] = 'Яркий';
 					break;
 			}
 			
 			switch ($query['style']) {
 				case 1:
-					$query['style'] = 'Новый';
+					$query['properties']['style'] = 'Новый';
 					break;
 				case 2:
-					$query['style'] = 'Классический';
+					$query['properties']['style'] = 'Классический';
 					break;
 				case 3:
-					$query['style'] = 'Старый';
-					break;
-				default:
-					$query['style'] = 'Не указано';
+					$query['properties']['style'] = 'Старый';
 					break;
 			}
 			
 			switch ($query['adult']) {
-				case 0:
-					$query['adult'] = 'Нет';
-					break;
-				default:
-					$query['adult'] = 'Да';
+				case 1:
+					$query['properties']['adult'] = 'Только для взрослых';
 					break;
 			}
 		}
@@ -498,6 +477,28 @@ class Designs_mdl extends Model {
 		
 		$this->db->delete('tags');
 	}
+
+	function delete_design_categories($design_id) {
+		$this->db->where('design_id', $design_id);
+		
+		$this->db->delete('designs_to_categories');
+	}
+
+	function get_design_categories($design_id) {
+		$this->db->select('category_id');
+		
+		$this->db->where('design_id', $design_id);
+		
+		$query = array(
+		);
+		
+		foreach ($this->db->get('designs_to_categories')->result_array() as $row) {
+			$query[$row['category_id']] = $row['category_id'];
+		}
+		
+		return $query;
+		
+	}
 	/**
 	 * ---------------------------------------------------------------
 	 *	Вывод цветов для полной новости
@@ -601,6 +602,8 @@ class Designs_mdl extends Model {
 	function get_user_designs($user_id, $start_page, $per_page) {
 		$this->db->select('*');
 		
+		$this->db->join('designs_to_categories', 'designs_to_categories.design_id = id');
+		
 		$this->db->where('user_id', $user_id);
 		
 		$this->db->order_by('views', 'desc');
@@ -639,8 +642,8 @@ class Designs_mdl extends Model {
 		}
 		
 		if (isset($search['category'])) {
-			$categories = $this->designs_mdl->cat_array($search['category']);
-			$where[] = '`category` IN (\''.implode('\', \'', $categories).'\')';
+			$categories = $this->cat_array($search['category']);
+			$where[] = '`id` IN (SELECT `design_id` FROM `ci_designs_to_categories` WHERE `category_id` IN (\''.implode('\', \'', $categories).'\'))';
 		}
 		
 		if (isset($search['tags'])) {
@@ -661,28 +664,91 @@ class Designs_mdl extends Model {
 			$hsv_f = $this->colors->format4hsv($hsv_s);
 			
 			$colors = array_merge($colors, $this->colors->proxy4rgb($rgb_f), $this->colors->proxy4hsv($hsv_f));
-			
+			/*
+			 foreach($colors as $row) {
+			 $color = $this->colors->deformat($row, $is_rgb, $is_hsv);
+			 
+			 if ($is_rgb) {
+			 list($r,$g,$b) = $color;
+			 list($r,$g,$b) = array(
+			 $r * 16 + $r,$g * 16 + $g,$b * 16 + $b
+			 );
+			 }
+			 
+			 if ($is_hsv) {
+			 list($h,$s,$v) = $color;
+			 list($h,$s,$v) = array(
+			 $h * 24 % 360,$s * 16 + $s,$v * 16 + $v
+			 );
+			 list($r,$g,$b) = $this->colors->hsv2rgb($h, $s, $v);
+			 }
+			 
+			 $hex = sprintf('%02x%02x%02x', $r, $g, $b);
+			 
+			 if (isset($existed[$hex])) {
+			 $row = FALSE;
+			 } else {
+			 $existed[$hex] = 1;
+			 $row = $hex;
+			 }
+			 if (!$row) continue;
+			 ?>
+			 <a class="colorBar" style="background: #<?= $row; ?>" rel="<?= $row; ?>" href="?color=<?= $row; ?>">&nbsp;&nbsp;&nbsp;</a>
+			 <?php
+			 }
+			 */
 			$where[] = '`id` IN ( SELECT `design_id` FROM `ci_colors` WHERE `color` IN (\''.implode('\', \'', $colors).'\') ORDER BY `percent` DESC )';
 		}
 		
-		if (isset($search['user_id'])) {
-			$where[] = "`user_id` = '{$search['user_id']}'";
-			if (isset($search['status'])) {
-				$where[] = "`status` = '{$search['status']}'";
-			} else {
-				$where[] = "`status` = '1'";
-			}
+		/* ci_designs_options */
+		
+		if (isset($search['flash'])) {
+			$where[] = "`flash` = '{$search['flash']}'";
+		}
+		if (isset($search['stretch'])) {
+			$where[] = "`stretch` = '{$search['stretch']}'";
+		}
+		if (isset($search['columns'])) {
+			$where[] = "`columns` = '{$search['columns']}'";
+		}
+		if (isset($search['destination'])) {
+			$where[] = "`destination` = '{$search['destination']}'";
+		}
+		if (isset($search['quality'])) {
+			$where[] = "`quality` = '{$search['quality']}'";
+		}
+		if (isset($search['type'])) {
+			$where[] = "`type` = '{$search['type']}'";
+		}
+		if (isset($search['tone'])) {
+			$where[] = "`tone` = '{$search['tone']}'";
+		}
+		if (isset($search['bright'])) {
+			$where[] = "`bright` = '{$search['bright']}'";
+		}
+		if (isset($search['style'])) {
+			$where[] = "`style` = '{$search['style']}'";
+		}
+		if (isset($search['theme'])) {
+			$where[] = "`theme` = '{$search['theme']}'";
+		}
+		if (isset($search['adult'])) {
+			$where[] = "`adult` = '{$search['adult']}'";
 		}
 		
 		$where[] = "`moder` = '1'";
 		
-		$where[] = "`status` = '1'";
+		if (isset($search['user_id'])) {
+			$where[] = "`user_id` = '{$search['user_id']}'";
+		}
+		
+		if (isset($search['status'])) {
+			$where[] = "`status` = '{$search['status']}'";
+		} else {
+			$where[] = "`status` = '1'";
+		}
 		
 		$where[] = "`id` NOT IN (SELECT `design_id` FROM `ci_designs_banned`)";
-		
-		if ($this->adult == 0) {
-			$where[] = "`adult` = '0'";
-		}
 		
 		if (isset($search['order_by'])) {
 			$dir = isset($search['order_dir']) ? strtoupper($search['order_dir']) : 'ASC';
@@ -712,18 +778,16 @@ class Designs_mdl extends Model {
 				//Дата размещения
 				$query[$i]['date'] = date_smart($query[$i]['date']);
 				
-				$query[$i]['category_id'] = $query[$i]['category'];
+				$query[$i]['section'] = $this->section($query[$i]['category']);
 				
-				$query[$i]['section'] = $this->designs_mdl->section($query[$i]['category']);
-				
-				$query[$i]['category'] = $this->designs_mdl->name($query[$i]['category']);
+				$query[$i]['category'] = $this->name($query[$i]['category']);
 				
 				switch ($query[$i]['status']) {
 					case 1:
 						$query[$i]['status'] = 'Открыт';
 						break;
 					case 2:
-						$query[$i]['status'] = 'Выкуплен';
+						$query[$i]['status'] = 'Вызаказан';
 						break;
 					case 3:
 						$query[$i]['status'] = 'Закрыт';
@@ -1084,14 +1148,18 @@ class Designs_mdl extends Model {
 	//Категории с колличеством пользователей предоставляющих данную услугу
 
 	function get_categories() {
-		$this->db->select('*');
+	
+		$this->db->select('*, COUNT(`design_id`) as `number`');
+		
+		$this->db->join('designs_to_categories', 'designs_to_categories.category_id = id', 'LEFT');
+		
+		$this->db->group_by('id');
 		
 		$query = array(
 		);
 		
 		foreach ($this->db->get('designs_categories')->result_array() as $item) {
 			$query[$item['id']] = $item;
-			$query[$item['id']]['number'] = $this->count_comments($item['id']);
 		}
 		
 		foreach ($query as & $item) {
@@ -1105,16 +1173,7 @@ class Designs_mdl extends Model {
 		
 		return $query;
 	}
-
-	function count_comments($category) {
-		$this->db->where('category', $category);
-		
-		$this->db->where('status', 1);
-		
-		$this->db->where('moder', 1);
-		
-		return $this->db->count_all_results('designs');
-	}
+	
 	/**
 	 * ---------------------------------------------------------------
 	 *	Категории

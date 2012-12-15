@@ -262,7 +262,7 @@
 								<option value="Установка виртуального статуса"<?php if( $input['sort'] == 'Установка виртуального статуса' ): ?> selected="selected"<?php endif; ?>>Установка виртуального статуса</option>
 								<option value="Продление виртуального статуса"<?php if( $input['sort'] == 'Продление виртуального статуса' ): ?> selected="selected"<?php endif; ?>>Продление виртуального статуса</option>
 								<option value="Продажа дизайна"<?php if( $input['sort'] == 'Продажа дизайна' ): ?> selected="selected"<?php endif; ?>>Продажа дизайна</option>
-								<option value="Покупка дизайна"<?php if( $input['sort'] == 'Покупка дизайна' ): ?> selected="selected"<?php endif; ?>>Покупка дизайна</option>
+								<option value="Заказ дизайна"<?php if( $input['sort'] == 'Заказ дизайна' ): ?> selected="selected"<?php endif; ?>>Заказ дизайна</option>
 							</select>
 						</span>
 					</div>

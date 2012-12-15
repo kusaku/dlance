@@ -84,7 +84,7 @@ class Designs extends Controller {
 	 */
 
 	function index($offset = 0) {
-		$title = 'Дизайны сайта. Купить шаблон для сайта, Купить дизайн сайта';
+		$title = 'Дизайны сайта. Заказать шаблон для сайта, Заказать дизайн сайта';
 		
 		$search = array(
 			'offset'=>intval($offset),'limit'=>20,
@@ -191,6 +191,18 @@ class Designs extends Controller {
 		empty($_REQUEST['buyout_from']) or $search['buyout_from'] = $_REQUEST['buyout_from'];
 		empty($_REQUEST['buyout_to']) or $search['buyout_to'] = $_REQUEST['buyout_to'];
 		
+		empty($_REQUEST['flash']) or $search['flash'] = $_REQUEST['flash'];
+		empty($_REQUEST['stretch']) or $search['stretch'] = $_REQUEST['stretch'];
+		empty($_REQUEST['columns']) or $search['columns'] = $_REQUEST['columns'];
+		empty($_REQUEST['destination']) or $search['destination'] = $_REQUEST['destination'];
+		empty($_REQUEST['quality']) or $search['quality'] = $_REQUEST['quality'];
+		empty($_REQUEST['type']) or $search['type'] = $_REQUEST['type'];
+		empty($_REQUEST['tone']) or $search['tone'] = $_REQUEST['tone'];
+		empty($_REQUEST['bright']) or $search['bright'] = $_REQUEST['bright'];
+		empty($_REQUEST['style']) or $search['style'] = $_REQUEST['style'];
+		empty($_REQUEST['theme']) or $search['theme'] = $_REQUEST['theme'];
+		empty($_REQUEST['adult']) or $search['adult'] = $_REQUEST['adult'];
+		
 		//Сортировка
 		switch (! empty($_REQUEST['order_by'])) {
 			default:
@@ -237,11 +249,11 @@ class Designs extends Controller {
 		}
 		
 		$data['search'] = $search;
-		/**
-		 * Блок
-		 */
-		// Категории
+		
 		$data['categories'] = $this->designs_mdl->get_categories();
+		$data['themes'] = $this->designs_mdl->get_themes();
+		$data['destinations'] = $this->designs_mdl->get_destinations();
+		
 		$data['colorbars'] = $this->designs_mdl->get_color_cloud();
 		
 		//Популярные дизайны
@@ -708,7 +720,7 @@ class Designs extends Controller {
 			),array(
 				'field'=>'text','label'=>'Текст','rules'=>'required|max_length[10000]'
 			),array(
-				'field'=>'category_id','label'=>'Категория','rules'=>'required'
+				'field'=>'category','label'=>'Категория','rules'=>'required'
 			),array(
 				'field'=>'price_1','label'=>'Цена','rules'=>'required|numeric'
 			),array(
@@ -1028,8 +1040,8 @@ class Designs extends Controller {
 					'text'=>htmlspecialchars($this->input->post('text')),
 				//Описание для SE
 				'descr'=>character_limiter(htmlspecialchars($this->input->post('text')), 255),
-					'category'=>$this->input->post('category_id'),'price_1'=>$this->input->post('price_1'),
-					'price_2'=>$this->input->post('price_2'),'source'=>htmlspecialchars($this->input->post('source')),
+					'price_1'=>$this->input->post('price_1'),'price_2'=>$this->input->post('price_2'),
+					'source'=>htmlspecialchars($this->input->post('source')),
 				//image1
 				'small_image1'=>$file1 ? '/files/designs/'.$file1['raw_name'].'_small'.$file1['file_ext'] : '',
 					'mid_image1'=>$file1 ? '/files/designs/'.$file1['raw_name'].'_mid'.$file1['file_ext'] : '',
@@ -1049,6 +1061,25 @@ class Designs extends Controller {
 			$this->designs_mdl->add('designs', $data);
 			
 			$design_id = $this->db->insert_id();
+			
+			/**
+			 * ---------------------------------------------------------------
+			 *	Категории
+			 * ---------------------------------------------------------------
+			 */
+			 
+			$categories = (array) $this->input->post('category');
+			
+			if (! empty($categories)) {
+				$a = array(
+				);
+				foreach ($categories as $category_id=>$dummy) {
+					$a[] = "('{$design_id}', '{$category_id}')";
+				}
+				$a = implode(', ', $a);
+				$query = "INSERT INTO `ci_designs_to_categories` (`design_id`, `category_id`) VALUES ".$a;
+				$query = $this->db->query($query);
+			}
 			
 			/**
 			 * ---------------------------------------------------------------
@@ -1078,28 +1109,16 @@ class Designs extends Controller {
 						$histogram = $this->colors->getStat();
 					}
 					
-					foreach ($this->db->query('SELECT `tag`, `color`, `range` FROM `ci_color_tags`')->result_object() as $color_tag) {
-					
-						$colors = array_merge($this->colors->proxy4rgb($color_tag->color, $color_tag->range), $this->colors->proxy4hsv($color_tag->color, $color_tag->range));
-						
+					if (! empty($histogram)) {
+						$a = array(
+						);
 						foreach ($histogram as $value=>$count) {
-							if (array_search($value, $colors) !== FALSE) {
-								$color_tags[] = $color_tag->tag;
-							}
+							$a[] = "('{$design_id}', '{$value}', '{$count}')";
 						}
+						$a = implode(', ', $a);
+						$query = "INSERT INTO ci_colors (design_id, color, percent) VALUES {$a}";
+						$query = $this->db->query($query);
 					}
-					
-					$a = array(
-					);
-					foreach ($histogram as $value=>$count) {
-						$a[] = "('{$design_id}', '{$value}', '{$count}')";
-					}
-					
-					$a = implode(', ', $a);
-					
-					$query = "INSERT INTO ci_colors (design_id, color, percent) VALUES {$a}";
-					
-					$query = $this->db->query($query);
 				}
 			}
 			
@@ -1116,17 +1135,17 @@ class Designs extends Controller {
 			$tags = array_unique($tags);
 			
 			$tags = array_filter($tags);
-			$a = array(
-			);
-			foreach ($tags as $value) {
-				$a[] = "('{$design_id}', '{$value}')";
+			
+			if (! empty($tags)) {
+				$a = array(
+				);
+				foreach ($tags as $value) {
+					$a[] = "('{$design_id}', '{$value}')";
+				}
+				$a = implode(', ', $a);
+				$query = "INSERT INTO ci_tags (design_id, tag) VALUES ".$a;
+				$query = $this->db->query($query);
 			}
-			
-			$a = implode(', ', $a);
-			
-			$query = "INSERT INTO ci_tags (design_id, tag) VALUES ".$a;
-			
-			$query = $this->db->query($query);
 			
 			/**
 			 * ---------------------------------------------------------------
@@ -1222,7 +1241,7 @@ class Designs extends Controller {
 			}
 		}
 		
-		$data['categories'] = $this->designs_mdl->get_categories();
+		$data['category'] = $this->designs_mdl->get_categories();
 		
 		$data['themes'] = $this->designs_mdl->get_themes();
 		
@@ -1268,6 +1287,7 @@ class Designs extends Controller {
 			
 			@unlink('./files/download/'.$design['dfile']);
 			
+			$this->designs_mdl->delete_design_categories($design_id);
 			$this->designs_mdl->delete_design_tags($design_id);
 			$this->designs_mdl->del_options($design_id);
 			$this->designs_mdl->del_views($design_id);
@@ -1288,7 +1308,7 @@ class Designs extends Controller {
 			),array(
 				'field'=>'text','label'=>'Текст','rules'=>'required|max_length[10000]'
 			),array(
-				'field'=>'category_id','label'=>'Категория','rules'=>'required'
+				'field'=>'category','label'=>'Категория','rules'=>'required'
 			),array(
 				'field'=>'price_1','label'=>'Цена','rules'=>'required|numeric'
 			),array(
@@ -1629,7 +1649,6 @@ class Designs extends Controller {
 			$data['text'] = htmlspecialchars($this->input->post('text'));
 			//Описание для SE
 			$data['descr'] = character_limiter(htmlspecialchars($this->input->post('text')), 255);
-			$data['category'] = $this->input->post('category_id');
 			$data['price_1'] = $this->input->post('price_1');
 			$data['price_2'] = $this->input->post('price_2');
 			$data['source'] = htmlspecialchars($this->input->post('source'));
@@ -1661,6 +1680,27 @@ class Designs extends Controller {
 			$design = array_merge($design, $data);
 			
 			$this->designs_mdl->edit('designs', $design_id, $data);
+			
+			/**
+			 * ---------------------------------------------------------------
+			 *	Категории
+			 * ---------------------------------------------------------------
+			 */
+			 
+			$this->designs_mdl->delete_design_categories($design_id);
+			
+			$categories = (array) $this->input->post('category');
+			
+			if (! empty($categories)) {
+				$a = array(
+				);
+				foreach ($categories as $category_id=>$dummy) {
+					$a[] = "('{$design_id}', '{$category_id}')";
+				}
+				$a = implode(', ', $a);
+				$query = "INSERT INTO `ci_designs_to_categories` (`design_id`, `category_id`) VALUES ".$a;
+				$query = $this->db->query($query);
+			}
 			
 			/**
 			 * ---------------------------------------------------------------
@@ -1802,6 +1842,8 @@ class Designs extends Controller {
 			
 			$design = array_merge($design, $data);
 		}
+		
+		$design['categories'] = $this->designs_mdl->get_design_categories($design_id);
 		
 		$data['design'] = $design;
 		

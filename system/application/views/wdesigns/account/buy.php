@@ -1,5 +1,5 @@
-<h1 class="title">Купить дизайн</h1>
-<p class="subtitle">Форма покупки дизайна</p>
+<h1 class="title">Заказать дизайн</h1>
+<p class="subtitle">Форма заказа дизайна</p>
 <?= validation_errors()?>
 
 <form action="" method="post" /><input type="hidden" name="design_id" value="<?=$id?>" />

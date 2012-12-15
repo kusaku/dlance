@@ -608,12 +608,12 @@ if ( ! function_exists('set_value'))
 	{
 		if (FALSE === ($OBJ =& _get_validation_object()))
 		{
-			if ( ! isset($_POST[$field]))
+			if ( ! isset($_REQUEST[$field]))
 			{
 				return $default;
 			}
 
-			return form_prep($_POST[$field]);
+			return form_prep($_REQUEST[$field]);
 		}
 
 		return form_prep($OBJ->set_value($field, $default));
@@ -642,16 +642,16 @@ if ( ! function_exists('set_select'))
 
 		if ($OBJ === FALSE)
 		{
-			if ( ! isset($_POST[$field]))
+			if ( ! isset($_REQUEST[$field]))
 			{
-				if (count($_POST) === 0)
+				if (count($_REQUEST) === 0)
 				{
 					return ' selected="selected"';
 				}
 				return '';
 			}
 
-			$field = $_POST[$field];
+			$field = $_REQUEST[$field];
 
 			if (is_array($field))
 			{
@@ -697,16 +697,16 @@ if ( ! function_exists('set_checkbox'))
 
 		if ($OBJ === FALSE)
 		{ 
-			if ( ! isset($_POST[$field]))
+			if ( ! isset($_REQUEST[$field]))
 			{
-				if (count($_POST) === 0)
+				if (count($_REQUEST) === 0)
 				{
 					return ' checked="checked"';
 				}
 				return '';
 			}
 
-			$field = $_POST[$field];
+			$field = $_REQUEST[$field];
 			
 			if (is_array($field))
 			{
@@ -752,16 +752,16 @@ if ( ! function_exists('set_radio'))
 
 		if ($OBJ === FALSE)
 		{
-			if ( ! isset($_POST[$field]))
+			if ( ! isset($_REQUEST[$field]))
 			{
-				if (count($_POST) === 0)
+				if (count($_REQUEST) === 0)
 				{
 					return ' checked="checked"';
 				}
 				return '';
 			}
 
-			$field = $_POST[$field];
+			$field = $_REQUEST[$field];
 			
 			if (is_array($field))
 			{

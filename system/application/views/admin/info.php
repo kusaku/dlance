@@ -321,7 +321,7 @@
 							</strong>
 						</p>
 						<p>
-							Куплено дизайнов: <strong>
+							Заказано дизайнов: <strong>
 								<?= $designs_purchased?>
 							</strong>
 						</p>

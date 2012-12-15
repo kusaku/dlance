@@ -237,7 +237,7 @@
 	<section class="grid_12">
 		<div class="block-border">
 			<form class="block-content form" id="table_form" method="get" action="/administrator/purchased/">
-				<h1>Покупки дизайнов</h1>
+				<h1>Заказы дизайнов</h1>
 				<fieldset class="grey-bg">
 					<legend>
 						<a href="#">Настройки</a>

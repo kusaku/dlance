@@ -28,7 +28,7 @@
 						<a href="/account/cart">корзина</a>
 					</li>
 					<li>
-						<a href="/account/purchased">купленные</a>
+						<a href="/account/purchased">заказанные</a>
 					</li>
 					<li>
 						<a href="/account/downloads">загрузки</a>

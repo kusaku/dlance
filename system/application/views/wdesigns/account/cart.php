@@ -46,7 +46,7 @@
 						<a href="/account/cart_del/<?=$row['id']?>" class="delete" title="удалить из корзины">x</a>
 						<?php if ($row['kind'] == 1): ?>
 						<p>
-							Цена покупки: <span><?= $row['price_1']?> руб.</span>
+							Цена заказа: <span><?= $row['price_1']?> руб.</span>
 						</p>
 						<?php else : ?>
 						<p>

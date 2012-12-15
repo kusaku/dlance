@@ -743,7 +743,7 @@ class Administrator extends Controller {
 		//Прошлый год
 		$data['year'] = date("d.m.Y", time() - 31556926);
 		
-		$this->template->build_admin('purchased', $data, $title = 'Покупки дизайнов');
+		$this->template->build_admin('purchased', $data, $title = 'Заказы дизайнов');
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -1046,7 +1046,7 @@ class Administrator extends Controller {
 			),array(
 				'field'=>'sell_design','label'=>'Продажа дизайна','rules'=>'numeric'
 			),array(
-				'field'=>'buy_design','label'=>'Покупка дизайна','rules'=>'numeric'
+				'field'=>'buy_design','label'=>'Заказ дизайна','rules'=>'numeric'
 			),array(
 				'field'=>'add_positive_review','label'=>'Отправка отзыва(+)','rules'=>'numeric'
 			),array(

@@ -350,7 +350,7 @@ class Account_mdl extends Model {
 	}
 	/**
 	 * ---------------------------------------------------------------
-	 *	Купить дизайн
+	 *	Заказать дизайн
 	 * ---------------------------------------------------------------
 	 */
 
@@ -374,7 +374,7 @@ class Account_mdl extends Model {
 		return $this->db->get('cart')->result_array();
 	}
 	
-	//Проверка на существование покупки
+	//Проверка на существование заказа
 
 	function buy_check($design_id = '', $user_id = '') {
 		if ( empty($design_id) or empty($user_id)) {
@@ -438,7 +438,7 @@ class Account_mdl extends Model {
 					$query[$i]['status'] = 'Открыт';
 					break;
 				case 2:
-					$query[$i]['status'] = 'Выкуплен';
+					$query[$i]['status'] = 'Вызаказан';
 					break;
 				case 3:
 					$query[$i]['status'] = 'Закрыт';
@@ -516,7 +516,7 @@ class Account_mdl extends Model {
 	}
 	/**
 	 * ---------------------------------------------------------------
-	 *	Купленные
+	 *	Заказанные
 	 * ---------------------------------------------------------------
 	 */
 

@@ -23,8 +23,8 @@
 	<div class="designsCategories">
 		<h3><a href="/designs">Дизайны:</a></h3>
 		<?php 
-		if (! empty($category)) {
-			$active = $category;
+		if (! empty($search['category'])) {
+			$active = $search['category'];
 			foreach ($categories as $row):
 				if ($active == $row['id']):
 					//Если у активной категории имеется раздел, присваиваем раздел
@@ -39,14 +39,14 @@
 			<?php foreach ($categories as $row): ?>
 			<?php if ($row['parent_id'] == 0): ?>
 			<li class="<?php if( !empty($active) and $row['id'] == $active ): ?>active<?php endif ?>">
-				<a href="/designs/index/?category=<?=$row['id']?>"><?= $row['name']?></a>
+				<a href="/designs/search/?category=<?=$row['id']?>"><?= $row['name']?></a>
 				<?php endif; ?>
 				<?php if (! empty($active) and $active == $row['id']): ?>
 				<ul>
 					<?php foreach ($categories as $row2): ?>
 					<?php if ($row['id'] == $row2['parent_id']): ?>
 					<li class="lvl-2">
-						<a href="/designs/index/?category=<?=$row2['id']?>"><?= $row2['name']?></a>
+						<a href="/designs/search/?category=<?=$row2['id']?>"><?= $row2['name']?></a>
 						<span>(<?= $row2['number']?>)</span>
 					</li>
 					<?php endif; ?>
@@ -89,8 +89,10 @@
 					</p>
 					<p>
 						Рейтинг: <span><?= $row['rating']?></span>
+						<?php if ($row['price_1'] > 0): ?>
 						<br/>
 						Цена: <span><?= $row['price_1']?> руб.</span>
+						<?php endif; ?>
 					</p>
 					<p class="details">
 						<a href="/designs/<?=$row['id']?>.html">Подробнее</a>
@@ -109,8 +111,10 @@
 					</p>
 					<p>
 						Рейтинг: <span><?= $row['rating']?></span>
+						<?php if ($row['price_1'] > 0): ?>
 						<br/>
 						Цена: <span><?= $row['price_1']?> руб.</span>
+						<?php endif; ?>
 					</p>
 					<p class="details">
 						<a href="/designs/<?=$row['id']?>.html">Подробнее</a>

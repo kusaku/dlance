@@ -52,7 +52,7 @@
 						<a href="/users"><span>Дизайнеры</span></a>
 					</li>
 					<li>
-						<a href="/account/cart"><span>Корзина (<b id="cart_count"><?= "$cart_count" ?></b>)</span></a>
+						<a href="/account/cart"><span>Корзина (<b class="cart_count"><?= "$cart_count" ?></b>)</span></a>
 					</li>
 				</ul>
 				<ul class="rightMenu">
@@ -88,15 +88,12 @@
 					<a href="/designs"><span>Дизайнеры</span></a>
 				</li>
 				<li>
-					<a href="/blogs"><span>Блоги</span></a>
+					<a href="/account/cart"><span>Корзина (<b class="cart_count"><?= "$cart_count" ?></b>)</span></a>
 				</li>
 			</ul>
 			<ul class="rightMenu">
 				<li>
 					<a href="/users/support"><span>Обратная связь</span></a>
-				</li>
-				<li>
-					<a href="/faq"><span>ЧаВо</span></a>
 				</li>
 				<li>
 					<a href="/help"><span>Помощь</span></a>

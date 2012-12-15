@@ -65,7 +65,7 @@ function addCart(p1, p2, p3){
 	
 	for (var i = 0; i < basketArray.length - 1; i++) {
 		goodsId = basketArray[i].split(":");
-		if (goodsId[0] == msg.id) // ищем, не покупали ли мы этот товар ранее
+		if (goodsId[0] == msg.id) // ищем, не заказывали ли мы этот товар ранее
 		{
 			check = true;
 			cnt = goodsId[1];

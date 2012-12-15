@@ -54,7 +54,8 @@
 		$(function(){
 			$("#slider1").bxSlider({
 				infiniteLoop: false,
-				hideControlOnEnd: true
+				hideControlOnEnd: true,
+				pager: false
 			});
 			$("a.zoom").fancybox({
 				titlePosition: 'over'
@@ -88,7 +89,6 @@
 		?>
 		<ul>
 			<?php foreach ($categories as $row): ?>
-			 
 			<?php if ($row['parent_id'] == 0): ?>
 			<li class="<?php if( !empty($active) and $row['id'] == $active ): ?>active<?php endif ?>">
 				<a href="/designs/search/?category=<?=$row['id']?>"><?= $row['name']?></a>
@@ -123,7 +123,7 @@
 				</fieldset>
 				<div class="esfPrice">
 					<fieldset>
-						<label>Цена за покупку:</label>
+						<label>Цена:</label>
 						<span>от</span>
 						<input type="text" name="buy_from" value="<?= $search['buy_from']; ?>"/><span>до</span>
 						<input type="text" name="buy_to" value="<?= $search['buy_to']; ?>" /><span>рублей</span>
@@ -145,10 +145,97 @@
 						<?php endforeach; ?>
 					</ul>
 				</div>
-			</div>
-			<div class="esfRightPart">
-				<fieldset>
-					<label>Категория:</label>
+				<div class="clear"></div>
+				<div>
+					<fieldset class="advParametr"><legend>Назначение сайта:</legend>
+					<select name="destination">
+						<option></option>
+						<?php foreach ($destinations as $row): ?>
+						<option value="<?=$row['id']?>"<?=$search['destination']==$row['id'] ? ' selected="selected"': ''?>><?= $row['name']?></option>
+						<?php endforeach; ?>
+					</select>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Тема:</legend>
+					<select name="theme">
+						<option></option>
+						<?php foreach ($themes as $row): ?>
+						<option value="<?=$row['id']?>"<?=$search['theme']==$row['id'] ? ' selected="selected"': ''?>><?= $row['name']?></option>
+						<?php endforeach; ?>
+					</select>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Флэш:</legend>
+						<label><input type="radio" name="flash"/> Не важно</label>
+						<label><input type="radio" name="flash" value="1"<?=$search['flash']==1 ? ' checked="checked"': ''?>/> Да</label>
+						<label><input type="radio" name="flash" value="2"<?=$search['flash']==2 ? ' checked="checked"': ''?>/> Нет</label>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Стретч:</legend>
+						<label><input type="radio" name="stretch"/> Не важно</label>
+						<label><input type="radio" name="stretch" value="1"<?=$search['stretch']==1 ? ' checked="checked"': ''?>/> Тянущаяся</label>
+						<label><input type="radio" name="stretch" value="2"<?=$search['stretch']==2 ? ' checked="checked"': ''?>/> Фиксированная</label>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Количество колонок:</legend>
+					<select name="columns">
+						<option></option>
+						<option value="1"<?=$search['columns']==1 ? ' selected="selected"': ''?>>1  </option>
+						<option value="2"<?=$search['columns']==2 ? ' selected="selected"': ''?>>2  </option>
+						<option value="3"<?=$search['columns']==3 ? ' selected="selected"': ''?>>3  </option>
+						<option value="4"<?=$search['columns']==4 ? ' selected="selected"': ''?>>4  </option>
+					</select>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Тех Качество:</legend>
+						<label><input type="radio" name="quality"/> Не важно</label>
+						<label><input type="radio" name="quality" value="1"<?=$search['quality']==1 ? ' checked="checked"': ''?>/> Только для IE</label>
+						<label><input type="radio" name="quality" value="2"<?=$search['quality']==2 ? ' checked="checked"': ''?>/> Кроссбраузерная верстка&nbsp &nbsp</label>
+						<label><input type="radio" name="quality" value="3"<?=$search['quality']==3 ? ' checked="checked"': ''?>/> Полное соответствие W3C</label>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Тип Верстки:</legend>
+						<label><input type="radio" name="type"/> Не важно</label>
+						<label><input type="radio" name="type" value="1"<?=$search['type']==1 ? ' checked="checked"': ''?>/> Блочная верстка</label>
+						<label><input type="radio" name="type" value="2"<?=$search['type']==2 ? ' checked="checked"': ''?>/> Табличная</label>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Тон:</legend>
+						<label><input type="radio" name="tone"/> Не важно</label>
+						<label><input type="radio" name="tone" value="1"<?=$search['tone']==1 ? ' checked="checked"': ''?>/> Светлый</label>
+						<label><input type="radio" name="tone" value="2"<?=$search['tone']==2 ? ' checked="checked"': ''?>/> Темный</label>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Яркость:</legend>
+						<label><input type="radio" name="bright"/> Не важно</label>
+						<label><input type="radio" name="bright" value="1"<?=$search['bright']==1 ? ' checked="checked"': ''?>/> Спокойный</label>
+						<label><input type="radio" name="bright" value="2"<?=$search['bright']==2 ? ' checked="checked"': ''?>/> Яркий</label>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="advParametr"><legend>Стиль:</legend>
+						<label><input type="radio" name="style"/> Не важно</label>
+						<label><input type="radio" name="style" value="1"<?=$search['style']==1 ? ' checked="checked"': ''?>/> Новый</label>
+						<label><input type="radio" name="style" value="2"<?=$search['style']==2 ? ' checked="checked"': ''?>/> Классический	&nbsp &nbsp</label>
+						<label><input type="radio" name="style" value="3"<?=$search['style']==3 ? ' checked="checked"': ''?>/> Старый</label>
+					</fieldset>
+				</div>
+				<div>
+					<fieldset class="adult"><legend></legend>
+					<label>Только для взрослых: <input type="checkbox" name="adult" value="1"<?=$search['adult']==1 ? ' checked="checked"': ''?>/></label>
+					</fieldset>
+				</div>
+				</div>
+				<div class="esfRightPart">
+					<fieldset><label>Категория:</label>
 					<select name="category" id="categorySelect">
 						<option value="">Не важно</option>
 						<?php foreach ($categories as $row): ?>
@@ -166,9 +253,8 @@
 						<?php endforeach; ?>
 						<?php endforeach; ?>
 					</select>
-				</fieldset>
-				<fieldset>
-					<label>Свой цвет:</label>
+					</fieldset>
+					<fieldset><label>Свой цвет:</label>
 					<div id="SimpleColor">
 						<input type="text" name="color" style="<?= empty($search['color']) ? '' : "border-color:#{$search['color']}"; ?>;border-right-width:24px;width:100px;" class="colorSample" value="<?= $search['color']; ?>"/>
 					</div>
@@ -209,8 +295,10 @@
 					</p>
 					<p>
 						Рейтинг: <span><?= $row['rating']?></span>
+						<?php if ($row['price_1'] > 0): ?>
 						<br/>
 						Цена: <span><?= $row['price_1']?> руб.</span>
+						<?php endif; ?>
 					</p>
 					<p class="details">
 						<a href="/designs/<?=$row['id']?>.html">Подробнее</a>
@@ -229,8 +317,10 @@
 					</p>
 					<p>
 						Рейтинг: <span><?= $row['rating']?></span>
+						<?php if ($row['price_1'] > 0): ?>
 						<br/>
 						Цена: <span><?= $row['price_1']?> руб.</span>
+						<?php endif; ?>
 					</p>
 					<p class="details">
 						<a href="/designs/<?=$row['id']?>.html">Подробнее</a>

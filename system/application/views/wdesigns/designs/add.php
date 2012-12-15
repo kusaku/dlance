@@ -82,19 +82,19 @@
 		<tr>
 			<td class="caption">Категория<em style="color:red;">*</em>:</td>
 			<td class="frnt cat">
-				<select name="category_id">
-					<option></option>
 					<?php foreach ($categories as $row): ?>
 					<?php if ($row['parent_id'] == 0): ?>
-					<optgroup label="<?=$row['name']?>">
+					<fieldset><legend><?=$row['name']?></legend>
 					<?php endif; ?>
 					<?php foreach ($categories as $row2): ?>
 					<?php if ($row['id'] == $row2['parent_id']): ?>
-					<option value="<?=$row2['id']?>"<?= set_select('category_id', ''.$row2['id'].''); ?>><?= $row2['name']?></option>
-					<?php endif; ?>
+					<label><input type="checkbox" value="1" name="category[<?=$row2['id']?>]"<?= empty($_REQUEST['category'][$row2['id']]) ? '' : ' checked="checked"' ?>/><?= $row2['name']?></label>					
+					<?php endif; ?>					
 					<?php endforeach; ?>
+					<?php if ($row['parent_id'] == 0): ?>
+					</fieldset>
+					<?php endif; ?>					
 					<?php endforeach; ?>
-				</select>
 			</td>
 		</tr>
 		<tr>

@@ -1,5 +1,5 @@
-<h1 class="title">Купить дизайн</h1>
-<p class="subtitle">Форма покупки дизайна</p>
+<h1 class="title">Заказать дизайн</h1>
+<p class="subtitle">Форма заказа дизайна</p>
 <?=validation_errors()?>
 <form action="" method="post" /><input type="hidden" name="design_id" value="<?=$id?>" />
 <div class="rnd">
@@ -26,7 +26,7 @@
 					<tr>
 						<td class="caption">Вид:</td>
 						<td>
-							<input type="radio" name="kind" value="1"<?= set_checkbox('kind', '1'); ?>/> Покупка (<strong><?= $price_1?> USD</strong>)
+							<input type="radio" name="kind" value="1"<?= set_checkbox('kind', '1'); ?>/> Заказ (<strong><?= $price_1?> USD</strong>)
 							&nbsp &nbsp
 							<input type="radio" name="kind" value="2"<?= set_checkbox('kind', '2'); ?>/> Выкуп (<strong><?= $price_2?> USD</strong>)
 						</td>

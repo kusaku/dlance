@@ -122,13 +122,13 @@ class Account extends Controller {
 		$inv_id = $_REQUEST["InvId"];
 		$crc = $_REQUEST["SignatureValue"];
 		
-		//Покупка без авторизацииы
+		//Заказ без авторизацииы
 		
 		if (! empty($_REQUEST["ShpCart"])) {
 			$ShpCart = $_REQUEST["ShpCart"];
 		}
 		
-		//Покупка без авторизацииы
+		//Заказ без авторизацииы
 		
 		if (! empty($_REQUEST["ShpCode"])) {
 			$ShpCode = $_REQUEST["ShpCode"];
@@ -136,7 +136,7 @@ class Account extends Controller {
 		
 		$crc = strtoupper($crc);
 		
-		//Покупка без авторизацииы
+		//Заказ без авторизацииы
 		
 		if (! empty($ShpCart)) {
 			$my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2:ShpCart=".$ShpCart.":ShpCode=".$ShpCode.""));
@@ -186,19 +186,19 @@ class Account extends Controller {
 		$crc = $_REQUEST["SignatureValue"];
 		$crc = strtoupper($crc);
 		
-		//Покупка без авторизацииы
+		//Заказ без авторизацииы
 		
 		if (! empty($_REQUEST["ShpCart"])) {
 			$ShpCart = $_REQUEST["ShpCart"];
 		}
 		
-		//Покупка без авторизацииы
+		//Заказ без авторизацииы
 		
 		if (! empty($_REQUEST["ShpCode"])) {
 			$ShpCode = $_REQUEST["ShpCode"];
 		}
 		
-		//Покупка без авторизацииы
+		//Заказ без авторизацииы
 		
 		if (! empty($ShpCart)) {
 			$my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass1:ShpCart=".$ShpCart.":ShpCode=".$ShpCode.""));
@@ -240,7 +240,7 @@ class Account extends Controller {
 		$designs = $this->account_mdl->pay_no_auth_designs($designs);
 		/**
 		 * ---------------------------------------------------------------
-		 *	После проверки выполняем изменения, добавляем в покупки, снимаем средства, прибавляем средства владельцу, отправляем дизайн на почту и т д
+		 *	После проверки выполняем изменения, добавляем в заказы, снимаем средства, прибавляем средства владельцу, отправляем дизайн на почту и т д
 		 * ---------------------------------------------------------------
 		 */
 		foreach ($designs as $row):
@@ -257,34 +257,34 @@ class Account extends Controller {
 				'user_id'=>$user_id,'design_id'=>$row['id'],'date'=>now(),'kind'=>$row['kind']
 			);
 			
-			//Добавляем в купленные
+			//Добавляем в заказанные
 			
 			$this->account_mdl->add('purchased', $data);
 			
-			//Увеличиваем число покупок
+			//Увеличиваем число заказов
 			
 			$this->designs_mdl->update_sales($row['id']);
 			
 			if ($row['kind'] == '1') {
-				//Прибавляем владельцу цену за покупку
+				//Прибавляем владельцу цену за заказ
 				
 				$this->balance_mdl->plus($row['user_id'], $row['price_1']);
 			}
-			//Если дизайн выкуплен переводим статус на выкуплен - 2
+			//Если дизайн вызаказан переводим статус на заказан - 2
 			
 			else {
 				//Прибавляем владельцу цену за выкуп
 				
 				$this->balance_mdl->plus($row['user_id'], $row['price_2']);
 				
-				//Переводим в выкуплен
+				//Переводим в вызаказан
 				
 				$this->designs_mdl->enter($row['id']);
 			}
 			
 			//Добавляем событие
 			
-			$this->events->create($row['user_id'], 'Ваш дизайн "'.$row['title'].'" был куплен');
+			$this->events->create($row['user_id'], 'Ваш дизайн "'.$row['title'].'" был заказан');
 			
 			/**
 			 * ---------------------------------------------------------------
@@ -298,7 +298,7 @@ class Account extends Controller {
 			 *	Повышение репутации покупателю
 			 * ---------------------------------------------------------------
 			 */
-			$this->events->create($user_id, 'Покупка дизайна', 'buy_design');#Событие с репутацией
+			$this->events->create($user_id, 'Заказ дизайна', 'buy_design');#Событие с репутацией
 			
 		endforeach;
 	}
@@ -977,15 +977,15 @@ class Account extends Controller {
 		 */
 		foreach ($designs as $row):
 		
-			//Если у дизайна больше одной продажи и пользователь пытается выкупить дизайн
+			//Если у дизайна больше одной продажи и пользователь пытается вызаказать дизайн
 			
 			if ($row['sales'] > 0 and $row['kind'] == 2) {
 			
-				show_error('Дизайн с ID '.$row['id'].' невозможно выкупить');
+				show_error('Дизайн с ID '.$row['id'].' невозможно вызаказать');
 			}
 			
 			if ($row['status'] == 2) {
-				show_error('Дизайн с ID '.$row['id'].' выкуплен');
+				show_error('Дизайн с ID '.$row['id'].' заказан');
 			}
 			
 		endforeach;
@@ -1110,11 +1110,11 @@ class Account extends Controller {
 			return;
 		}
 		
-		//Если дизайн уже был куплен
+		//Если дизайн уже был заказан
 		
 		if ($this->_check_purchased($id)) {
 			echo json_encode(array(
-				'success'=>FALSE,'message'=>'Товар уже куплен',
+				'success'=>FALSE,'message'=>'Товар уже заказан',
 			));
 			return;
 		}
@@ -1125,7 +1125,7 @@ class Account extends Controller {
 		
 		if ($design['sales'] > 0 and $kind == 2) {
 			echo json_encode(array(
-				'success'=>FALSE,'message'=>'Товар нелья выкупит',
+				'success'=>FALSE,'message'=>'Товар нелья выкупить',
 			));
 			return;
 		}
@@ -1218,7 +1218,7 @@ class Account extends Controller {
 	}
 	/**
 	 * ---------------------------------------------------------------
-	 *	Очистка корзины, от купленных товаров у пользователя
+	 *	Очистка корзины, от заказанных товаров у пользователя
 	 * ---------------------------------------------------------------
 	 */
 
@@ -1318,21 +1318,21 @@ class Account extends Controller {
 		 */
 		foreach ($designs as $row):
 		
-			//Если у дизайна больше одной продажи и пользователь пытается выкупить дизайн
+			//Если у дизайна больше одной продажи и пользователь пытается вызаказать дизайн
 			
 			if ($row['sales'] > 0 and $row['kind'] == 2) {
 			
-				show_error('Дизайн с ID '.$row['id'].' невозможно выкупить');
+				show_error('Дизайн с ID '.$row['id'].' невозможно вызаказать');
 			}
 			
 			if ($row['status'] == 2) {
-				show_error('Дизайн с ID '.$row['id'].' выкуплен');
+				show_error('Дизайн с ID '.$row['id'].' вызаказан');
 			}
 			
 		endforeach;
 		/**
 		 * ---------------------------------------------------------------
-		 *	После проверки выполняем изменения, добавляем в покупки, снимаем средства, прибавляем средства владельцу и т д
+		 *	После проверки выполняем изменения, добавляем в заказа, снимаем средства, прибавляем средства владельцу и т д
 		 * ---------------------------------------------------------------
 		 */
 		//Списываем со счёта
@@ -1345,27 +1345,27 @@ class Account extends Controller {
 				'user_id'=>$this->user_id,'design_id'=>$row['id'],'date'=>now(),'kind'=>$row['kind']
 			);
 			
-			//Добавляем в купленные
+			//Добавляем в заказанные
 			
 			$this->account_mdl->add('purchased', $data);
 			
-			//Увеличиваем число покупок
+			//Увеличиваем число заказов
 			
 			$this->designs_mdl->update_sales($row['id']);
 			
 			if ($row['kind'] == '1') {
-				//ПОкупка
-				
+			
+				//Заказ
 				$price = $row['price_1'];
 			}
-			//Если дизайн выкуплен переводим статус на выкуплен - 2
+			//Если дизайн вызаказан переводим статус на вызаказан - 2
 			
 			else {
 				//Выкуп
 				
 				$price = $row['price_2'];
 				
-				//Переводим в выкуплен
+				//Переводим в вызаказан
 				
 				$this->designs_mdl->enter($row['id']);
 			}
@@ -1376,7 +1376,7 @@ class Account extends Controller {
 			
 			//Добавляем событие
 			
-			$this->events->create($row['user_id'], 'Ваш дизайн "'.$row['title'].'" был куплен');
+			$this->events->create($row['user_id'], 'Ваш дизайн "'.$row['title'].'" был заказан');
 			
 			/**
 			 * ---------------------------------------------------------------
@@ -1393,25 +1393,25 @@ class Account extends Controller {
 			 *	Покупатель
 			 * ---------------------------------------------------------------
 			 */
-			$this->events->create($this->user_id, 'Покупка дизайна', 'buy_design');#Событие с репутацией
+			$this->events->create($this->user_id, 'Заказ дизайна', 'buy_design');#Событие с репутацией
 			
 			//История покупателя
 			
-			$this->transaction->create($this->user_id, 'Покупка дизайна', $price);
+			$this->transaction->create($this->user_id, 'Заказ дизайна', $price);
 			
 		endforeach;
 		
-		//Удаляем купленные товары из корзины
+		//Удаляем заказанные товары из корзины
 		
 		$this->cart_clear($designs, $this->user_id);
 		
-		//Также нужно удалить выкупленные товары из корзины всех пользователей
+		//Также нужно удалить вызаказанные товары из корзины всех пользователей
 		
 		show_error('Все товары оплачены.');
 	}
 	/**
 	 * ---------------------------------------------------------------
-	 *	Купить
+	 *	Заказать
 	 * ---------------------------------------------------------------
 	 */
 
@@ -1424,7 +1424,7 @@ class Account extends Controller {
 			show_404('page');
 		}
 		
-		//Если статус дизайна отличный от открыт, может быть он уже выкуплен и т д
+		//Если статус дизайна отличный от открыт, может быть он уже вызаказан и т д
 		
 		if ($design['status'] != 1) {
 			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
@@ -1440,7 +1440,7 @@ class Account extends Controller {
 		
 		$data = array(
 			'user_id'=>$this->user_id,'design_id'=>$id,'date'=>now(),
-			//1 - куплен, 2 - выкуплен, затем расчитываеться как 1 - цена покупки 2 - цена выкупа
+			//1 - заказан, 2 - вызаказан, затем расчитываеться как 1 - цена заказа 2 - цена выкупа
 			
 			'kind'=>$this->input->post('kind')
 		);
@@ -1455,17 +1455,17 @@ class Account extends Controller {
 			if ($this->input->post('kind') == '1') {
 				$price = $design['price_1'];
 			}
-			//Если дизайн выкуплен переводим статус на выкуплен - 2
+			//Если дизайн вызаказан переводим статус на вызаказан - 2
 			
 			else {
 				$price = $design['price_2'];
 				
-				//Переводим в выкуплен
+				//Переводим в вызаказан
 				
 				$this->designs_mdl->enter($id);
 			}
 			
-			//Увеличиваем число покупок
+			//Увеличиваем число заказов
 			
 			$this->designs_mdl->update_sales($id);
 			
@@ -1475,17 +1475,17 @@ class Account extends Controller {
 			
 			//Добавляем событие
 			
-			$this->events->create($design['user_id'], 'Ваш дизайн "'.$design['title'].'" был куплен');
+			$this->events->create($design['user_id'], 'Ваш дизайн "'.$design['title'].'" был заказан');
 			
 			redirect('account/purchased');
 		}
 		
 		$data = $design;
 		
-		$this->template->build('account/buy', $data, $title = 'Купить');
+		$this->template->build('account/buy', $data, $title = 'Заказать');
 	}
 	
-	//Нельзя покупать свой дизайн или уже купленный, проверяем наличие средств
+	//Нельзя покупать свой дизайн или уже заказанный, проверяем наличие средств
 
 	function _check_buy($id) {
 		//Выводим все данные о дизайне
@@ -1501,7 +1501,7 @@ class Account extends Controller {
 		}
 		
 		if ($this->account_mdl->buy_check($design['id'], $this->user_id)) {
-			$this->form_validation->set_message('_check_buy', 'Данный дизайн уже куплен вами');
+			$this->form_validation->set_message('_check_buy', 'Данный дизайн уже заказан вами');
 			return FALSE;
 		}
 		
@@ -1519,7 +1519,7 @@ class Account extends Controller {
 	}
 	/**
 	 * ---------------------------------------------------------------
-	 *	Купленные
+	 *	Заказанные
 	 * ---------------------------------------------------------------
 	 */
 
@@ -1548,11 +1548,11 @@ class Account extends Controller {
 		
 		$data['data'] = $this->account_mdl->get_purchased($start_page, $per_page, $this->user_id);
 		
-		$this->template->build('account/purchased', $data, $title = 'Купленные');
+		$this->template->build('account/purchased', $data, $title = 'Заказанные');
 	}
 
 	function _check_purchased($design_id) {
-		//Если существует товар у пользователя в покупках
+		//Если существует товар у пользователя в заказх
 		
 		if ($this->account_mdl->purchased_check($design_id, $this->user_id)) {
 			return TRUE;
@@ -1561,9 +1561,9 @@ class Account extends Controller {
 	}
 
 	function create_download($design_id) {
-		//Проверяем куплен ли дизайн нами, если да то создаём защищённую загрузку
+		//Проверяем заказан ли дизайн нами, если да то создаём защищённую загрузку
 		
-		//Если дизайн не был куплен
+		//Если дизайн не был заказан
 		
 		if (!$this->_check_purchased($design_id)) {
 			show_error('Неверно указан идентификатор действия либо выполнение действия запрещено.');
@@ -1580,7 +1580,7 @@ class Account extends Controller {
 		
 		$this->account_mdl->add('downloads', $data);
 		
-		$this->template->build('account/create_download', $data, $title = 'Купленные');
+		$this->template->build('account/create_download', $data, $title = 'Заказанные');
 	}
 	/**
 	 * ---------------------------------------------------------------
@@ -1660,7 +1660,8 @@ class Account extends Controller {
 		$fdown = $file;
 		
 		/**
-		 Мы только что "на лету" сгенерировали файл, которого физически на сервере не существует. Таким образом мы можем генерировать "виртуальные" файлы и отдавать их пользователю.
+		 Мы только что "на лету" сгенерировали файл, которого физически на сервере не существует.
+		 Таким образом мы можем генерировать "виртуальные" файлы и отдавать их пользователю.
 		 */
 		 
 		// Установлена или нет переменная HTTP_RANGE
@@ -1721,7 +1722,7 @@ class Account extends Controller {
 	}
 	/**
 	 * ---------------------------------------------------------------
-	 *	Отправка купленного файла на email
+	 *	Отправка заказанного файла на email
 	 * ---------------------------------------------------------------
 	 */
 
@@ -1730,7 +1731,7 @@ class Account extends Controller {
 			return;
 		}
 		
-		//Если данный дизайн был куплен
+		//Если данный дизайн был заказан
 		
 		if ($this->_check_purchased($design_id)) {
 			$email = $this->users_mdl->get_email($this->user_id);
@@ -2133,7 +2134,7 @@ class Account extends Controller {
 		
 		foreach ($this->designs_mdl->get_user_designs($this->user_id, $start_page, $per_page) as $item) {
 			// невротебенно же!
-			$cat_name_path = implode(' &gt ', $categories[$item['category']]['name_path']);
+			$cat_name_path = implode(' &gt ', $categories[$item['category_id']]['name_path']);
 			$designs[$cat_name_path][] = $item;
 		}
 		
